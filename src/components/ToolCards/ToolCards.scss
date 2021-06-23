@@ -1,0 +1,42 @@
+.toolcard{
+    padding-top: 15px;
+        padding-bottom: 15px;
+    #{&}__image{
+        margin-bottom: 5px;
+        text-align: center;
+       >img{
+        max-width: 100%;
+        width: 180px;
+        min-height: 180px;
+       }
+    }
+    #{&}__align{
+        display: flex;
+    }
+    #{&}__items{
+        display: flex;
+        flex: 0 0 50%;
+    }
+    #{&}__shopping{
+        display: flex;
+        justify-content: flex-end;
+    }
+    #{&}__sub-icons{
+        display: flex;
+        border: map-get($map: $border-color, $key: border-width) map-get($map: $border-color, $key: bsolid) map-get($map: $border-round, $key: accent) ;
+       border-radius: 4px;
+        padding: 8px;
+    }
+    #{&}__aligninr1{
+        display: flex;
+        flex: 0 0 80%;
+    }
+    #{&}__aligninr{
+        display: flex;
+        flex: 0 0 20%;
+        justify-content: flex-end;
+    }
+    #{&}__toolname{
+        margin-top: 10px;
+    }
+}

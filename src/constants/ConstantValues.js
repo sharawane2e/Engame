@@ -1,0 +1,1 @@
+export const LOGOUT_TIME = 1800; //in seconds
