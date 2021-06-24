@@ -23,18 +23,18 @@ function Home(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-        <AppBar position="static">
-        <Toolbar className="header-bg">
-          <Typography variant="h6" className={classes.title}>
-            <img src={e2eLogo}/>
-          </Typography>
-          <div className="header-text-color">
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Registeration</Button>
-          <ShoppingCartIcon/>
-          </div>
-        </Toolbar>
-      </AppBar>
+          <AppBar position="static">
+            <Toolbar className="header-bg">
+              <Typography variant="h6" className={classes.title}>
+                <img src={e2eLogo}/>
+              </Typography>
+              <div className="header-text-color">
+              <Button color="inherit">Login</Button>
+              <Button color="inherit">Registeration</Button>
+              <ShoppingCartIcon/>
+              </div>
+            </Toolbar>
+          </AppBar>
         </div>
     );
 }
