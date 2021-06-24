@@ -14,22 +14,6 @@ const Header=()=> {
   const [isReginOpen, setReginIsOpen] = useState(false);
   
     return (
-<<<<<<< HEAD
-        <div className={classes.root}>
-          <AppBar position="static">
-            <Toolbar className="header-bg">
-              <Typography variant="h6" className={classes.title}>
-                <img src={e2eLogo}/>
-              </Typography>
-              <div className="header-text-color">
-              <Button color="inherit">Login</Button>
-              <Button color="inherit">Registeration</Button>
-              <ShoppingCartIcon/>
-              </div>
-            </Toolbar>
-          </AppBar>
-        </div>
-=======
       <>
       <div className="flexGrow">
         <AppBar position="static">
@@ -52,7 +36,6 @@ const Header=()=> {
         <Registration/>
       </Popup>
       </>
->>>>>>> e3fb3fe4492efe6ebb8bc837270abed1e9f088c7
     );
 }
 

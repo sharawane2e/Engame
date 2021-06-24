@@ -52,6 +52,7 @@ export class LoginValidation extends Validation {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
         }
+        
         // else if (value.length < PASSWORD_MIN_LENGTH) {
         //   validationResponse.isValid = false;
         //   validationResponse.message = ErrorMessages.PASSWORD_MIN;

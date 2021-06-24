@@ -1,0 +1,1 @@
+export const LOGIN = "https://run.mocky.io/v3/52b266f5-fb7c-493f-a757-3306c6ff175e";
