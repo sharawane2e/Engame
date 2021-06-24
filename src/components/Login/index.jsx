@@ -43,7 +43,6 @@ class Login extends Component {
           email: "",
           password: "",
         },
-        //
       };
       // sendMessage = (e) => {
       //   e.preventDefault();
@@ -64,20 +63,28 @@ class Login extends Component {
         });
         console.log("click",validationResponse)
       }
-      handleChange = (e, key) => {
-        let value = e.target.value;
+      handleChange = (el, key) => {
+        let value = el.target.value;
         const validationResponse = this.loginValidation.validateField(key, value);
         const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
-      this.setState({
+        console.log(errorMessage)
+        this.setState({
         [key]: value,
         formErrors: { ...this.state.formErrors, [key]: errorMessage },
       });
       }
-      handleBlur = (e, key) => {
-        let value = e.target.value;
+      handleBlur = (el, key) => {
+        let value = el.target.value;
         if (typeof value === "string") {
           value = value.trim();
         }
+        const validationResponse = this.loginValidation.validateField(key, value);
+        const errorMessage = validationResponse.message;
+    console.log(errorMessage)
+        this.setState({
+          [key]: value,
+          formErrors: { ...this.state.formErrors, [key]: errorMessage },
+        });
       }
       
       render() {
@@ -96,23 +103,24 @@ class Login extends Component {
             value={this.state.email}
             onChange={(e) => this.handleChange(e, "email")}
             onBlur={(e) => this.handleBlur(e, "email")}
-            // onChange={(e) => this.handleChange(e, "email")}
-            // onBlur={(e) => this.handleBlur(e, "email")}
-            // message={this.state.formErrors.email}
-            // maxLength={EMAIL_LENGTH}
+            message={this.state.formErrors.email}
             type="Email" autoComplete="current-email" variant="outlined"
             />
-                </FormControl>
+            </FormControl>
+            <div className="validated-error">{this.state.formErrors.email}</div>
+
         <InputLabel htmlFor="standard-adornment-password" className="input-label">Password</InputLabel> 
           <FormControl className="form-area__control" variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput 
             id="outlined-adornment-password"
-            value={this.state.password}
-            onChange={(e) => this.handleChange(e, "password")}
-            onBlur={(e) => this.handleBlur(e, "password")}
             endAdornment={
-              <InputAdornment position="end" label="Outlined" variant="outlined">
+              <InputAdornment position="end" label="Outlined" variant="outlined"
+              value={this.state.password}
+              onChange={(e) => this.handleChange(e, "password")}
+              onBlur={(e) => this.handleBlur(e, "password")}
+              message={this.state.formErrors.password}
+              >
                 <IconButton
                   aria-label="toggle password visibility"
                   // onClick={handleClickShowPassword}
@@ -126,6 +134,7 @@ class Login extends Component {
             labelWidth={70}
           />
         </FormControl>
+        <div className="validated-error">{this.state.formErrors.password}</div>
         <div className="forgot-link">
         <Link href="#" >
             Forgot password ?
