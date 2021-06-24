@@ -1,27 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import e2eLogo from "../../assets/images/E2E-logo.png";
+import Popup from "../CustomPopup";
+import Login from "../Login";
+import Registration from "../Registration";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
-
-function Home(props) {
-    const classes = useStyles();
+const Header=()=> {
+  const [isLoginOpen, setLoginIsOpen] = useState(false);
+  const [isReginOpen, setReginIsOpen] = useState(false);
+  
     return (
+<<<<<<< HEAD
         <div className={classes.root}>
           <AppBar position="static">
             <Toolbar className="header-bg">
@@ -36,7 +29,31 @@ function Home(props) {
             </Toolbar>
           </AppBar>
         </div>
+=======
+      <>
+      <div className="flexGrow">
+        <AppBar position="static">
+        <Toolbar className="header-bg">
+          <Typography variant="h6" className="flexGrow">
+            <img src={e2eLogo}/>
+          </Typography>
+          <div className="header-text-color">
+          <Button color="inherit" onClick={() =>setLoginIsOpen(true)}>Login</Button>
+          <Button color="inherit" onClick={() =>setReginIsOpen(true)}>Registeration</Button>
+          <ShoppingCartIcon/>
+          </div>
+        </Toolbar>
+      </AppBar>
+      </div>
+      <Popup open={isLoginOpen} onClose={() =>setLoginIsOpen(false)}>
+        <Login/>
+      </Popup>
+      <Popup open={isReginOpen} onClose={() =>setReginIsOpen(false)}>
+        <Registration/>
+      </Popup>
+      </>
+>>>>>>> e3fb3fe4492efe6ebb8bc837270abed1e9f088c7
     );
 }
 
-export default Home;
+export default Header;
