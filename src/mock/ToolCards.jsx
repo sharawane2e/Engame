@@ -1,11 +1,14 @@
- import images1 from "../assets/images/Archetypes.svg";
- import images2 from "../assets/images/Artcards.svg";
- import images3 from "../assets/images/BrandTarget-dnd.svg";
+ import Archetypes from "../assets/images/Archetypes.svg";
+ import Artcards from "../assets/images/Artcards.svg";
+ import BrandTarget from "../assets/images/BrandTarget-dnd.svg";
+ import Container_exclusive_dnd from "../assets/images/Container_exclusive_dnd.svg";
+ import E_clinic from "../assets/images/E-clinic.svg";
+
 
 const toolsCrad = [
     {
-         imgUrl:images1,
-         name:"Target",
+        imgUrl: Container_exclusive_dnd,
+         name:"Target Drag & Drop",
          showDownload:true,
          showAddToCart:true,
          price:21,
@@ -14,8 +17,8 @@ const toolsCrad = [
          
      },
     {
-        imgUrl:images2,
-         name:"Target",
+        imgUrl:BrandTarget,
+         name:"Brand Sorting",
          showDownload:true,
          showAddToCart:true,
          price:32,
@@ -24,374 +27,132 @@ const toolsCrad = [
          
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:E_clinic,
+         name:"E-Clinic",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:21,
          currency:"$",
          toolname:"E-Clinic"
-         
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:E_clinic,
+         name:"Implicit Exercise",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:45,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Implicit Exercise"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
     {
-        imgUrl:images3,
-         name:"Target",
+        imgUrl:Artcards,
+         name:"Artcards",
          showDownload:true,
          showAddToCart:true,
-         price:23,
+         price:32,
          currency:"$",
-         toolname:"E-Clinic"
-         
+         toolname:"Artcards"
      },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
-    {
-        imgUrl:images3,
-         name:"Target",
-         showDownload:true,
-         showAddToCart:true,
-         price:23,
-         currency:"$",
-         toolname:"E-Clinic"
-         
-     },
+
+
  ]
  export default toolsCrad;

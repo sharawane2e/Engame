@@ -1,0 +1,17 @@
+.form-area{
+    // text-align: center;
+    #{&}__login{
+        text-align: center;
+        padding-top: 25px;
+        padding-bottom: 40px;
+        font-size: map-get($map:$text-size , $key: xl);
+    }
+    #{&}__fileds{
+        & > *{
+            width: 100%;
+        }
+    }
+    #{&}__control{
+        margin-bottom: 15px;
+    }
+}

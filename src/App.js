@@ -9,6 +9,8 @@ function App() {
       <AppRouting routes={Routes} />
     </div>
   );
+  
 }
+
 
 export default App;

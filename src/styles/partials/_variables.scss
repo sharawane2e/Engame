@@ -1,5 +1,5 @@
 
-$font-family: Roboto;
+$font-family:  "barlowmedium";
 $text-size: (
   "xxl": 50px,
   "xl": 32px,
@@ -23,6 +23,7 @@ $background-color: (
   "primary": #ffffff,
   "secondary": #ECECEC,
   "border-secondary": #efefef,
+  "back-color":#D6D6D6,
   "button-primary": #F15A5C,
   "button-secondary": #F15B5B,
  
@@ -42,9 +43,12 @@ $border-round: (
 $border-color: (
   "border-width": 1px,
   "bsolid": solid,
-  "red-smooth":rgba(241, 91, 91, 0.31)
+  "red-dark": #F15B5B,
+);
+$boxshadow:(
+    "red-smooth":rgba(241 ,91 ,91 ,0.50)
 );
 
 $fill-color:(
- 
-)
+   "primary-color":#ffffff,
+);

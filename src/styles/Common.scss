@@ -3,3 +3,68 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    font-family: 'barlowregular';
+}
+.MuiButton-label{
+    // font-family: 'barlowmedium';
+    // color: #363636;
+    font-weight: 600;
+}
+.flexGrow{
+    flex-grow: 1;
+    display: flex;
+    width: 100%;
+}
+.paperstyel{
+    padding: 16px;
+    text-align: left;
+}
+.input{
+    flex: 1;
+    margin-left: 8px;
+}
+.iconButton{
+    padding: 10px;
+}
+.divider{
+    height:42px !important;
+      margin: 4px !important;
+}
+.MuiIconButton-root:hover{
+    background-color: transparent !important;
+}
+    
+     
+
+.large-hedding{
+    color: map-get($map:$text-color , $key:black-drak );
+}
+.input-label{
+    margin-bottom: 10px;
+}
+.forgot-link{
+    text-align: right;
+    &>a{
+        color:map-get($map: $text-color, $key: red-dark);
+    }
+}
+.form-button-grop{
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    #{&}__custom-button{
+        background: map-get($map: $text-color, $key: red-dark) !important;
+        color: #fff !important;
+        box-shadow: 0px 10px 20px map-get($map: $boxshadow, $key:red-smooth );
+        padding: 15px 145px;
+    }
+}
+.form-newaccont{
+    text-align: center;
+    &>a{
+        padding-left: 8px;
+        color:map-get($map: $text-color, $key: red-dark);
+    }
+}
+  

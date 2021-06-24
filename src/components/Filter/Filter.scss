@@ -19,10 +19,33 @@
         color:map-get($map: $text-color, $key: "black-drak") ;
         font-size:map-get($map: $text-size, $key: "large") ;
     }
-    
+   
+    .paperstyel{
+        >img{
+            max-width: 100%;
+        }
+    }
+}
+.header-bg{
+    .MuiPaper-elevation1{
+        box-shadow: none !important;
+    }
 }
 .makeStyles-root-4 {
     flex-grow: 1;
     display: flex;
     width: 100%;
+}
+.search-icon{
+    background-color:map-get($map: $background-color, $key: "back-color") !important;
+    border-radius: unset !important;
+    .MuiIconButton-label{
+        >svg{
+            width: 25px;
+            height: 25px;
+            path{
+                fill:#ffffff;
+            }
+        }
+    }
 }
