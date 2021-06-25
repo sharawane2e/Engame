@@ -75,6 +75,13 @@ body{
     min-height: 16px;
     // margin-top: 5px;
     color: #ff0000;
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.border-bottom{
+    border-bottom: map-get($map:$border-color , $key: border-width) map-get($map:$border-color , $key: bsolid) map-get($map: $text-color, $key: black-smooth);
+
 }

@@ -2,7 +2,7 @@
     // text-align: center;
     #{&}__login{
         text-align: center;
-        padding-top: 25px;
+        padding-top: 15px;
         padding-bottom: 40px;
         font-size: map-get($map:$text-size , $key: xl);
     }

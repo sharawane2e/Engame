@@ -35,6 +35,9 @@ const Header=()=> {
       <Popup open={isReginOpen} onClose={() =>setReginIsOpen(false)}>
         <Registration/>
       </Popup>
+      {/* <Popup open={isReginOpen} onClose={() =>setLoginIsOpen(false)}>
+        <Registration/>
+      </Popup> */}
       </>
     );
 }

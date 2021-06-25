@@ -1,65 +1,82 @@
 import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-// import Input from '@material-ui/core/Input';
-// import FilledInput from '@material-ui/core/FilledInput';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-//import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from "@material-ui/core/Button";
 import Link from '@material-ui/core/Link';
-//import {EMAIL_LENGTH, PASSWORD_MAX_LENGTH} from "../../constants/ConstantValues";
 import { LoginValidation } from "../../util/FormValidation";
 import ApiRequest from "../../util/ApiRequest";
 import { LOGIN } from "../../config/ApiUrl";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import Registration from "../../components/Registration";
+import axios from "axios";
   
-
 class Login extends Component {
      state = {
         email: "",
         password: "",
+        data:"",
         formErrors: {
           email: "",
           password: "",
         },
         showPassword:false
       };
-     
+      
       loginValidation = new LoginValidation();
       
+      createAccount = (el) =>{
+        this.setState({data:`texxt`}); 
+      }
+
       handleSubmit = (el) => {
         el.preventDefault();
         const { email, password } = this.state;
         const validationResponse = this.loginValidation.validateForm({
-         // console.log(validationResponse),
            email,
            password,
         });
-        console.log(validationResponse);
-       if(validationResponse.isFormValid){
-          ApiRequest.request(LOGIN, "POST", {
-            email: email,
-            password: password,
-          })
-          .then((res) => {
-            console.log(res);
-            if (res.HasSuccess) {
-              console.log("susses");
-              
-              LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data);
-              ApiRequest.setAuthToken(LocalStorageUtils.getToken());
-              console.log(this.props.history.push("/Ashish"))
-            }
+
+      const data={
+        email:this.email,
+        password:this.pasword,
+        token:this.token
+      }
+
+      if(validationResponse.isFormValid){
+        axios.post(LOGIN,data)
+        .then(res=>{
+          console.log(res);
+          console.log(localStorage.setItem('token',res.token));
+        })
+          // ApiRequest.request(LOGIN, "POST", {
+          //   email: email,
+          //   password: password,
+          // })
+          
+
+          // .then((res) => {
+          //   // console.log(res);
+  
+          //   if (res.HasSuccess) {
+          //     console.log("susses",res.DataObject.user);
+          //     //LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data);
+          //     //piRequest.setAuthToken(LocalStorageUtils.getToken());
+          //     //console.log(this.props.history.push("/"))
+          //   }
+          //   else{              
+          //     console.log("Welcome to my login");
+          //   }
             
-          })
-          .catch((error) => {
-            console.log("eror",error);
-          })
+          // })
+          // .catch((error) => {
+          //   console.log("eror",error);
+          // })
        }
        else {
         delete validationResponse.isFormValid;
@@ -78,8 +95,7 @@ class Login extends Component {
         let value = el.target.value;
         const validationResponse = this.loginValidation.validateField(key, value);
         const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
-        console.log(errorMessage)
-        this.setState({
+            this.setState({
         [key]: value,
         formErrors: { ...this.state.formErrors, [key]: errorMessage },
       });
@@ -91,7 +107,6 @@ class Login extends Component {
         }
         const validationResponse = this.loginValidation.validateField(key, value);
         const errorMessage = validationResponse.message;
-    console.log(errorMessage)
         this.setState({
           [key]: value,
           formErrors: { ...this.state.formErrors, [key]: errorMessage },
@@ -103,10 +118,10 @@ class Login extends Component {
 render() {
     return (      
         <>
+        {this.state.data?<Registration />:
         <div className="form-area">
             <div className="form-area__login  large-hedding">Login</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-     
            <InputLabel htmlFor="standard-adornment-email" className="input-label">E-mail address</InputLabel> 
                 <FormControl className="form-area__control">
                 <TextField
@@ -118,14 +133,12 @@ render() {
                 message={this.state.formErrors.email}
                 type="Email"  variant="outlined"
                 />
+                 <div className="validated-error">{this.state.formErrors.email}</div>
                 </FormControl>
-            <div className="validated-error">{this.state.formErrors.email}</div>
-      
-  
+           
        <InputLabel htmlFor="standard-adornment-password" className="input-label">Password</InputLabel> 
           <FormControl className="form-area__control" variant="outlined">
-          {/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel> */}
-          <OutlinedInput 
+            <OutlinedInput 
             id="outlined-adornment-password"
             type= {this.state.showPassword ? "text": "password"}
             value={this.state.password}
@@ -144,8 +157,8 @@ render() {
               </InputAdornment>
             }
             />
+          <div className="validated-error">{this.state.formErrors.password}</div>
         </FormControl>
-        <div className="validated-error">{this.state.formErrors.password}</div>
   
 
         <div className="forgot-link">
@@ -157,16 +170,15 @@ render() {
        <div className="form-button-grop">
        <Button type="submit"
         onClick={this.handleSubmit}
-        // disabled={this.state.disableSubmit}
        className="form-button-grop__custom-button">Log In</Button>
        </div>
         <div className="form-newaccont">
             <span>New Here?</span>
-            <Link href="#" >
+            <Link href="#" onClick={this.createAccount}>
             Create an Account
          </Link>
         </div>
-        </div>
+        </div>}
         </>
     );
   }
