@@ -5,8 +5,6 @@
     background-size: 70%;
 }
 
-
-
 .popup-container {
     position: fixed;
     // background: rgba(0, 0, 0, 0.5);
@@ -22,8 +20,6 @@
         transform: translate(-50%, -50%);
         background: #fff;
         min-height: 550px;
-        border: map-get($map: $border-color, $key: border-width) map-get($map: $border-color, $key: bsolid) map-get($map: $border-color, $key: red-dark);
-        border-radius: map-get($map: $border-round, $key: boder-radius);
         // padding: 0 24px;
     }
     #{&}__inerxl {

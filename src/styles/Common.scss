@@ -83,5 +83,11 @@ body{
 
 .border-bottom{
     border-bottom: map-get($map:$border-color , $key: border-width) map-get($map:$border-color , $key: bsolid) map-get($map: $text-color, $key: black-smooth);
+}
 
+.border-allside{
+    border: map-get($map: $border-color, $key: border-width) map-get($map: $border-color, $key: bsolid) map-get($map: $border-color, $key: red-dark);
+}
+.border-radius{
+    border-radius: map-get($map: $border-round, $key: boder-radius);
 }

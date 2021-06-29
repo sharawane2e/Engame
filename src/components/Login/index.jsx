@@ -15,8 +15,6 @@
  import LocalStorageUtils from "../../util/LocalStorageUtils";
  import Registration from "../../components/Registration";
  import ForgotPassword from "../../components/ForgotPassword";
-
- 
  
  class Login extends Component {
       state = {
@@ -50,29 +48,23 @@
             password,
          });
 
-       // const data={
-       //   email:this.email,
-       //   password:this.pasword,
-       //   token:this.token
-       // }
-
        if(!validationResponse.isFormValid){
-      
            ApiRequest.request(LOGIN, "POST", {
              email: email,
              password: password,
             })
                    
            .then((res) => {
-            if (res) {
+            if (res.HasSuccess) {
                console.log("susses",res);
+               LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data);
              // console.log( localStorage.setItem('token',res.data));
-               //LocalStorageUtils.setUserIntoLocalStorage(res.Data);
+              // LocalStorageUtils.setUserIntoLocalStorage(res.Data);
                //LocalStorageUtils.setUserIntoLocalStorage("Ashish");
-               localStorage.setItem('token',res.DataObject.data);
+              // localStorage.setItem('token',res.DataObject.data);
                console.log("welome")
-               const { from } = this.props.location || { from: { pathname: "/" } };
-                this.props.history.push(from);
+              //  const { from } = this.props.location || { from: { pathname: "/" } };
+              //   this.props.history.push(from);
                //ApiRequest.setAuthToken(LocalStorageUtils.getToken());
                //this.props.history.push("/");
              }
@@ -93,13 +85,13 @@
        }
        }
 
-       handleClickShowPassword = (el,key) => {
+       handleClickShowPassword = (e,key) => {
          this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
          this.setState({ showPassword: !this.state.showPassword });
        }
 
-      handleChange = (el, key) => {
-         let value = el.target.value;
+      handleChange = (e, key) => {
+         let value = e.target.value;
          const validationResponse = this.loginValidation.validateField(key, value);
          const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
              this.setState({
@@ -107,8 +99,8 @@
          formErrors: { ...this.state.formErrors, [key]: errorMessage },
        });
        }
-       handleBlur = (el, key) => {
-         let value = el.target.value;
+       handleBlur = (e, key) => {
+         let value = e.target.value;
          if (typeof value === "string") {
            value = value.trim();
          }

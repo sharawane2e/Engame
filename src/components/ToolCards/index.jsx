@@ -13,7 +13,7 @@ const ToolCards = (props) => {
         <Grid container spacing={3}>
         {state.map((tooldata,index) => {
         return (
-            <Grid item xs={12} sm={2} key={index}>
+            <Grid item xs={12} lg={2} sm={4} key={index}>
             <Paper className="paperstyel"  >
                 <div className="toolcard__image"><img src={tooldata.imgUrl}/></div>
                <div className="toolcard__align">

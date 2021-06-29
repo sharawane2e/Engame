@@ -9,8 +9,9 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from '@material-ui/core/Grid';
+import clsx from 'clsx';
 
-const Header=()=> {
+const Header=(props)=> {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   
@@ -30,7 +31,7 @@ const Header=()=> {
         </Toolbar>
       </AppBar>
       </div>
-      <CustomPopup open={isLoginOpen} onClose={() =>setLoginIsOpen(false)} >
+      <CustomPopup open={isLoginOpen} onClose={() =>setLoginIsOpen(false)} poupxl={true}> 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} className="login-background">
           </Grid>
@@ -39,7 +40,7 @@ const Header=()=> {
           </Grid>
         </Grid>
       </CustomPopup>
-      <CustomPopup open={isReginOpen} onClose={() =>setReginIsOpen(false)}>
+      <CustomPopup open={isReginOpen} onClose={() =>setReginIsOpen(false)}poupxl={true}>
      <Grid container spacing={3}>
       <Grid item xs={12} sm={5} className="login-background">
              </Grid>

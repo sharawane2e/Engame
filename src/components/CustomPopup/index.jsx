@@ -9,7 +9,7 @@ function CutomPopup(props) {
     onClose,
     classes = {},
     headerText = "",
-    poupxl=true,
+    poupxl,
   } = props;
   const { content = "" } = classes;
   return open ? (
