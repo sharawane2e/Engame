@@ -5,9 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import e2eLogo from "../../assets/images/E2E-logo.png";
-import Popup from "../CustomPopup";
+import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
+import Grid from '@material-ui/core/Grid';
 
 const Header=()=> {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -29,15 +30,24 @@ const Header=()=> {
         </Toolbar>
       </AppBar>
       </div>
-      <Popup open={isLoginOpen} onClose={() =>setLoginIsOpen(false)}>
-        <Login/>
-      </Popup>
-      <Popup open={isReginOpen} onClose={() =>setReginIsOpen(false)}>
+      <CustomPopup open={isLoginOpen} onClose={() =>setLoginIsOpen(false)} >
+      <Grid container spacing={3}>
+      <Grid item xs={12} sm={5} className="login-background">
+             </Grid>
+        <Grid item xs={12} sm={7}>
+          <Login />
+          </Grid>
+        </Grid>
+      </CustomPopup>
+      <CustomPopup open={isReginOpen} onClose={() =>setReginIsOpen(false)}>
+     <Grid container spacing={3}>
+      <Grid item xs={12} sm={5} className="login-background">
+             </Grid>
+        <Grid item xs={12} sm={7}>
         <Registration/>
-      </Popup>
-      {/* <Popup open={isReginOpen} onClose={() =>setLoginIsOpen(false)}>
-        <Registration/>
-      </Popup> */}
+          </Grid>
+        </Grid> 
+      </CustomPopup>
       </>
     );
 }

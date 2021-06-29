@@ -14,13 +14,15 @@
  import { LOGIN } from "../../config/ApiUrl";
  import LocalStorageUtils from "../../util/LocalStorageUtils";
  import Registration from "../../components/Registration";
- import axios from "axios";
-  
+ import ForgotPassword from "../../components/ForgotPassword";
+ 
+ 
  class Login extends Component {
       state = {
          email: "",
          password: "",
          data:"",
+         forgot:"",
          formErrors: {
            email: "",
            password: "",
@@ -30,8 +32,13 @@
       
        loginValidation = new LoginValidation();
       
-       createAccount = (el) =>{
+       createAccount = (e) =>{
          this.setState({data:`texxt`}); 
+       }
+       forgotPassword = (e) =>{
+         console.log("forgot", )
+         this.setState({forgot:`texxt`});
+        
        }
 
        handleSubmit = (el) => {
@@ -62,14 +69,15 @@
                //LocalStorageUtils.setUserIntoLocalStorage(res.Data);
                //LocalStorageUtils.setUserIntoLocalStorage("Ashish");
                localStorage.setItem('token',res.DataObject.data);
+               console.log("welome")
                const { from } = this.props.location || { from: { pathname: "/" } };
-                     this.props.history.push(from);
+                this.props.history.push(from);
                //ApiRequest.setAuthToken(LocalStorageUtils.getToken());
                //this.props.history.push("/");
              }
-             // else{              
-             //   console.log("Welcome to my login");
-             // }
+              else{              
+                console.log("not login");
+             }
             
            })
            .catch((error) => {
@@ -91,7 +99,7 @@
 
       handleChange = (el, key) => {
          let value = el.target.value;
-         const validationResponse = this.validateField(key, value);
+         const validationResponse = this.loginValidation.validateField(key, value);
          const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
              this.setState({
          [key]: value,
@@ -110,13 +118,12 @@
            formErrors: { ...this.state.formErrors, [key]: errorMessage },
          });
        }
-      
-     
+    
    
  render() {
      return (      
          <>
-         {this.state.data?<Registration />:
+        {(this.state.forgot) ? <ForgotPassword/> : (this.state.data) ? <Registration/> :
          <div className="form-area">
              <div className="form-area__login  large-hedding">Login</div>
              <form className="form-area__fileds" noValidate autoComplete="off">
@@ -158,9 +165,8 @@
            <div className="validated-error">{this.state.formErrors.password}</div>
          </FormControl>
   
-
          <div className="forgot-link">
-         <Link href="#" >
+         <Link href="#" onClick={this.forgotPassword}>
              Forgot password ?
           </Link>
          </div>

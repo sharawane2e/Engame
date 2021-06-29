@@ -111,37 +111,25 @@ export class UserValidation extends Validation {
     };
 }
 
-// export class UserValidation extends Validation {
-//   validateField = (field, value, context) => {
-//     const validationResponse = new ValidationResponse();
+export class ForgotValidation extends Validation {
 
-//     switch (field) {
-//       case "email":
-//         if (!value) {
-//           validationResponse.isValid = false;
-//           validationResponse.message = ErrorMessages.EMAIL_REQUIRED;
-//         } else {
-//           if (!validateEmailPattern(value)) {
-//             validationResponse.isValid = false;
-//             validationResponse.message = ErrorMessages.EMAIL_INVALID;
-//           }
-//         }
-//         break;
-//       case "firstName":
-//         if (!value) {
-//           validationResponse.isValid = false;
-//           validationResponse.message = ErrorMessages.USER_FIRSTNAME_REQUIRED;
-//         }
-//         break;
-//       case "lastName":
-//         if (!value) {
-//           validationResponse.isValid = false;
-//           validationResponse.message = ErrorMessages.USER_LASTNAME_REQUIRED;
-//         }
-//         break;
-//       default:
-//         break;
-//     }
-//     return validationResponse;
-//   };
-// }
+    validateField = (field, value) => {
+        const validationResponse = new ValidationResponse();
+
+        switch (field) {
+            case "email":
+                if (!value) {
+                    validationResponse.isValid = false;
+                    validationResponse.message = ErrorMessages.EMAIL_INVALID;
+                } else {
+                    if (!validateEmailPattern(value)) {
+                        validationResponse.isValid = false;
+                        validationResponse.message = ErrorMessages.EMAIL_INVALID;
+                    }
+                }
+            default:
+                break;
+        }
+        return validationResponse;
+    };
+}

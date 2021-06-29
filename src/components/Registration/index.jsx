@@ -9,6 +9,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from "@material-ui/core/Button";
 import { UserValidation } from "../../util/FormValidation";
+import Login from "../../components/Login";
 
 
 class Registration extends Component {
@@ -31,6 +32,10 @@ class Registration extends Component {
   };
 
   UserValidation = new UserValidation();
+
+  backLogin = (e) =>{
+    this.setState({data:`texxt`}); 
+  }
 
   handleRegister = (e) => {
     e.preventDefault();
@@ -90,6 +95,7 @@ class Registration extends Component {
   render(){
     return(
       <>
+      {this.state.data?<Login />:
         <div className="form-area">
              <div className="form-area__login  large-hedding">Registartion</div>
              <form className="form-area__fileds" noValidate autoComplete="off">
@@ -175,9 +181,9 @@ class Registration extends Component {
         <Button type="button" className="form-button-grop__custom-button" onClick={this.handleRegister}>Register</Button>
         </div>
       <div>
-       <Button type="button" className=""  >Back</Button>
+       <Button type="button" className="" onClick={this.backLogin} >Back to login</Button>
       </div>
-         </div>
+         </div>}
       </>
     )
   }
