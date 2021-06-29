@@ -15,6 +15,7 @@
  import LocalStorageUtils from "../../util/LocalStorageUtils";
  import Registration from "../../components/Registration";
  import ForgotPassword from "../../components/ForgotPassword";
+
  
  
  class Login extends Component {
@@ -55,7 +56,7 @@
        //   token:this.token
        // }
 
-       if(validationResponse.isFormValid){
+       if(!validationResponse.isFormValid){
       
            ApiRequest.request(LOGIN, "POST", {
              email: email,

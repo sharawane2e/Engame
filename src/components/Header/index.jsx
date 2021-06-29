@@ -31,11 +31,11 @@ const Header=()=> {
       </AppBar>
       </div>
       <CustomPopup open={isLoginOpen} onClose={() =>setLoginIsOpen(false)} >
-      <Grid container spacing={3}>
-      <Grid item xs={12} sm={5} className="login-background">
-             </Grid>
-        <Grid item xs={12} sm={7}>
-          <Login />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={5} className="login-background">
+          </Grid>
+          <Grid item xs={12} sm={7}>
+            <Login data="high" />
           </Grid>
         </Grid>
       </CustomPopup>

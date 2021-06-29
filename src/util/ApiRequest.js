@@ -3,7 +3,7 @@ import LocalStorageUtils from "./LocalStorageUtils";
 
 const instance = axios.create({
     //baseURL: process.env.REACT_APP_Dev_BaseUrl,
-    baseURL: process.env.REACT_APP_Dev_BaseUrlLocal,
+    baseURL: process.env.REACT_APP_BASEURL,
   });
 
   const token = LocalStorageUtils.getToken();

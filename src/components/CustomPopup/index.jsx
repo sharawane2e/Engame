@@ -1,5 +1,6 @@
 import React from "react";
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import Overlay from "../Overlay";
 
 function CutomPopup(props) {
   const {
@@ -13,7 +14,7 @@ function CutomPopup(props) {
   const { content = "" } = classes;
   return open ? (
       <>
-      <div className="popup-overlay"></div>
+     <Overlay position="absolute" />
     <div className="popup-container">
      <div className={poupxl?"popup-container__iner popup-container__inerxl":"popup-container__iner popup-container__inersm"}>
      {headerText?<div className="popup-container__header border-bottom" >
