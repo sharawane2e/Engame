@@ -76,7 +76,9 @@ render() {
         onClick={this.handleSubmit}
        className="form-button-grop__custom-button">Forgot Password</Button>
        </div>
-         <Button type="button" className=""  onClick={this.backLogin}>Back to login</Button>
+       <Link href="#" onClick={this.backLogin} className="back-button">
+        Back to login
+      </Link>
         </div>}
         </>
     );

@@ -184,8 +184,7 @@ class Registration extends Component {
       <Link href="#" onClick={this.backLogin} className="back-button">
         Back to login
       </Link>
-       {/* <Button type="button" className="" onClick={this.backLogin} ></Button> */}
-          </div>}
+            </div>}
       </>
     )
   }
