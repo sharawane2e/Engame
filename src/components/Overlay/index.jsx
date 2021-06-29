@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 const Overlay = (props)=>{
-    const {position,width,dataindex} = props;
+    const {position} = props;
     return(
         <div className={clsx('popup-overlay',position?position:'small')}></div>
     )

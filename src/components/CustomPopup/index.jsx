@@ -16,14 +16,14 @@ function CutomPopup(props) {
       <>
      <Overlay position="absolute" />
     <div className="popup-container">
-     <div className={poupxl?"popup-container__iner popup-container__inerxl":"popup-container__iner popup-container__inersm"}>
+     <div className={poupxl?"popup-container__iner popup-container__inerxl border-allside border-radius":"popup-container__iner popup-container__inersm"} poupType="">
      {headerText?<div className="popup-container__header border-bottom" >
          <div className="popup-container__text ">{headerText}</div>
           <div className="popup-container__close" onClick={onClose}>
             <CloseOutlinedIcon/>
           </div>
        </div>: <>
-       <div className="popup-container__close" onClick={onClose}>
+       <div className="popup-container__close-withoutheader" onClick={onClose}>
             <CloseOutlinedIcon/>
           </div>
        </>

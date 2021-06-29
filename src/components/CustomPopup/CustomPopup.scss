@@ -37,11 +37,26 @@
         flex: 1;
     }
     #{&}__body {
-        padding: 24px;
+        padding: 24px 90px 24px 50px;
     }
     #{&}__close {
         display: flex;
         justify-content: flex-end;
         cursor: pointer;
+        &>svg{
+            width: 2rem !important;
+            height: 2rem !important;
+            fill: map-get($map: $fill-color , $key:"black-smdark");
+        }
+    }
+    #{&}__close-withoutheader{
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        &>svg{
+            width: 2rem !important;
+            height: 2rem !important;
+            fill: map-get($map: $fill-color , $key: "black-smdark");
+        }
     }
 }

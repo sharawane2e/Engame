@@ -14,7 +14,6 @@ import clsx from 'clsx';
 const Header=(props)=> {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  
     return (
       <>
       <div className="flexGrow">
@@ -24,9 +23,11 @@ const Header=(props)=> {
             <img src={e2eLogo}/>
           </Typography>
           <div className="header-text-color">
-          <Button color="inherit" onClick={() =>setLoginIsOpen(true)}>Login</Button>
+          <Button color="inherit" onClick={() =>setLoginIsOpen(true)}>Login</Button>|
           <Button color="inherit" onClick={() =>setReginIsOpen(true)}>Registeration</Button>
-          <ShoppingCartIcon/>
+        <div className="shoping__card">
+        <ShoppingCartIcon/>
+        </div>
           </div>
         </Toolbar>
       </AppBar>

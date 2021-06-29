@@ -138,6 +138,7 @@
            <FormControl className="form-area__control" variant="outlined">
              <OutlinedInput 
              id="outlined-adornment-password"
+             placeholder="***********************"
              type= {this.state.showPassword ? "text": "password"}
              value={this.state.password}
              onChange={(e) => this.handleChange(e, "password")}

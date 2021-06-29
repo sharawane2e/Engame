@@ -10,6 +10,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from "@material-ui/core/Button";
 import { UserValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
+import Link from '@material-ui/core/Link';
 
 
 class Registration extends Component {
@@ -180,10 +181,11 @@ class Registration extends Component {
         <div className="form-button-grop">
         <Button type="button" className="form-button-grop__custom-button" onClick={this.handleRegister}>Register</Button>
         </div>
-      <div>
-       <Button type="button" className="" onClick={this.backLogin} >Back to login</Button>
-      </div>
-         </div>}
+      <Link href="#" onClick={this.backLogin} className="back-button">
+        Back to login
+      </Link>
+       {/* <Button type="button" className="" onClick={this.backLogin} ></Button> */}
+          </div>}
       </>
     )
   }

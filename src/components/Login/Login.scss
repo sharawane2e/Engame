@@ -14,4 +14,33 @@
     #{&}__control{
         margin-bottom: 10px;
     }
+    .forgot-link{
+        text-align: right;
+        padding-bottom: 25px;
+        &>a{
+            color:map-get($map: $text-color, $key: red-dark);
+        }
+    }
+}
+.form-button-grop{
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    #{&}__custom-button{
+        background: map-get($map: $text-color, $key: red-dark) !important;
+        color: #fff !important;
+        box-shadow: 0px 10px 20px map-get($map: $boxshadow, $key:red-smooth );
+        padding: 10px;
+        min-width: 280px;
+        text-transform: unset !important;
+        font-family: $font-barlowmedium;
+    }
+}
+.form-newaccont{
+    text-align: center;
+    padding-top: 15px;
+    &>a{
+        padding-left: 8px;
+        color:map-get($map: $text-color, $key: red-dark);
+    }
 }
