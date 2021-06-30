@@ -32,7 +32,7 @@
     padding: map-get($map: $padding, $key: padding-10);
     min-width: 280px;
     text-transform: unset !important;
-    font-family: $font-barlowmedium;
+    font-family: map-get($map: $font-family, $key: font-barlowmedium);
   }
 }
 .form-newaccont {

@@ -47,8 +47,8 @@
     justify-content: flex-end;
     cursor: pointer;
     & > svg {
-      width: map-get($map: $width, $key: width-2rem) !important;
-      height: map-get($map: $height, $key: height-2rem) !important;
+      width: 2rem !important;
+      height: 2rem !important;
       fill: map-get($map: $fill-color, $key: "black-smdark");
     }
   }
@@ -57,8 +57,8 @@
     right: 0;
     cursor: pointer;
     & > svg {
-      width: map-get($map: $width, $key: width-2rem) !important;
-      height: map-get($map: $height, $key: height-2rem) !important;
+      width: 2rem !important;
+      height: 2rem !important;
       fill: map-get($map: $fill-color, $key: "black-smdark");
     }
   }

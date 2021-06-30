@@ -1,9 +1,10 @@
-$font-barlowmedium: "barlowmedium";
-$font-barlowbold: "barlowbold";
-$font-barlowitalic: "barlowitalic";
-$font-barlowlight: "barlowlight";
-$font-barlowregular: "barlowregular";
-
+$font-family: (
+  "font-barlowmedium": barlowmedium,
+  "font-barlowbold": barlowbold,
+  "font-barlowitalic": barlowitalic,
+  "font-barlowlight": barlowlight,
+  "font-barlowregular": barlowregular,
+);
 $text-size: (
   "xxl": 50px,
   "xl": 32px,
@@ -98,12 +99,4 @@ $margin: (
   "margin-16": 16px,
   "margin-18": 18px,
   "margin-20": 20px,
-);
-
-$width: (
-  "width-2rem": 2rem,
-);
-
-$height: (
-  "height-2rem": 2rem,
 );

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: $font-barlowregular;
+  font-family: map-get($map: $font-family, $key: font-barlowregular);
 }
 .MuiButton-label {
   font-weight: map-get($map: $font-weight, $key: font-600);
