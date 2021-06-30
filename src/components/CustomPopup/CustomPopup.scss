@@ -1,62 +1,65 @@
 .login-background {
-    background: url("../../assets/images/Login-background.jpg") no-repeat;
-    min-height: 520px;
-    background-position: left bottom;
-    background-size: 70%;
+  background: url("../../assets/images/Login-background.jpg") no-repeat;
+  min-height: 520px;
+  background-position: left bottom;
+  background-size: 70%;
 }
 
 .popup-container {
-    position: fixed;
-    // background: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    left: 0;
-    z-index: 9999;
-    top: 0;
-    #{&}__iner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        min-height: 550px;
-        // padding: 0 24px;
+  position: fixed;
+  // background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  z-index: 9999;
+  top: 0;
+  #{&}__iner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    min-height: 550px;
+    // padding: 0 24px;
+  }
+  #{&}__inerxl {
+    width: 80%;
+  }
+  #{&}__inersm {
+    width: 50%;
+  }
+  #{&}__header {
+    padding: map-get($map: $padding, $key: padding-25);
+    display: flex;
+  }
+  #{&}__text {
+    display: flex;
+    flex: 1;
+  }
+  #{&}__body {
+    padding: map-get($map: $padding, $key: padding-24)
+      map-get($map: $padding, $key: padding-90)
+      map-get($map: $padding, $key: padding-24)
+      map-get($map: $padding, $key: padding-50); //24 90 24 50
+  }
+  #{&}__close {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    & > svg {
+      width: map-get($map: $width, $key: width-2rem) !important;
+      height: map-get($map: $height, $key: height-2rem) !important;
+      fill: map-get($map: $fill-color, $key: "black-smdark");
     }
-    #{&}__inerxl {
-        width: 80%;
+  }
+  #{&}__close-withoutheader {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    & > svg {
+      width: map-get($map: $width, $key: width-2rem) !important;
+      height: map-get($map: $height, $key: height-2rem) !important;
+      fill: map-get($map: $fill-color, $key: "black-smdark");
     }
-    #{&}__inersm {
-        width: 50%;
-    }
-    #{&}__header {
-        padding: 25px;
-        display: flex;
-    }
-    #{&}__text {
-        display: flex;
-        flex: 1;
-    }
-    #{&}__body {
-        padding: 24px 90px 24px 50px;
-    }
-    #{&}__close {
-        display: flex;
-        justify-content: flex-end;
-        cursor: pointer;
-        &>svg{
-            width: 2rem !important;
-            height: 2rem !important;
-            fill: map-get($map: $fill-color , $key:"black-smdark");
-        }
-    }
-    #{&}__close-withoutheader{
-        position: absolute;
-        right: 0;
-        cursor: pointer;
-        &>svg{
-            width: 2rem !important;
-            height: 2rem !important;
-            fill: map-get($map: $fill-color , $key: "black-smdark");
-        }
-    }
+  }
 }

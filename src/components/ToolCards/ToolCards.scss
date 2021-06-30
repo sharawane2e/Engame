@@ -1,42 +1,44 @@
-.toolcard{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    #{&}__image{
-        margin-bottom: 5px;
-        text-align: center;
-       >img{
-        max-width: 100%;
-        width: 100%;
-        max-height: 120px;
-       }
+.toolcard {
+  padding-top: map-get($map: $padding, $key: "padding-15");
+  padding-bottom: map-get($map: $padding, $key: "padding-15");
+  #{&}__image {
+    margin-bottom: map-get($map: $margin, $key: "margin-5");
+    text-align: map-get($map: $alignment, $key: "align-center");
+    > img {
+      max-width: 100%;
+      width: 100%;
+      max-height: 120px;
     }
-    #{&}__align{
-        display: flex;
-    }
-    #{&}__items{
-        display: flex;
-        flex: 0 0 50%;
-    }
-    #{&}__shopping{
-        display: flex;
-        justify-content: flex-end;
-    }
-    #{&}__sub-icons{
-        display: flex;
-        border: map-get($map: $border-color, $key: border-width) map-get($map: $border-color, $key: bsolid) map-get($map: $border-round, $key: accent) ;
-       border-radius: 4px;
-        padding: 8px;
-    }
-    #{&}__aligninr1{
-        display: flex;
-        flex: 0 0 80%;
-    }
-    #{&}__aligninr{
-        display: flex;
-        flex: 0 0 20%;
-        justify-content: flex-end;
-    }
-    #{&}__toolname{
-        margin-top: 10px;
-    }
+  }
+  #{&}__align {
+    display: flex;
+  }
+  #{&}__items {
+    display: flex;
+    flex: 0 0 50%;
+  }
+  #{&}__shopping {
+    display: flex;
+    justify-content: flex-end;
+  }
+  #{&}__sub-icons {
+    display: flex;
+    border: map-get($map: $border-color, $key: "border-width")
+      map-get($map: $border-color, $key: bsolid)
+      map-get($map: $border-round, $key: accent);
+    border-radius: map-get($map: $border-round, $key: "boder-radius"); //4
+    padding: map-get($map: $padding, $key: "padding-8");
+  }
+  #{&}__aligninr1 {
+    display: flex;
+    flex: 0 0 80%;
+  }
+  #{&}__aligninr {
+    display: flex;
+    flex: 0 0 20%;
+    justify-content: flex-end;
+  }
+  #{&}__toolname {
+    margin-top: map-get($map: $margin, $key: "margin-10");
+  }
 }

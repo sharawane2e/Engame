@@ -1,46 +1,45 @@
-.form-area{
-    #{&}__login{
-        text-align: center;
-        padding-top: 15px;
-        padding-bottom: 40px;
-        font-size: map-get($map:$text-size , $key: xl);
+.form-area {
+  #{&}__login {
+    text-align: map-get($map: $alignment, $key: align-center);
+    padding-top: map-get($map: $padding, $key: padding-15);
+    padding-bottom: map-get($map: $padding, $key: padding-40);
+    font-size: map-get($map: $text-size, $key: xl);
+  }
+  #{&}__fileds {
+    & > * {
+      width: 100%;
     }
-    #{&}__fileds{
-        & > *{
-            width: 100%;
-        }
+  }
+  #{&}__control {
+    margin-bottom: map-get($map: $margin, $key: margin-10);
+  }
+  .forgot-link {
+    text-align: map-get($map: $alignment, $key: align-right);
+    padding-bottom: map-get($map: $padding, $key: padding-25);
+    & > a {
+      color: map-get($map: $text-color, $key: red-dark);
     }
-    #{&}__control{
-        margin-bottom: 10px;
-    }
-    .forgot-link{
-        text-align: right;
-        padding-bottom: 25px;
-        &>a{
-            color:map-get($map: $text-color, $key: red-dark);
-        }
-    }
-
+  }
 }
-.form-button-grop{
-    text-align: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    #{&}__custom-button{
-        background: map-get($map: $text-color, $key: red-dark) !important;
-        color: #fff !important;
-        box-shadow: 0px 10px 20px map-get($map: $boxshadow, $key:red-smooth );
-        padding: 10px;
-        min-width: 280px;
-        text-transform: unset !important;
-        font-family: $font-barlowmedium;
-    }
+.form-button-grop {
+  text-align: map-get($map: $alignment, $key: align-center);
+  padding-top: map-get($map: $padding, $key: padding-15);
+  padding-bottom: map-get($map: $padding, $key: padding-15);
+  #{&}__custom-button {
+    background: map-get($map: $text-color, $key: red-dark) !important;
+    color: map-get($map: $background-color, $key: primary) !important;
+    box-shadow: 0px 10px 20px map-get($map: $boxshadow, $key: red-smooth);
+    padding: map-get($map: $padding, $key: padding-10);
+    min-width: 280px;
+    text-transform: unset !important;
+    font-family: $font-barlowmedium;
+  }
 }
-.form-newaccont{
-    text-align: center;
-    padding-top: 15px;
-    &>a{
-        padding-left: 8px;
-        color:map-get($map: $text-color, $key: red-dark);
-    }
+.form-newaccont {
+  text-align: map-get($map: $alignment, $key: align-center);
+  padding-top: map-get($map: $padding, $key: padding-15);
+  & > a {
+    padding-left: map-get($map: $padding, $key: padding-8);
+    color: map-get($map: $text-color, $key: red-dark);
+  }
 }

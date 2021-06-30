@@ -1,16 +1,16 @@
-.header-bg{
-    background-color: map-get($map: $background-color, $key: "secondary");
-    padding-top: 15px;
-    padding-bottom: 15px;
+.header-bg {
+  background-color: map-get($map: $background-color, $key: "secondary");
+  padding-top: map-get($map: $padding, $key: "padding-15");
+  padding-bottom: map-get($map: $padding, $key: "padding-15");
 }
-.MuiPaper-elevation4{
-    box-shadow: none !important;
+.MuiPaper-elevation4 {
+  box-shadow: none !important;
 }
-.header-text-color{
-    display: flex;
-    align-items: center;
-    color: map-get($map: $text-color, $key: "black-light");
+.header-text-color {
+  display: flex;
+  align-items: map-get($map: $alignment, $key: align-center);
+  color: map-get($map: $text-color, $key: "black-light");
 }
-.shoping__card{
-    padding-left: 15px;
+.shoping__card {
+  padding-left: map-get($map: $padding, $key: "padding-15");
 }

@@ -1,11 +1,11 @@
-.back-button{
-    display: block;
-    padding: 15px 0;
-    text-align: center;
-     >a{
-        color: map-get($map:$text-color , $key:"black-drak" ) !important;
-        &:hover{
-            text-decoration: none !important;
-        }
+.back-button {
+  display: block;
+  padding: map-get($map: $padding, $key: "padding-15") 0;
+  text-align: map-get($map: $alignment, $key: align-center);
+  > a {
+    color: map-get($map: $text-color, $key: "black-drak") !important;
+    &:hover {
+      text-decoration: none !important;
     }
+  }
 }

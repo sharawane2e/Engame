@@ -1,9 +1,13 @@
+$font-barlowmedium: "barlowmedium";
+$font-barlowbold: "barlowbold";
+$font-barlowitalic: "barlowitalic";
+$font-barlowlight: "barlowlight";
+$font-barlowregular: "barlowregular";
 
-$font-barlowmedium:  "barlowmedium"; 
 $text-size: (
   "xxl": 50px,
   "xl": 32px,
-  "large20":20px,
+  "large20": 20px,
   "large": 18px,
   "regular": 16px,
   "small": 14px,
@@ -22,63 +26,84 @@ $font-weight: (
 );
 $background-color: (
   "primary": #ffffff,
-  "secondary": #ECECEC,
+  "secondary": #ececec,
   "border-secondary": #efefef,
-  "back-color":#D6D6D6,
-  "button-primary": #F15A5C,
-  "button-secondary": #F15B5B,
+  "back-color": #d6d6d6,
+  "button-primary": #f15a5c,
+  "button-secondary": #f15b5b,
+  "transparent": transparent,
 );
 $text-color: (
-   "black-light": #363636,
-   "black-drak": #383838,
-   "black-smooth": #B3B3B3,
-   "black-gray": #9D9D9D,
-   "red-dark": #F15B5B,
+  "black-light": #363636,
+  "black-drak": #383838,
+  "black-smooth": #b3b3b3,
+  "black-gray": #9d9d9d,
+  "red-dark": #f15b5b,
 );
 $border-round: (
   "accent": #e3ebf7,
   "light-smooth": #d4d4d4,
-  "boder-radius":4px,
+  "boder-radius": 4px,
 );
 $border-color: (
   "border-width": 1px,
   "bsolid": solid,
-  "red-dark": #F15B5B,
+  "red-dark": #f15b5b,
 );
-$boxshadow:(
-    "red-smooth":rgba(241 ,91 ,91 ,0.50)
-);
-
-$fill-color:(
-   "primary-color":#ffffff,
-   "black-smdark": rgba(132, 132, 132, 0.5),
-);
-$font-weight:(
-  "font-500":500,
-  "font-600":600,
-  "font-700":700,
-  "font-800":800,
-);
-$alignment:(
- 
+$boxshadow: (
+  "red-smooth": rgba(241, 91, 91, 0.5),
 );
 
-$padding:(
-  "padding-5":5px,
-  "padding-8":8px,
-  "padding-12":12px,
-  "padding-14":14px,
-  "padding-15":15px,
-  "padding-16":16px,
-  "padding-18":18px,
-  "padding-20":20px,
+$fill-color: (
+  "primary-color": #ffffff,
+  "black-smdark": rgba(132, 132, 132, 0.5),
 );
-$margin:(
-  "margin-10":10px,
-  "margin-12":12px,
-  "margin-14":14px,
-  "margin-15":15px,
-  "margin-16":16px,
-  "margin-18":18px,
-  "margin-20":20px,
-)
+$font-weight: (
+  "font-500": 500,
+  "font-600": 600,
+  "font-700": 700,
+  "font-800": 800,
+);
+$alignment: (
+  "align-center": center,
+  "align-right": right,
+  "align-left": left,
+);
+
+$padding: (
+  "padding-5": 5px,
+  "padding-8": 8px,
+  "padding-10": 10px,
+  "padding-12": 12px,
+  "padding-14": 14px,
+  "padding-15": 15px,
+  "padding-16": 16px,
+  "padding-18": 18px,
+  "padding-20": 20px,
+  "padding-24": 24px,
+  "padding-25": 25px,
+  "padding-40": 40px,
+  "padding-50": 50px,
+  "padding-90": 90px,
+);
+
+$margin: (
+  "margin-0": 0,
+  "margin-5": 5px,
+  "margin-8": 8px,
+  "margin-10": 10px,
+  "margin-12": 12px,
+  "margin-14": 14px,
+  "margin-15": 15px,
+  "margin-16": 16px,
+  "margin-18": 18px,
+  "margin-20": 20px,
+);
+
+$width: (
+  "width-2rem": 2rem,
+);
+
+$height: (
+  "height-2rem": 2rem,
+);

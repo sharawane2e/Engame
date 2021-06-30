@@ -1,57 +1,61 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-body{
-    font-family: 'barlowregular';
+body {
+  font-family: $font-barlowregular;
 }
-.MuiButton-label{
-    font-weight: 600;
+.MuiButton-label {
+  font-weight: map-get($map: $font-weight, $key: font-600);
 }
-.flexGrow{
-    flex-grow: 1;
-    display: flex;
-    width: 100%;
+.flexGrow {
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
 }
-.paperstyel{
-    padding: 16px;
-    text-align: left;
+.paperstyel {
+  padding: map-get($map: $padding, $key: padding-16);
+  text-align: map-get($map: $alignment, $key: align-left);
 }
-.input{
-    flex: 1;
-    margin-left: 8px;
+.input {
+  flex: 1;
+  margin-left: map-get($map: $margin, $key: margin-8);
 }
-.iconButton{
-    padding: 10px;
+.iconButton {
+  padding: map-get($map: $padding, $key: padding-10);
 }
-.divider{
-    height:42px !important;
-    margin: 4px !important;
-}
-  
-
-.large-hedding{
-    color: map-get($map:$text-color , $key:black-drak );
-}
-.input-label{
-    margin-bottom: 10px;
+.divider {
+  height: 42px !important;
+  margin: 4px !important;
 }
 
-.validated-error{
-    min-height: 16px;
-    color: map-get($map:$background-color , $key:"button-secondary" );
-    font-size: map-get($map: $text-size, $key:"small" );
-    margin: 5px 0;
+.large-hedding {
+  color: map-get($map: $text-color, $key: black-drak);
+}
+.input-label {
+  margin-bottom: map-get($map: $margin, $key: margin-10);
 }
 
-.border-bottom{
-    border-bottom: map-get($map:$border-color , $key: border-width) map-get($map:$border-color , $key: bsolid) map-get($map: $text-color, $key: black-smooth);
+.validated-error {
+  min-height: 16px;
+  color: map-get($map: $background-color, $key: "button-secondary");
+  font-size: map-get($map: $text-size, $key: "small");
+  margin: map-get($map: $margin, $key: margin-5)
+    map-get($map: $margin, $key: margin-0);
 }
 
-.border-allside{
-    border: map-get($map: $border-color, $key: border-width) map-get($map: $border-color, $key: bsolid) map-get($map: $border-color, $key: red-dark);
+.border-bottom {
+  border-bottom: map-get($map: $border-color, $key: border-width)
+    map-get($map: $border-color, $key: bsolid)
+    map-get($map: $text-color, $key: black-smooth);
 }
-.border-radius{
-    border-radius: map-get($map: $border-round, $key: boder-radius);
+
+.border-allside {
+  border: map-get($map: $border-color, $key: border-width)
+    map-get($map: $border-color, $key: bsolid)
+    map-get($map: $border-color, $key: red-dark);
+}
+.border-radius {
+  border-radius: map-get($map: $border-round, $key: boder-radius);
 }
