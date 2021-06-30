@@ -5,7 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from "@material-ui/core/Button";
 import Link from '@material-ui/core/Link';
 import { ForgotValidation } from "../../util/FormValidation";
-import ApiRequest from "../../util/ApiRequest";
+// import ApiRequest from "../../util/ApiRequest";
 import Login from "../../components/Login";
 
 class ForgotPassword extends Component {
@@ -20,7 +20,7 @@ class ForgotPassword extends Component {
       ForgotPasswordVali = new ForgotValidation();
      
       backLogin = (e) =>{
-        this.setState({data:`texxt`}); 
+        this.setState({data:`data`}); 
       }
 
       handleSubmit = (e) => {
@@ -76,9 +76,11 @@ render() {
         onClick={this.handleSubmit}
        className="form-button-grop__custom-button">Forgot Password</Button>
        </div>
-       <Link href="#" onClick={this.backLogin} className="back-button">
+      <div className="back-button">
+      <Link href="#" onClick={this.backLogin} >
         Back to login
       </Link>
+      </div>
         </div>}
         </>
     );

@@ -9,7 +9,7 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from '@material-ui/core/Grid';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 
 const Header=(props)=> {
   const [isLoginOpen, setLoginIsOpen] = useState(false);

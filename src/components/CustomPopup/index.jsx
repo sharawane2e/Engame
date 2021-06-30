@@ -7,16 +7,16 @@ function CutomPopup(props) {
     children,
     open,
     onClose,
-    classes = {},
+    // classes = {},
     headerText = "",
     poupxl,
   } = props;
-  const { content = "" } = classes;
+  // const { content = "" } = classes;
   return open ? (
       <>
      <Overlay position="absolute" />
     <div className="popup-container">
-     <div className={poupxl?"popup-container__iner popup-container__inerxl border-allside border-radius":"popup-container__iner popup-container__inersm"} poupType="">
+     <div className={poupxl?"popup-container__iner popup-container__inerxl border-allside border-radius":"popup-container__iner popup-container__inersm"} >
      {headerText?<div className="popup-container__header border-bottom" >
          <div className="popup-container__text ">{headerText}</div>
           <div className="popup-container__close" onClick={onClose}>

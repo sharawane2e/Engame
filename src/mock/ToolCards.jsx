@@ -1,4 +1,3 @@
- import Archetypes from "../assets/images/Archetypes.svg";
  import Artcards from "../assets/images/Artcards.svg";
  import BrandTarget from "../assets/images/BrandTarget-dnd.svg";
  import Container_exclusive_dnd from "../assets/images/Container_exclusive_dnd.svg";

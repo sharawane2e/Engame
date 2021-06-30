@@ -127,8 +127,9 @@ export class ForgotValidation extends Validation {
                         validationResponse.message = ErrorMessages.EMAIL_INVALID;
                     }
                 }
-            default:
                 break;
+            default:
+                // break;
         }
         return validationResponse;
     };

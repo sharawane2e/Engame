@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 
-function Home(props) {
+function Home() {
     
     return (
         <div className="header-bg">
@@ -27,29 +27,27 @@ function Home(props) {
               <img src={librarycards}/>
           </Paper>
         </Grid>
-       
       </Grid>
     </div>
     </Toolbar>
-    <Toolbar>
+    <Toolbar className="filter-inputsection">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-          <Paper component="form" className="flexGrow">
-        <IconButton className="iconButton search-icon" aria-label="menu">
-          <SearchIcon/>
-        </IconButton>
-        <InputBase
-          className="input"
-          placeholder="Search Here"
-          inputProps={{ 'aria-label': 'search google maps' }}
-        />
-       <Divider className="divider" orientation="vertical" />
-      <IconButton  className="iconButton" aria-label="directions">
-        <FilterListIcon />Filter
-      </IconButton>
-    </Paper>
-            </Grid>
-        </Grid>
+          <Paper component="form" className="flexGrow filter-inputsection__form">
+            <IconButton className="iconButton search-icon" aria-label="menu">
+              <SearchIcon/>
+            </IconButton>
+              <InputBase
+              className="input"
+              placeholder="Search Here"
+            />
+           <Divider className="divider" orientation="vertical" />
+          <IconButton  className="iconButton filter-inputsection__icon" aria-label="directions">
+            <FilterListIcon />Filter
+          </IconButton>
+       </Paper>
+      </Grid>
+    </Grid>
     </Toolbar>
         </div>
     );

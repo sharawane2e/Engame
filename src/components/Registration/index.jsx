@@ -117,13 +117,12 @@ class Registration extends Component {
              <FormControl className="form-area__control">
               <TextField id="outlined-email-input" 
                 placeholder="Emails"  
-                type="email"  
+                type="Email"  variant="outlined"
                 value={this.state.email}
                 onChange={(e) => this.handleChange(e, "email")}
                 onBlur={(e) => this.handleBlur(e, "email")}
                 message={this.state.formErrors.email}
-                type="Email"  variant="outlined"
-                />
+                 />
               <div className="validated-error">{this.state.formErrors.email}</div>
              </FormControl>
     
@@ -181,10 +180,12 @@ class Registration extends Component {
         <div className="form-button-grop">
         <Button type="button" className="form-button-grop__custom-button" onClick={this.handleRegister}>Register</Button>
         </div>
-      <Link href="#" onClick={this.backLogin} className="back-button">
-        Back to login
-      </Link>
-            </div>}
+     <div className="back-button">
+      <Link href="#" onClick={this.backLogin} className="">
+          Back to login
+        </Link>
+     </div>
+    </div>}
       </>
     )
   }

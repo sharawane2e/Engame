@@ -2,5 +2,10 @@
     display: block;
     padding: 15px 0;
     text-align: center;
-    color: map-get($map:$text-color , $key:"black-drak" ) !important;
+     >a{
+        color: map-get($map:$text-color , $key:"black-drak" ) !important;
+        &:hover{
+            text-decoration: none !important;
+        }
+    }
 }
