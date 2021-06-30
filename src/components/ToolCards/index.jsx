@@ -42,19 +42,17 @@ const ToolCards = (props) => {
             </div>
       
           </Grid>
-        
          
            </>
           
         )
             })}
      </Grid>
-        <CustomPopup open={isToolOpen} onClose={() =>setToolOpen(false)} poupxl={true}>
-            <ToolDemo>
-                {isToolData}
-            </ToolDemo> 
-        </CustomPopup>
-    
+      
+     <CustomPopup open={isToolOpen} onClose={() =>setToolOpen(false)} poupxl={true}>
+            <ToolDemo /> 
+    </CustomPopup>
+
         </Toolbar>
     );
 }
