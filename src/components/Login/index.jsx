@@ -35,9 +35,7 @@
          this.setState({data:`texxt`}); 
        }
        forgotPassword = (e) =>{
-         console.log("forgot", )
          this.setState({forgot:`texxt`});
-        
        }
 
        handleSubmit = (el) => {

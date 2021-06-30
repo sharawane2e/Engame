@@ -35,6 +35,7 @@
   #{&}__text {
     display: flex;
     flex: 1;
+    font-size: map-get($map:$text-size , $key: "xl");
   }
   #{&}__body {
     padding: map-get($map: $padding, $key: padding-24)

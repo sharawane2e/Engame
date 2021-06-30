@@ -23,13 +23,14 @@ class ForgotPassword extends Component {
         this.setState({data:`data`}); 
       }
 
-      handleSubmit = (e) => {
+      forgotSubmit = (e) => {
          e.preventDefault();
       }
 
      handleChange = (e, key) => {
         let value = e.target.value;
-        const validationResponse = this.validateField(key, value);
+        const validationResponse = this.ForgotPasswordVali.validateField(key, value);
+        console.log(validationResponse)
         const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
             this.setState({
         [key]: value,
@@ -41,7 +42,8 @@ class ForgotPassword extends Component {
         if (typeof value === "string") {
           value = value.trim();
         }
-        const validationResponse = this.loginValidation.validateField(key, value);
+        const validationResponse = this.ForgotPasswordVali.validateField(key, value);
+        console.log(validationResponse)
         const errorMessage = validationResponse.message;
         this.setState({
           [key]: value,
@@ -62,25 +64,25 @@ render() {
                 <TextField
                 id="outlined-email-input"   
                 placeholder="E-mail address"
-                // value={this.state.email}
-                // onChange={(e) => this.handleChange(e, "email")}
-                // onBlur={(e) => this.handleBlur(e, "email")}
-                // message={this.state.formErrors.email}
-                type="Email"  variant="outlined"
-                />
-                 {/* <div className="validated-error">{this.state.formErrors.email}</div> */}
+                value={this.state.email}
+                type="email"  variant="outlined"
+                 onChange={(e) => this.handleChange(e, "email")}
+                onBlur={(e) => this.handleBlur(e, "email")}
+                 message={this.state.formErrors.email}
+               />
+                <div className="validated-error">{this.state.formErrors.email}</div> 
                 </FormControl>
         </form>
-       <div className="form-button-grop">
-       <Button type="submit"
-        onClick={this.handleSubmit}
-       className="form-button-grop__custom-button">Forgot Password</Button>
-       </div>
-      <div className="back-button">
-      <Link href="#" onClick={this.backLogin} >
-        Back to login
-      </Link>
-      </div>
+          <div className="form-button-grop">
+            <Button type="submit"
+              onClick={this.forgotSubmit}
+            className="form-button-grop__custom-button">Forgot Password</Button>
+          </div>
+          <div className="back-button">
+            <Link href="#" onClick={this.backLogin} >
+              Back to login
+            </Link>
+          </div>
         </div>}
         </>
     );

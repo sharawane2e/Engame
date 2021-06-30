@@ -9,11 +9,29 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+// import Button from '@material-ui/core/Button';
 // import clsx from 'clsx';
+import ToolDemo from '../../components/ToolDemo'
 
 const Header=(props)=> {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
+  const [isToolOpen, setToolOpen] = useState(false);
+   const [isUserLogin, Setuserlogin] = useState(true);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
     return (
       <>
       <div className="flexGrow">
@@ -23,11 +41,27 @@ const Header=(props)=> {
             <img src={e2eLogo}/>
           </Typography>
           <div className="header-text-color">
-          <Button color="inherit" onClick={() =>setLoginIsOpen(true)}>Login</Button>|
-          <Button color="inherit" onClick={() =>setReginIsOpen(true)}>Registeration</Button>
-        <div className="shoping__card">
-        <ShoppingCartIcon/>
-        </div>
+         {isUserLogin?<div className="login__registration">
+          <Button color="inherit" onClick={() =>setLoginIsOpen(true)}>Login</Button>
+          <span>|</span>
+            <Button color="inherit" onClick={() =>setReginIsOpen(true)}>Registeration</Button>
+            <Button color="inherit" onClick={() =>setToolOpen(true)}>ToolDemo</Button>
+         </div>:<FormControl className="userForm" >
+        <InputLabel id="user-open-select">User</InputLabel>
+        <Select
+           labelId="user-open-select"
+          id="user-open-select"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+        >
+          <MenuItem value={10}>Logout</MenuItem>
+          <MenuItem value={20}>Profile</MenuItem>
+          </Select>
+      </FormControl>}
+           <div className="shoping__card">
+             <ShoppingCartIcon/>
+           </div>
           </div>
         </Toolbar>
       </AppBar>
@@ -41,7 +75,7 @@ const Header=(props)=> {
           </Grid>
         </Grid>
       </CustomPopup>
-      <CustomPopup open={isReginOpen} onClose={() =>setReginIsOpen(false)}poupxl={true}>
+      <CustomPopup open={isReginOpen} onClose={() =>setReginIsOpen(false)} poupxl={true}>
      <Grid container spacing={3}>
       <Grid item xs={12} sm={5} className="login-background">
              </Grid>
@@ -50,6 +84,13 @@ const Header=(props)=> {
           </Grid>
         </Grid> 
       </CustomPopup>
+      {/* <CustomPopup open={isToolOpen} onClose={() =>setToolOpen(false)} poupxl={true} headerText="Craousal Rating">
+     <Grid container spacing={3}>
+          <Grid item xs={12} sm={12}>
+           <ToolDemo/> 
+          </Grid>
+        </Grid>  
+      </CustomPopup> */}
       </>
     );
 }

@@ -12,8 +12,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:21,
          currency:"$",
-         toolname:"Target Drag & Drop"
-         
+         toolname:"Target Drag & Drop",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:BrandTarget,
@@ -22,8 +22,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Brand Sorting"
-         
+         toolname:"Brand Sorting",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/Amadeus/highlighter_buttons_analyzer-ppt/"
      },
     {
         imgUrl:E_clinic,
@@ -32,7 +32,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:21,
          currency:"$",
-         toolname:"E-Clinic"
+         toolname:"E-Clinic",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:E_clinic,
@@ -41,7 +42,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:45,
          currency:"$",
-         toolname:"Implicit Exercise"
+         toolname:"Implicit Exercise",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -50,7 +52,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -59,7 +62,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -68,7 +72,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -77,7 +82,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -86,7 +92,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -95,7 +102,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -104,7 +112,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -113,7 +122,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -122,7 +132,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -131,7 +142,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -140,7 +152,8 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
     {
         imgUrl:Artcards,
@@ -149,8 +162,50 @@ const toolsCrad = [
          showAddToCart:true,
          price:32,
          currency:"$",
-         toolname:"Artcards"
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
+    {
+        imgUrl:Artcards,
+         name:"Artcards",
+         showDownload:true,
+         showAddToCart:true,
+         price:32,
+         currency:"$",
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+     },
+    {
+        imgUrl:Artcards,
+         name:"Artcards",
+         showDownload:true,
+         showAddToCart:true,
+         price:32,
+         currency:"$",
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+     },
+    {
+        imgUrl:Artcards,
+         name:"Artcards",
+         showDownload:true,
+         showAddToCart:true,
+         price:32,
+         currency:"$",
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+     },
+    {
+        imgUrl:Artcards,
+         name:"Artcards",
+         showDownload:true,
+         showAddToCart:true,
+         price:32,
+         currency:"$",
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+     },
+   
 
 
  ]
