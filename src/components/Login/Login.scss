@@ -1,9 +1,16 @@
+@import "../../styles/partials/mixin";
+
 .form-area {
   #{&}__login {
+    font-weight: map-get($map: $font-weight, $key: "font-600");
     text-align: map-get($map: $alignment, $key: align-center);
     padding-top: map-get($map: $padding, $key: padding-15);
     padding-bottom: map-get($map: $padding, $key: padding-40);
     font-size: map-get($map: $text-size, $key: xl);
+  }
+  .input-label {
+    font-size: map-get($map: $text-size, $key: large20);
+    opacity: map-get($map: $opacity, $key: opacity-6);
   }
   #{&}__fileds {
     & > * {
@@ -14,11 +21,15 @@
     margin-bottom: map-get($map: $margin, $key: margin-10);
   }
   .forgot-link {
+    font-weight: map-get($map: $font-weight, $key: font-600);
     text-align: map-get($map: $alignment, $key: align-right);
     padding-bottom: map-get($map: $padding, $key: padding-25);
     & > a {
       color: map-get($map: $text-color, $key: red-dark);
     }
+  }
+  .form-newaccont {
+    font-weight: map-get($map: $font-weight, $key: font-600);
   }
 }
 .form-button-grop {
@@ -28,7 +39,13 @@
   #{&}__custom-button {
     background: map-get($map: $text-color, $key: red-dark) !important;
     color: map-get($map: $background-color, $key: primary) !important;
-    box-shadow: 0px 10px 20px map-get($map: $boxshadow, $key: red-smooth);
+
+    @include box-shadow(
+      0px,
+      10px,
+      20px,
+      map-get($map: $boxshadow, $key: red-smooth)
+    );
     padding: map-get($map: $padding, $key: padding-10);
     min-width: 280px;
     text-transform: unset !important;

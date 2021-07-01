@@ -7,6 +7,9 @@ body {
   font-family: map-get($map: $font-family, $key: font-barlowregular);
 }
 .MuiButton-label {
+  text-transform: none;
+  font-size: map-get($map: $text-size, $key: large);
+
   font-weight: map-get($map: $font-weight, $key: font-600);
 }
 .flexGrow {
@@ -26,7 +29,7 @@ body {
   padding: map-get($map: $padding, $key: padding-10);
 }
 .divider {
-  height: 42px !important;
+  height: 50px !important;
   margin: 4px !important;
 }
 

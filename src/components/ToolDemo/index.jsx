@@ -1,25 +1,20 @@
-import {React,useState} from "react";
-import Tools from '../../mock/ToolCards';
+import { React, useState } from "react";
 
-const ToolDemo=(props)=> {
-    const [istoolUrl,setToolData] = useState(Tools);
-  
-    return (
-    <>    
-    {/* {
-        istoolUrl.map((toolData,index)=>{
-           return(
-            <iframe key={index} width="100%" height="650" scrolling="yes" frameborder="no" allow="autoplay" 
-            src={toolData.toolLink}></iframe>
-           );
-        })
-    } */}
-    <iframe  width="100%" height="650" scrolling="yes" frameborder="no" allow="autoplay" 
-            src=""></iframe>
+const ToolDemo = (props) => {
+  const { tool ,title} = props;
+  return (
+    <>
+  {tool.name}
+      <iframe
+        width="100%"
+        height="650"
+        scrolling="yes"
+        frameborder="no"
+        allow="autoplay"
+        src={tool.toolLink}
+      ></iframe>
     </>
-    )
-}
+  );
+};
 
 export default ToolDemo;
-
-

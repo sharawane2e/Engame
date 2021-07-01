@@ -33,7 +33,7 @@ const toolsCrad = [
          price:21,
          currency:"$",
          toolname:"E-Clinic",
-         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/savanta/Iheart_Pack/Self_Display/"
      },
     {
         imgUrl:E_clinic,
@@ -43,7 +43,7 @@ const toolsCrad = [
          price:45,
          currency:"$",
          toolname:"Implicit Exercise",
-         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/Afterburn-E/e-Clinic-slider_multi/v3-slider-exclusive/"
      },
     {
         imgUrl:Artcards,
@@ -53,7 +53,7 @@ const toolsCrad = [
          price:32,
          currency:"$",
          toolname:"Artcards",
-         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+         toolLink:"https://e2eresearch.com/swteam/swiperMulti_updated_with_showall/"
      },
     {
         imgUrl:Artcards,
@@ -63,7 +63,7 @@ const toolsCrad = [
          price:32,
          currency:"$",
          toolname:"Artcards",
-         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/swiper_tool/swiper_tool_with_showall/"
      },
     {
         imgUrl:Artcards,

@@ -18,7 +18,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
+    background: map-get($map: $background-color, $key: primary);
     min-height: 550px;
     // padding: 0 24px;
   }

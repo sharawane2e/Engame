@@ -8,6 +8,7 @@ $font-family: (
 $text-size: (
   "xxl": 50px,
   "xl": 32px,
+  "xl42": 42px,
   "large20": 20px,
   "large": 18px,
   "regular": 16px,
@@ -22,6 +23,14 @@ $heading-size: (
   "medium": 20px,
   "extra-medum": 24px,
 );
+
+$opacity: (
+  "opacity-1": 0.1,
+  "opacity-5": 0.5,
+  "opacity-6": 0.6,
+  "opacity-10": 1,
+);
+
 $font-weight: (
   "bold": bold,
 );
@@ -83,6 +92,7 @@ $padding: (
   "padding-20": 20px,
   "padding-24": 24px,
   "padding-25": 25px,
+  "padding-30":30px,
   "padding-40": 40px,
   "padding-50": 50px,
   "padding-90": 90px,

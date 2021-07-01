@@ -11,10 +11,13 @@
     ) !important;
   }
   .review-text {
+    font-weight: map-get($map: $font-weight, $key: "font-600");
     color: map-get($map: $text-color, $key: "red-dark");
     font-size: map-get($map: $text-size, $key: "xxl");
   }
+
   .filter-text {
+    font-weight: map-get($map: $font-weight, $key: "font-600");
     color: map-get($map: $text-color, $key: "black-drak");
     font-size: map-get($map: $text-size, $key: "xxl");
   }
@@ -37,6 +40,7 @@
         $map: $background-color,
         $key: "back-color"
       ) !important;
+      padding:map-get($map: $padding, $key: "padding-10")  map-get($map: $padding, $key: "padding-30");
       border-top-left-radius: map-get(
         $map: $border-round,
         $key: "boder-radius"
@@ -47,8 +51,7 @@
       );
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      padding: map-get($map: $padding, $key: "padding-12")
-        map-get($map: $padding, $key: "padding-18");
+
       .MuiIconButton-label {
         > svg {
           width: 30px;
