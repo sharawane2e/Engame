@@ -15,6 +15,7 @@
  import LocalStorageUtils from "../../util/LocalStorageUtils";
  import Registration from "../../components/Registration";
  import ForgotPassword from "../../components/ForgotPassword";
+ import { Redirect } from "react-router-dom";
  
  class Login extends Component {
       state = {
@@ -48,19 +49,30 @@
 
        if(!validationResponse.isFormValid){
            ApiRequest.request(LOGIN, "POST", {
-             email: email,
+            Email: email,
              password: password,
             })
                    
            .then((res) => {
             if (res.HasSuccess) {
-               console.log("susses",res);
-               LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data);
+              console.log("susses",res.DataObject.Data);
+              //  res.JSON().then((result)=>{
+                //LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data.Token);
+                //ApiRequest.setAuthToken(LocalStorageUtils.getToken());
+               localStorage.setItem('login',JSON.stringify({token:res.DataObject.Data.Token}));
+                //this.props.history.push("/");
+            
+              //this.props.history.push('/dashboard')
+              this.props.history.push('/')
+              console.log("Hash user login succes");
+
+              //  })
+               
+               //LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data);
              // console.log( localStorage.setItem('token',res.data));
               // LocalStorageUtils.setUserIntoLocalStorage(res.Data);
                //LocalStorageUtils.setUserIntoLocalStorage("Ashish");
               // localStorage.setItem('token',res.DataObject.data);
-               console.log("welome")
               //  const { from } = this.props.location || { from: { pathname: "/" } };
               //   this.props.history.push(from);
                //ApiRequest.setAuthToken(LocalStorageUtils.getToken());

@@ -15,13 +15,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 // import Button from '@material-ui/core/Button';
 // import clsx from 'clsx';
-import ToolDemo from '../../components/ToolDemo'
+// import ToolDemo from '../../components/ToolDemo'
 
 const Header = (props) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  const [isToolOpen, setToolOpen] = useState(false);
-   const [isUserLogin, Setuserlogin] = useState(true);
+  // const [isToolOpen, setToolOpen] = useState(false);
+   const [isUserLogin] = useState(true);
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -32,6 +32,11 @@ const Header = (props) => {
     setOpen(true);
   };
 
+  // const openModal = (e) => {
+  //   console.log(e)
+  // }
+
+
     return (
       <>
       <div className="flexGrow">
@@ -41,7 +46,7 @@ const Header = (props) => {
             <img src={e2eLogo}/>
           </Typography>
           <div className="header-text-color">
-         {isUserLogin?<><Button color="inherit" onClick={() =>setLoginIsOpen(true)}>Login</Button>|
+         {isUserLogin?<><Button color="inherit" onClick={() =>setLoginIsOpen(true)} >Login</Button>|
             <Button color="inherit" onClick={() =>setReginIsOpen(true)}>Registeration</Button>
          </>  
          :<FormControl className="userForm" >

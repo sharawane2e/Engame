@@ -7,7 +7,7 @@ class LocalStorageUtils {
     }
     static getToken() {
         const user = this.getUserFromLocalStorage();
-        console.log(user);
+        // console.log(user);
         if (user) {
             return user.Token;
         } else {

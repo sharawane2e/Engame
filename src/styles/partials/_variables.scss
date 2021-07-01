@@ -31,9 +31,6 @@ $opacity: (
   "opacity-10": 1,
 );
 
-$font-weight: (
-  "bold": bold,
-);
 $background-color: (
   "primary": #ffffff,
   "secondary": #ececec,
@@ -42,6 +39,7 @@ $background-color: (
   "button-primary": #f15a5c,
   "button-secondary": #f15b5b,
   "transparent": transparent,
+  "overlay-color":rgba(241, 91, 91, 0.31)
 );
 $text-color: (
   "black-light": #363636,
@@ -69,6 +67,8 @@ $fill-color: (
   "black-smdark": rgba(132, 132, 132, 0.5),
 );
 $font-weight: (
+  "bold": bold,
+  "font-normal":normal,
   "font-500": 500,
   "font-600": 600,
   "font-700": 700,

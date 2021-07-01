@@ -7,11 +7,11 @@ function CutomPopup(props) {
     children,
     open,
     onClose,
-     classes = {},
+    //  classes = {},
     headerText = "",
     poupxl,
   } = props;
-   const { content = "" } = classes;
+  //  const { content = "" } = classes;
   return open ? (
       <>
      <Overlay position="absolute" />
