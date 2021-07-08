@@ -4,6 +4,10 @@
   &.login--form{
     padding-top: map-get($map: $padding, $key: "padding-50");
     padding-bottom: map-get($map: $padding, $key: "padding-50");
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      padding-top: map-get($map: $padding, $key: "padding-5");
+      padding-bottom: map-get($map: $padding, $key: "padding-5");
+    }
   }
  
   #{&}__login {
@@ -12,12 +16,28 @@
     text-align: map-get($map: $alignment, $key: "align-center");
     padding-top: map-get($map: $padding, $key: "padding-15");
     padding-bottom: map-get($map: $padding, $key: "padding-50");
-   
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      padding-bottom: map-get($map: $padding, $key: "padding-25");
+      font-size: map-get($map: $text-size, $key: "large");
+    }
   }
   .input-label {
     font-size: map-get($map: $text-size, $key: "large");
     opacity: map-get($map: $opacity, $key: "opacity-6");
     font-family: map-get($map: $font-family, $key: "font-barlowlight");
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      font-size: map-get($map: $text-size, $key: "small");
+      margin-bottom: 2px;
+    }
+
+  }
+  .MuiOutlinedInput-input {
+     @media (min-width: 1280px) and (max-width: 1365px) {
+    padding-top: map-get($map: $padding, $key: "padding-10");
+    padding-bottom: map-get($map: $padding, $key: "padding-10");
+    font-size: map-get($map:$text-size , $key: "small");
+   }
+    
   }
   #{&}__fileds {
     & > * {
@@ -26,6 +46,15 @@
   }
   #{&}__control {
     margin-bottom: map-get($map: $margin, $key: margin-10);
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      .MuiIconButton-label{
+        >svg{
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+    
   }
   .forgot-link {
     font-weight: map-get($map: $font-weight, $key: font-600);
@@ -36,9 +65,16 @@
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       font-weight: map-get($map: $font-weight, $key: "font-normal");
     }
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      font-size:map-get($map: $text-size, $key:"xsmall" ) ;
+    }
   }
   .form-newaccont {
+    font-size: map-get($map: $text-size, $key: "small");
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      font-size: map-get($map: $text-size, $key: "xsmall");
+    }
   }
 }
 .form-button-grop {
@@ -55,8 +91,11 @@
     20px,
     map-get($map: $boxshadow, $key: red-smooth)
   );
- 
-
+  @media (min-width: 1280px) and (max-width: 1365px) {
+    font-size: map-get($map: $text-size, $key: "xsmall");
+    padding-top: map-get($map: $padding, $key: "padding-15");
+    padding-bottom: map-get($map: $padding, $key: "padding-10");
+  }
  }
 }
 .form-newaccont {

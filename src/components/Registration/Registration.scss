@@ -1,6 +1,10 @@
 .registration--form{
   padding-top: map-get($map: $padding, $key: "padding-30");
   padding-bottom: map-get($map: $padding, $key: "padding-30");
+  @media (min-width: 1280px) and (max-width: 1365px) {
+    padding-top: map-get($map: $padding, $key: "padding-10");
+  padding-bottom: map-get($map: $padding, $key: "padding-10");
+  }
 }
 .back-button {
   font-family: map-get($map:$font-family , $key: "font-barlowmedium");
@@ -14,6 +18,9 @@
       text-decoration: none !important;
     }
   }
+  @media (min-width: 1280px) and (max-width: 1365px) {
+    font-size: map-get($map: $text-size, $key: "xsmall");
+  }
 }
 .form-button-grop{
   .register__button{
@@ -26,6 +33,8 @@
       20px,
       map-get($map: $boxshadow, $key: red-smooth)
     );
-  
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      font-size: map-get($map: $text-size, $key: "xsmall");
+    }
    }
 }

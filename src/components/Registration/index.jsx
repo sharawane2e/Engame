@@ -217,7 +217,7 @@ class Registration extends Component {
             <div className="form-button-grop">
               <CustomButton  onClick={this.handleRegister}
               className='register__button'>
-              Log In
+                Register
               </CustomButton>
             </div>
             <div className="back-button">

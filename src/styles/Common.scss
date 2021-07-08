@@ -45,7 +45,11 @@ body {
   font-size: map-get($map: $text-size, $key: "small");
   margin: map-get($map: $margin, $key: margin-5)
     map-get($map: $margin, $key: margin-0);
-}
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      font-size: map-get($map: $text-size, $key: "xsmall");
+      margin-bottom: 0;
+    }
+  }
 
 .border-bottom {
   border-bottom: map-get($map: $border-color, $key: border-width)
@@ -69,4 +73,8 @@ body {
     font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
     line-height: inherit !important;
     border-radius: map-get($map: $border-round, $key:"boder-radius") !important;
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      min-width: 290px !important;
+       padding: map-get($map: $padding, $key: "padding-10") !important;
+    }
   }

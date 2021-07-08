@@ -3,6 +3,9 @@
   min-height: 520px;
   background-position: left bottom;
   background-size: 70%;
+  @media (min-width: 1280px) and (max-width: 1365px) {
+    // min-height: 300px;
+  }
 }
 
 .popup-container {
@@ -19,6 +22,9 @@
     transform: translate(-50%, -50%);
     background: map-get($map: $background-color, $key: primary);
     min-height: 550px;
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      min-height: 300px;
+    }
   }
   #{&}__inerxl {
     width: 70%;
@@ -40,6 +46,12 @@
       map-get($map: $padding, $key: "padding-90")
       map-get($map: $padding, $key: "padding-24")
       map-get($map: $padding, $key: "padding-30"); 
+      @media (min-width: 1280px) and (max-width: 1365px) {
+        padding: map-get($map: $padding, $key: "padding-5")
+        map-get($map: $padding, $key: "padding-90")
+        map-get($map: $padding, $key: "padding-15")
+        map-get($map: $padding, $key: "padding-30"); 
+      }
   }
   #{&}__close {
     display: flex;
