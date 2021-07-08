@@ -1,5 +1,6 @@
 import * as actionTypes from './shopping-types';
 import Tools from "../../mock/ToolCards";
+
 const initialState = {
     products:[...Tools], //{id, title, descr, price, img}
     cart:[], //{id, title, descr, price, img}
