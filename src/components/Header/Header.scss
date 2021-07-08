@@ -14,6 +14,22 @@
 }
 .shoping__card {
   padding-left: map-get($map: $padding, $key: "padding-15");
+  cursor: pointer;
+  position: relative;
+  span{
+    position: absolute;
+    top: -13px;
+    font-size: 13px;
+    right: -7px;
+    background-color: #F15B5B;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border-radius: 50%;
+  }
 }
 .userForm{
   min-width:  120px !important;
