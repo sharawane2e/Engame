@@ -1,6 +1,8 @@
 .toolcard {
   padding-top: map-get($map: $padding, $key: "padding-40");
   padding-bottom: map-get($map: $padding, $key: "padding-40");
+  display: block !important;
+  padding-left: 0;
   #{&}__imageblck{
     &:hover{
     border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map:$text-color , $key:"red-dark" );
