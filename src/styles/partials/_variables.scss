@@ -51,7 +51,7 @@ $text-color: (
 $border-round: (
   "accent": #e3ebf7,
   "light-smooth": #d4d4d4,
-  "boder-radius": 4px,
+  "boder-radius": 6px,
 );
 $border-color: (
   "border-width": 1px,
@@ -60,6 +60,9 @@ $border-color: (
 );
 $boxshadow: (
   "red-smooth": rgba(241, 91, 91, 0.5),
+  "black-smooth":rgba(0, 0 ,0 , 0.25),
+  "black-1":rgba(0, 0 ,0 , 0.1),
+  "black-4":rgba(0, 0 ,0 , 0.40),
 );
 
 $fill-color: (
@@ -81,6 +84,7 @@ $alignment: (
 );
 
 $padding: (
+  "padding-2": 2px,
   "padding-5": 5px,
   "padding-8": 8px,
   "padding-10": 10px,
@@ -92,7 +96,7 @@ $padding: (
   "padding-20": 20px,
   "padding-24": 24px,
   "padding-25": 25px,
-  "padding-30":30px,
+  "padding-30": 30px,
   "padding-40": 40px,
   "padding-50": 50px,
   "padding-90": 90px,

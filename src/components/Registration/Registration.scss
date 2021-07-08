@@ -1,12 +1,31 @@
+.registration--form{
+  padding-top: map-get($map: $padding, $key: "padding-30");
+  padding-bottom: map-get($map: $padding, $key: "padding-30");
+}
 .back-button {
-  font-weight: map-get($map: $font-weight, $key: font-600);
+  font-family: map-get($map:$font-family , $key: "font-barlowmedium");
   display: block;
   padding: map-get($map: $padding, $key: "padding-15") 0;
-  text-align: map-get($map: $alignment, $key: align-center);
+  text-align: map-get($map: $alignment, $key: "align-center");
+  font-size: map-get($map: $text-size, $key: "regular");
   > a {
     color: map-get($map: $text-color, $key: "black-drak") !important;
     &:hover {
       text-decoration: none !important;
     }
   }
+}
+.form-button-grop{
+  .register__button{
+    background: map-get($map: $text-color, $key: "red-dark") !important;
+    color: map-get($map: $background-color, $key: "primary") !important;
+    font-size: map-get($map: $text-size, $key: "large20");
+    @include box-shadow(
+      0px,
+      10px,
+      20px,
+      map-get($map: $boxshadow, $key: red-smooth)
+    );
+  
+   }
 }

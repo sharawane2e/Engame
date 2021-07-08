@@ -7,7 +7,6 @@
 
 .popup-container {
   position: fixed;
-  // background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
   left: 0;
@@ -20,10 +19,9 @@
     transform: translate(-50%, -50%);
     background: map-get($map: $background-color, $key: primary);
     min-height: 550px;
-    // padding: 0 24px;
   }
   #{&}__inerxl {
-    width: 80%;
+    width: 70%;
   }
   #{&}__inersm {
     width: 50%;
@@ -38,10 +36,10 @@
     font-size: map-get($map:$text-size , $key: "xl");
   }
   #{&}__body {
-    padding: map-get($map: $padding, $key: padding-24)
-      map-get($map: $padding, $key: padding-90)
-      map-get($map: $padding, $key: padding-24)
-      map-get($map: $padding, $key: padding-50); //24 90 24 50
+    padding: map-get($map: $padding, $key: "padding-24")
+      map-get($map: $padding, $key: "padding-90")
+      map-get($map: $padding, $key: "padding-24")
+      map-get($map: $padding, $key: "padding-30"); 
   }
   #{&}__close {
     display: flex;

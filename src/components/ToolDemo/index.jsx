@@ -12,6 +12,7 @@ const ToolDemo = (props) => {
         frameborder="no"
         allow="autoplay"
         src={tool.toolLink}
+        frameBorder="0"
       ></iframe>
     </>
   );

@@ -1,9 +1,10 @@
 .header-bg {
   background-color: map-get($map: $background-color, $key: "secondary");
-  padding-top: map-get($map: $padding, $key: "padding-15");
-  padding-bottom: map-get($map: $padding, $key: "padding-15");
+  padding-top: map-get($map: $padding, $key: "padding-25");
+  padding-bottom: map-get($map: $padding, $key: "padding-25");
 }
-.MuiPaper-elevation4 {
+.header-box{
+  .MuiPaper-elevation4 {
   box-shadow: none !important;
 }
 .header-text-color {
@@ -19,4 +20,11 @@
 }
 .login__registration{
   display: flex;
+}
+.menu-button{
+  font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+  font-size: map-get($map:$text-size , $key: "large20");
+  padding: map-get($map:$padding , $key:"padding-15" );
+  cursor: pointer;
+}
 }

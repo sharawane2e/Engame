@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 function Home() {
   return (
-    <div className="header-bg">
+    <div className="header-bg filter-tool-shadow">
       <Toolbar className="filter-section">
         <div className="flexGrow">
           <Grid container spacing={3}>
@@ -45,14 +45,14 @@ function Home() {
               <IconButton className="iconButton search-icon" aria-label="menu">
                 <SearchIcon fontSize="large" />
               </IconButton>
-              <InputBase className="input" placeholder="Search Here" />
+              <InputBase className="input" />
               <Divider className="divider" orientation="vertical" />
               <IconButton
                 className="iconButton filter-inputsection__icon"
                 aria-label="directions"
               >
                 <FilterListIcon fontSize="large" />
-                Filter
+                Filters
               </IconButton>
             </Paper>
           </Grid>

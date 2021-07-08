@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import e2eLogo from "../../assets/images/E2E-logo.png";
 import CustomPopup from "../CustomPopup";
@@ -13,15 +12,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-// import Button from '@material-ui/core/Button';
-// import clsx from 'clsx';
-// import ToolDemo from '../../components/ToolDemo'
 
 const Header = (props) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  // const [isToolOpen, setToolOpen] = useState(false);
-   const [isUserLogin] = useState(true);
+  const [isUserLogin] = useState(true);
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -31,23 +26,18 @@ const Header = (props) => {
   const handleOpen = () => {
     setOpen(true);
   };
-
-  // const openModal = (e) => {
-  //   console.log(e)
-  // }
-
-
-    return (
+  
+  return (
       <>
-      <div className="flexGrow">
+      <div className="flexGrow header-box">
         <AppBar position="static">
         <Toolbar className="header-bg">
           <Typography variant="h6" className="flexGrow">
             <img src={e2eLogo}/>
           </Typography>
           <div className="header-text-color">
-         {isUserLogin?<><Button color="inherit" onClick={() =>setLoginIsOpen(true)} >Login</Button>|
-            <Button color="inherit" onClick={() =>setReginIsOpen(true)}>Registeration</Button>
+         {isUserLogin?<><div className="menu-button" onClick={() =>setLoginIsOpen(true)} >Login</div>|
+            <div className="menu-button" onClick={() =>setReginIsOpen(true)}>Register</div>
          </>  
          :<FormControl className="userForm" >
         <InputLabel id="user-open-select">User</InputLabel>

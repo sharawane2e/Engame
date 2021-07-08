@@ -1,5 +1,14 @@
+.filter-tool-shadow{
+  //box-shadow: 0px 0px 6px rgb(0 0 0 / 25%);
+  @include box-shadow(
+    0px,
+    0px,
+    6px,
+    map-get($map: $boxshadow, $key: "black-smooth")
+  );
+
 .filter-section {
-  width: 80%;
+  width: 90%;
   margin: map-get($map: $margin, $key: "margin-0") auto;
   .MuiPaper-elevation1 {
     box-shadow: none !important;
@@ -33,6 +42,7 @@
     }
   }
 }
+}
 .filter-inputsection {
   #{&}__form {
     .search-icon {
@@ -40,11 +50,12 @@
         $map: $background-color,
         $key: "back-color"
       ) !important;
-      padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-30");
+      padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-20");
       border-top-left-radius: map-get(
         $map: $border-round,
         $key: "boder-radius"
       );
+      
       border-bottom-left-radius: map-get(
         $map: $border-round,
         $key: "boder-radius"
@@ -64,9 +75,15 @@
     }
   }
   #{&}__icon {
-    padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-10");
+    padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-20") map-get($map: $padding, $key: "padding-10") map-get($map: $padding, $key: "padding-10");
+    color: map-get($map: $text-color, $key: "black-drak");
     &:hover {
       border-radius: map-get($map: $border-round, $key: "boder-radius");
+    }
+    .MuiIconButton-label{
+      >svg{
+        margin-right: 10px;
+      }
     }
   }
 }

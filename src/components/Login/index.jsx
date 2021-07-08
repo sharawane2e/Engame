@@ -7,22 +7,22 @@
  import FormControl from '@material-ui/core/FormControl';
  import Visibility from '@material-ui/icons/Visibility';
  import VisibilityOff from '@material-ui/icons/VisibilityOff';
- import Button from "@material-ui/core/Button";
+ import CustomButton from "../../components/widgets/Button"
  import Link from '@material-ui/core/Link';
  import { LoginValidation } from "../../util/FormValidation";
  import ApiRequest from "../../util/ApiRequest";
  import { LOGIN } from "../../config/ApiUrl";
- import LocalStorageUtils from "../../util/LocalStorageUtils";
  import Registration from "../../components/Registration";
  import ForgotPassword from "../../components/ForgotPassword";
- import { Redirect } from "react-router-dom";
  
  class Login extends Component {
+
       state = {
          email: "",
          password: "",
          data:"",
          forgot:"",
+         buttonClass:0,
          formErrors: {
            email: "",
            password: "",
@@ -30,6 +30,7 @@
          showPassword:false
        };
       
+
        loginValidation = new LoginValidation();
       
        createAccount = (e) =>{
@@ -59,11 +60,11 @@
               //  res.JSON().then((result)=>{
                 //LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data.Token);
                 //ApiRequest.setAuthToken(LocalStorageUtils.getToken());
-               localStorage.setItem('login',JSON.stringify({token:res.DataObject.Data.Token}));
+               localStorage.setItem('login',JSON.stringify({token:res.DataObject.Data}));
                 //this.props.history.push("/");
             
               //this.props.history.push('/dashboard')
-              this.props.history.push('/')
+              //this.props.history.push('/')
               console.log("Hash user login succes");
 
               //  })
@@ -127,7 +128,7 @@
      return (      
          <>
         {(this.state.forgot) ? <ForgotPassword/> : (this.state.data) ? <Registration/> :
-         <div className="form-area">
+         <div className="form-area login--form">
              <div className="form-area__login  large-hedding">Login</div>
              <form className="form-area__fileds" noValidate autoComplete="off">
             <InputLabel htmlFor="standard-adornment-email" className="input-label">E-mail address</InputLabel> 
@@ -176,9 +177,10 @@
          </div>
          </form>
         <div className="form-button-grop">
-        <Button type="submit"
-         onClick={this.handleSubmit}
-        className="form-button-grop__custom-button">Log In</Button>
+          <CustomButton onClick={this.handleSubmit} 
+          className='login__button'>
+           Log In
+          </CustomButton>
         </div>
          <div className="form-newaccont">
              <span>New Here?</span>

@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Button from "@material-ui/core/Button";
 import Link from '@material-ui/core/Link';
 import { ForgotValidation } from "../../util/FormValidation";
-// import ApiRequest from "../../util/ApiRequest";
 import Login from "../../components/Login";
+import CustomButton from "../../components/widgets/Button"
 
 class ForgotPassword extends Component {
      state = {
@@ -56,7 +55,7 @@ render() {
     return (      
         <>
         {this.state.data?<Login />:
-        <div className="form-area">
+        <div className="form-area forgot--password">
             <div className="form-area__login  large-hedding">Forgot Password</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
            <InputLabel htmlFor="standard-adornment-email" className="input-label">E-mail address</InputLabel> 
@@ -74,10 +73,11 @@ render() {
                 </FormControl>
         </form>
           <div className="form-button-grop">
-            <Button type="submit"
-              onClick={this.forgotSubmit}
-            className="form-button-grop__custom-button">Forgot Password</Button>
-          </div>
+            <CustomButton  onClick={this.forgotSubmit}
+                className='forgot__button'>
+              Forgot Password
+              </CustomButton>
+            </div>
           <div className="back-button">
             <Link href="#" onClick={this.backLogin} >
               Back to login
