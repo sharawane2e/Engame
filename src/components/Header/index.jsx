@@ -41,7 +41,7 @@ const Header = ({props, cart}) => {
   return (
       <>
       <div className="flexGrow header-box">
-        <AppBar position="static">
+        <AppBar position="fixed">
         <Toolbar className="header-bg">
           <Typography variant="h6" className="flexGrow">
             <Link to="/">
@@ -78,7 +78,7 @@ const Header = ({props, cart}) => {
       <CustomPopup
         open={isLoginOpen}
         onClose={() => setLoginIsOpen(false)}
-        poupxl={true}
+        className="popup-container__iner--xl border-allside border-radius"
       >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} className="login-background"></Grid>
@@ -87,22 +87,19 @@ const Header = ({props, cart}) => {
           </Grid>
         </Grid>
       </CustomPopup>
-      <CustomPopup open={isReginOpen} onClose={() =>setReginIsOpen(false)} poupxl={true}>
+    <CustomPopup 
+        open={isReginOpen} 
+        onClose={() =>setReginIsOpen(false)} 
+        className="popup-container__iner--xl border-allside border-radius"
+    >
      <Grid container spacing={3}>
       <Grid item xs={12} sm={5} className="login-background">
-             </Grid>
+        </Grid>
         <Grid item xs={12} sm={7}>
         <Registration/>
           </Grid>
         </Grid>
       </CustomPopup>
-      {/* <CustomPopup open={isToolOpen} onClose={() =>setToolOpen(false)} poupxl={true} headerText="Craousal Rating">
-     <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
-           <ToolDemo/> 
-          </Grid>
-        </Grid>  
-      </CustomPopup> */}
       </>
     );
 }

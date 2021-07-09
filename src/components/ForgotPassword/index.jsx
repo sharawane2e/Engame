@@ -74,7 +74,7 @@ render() {
         </form>
           <div className="form-button-grop">
             <CustomButton  onClick={this.forgotSubmit}
-                className='forgot__button'>
+                className='forgot__button primary-button'>
               Forgot Password
               </CustomButton>
             </div>

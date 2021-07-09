@@ -6,7 +6,7 @@ const CustomButton = (props) => {
   return (
       <>
      <Button {...props}  
-     className={getClassNames("custom-button", props.className)}
+       className={getClassNames("custom-button", props.className)}
       >
       {props.children}
      </Button>

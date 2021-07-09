@@ -7,7 +7,7 @@
  import FormControl from '@material-ui/core/FormControl';
  import Visibility from '@material-ui/icons/Visibility';
  import VisibilityOff from '@material-ui/icons/VisibilityOff';
- import CustomButton from "../../components/widgets/Button"
+ import CustomButton from "../../components/widgets/Button";
  import Link from '@material-ui/core/Link';
  import { LoginValidation } from "../../util/FormValidation";
  import ApiRequest from "../../util/ApiRequest";
@@ -57,28 +57,10 @@
            .then((res) => {
             if (res.HasSuccess) {
               console.log("susses",res.DataObject.Data);
-              //  res.JSON().then((result)=>{
-                //LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data.Token);
-                //ApiRequest.setAuthToken(LocalStorageUtils.getToken());
                localStorage.setItem('login',JSON.stringify({token:res.DataObject.Data}));
-                //this.props.history.push("/");
-            
-              //this.props.history.push('/dashboard')
-              //this.props.history.push('/')
               console.log("Hash user login succes");
 
-              //  })
-               
-               //LocalStorageUtils.setUserIntoLocalStorage(res.DataObject.Data);
-             // console.log( localStorage.setItem('token',res.data));
-              // LocalStorageUtils.setUserIntoLocalStorage(res.Data);
-               //LocalStorageUtils.setUserIntoLocalStorage("Ashish");
-              // localStorage.setItem('token',res.DataObject.data);
-              //  const { from } = this.props.location || { from: { pathname: "/" } };
-              //   this.props.history.push(from);
-               //ApiRequest.setAuthToken(LocalStorageUtils.getToken());
-               //this.props.history.push("/");
-             }
+         }
               else{              
                 console.log("not login");
              }
@@ -178,13 +160,13 @@
          </form>
         <div className="form-button-grop">
           <CustomButton onClick={this.handleSubmit} 
-          className='login__button'>
-           Log In
+              className='login__button primary-button'>
+                Log In
           </CustomButton>
         </div>
          <div className="form-newaccont">
              <span>New Here?</span>
-             <Link href="#" onClick={this.createAccount}>
+               <Link href="#" onClick={this.createAccount}>
              Create an Account
           </Link>
          </div>

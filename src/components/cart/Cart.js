@@ -11,7 +11,8 @@ const Cart = ({cart}) => {
     return (
         <div className="cart">
             <Header />
-            <div className="bread_crum">
+         <div className="cart_header-fixed">
+         <div className="bread_crum">
                 <div className="container">
                     <div className="crums">
                         <p>
@@ -94,7 +95,9 @@ const Cart = ({cart}) => {
                 </div>
                 }
             </div>
-        </div>
+        
+         </div>
+         </div>
     )
 }
 

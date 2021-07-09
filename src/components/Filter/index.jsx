@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 function Home() {
   return (
-    <div className="header-bg filter-tool-shadow">
+    <div className="header-bg filter-tool-shadow filter--fixed">
       <Toolbar className="filter-section">
         <div className="flexGrow">
           <Grid container spacing={3}>
