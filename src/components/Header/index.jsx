@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 const Header = ({props, cart}) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -43,7 +44,9 @@ const Header = ({props, cart}) => {
         <AppBar position="static">
         <Toolbar className="header-bg">
           <Typography variant="h6" className="flexGrow">
-            <img src={e2eLogo}/>
+            <Link to="/">
+              <img src={e2eLogo}/>
+            </Link>
           </Typography>
           <div className="header-text-color">
          {isUserLogin?<><div className="menu-button" onClick={() =>setLoginIsOpen(true)} >Login</div>|
@@ -63,8 +66,10 @@ const Header = ({props, cart}) => {
           </Select>
       </FormControl>}
            <div className="shoping__card">
-             <ShoppingCartIcon/>
-             <span>{cartCount}</span>
+             <Link to="/cart">
+                <ShoppingCartIcon/>
+                <span>{cartCount}</span>
+             </Link>
            </div>
           </div>
         </Toolbar>

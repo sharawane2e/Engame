@@ -3,6 +3,7 @@ import PublicScreen from "../screens/PublicScreen";
 import PageNotFoundScreen from "../screens/PageNotFoundScreen";
 import Home from "../components/Home";
 import Purchased from "../components/Purchased";
+import Cart from '../components/cart/Cart';
 
 const Routes = [
     {
@@ -11,10 +12,15 @@ const Routes = [
         exact:true
     },
     {
-        path:["/"],
+        path:["/", "/cart"],
         component:PublicScreen,
         exact:true,
         routes:[
+            {
+                path:"/cart",
+                component:Cart,
+                exact:true,
+            },
             {
                 path:"/",
                 component:Home,
