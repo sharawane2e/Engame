@@ -1,6 +1,16 @@
 @import "../../styles/partials/mixin";
 
 .form-area {
+  padding: map-get($map: $padding, $key: "padding-24")
+      map-get($map: $padding, $key: "padding-90")
+      map-get($map: $padding, $key: "padding-24")
+      map-get($map: $padding, $key: "padding-30"); 
+      @media (min-width: 1280px) and (max-width: 1365px) {
+        padding: map-get($map: $padding, $key: "padding-5")
+        map-get($map: $padding, $key: "padding-90")
+        map-get($map: $padding, $key: "padding-15")
+        map-get($map: $padding, $key: "padding-30"); 
+      }
   &.login--form{
     padding-top: map-get($map: $padding, $key: "padding-50");
     padding-bottom: map-get($map: $padding, $key: "padding-50");
@@ -82,16 +92,8 @@
   padding-top: map-get($map: $padding, $key: "padding-15");
   padding-bottom: map-get($map: $padding, $key: "padding-25");
  .login__button{
-  background: map-get($map: $text-color, $key: "red-dark") !important;
-  color: map-get($map: $background-color, $key: "primary") !important;
-  font-size: map-get($map: $text-size, $key: "large20");
-  @include box-shadow(
-    0px,
-    10px,
-    20px,
-    map-get($map: $boxshadow, $key: red-smooth)
-  );
-  @media (min-width: 1280px) and (max-width: 1365px) {
+  min-width: 292px !important;
+   @media (min-width: 1280px) and (max-width: 1365px) {
     font-size: map-get($map: $text-size, $key: "xsmall");
     padding-top: map-get($map: $padding, $key: "padding-15");
     padding-bottom: map-get($map: $padding, $key: "padding-10");

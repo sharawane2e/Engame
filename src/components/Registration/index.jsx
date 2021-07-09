@@ -216,7 +216,7 @@ class Registration extends Component {
             </form>
             <div className="form-button-grop">
               <CustomButton  onClick={this.handleRegister}
-              className='register__button'>
+              className='register__button primary-button'>
                 Register
               </CustomButton>
             </div>

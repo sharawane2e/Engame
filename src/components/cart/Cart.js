@@ -3,7 +3,6 @@ import Header from '../Header'
 import { Link } from 'react-router-dom'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo';
 import { connect } from 'react-redux';
-import testImg from '../../assets/images/library-cards.svg'
 import empty from '../../assets/images/empty.gif'
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -13,7 +12,8 @@ const Cart = ({cart}) => {
     return (
         <div className="cart">
             <Header />
-            <div className="bread_crum">
+         <div className="cart_header-fixed">
+         <div className="bread_crum">
                 <div className="container">
                     <div className="crums">
                         <p>
@@ -95,7 +95,9 @@ const Cart = ({cart}) => {
                 </div>
                 }
             </div>
-        </div>
+        
+         </div>
+         </div>
     )
 }
 

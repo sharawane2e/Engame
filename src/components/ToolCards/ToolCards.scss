@@ -126,6 +126,18 @@
     margin-top: map-get($map: $margin, $key: "margin-10");
     margin-bottom: map-get($map: $margin, $key: "margin-10");
   }
+  
+  .popup-container__footer{
+    display: flex;
+    .add--card{
+      width: 178px !important;
+      margin: 0 auto;
+      .MuiButton-label{>svg{
+        margin-right: map-get($map: $margin, $key:"margin-5");
+      }
+    }
+    }
+  }
 }
 
 

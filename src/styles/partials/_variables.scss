@@ -9,6 +9,7 @@ $text-size: (
   "xxl": 50px,
   "xl": 32px,
   "xl42": 42px,
+  "large25": 25px,
   "large20": 20px,
   "large": 18px,
   "regular": 16px,
@@ -113,4 +114,15 @@ $margin: (
   "margin-16": 16px,
   "margin-18": 18px,
   "margin-20": 20px,
+  "margin-25": 25px,
+  "margin-30": 30px,
 );
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1440px,
+) !default;

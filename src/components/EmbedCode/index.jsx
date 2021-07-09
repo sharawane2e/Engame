@@ -10,7 +10,7 @@ const EmbedCode = () => {
       placeholder="Maximum 4 rows"
       defaultValue=""
     />
-            EmbedCode Here for custom code 
+            EmbedCode Here  
         </>
     )
 }

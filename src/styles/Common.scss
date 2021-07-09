@@ -51,6 +51,7 @@ body {
     }
   }
 
+  /*Use these classes for borders*/
 .border-bottom {
   border-bottom: map-get($map: $border-color, $key: border-width)
     map-get($map: $border-color, $key: bsolid)
@@ -65,16 +66,47 @@ body {
 .border-radius {
   border-radius: map-get($map: $border-round, $key: boder-radius);
 }
-
-.custom-button{
-    padding: map-get($map: $padding, $key: "padding-15") !important;
-    min-width: 292px !important;
+ /*End*/
+ /*Use thses classes for buttons*/
+.primary-button{
+   background: map-get($map: $text-color, $key: "red-dark") !important;
+   color: map-get($map: $background-color, $key: "primary") !important;
+    padding: map-get($map: $padding, $key: "padding-10") !important;
     text-transform: unset !important;
-    font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
+    font-family: map-get($map: $font-family, $key: "font-barlowmedium") !important;
     line-height: inherit !important;
     border-radius: map-get($map: $border-round, $key:"boder-radius") !important;
+    font-size: map-get($map: $text-size, $key: "large20") !important;
+    @include box-shadow(
+      0px,
+      10px,
+      20px,
+      map-get($map: $boxshadow, $key: "red-smooth")
+    );
     @media (min-width: 1280px) and (max-width: 1365px) {
       min-width: 290px !important;
        padding: map-get($map: $padding, $key: "padding-10") !important;
     }
+}
+.secondary-button{
+   background: map-get($map: $text-color, $key: "black-gray") !important;
+   color: map-get($map: $background-color, $key: "primary") !important;
+    padding: map-get($map: $padding, $key: "padding-15") !important;
+    text-transform: unset !important;
+    font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
+    line-height: inherit !important;
+    border-radius: map-get($map: $border-round, $key:"boder-radius") !important;
+    font-size: map-get($map: $text-size, $key: "large20") !important;
+  @include box-shadow(
+    0px,
+    10px,
+    20px,
+    map-get($map: $boxshadow, $key: "black-smooth")
+  );
+  @media (min-width: 1280px) and (max-width: 1365px) {
+    min-width: 290px !important;
+     padding: map-get($map: $padding, $key: "padding-10") !important;
   }
+}
+/*End*/
+

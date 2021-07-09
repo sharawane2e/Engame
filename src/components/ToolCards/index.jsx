@@ -6,17 +6,20 @@ import Tools from "../../mock/ToolCards";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ToolDemo from "../ToolDemo";
 import CustomPopup from "../CustomPopup";
-import Button from "@material-ui/core/Button";
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/shopping/shopping-action";
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import  Embedcode  from "../EmbedCode";
- 
+import CustomButton from "../../components/widgets/Button"
+import Subscription from '../../components/SubscriptionType';
+
 const ToolCards = ({addToCart}) => {
   const [state] = useState(Tools);
   const [selectedTool, setSelectedTool] = useState(null);
   const [ispopup, setPopup] = useState(false);
+  const [isSubscription, setSubscriptionPopup] = useState(false);
+
  
   const handleToolClick = (tool) => {
         setSelectedTool(tool);
@@ -35,8 +38,9 @@ const ToolCards = ({addToCart}) => {
                   <div className="toolcard__image">
                     <img src={tooldata.imgUrl} />
                     <div className="toolcard__preview">
-                     <Button className="toolcard__perview-button"  onClick={() => handleToolClick(tooldata)}> 
-                     <RemoveRedEyeIcon className="eyes_icon"/> Preview</Button>
+                     <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata)}>
+                        <RemoveRedEyeIcon className="eyes_icon"/> Preview
+                     </CustomButton>
                     </div>
                   </div>
                   <div className="toolcard__align toolcard__toolicons">
@@ -49,7 +53,7 @@ const ToolCards = ({addToCart}) => {
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
-                        <ShoppingCartIcon  onClick={() => addToCart(tooldata.id)}/>
+                        <ShoppingCartIcon  onClick= {() =>setSubscriptionPopup(true)}/>
                       </span>
                     </div>
                   </div>
@@ -65,16 +69,33 @@ const ToolCards = ({addToCart}) => {
       <CustomPopup
         open={selectedTool}
         onClose={() => setSelectedTool(null)}
-        poupxl={true}
-      >
+        className="popup-container__iner--xl border-radius"
+        >
         <ToolDemo tool={selectedTool}></ToolDemo>
       </CustomPopup>
-      <CustomPopup 
-      open={ispopup} onClose={() =>setPopup(false)} 
-      poupxl={false}
-      headerText="Embed code">
-        <Embedcode/>
-      </CustomPopup>
+        <CustomPopup 
+          open={ispopup} onClose={() =>setPopup(false)} 
+          headerText="Embed code"
+          className="border-radius"
+          >
+          <Embedcode/>
+        </CustomPopup>
+
+        <CustomPopup
+          open={isSubscription}
+          onClose={() => setSubscriptionPopup(false)}
+          headerText="Subscription Type"
+          footerButton={true}
+          className="border-radius popup-container__iner--sm"
+        >
+         <Subscription/> 
+         <div className="popup-container__footer">
+         <CustomButton className="primary-button add--card" onClick={() => addToCart(state.id)}>
+            <ShoppingCartIcon/>  Add to Cart
+         </CustomButton>
+         </div>
+        </CustomPopup>
+      
     </Toolbar>
    </>
   
