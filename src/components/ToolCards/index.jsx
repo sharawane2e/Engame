@@ -17,6 +17,7 @@ import Subscription from '../../components/SubscriptionType';
 const ToolCards = ({addToCart}) => {
   const [state] = useState(Tools);
   const [selectedTool, setSelectedTool] = useState(null);
+  const [popupId, setPopupId] = useState()
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
 
@@ -47,13 +48,13 @@ const ToolCards = ({addToCart}) => {
                     <div className="toolcard__items toolcard__download">
                       {/* {tooldata.showDownload == true ? ( */}
                         <span className="toolcard__sub-icons">
-                          <SystemUpdateAltIcon onClick={() =>setPopup(true)}/>
+                          <SystemUpdateAltIcon onClick={() => setPopup(true)}/>
                         </span>
                       {/* ) : null} */}
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
-                        <ShoppingCartIcon  onClick= {() =>setSubscriptionPopup(true)}/>
+                        <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>
                       </span>
                     </div>
                   </div>
@@ -90,7 +91,7 @@ const ToolCards = ({addToCart}) => {
         >
          <Subscription/> 
          <div className="popup-container__footer">
-         <CustomButton className="primary-button add--card" onClick={() => addToCart(state.id)}>
+         <CustomButton className="primary-button add--card" onClick={(itemId) => addToCart(popupId)}>
             <ShoppingCartIcon/>  Add to Cart
          </CustomButton>
          </div>
