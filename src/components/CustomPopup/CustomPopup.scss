@@ -20,7 +20,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: map-get($map: $background-color, $key: primary);
+    background: map-get($map: $background-color, $key: "primary");
     min-height: 550px;
     @media (min-width: 1280px) and (max-width: 1365px) {
       min-height: 300px;
@@ -31,10 +31,12 @@
   }
   #{&}__inersm {
     width: 50%;
+    border-radius: map-get($map: $border-round, $key: "boder-radius");
   }
   #{&}__header {
-    padding: map-get($map: $padding, $key: padding-25);
+    padding: map-get($map: $padding, $key: "padding-25");
     display: flex;
+    font-family: map-get($map: $border-round, $key: "boder-radius");
   }
   #{&}__text {
     display: flex;
@@ -53,6 +55,7 @@
         map-get($map: $padding, $key: "padding-30"); 
       }
   }
+  
   #{&}__close {
     display: flex;
     justify-content: flex-end;

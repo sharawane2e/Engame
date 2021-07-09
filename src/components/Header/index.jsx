@@ -40,7 +40,7 @@ const Header = ({props, cart}) => {
   return (
       <>
       <div className="flexGrow header-box">
-        <AppBar position="static">
+        <AppBar position="static"  position="Fixed">
         <Toolbar className="header-bg">
           <Typography variant="h6" className="flexGrow">
             <img src={e2eLogo}/>
@@ -91,13 +91,6 @@ const Header = ({props, cart}) => {
           </Grid>
         </Grid>
       </CustomPopup>
-      {/* <CustomPopup open={isToolOpen} onClose={() =>setToolOpen(false)} poupxl={true} headerText="Craousal Rating">
-     <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
-           <ToolDemo/> 
-          </Grid>
-        </Grid>  
-      </CustomPopup> */}
       </>
     );
 }

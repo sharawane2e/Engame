@@ -2,7 +2,7 @@ import React from "react";
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import Overlay from "../Overlay";
 
-function CutomPopup(props) {
+const CutomPopup=(props)=> {
   const {
     children,
     open,
@@ -29,6 +29,7 @@ function CutomPopup(props) {
        <div className="popup-container__body">
           {children}
         </div>
+        <div className="popup-container__footer"></div>
      </div>
     </div>
     </>
