@@ -27,7 +27,7 @@
 }
 // ********************************************* shopping_cart start ***********************************************
 .shopping_cart{
-    margin: 40px 0;
+    margin: 40px 0 0;
     .header{
         display: flex;
         align-items: center;
@@ -53,6 +53,7 @@
         padding: 20px;
         margin: 20px 0;
         border-radius: 6px;
+        &:last-child{}
         .row{
             display: flex;
             align-items: center;

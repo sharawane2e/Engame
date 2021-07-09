@@ -3,13 +3,11 @@ import Header from '../Header'
 import { Link } from 'react-router-dom'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo';
 import { connect } from 'react-redux';
-import testImg from '../../assets/images/library-cards.svg'
 import empty from '../../assets/images/empty.gif'
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const Cart = ({cart}) => {
-    console.log(cart)
     return (
         <div className="cart">
             <Header />
@@ -32,7 +30,8 @@ const Cart = ({cart}) => {
 
                     <div className="row">
                         <div className="col-lg-9 col-md-8 col-sm-6">
-                           {cart.map(item => (<div className="strip">
+                           {cart.map(item => (
+                            <div className="strip">
                                 <div className="row">
                                     <div className="col-lg-2 col-md-3">
                                         <img src={item.imgUrl} alt="" className="img-fluid" />
