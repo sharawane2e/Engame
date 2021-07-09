@@ -16,6 +16,9 @@
   padding-left: map-get($map: $padding, $key: "padding-15");
   cursor: pointer;
   position: relative;
+  a{
+    color:#363636;
+  }
   span{
     position: absolute;
     top: -13px;
