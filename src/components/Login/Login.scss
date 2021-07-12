@@ -1,5 +1,3 @@
-@import "../../styles/partials/mixin";
-
 .form-area {
   padding: map-get($map: $padding, $key: "padding-24")
       map-get($map: $padding, $key: "padding-90")
@@ -80,11 +78,14 @@
     }
   }
   .form-newaccont {
-    font-size: map-get($map: $text-size, $key: "small");
+    text-align: map-get($map: $alignment, $key: align-center);
+    font-size: map-get($map: $text-size, $key: "regular");
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      font-size: map-get($map: $text-size, $key: "xsmall");
-    }
+    padding-top: map-get($map: $padding, $key: padding-15);
+    & > a {
+          padding-left: map-get($map: $padding, $key: padding-8);
+          color: map-get($map: $text-color, $key: red-dark);
+        }
   }
 }
 .form-button-grop {
@@ -100,11 +101,4 @@
   }
  }
 }
-.form-newaccont {
-  text-align: map-get($map: $alignment, $key: align-center);
-  padding-top: map-get($map: $padding, $key: padding-15);
-  & > a {
-    padding-left: map-get($map: $padding, $key: padding-8);
-    color: map-get($map: $text-color, $key: red-dark);
-  }
-}
+

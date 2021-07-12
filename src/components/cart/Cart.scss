@@ -33,7 +33,7 @@
     }
     #{&}__container{
         padding-top: map-get($map: $padding, $key:"padding-35");
-        height: 80vh;
+         min-height: 800px;
     }
     #{&}__container-inr{
         padding-bottom: map-get($map: $padding, $key:"padding-15");
@@ -50,11 +50,13 @@
     #{&}__tool-card{
         padding: map-get($map: $padding, $key: "padding-20");
         padding-bottom: map-get($map: $padding, $key: "padding-40");
+        margin-bottom: 10px;
     }
     .continue-button{
         display: flex;
         justify-content: flex-end;
         margin-top: map-get($map: $margin, $key: "margin-40");
+        margin-bottom: map-get($map: $margin, $key: "margin-50");
     }
     .margin-right{
         margin-right: map-get($map: $margin, $key:"margin-10" );
@@ -193,6 +195,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 80vh;
+         height: 81.5vh;
     }
 }

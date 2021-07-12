@@ -6,6 +6,9 @@
 body {
   font-family: map-get($map: $font-family, $key: font-barlowregular);
 }
+.App{
+  position: relative;
+}
 .MuiButton-label {
   text-transform: none;
   // font-size: map-get($map: $text-size, $key: large);
