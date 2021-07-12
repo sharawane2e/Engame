@@ -91,7 +91,7 @@ body {
 .secondary-button{
    background: map-get($map: $text-color, $key: "black-gray") !important;
    color: map-get($map: $background-color, $key: "primary") !important;
-    padding: map-get($map: $padding, $key: "padding-15") !important;
+    padding: map-get($map: $padding, $key: "padding-10") !important;
     text-transform: unset !important;
     font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
     line-height: inherit !important;

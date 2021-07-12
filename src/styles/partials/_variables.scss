@@ -10,6 +10,7 @@ $text-size: (
   "xl": 32px,
   "xl42": 42px,
   "large25": 25px,
+  "large30": 30px,
   "large20": 20px,
   "large": 18px,
   "regular": 16px,
@@ -57,6 +58,7 @@ $border-round: (
 $border-color: (
   "border-width": 1px,
   "bsolid": solid,
+  "dotted":dotted,
   "red-dark": #f15b5b,
 );
 $boxshadow: (
@@ -83,6 +85,9 @@ $alignment: (
   "align-right": right,
   "align-left": left,
 );
+$fillcolor:(
+  "red-dark":#f15b5b,
+);
 
 $padding: (
   "padding-2": 2px,
@@ -98,6 +103,7 @@ $padding: (
   "padding-24": 24px,
   "padding-25": 25px,
   "padding-30": 30px,
+  "padding-35": 35px,
   "padding-40": 40px,
   "padding-50": 50px,
   "padding-90": 90px,
@@ -116,6 +122,7 @@ $margin: (
   "margin-20": 20px,
   "margin-25": 25px,
   "margin-30": 30px,
+  "margin-40": 40px,
 );
 
 $grid-breakpoints: (

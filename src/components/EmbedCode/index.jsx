@@ -5,11 +5,11 @@ const EmbedCode = () => {
     return(
         <>
         <TextareaAutosize
-      maxRows={4}
-      aria-label="maximum height"
-      placeholder="Maximum 4 rows"
-      defaultValue=""
-    />
+            maxRows={4}
+            aria-label="maximum height"
+            placeholder="Maximum 4 rows"
+            defaultValue=""
+            />
             EmbedCode Here  
         </>
     )

@@ -14,6 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import Badge from '@material-ui/core/Badge';
 
 const Header = ({props, cart}) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -49,8 +50,10 @@ const Header = ({props, cart}) => {
             </Link>
           </Typography>
           <div className="header-text-color">
-         {isUserLogin?<><div className="menu-button" onClick={() =>setLoginIsOpen(true)} >Login</div>|
-            <div className="menu-button" onClick={() =>setReginIsOpen(true)}>Register</div>
+         {isUserLogin?<><div className="menu-button" 
+            onClick={() =>setLoginIsOpen(true)} >Login</div>|
+            <div className="menu-button" 
+            onClick={() =>setReginIsOpen(true)}>Register</div>
          </>  
          :<FormControl className="userForm" >
         <InputLabel id="user-open-select">User</InputLabel>
@@ -66,10 +69,12 @@ const Header = ({props, cart}) => {
           </Select>
       </FormControl>}
            <div className="shoping__card">
-             <Link to="/cart">
-                <ShoppingCartIcon/>
-                <span>{cartCount}</span>
-             </Link>
+           <Badge badgeContent={cartCount} color="secondary">
+           <Link to="/cart">
+                  <ShoppingCartIcon/>
+                </Link>
+           </Badge>
+              
            </div>
           </div>
         </Toolbar>
@@ -106,7 +111,7 @@ const Header = ({props, cart}) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart:state.shop.cart
+     cart:state.shop.cart
   }
 }
 

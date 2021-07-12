@@ -17,21 +17,7 @@
   cursor: pointer;
   position: relative;
   a{
-    color:#363636;
-  }
-  span{
-    position: absolute;
-    top: -13px;
-    font-size: 13px;
-    right: -7px;
-    background-color: #F15B5B;
-    width: 22px;
-    height: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    border-radius: 50%;
+    color:map-get($map: $text-color, $key: "black-light");
   }
 }
 .userForm{

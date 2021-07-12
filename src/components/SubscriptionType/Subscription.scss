@@ -10,29 +10,35 @@
      border-radius: map-get($map:$border-round , $key: "boder-radius");
      margin-bottom: map-get($map: $margin, $key:"margin-30");
    }
-   .subscription-type__iner{
+   #{&}__iner{
      display: flex;
    }
-   .subscription-type__days{
+   #{&}__days{
      display: flex;
      flex: 0 0 80%;
    }
-   .subscription-type__text{
+   #{&}__text{
      display: flex;
      align-items: center;
      padding-left: map-get($map: $padding, $key: "padding-15");
    }
-   .subscription-type__amount{
+   #{&}__amount{
      display: flex;
      flex: 0 0 20%;
      justify-content: flex-end;
      align-items: center;
    }
-   .subscription-type__amount-text{
+   #{&}__amount-text{
      font-family: map-get($map: $font-family, $key: "font-barlowbold");
      font-size: map-get($map: $text-size, $key: "large25");
    }
-  .subscription-type__inputbox{
+  #{&}__inputbox{
     width: 100px ;
+    .MuiInputBase-root {
+      .MuiOutlinedInput-input{
+        padding: map-get($map: $padding, $key: "padding-15");
+      }
+    }
+    
   }
  }

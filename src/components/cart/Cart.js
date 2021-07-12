@@ -1,110 +1,170 @@
-import React from 'react'
-import Header from '../Header'
-import { Link } from 'react-router-dom'
-import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo';
+import React from 'react';
+import Header from '../Header';
+import { Link } from 'react-router-dom';
+import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 import { connect } from 'react-redux';
 import empty from '../../assets/images/empty.gif'
-import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { Breadcrumbs } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import CustomButton from "../../components/widgets/Button";
+import Footer from "../../components/Footer";
+import Paper from '@material-ui/core/Paper';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import { styled } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import DeleteIcon from '@material-ui/icons/Delete';
+import DoneIcon from '@material-ui/icons/Done';
+
+
+const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  });
 
 const Cart = ({cart}) => {
-    console.log(cart)
+    console.log(cart);
     return (
-        <div className="cart">
-            <Header />
-         <div className="cart_header-fixed">
-         <div className="bread_crum">
-                <div className="container">
-                    <div className="crums">
-                        <p>
-                            <Link to="/">Home</Link> <span> / Shopping Cart</span>
-                        </p>
-                    </div>
+        <>
+            <div className="shoping-cart">
+                <Header />
+                <div className="shoping-cart__bredcrum_inr">
+                <Container maxWidth="lg">
+                <Breadcrumbs aria-label="breadcrumb" className="shoping-cart__bredcrum-text">
+                    <Link color="inherit" to="/" >
+                        Home
+                    </Link>
+                    {/* <Link color="inherit" to="" >
+                        Shopping Cart
+                    </Link> */}
+                    <Typography color="textPrimary">Shopping Cart</Typography>
+                </Breadcrumbs>
+                </Container>
                 </div>
-            </div>
+                {cart.length !== 0 ? <Container maxWidth="lg" className="shoping-cart__container">
+                 <Grid container spacing={3} className="shoping-cart__container-inr">
+                    <Grid item xs={8}  className="shoping-cart__left-card">
+                         Shopping Cart
+                    </Grid>
+                    <Grid item xs={4}  className="shoping-cart__right-card">
+                    <Link to="/"> <CustomButton 
+                    className='secondary-button'>
+                     <PlayCircleFilledWhiteIcon  className="margin-right"/>   Continue Shopping
+                    </CustomButton>
+                    </Link>
+                    </Grid>
+                </Grid>
 
-            <div className="shopping_cart">
-                {cart.length !== 0 ? <div className="container">
-                    <div className="header">
-                        <h3>Shopping Cart</h3>
-                        <Link to="/"> <SlowMotionVideoIcon /> Continue Shopping </Link>
-                    </div>
+              <Grid container spacing={2} >
+                    <Grid item xs={9} className="border-radius">
+                 {cart.map((item, index) => {
+                            return (
+                     <Paper className="shoping-cart__tool-card">
+                        <Grid container spacing={3}>
+                            <Grid item xs={2}  container>
+                                <ButtonBase sx={{ width: 128, height: 128 }}>
+                                    <Img alt=""  src={item.imgUrl}/> 
+                                </ButtonBase>
+                            </Grid>
+                           <Grid item xs={10} sm container>
+                              <Grid item xs container direction="row" spacing={2} className="shoping-cart__subscription-card"  >
+                                   <Grid item xs>
+                                        <Typography gutterBottom variant="subtitle1" component="div" className="shoping-cart__tool-title">
+                                             {item.name}
+                                        </Typography>
+                                        <Typography variant="body2" gutterBottom className="shoping-cart__tool-discription">
+                                        Description Description Description Description Description Description\
+                                        Description Descri ptionDescriptionptionDescriptionptionDescriptionptionDescriptionptionDescriptionptionDescription
+                                        </Typography>
+                                   </Grid>
+                                </Grid>
+                               <Grid item>
+                                    <Typography variant="subtitle1" component="div" className="shoping-cart__total-amount">
+                                    {item.currency}{item.price}
+                                    </Typography>
+                                </Grid>
+                           <Grid item xs={10} sm container>
+                              <Grid item xs  direction="column" spacing={2}>
+                                   <Grid item sm >
+                                   <Typography gutterBottom variant="subtitle1" component="div" className="shoping-cart__subscription">
+                                      <span>Subscription:</span>
+                                        <select className="border-radius">
+                                            <option>Number of days</option>
+                                            <option>2</option>
+                                            <option>1</option>
+                                            <option>1</option>
+                                            <option>1</option>
+                                            <option>1</option>
+                                        </select>
+                                   </Typography>
+                                   </Grid>
+                                </Grid>
+                                   <Grid item sm>
+                                        <Typography variant="subtitle1" component="div" className="shoping-cart__validity-input">
+                                               <span>Validity:</span>
+                                            <TextField id="outlined-basic"  variant="outlined" /> <span className="shoping-cart__input-days">Days</span>
+                                        </Typography>
+                                    </Grid>
+                               <Grid item className="shoping-cart__tool-icons">
+                                <Typography variant="subtitle1" component="div">
+                                    <DoneIcon className="shoping-cart__tool-tick"/> | <DeleteIcon className="shoping-cart__tool-delete"/>
+                                </Typography>
+                                </Grid>
+                           </Grid>
+                           </Grid>
+                        </Grid>
+                        </Paper>
+                    
+                            )
+                        })}
+                        <div className="continue-button">
+                        <Link to="/"> <CustomButton 
+                            className='secondary-button shopping-button'>
+                                <PlayCircleFilledWhiteIcon className="margin-right"/>   Continue Shopping
+                            </CustomButton>
+                            </Link>
+                          </div>
+                    </Grid>
+               
 
-                    <div className="row">
-                        <div className="col-lg-9 col-md-8 col-sm-6">
-                           {cart.map(item => (<div className="strip">
-                                <div className="row">
-                                    <div className="col-lg-2 col-md-3">
-                                        <img src={item.imgUrl} alt="" className="img-fluid" />
-                                    </div>
-                                    <div className="col-lg-8 col-md-7">
-                                        <div className="content_strip">
-                                            <h3>{item.name}</h3>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi deserunt culpa sunt ad porro delectus.</p>
-                                            <div className="subscription">
-                                                <div className="subscribe">
-                                                    <label htmlFor="subscription">Subscription : </label>
-                                                    <select name="" id="">
-                                                        <option value="">Number of Days</option>
-                                                    </select>
-                                                </div>
-                                                <div className="validity">
-                                                    <label htmlFor="validity">Validity</label>
-                                                    <input type="text" value="60" />
-                                                    <span>Days</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-2 col-md-3">
-                                        <div className="last_button">
-                                            <p>{item.currency}{item.price}</p>
-                                            <div className="btns">
-                                                <DeleteIcon />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> ))
-                            }
-                        
-                        </div>
-                        <div className="col-lg-3 col-md-4 col-sm-6">
-                            <div className="total">
-                                <h3>Need to Pay</h3>
-                                <div className="price">
-                                    <span>${cart.map(item => item.price).reduce((accumulator, currentValue) => accumulator+currentValue)}</span>
-                                </div>
-                                <div className="promotion">
-                                    <span>Promotion code</span>
-                                    <div className="apply">
-                                        <input type="text" />
-                                        <button>Apply</button>
-                                    </div>
-                                    <button className="chekout">
-                                        <CheckCircleIcon /> Checkout
-                                    </button>
-                                </div>
+                    <Grid item xs={3} className="border-radius">
+                        <Paper className="shoping-cart__tool-card shoping-cart__card-coupon" align="center" >
+                            <div className="shoping-cart__coupon-hedding">Need to pay</div>
+                            <div className="shoping-cart__coupon-amount">
+                                ${cart.map(item => item.price).reduce((accumulator, currentValue) => accumulator+currentValue)}
                             </div>
-                        </div>
-                    </div>
-                </div>
-                :
-                <div className="empty_cart">
-                    <img src={empty} alt="" />
-                </div>
-                }
+                                <div className="shoping-cart__coupon-code">
+                                    <span align="center">Promotion code</span>
+                                    <div className="shoping-cart__coupon-apply" align="center">
+                                       <input type="text" class="shoping-cart__coupon-apply-input"/>
+                                     <button>Apply</button>
+                              </div>
+                            </div>
+                        <CustomButton className="primary-button checkout-button">
+                          <CheckCircleIcon /> Checkout
+                        </CustomButton>
+                        </Paper>
+                    </Grid>
+                </Grid>
+                {/*End card data*/}
+                </Container>
+                :<div className="empty_cart">
+                <img src={empty} alt="" />
+            </div>}
             </div>
-        
-         </div>
-         </div>
+            <Footer/>
+        </>
     )
 }
 
 const mapDispatchToProp = state => {
     return {
-         cart:state.shop.cart
-    }
+        cart:state.shop.cart
+    }   
 }
 
 export default connect(mapDispatchToProp)(Cart)
