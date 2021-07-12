@@ -68,6 +68,9 @@ body {
 }
  /*End*/
  /*Use thses classes for buttons*/
+ a {
+  text-decoration: none !important;
+}
 .primary-button{
    background: map-get($map: $text-color, $key: "red-dark") !important;
    color: map-get($map: $background-color, $key: "primary") !important;

@@ -54,9 +54,7 @@
     .continue-button{
         display: flex;
         justify-content: flex-end;
-        .shopping-button{
-            margin-top: map-get($map: $margin, $key: "margin-40")
-        }
+        margin-top: map-get($map: $margin, $key: "margin-40");
     }
     .margin-right{
         margin-right: map-get($map: $margin, $key:"margin-10" );
