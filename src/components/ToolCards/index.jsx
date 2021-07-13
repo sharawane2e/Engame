@@ -9,9 +9,9 @@ import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/shopping/shopping-action";
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt'; 
 import  Embedcode  from "../EmbedCode";
-import CustomButton from "../../components/widgets/Button"
+import CustomButton from "../../components/widgets/Button";
 import Subscription from '../../components/SubscriptionType';
 
 const ToolCards = ({addToCart}) => {
@@ -34,8 +34,7 @@ const ToolCards = ({addToCart}) => {
           return (
               <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.id}>
                 <Paper 
-                  className="toolcard__imageblck"
-                >
+                  className="toolcard__imageblck">
                   <div className="toolcard__image">
                     <img src={tooldata.imgUrl} />
                     <div className="toolcard__preview">

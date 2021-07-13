@@ -3,7 +3,7 @@
     background-color: map-get($map: $background-color, $key:"secondary" );
     #{&}__container{
         padding-top: map-get($map: $padding, $key:"padding-35");
-        min-height: 800px;
+        min-height: 763px;
     }
     #{&}__container-inr{
         padding-bottom: map-get($map: $padding, $key:"padding-15");
@@ -18,11 +18,16 @@
         justify-content: flex-end;
     }
     #{&}__tool-card{
-        padding: map-get($map: $padding, $key: "padding-20");
-        // padding-bottom: map-get($map: $padding, $key: "padding-40");
-        margin-bottom: 10px;
+        padding: map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40")
+        map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40");
+        margin-bottom: map-get($map: $margin, $key: "margin-10");
         .curent-tool-img{
             width: 100%;
+            >img{
+                max-width: 100%;
+            }
         }
     }
     .continue-button{
