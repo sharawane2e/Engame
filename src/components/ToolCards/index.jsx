@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Tools from "../../mock/ToolCards";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ToolDemo from "../ToolDemo";
 import CustomPopup from "../CustomPopup";
@@ -14,8 +13,8 @@ import  Embedcode  from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from '../../components/SubscriptionType';
 
-const ToolCards = ({addToCart}) => {
-  const [state] = useState(Tools);
+const ToolCards = ({products, addToCart}) => {
+  const [state] = useState(products);
   const [selectedTool, setSelectedTool] = useState(null);
   const [popupId, setPopupId] = useState()
   const [ispopup, setPopup] = useState(false);
@@ -88,7 +87,7 @@ const ToolCards = ({addToCart}) => {
           footerButton={true}
           className="border-radius popup-container__iner--sm"
         >
-         <Subscription/> 
+         <Subscription toolId={popupId} /> 
          <div className="popup-container__footer">
          <CustomButton className="primary-button add--card" onClick={(itemId) => addToCart(popupId)}>
             <ShoppingCartIcon/>  Add to Cart
@@ -107,5 +106,11 @@ const mapDispatchToProps = dispatch => {
     addToCart: (id) => dispatch(addToCart(id))
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    products : state.shop.products,
+  }
+}
  
-export default connect(null, mapDispatchToProps)(ToolCards);
+export default connect(mapStateToProps, mapDispatchToProps)(ToolCards);
