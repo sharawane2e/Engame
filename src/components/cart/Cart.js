@@ -34,6 +34,14 @@ const Cart = ({cart}) => {
         setTotalPrice(price)
         setTotalItem(items)
     }, [cart, totalItem, totalPrice, setTotalItem, setTotalPrice])
+
+    const scrollTo = (ele) => {
+        ele.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      };
+
     return (
         <>
             <div className="shoping-cart bredcrum-conatiner">
@@ -136,7 +144,7 @@ const Cart = ({cart}) => {
                             </Link>
                         </div>
                     </Grid>
-                    <Grid item xs={3} className="border-radius">
+                    <Grid item xs={3} className="border-radius" >
                         <Paper className="shoping-cart__tool-card shoping-cart__card-coupon " align="center" >
                             <div className="shoping-cart__coupon-hedding">Need to pay</div>
                             <div className="shoping-cart__coupon-amount">
