@@ -13,28 +13,19 @@ import CustomButton from "../../components/widgets/Button";
 import Footer from "../../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { styled } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 
 
-const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  });
-
 const Cart = ({cart}) => {
-    console.log(cart);
     return (
         <>
-            <div className="shoping-cart">
+            <div className="shoping-cart bredcrum-conatiner">
                 <Header />
-                <div className="shoping-cart__bredcrum_inr">
+                <div className="bredcrum-conatiner__bredcrum_inr">
                 <Container maxWidth="lg">
-                <Breadcrumbs aria-label="breadcrumb" className="shoping-cart__bredcrum-text">
+                <Breadcrumbs aria-label="breadcrumb" className="bredcrum-conatiner__bredcrum-text">
                     <Link color="inherit" to="/" >
                         Home
                     </Link>
@@ -45,7 +36,8 @@ const Cart = ({cart}) => {
                 </Breadcrumbs>
                 </Container>
                 </div>
-                {cart.length !== 0 ? <Container maxWidth="lg" className="shoping-cart__container">
+                {cart.length !== 0 ? 
+                <Container maxWidth="lg" className="shoping-cart__container">
                  <Grid container spacing={3} className="shoping-cart__container-inr">
                     <Grid item xs={8}  className="shoping-cart__left-card">
                          Shopping Cart
@@ -60,14 +52,14 @@ const Cart = ({cart}) => {
                 </Grid>
 
               <Grid container spacing={2} >
-                    <Grid item xs={9} className="border-radius">
+                    <Grid item xs={9} className="border-radius" >
                  {cart.map((item, index) => {
                             return (
-                     <Paper className="shoping-cart__tool-card">
+                     <Paper className="shoping-cart__tool-card" key={index}>
                         <Grid container spacing={3}>
                             <Grid item xs={2}  container>
-                                <ButtonBase sx={{ width: 128, height: 128 }}>
-                                    <Img alt=""  src={item.imgUrl}/> 
+                                <ButtonBase  className="curent-tool-img">
+                                    <img alt=""  src={item.imgUrl}/> 
                                 </ButtonBase>
                             </Grid>
                            <Grid item xs={10} sm container>
@@ -122,9 +114,14 @@ const Cart = ({cart}) => {
                             )
                         })}
                         <div className="continue-button">
-                        <Link to="/"> <CustomButton 
-                            className='secondary-button shopping-button'>
+                            <Link to="/"> <CustomButton 
+                             className='secondary-button shopping-button'>
                                 <PlayCircleFilledWhiteIcon className="margin-right"/>   Continue Shopping
+                            </CustomButton>
+                            </Link>
+                            <Link to="/purchased"> <CustomButton 
+                             className='secondary-button shopping-button'>
+                                <PlayCircleFilledWhiteIcon className="margin-right"/>   Continue Purchased
                             </CustomButton>
                             </Link>
                           </div>
@@ -140,7 +137,7 @@ const Cart = ({cart}) => {
                                 <div className="shoping-cart__coupon-code">
                                     <span align="center">Promotion code</span>
                                     <div className="shoping-cart__coupon-apply" align="center">
-                                       <input type="text" class="shoping-cart__coupon-apply-input"/>
+                                       <input type="text" className="shoping-cart__coupon-apply-input"/>
                                      <button>Apply</button>
                               </div>
                             </div>

@@ -1,0 +1,12 @@
+.purchased-tool{
+    font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+    #{&}__container{
+        padding-top: 35px;
+    }
+    #{&}__tool-card{
+        padding: map-get($map: $padding, $key: "padding-20");
+    }
+    #{&}__tool-title{
+        font-size: map-get($map: $text-size, $key: "regular");
+    }
+}

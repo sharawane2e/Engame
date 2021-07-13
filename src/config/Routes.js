@@ -12,10 +12,15 @@ const Routes = [
         exact:true
     },
     {
-        path:["/", "/cart"],
+        path:["/", "/cart","/purchased"],
         component:PublicScreen,
         exact:true,
         routes:[
+            {
+                path:"/purchased",
+                component:Purchased,
+                isExact:true
+            },
             {
                 path:"/cart",
                 component:Cart,
