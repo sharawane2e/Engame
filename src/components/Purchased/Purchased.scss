@@ -1,0 +1,95 @@
+.purchased-tool{
+    font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+    #{&}__container{
+        padding-top: 35px;
+        min-height: 763px;
+    }
+    
+    #{&}__hedding{
+       margin-bottom: 20px;
+       .hedding-text{
+        font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+        font-size: map-get($map: $text-size, $key: "large20");
+       }
+    }
+
+    #{&}__tool-card{
+        padding: map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40")
+        map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40");
+    }
+    #{&}__tool-title{
+        font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+        font-size: map-get($map: $text-size, $key: "regular");
+    }
+    #{&}__tool-type{
+        .subscription-type-text{
+            font-family: map-get($map: $font-family, $key:"font-barlowbold" ) ;
+            font-size: map-get($map: $text-size, $key: "small");
+        }
+        .subscription-day{
+            font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+            font-size: map-get($map: $text-size, $key: "small");
+        }
+    }
+    #{&}__tool-validity{
+        display: flex;
+        align-items: center;
+        .tool-extned{
+            font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+            color: map-get($map:$text-color , $key:"red-dark" );
+            text-decoration: underline;
+        }
+    }
+    #{&}__tool-nodays{
+        display: flex;
+        justify-content: center;
+        .tool-validity{
+            align-items: center;
+        }
+    }
+    #{&}__tool-left-day{
+        font-family: map-get($map: $font-family, $key:"font-barlowbold" ) ;
+        font-size: map-get($map: $text-size, $key: "regular");
+    }
+    #{&}__embeded-icon{
+        display: flex;
+        border: 1px solid #e3ebf7;
+        border: map-get($map: $border-color, $key: border-width)
+        map-get($map: $border-color, $key: bsolid)
+        map-get($map: $border-round, $key: "accent");;
+        padding: map-get($map: $padding, $key: "padding-8");
+        cursor: pointer;
+        &:hover{
+            border: map-get($map: $border-color, $key: border-width)
+            map-get($map: $border-color, $key: bsolid)
+            map-get($map: $border-color, $key: red-dark);
+        }
+        >svg{
+            color: map-get($map: $fillcolor, $key: "gray-light");
+            &:hover{
+                color: map-get($map: $fillcolor, $key: "red-dark");
+            }
+        }
+    }
+    #{&}__date-time{
+        margin-top: map-get($map: $margin, $key: "margin-15");
+        .purchased-on{
+            font-family: map-get($map: $font-family, $key:"font-barlowbold" ) ;
+            font-size: map-get($map: $text-size, $key: "small");
+            color: map-get($map:$text-color , $key: "black-gray");
+        }
+        .purchased-date{
+            font-family: map-get($map: $font-family, $key:"font-barlowmedium" ) ;
+            font-size: map-get($map: $text-size, $key: "small");
+          color: map-get($map:$text-color , $key: "black-gray");
+        }
+    }
+    #{&}__expiry-date{
+        display: flex;
+        justify-content: flex-end;
+       color: map-get($map:$text-color , $key: "black-gray");
+    }
+    
+}

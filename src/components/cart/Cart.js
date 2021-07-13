@@ -13,19 +13,11 @@ import CustomButton from "../../components/widgets/Button";
 import Footer from "../../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { styled } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import { removeFromCart } from '../../redux/shopping/shopping-action';
 
-
-const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  });
 
 const Cart = ({cart}) => {
     const [totalPrice, setTotalPrice] = useState(0)
@@ -44,11 +36,11 @@ const Cart = ({cart}) => {
     }, [cart, totalItem, totalPrice, setTotalItem, setTotalPrice])
     return (
         <>
-            <div className="shoping-cart">
+            <div className="shoping-cart bredcrum-conatiner">
                 <Header />
-                <div className="shoping-cart__bredcrum_inr">
+                <div className="bredcrum-conatiner__bredcrum_inr">
                 <Container maxWidth="lg">
-                <Breadcrumbs aria-label="breadcrumb" className="shoping-cart__bredcrum-text">
+                <Breadcrumbs aria-label="breadcrumb" className="bredcrum-conatiner__bredcrum-text">
                     <Link color="inherit" to="/" >
                         Home
                     </Link>
@@ -59,7 +51,8 @@ const Cart = ({cart}) => {
                 </Breadcrumbs>
                 </Container>
                 </div>
-                {cart.length !== 0 ? <Container maxWidth="lg" className="shoping-cart__container">
+                {cart.length !== 0 ? 
+                <Container maxWidth="lg" className="shoping-cart__container margin-top-174">
                  <Grid container spacing={3} className="shoping-cart__container-inr">
                     <Grid item xs={8}  className="shoping-cart__left-card">
                          Shopping Cart
@@ -73,21 +66,21 @@ const Cart = ({cart}) => {
                     </Grid>
                 </Grid>
 
-              <Grid container spacing={2} >
-                    <Grid item xs={9} className="border-radius">
+              <Grid container spacing={3} >
+                    <Grid item xs={9} >
                  {cart.map((item, index) => {
                     return (
-                     <Paper className="shoping-cart__tool-card">
+                     <Paper className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius" key={index}>
                         <Grid container spacing={3}>
                             <Grid item xs={2}  container>
-                                <ButtonBase sx={{ width: 128, height: 128 }}>
-                                    <Img alt=""  src={item.imgUrl}/> 
+                                <ButtonBase  className="curent-tool-img">
+                                    <img alt=""  src={item.imgUrl}/> 
                                 </ButtonBase>
                             </Grid>
                            <Grid item xs={10} sm container> 
                               <Grid item xs container direction="row" spacing={2} className="shoping-cart__subscription-card"  >
                                    <Grid item xs>
-                                        <Typography gutterBottom variant="subtitle1" component="div" className="shoping-cart__tool-title">
+                                        <Typography gutterBottom  component="div" className="shoping-cart__tool-title">
                                              {item.name}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom className="shoping-cart__tool-discription">
@@ -97,14 +90,14 @@ const Cart = ({cart}) => {
                                    </Grid>
                                 </Grid>
                                <Grid item>
-                                    <Typography variant="subtitle1" component="div" className="shoping-cart__total-amount">
+                                    <Typography  component="div" className="shoping-cart__total-amount">
                                     {item.currency}{item.price}
                                     </Typography>
                                 </Grid>
                            <Grid item xs={10} sm container>
-                              <Grid item xs  direction="column" spacing={2}>
+                              <Grid item xs  container direction="column" spacing={2}>
                                    <Grid item sm >
-                                   <Typography gutterBottom variant="subtitle1" component="div" className="shoping-cart__subscription">
+                                   <Typography gutterBottom  component="div" className="shoping-cart__subscription">
                                       <span>Subscription:</span>
                                         <select className="border-radius">
                                             <option>Number of days</option>
@@ -118,13 +111,13 @@ const Cart = ({cart}) => {
                                    </Grid>
                                 </Grid>
                                    <Grid item sm>
-                                        <Typography variant="subtitle1" component="div" className="shoping-cart__validity-input">
+                                        <Typography  component="div" className="shoping-cart__validity-input">
                                                <span>Validity:</span>
                                             <TextField id="outlined-basic"  variant="outlined" /> <span className="shoping-cart__input-days">Days</span>
                                         </Typography>
                                     </Grid>
                                <Grid item className="shoping-cart__tool-icons">
-                                <Typography variant="subtitle1" component="div">
+                                <Typography  component="div">
                                     <DoneIcon className="shoping-cart__tool-tick"/> | <DeleteIcon className="shoping-cart__tool-delete" onClick={() => dispatch(removeFromCart(item.id))} />
                                 </Typography>
                                 </Grid>
@@ -136,17 +129,15 @@ const Cart = ({cart}) => {
                             )
                         })}
                         <div className="continue-button">
-                        <Link to="/"> <CustomButton 
-                            className='secondary-button shopping-button'>
+                            <Link to="/"> <CustomButton 
+                             className='secondary-button shopping-button'>
                                 <PlayCircleFilledWhiteIcon className="margin-right"/>   Continue Shopping
                             </CustomButton>
                             </Link>
-                          </div>
+                        </div>
                     </Grid>
-               
-
                     <Grid item xs={3} className="border-radius">
-                        <Paper className="shoping-cart__tool-card shoping-cart__card-coupon" align="center" >
+                        <Paper className="shoping-cart__tool-card shoping-cart__card-coupon " align="center" >
                             <div className="shoping-cart__coupon-hedding">Need to pay</div>
                             <div className="shoping-cart__coupon-amount">
                                 ${totalPrice}
@@ -154,7 +145,7 @@ const Cart = ({cart}) => {
                                 <div className="shoping-cart__coupon-code">
                                     <span align="center">Promotion code</span>
                                     <div className="shoping-cart__coupon-apply" align="center">
-                                       <input type="text" class="shoping-cart__coupon-apply-input"/>
+                                       <input type="text" className="shoping-cart__coupon-apply-input"/>
                                      <button>Apply</button>
                               </div>
                             </div>
@@ -166,11 +157,12 @@ const Cart = ({cart}) => {
                 </Grid>
                 {/*End card data*/}
                 </Container>
-                :<div className="empty_cart">
+                :<div className="empty_cart margin-top-174">
                 <img src={empty} alt="" />
             </div>}
-            </div>
             <Footer/>
+            </div>
+            
         </>
     )
 }

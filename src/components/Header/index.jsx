@@ -69,11 +69,13 @@ const Header = ({props, cart}) => {
           </Select>
       </FormControl>}
            <div className="shoping__card">
-           <Badge badgeContent={cartCount} color="secondary">
+           
            <Link to="/cart">
+           <Badge badgeContent={cartCount} color="secondary">
                   <ShoppingCartIcon/>
+                  </Badge>
                 </Link>
-           </Badge>
+           
               
            </div>
           </div>

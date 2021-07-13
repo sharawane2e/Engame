@@ -1,39 +1,9 @@
 .shoping-cart{
     font-family: map-get($map: $font-family, $key:"font-barlowmedium" );
     background-color: map-get($map: $background-color, $key:"secondary" );
-    #{&}__bredcrum_inr{
-        margin-top: 110px;
-        background-color: map-get($map:$background-color, $key:"back-color");
-    }
-    #{&}__bredcrum-text{
-        padding-top: map-get($map: $padding, $key:"padding-20");
-        padding-bottom: map-get($map: $padding, $key:"padding-20");
-        ol{
-            .MuiBreadcrumbs-separator{
-                color: map-get($map: $text-color, $key: "black-drak");
-                font-family: map-get($map: $font-family, $key: "font-barlowbold");
-                font-weight: map-get($map: $font-weight, $key: "font-700");
-                font-size: map-get($map: $text-size, $key: "regular");
-            }
-            li{
-               >a{
-                   text-decoration: none;
-                   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-                   color: map-get($map: $text-color, $key: "red-dark");
-                   font-size: map-get($map: $text-size, $key: "regular");
-               }
-               >p{
-                font-family: map-get($map: $font-family, $key: "font-barlowbold");
-                   color: map-get($map: $text-color, $key: "black-drak");
-                   font-weight: map-get($map: $font-weight, $key: "font-700");
-                   font-size: map-get($map: $text-size, $key: "regular");
-               }
-            }
-        }
-    }
     #{&}__container{
         padding-top: map-get($map: $padding, $key:"padding-35");
-         min-height: 800px;
+        min-height: 763px;
     }
     #{&}__container-inr{
         padding-bottom: map-get($map: $padding, $key:"padding-15");
@@ -48,9 +18,17 @@
         justify-content: flex-end;
     }
     #{&}__tool-card{
-        padding: map-get($map: $padding, $key: "padding-20");
-        padding-bottom: map-get($map: $padding, $key: "padding-40");
-        margin-bottom: 10px;
+        padding: map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40")
+        map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40");
+        margin-bottom: map-get($map: $margin, $key: "margin-10");
+        .curent-tool-img{
+            width: 100%;
+            >img{
+                max-width: 100%;
+            }
+        }
     }
     .continue-button{
         display: flex;
