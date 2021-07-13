@@ -22,10 +22,10 @@ const SubscriptionType =({toolId, products})=>{
                   <div className="subscription-type__text">DYAS</div>
                 </div>
               <div className="subscription-type__amount  subscription-type__amount-text ">
-                  $45
-                  {/* {products.map(item => (
+                  $
+                  {products.map(item => (
                     item.id == toolId ? item.price : null
-                  ))} */}
+                  ))}
               </div>
             </div>
 
