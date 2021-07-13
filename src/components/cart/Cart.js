@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Header from '../Header';
 import { Link } from 'react-router-dom';
 import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import empty from '../../assets/images/empty.gif'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Breadcrumbs } from '@material-ui/core';
@@ -17,6 +17,7 @@ import { styled } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
+import { removeFromCart } from '../../redux/shopping/shopping-action';
 
 
 const Img = styled('img')({
@@ -27,7 +28,20 @@ const Img = styled('img')({
   });
 
 const Cart = ({cart}) => {
-    console.log(cart);
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [totalItem, setTotalItem] = useState(0);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        let items = 0;
+        let price = 0;
+        cart.forEach(item => {
+            items += item.qty;
+            price += item.qty * item.price
+        })
+        setTotalPrice(price)
+        setTotalItem(items)
+    }, [cart, totalItem, totalPrice, setTotalItem, setTotalPrice])
     return (
         <>
             <div className="shoping-cart">
@@ -62,7 +76,7 @@ const Cart = ({cart}) => {
               <Grid container spacing={2} >
                     <Grid item xs={9} className="border-radius">
                  {cart.map((item, index) => {
-                            return (
+                    return (
                      <Paper className="shoping-cart__tool-card">
                         <Grid container spacing={3}>
                             <Grid item xs={2}  container>
@@ -70,7 +84,7 @@ const Cart = ({cart}) => {
                                     <Img alt=""  src={item.imgUrl}/> 
                                 </ButtonBase>
                             </Grid>
-                           <Grid item xs={10} sm container>
+                           <Grid item xs={10} sm container> 
                               <Grid item xs container direction="row" spacing={2} className="shoping-cart__subscription-card"  >
                                    <Grid item xs>
                                         <Typography gutterBottom variant="subtitle1" component="div" className="shoping-cart__tool-title">
@@ -111,7 +125,7 @@ const Cart = ({cart}) => {
                                     </Grid>
                                <Grid item className="shoping-cart__tool-icons">
                                 <Typography variant="subtitle1" component="div">
-                                    <DoneIcon className="shoping-cart__tool-tick"/> | <DeleteIcon className="shoping-cart__tool-delete"/>
+                                    <DoneIcon className="shoping-cart__tool-tick"/> | <DeleteIcon className="shoping-cart__tool-delete" onClick={() => dispatch(removeFromCart(item.id))} />
                                 </Typography>
                                 </Grid>
                            </Grid>
@@ -135,7 +149,7 @@ const Cart = ({cart}) => {
                         <Paper className="shoping-cart__tool-card shoping-cart__card-coupon" align="center" >
                             <div className="shoping-cart__coupon-hedding">Need to pay</div>
                             <div className="shoping-cart__coupon-amount">
-                                ${cart.map(item => item.price).reduce((accumulator, currentValue) => accumulator+currentValue)}
+                                ${totalPrice}
                             </div>
                                 <div className="shoping-cart__coupon-code">
                                     <span align="center">Promotion code</span>

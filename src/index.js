@@ -6,15 +6,17 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 import {HashRouter} from 'react-router-dom';
-import store from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
-
+import {store, persistor} from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
     <HashRouter>
-    <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
    </HashRouter>
    </Provider>
   </React.StrictMode>,
