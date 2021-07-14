@@ -12,6 +12,7 @@ import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import  Embedcode  from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from '../../components/SubscriptionType';
+import Toaster from "../../util/Toaster";
 
 const ToolCards = ({products, addToCart}) => {
   const [state] = useState(products);
@@ -20,9 +21,8 @@ const ToolCards = ({products, addToCart}) => {
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
 
- 
   const handleToolClick = (tool) => {
-        setSelectedTool(tool);
+    setSelectedTool(tool);
   };
 
   return (
@@ -75,7 +75,7 @@ const ToolCards = ({products, addToCart}) => {
         <CustomPopup 
           open={ispopup} onClose={() =>setPopup(false)} 
           headerText="Embed code"
-          className="border-radius"
+          className="border-radius popup-container__iner--md"
           >
           <Embedcode/>
         </CustomPopup>
@@ -87,12 +87,15 @@ const ToolCards = ({products, addToCart}) => {
           footerButton={true}
           className="border-radius popup-container__iner--sm"
         >
-         <Subscription toolId={popupId} /> 
-         <div className="popup-container__footer">
-         <CustomButton className="primary-button add--card" onClick={(itemId) => addToCart(popupId)}>
-            <ShoppingCartIcon/>  Add to Cart
-         </CustomButton>
-         </div>
+           <Subscription toolId={popupId} /> 
+              <div className="popup-container__footer">
+                  <CustomButton 
+                    className="primary-button add--card" 
+                    onClick={() =>  addToCart(popupId)}
+                  >
+                      <ShoppingCartIcon/>  Add to Cart
+                  </CustomButton>
+              </div>
         </CustomPopup>
       
     </Toolbar>

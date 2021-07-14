@@ -1,12 +1,10 @@
 import React from 'react';
 import Header from '../Header';
 import { Link } from 'react-router-dom';
-import empty from '../../assets/images/empty.gif'
 import { Breadcrumbs } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import CustomButton from "../../components/widgets/Button";
 import Footer from "../../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -18,7 +16,7 @@ function Purchased(props) {
         <>
         <div className="purchased-tool bredcrum-conatiner">
             <Header />
-            <div className="bredcrum-conatiner__bredcrum_inr">
+            <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
                 <Container maxWidth="lg">
                     <Breadcrumbs aria-label="breadcrumb" className="bredcrum-conatiner__bredcrum-text">
                         <Link color="inherit" to="/" >
@@ -28,7 +26,7 @@ function Purchased(props) {
                     </Breadcrumbs>
                 </Container>
             </div>
-            <Container maxWidth="lg" className="purchased-tool__container margin-top-174">
+            <Container maxWidth="lg" className="purchased-tool__container  margin-top-174">
                 <Grid container spacing={3}>
                     <Grid item xs={12} className="purchased-tool__hedding">
                         <Typography  component="div" className="hedding-text">

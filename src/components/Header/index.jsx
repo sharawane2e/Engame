@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import Badge from '@material-ui/core/Badge';
+import Toaster from "../../util/Toaster";
 
 const Header = ({props, cart}) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -39,10 +40,11 @@ const Header = ({props, cart}) => {
     setOpen(true);
   };
   
+
   return (
       <>
-      <div className="flexGrow header-box">
-        <AppBar position="fixed">
+      <div className="flexGrow header-box sticky-head-position">
+      <AppBar >
         <Toolbar className="header-bg">
           <Typography variant="h6" className="flexGrow">
             <Link to="/">
@@ -55,6 +57,7 @@ const Header = ({props, cart}) => {
             <div className="menu-button" 
             onClick={() =>setReginIsOpen(true)}>Register</div>
          </>  
+         
          :<FormControl className="userForm" >
         <InputLabel id="user-open-select">User</InputLabel>
         <Select
@@ -90,7 +93,7 @@ const Header = ({props, cart}) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} className="login-background"></Grid>
           <Grid item xs={12} sm={7}>
-            <Login data="high" />
+            <Login />
           </Grid>
         </Grid>
       </CustomPopup>

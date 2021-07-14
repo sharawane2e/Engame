@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: map-get($map: $font-family, $key: font-barlowregular);
+  font-family: map-get($map: $font-family, $key: font-barlowregular) !important;
 }
 .App{
   position: relative;
@@ -128,10 +128,10 @@ body {
   font-family: map-get($map: $font-family, $key:"font-barlowmedium" );
     background-color: map-get($map: $background-color, $key:"secondary" );
   #{&}__bredcrum_inr{
-    position: fixed;
-    top: 0;
+    // position: fixed;
+    // top: 0;
     width: 100%;
-    margin-top: 110px;
+    // margin-top: 110px;
     z-index: 99;
     background-color: map-get($map:$background-color, $key:"back-color");
 }
@@ -163,8 +163,17 @@ body {
 }
 }
 /*END*/
+/*icon space set */
+.margin-right-15{
+  margin-right: map-get($map: $margin, $key: "margin-15");
+}
+.margin-right-20{
+  margin-right: map-get($map: $margin, $key: "margin-20") !important;
+}
+/*End*/
+
 .margin-top-174{
-  margin-top: 174px;
+  margin-top: 127px;
 }
 .MuiPaper-elevation1 {
   box-shadow: none !important;
@@ -180,3 +189,19 @@ body {
   }
 }
 
+.sticky-card-position{
+  position: sticky;
+    top: 175px;
+    height: 100%
+}
+.sticky-position{
+    position: sticky;
+    top: 105px;
+    height: 100%
+}
+.sticky-head-position{
+    position: sticky;
+    top: 0;
+    height: 100%
+    
+}

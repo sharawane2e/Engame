@@ -1,0 +1,14 @@
+.embeded-conatiner{
+    #{&}__embeded-code-textarea{
+        min-height: 438px;
+        width: 100%;
+        resize: none;
+        outline: 0;
+        padding: map-get($map: $padding, $key: "padding-12");
+    }
+    #{&}__buttton-group{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: map-get($map: $margin, $key:"margin-30" );
+    }
+}

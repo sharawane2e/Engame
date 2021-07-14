@@ -23,6 +23,8 @@
          data:"",
          forgot:"",
          buttonClass:0,
+         login:false,
+         store:null,
          formErrors: {
            email: "",
            password: "",
@@ -48,16 +50,20 @@
             password,
          });
 
-       if(!validationResponse.isFormValid){
+       if(validationResponse.isFormValid){
            ApiRequest.request(LOGIN, "POST", {
             Email: email,
              password: password,
             })
-                   
            .then((res) => {
             if (res.HasSuccess) {
               console.log("susses",res.DataObject.Data);
-               localStorage.setItem('login',JSON.stringify({token:res.DataObject.Data}));
+               localStorage.setItem('login',JSON.stringify({
+                 login:true,
+                 token:res.DataObject.Data}
+                 ));
+                 console.log("",this.state.login)
+                 this.setState({login:true})
               console.log("Hash user login succes");
 
          }
@@ -109,7 +115,8 @@
  render() {
      return (      
          <>
-        {(this.state.forgot) ? <ForgotPassword/> : (this.state.data) ? <Registration/> :
+         {!this.state.login?
+      (this.state.forgot) ? <ForgotPassword/> : (this.state.data) ? <Registration/> :
          <div className="form-area login--form">
              <div className="form-area__login  large-hedding">Login</div>
              <form className="form-area__fileds" noValidate autoComplete="off">
@@ -170,7 +177,8 @@
              Create an Account
           </Link>
          </div>
-         </div>}
+         </div>
+         :<div to="/" >Login</div>}
          </>
      );
    }

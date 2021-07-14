@@ -1,17 +1,30 @@
 import React from "react";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import CustomButton from "../../components/widgets/Button";
+import GetAppIcon from '@material-ui/icons/GetApp';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import EmbededCodes from '../../mock/EmbedCode';
 
 const EmbedCode = () => {
     return(
-        <>
+        <div className="embeded-conatiner">
         <TextareaAutosize
-            maxRows={4}
+        className="embeded-conatiner__embeded-code-textarea border-radius"
             aria-label="maximum height"
             placeholder="Maximum 4 rows"
-            defaultValue=""
+            defaultValue= {EmbededCodes.map(item=>item.id)}
             />
-            EmbedCode Here  
-        </>
+            <div className="embeded-conatiner__buttton-group">
+                <CustomButton 
+                className='secondary-button margin-right-20'>
+                <FileCopyIcon className="margin-right-15"/> Copy to Clipboard
+                </CustomButton>
+                <CustomButton 
+                className='primary-button'>
+                <GetAppIcon className="margin-right-15"/>   Download
+                </CustomButton>
+            </div>
+        </div>
     )
 }
 

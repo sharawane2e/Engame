@@ -35,18 +35,11 @@ const Cart = ({cart}) => {
         setTotalItem(items)
     }, [cart, totalItem, totalPrice, setTotalItem, setTotalPrice])
 
-    const scrollTo = (ele) => {
-        ele.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      };
-
     return (
         <>
             <div className="shoping-cart bredcrum-conatiner">
                 <Header />
-                <div className="bredcrum-conatiner__bredcrum_inr">
+                <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
                 <Container maxWidth="lg">
                 <Breadcrumbs aria-label="breadcrumb" className="bredcrum-conatiner__bredcrum-text">
                     <Link color="inherit" to="/" >
@@ -60,7 +53,7 @@ const Cart = ({cart}) => {
                 </Container>
                 </div>
                 {cart.length !== 0 ? 
-                <Container maxWidth="lg" className="shoping-cart__container margin-top-174">
+                <Container maxWidth="lg" className="shoping-cart__container sticky-position margin-top-174">
                  <Grid container spacing={3} className="shoping-cart__container-inr">
                     <Grid item xs={8}  className="shoping-cart__left-card">
                          Shopping Cart
@@ -121,7 +114,7 @@ const Cart = ({cart}) => {
                                    <Grid item sm>
                                         <Typography  component="div" className="shoping-cart__validity-input">
                                                <span>Validity:</span>
-                                            <TextField id="outlined-basic"  variant="outlined" /> <span className="shoping-cart__input-days">Days</span>
+                                            <TextField id={"input-filed" +item.id}  variant="outlined" /> <span className="shoping-cart__input-days">Days</span>
                                         </Typography>
                                     </Grid>
                                <Grid item className="shoping-cart__tool-icons">
@@ -144,8 +137,8 @@ const Cart = ({cart}) => {
                             </Link>
                         </div>
                     </Grid>
-                    <Grid item xs={3} className="border-radius" >
-                        <Paper className="shoping-cart__tool-card shoping-cart__card-coupon " align="center" >
+                    <Grid item xs={3} className="border-radius sticky-card-position" >
+                        <Paper className="shoping-cart__card-coupon " align="center" >
                             <div className="shoping-cart__coupon-hedding">Need to pay</div>
                             <div className="shoping-cart__coupon-amount">
                                 ${totalPrice}
