@@ -169,6 +169,9 @@
     
     .checkout-button{
         width: 210px !important;
+        a{
+            color: inherit;
+        }
         .MuiButton-label{
             >svg{
                 margin-right: map-get($map:$margin , $key: "margin-15");

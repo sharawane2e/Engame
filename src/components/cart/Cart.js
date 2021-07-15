@@ -151,7 +151,7 @@ const Cart = ({cart}) => {
                               </div>
                             </div>
                         <CustomButton className="primary-button checkout-button">
-                          <CheckCircleIcon /> Checkout
+                          <CheckCircleIcon /> <Link to="/purchased">Checkout</Link>
                         </CustomButton>
                         </Paper>
                     </Grid>

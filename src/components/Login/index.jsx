@@ -14,6 +14,7 @@
  import { LOGIN } from "../../config/ApiUrl";
  import Registration from "../../components/Registration";
  import ForgotPassword from "../../components/ForgotPassword";
+
  
  class Login extends Component {
 
@@ -166,7 +167,7 @@
          </div>
          </form>
         <div className="form-button-grop">
-          <CustomButton onClick={this.handleSubmit} 
+          <CustomButton onClick={this.handleSubmit}  
               className='login__button primary-button'>
                 Log In
           </CustomButton>

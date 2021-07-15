@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import Badge from '@material-ui/core/Badge';
 import Toaster from "../../util/Toaster";
+import { useDispatch } from "react-redux";
+import { loadingStart, loadingStop } from '../../redux/loader/loader-actions'
 
 const Header = ({props, cart}) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -23,7 +25,7 @@ const Header = ({props, cart}) => {
   const [isUserLogin] = useState(true);
   const [open, setOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0)
-
+  const dispatch = useDispatch();
   useEffect(() => {
     let count = 0;
     cart.forEach(item => {
@@ -40,7 +42,12 @@ const Header = ({props, cart}) => {
     setOpen(true);
   };
   
-
+const handleLoader = () =>{
+  dispatch(loadingStart())
+  setTimeout(() => {
+    dispatch(loadingStop())
+  }, 3000);
+}
   return (
       <>
       <div className="flexGrow header-box sticky-head-position">
@@ -73,7 +80,7 @@ const Header = ({props, cart}) => {
       </FormControl>}
            <div className="shoping__card">
            
-           <Link to="/cart">
+           <Link to="/cart" onClick={handleLoader}>
            <Badge badgeContent={cartCount} color="secondary">
                   <ShoppingCartIcon/>
                   </Badge>
