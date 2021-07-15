@@ -54,7 +54,7 @@ const handleLoader = () =>{
       <AppBar >
         <Toolbar className="header-bg">
           <Typography variant="h6" className="flexGrow">
-            <Link to="/">
+            <Link to="/" >
               <img src={e2eLogo}/>
             </Link>
           </Typography>

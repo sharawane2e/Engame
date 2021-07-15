@@ -7,23 +7,31 @@ import ToolDemo from "../ToolDemo";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/shopping/shopping-action";
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt'; 
 import  Embedcode  from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from '../../components/SubscriptionType';
-import Toaster from "../../util/Toaster";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
-const ToolCards = ({products, addToCart}) => {
+const ToolCards = ({products}) => {
   const [state] = useState(products);
   const [selectedTool, setSelectedTool] = useState(null);
   const [popupId, setPopupId] = useState()
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
-
+  const dispatch = useDispatch();
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+
+  const handleCart = () => {
+    dispatch(addToCart(popupId))
+    toast("Your Item is added to shopping cart!")
+  }
+
 
   return (
    <>
@@ -87,11 +95,12 @@ const ToolCards = ({products, addToCart}) => {
           footerButton={true}
           className="border-radius popup-container__iner--sm"
         >
-           <Subscription toolId={popupId} /> 
+           <Subscription toolId={popupId} />
+           <ToastContainer /> 
               <div className="popup-container__footer">
                   <CustomButton 
                     className="primary-button add--card" 
-                    onClick={() =>  addToCart(popupId)}
+                    onClick={handleCart}
                   >
                       <ShoppingCartIcon/>  Add to Cart
                   </CustomButton>
@@ -104,11 +113,11 @@ const ToolCards = ({products, addToCart}) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: (id) => dispatch(addToCart(id))
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addToCart: (id) => dispatch(addToCart(id))
+//   }
+// }
 
 const mapStateToProps = (state) => {
   return {
@@ -116,4 +125,4 @@ const mapStateToProps = (state) => {
   }
 }
  
-export default connect(mapStateToProps, mapDispatchToProps)(ToolCards);
+export default connect(mapStateToProps)(ToolCards);

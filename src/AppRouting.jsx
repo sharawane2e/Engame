@@ -6,7 +6,6 @@ import 'react-app-polyfill/stable';
 const AppRouting = (props) =>{
     const {routes} = props;
     // console.log(props)
-
     return (
         <Switch>
             {
@@ -21,7 +20,7 @@ const AppRouting = (props) =>{
                                 return route.isPrivate ?(
                                     <PrivateRoute component={route.component} {...props} routes={route.routes} />
                                 ):(
-                                    <route.component {...props} routes={route.routes} />
+                                    <route.component {...props} routes={route.routes}   />
                                 )
                             }}
                         />
