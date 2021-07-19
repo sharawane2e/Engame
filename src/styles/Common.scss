@@ -1,64 +1,220 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 body {
-  font-family: map-get($map: $font-family, $key: font-barlowregular);
+	font-family: map-get($map: $font-family, $key: font-barlowregular) !important;
+}
+.App {
+	position: relative;
 }
 .MuiButton-label {
-  text-transform: none;
-  font-size: map-get($map: $text-size, $key: large);
-
-  font-weight: map-get($map: $font-weight, $key: font-600);
+	text-transform: none;
+	@include breakpoint(mobileonly) {
+		font-size: 12px;
+	}
+	// font-size: map-get($map: $text-size, $key: large);
+	// font-weight: map-get($map: $font-weight, $key: font-600);
 }
 .flexGrow {
-  flex-grow: 1;
-  display: flex;
-  width: 100%;
+	flex-grow: 1;
+	display: flex;
+	width: 100%;
 }
 .paperstyel {
-  padding: map-get($map: $padding, $key: padding-16);
-  text-align: map-get($map: $alignment, $key: align-left);
+	padding: map-get($map: $padding, $key: padding-16);
+	text-align: map-get($map: $alignment, $key: align-left);
 }
 .input {
-  flex: 1;
-  margin-left: map-get($map: $margin, $key: margin-8);
+	flex: 1;
+	margin-left: map-get($map: $margin, $key: margin-8);
 }
 .iconButton {
-  padding: map-get($map: $padding, $key: padding-10);
+	padding: map-get($map: $padding, $key: padding-10);
 }
 .divider {
-  height: 40px !important;
-  margin: 4px !important;
+	height: 40px !important;
+	margin: 4px !important;
 }
 
 .large-hedding {
-  color: map-get($map: $text-color, $key: black-drak);
+	color: map-get($map: $text-color, $key: black-drak);
 }
 .input-label {
-  margin-bottom: map-get($map: $margin, $key: margin-10);
+	margin-bottom: map-get($map: $margin, $key: margin-10);
 }
 
 .validated-error {
-  min-height: 16px;
-  color: map-get($map: $background-color, $key: "button-secondary");
-  font-size: map-get($map: $text-size, $key: "small");
-  margin: map-get($map: $margin, $key: margin-5)
-    map-get($map: $margin, $key: margin-0);
+	min-height: 16px;
+	color: map-get($map: $background-color, $key: "button-secondary");
+	font-size: map-get($map: $text-size, $key: "small");
+	margin: map-get($map: $margin, $key: margin-5)
+		map-get($map: $margin, $key: margin-0);
+	@media (min-width: 1280px) and (max-width: 1365px) {
+		font-size: map-get($map: $text-size, $key: "xsmall");
+		margin-bottom: 0;
+	}
 }
 
+.header-margin-top {
+	margin-top: 110px;
+}
+/*Use these classes for borders*/
 .border-bottom {
-  border-bottom: map-get($map: $border-color, $key: border-width)
-    map-get($map: $border-color, $key: bsolid)
-    map-get($map: $text-color, $key: black-smooth);
+	border-bottom: map-get($map: $border-color, $key: border-width)
+		map-get($map: $border-color, $key: bsolid)
+		map-get($map: $text-color, $key: black-smooth);
 }
 
 .border-allside {
-  border: map-get($map: $border-color, $key: border-width)
-    map-get($map: $border-color, $key: bsolid)
-    map-get($map: $border-color, $key: red-dark);
+	border: map-get($map: $border-color, $key: border-width)
+		map-get($map: $border-color, $key: bsolid)
+		map-get($map: $border-color, $key: red-dark);
+}
+.border-allside-gray {
+	border: map-get($map: $border-color, $key: border-width)
+		map-get($map: $border-color, $key: bsolid)
+		map-get($map: $border-color, $key: "gray");
 }
 .border-radius {
-  border-radius: map-get($map: $border-round, $key: boder-radius);
+	border-radius: map-get($map: $border-round, $key: boder-radius) !important;
+}
+/*End*/
+/*Use thses classes for buttons*/
+a {
+	text-decoration: none !important;
+}
+.primary-button {
+	background: map-get($map: $text-color, $key: "red-dark") !important;
+	color: map-get($map: $background-color, $key: "primary") !important;
+	padding: map-get($map: $padding, $key: "padding-10") !important;
+	text-transform: unset !important;
+	font-family: map-get(
+		$map: $font-family,
+		$key: "font-barlowmedium"
+	) !important;
+	line-height: inherit !important;
+	border-radius: map-get($map: $border-round, $key: "boder-radius") !important;
+	font-size: map-get($map: $text-size, $key: "large20") !important;
+	@include box-shadow(
+		0px,
+		10px,
+		20px,
+		map-get($map: $boxshadow, $key: "red-smooth")
+	);
+	@media (min-width: 1280px) and (max-width: 1365px) {
+		min-width: 290px !important;
+		padding: map-get($map: $padding, $key: "padding-10") !important;
+	}
+}
+.secondary-button {
+	@include breakpoint(mobileonly) {
+		padding: unset !important;
+		min-width: none !important;
+	}
+	background: map-get($map: $text-color, $key: "black-gray") !important;
+	color: map-get($map: $background-color, $key: "primary") !important;
+	padding: map-get($map: $padding, $key: "padding-10") !important;
+	text-transform: unset !important;
+	font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
+	line-height: inherit !important;
+	border-radius: map-get($map: $border-round, $key: "boder-radius") !important;
+	font-size: map-get($map: $text-size, $key: "large20") !important;
+	@include box-shadow(
+		0px,
+		10px,
+		20px,
+		map-get($map: $boxshadow, $key: "black-smooth")
+	);
+	@media (min-width: 1280px) and (max-width: 1365px) {
+		min-width: 290px !important;
+		padding: map-get($map: $padding, $key: "padding-10") !important;
+	}
+}
+/*End*/
+/*bredcrum*/
+.bredcrum-conatiner {
+	font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+	background-color: map-get($map: $background-color, $key: "secondary");
+	#{&}__bredcrum_inr {
+		// position: fixed;
+		// top: 0;
+		width: 100%;
+		// margin-top: 110px;
+		z-index: 99;
+		background-color: map-get($map: $background-color, $key: "back-color");
+	}
+	#{&}__bredcrum-text {
+		padding-top: map-get($map: $padding, $key: "padding-20");
+		padding-bottom: map-get($map: $padding, $key: "padding-20");
+		ol {
+			.MuiBreadcrumbs-separator {
+				color: map-get($map: $text-color, $key: "black-drak");
+				font-family: map-get($map: $font-family, $key: "font-barlowbold");
+				font-weight: map-get($map: $font-weight, $key: "font-700");
+				font-size: map-get($map: $text-size, $key: "regular");
+			}
+			li {
+				> a {
+					text-decoration: none;
+					font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+					color: map-get($map: $text-color, $key: "red-dark");
+					font-size: map-get($map: $text-size, $key: "regular");
+				}
+				> p {
+					font-family: map-get($map: $font-family, $key: "font-barlowbold");
+					color: map-get($map: $text-color, $key: "black-drak");
+					font-weight: map-get($map: $font-weight, $key: "font-700");
+					font-size: map-get($map: $text-size, $key: "regular");
+				}
+			}
+		}
+	}
+}
+/*END*/
+/*icon space set */
+.margin-right-15 {
+	margin-right: map-get($map: $margin, $key: "margin-15");
+	@include breakpoint(mobileonly) {
+		font-size: 15px !important;
+		margin: 0;
+	}
+}
+.margin-right-20 {
+	margin-right: map-get($map: $margin, $key: "margin-20") !important;
+}
+/*End*/
+
+.margin-top-174 {
+	margin-top: 127px;
+}
+.MuiPaper-elevation1 {
+	box-shadow: none !important;
+}
+.card-box-shadow {
+	&:hover {
+		@include card-box-shadow(
+			0px,
+			0px,
+			6px,
+			map-get($map: $boxshadow, $key: "black-smooth")
+		);
+	}
+}
+
+.sticky-card-position {
+	position: sticky;
+	top: 175px;
+	height: 100%;
+}
+.sticky-position {
+	position: sticky;
+	top: 105px;
+	height: 100%;
+}
+.sticky-head-position {
+	position: sticky;
+	top: 0;
+	height: 100%;
 }

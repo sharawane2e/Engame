@@ -1,22 +1,20 @@
 import React from "react";
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import Overlay from "../Overlay";
+import { getClassNames } from "../../util/Utility";
 
-function CutomPopup(props) {
+const CutomPopup=(props)=> {
   const {
     children,
     open,
     onClose,
-    //  classes = {},
     headerText = "",
-    poupxl,
   } = props;
-  //  const { content = "" } = classes;
   return open ? (
       <>
      <Overlay position="absolute" />
     <div className="popup-container">
-     <div className={poupxl?"popup-container__iner popup-container__inerxl border-allside border-radius":"popup-container__iner popup-container__inersm"} >
+     <div className={getClassNames("popup-container__iner", props.className)} >
      {headerText?<div className="popup-container__header border-bottom" >
          <div className="popup-container__text ">{headerText}</div>
           <div className="popup-container__close" onClick={onClose}>
@@ -31,6 +29,9 @@ function CutomPopup(props) {
        <div className="popup-container__body">
           {children}
         </div>
+        {/* {footerButton?<div className="popup-container__footer">
+             dfsdfsdf
+        </div>:null} */}
      </div>
     </div>
     </>

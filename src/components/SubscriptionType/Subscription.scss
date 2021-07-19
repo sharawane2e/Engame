@@ -1,0 +1,44 @@
+.subscription-type{
+    padding-bottom: map-get($map: $padding, $key:"padding-40");
+   >select{
+     width: 100%;
+     outline: 0;
+     border-bottom: map-get($map: $border-color, $key: border-width)
+       map-get($map: $border-color, $key: bsolid)
+       map-get($map: $text-color, $key: black-smooth);
+     padding: map-get($map:$padding , $key: "padding-10");
+     border-radius: map-get($map:$border-round , $key: "boder-radius");
+     margin-bottom: map-get($map: $margin, $key:"margin-30");
+   }
+   #{&}__iner{
+     display: flex;
+   }
+   #{&}__days{
+     display: flex;
+     flex: 0 0 80%;
+   }
+   #{&}__text{
+     display: flex;
+     align-items: center;
+     padding-left: map-get($map: $padding, $key: "padding-15");
+   }
+   #{&}__amount{
+     display: flex;
+     flex: 0 0 20%;
+     justify-content: flex-end;
+     align-items: center;
+   }
+   #{&}__amount-text{
+     font-family: map-get($map: $font-family, $key: "font-barlowbold");
+     font-size: map-get($map: $text-size, $key: "large25");
+   }
+  #{&}__inputbox{
+    width: 100px ;
+    .MuiInputBase-root {
+      .MuiOutlinedInput-input{
+        padding: map-get($map: $padding, $key: "padding-15");
+      }
+    }
+    
+  }
+ }

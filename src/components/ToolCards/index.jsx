@@ -2,73 +2,127 @@ import React, { useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Tools from "../../mock/ToolCards";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import GetAppIcon from "@material-ui/icons/GetApp";
 import ToolDemo from "../ToolDemo";
 import CustomPopup from "../CustomPopup";
-import Button from "@material-ui/core/Button";
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
- 
-const ToolCards = (props) => {
-  const [state] = useState(Tools);
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/shopping/shopping-action";
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt'; 
+import  Embedcode  from "../EmbedCode";
+import CustomButton from "../../components/widgets/Button";
+import Subscription from '../../components/SubscriptionType';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+const ToolCards = ({products}) => {
+  const [state] = useState(products);
   const [selectedTool, setSelectedTool] = useState(null);
- 
-  const handleToolClick = (tool,title) => {
-        setSelectedTool(tool);
+  const [popupId, setPopupId] = useState()
+  const [ispopup, setPopup] = useState(false);
+  const [isSubscription, setSubscriptionPopup] = useState(false);
+  const dispatch = useDispatch();
+  const handleToolClick = (tool) => {
+    setSelectedTool(tool);
   };
 
+  const handleCart = () => {
+    dispatch(addToCart(popupId))
+    toast("Your Item is added to shopping cart!")
+  }
+
+
   return (
+   <>
     <Toolbar className="toolcard">
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {state.map((tooldata, index) => {
           return (
-            <>
-              <Grid item xs={12} lg={2} sm={4} key={index}>
+              <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.id}>
                 <Paper 
-                  className="toolcard__imageblck"
-                 
-                >
+                  className="toolcard__imageblck">
                   <div className="toolcard__image">
                     <img src={tooldata.imgUrl} />
                     <div className="toolcard__preview">
-                     <Button className="toolcard__button"  onClick={() => handleToolClick(tooldata)}> <RemoveRedEyeIcon className="eyes_icon"/> Preview</Button>
+                     <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata)}>
+                        <RemoveRedEyeIcon className="eyes_icon"/> Preview
+                     </CustomButton>
                     </div>
                   </div>
                   <div className="toolcard__align toolcard__toolicons">
                     <div className="toolcard__items toolcard__download">
-                      {tooldata.showDownload == false ? (
+                      {/* {tooldata.showDownload == true ? ( */}
                         <span className="toolcard__sub-icons">
-                          <GetAppIcon />
+                          <SystemUpdateAltIcon onClick={() => setPopup(true)}/>
                         </span>
-                      ) : null}
+                      {/* ) : null} */}
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
-                        <ShoppingCartIcon/>
+                        <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>
                       </span>
                     </div>
                   </div>
                 </Paper>
                 <div className="toolcard__align toolcard__toolname">
-                  <div className="toolcard__aligninr1">{tooldata.toolname}</div>
-                  <div className="toolcard__aligninr">{tooldata.price}</div>
+                  <div className="toolcard__aligninr1 toolcard__font-family">{tooldata.toolname}</div>
+                  <div className="toolcard__aligninr toolcard__font-family">${tooldata.price}</div>
                 </div>
               </Grid>
-            </>
           );
         })}
       </Grid>
       <CustomPopup
         open={selectedTool}
         onClose={() => setSelectedTool(null)}
-        poupxl={true}
-        // headerText="demo"
-      >
+        className="popup-container__iner--xl border-radius"
+        >
         <ToolDemo tool={selectedTool}></ToolDemo>
       </CustomPopup>
+        <CustomPopup 
+          open={ispopup} onClose={() =>setPopup(false)} 
+          headerText="Embed code"
+          className="border-radius popup-container__iner--md"
+          >
+          <Embedcode/>
+        </CustomPopup>
+
+        <CustomPopup
+          open={isSubscription}
+          onClose={() => setSubscriptionPopup(false)}
+          headerText="Subscription Type"
+          footerButton={true}
+          className="border-radius popup-container__iner--sm"
+        >
+           <Subscription toolId={popupId} />
+           <ToastContainer /> 
+              <div className="popup-container__footer">
+                  <CustomButton 
+                    className="primary-button add--card" 
+                    onClick={handleCart}
+                  >
+                      <ShoppingCartIcon/>  Add to Cart
+                  </CustomButton>
+              </div>
+        </CustomPopup>
+      
     </Toolbar>
+   </>
+  
   );
 };
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addToCart: (id) => dispatch(addToCart(id))
+//   }
+// }
+
+const mapStateToProps = (state) => {
+  return {
+    products : state.shop.products,
+  }
+}
  
-export default ToolCards;
+export default connect(mapStateToProps)(ToolCards);

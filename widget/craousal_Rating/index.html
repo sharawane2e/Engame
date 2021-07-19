@@ -1,0 +1,24 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>Carousel Rating</title>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script  src="js/jquery-2.2.4.min.js"></script>
+        <script  src="js/script.min.js"></script>
+        <link rel="stylesheet" href="css/style.min.css" />
+    </head>
+    <body>
+        <script>
+            strImgValues = "Statement 1||Statement 2||Statement 3||Statement 4||Statement 5||Statement 6||Statement 7||Statement 8||Statement 9||Statement 10";
+            strScaleValues = "Poor||Fair||Good||Very Good||Excellent";
+            function output(data){
+                $(".output").val(data);
+            }
+        </script>
+
+        <div class="carousel-rating-container" id="toolwrapper"></div>
+
+        <input type="text" id="outputValue" class="output"/>
+    </body>
+</html>

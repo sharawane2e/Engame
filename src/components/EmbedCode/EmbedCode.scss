@@ -1,0 +1,20 @@
+.embeded-conatiner {
+	#{&}__embeded-code-textarea {
+		@media all and (max-width: map-get($map: $grid-breakpoints, $key: mobile)) {
+			min-height: 130px;
+		}
+		min-height: 438px;
+		width: 100%;
+		resize: none;
+		outline: 0;
+		padding: map-get($map: $padding, $key: "padding-12");
+	}
+	#{&}__buttton-group {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: map-get($map: $margin, $key: "margin-30");
+		@include breakpoint(mobileonly) {
+			margin-top: 10px;
+		}
+	}
+}

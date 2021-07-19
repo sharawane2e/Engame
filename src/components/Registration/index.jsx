@@ -7,10 +7,10 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Button from "@material-ui/core/Button";
 import { UserValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import Link from "@material-ui/core/Link";
+import CustomButton from "../../components/widgets/Button"
 
 class Registration extends Component {
   state = {
@@ -95,7 +95,7 @@ class Registration extends Component {
         {this.state.data ? (
           <Login />
         ) : (
-          <div className="form-area">
+          <div className="form-area registration--form">
             <div className="form-area__login  large-hedding">Registration</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
               <InputLabel
@@ -215,13 +215,10 @@ class Registration extends Component {
               </FormControl>
             </form>
             <div className="form-button-grop">
-              <Button
-                type="button"
-                className="form-button-grop__custom-button"
-                onClick={this.handleRegister}
-              >
+              <CustomButton  onClick={this.handleRegister}
+              className='register__button primary-button'>
                 Register
-              </Button>
+              </CustomButton>
             </div>
             <div className="back-button">
               <Link href="#" onClick={this.backLogin} className="">

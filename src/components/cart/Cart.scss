@@ -1,0 +1,187 @@
+.shoping-cart{
+    font-family: map-get($map: $font-family, $key:"font-barlowmedium" );
+    background-color: map-get($map: $background-color, $key:"secondary" );
+    #{&}__container{
+        // padding-top: map-get($map: $padding, $key:"padding-35");
+        min-height: 763px;
+    }
+    #{&}__container-inr{
+        padding-bottom: map-get($map: $padding, $key:"padding-15");
+    }
+    #{&}__left-card{
+        display: flex;
+        align-items: map-get($map: $alignment, $key:"align-center");
+        font-size: map-get($map: $text-size, $key: "large20");
+    }
+    #{&}__right-card{
+        display: flex;
+        justify-content: flex-end;
+    }
+    #{&}__tool-card{
+        padding: map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40")
+        map-get($map: $padding, $key: "padding-20")
+        map-get($map: $padding, $key: "padding-40");
+        margin-bottom: map-get($map: $margin, $key: "margin-10");
+        .curent-tool-img{
+            width: 100%;
+            >img{
+                max-width: 100%;
+            }
+        }
+    }
+    #{&}__card-coupon{
+        padding: map-get($map: $padding, $key: "padding-30");
+        margin-bottom: map-get($map: $margin, $key: "margin-10");
+
+    }
+    .continue-button{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: map-get($map: $margin, $key: "margin-40");
+        margin-bottom: map-get($map: $margin, $key: "margin-50");
+    }
+    .margin-right{
+        margin-right: map-get($map: $margin, $key:"margin-10" );
+    }
+    #{&}__tool-title{
+        font-size: map-get($map: $text-size, $key: "regular");
+    }
+    #{&}__tool-discription{
+        font-size: map-get($map: $text-size, $key: "xsmall");
+    }
+    #{&}__total-amount{
+        color: map-get($map: $text-color, $key:"black-drak" );
+            font-size: map-get($map: $text-size, $key: "large25");
+    }
+    #{&}__subscription{
+        display: flex;
+        margin-right: 30px;
+        >span{
+            display: flex ;
+            align-items: center;
+            margin-right: 10px;
+            font-family: map-get($map: $font-family, $key:"font-barlowbold" );
+        }
+        >select{
+            display: flex;
+            width: 100%;
+            padding: map-get($map: $padding, $key: "padding-16");
+            border: 1px solid rgba(132 ,132, 132 , 0.50);
+            outline: 0;
+            &:hover{
+                border: 1px solid rgba(132 ,132, 132 , 1);
+            }
+        }
+    }
+    #{&}__subscription-card{
+        margin-bottom: map-get($map: $margin, $key:"margin-15" );
+    }
+    
+    #{&}__validity-input{
+        display: flex;
+        >span{
+            display: flex ;
+            align-items: center;
+            margin-right: 10px;
+            font-family: map-get($map: $font-family, $key:"font-barlowbold" );
+        }
+        .TextField-root{
+            display: flex;
+        }
+        .MuiOutlinedInput-input{
+            border-radius: map-get($map: $border-round, $key: "boder-radius");
+            padding: map-get($map: $padding, $key: "padding-15") ;
+            width:60px ;
+        }
+        .shoping-cart__input-days{
+            margin-left: map-get($map:$margin , $key: "margin-15");
+            
+            font-family: map-get($map: $font-family, $key:"font-barlowmedium" );
+        }
+    }
+    #{&}__tool-icons{
+        cursor: pointer;
+    }
+    #{&}__tool-tick{
+        &:hover{
+        fill: map-get($map: $fillcolor, $key: "red-dark");
+        }
+    }
+    #{&}__tool-delete{
+        &:hover{
+            fill: map-get($map: $fillcolor, $key: "red-dark");
+        }
+    }
+    #{&}__coupon-textbox{
+        display: flex;
+        .MuiOutlinedInput-input{
+            padding:map-get($map:$padding , $key: "padding-15") ;
+        }
+    }
+    #{&}__coupon-hedding{
+        font-size: map-get($map: $text-size, $key: "large20");
+        text-align: map-get($map: $alignment, $key: "align-center");
+        padding-top: map-get($map: $padding, $key: "padding-10");
+        padding-bottom: map-get($map: $padding, $key: "padding-10");
+    }
+    #{&}__coupon-amount{
+        font-size: map-get($map: $text-size, $key: "large30");
+        text-align: map-get($map: $alignment, $key: "align-center");
+    }
+    #{&}__coupon-code{
+        text-align: left;
+        padding-top: map-get($map: $padding, $key: "padding-30");
+        padding-bottom: map-get($map: $padding, $key: "padding-30");
+        span{
+            font-size: map-get($map: $text-size, $key: "regular");
+        }
+        .shoping-cart__coupon-apply{
+            display: flex;
+            justify-content: center;
+            margin: map-get($map:$margin , $key: "margin-15") 0 0 ;
+            .shoping-cart__coupon-apply-input{
+                    width: 80%;
+                outline: none;
+                padding: map-get($map: $padding, $key: "padding-15");
+                border: map-get($map: $border-color, $key: "border-width") 
+                map-get($map: $border-color, $key: "dotted") 
+                map-get($map: $background-color, $key: "back-color");
+                border-right: none;
+                border-top-left-radius: 6px;
+                border-bottom-left-radius: 6px;
+            }
+            button{
+                border: none;
+                text-transform: capitalize;
+                background: #D6D6D6;
+                color: #ffff;
+                padding: map-get($map: $padding, $key: "padding-15");
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                outline: none;
+                font-family: map-get($map: $font-family, $key:"font-barlowbold" );
+                font-size: map-get($map: $text-size, $key:"regular" );
+            }
+        
+        }
+    }
+    
+    .checkout-button{
+        width: 210px !important;
+        a{
+            color: inherit;
+        }
+        .MuiButton-label{
+            >svg{
+                margin-right: map-get($map:$margin , $key: "margin-15");
+            }
+        }
+    }
+    .empty_cart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+         height: 81.5vh;
+    }
+}
