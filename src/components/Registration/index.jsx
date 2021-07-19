@@ -12,6 +12,8 @@ import Login from "../../components/Login";
 import Link from "@material-ui/core/Link";
 import { ToastContainer, toast } from 'react-toastify';
 import CustomButton from "../../components/widgets/Button"
+import { connect } from "react-redux";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 
 class Registration extends Component {
   state = {
@@ -55,6 +57,9 @@ class Registration extends Component {
       });
     }
 
+    // loader's
+    this.props.dispatch(loadingStart())
+
     // api's
     let url = 'http://192.168.1.124:8000/user/';
     fetch(url, {
@@ -67,7 +72,12 @@ class Registration extends Component {
     .then(result => result.json())
     .then(data => {
       console.log(data)
+      toast(data.username ? data.username.join("") : null)
+      toast(data.email ? data.email.join("") : null)
+      toast(data.email ? data.email.join("") : null)
+      toast(data.non_field_errors ? data.non_field_errors.join("") : null)
       toast(data.detail)
+      this.props.dispatch(loadingStop())
     })
     
   };
@@ -250,4 +260,7 @@ class Registration extends Component {
     );
   }
 }
-export default Registration;
+
+const mapStateToProps = state => {return{}}
+
+export default connect(mapStateToProps)(Registration);

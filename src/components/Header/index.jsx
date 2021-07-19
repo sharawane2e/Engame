@@ -91,7 +91,7 @@ const Header = ({ props, cart }) => {
 								</FormControl>
 							)}
 							<div className="shoping__card">
-								<Link to="/cart" onClick={handleLoader}>
+								<Link to="/cart">
 									<Badge badgeContent={cartCount} color="secondary">
 										<ShoppingCartIcon />
 									</Badge>
