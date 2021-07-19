@@ -17,6 +17,7 @@
       }
       .toolcard__sub-icons{
         border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map: $background-color, $key: "button-secondary");
+        
         &>svg{
           fill: map-get($map: $background-color, $key: "button-secondary");
         }
