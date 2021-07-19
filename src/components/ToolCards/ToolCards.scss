@@ -4,16 +4,24 @@
   #{&}__imageblck{
     &:hover{
       border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map: $background-color, $key: "button-secondary");
+      @include box-shadow(
+        0px,
+        10px,
+        20px,
+        map-get($map: $boxshadow, $key: "red-smooth")
+      );
       .toolcard__preview{
         display: block ;
       }
       .toolcard__sub-icons{
         border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map: $background-color, $key: "button-secondary");
+        
         &>svg{
           fill: map-get($map: $background-color, $key: "button-secondary");
         }
       }
     }
+    border: 1px solid #ececec;
     
   }
   #{&}__image {
