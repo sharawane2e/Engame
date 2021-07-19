@@ -10,13 +10,13 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import CustomButton from "../../components/widgets/Button";
 import Link from "@material-ui/core/Link";
 import { LoginValidation } from "../../util/FormValidation";
-import ApiRequest from "../../util/ApiRequest";
-import { LOGIN } from "../../config/ApiUrl";
+import { BaseUrl } from "../../config/ApiUrl";
 import Registration from "../../components/Registration";
 import { ToastContainer, toast } from 'react-toastify';
 import ForgotPassword from "../../components/ForgotPassword";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
+
 
 class Login extends Component {
 	state = {
@@ -56,7 +56,7 @@ class Login extends Component {
 		this.props.dispatch(loadingStart())
 		
 		// api's
-		let url = 'http://192.168.1.124:8000/user/login/';
+		let url = BaseUrl+'/user/login';
 
 		fetch(url, {
 			method:'POST',
