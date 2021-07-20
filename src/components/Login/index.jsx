@@ -17,6 +17,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import ForgotPassword from "../../components/ForgotPassword";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
+//import { login } from "../actions/auth";
+//import { login} from "../../redux/reducers/index";
+import  login from "../../redux/reducers/index";
 
 class Login extends Component {
 	state = {
@@ -47,16 +50,16 @@ class Login extends Component {
 		el.preventDefault();
 		const { email, password } = this.state;
 		const user = {email:email, password:password}
-		const validationResponse = this.loginValidation.validateForm({
-			email,
-			password,
-		});
+		// const validationResponse = this.loginValidation.validateForm({
+		// 	email,
+		// 	password,
+		// });
 
 		// loader
 		this.props.dispatch(loadingStart())
 		
 		// api's
-		let url = 'http://192.168.1.124:8000/user/login/';
+		const url = 'http://192.168.1.124:8000/user/login/';
 
 		fetch(url, {
 			method:'POST',
@@ -65,10 +68,19 @@ class Login extends Component {
 			},
 			body:JSON.stringify(user)
 		})
-		.then(result => result.json())
+		.then(result => result.json(
+			console.log(result)
+		))
 		.then((data) => {
 			toast(data.non_field_errors ? data.non_field_errors.join("") : null )
 			this.props.dispatch(loadingStop())
+		//	this.props.dispatch(login)
+			console.log(data)
+			if (data.access_token) {
+				localStorage.setItem("user", JSON.stringify(data.access_token));
+			//	history.push("/");
+			//	window.location.reload();
+			}
 		})
 
 
@@ -135,6 +147,10 @@ class Login extends Component {
 	};
 
 	render() {
+		const { isLoggedIn, message } = this.props;
+		if (isLoggedIn) {
+			// return <Redirect to="/" />;
+		  }
 		return (
 			<>
 				{!this.state.login ? (
@@ -238,7 +254,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-	return {}
+const { isLoggedIn } = state;
+//	console.log(isLoggedIn)
+  	// const { message } = state.message;
+	return {
+//		isLoggedIn,
+	}
 }
 
 export default connect(mapStateToProps)(Login);
