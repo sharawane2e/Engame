@@ -226,6 +226,30 @@ const toolsCrad = [
          toolname:"Artcards",
          toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
      },
+
+     {
+        id:21,
+        imgUrl:Artcards,
+         name:"Artcards",
+         showDownload:true,
+         showAddToCart:true,
+         price:50,
+         currency:"$",
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+     },
+     
+     {
+        id:22,
+        imgUrl:Artcards,
+         name:"Artcards",
+         showDownload:true,
+         showAddToCart:true,
+         price:51,
+         currency:"$",
+         toolname:"Artcards",
+         toolLink:"https://e2eresearch.com/swteam/html5Tools/testTool/craousal_Rating/"
+     },
    
 
 

@@ -1,12 +1,21 @@
 import * as actionTypes from './shopping-types'; 
-
-export const addToCart = (itemId) => {
-    return {
+import { BASE_URL } from '../../config/ApiUrl';
+import axios from 'axios';
+export const addToCart = (productId, name) => async(dispatch, getState) => {
+    const {data} = await axios.get(BASE_URL+"widget/");
+    dispatch({
         type:actionTypes.ADD_TO_CART,
-        payload: {
-             id: itemId
+        payload:{
+            id:productId,
+            name:name,
+            image:data.imgUrl,
+            price:data.price,
+            desc:data.summary,
+            currency:data.currency,
+            product:data.id,
         }
-    }
+    });
+    localStorage.setItem('cart', JSON.stringify(getState().cart))
 }
 
 export const removeFromCart = (itemId) => {

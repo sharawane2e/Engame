@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -6,26 +6,41 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ToolDemo from "../ToolDemo";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
-import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/shopping/shopping-action";
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt'; 
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import  Embedcode  from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from '../../components/SubscriptionType';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { BASE_URL } from "../../config/ApiUrl";
+import axios from "axios";
+import LoadingBox from "../FullPageLoader/LoadingBox";
+import MessageBox from "../FullPageLoader/MessageBox";
+import { listProducts } from "../../redux/product/product-action";
 
-const ToolCards = ({products}) => {
-  const [state] = useState(products);
+
+const ToolCards = () => {
+  const [state, setState] = useState([]);
   const [selectedTool, setSelectedTool] = useState(null);
+  // const [loading, setLoading] = useState(false)
+  // const [error, setError] = useState(false)
   const [popupId, setPopupId] = useState()
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
+  const productList = useSelector(state => state.productList)
+  const {loading, error, products} = productList
+  console.log(products)
   const dispatch = useDispatch();
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+
+  // Fteching widget's from backend
+  useEffect(() => {
+    dispatch(listProducts())
+  }, [])
 
   const handleCart = () => {
     dispatch(addToCart(popupId))
@@ -36,14 +51,23 @@ const ToolCards = ({products}) => {
   return (
    <>
     <Toolbar className="toolcard">
-      <Grid container spacing={4}>
-        {state.map((tooldata, index) => {
+      {loading ? (
+      <LoadingBox />
+      ) :
+         error ? (
+            <MessageBox>{error}</MessageBox>
+          ):
+         (
+           <Grid container spacing={4}>
+        
+        {products.map((tooldata, index) => {
           return (
               <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.id}>
                 <Paper 
                   className="toolcard__imageblck">
                   <div className="toolcard__image">
-                    <img src={tooldata.imgUrl} />
+                    <img src={"http://192.168.1.124:8000"+tooldata.imgUrl} />
+                    {/* <span>{tooldata.imgUrl}</span> */}
                     <div className="toolcard__preview">
                      <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata)}>
                         <RemoveRedEyeIcon className="eyes_icon"/> Preview
@@ -54,7 +78,7 @@ const ToolCards = ({products}) => {
                     <div className="toolcard__items toolcard__download">
                       {/* {tooldata.showDownload == true ? ( */}
                         <span className="toolcard__sub-icons">
-                          <SystemUpdateAltIcon onClick={() => setPopup(true)}/>
+                          <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
                         </span>
                       {/* ) : null} */}
                     </div>
@@ -73,6 +97,10 @@ const ToolCards = ({products}) => {
           );
         })}
       </Grid>
+      
+         )
+        }
+      
       <CustomPopup
         open={selectedTool}
         onClose={() => setSelectedTool(null)}
@@ -85,7 +113,7 @@ const ToolCards = ({products}) => {
           headerText="Embed code"
           className="border-radius popup-container__iner--md"
           >
-          <Embedcode/>
+          <Embedcode data={products} toolId={popupId} />
         </CustomPopup>
 
         <CustomPopup
@@ -95,7 +123,7 @@ const ToolCards = ({products}) => {
           footerButton={true}
           className="border-radius popup-container__iner--sm"
         >
-           <Subscription toolId={popupId} />
+           <Subscription data={products} toolId={popupId} />
            <ToastContainer /> 
               <div className="popup-container__footer">
                   <CustomButton 
@@ -112,17 +140,5 @@ const ToolCards = ({products}) => {
   
   );
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addToCart: (id) => dispatch(addToCart(id))
-//   }
-// }
-
-const mapStateToProps = (state) => {
-  return {
-    products : state.shop.products,
-  }
-}
  
-export default connect(mapStateToProps)(ToolCards);
+export default ToolCards;
