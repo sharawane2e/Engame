@@ -75,7 +75,7 @@ const Cart = ({cart}) => {
                         <Grid container spacing={3}>
                             <Grid item xs={2}  container>
                                 <ButtonBase  className="curent-tool-img">
-                                    <img alt=""  src={item.imgUrl}/> 
+                                    <img alt=""  src={"http://192.168.1.124:8000"+item.imgUrl}/> 
                                 </ButtonBase>
                             </Grid>
                            <Grid item xs={10} sm container> 

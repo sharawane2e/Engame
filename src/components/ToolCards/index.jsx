@@ -22,16 +22,12 @@ import { listProducts } from "../../redux/product/product-action";
 
 
 const ToolCards = () => {
-  const [state, setState] = useState([]);
   const [selectedTool, setSelectedTool] = useState(null);
-  // const [loading, setLoading] = useState(false)
-  // const [error, setError] = useState(false)
   const [popupId, setPopupId] = useState()
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
   const productList = useSelector(state => state.productList)
   const {loading, error, products} = productList
-  console.log(products)
   const dispatch = useDispatch();
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
