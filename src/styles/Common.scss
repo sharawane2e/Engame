@@ -131,6 +131,10 @@ a {
 		min-width: 290px !important;
 		padding: map-get($map: $padding, $key: "padding-10") !important;
 	}
+	  @media all and  (max-width: 1024px){
+		font-size: map-get($map: $text-size, $key: "small") !important;
+		padding: 5px !important;
+	}
 }
 /*End*/
 /*bredcrum*/
