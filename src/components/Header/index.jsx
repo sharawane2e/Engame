@@ -13,7 +13,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import Toaster from "../../util/Toaster";
 import { useDispatch } from "react-redux";
@@ -27,6 +27,7 @@ const Header = ({ props, cart, user }) => {
 	const [open, setOpen] = useState(false);
 	const [cartCount, setCartCount] = useState(0);
 	const dispatch = useDispatch();
+	const history = useHistory()
 	useEffect(() => {
 		let count = 0;
 		cart.forEach((item) => {
@@ -50,6 +51,7 @@ const Header = ({ props, cart, user }) => {
 			dispatch(logOutUser())
 			localStorage.removeItem("auth")
 			dispatch(loadingStop())
+			history.push("/")
 		})
 
 	}

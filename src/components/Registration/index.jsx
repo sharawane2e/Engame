@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import CustomButton from "../../components/widgets/Button"
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { BASE_URL } from "../../config/ApiUrl";
 
 class Registration extends Component {
   state = {
@@ -41,7 +42,7 @@ class Registration extends Component {
   handleRegister = (e) => {
     e.preventDefault();
     const { name, email, setpassword, confirmpassword } = this.state;
-    const user = {username:name, email:email,password1:setpassword, password2: confirmpassword, first_name:name, last_name:"Singh", mobile:"9191919191"}
+    const user = {username:name, email:email,password1:setpassword, password2: confirmpassword, first_name:name, last_name:"s", mobile:"9191"}
     const validationResponse = this.UserValidation.validateForm({
       name,
       email,
@@ -61,8 +62,7 @@ class Registration extends Component {
     this.props.dispatch(loadingStart())
 
     // api's
-    let url = 'http://192.168.1.124:8000/user/';
-    fetch(url, {
+    fetch(BASE_URL+"user/", {
       method:'POST',
       headers : {
         'Content-Type':'application/json'
@@ -71,13 +71,16 @@ class Registration extends Component {
     })
     .then(result => result.json())
     .then(data => {
-      console.log(data)
+      console.log(data.detail)
       toast(data.username ? data.username.join("") : null)
       toast(data.email ? data.email.join("") : null)
       toast(data.email ? data.email.join("") : null)
       toast(data.non_field_errors ? data.non_field_errors.join("") : null)
-      toast(data.detail)
+     
       this.props.dispatch(loadingStop())
+       if(data.detail){
+        window.location.reload()
+      }
     })
     
   };
