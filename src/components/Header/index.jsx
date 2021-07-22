@@ -18,11 +18,12 @@ import Badge from "@material-ui/core/Badge";
 import Toaster from "../../util/Toaster";
 import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { BASE_URL } from "../../config/ApiUrl";
+import { logOutUser } from "../../redux/user/user-action";
 
-const Header = ({ props, cart }) => {
+const Header = ({ props, cart, user }) => {
 	const [isLoginOpen, setLoginIsOpen] = useState(false);
 	const [isReginOpen, setReginIsOpen] = useState(false);
-	const [isUserLogin] = useState(true);
 	const [open, setOpen] = useState(false);
 	const [cartCount, setCartCount] = useState(0);
 	const dispatch = useDispatch();
@@ -31,8 +32,27 @@ const Header = ({ props, cart }) => {
 		cart.forEach((item) => {
 			count += item.qty;
 		});
-		setCartCount(count);
-	}, [cart, cartCount]);
+		if(user.isLoggedIn){
+			setLoginIsOpen(false)
+		} else{
+			// setReginIsOpen(true)
+		}
+	}, [cart, cartCount, user]);
+
+	const handleLogou = () => {
+		dispatch(loadingStart())
+		fetch(BASE_URL+"user/logout/",{
+			method:"POST",
+			body:JSON.stringify("")
+		})
+		.then(result=>result.json())
+		.then(res => {
+			dispatch(logOutUser())
+			localStorage.removeItem("auth")
+			dispatch(loadingStop())
+		})
+
+	}
 
 	const handleClose = () => {
 		setOpen(false);
@@ -59,7 +79,7 @@ const Header = ({ props, cart }) => {
 							</Link>
 						</Typography>
 						<div className="header-text-color">
-							{isUserLogin ? (
+							{!user.isLoggedIn ? (
 								<>
 									<div
 										className="menu-button"
@@ -77,7 +97,7 @@ const Header = ({ props, cart }) => {
 								</>
 							) : (
 								<FormControl className="userForm">
-									<InputLabel id="user-open-select">User</InputLabel>
+									<InputLabel id="user-open-select">{user.token.user.first_name}</InputLabel>
 									<Select
 										labelId="user-open-select"
 										id="user-open-select"
@@ -85,7 +105,7 @@ const Header = ({ props, cart }) => {
 										onClose={handleClose}
 										onOpen={handleOpen}
 									>
-										<MenuItem value={10}>Logout</MenuItem>
+										<MenuItem value={10} onClick={() => handleLogou()}>Logout</MenuItem>
 										<MenuItem value={20}>Profile</MenuItem>
 									</Select>
 								</FormControl>
@@ -132,6 +152,7 @@ const Header = ({ props, cart }) => {
 const mapStateToProps = (state) => {
 	return {
 		cart: state.shop.cart,
+		user:state.user
 	};
 };
 

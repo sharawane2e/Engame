@@ -11,7 +11,7 @@ import CustomButton from "../../components/widgets/Button";
 import Link from "@material-ui/core/Link";
 import { LoginValidation } from "../../util/FormValidation";
 import ApiRequest from "../../util/ApiRequest";
-import { LOGIN } from "../../config/ApiUrl";
+import { BASE_URL, LOGIN } from "../../config/ApiUrl";
 import Registration from "../../components/Registration";
 import { ToastContainer, toast } from 'react-toastify';
 import ForgotPassword from "../../components/ForgotPassword";
@@ -19,7 +19,7 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
 //import { login } from "../actions/auth";
 //import { login} from "../../redux/reducers/index";
-import  login from "../../redux/reducers/index";
+import { loginUser } from "../../redux/user/user-action";
 
 class Login extends Component {
 	state = {
@@ -47,74 +47,27 @@ class Login extends Component {
 	};
 
 	handleSubmit = (el) => {
-		el.preventDefault();
+		// el.preventDefault();
 		const { email, password } = this.state;
 		const user = {email:email, password:password}
-		// const validationResponse = this.loginValidation.validateForm({
-		// 	email,
-		// 	password,
-		// });
-
-		// loader
-		this.props.dispatch(loadingStart())
-		
+		console.log(this.props.user);
 		// api's
-		const url = 'http://192.168.1.124:8000/user/login/';
-
-		fetch(url, {
+		this.props.dispatch(loadingStart())
+		fetch(BASE_URL+"user/login/", {
 			method:'POST',
 			headers:{
 				'Content-Type':'application/json'
 			},
 			body:JSON.stringify(user)
 		})
-		.then(result => result.json(
-			console.log(result)
-		))
+		.then(result => result.json())
 		.then((data) => {
 			toast(data.non_field_errors ? data.non_field_errors.join("") : null )
 			this.props.dispatch(loadingStop())
-		//	this.props.dispatch(login)
-			console.log(data)
 			if (data.access_token) {
-				localStorage.setItem("user", JSON.stringify(data.access_token));
-			//	history.push("/");
-			//	window.location.reload();
+				this.props.dispatch(loginUser(data))
 			}
 		})
-
-
-		// if (validationResponse.isFormValid) {
-		// 	ApiRequest.request('LOGIN', "POST", {
-		// 		Email: email,
-		// 		password: password,
-		// 	})
-		// 		.then((res) => {
-		// 			if (res.HasSuccess) {
-		// 				console.log("susses", res.DataObject.Data);
-		// 				localStorage.setItem(
-		// 					"login",
-		// 					JSON.stringify({
-		// 						login: true,
-		// 						token: res.DataObject.Data,
-		// 					})
-		// 				);
-		// 				console.log("", this.state.login);
-		// 				this.setState({ login: true });
-		// 				console.log("Hash user login succes");
-		// 			} else {
-		// 				console.log("not login");
-		// 			}
-		// 		})
-		// 		.catch((error) => {
-		// 			console.log("eror", error);
-		// 		});
-		// } else {
-		// 	delete validationResponse.isFormValid;
-		// 	this.setState({
-		// 		formErrors: { ...this.state.formErrors, ...validationResponse.errors },
-		// 	});
-		// }
 	};
 
 	handleClickShowPassword = (e, key) => {
@@ -254,12 +207,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-const { isLoggedIn } = state;
-//	console.log(isLoggedIn)
-  	// const { message } = state.message;
 	return {
-//		isLoggedIn,
+		user:state.user
 	}
 }
+
+
 
 export default connect(mapStateToProps)(Login);

@@ -3,7 +3,7 @@ import Header from '../Header';
 import { Link } from 'react-router-dom';
 import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 import { connect, useDispatch } from 'react-redux';
-import empty from '../../assets/images/empty.gif'
+import empty from '../../assets/images/empty.gif';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Breadcrumbs } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -17,7 +17,6 @@ import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import { removeFromCart } from '../../redux/shopping/shopping-action';
-
 
 const Cart = ({cart}) => {
     const [totalPrice, setTotalPrice] = useState(0)
@@ -92,7 +91,7 @@ const Cart = ({cart}) => {
                                 </Grid>
                                <Grid item>
                                     <Typography  component="div" className="shoping-cart__total-amount">
-                                    {item.currency}{item.price}
+                                        {item.currency}{item.price}
                                     </Typography>
                                 </Grid>
                            <Grid item xs={10} sm container>
@@ -113,8 +112,9 @@ const Cart = ({cart}) => {
                                 </Grid>
                                    <Grid item sm>
                                         <Typography  component="div" className="shoping-cart__validity-input">
-                                               <span>Validity:</span>
-                                            <TextField id={"input-filed" +item.id}  variant="outlined" /> <span className="shoping-cart__input-days">Days</span>
+                                            <span>Validity:</span>
+                                            <TextField id={"input-filed" +item.id}  variant="outlined" />
+                                            <span className="shoping-cart__input-days">Days</span>
                                         </Typography>
                                     </Grid>
                                <Grid item className="shoping-cart__tool-icons">
@@ -146,8 +146,8 @@ const Cart = ({cart}) => {
                                 <div className="shoping-cart__coupon-code">
                                     <span align="center">Promotion code</span>
                                     <div className="shoping-cart__coupon-apply" align="center">
-                                       <input type="text" className="shoping-cart__coupon-apply-input"/>
-                                     <button>Apply</button>
+                                    <input type="text" className="shoping-cart__coupon-apply-input"/>
+                                    <button>Apply</button>
                               </div>
                             </div>
                         <CustomButton className="primary-button checkout-button">
