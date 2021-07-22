@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CustomButton from "../../components/widgets/Button";
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import TextField from '@material-ui/core/TextField';
@@ -161,7 +161,6 @@ const Cart = ({cart}) => {
                 :<div className="empty_cart margin-top-174">
                 <img src={empty} alt="" />
             </div>}
-            <Footer/>
             </div>
             
         </>

@@ -3,12 +3,12 @@
   padding-top: map-get($map: $padding, $key: "padding-25");
   padding-bottom: map-get($map: $padding, $key: "padding-25");
 }
+.MuiPaper-elevation4 {
+box-shadow: none !important;
+
+}
 .header-box{
   z-index: 99;
-  .MuiPaper-elevation4 {
-  box-shadow: none !important;
- 
-}
 .header-text-color {
   display: flex;
   align-items: map-get($map: $alignment, $key: align-center);

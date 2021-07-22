@@ -1,6 +1,6 @@
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color:map-get($map:$background-color , $key:secondary );

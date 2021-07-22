@@ -2,6 +2,7 @@ import { React } from "react";
 
 const ToolDemo = (props) => {
   const { tool} = props;
+
   return (
     <>
  {tool.name}
@@ -12,7 +13,7 @@ const ToolDemo = (props) => {
         frameborder="no"
         allow="autoplay"
         src={tool.toolLink}
-        frameBorder="0"
+        // frameBorder="0"
       ></iframe>
     </>
   );
