@@ -19,8 +19,6 @@ function addData(object){
 }
 getRadomeData()
 
-console.log(data)
-
 
 const initialState = {
     products:[data], //{id, title, descr, price, img}
