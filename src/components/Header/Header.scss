@@ -13,6 +13,7 @@
   display: flex;
   align-items: map-get($map: $alignment, $key: align-center);
   color: map-get($map: $text-color, $key: "black-light");
+  
 }
 .shoping__card {
   padding-left: map-get($map: $padding, $key: "padding-15");

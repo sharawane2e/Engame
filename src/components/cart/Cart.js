@@ -67,7 +67,7 @@ const Cart = ({cart}) => {
                     </Grid>
                 </Grid>
 
-              <Grid container spacing={3} >
+              <Grid container spacing={3}>
                     <Grid item xs={9} >
                  {cart.map((item, index) => {
                     return (
@@ -78,7 +78,7 @@ const Cart = ({cart}) => {
                                     <img alt=""  src={item.imgUrl}/> 
                                 </ButtonBase>
                             </Grid>
-                           <Grid item xs={10} sm container> 
+                           <Grid item xs={10}  container> 
                               <Grid item xs container direction="row" spacing={2} className="shoping-cart__subscription-card"  >
                                    <Grid item xs>
                                         <Typography gutterBottom  component="div" className="shoping-cart__tool-title">
@@ -137,7 +137,7 @@ const Cart = ({cart}) => {
                             </Link>
                         </div>
                     </Grid>
-                    <Grid item xs={3} className="border-radius sticky-card-position" >
+                    <Grid item xs={3}  className="border-radius sticky-card-position" >
                         <Paper className="shoping-cart__card-coupon " align="center" >
                             <div className="shoping-cart__coupon-hedding">Need to pay</div>
                             <div className="shoping-cart__coupon-amount">
