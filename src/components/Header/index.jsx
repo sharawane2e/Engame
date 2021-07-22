@@ -32,12 +32,12 @@ const Header = ({ props, cart, user }) => {
 		cart.forEach((item) => {
 			count += item.qty;
 		});
+		setCartCount(count)
 		if(user.isLoggedIn){
 			setLoginIsOpen(false)
-		} else{
-			// setReginIsOpen(true)
 		}
 	}, [cart, cartCount, user]);
+
 
 	const handleLogou = () => {
 		dispatch(loadingStart())

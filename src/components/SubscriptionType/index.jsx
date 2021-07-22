@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField';
 
 const SubscriptionType =({data,toolId})=>{
   const [state] = useState(data)
-  console.log(state)
     return(
         <>
         <div className="subscription-type">
