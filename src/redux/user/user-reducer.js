@@ -13,7 +13,6 @@ const initialState = {
             return initialState;
         }
     }
-console.log(getAuthState());
 
 const newAuth = getAuthState()
 

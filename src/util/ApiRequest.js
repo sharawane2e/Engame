@@ -6,7 +6,6 @@ const instance = axios.create({
 });
 
 const token = LocalStorageUtils.getToken();
-console.log(token);
 
 if (token) {
     instance.defaults.headers.common["Authorization"] = token;
