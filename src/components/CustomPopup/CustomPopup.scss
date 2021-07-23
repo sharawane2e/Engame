@@ -49,6 +49,12 @@
 	}
 	#{&}__iner--sm {
 		width: 35%;
+		@include breakpoint(mobileonly) {
+			width: 75%;
+		}
+		// @include breakpoint(Ipad) {
+		// 	width: 70%;
+		// }
 	}
 	#{&}__iner--xsm {
 		width: 25%;
