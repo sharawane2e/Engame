@@ -15,7 +15,7 @@ import Select from "@material-ui/core/Select";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
-import Toaster from "../../util/Toaster";
+// import Toaster from "../../util/Toaster";
 import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
@@ -70,10 +70,11 @@ const Header = ({ props, cart, user }) => {
 			dispatch(loadingStop());
 		}, 3000);
 	};
+
 	return (
 		<>
-			<div className="flexGrow header-box sticky-head-position">
-				<AppBar>
+
+				<AppBar className="flexGrow header-box" position={"sticky"}>
 					<Toolbar className="header-bg">
 						<Typography variant="h6" className="flexGrow">
 							<Link to="/">
@@ -122,11 +123,11 @@ const Header = ({ props, cart, user }) => {
 						</div>
 					</Toolbar>
 				</AppBar>
-			</div>
+
 			<CustomPopup
 				open={isLoginOpen}
 				onClose={() => setLoginIsOpen(false)}
-				className="popup-container__iner--xl border-allside border-radius"
+				className="popup-container__iner--xl border-radius"
 			>
 				<Grid container spacing={1}>
 					<Grid item xs={12} sm={6} className="login-background"></Grid>
@@ -138,7 +139,7 @@ const Header = ({ props, cart, user }) => {
 			<CustomPopup
 				open={isReginOpen}
 				onClose={() => setReginIsOpen(false)}
-				className="popup-container__iner--xl border-allside border-radius"
+				className="popup-container__iner--xl border-radius"
 			>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={5} className="login-background"></Grid>

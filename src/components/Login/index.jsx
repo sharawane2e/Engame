@@ -17,8 +17,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import ForgotPassword from "../../components/ForgotPassword";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
-//import { login } from "../actions/auth";
-//import { login} from "../../redux/reducers/index";
 import { loginUser } from "../../redux/user/user-action";
 
 class Login extends Component {
@@ -50,7 +48,7 @@ class Login extends Component {
 		// el.preventDefault();
 		const { email, password } = this.state;
 		const user = {email:email, password:password}
-		console.log(this.props.user);
+		// console.log(this.props.user);
 		// api's
 		this.props.dispatch(loadingStart())
 		fetch(BASE_URL+"user/login/", {

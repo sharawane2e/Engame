@@ -107,7 +107,7 @@ const ToolCards = () => {
         <CustomPopup 
           open={ispopup} onClose={() =>setPopup(false)} 
           headerText="Embed code"
-          className="border-radius popup-container__iner--md"
+          className="border-radius popup-container__iner--sm"
           >
           <Embedcode data={products} toolId={popupId} />
         </CustomPopup>
