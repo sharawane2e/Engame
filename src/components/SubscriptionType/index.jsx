@@ -1,8 +1,8 @@
+import React,{useState} from 'react';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
 
-const SubscriptionType =({toolId, products})=>{
-  
+const SubscriptionType =({data,toolId})=>{
+  const [state] = useState(data)
     return(
         <>
         <div className="subscription-type">
@@ -22,7 +22,7 @@ const SubscriptionType =({toolId, products})=>{
                   <div className="subscription-type__text">DYAS</div>
                 </div>
               <div className="subscription-type__amount  subscription-type__amount-text ">
-                  ${products.map(item => (
+                  ${state.map(item => (
                     item.id == toolId ? item.price : null
                   ))}
               </div>
@@ -32,11 +32,5 @@ const SubscriptionType =({toolId, products})=>{
     )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products : state.shop.products
 
-  }
-}
-
-export default connect(mapStateToProps)(SubscriptionType);
+export default SubscriptionType;

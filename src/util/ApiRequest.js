@@ -6,25 +6,26 @@ const instance = axios.create({
 });
 
 const token = LocalStorageUtils.getToken();
-// console.log(token);
+console.log(token);
 
 if (token) {
     instance.defaults.headers.common["Authorization"] = token;
 }
 
 export default {
-    request: async function(url, method, data, params) {
+    request: async function(url, method) {
         let response = null;
+      
         try {
             const apiResponse = await instance(url, {
-                data,
-                method,
-                params,
-            });
 
+                method,
+
+            });
             response = apiResponse.data;
+            console.log(response);
         } catch (error) {
-            console.log(error);
+            
             if (error.response) {
                 if (error.response.status === 401) {
                     LocalStorageUtils.removeUserFromLocalStorage();

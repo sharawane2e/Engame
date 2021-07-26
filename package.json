@@ -9,7 +9,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.2",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-bootstrap": "^1.6.1",
@@ -22,6 +21,7 @@
     "react-toastify": "^7.0.4",
     "redux": "^4.1.0",
     "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "sass": "^1.35.1",
     "web-vitals": "^1.0.1"
   },

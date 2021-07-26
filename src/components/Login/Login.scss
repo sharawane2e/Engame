@@ -1,29 +1,39 @@
 .form-area {
-  padding: map-get($map: $padding, $key: "padding-24")
+  @include breakpoint(Ipad-pro) {
+    padding: 0;
+  }
+  // padding: map-get($map: $padding, $key: "padding-24")
+  // 	map-get($map: $padding, $key: "padding-90")
+  // 	map-get($map: $padding, $key: "padding-24")
+  // 	map-get($map: $padding, $key: "padding-30");
+  @media (min-width: 1280px) and (max-width: 1365px) {
+    padding: map-get($map: $padding, $key: "padding-5")
       map-get($map: $padding, $key: "padding-90")
-      map-get($map: $padding, $key: "padding-24")
-      map-get($map: $padding, $key: "padding-30"); 
-      @media (min-width: 1280px) and (max-width: 1365px) {
-        padding: map-get($map: $padding, $key: "padding-5")
-        map-get($map: $padding, $key: "padding-90")
-        map-get($map: $padding, $key: "padding-15")
-        map-get($map: $padding, $key: "padding-30"); 
-      }
-  &.login--form{
-    padding-top: map-get($map: $padding, $key: "padding-50");
-    padding-bottom: map-get($map: $padding, $key: "padding-50");
+      map-get($map: $padding, $key: "padding-15")
+      map-get($map: $padding, $key: "padding-30");
+  }
+  @media (min-width: 1920px) {
+    padding: map-get($map: $padding, $key: "padding-5")
+      map-get($map: $padding, $key: "padding-90")
+      map-get($map: $padding, $key: "padding-15")
+      map-get($map: $padding, $key: "padding-30");
+  }
+  &.login--form {
+    // padding-top: map-get($map: $padding, $key: "padding-50");
+    // padding-bottom: map-get($map: $padding, $key: "padding-50");
+
     @media (min-width: 1280px) and (max-width: 1365px) {
       padding-top: map-get($map: $padding, $key: "padding-5");
       padding-bottom: map-get($map: $padding, $key: "padding-5");
     }
   }
- 
+
   #{&}__login {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     font-size: map-get($map: $text-size, $key: "xl");
     text-align: map-get($map: $alignment, $key: "align-center");
-    padding-top: map-get($map: $padding, $key: "padding-15");
-    padding-bottom: map-get($map: $padding, $key: "padding-50");
+    padding-top: map-get($map: $padding, $key: "padding-0");
+    padding-bottom: map-get($map: $padding, $key: "padding-15");
     @media (min-width: 1280px) and (max-width: 1365px) {
       padding-bottom: map-get($map: $padding, $key: "padding-25");
       font-size: map-get($map: $text-size, $key: "large");
@@ -37,15 +47,14 @@
       font-size: map-get($map: $text-size, $key: "small");
       margin-bottom: 2px;
     }
-
   }
   .MuiOutlinedInput-input {
-     @media (min-width: 1280px) and (max-width: 1365px) {
-    padding-top: map-get($map: $padding, $key: "padding-10");
-    padding-bottom: map-get($map: $padding, $key: "padding-10");
-    font-size: map-get($map:$text-size , $key: "small");
-   }
-    
+    padding: map-get($map: $padding, $key: "padding-12");
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      padding-top: map-get($map: $padding, $key: "padding-10");
+      padding-bottom: map-get($map: $padding, $key: "padding-10");
+      font-size: map-get($map: $text-size, $key: "small");
+    }
   }
   #{&}__fileds {
     & > * {
@@ -55,14 +64,13 @@
   #{&}__control {
     margin-bottom: map-get($map: $margin, $key: margin-10);
     @media (min-width: 1280px) and (max-width: 1365px) {
-      .MuiIconButton-label{
-        >svg{
+      .MuiIconButton-label {
+        > svg {
           width: 18px;
           height: 18px;
         }
       }
     }
-    
   }
   .forgot-link {
     font-weight: map-get($map: $font-weight, $key: font-600);
@@ -74,7 +82,7 @@
       font-weight: map-get($map: $font-weight, $key: "font-normal");
     }
     @media (min-width: 1280px) and (max-width: 1365px) {
-      font-size:map-get($map: $text-size, $key:"xsmall" ) ;
+      font-size: map-get($map: $text-size, $key: "xsmall");
     }
   }
   .form-newaccont {
@@ -83,22 +91,21 @@
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     padding-top: map-get($map: $padding, $key: padding-15);
     & > a {
-          padding-left: map-get($map: $padding, $key: padding-8);
-          color: map-get($map: $text-color, $key: red-dark);
-        }
+      padding-left: map-get($map: $padding, $key: padding-8);
+      color: map-get($map: $text-color, $key: red-dark);
+    }
   }
 }
 .form-button-grop {
   text-align: map-get($map: $alignment, $key: "align-center");
   padding-top: map-get($map: $padding, $key: "padding-15");
   padding-bottom: map-get($map: $padding, $key: "padding-25");
- .login__button{
-  min-width: 292px !important;
-   @media (min-width: 1280px) and (max-width: 1365px) {
-    font-size: map-get($map: $text-size, $key: "xsmall");
-    padding-top: map-get($map: $padding, $key: "padding-15");
-    padding-bottom: map-get($map: $padding, $key: "padding-10");
+  .login__button {
+    min-width: 292px !important;
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      font-size: map-get($map: $text-size, $key: "xsmall");
+      padding-top: map-get($map: $padding, $key: "padding-15");
+      padding-bottom: map-get($map: $padding, $key: "padding-10");
+    }
   }
- }
 }
-

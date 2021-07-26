@@ -1,12 +1,13 @@
 import * as actionTypes from './shopping-types'; 
-
-export const addToCart = (itemId) => {
-    return {
-        type:actionTypes.ADD_TO_CART,
-        payload: {
-             id: itemId
-        }
-    }
+import { BASE_URL } from '../../config/ApiUrl';
+import axios from 'axios';
+export const addToCart = (productId) => {
+   return {
+       type:actionTypes.ADD_TO_CART,
+       payload: {
+           id:productId
+       }
+   }
 }
 
 export const removeFromCart = (itemId) => {

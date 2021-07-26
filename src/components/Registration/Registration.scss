@@ -1,32 +1,32 @@
-.registration--form{
-  padding-top: map-get($map: $padding, $key: "padding-30");
-  padding-bottom: map-get($map: $padding, $key: "padding-30");
-  @media (min-width: 1280px) and (max-width: 1365px) {
-    padding-top: map-get($map: $padding, $key: "padding-10");
-  padding-bottom: map-get($map: $padding, $key: "padding-10");
-  }
+.registration--form {
+	// padding-top: map-get($map: $padding, $key: "padding-30");
+	// padding-bottom: map-get($map: $padding, $key: "padding-30");
+	@media (min-width: 1280px) and (max-width: 1365px) {
+		padding-top: map-get($map: $padding, $key: "padding-10");
+		padding-bottom: map-get($map: $padding, $key: "padding-10");
+	}
 }
 .back-button {
-  font-family: map-get($map:$font-family , $key: "font-barlowmedium");
-  display: block;
-  padding: map-get($map: $padding, $key: "padding-15") 0;
-  text-align: map-get($map: $alignment, $key: "align-center");
-  font-size: map-get($map: $text-size, $key: "regular");
-  > a {
-    color: map-get($map: $text-color, $key: "black-drak") !important;
-    &:hover {
-      text-decoration: none !important;
-    }
-  }
-  @media (min-width: 1280px) and (max-width: 1365px) {
-    font-size: map-get($map: $text-size, $key: "xsmall");
-  }
+	font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+	display: block;
+	padding: map-get($map: $padding, $key: "padding-15") 0;
+	text-align: map-get($map: $alignment, $key: "align-center");
+	font-size: map-get($map: $text-size, $key: "regular");
+	> a {
+		color: map-get($map: $text-color, $key: "black-drak") !important;
+		&:hover {
+			text-decoration: none !important;
+		}
+	}
+	@media (min-width: 1280px) and (max-width: 1365px) {
+		font-size: map-get($map: $text-size, $key: "xsmall");
+	}
 }
-.form-button-grop{
-  .register__button{
-    min-width: 292px !important;
-      @media (min-width: 1280px) and (max-width: 1365px) {
-      font-size: map-get($map: $text-size, $key: "xsmall");
-    }
-   }
+.form-button-grop {
+	.register__button {
+		min-width: 292px !important;
+		@media (min-width: 1280px) and (max-width: 1365px) {
+			font-size: map-get($map: $text-size, $key: "xsmall");
+		}
+	}
 }

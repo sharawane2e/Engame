@@ -10,7 +10,11 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { UserValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import Link from "@material-ui/core/Link";
+import { ToastContainer, toast } from 'react-toastify';
 import CustomButton from "../../components/widgets/Button"
+import { connect } from "react-redux";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { BASE_URL } from "../../config/ApiUrl";
 
 class Registration extends Component {
   state = {
@@ -38,6 +42,7 @@ class Registration extends Component {
   handleRegister = (e) => {
     e.preventDefault();
     const { name, email, setpassword, confirmpassword } = this.state;
+    const user = {username:name, email:email,password1:setpassword, password2: confirmpassword, first_name:name, last_name:"s", mobile:"9191"}
     const validationResponse = this.UserValidation.validateForm({
       name,
       email,
@@ -52,6 +57,32 @@ class Registration extends Component {
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },
       });
     }
+
+    // loader's
+    this.props.dispatch(loadingStart())
+
+    // api's
+    fetch(BASE_URL+"user/", {
+      method:'POST',
+      headers : {
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(user)
+    })
+    .then(result => result.json())
+    .then(data => {
+      console.log(data.detail)
+      toast(data.username ? data.username.join("") : null)
+      toast(data.email ? data.email.join("") : null)
+      toast(data.email ? data.email.join("") : null)
+      toast(data.non_field_errors ? data.non_field_errors.join("") : null)
+     
+      this.props.dispatch(loadingStop())
+       if(data.detail){
+        window.location.reload()
+      }
+    })
+    
   };
 
   handleClickShowPassword = (e, key) => {
@@ -215,6 +246,7 @@ class Registration extends Component {
               </FormControl>
             </form>
             <div className="form-button-grop">
+           <ToastContainer /> 
               <CustomButton  onClick={this.handleRegister}
               className='register__button primary-button'>
                 Register
@@ -231,4 +263,7 @@ class Registration extends Component {
     );
   }
 }
-export default Registration;
+
+const mapStateToProps = state => {return{}}
+
+export default connect(mapStateToProps)(Registration);
