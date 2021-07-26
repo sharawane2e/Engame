@@ -33,7 +33,7 @@
 	}
 }
 
-@mixin space($type: margin, $direction: all, $amount: $padding) {
+@mixin space($type,$direction,$amount) {
 	@if $type == padding {
 	  @if $direction == all {
 		padding: $amount;
@@ -45,9 +45,7 @@
 		padding-left: $amount;
 	  } @else if $direction == right {
 		padding-right: $amount;
-	  } @else {
-		padding-bottom: $amount;
-	  }
+	  } 
 	} @else {
 	  @if $direction == all {
 		margin: $amount;
@@ -59,8 +57,6 @@
 		margin-left: $amount;
 	  } @else if $direction == right {
 		margin-right: $amount;
-	  } @else {
-		margin-bottom: $amount;
-	  }
+	  } 
 	}
   }

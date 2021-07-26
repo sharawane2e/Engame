@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 body {
-	font-family: map-get($map: $font-family, $key: font-barlowregular) !important;
+	font-family: map-get($map: $font-family, $key: font-barlowregular) ;
 }
 .App {
 	position: relative;
@@ -104,7 +104,7 @@ a {
 		map-get($map: $boxshadow, $key: "red-smooth")
 	);
 	@media (min-width: 1280px) and (max-width: 1365px) {
-		min-width: 290px !important;
+		min-width: 250px !important;
 		padding: map-get($map: $padding, $key: "padding-10") !important;
 	}
 }
@@ -191,7 +191,7 @@ a {
 /*End*/
 
 .margin-top-174 {
-	margin-top: 14px;
+	margin-top: 20px;
 }
 .MuiPaper-elevation1 {
 	box-shadow: none !important;
@@ -221,4 +221,8 @@ a {
 	position: sticky;
 	top: 0;
 	height: 100%;
+}
+
+.MuiBadge-colorSecondary{
+	background-color: map-get($map: $background-color, $key:"button-secondary") !important;
 }

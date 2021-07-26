@@ -44,7 +44,7 @@
     > img {
       max-width: 100%;
       width: 100%;
-      max-height: 65px;
+      max-height: 95px;
     }
   }
   #{&}__preview{
@@ -137,7 +137,7 @@
   .popup-container__footer{
     display: flex;
     .add--card{
-      width: 178px !important;
+       width: 178px !important;
       margin: 0 auto;
       .MuiButton-label{>svg{
         margin-right: map-get($map: $margin, $key:"margin-5");

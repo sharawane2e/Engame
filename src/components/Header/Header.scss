@@ -33,5 +33,21 @@ box-shadow: none !important;
   font-size: map-get($map:$text-size , $key: "large20");
   padding: map-get($map:$padding , $key:"padding-15" );
   cursor: pointer;
+  
+}
+.user-after-login{
+  .custom-button{
+    color: #363636;
+    font-size: 18px;
+    font-family: "barlowmedium";
+    cursor: pointer;
+    font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+    &:hover{
+      background-color: transparent !important;
+    }
+  }
+  .user-btn{
+    width: auto !important;
+  }
 }
 }

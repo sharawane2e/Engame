@@ -1,6 +1,6 @@
 import * as actionTypes from './shopping-types'; 
-import { BASE_URL } from '../../config/ApiUrl';
-import axios from 'axios';
+// import { BASE_URL } from '../../config/ApiUrl';
+// import axios from 'axios';
 export const addToCart = (productId) => {
    return {
        type:actionTypes.ADD_TO_CART,
