@@ -3,6 +3,8 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  text-align: center;
+  font-size: map-get($map: $text-size, $key: "small");
   background-color:map-get($map:$background-color , $key:secondary );
   padding: map-get($map: $padding, $key: "padding-15")
     map-get($map: $padding, $key: "padding-24");

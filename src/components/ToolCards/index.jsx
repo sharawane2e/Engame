@@ -3,7 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ToolDemo from "../ToolDemo";
+import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import { useDispatch, useSelector } from "react-redux";
@@ -14,12 +14,9 @@ import CustomButton from "../../components/widgets/Button";
 import Subscription from '../../components/SubscriptionType';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { BASE_URL } from "../../config/ApiUrl";
-import axios from "axios";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
-
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -29,6 +26,7 @@ const ToolCards = () => {
   const productList = useSelector(state => state.productList)
   const {loading, error, products} = productList
   const dispatch = useDispatch();
+
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
@@ -40,7 +38,7 @@ const ToolCards = () => {
 
   const handleCart = () => {
     dispatch(addToCart(popupId))
-    toast("Your Item is added to shopping cart!")
+    toast.success("Your Item is added to shopping cart!")
   }
 
 
@@ -97,21 +95,25 @@ const ToolCards = () => {
          )
         }
       
-      <CustomPopup
-        open={selectedTool}
-        onClose={() => setSelectedTool(null)}
-        className="popup-container__iner--xl border-radius"
-        >
-        <ToolDemo tool={selectedTool}></ToolDemo>
-      </CustomPopup>
-        <CustomPopup 
+        {/*Perview tools code popup */}
+        <CustomPopup
+           open={selectedTool}
+             onClose={() => setSelectedTool(null)}
+            className="popup-container__iner--md border-radius tool-perview-data"
+            >
+          <ToolPerview tool={selectedTool}></ToolPerview>
+          </CustomPopup>
+        {/*End */}
+        {/*Emneded code popup */}
+          <CustomPopup 
           open={ispopup} onClose={() =>setPopup(false)} 
           headerText="Embed code"
           className="border-radius popup-container__iner--sm"
           >
           <Embedcode data={products} toolId={popupId} />
         </CustomPopup>
-
+        {/*End*/}
+        {/*Add to cart */}
         <CustomPopup
           open={isSubscription}
           onClose={() => setSubscriptionPopup(false)}
@@ -130,6 +132,7 @@ const ToolCards = () => {
                   </CustomButton>
               </div>
         </CustomPopup>
+        {/*End */}
       
     </Toolbar>
    </>

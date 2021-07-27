@@ -6,6 +6,10 @@ const instance = axios.create({
 });
 
 const token = LocalStorageUtils.getToken();
+<<<<<<< HEAD
+=======
+// console.log(token);
+>>>>>>> 648a407a57edd148686b1812c031195abdb6cea4
 
 if (token) {
     instance.defaults.headers.common["Authorization"] = token;
@@ -22,7 +26,7 @@ export default {
 
             });
             response = apiResponse.data;
-            console.log(response);
+//            console.log(response);
         } catch (error) {
             
             if (error.response) {
@@ -35,7 +39,7 @@ export default {
                     response = error.response.data;
                 } else if (error.response.status === 404) {} else {
                     // Toaster.error("Something went wrong");
-                    console.log("wrong");
+  //                  console.log("wrong");
                 }
             }
         }

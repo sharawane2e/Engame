@@ -18,7 +18,7 @@ const newAuth = getAuthState()
 
 const userReducer = (state=newAuth, action) => {
     switch(action.type){
-        case actionTypes.LOGIN_SUCCESS :
+        case actionTypes.LOGIN_SUCCESS : 
             const newState =  {
                 isLoggedIn:true,
                 token:action.payload,
@@ -27,7 +27,7 @@ const userReducer = (state=newAuth, action) => {
                 return newState; 
             
             case actionTypes.LOGOUT : 
-                return initialState;
+                return initialState; 
         default:
             return state;
     }

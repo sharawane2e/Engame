@@ -10,7 +10,7 @@ const PrivateScreen = (props, user) =>{
     useEffect(() => {
         const data = dispatch(loginUser())
     }, [])
-    console.log(user);
+
     return(
         <AppRouting routes={props.route} />
     )

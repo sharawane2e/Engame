@@ -29,7 +29,7 @@
 	}
 
 	#{&}__iner--xl {
-		width: 70%;
+		width: 800px;
 		@include breakpoint(Ipad-pro) {
 			width: 90%;
 		}
@@ -61,7 +61,15 @@
 	}
 	/*End*/
 	#{&}__header {
-		padding: map-get($map: $padding, $key: "padding-20") map-get($map: $padding, $key: "padding-30") map-get($map: $padding, $key: "padding-20") map-get($map: $padding, $key: "padding-30");
+		padding: map-get($map: $padding, $key: "padding-20")
+		 map-get($map: $padding, $key: "padding-30") 
+		 map-get($map: $padding, $key: "padding-20") 
+		 map-get($map: $padding, $key: "padding-30");
+
+		//  @include space(padding) {
+		// 	width: 75%;
+		// }
+
 		display: flex;
 		font-family: map-get($map: $font-family, $key: "font-barlowbold");
 	}
@@ -92,6 +100,11 @@
 		position: absolute;
 		right: 0;
 		cursor: pointer;
+	
+		@include space(padding, top, $padding-10);
+		@include space(padding, bottom, $padding-10);
+		@include space(padding, left, $padding-30);
+		@include space(padding, right, $padding-30);
 		& > svg {
 			width: 2rem !important;
 			height: 2rem !important;

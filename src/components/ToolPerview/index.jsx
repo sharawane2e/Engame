@@ -5,15 +5,15 @@ const ToolDemo = (props) => {
 
   return (
     <>
- {tool.name}
-      <iframe
+      <div className="curent-tool-name">{tool.name}</div>
+      <iframe className="tool-perview"
         width="100%"
         height="650"
         scrolling="yes"
-        frameborder="no"
+        // /frameborder="no"
         allow="autoplay"
         src={tool.toolLink}
-        // frameBorder="0"
+        frameBorder="0"
       ></iframe>
     </>
   );

@@ -29,31 +29,39 @@
   }
 
   #{&}__login {
+
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     font-size: map-get($map: $text-size, $key: "xl");
     text-align: map-get($map: $alignment, $key: "align-center");
-    padding-top: map-get($map: $padding, $key: "padding-0");
-    padding-bottom: map-get($map: $padding, $key: "padding-15");
+    // padding-top: map-get($map: $padding, $key: "padding-0");
+    // padding-bottom: map-get($map: $padding, $key: "padding-50");
+    @include space(padding, top, $padding-20);
+    @include space(padding, bottom, $padding-50);
+
     @media (min-width: 1280px) and (max-width: 1365px) {
       padding-bottom: map-get($map: $padding, $key: "padding-25");
       font-size: map-get($map: $text-size, $key: "large");
     }
   }
   .input-label {
-    font-size: map-get($map: $text-size, $key: "large");
-    opacity: map-get($map: $opacity, $key: "opacity-6");
+    font-size: map-get($map: $text-size, $key: "regular");
+    // opacity: map-get($map: $opacity, $key: "opacity-6");
     font-family: map-get($map: $font-family, $key: "font-barlowlight");
+    color: map-get($map: $text-color, $key:"black-smooth");
     @media (min-width: 1280px) and (max-width: 1365px) {
       font-size: map-get($map: $text-size, $key: "small");
       margin-bottom: 2px;
     }
   }
   .MuiOutlinedInput-input {
-    padding: map-get($map: $padding, $key: "padding-12");
+    @include space(padding, all, $padding-15 );
+    font-size: map-get($map: $text-size, $key: "xsmall");
     @media (min-width: 1280px) and (max-width: 1365px) {
-      padding-top: map-get($map: $padding, $key: "padding-10");
-      padding-bottom: map-get($map: $padding, $key: "padding-10");
-      font-size: map-get($map: $text-size, $key: "small");
+      // padding-top: map-get($map: $padding, $key: "padding-10");
+      // padding-bottom: map-get($map: $padding, $key: "padding-10");
+    @include space(padding, top, $padding-10);
+    @include space(padding, bottom, $padding-10);
+      font-size: map-get($map: $text-size, $key: "xsmall");
     }
   }
   #{&}__fileds {
@@ -102,6 +110,7 @@
   padding-bottom: map-get($map: $padding, $key: "padding-25");
   .login__button {
     min-width: 292px !important;
+    @include space(padding, all, $padding-15 !important);
     @media (min-width: 1280px) and (max-width: 1365px) {
       font-size: map-get($map: $text-size, $key: "xsmall");
       padding-top: map-get($map: $padding, $key: "padding-15");

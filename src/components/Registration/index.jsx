@@ -36,7 +36,7 @@ class Registration extends Component {
   UserValidation = new UserValidation();
 
   backLogin = (e) => {
-    this.setState({ data: `texxt` });
+    this.setState({ data: `string` });
   };
 
   handleRegister = (e) => {
@@ -50,7 +50,7 @@ class Registration extends Component {
       confirmpassword,
     });
     if (validationResponse.isFormValid) {
-      console.log("wleocme to Register");
+      toast.success("Thanks for registration")
     } else {
       delete validationResponse.isFormValid;
       this.setState({
@@ -72,10 +72,10 @@ class Registration extends Component {
     .then(result => result.json())
     .then(data => {
       console.log(data.detail)
-      toast(data.username ? data.username.join("") : null)
-      toast(data.email ? data.email.join("") : null)
-      toast(data.email ? data.email.join("") : null)
-      toast(data.non_field_errors ? data.non_field_errors.join("") : null)
+      toast.error(data.username ? data.username.join("") : null)
+      toast.error(data.email ? data.email.join("") : null)
+      toast.error(data.email ? data.email.join("") : null)
+      toast.error(data.non_field_errors ? data.non_field_errors.join("") : null)
      
       this.props.dispatch(loadingStop())
        if(data.detail){
