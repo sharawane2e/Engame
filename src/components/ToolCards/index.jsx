@@ -24,6 +24,7 @@ const ToolCards = () => {
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
   const productList = useSelector(state => state.productList)
+  const user  = useSelector(state => state.user.isLoggedIn)
   const {loading, error, products} = productList
   const dispatch = useDispatch();
 
@@ -40,7 +41,6 @@ const ToolCards = () => {
     dispatch(addToCart(popupId))
     toast.success("Your Item is added to shopping cart!")
   }
-
 
   return (
    <>
@@ -68,7 +68,8 @@ const ToolCards = () => {
                      </CustomButton>
                     </div>
                   </div>
-                  <div className="toolcard__align toolcard__toolicons">
+                  {user ? 
+                  (<div className="toolcard__align toolcard__toolicons">
                     <div className="toolcard__items toolcard__download">
                       {/* {tooldata.showDownload == true ? ( */}
                         <span className="toolcard__sub-icons">
@@ -78,10 +79,13 @@ const ToolCards = () => {
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
-                        <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>
+                        {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> */}
+                        <ShoppingCartIcon />
                       </span>
                     </div>
-                  </div>
+                  </div>)
+                  : null  
+                }
                 </Paper>
                 <div className="toolcard__align toolcard__toolname">
                   <div className="toolcard__aligninr1 toolcard__font-family">{tooldata.toolname}</div>

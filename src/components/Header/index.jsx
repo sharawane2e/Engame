@@ -88,8 +88,7 @@ const Header = ({ props, cart, user }) => {
 								<>
 									<div
 										className="menu-button"
-										onClick={() => setLoginIsOpen(true)}
-									>
+										onClick={() => setLoginIsOpen(true)}>
 										Login
 									</div>
 									|
@@ -123,15 +122,19 @@ const Header = ({ props, cart, user }) => {
 										anchorEl={anchorEl}
 										keepMounted
 										open={Boolean(anchorEl)}
-										onClose={handleClose}
-									>
+										onClose={handleClose}>
 										<MenuItem onClick={handleClose}>Profile</MenuItem>
 										<MenuItem onClick={() => handleLogout()} >Logout</MenuItem>
 									</Menu>
 								</div>
 							)}
 							<div className="shoping__card">
-								<Link to="/cart">
+								{/* <Link to="/cart">
+									<Badge badgeContent={cartCount} color="secondary">
+										<ShoppingCartIcon />
+									</Badge>
+								</Link> */}
+								<Link to="#!">
 									<Badge badgeContent={cartCount} color="secondary">
 										<ShoppingCartIcon />
 									</Badge>
