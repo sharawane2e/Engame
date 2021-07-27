@@ -1,17 +1,21 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import loaderImg from '../../assets/images/loader.gif'
+import loaderImg from '../../assets/images/loader.svg';
+import Overlay from "../Overlay";
 
 const FullPageLoader = ({loading}) => {
     if(!loading){
         return null
     }
     return (
-        <div className="loader_main">
-            <div className="loader">
-                <img src={ loaderImg } alt="" />
-            </div>
-        </div>
+        <>
+               <Overlay />
+               <div className="loader_main">
+                <div className="loader" >
+                        <img src={ loaderImg } alt="" />
+                </div>
+                </div>
+        </>
     )
 }
 

@@ -25,6 +25,7 @@
 .form-button-grop {
 	.register__button {
 		min-width: 292px !important;
+		@include space(padding, all, $padding-15 !important);
 		@media (min-width: 1280px) and (max-width: 1365px) {
 			font-size: map-get($map: $text-size, $key: "xsmall");
 		}

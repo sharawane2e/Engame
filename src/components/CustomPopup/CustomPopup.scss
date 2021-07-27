@@ -25,17 +25,11 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 60%;
-		// max-height: calc(100% - 100px);
 		background: map-get($map: $background-color, $key: "primary");
-
-		// min-height: 550px;
-		// @media (min-width: 1280px) and (max-width: 1365px) {
-		//   min-height: 300px;
-		// }
 	}
 
 	#{&}__iner--xl {
-		width: 70%;
+		width: 800px;
 		@include breakpoint(Ipad-pro) {
 			width: 90%;
 		}
@@ -43,34 +37,39 @@
 			height: 98%;
 		}
 	}
+
 	#{&}__iner--md {
 		width: 50%;
 		@include breakpoint(mobileonly) {
 			width: 75%;
-			height: 50%;
 		}
 		@include breakpoint(Ipad) {
 			width: 70%;
 		}
 	}
 	#{&}__iner--sm {
-		@include breakpoint(Ipad) {
-			width: 70%;
-		}
-		width: 25%;
+		width: 35%;
 		@include breakpoint(mobileonly) {
-			width: 75% !important;
+			width: 75%;
 		}
-		@include breakpoint(Ipad-pro) {
-			width: 50%;
-		}
-		@include breakpoint(desktop) {
-			width: 25%;
-		}
+		// @include breakpoint(Ipad) {
+		// 	width: 70%;
+		// }
+	}
+	#{&}__iner--xsm {
+		width: 25%;
 	}
 	/*End*/
 	#{&}__header {
-		padding: map-get($map: $padding, $key: "padding-20");
+		padding: map-get($map: $padding, $key: "padding-20")
+		 map-get($map: $padding, $key: "padding-30") 
+		 map-get($map: $padding, $key: "padding-20") 
+		 map-get($map: $padding, $key: "padding-30");
+
+		//  @include space(padding) {
+		// 	width: 75%;
+		// }
+
 		display: flex;
 		font-family: map-get($map: $font-family, $key: "font-barlowbold");
 	}
@@ -78,6 +77,7 @@
 		display: flex;
 		flex: 1;
 		font-size: map-get($map: $text-size, $key: "large20");
+		align-items: center;
 	}
 	#{&}__body {
 		padding: map-get($map: $padding, $key: "padding-30");
@@ -100,6 +100,11 @@
 		position: absolute;
 		right: 0;
 		cursor: pointer;
+	
+		@include space(padding, top, $padding-10);
+		@include space(padding, bottom, $padding-10);
+		@include space(padding, left, $padding-30);
+		@include space(padding, right, $padding-30);
 		& > svg {
 			width: 2rem !important;
 			height: 2rem !important;

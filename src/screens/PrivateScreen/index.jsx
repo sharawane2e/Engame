@@ -3,6 +3,7 @@
 import AppRouting from "../../AppRouting";
 
 const PrivateScreen = (props) =>{
+    console.log(props);
     return(
         <AppRouting routes={props.route} />
     )

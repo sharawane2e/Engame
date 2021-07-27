@@ -76,7 +76,7 @@
         >select{
             display: flex;
             width: fit-content;
-            padding: map-get($map: $padding, $key: "padding-16");
+            padding: map-get($map: $padding, $key: "padding-12");
             border: 1px solid rgba(132 ,132, 132 , 0.50);
             outline: 0;
             &:hover{
@@ -112,7 +112,7 @@
         }
         .MuiOutlinedInput-input{
             border-radius: map-get($map: $border-round, $key: "boder-radius");
-            padding: map-get($map: $padding, $key: "padding-15") ;
+            padding: map-get($map: $padding, $key: "padding-12") ;
             width:60px ;
             @media all and (max-width:1024px) {
                font-size: 14px;
@@ -127,16 +127,22 @@
         }
     }
     #{&}__tool-icons{
-        display: inline-block;
-        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         cursor: pointer;
+        .MuiTypography-body1{
+            display: flex;
+        }
     }
     #{&}__tool-tick{
+        margin-right: 5px;
         &:hover{
         fill: map-get($map: $fillcolor, $key: "red-dark");
         }
     }
     #{&}__tool-delete{
+        margin-left: 5px;
         &:hover{
             fill: map-get($map: $fillcolor, $key: "red-dark");
         }

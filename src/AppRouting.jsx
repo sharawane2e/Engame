@@ -10,7 +10,7 @@ const AppRouting = (props) =>{
         <Switch>
             {
                 routes.map(function(route,index){
-                    // console.log(route.component)
+                    console.log(route)
                     return(
                         <Route
                             key={index}

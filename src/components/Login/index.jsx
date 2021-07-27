@@ -10,15 +10,12 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import CustomButton from "../../components/widgets/Button";
 import Link from "@material-ui/core/Link";
 import { LoginValidation } from "../../util/FormValidation";
-import ApiRequest from "../../util/ApiRequest";
-import { BASE_URL, LOGIN } from "../../config/ApiUrl";
+import { BASE_URL } from "../../config/ApiUrl";
 import Registration from "../../components/Registration";
 import { ToastContainer, toast } from 'react-toastify';
 import ForgotPassword from "../../components/ForgotPassword";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
-//import { login } from "../actions/auth";
-//import { login} from "../../redux/reducers/index";
 import { loginUser } from "../../redux/user/user-action";
 
 class Login extends Component {
@@ -40,18 +37,15 @@ class Login extends Component {
 	loginValidation = new LoginValidation();
 
 	createAccount = (e) => {
-		this.setState({ data: `texxt` });
+		this.setState({ data: `string` });
 	};
 	forgotPassword = (e) => {
-		this.setState({ forgot: `texxt` });
+		this.setState({ forgot: `string` });
 	};
 
-	handleSubmit = (el) => {
-		// el.preventDefault();
+	handleSubmit = (e) => {
 		const { email, password } = this.state;
 		const user = {email:email, password:password}
-		console.log(this.props.user);
-		// api's
 		this.props.dispatch(loadingStart())
 		fetch(BASE_URL+"user/login/", {
 			method:'POST',
@@ -62,12 +56,17 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			toast(data.non_field_errors ? data.non_field_errors.join("") : null )
+			toast.error(data.non_field_errors ? data.non_field_errors.join("") : null )
 			this.props.dispatch(loadingStop())
 			if (data.access_token) {
 				this.props.dispatch(loginUser(data))
 			}
 		})
+		.catch((error)=>{
+			toast.error(error);
+		})
+
+		
 	};
 
 	handleClickShowPassword = (e, key) => {
@@ -100,14 +99,10 @@ class Login extends Component {
 	};
 
 	render() {
-		const { isLoggedIn, message } = this.props;
-		if (isLoggedIn) {
-			// return <Redirect to="/" />;
-		  }
 		return (
 			<>
-				{!this.state.login ? (
-					this.state.forgot ? (
+				
+					{this.state.forgot ? (
 						<ForgotPassword />
 					) : this.state.data ? (
 						<Registration />
@@ -196,11 +191,7 @@ class Login extends Component {
 								</Link>
 							</div>
 						</div>
-					)
-				) : (
-					
-					<div to="/">Login</div>
-				)}
+					)}
 			</>
 		);
 	}

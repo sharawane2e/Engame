@@ -8,18 +8,18 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
-import Toaster from "../../util/Toaster";
 import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
+import CustomButton from "../../components/widgets/Button";
+import Menu from '@material-ui/core/Menu';
+import { ToastContainer, toast } from 'react-toastify';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const Header = ({ props, cart, user }) => {
 	const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const Header = ({ props, cart, user }) => {
 	}, [cart, cartCount, user]);
 
 
-	const handleLogou = () => {
+	const handleLogout = () => {
 		dispatch(loadingStart())
 		fetch(BASE_URL+"user/logout/",{
 			method:"POST",
@@ -53,27 +53,30 @@ const Header = ({ props, cart, user }) => {
 			dispatch(loadingStop())
 			history.push("/")
 		})
-
+		.catch((error)=>{
+			toast.error(error);
+		})
 	}
-
-	const handleClose = () => {
-		setOpen(false);
-	};
 
 	const handleOpen = () => {
 		setOpen(true);
 	};
 
-	const handleLoader = () => {
-		dispatch(loadingStart());
-		setTimeout(() => {
-			dispatch(loadingStop());
-		}, 3000);
+	const [anchorEl, setAnchorEl] = React.useState(null);
+
+	const handleClick = (event) => {
+	  setAnchorEl(event.currentTarget);
 	};
+  
+	const handleClose = () => {
+	  setAnchorEl(null);
+	  setOpen(false);
+	};
+
 	return (
 		<>
-			<div className="flexGrow header-box sticky-head-position">
-				<AppBar>
+
+				<AppBar className="flexGrow header-box" position={"sticky"}>
 					<Toolbar className="header-bg">
 						<Typography variant="h6" className="flexGrow">
 							<Link to="/">
@@ -98,19 +101,34 @@ const Header = ({ props, cart, user }) => {
 									</div>
 								</>
 							) : (
-								<FormControl className="userForm">
-									<InputLabel id="user-open-select">{user.token.user.first_name}</InputLabel>
-									<Select
-										labelId="user-open-select"
-										id="user-open-select"
-										open={open}
+								// <FormControl className="userForm">
+								// 	<InputLabel id="user-open-select">{user.token.user.first_name}</InputLabel>
+								// 	<Select
+								// 		labelId="user-open-select"
+								// 		id="user-open-select"
+								// 		open={open}
+								// 		onClose={handleClose}
+								// 		onOpen={handleOpen}
+								// 	>
+								// 		<MenuItem value={10} onClick={() => handleLogout()}>Logout</MenuItem>
+								// 		<MenuItem value={20}>Profile</MenuItem>
+								// 	</Select>
+								// </FormControl>
+								<div className="user-after-login" >
+								<CustomButton onClick={handleClick}>
+								 	{user.token.user.first_name} <ArrowDropDownIcon/>
+								</CustomButton>
+									<Menu
+										id="simple-menu"
+										anchorEl={anchorEl}
+										keepMounted
+										open={Boolean(anchorEl)}
 										onClose={handleClose}
-										onOpen={handleOpen}
 									>
-										<MenuItem value={10} onClick={() => handleLogou()}>Logout</MenuItem>
-										<MenuItem value={20}>Profile</MenuItem>
-									</Select>
-								</FormControl>
+										<MenuItem onClick={handleClose}>Profile</MenuItem>
+										<MenuItem onClick={() => handleLogout()} >Logout</MenuItem>
+									</Menu>
+								</div>
 							)}
 							<div className="shoping__card">
 								<Link to="/cart">
@@ -122,11 +140,11 @@ const Header = ({ props, cart, user }) => {
 						</div>
 					</Toolbar>
 				</AppBar>
-			</div>
+
 			<CustomPopup
 				open={isLoginOpen}
 				onClose={() => setLoginIsOpen(false)}
-				className="popup-container__iner--xl border-allside border-radius"
+				className="popup-container__iner--md border-radius"
 			>
 				<Grid container spacing={1}>
 					<Grid item xs={12} sm={6} className="login-background"></Grid>
@@ -138,7 +156,7 @@ const Header = ({ props, cart, user }) => {
 			<CustomPopup
 				open={isReginOpen}
 				onClose={() => setReginIsOpen(false)}
-				className="popup-container__iner--xl border-allside border-radius"
+				className="popup-container__iner--md border-radius"
 			>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={5} className="login-background"></Grid>

@@ -2,14 +2,15 @@ import { React } from "react";
 
 const ToolDemo = (props) => {
   const { tool} = props;
+
   return (
     <>
- {tool.name}
-      <iframe
+      <div className="curent-tool-name">{tool.name}</div>
+      <iframe className="tool-perview"
         width="100%"
         height="650"
         scrolling="yes"
-        frameborder="no"
+        // /frameborder="no"
         allow="autoplay"
         src={tool.toolLink}
         frameBorder="0"

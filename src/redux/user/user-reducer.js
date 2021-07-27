@@ -13,7 +13,7 @@ const initialState = {
             return initialState;
         }
     }
-console.log(getAuthState());
+// console.log(getAuthState());
 
 const newAuth = getAuthState()
 

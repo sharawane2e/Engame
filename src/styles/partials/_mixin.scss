@@ -32,3 +32,44 @@
 		}
 	}
 }
+
+@mixin space($type,$direction,$amount) {
+	@if $type == padding {
+	  @if $direction == all {
+		padding: $amount;
+	  } @else if $direction == top {
+		padding-top: $amount;
+	  } @else if $direction == top {
+		padding-top: $amount;
+	  } 
+	  @else if $direction == bottom {
+		padding-bottom: $amount;
+	  } @else if $direction == left {
+		padding-left: $amount;
+	  } @else if $direction == right {
+		padding-right: $amount;
+	  } 
+	} @else {
+	  @if $direction == all {
+		margin: $amount;
+	  } @else if $direction == top {
+		margin-top: $amount;
+	  } @else if $direction == bottom {
+		margin-bottom: $amount;
+	  } @else if $direction == left {
+		margin-left: $amount;
+	  } @else if $direction == right {
+		margin-right: $amount;
+	  } 
+	}
+  }
+
+
+$paddingDirection:('right','left','top','bottom');
+$paddingLength:(15,30,45,50);
+
+@each $dir in $paddingDirection{
+  @each $len in $paddingLength{
+    %padding-#{$dir}-#{$len}{ padding-#{$dir}: #{$len}px;}
+  }
+}
