@@ -5,7 +5,14 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 const EmbedCode = ({data, toolId}) => {
-    const [state] = useState(data)
+    const [state] = useState(data);
+    
+    copyCodeToClipboard = () => {
+        const el = this.textArea
+        el.select()
+        document.execCommand("copy")
+      }
+
     return(
         <div className="embeded-conatiner">
         <TextareaAutosize
@@ -15,7 +22,7 @@ const EmbedCode = ({data, toolId}) => {
             defaultValue= {state.map(item => item.id===toolId ? item.widget_embed_code : null)}
             />
             <div className="embeded-conatiner__buttton-group">
-                 <CustomButton 
+                 <CustomButton  onClick={() => this.copyCodeToClipboard()}
                     className='secondary-button margin-right-20'>
                     <FileCopyIcon className="margin-right-15"/> Copy to Clipboard
                 </CustomButton>

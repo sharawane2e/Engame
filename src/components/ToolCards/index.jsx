@@ -18,8 +18,10 @@ import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 
-const ToolCards = () => {
+const ToolCards = (user) => {
+  console.log(user);
   const [selectedTool, setSelectedTool] = useState(null);
+  const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [popupId, setPopupId] = useState()
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
@@ -30,6 +32,10 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+
+  if(user.isLoggedIn){
+    setLoginIsOpen(false)
+  }
 
   // Fteching widget's from backend
   useEffect(() => {
@@ -70,11 +76,10 @@ const ToolCards = () => {
                   </div>
                   <div className="toolcard__align toolcard__toolicons">
                     <div className="toolcard__items toolcard__download">
-                      {/* {tooldata.showDownload == true ? ( */}
+                      {user.isLoggedIn?
                         <span className="toolcard__sub-icons">
                           <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
-                        </span>
-                      {/* ) : null} */}
+                        </span>:null}
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">

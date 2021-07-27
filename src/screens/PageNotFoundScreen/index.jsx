@@ -1,7 +1,7 @@
 const PageNotFoundScreen = () =>{
     return(
-        <div>
-            <h1>Page Not Found</h1>
+        <div className="pagenot-found">
+            Page Not Found
         </div>
     )
 }

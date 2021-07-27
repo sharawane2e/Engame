@@ -226,3 +226,10 @@ a {
 .MuiBadge-colorSecondary{
 	background-color: map-get($map: $background-color, $key:"button-secondary") !important;
 }
+
+.pagenot-found{
+	font-size:25px ;
+	margin-top: 15px;
+	margin-left: 15px;
+	font-weight: bold ;
+}

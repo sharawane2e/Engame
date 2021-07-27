@@ -1,6 +1,30 @@
 $(document).ready(function(){
 
-    var htmlElemnt='<div class="carousel-container"> \
+
+        fetch("https://api.etherscan.io/api?module=stats&action=ethprice",{
+            method:"POST",
+            // headers:"",
+            body:JSON.stringify()
+        }).then((result)=>result.json())
+        .then((res)=>{
+            if(res.status=="1"){
+                after_logindata();
+                }
+            else{
+                console.log("error");
+            }
+        }
+        )
+
+
+        // $.get("https://api.etherscan.io/api?module=stats&action=ethprice", function(data) {
+        //     console.log(data.result.ethbtc_timestamp)
+        // });
+
+ 
+        
+        function after_logindata(){
+            var htmlElemnt='<div class="carousel-container"> \
         <div class="carousel-slide clearfix"></div> \
             </div> \
             <div class="buttons-continer"> \
@@ -109,5 +133,7 @@ $(document).ready(function(){
     carouselApp.initApp();
     carouselApp.nextRating();
     carouselApp.prevRating();
+        }
+    
 
 });

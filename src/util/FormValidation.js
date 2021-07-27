@@ -85,7 +85,6 @@ export class UserValidation extends Validation {
                 break;
             case "name":
                 if (!value) {
-                    console.log("login form", value)
                     validationResponse.isValid = false;
                     validationResponse.message = ErrorMessages.NAME_REQURIED;
                 }

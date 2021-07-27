@@ -75,7 +75,6 @@ const Header = ({ props, cart, user }) => {
 
 	return (
 		<>
-
 				<AppBar className="flexGrow header-box" position={"sticky"}>
 					<Toolbar className="header-bg">
 						<Typography variant="h6" className="flexGrow">

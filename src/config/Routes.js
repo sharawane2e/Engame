@@ -42,6 +42,10 @@ const Routes = [
             },
          
         ]
+    },
+    {
+        path: "*",
+        component: PageNotFoundScreen,
     }
 ]
 
