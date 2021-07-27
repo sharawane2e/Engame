@@ -7,7 +7,7 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 const EmbedCode = ({data, toolId}) => {
     const [state] = useState(data);
     
-    copyCodeToClipboard = () => {
+    const copyCodeToClipboard = () => {
         const el = this.textArea
         el.select()
         document.execCommand("copy")

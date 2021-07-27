@@ -18,8 +18,8 @@ import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 
-const ToolCards = (user) => {
-  console.log(user);
+const ToolCards = () => {
+  // console.log(user);
   const [selectedTool, setSelectedTool] = useState(null);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [popupId, setPopupId] = useState()
