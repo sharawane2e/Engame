@@ -16,6 +16,7 @@ const Routes = [
         component:PublicScreen,
         exact:true,
         routes:[
+            
             {
                 path:"/cart",
                 component:Cart,
@@ -39,6 +40,7 @@ const Routes = [
                 component:Purchased,
                 isExact:true
             },
+         
         ]
     }
 ]

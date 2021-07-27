@@ -1,18 +1,20 @@
 import {Redirect} from "react-router-dom";
 import LocalStorageUtils from "./util/LocalStorageUtils";
 import AppRouting from "./AppRouting";
+import { connect, useSelector } from "react-redux";
 
 const PrivateRoute = (props) =>{
-    console.log(props);
     const Component = props.component;
-    console.log(Component)
-    console.log(LocalStorageUtils.isUserloggedIn())
-
-    return LocalStorageUtils.isUserloggedIn() ?(
+    const user  = useSelector((state) => state.user.isLoggedIn)
+    return user ?(
         <AppRouting routes={props.routes}/>
     ):(
         <Redirect to="/" />
     )
 }
-
-export default PrivateRoute;
+const mapStateToProps = state => {
+    return {
+        user : state.user.isLoggedIn
+    }
+}
+export default connect(mapStateToProps)(PrivateRoute);

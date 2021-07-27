@@ -60,6 +60,8 @@ class Login extends Component {
 			this.props.dispatch(loadingStop())
 			if (data.access_token) {
 				this.props.dispatch(loginUser(data))
+			} else{
+				localStorage.removeItem("auth")
 			}
 		})
 		.catch((error)=>{
@@ -112,8 +114,7 @@ class Login extends Component {
 							<form className="form-area__fileds" noValidate autoComplete="off">
 								<InputLabel
 									htmlFor="standard-adornment-email"
-									className="input-label"
-								>
+									className="input-label">
 									E-mail address
 								</InputLabel>
 								<FormControl className="form-area__control">
@@ -134,8 +135,7 @@ class Login extends Component {
 
 								<InputLabel
 									htmlFor="standard-adornment-password"
-									className="input-label"
-								>
+									className="input-label">
 									Password
 								</InputLabel>
 								<FormControl className="form-area__control" variant="outlined">
@@ -152,8 +152,7 @@ class Login extends Component {
 												<IconButton
 													aria-label="toggle password visibility"
 													onClick={this.handleClickShowPassword}
-													edge="end"
-												>
+													edge="end">
 													{this.state.showPassword ? (
 														<Visibility />
 													) : (
@@ -178,8 +177,7 @@ class Login extends Component {
 							<ToastContainer />
 								 <CustomButton
 									onClick={this.handleSubmit}
-									className="login__button primary-button"
-								>
+									className="login__button primary-button">
 									{/* {isLoaded ? "Loading..." : "Log In" } */}
 									Log In
 								</CustomButton>
