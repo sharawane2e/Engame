@@ -77,15 +77,17 @@ const ToolCards = () => {
               
                   <div className="toolcard__align toolcard__toolicons">
                     <div className="toolcard__items toolcard__download">
-                     
-                        <span className="toolcard__sub-icons">
-                          <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
-                        </span>
+                     {user?
+                      <span className="toolcard__sub-icons">
+                      <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
+                    </span>:null 
+                    }
+                        
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
-                        {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> */}
-                        <ShoppingCartIcon />
+                      <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> 
+                        {/* <ShoppingCartIcon /> */}
                       </span>
                     </div>
                   </div>

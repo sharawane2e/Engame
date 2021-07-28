@@ -15,13 +15,15 @@
 }
 }
 .forgot{
+  .form-area__control{
+    width: 100%;
+  }
     font-family: map-get($map: $font-family, $key:"font-barlowmedium" );
     background-color: map-get($map: $background-color, $key:"secondary" );
-    min-height: 83vh;
+    min-height: 88vh;
     width: 100%;
     display: flex;
     align-items: center;
-    text-align: center;
     form{
       width: 30%;
       padding: 30px;
@@ -36,7 +38,6 @@
       }
       label{
         display: block;
-        margin:10px 0;
         text-align: left;
       }
       input{
