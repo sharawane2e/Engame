@@ -41,7 +41,7 @@ const EmbedCode = ({data, toolId}) => {
             <div className="embeded-conatiner__buttton-group">
                  <CustomButton  onClick={copyToClipboard}
                     className='secondary-button margin-right-20'>
-                    <FileCopyIcon className="margin-right-15"/> Copy to Clipboard {copySuccess}
+                    <FileCopyIcon className="margin-right-15"/> {copySuccess ? copySuccess : "Copy to Clipboard"} 
                 </CustomButton>
                 <CustomButton onClick={downloadfile}
                     className='primary-button'>
