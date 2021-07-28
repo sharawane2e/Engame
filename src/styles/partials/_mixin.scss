@@ -11,14 +11,20 @@
 
 @mixin breakpoint($point) {
 	@if $point == desktop {
-		@media (min-width: 1440px) {
+		@media (min-width: 1366px) {
 			@content;
 		}
 	} @else if $point == laptop {
+		@media (min-width: 1400px) {
+			@content;
+		}
+	} 
+	 @else if $point == lg-desktop {
 		@media (min-width: 1920px) {
 			@content;
 		}
-	} @else if $point == Ipad {
+	} 	
+	@else if $point == Ipad {
 		@media (min-width: 768px) {
 			@content;
 		}
@@ -32,6 +38,7 @@
 		}
 	}
 }
+
 
 @mixin space($type,$direction,$amount) {
 	@if $type == padding {
@@ -64,12 +71,3 @@
 	}
   }
 
-
-$paddingDirection:('right','left','top','bottom');
-$paddingLength:(15,30,45,50);
-
-@each $dir in $paddingDirection{
-  @each $len in $paddingLength{
-    %padding-#{$dir}-#{$len}{ padding-#{$dir}: #{$len}px;}
-  }
-}
