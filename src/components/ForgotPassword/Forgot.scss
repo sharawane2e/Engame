@@ -14,3 +14,46 @@
     }
 }
 }
+.forgot{
+    font-family: map-get($map: $font-family, $key:"font-barlowmedium" );
+    background-color: map-get($map: $background-color, $key:"secondary" );
+    min-height: 83vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    form{
+      width: 30%;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #fff;
+      margin: 0 auto;
+      .form-group{
+        margin-bottom: 25px;
+        &:last-child{
+          margin: 0;
+        }
+      }
+      label{
+        display: block;
+        margin:10px 0;
+        text-align: left;
+      }
+      input{
+        display: block;
+        width: 100%;
+        height: 50px;
+        outline: none;
+        padding: 0 0 0 10px;
+      }
+      button{
+        display: block;
+        width: 100%;
+        text-transform: capitalize;
+        font-size: 16px;
+        background-color: map-get($map: $background-color, $key:"secondary" );
+        padding: 10px 0;
+        cursor: pointer;
+      }
+    }
+}

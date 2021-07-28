@@ -4,6 +4,7 @@ import PageNotFoundScreen from "../screens/PageNotFoundScreen";
 import Home from "../components/Home";
 import Purchased from "../components/Purchased";
 import Cart from '../components/cart/Cart';
+import Forgot from "../components/ForgotPassword/Forgot";
 
 const Routes = [
     {
@@ -12,7 +13,7 @@ const Routes = [
         exact:true
     },
     {
-        path:["/", "/cart"],
+        path:["/", "/cart", "/forgot"],
         component:PublicScreen,
         exact:true,
         routes:[
@@ -20,6 +21,11 @@ const Routes = [
             {
                 path:"/cart",
                 component:Cart,
+                exact:true,
+            },
+            {
+                path:"/forgot",
+                component:Forgot,
                 exact:true,
             },
             {
