@@ -77,10 +77,10 @@ const ToolCards = () => {
                   {user ? 
                   (<div className="toolcard__align toolcard__toolicons">
                     <div className="toolcard__items toolcard__download">
-                      {user.isLoggedIn?
+                      
                         <span className="toolcard__sub-icons">
                           <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
-                        </span>:null}
+                        </span>
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
