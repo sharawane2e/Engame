@@ -1,16 +1,19 @@
-.forgot--password{
-    padding-top: map-get($map:$padding , $key: "padding-40");
-    .form-button-grop{
-    .forgot__button{
+.forgot--password {
+  // padding-top: map-get($map: $padding, $key: "padding-40");
+  @include space(padding, top, $padding-40, 0);
+
+  .form-button-grop {
+    .forgot__button {
       min-width: 292px !important;
       // padding: 15px !important;
-      	@include space(padding, all, $padding-15 !important);
-        font-size: map-get($map: $text-size, $key: "large20");
-        @media (min-width: 1280px) and (max-width: 1365px) {
-          font-size: map-get($map: $text-size, $key: "xsmall");
-          padding-top: map-get($map: $padding, $key: "padding-15");
-          padding-bottom: map-get($map: $padding, $key: "padding-10");
-        }
+      @include space(padding, all, $padding-15 !important, 0);
+      font-size: map-get($map: $text-size, $key: "large20");
+      @media (min-width: 1280px) and (max-width: 1365px) {
+        font-size: map-get($map: $text-size, $key: "xsmall");
+        // padding-top: map-get($map: $padding, $key: "padding-15");
+        // padding-bottom: map-get($map: $padding, $key: "padding-10");
+        @include space(padding, top-bottom, $padding-15, $padding-10);
+      }
     }
-}
+  }
 }

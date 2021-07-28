@@ -1,54 +1,57 @@
 .header-bg {
   background-color: map-get($map: $background-color, $key: "secondary");
-  padding-top: map-get($map: $padding, $key: "padding-25");
-  padding-bottom: map-get($map: $padding, $key: "padding-25");
+  // padding-top: map-get($map: $padding, $key: "padding-25");
+  @include space(padding, top-bottom, $padding-25, $padding-25);
+
+  // padding-bottom: map-get($map: $padding, $key: "padding-25");
 }
 .MuiPaper-elevation4 {
-box-shadow: none !important;
-
+  box-shadow: none !important;
 }
-.header-box{
+.header-box {
   z-index: 99;
-.header-text-color {
-  display: flex;
-  align-items: map-get($map: $alignment, $key: align-center);
-  color: map-get($map: $text-color, $key: "black-light");
-  
-}
-.shoping__card {
-  padding-left: map-get($map: $padding, $key: "padding-15");
-  cursor: pointer;
-  position: relative;
-  a{
-    color:map-get($map: $text-color, $key: "black-light");
+  .header-text-color {
+    display: flex;
+    align-items: map-get($map: $alignment, $key: align-center);
+    color: map-get($map: $text-color, $key: "black-light");
   }
-}
-.userForm{
-  min-width:  120px !important;
-}
-.login__registration{
-  display: flex;
-}
-.menu-button{
-  font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  font-size: map-get($map:$text-size , $key: "large20");
-  padding: map-get($map:$padding , $key:"padding-15" );
-  cursor: pointer;
-  
-}
-.user-after-login{
-  .custom-button{
-    color: #363636;
-    font-size: 18px;
-    font-family: "barlowmedium";
+  .shoping__card {
+    // padding-left: map-get($map: $padding, $key: "padding-15");
+    @include space(padding, left, $padding-15, 0);
+
     cursor: pointer;
-    font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    &:hover{
-      background-color: transparent !important;
+    position: relative;
+    a {
+      color: map-get($map: $text-color, $key: "black-light");
     }
   }
-  .user-btn{
-    width: auto !important;
+  .userForm {
+    min-width: 120px !important;
   }
-}
+  .login__registration {
+    display: flex;
+  }
+  .menu-button {
+    font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+    font-size: map-get($map: $text-size, $key: "large20");
+    // padding: map-get($map: $padding, $key: "padding-15");
+    @include space(padding, all, $padding-15, 0);
+
+    cursor: pointer;
+  }
+  .user-after-login {
+    .custom-button {
+      color: #363636;
+      font-size: 18px;
+      font-family: "barlowmedium";
+      cursor: pointer;
+      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+    .user-btn {
+      width: auto !important;
+    }
+  }
 }

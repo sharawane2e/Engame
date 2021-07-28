@@ -1,45 +1,53 @@
 .toolcard {
-  padding-top: map-get($map: $padding, $key: "padding-40");
-  padding-bottom: map-get($map: $padding, $key: "padding-40");
+  // padding-top: map-get($map: $padding, $key: "padding-40");
+  // padding-bottom: map-get($map: $padding, $key: "padding-40");
+  @include space(padding, top-bottom, $padding-40, $padding-40);
+
   display: block !important;
   padding-left: 0;
-  #{&}__imageblck{
-    &:hover{
-    border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map:$text-color , $key:"red-dark" );
-    @include box-shadow(
-    0px,
-    0px,
-    4px,
-    map-get($map: $boxshadow, $key: "red-smooth")
-  );  
-  .toolcard__preview{
-        display: block ;
+  #{&}__imageblck {
+    &:hover {
+      border: map-get($map: $border-color, $key: "border-width")
+        map-get($map: $border-color, $key: "bsolid")
+        map-get($map: $text-color, $key: "red-dark");
+      @include box-shadow(
+        0px,
+        0px,
+        4px,
+        map-get($map: $boxshadow, $key: "red-smooth")
+      );
+      .toolcard__preview {
+        display: block;
       }
       // .toolcard__sub-icons{
       //   border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map: $background-color, $key: "button-secondary");
-        
+
       //   &>svg{
       //     fill: map-get($map: $background-color, $key: "button-secondary");
       //   }
       // }
-      +.toolcard__align{
+      + .toolcard__align {
         color: map-get($map: $text-color, $key: "red-dark");
         font-weight: map-get($map: $font-weight, $key: "font-500");
       }
     }
-    border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid")  map-get($map: $boxshadow, $key: "black-1");
+    border: map-get($map: $border-color, $key: "border-width")
+      map-get($map: $border-color, $key: "bsolid")
+      map-get($map: $boxshadow, $key: "black-1");
     @include box-shadow(
-    0px,
-    0px,
-    4px,
-    map-get($map: $boxshadow, $key: "black-smooth")
-  );
-  border-radius: map-get($map: $border-round, $key: "boder-radius");
+      0px,
+      0px,
+      4px,
+      map-get($map: $boxshadow, $key: "black-smooth")
+    );
+    border-radius: map-get($map: $border-round, $key: "boder-radius");
   }
   #{&}__image {
     text-align: map-get($map: $alignment, $key: "align-center");
-    padding-top:map-get($map: $padding, $key: padding-16); 
-    padding-bottom:map-get($map: $padding, $key: padding-16); 
+    // padding-top: map-get($map: $padding, $key: padding-16);
+    // padding-bottom: map-get($map: $padding, $key: padding-16);
+    @include space(padding, top-bottom, $padding-16, $padding-16);
+
     position: relative;
     > img {
       max-width: 100%;
@@ -47,44 +55,56 @@
       max-height: 95px;
     }
   }
-  #{&}__preview{
+  #{&}__preview {
     position: absolute;
-    background: map-get($map:$background-color , $key: "overlay-color");
+    background: map-get($map: $background-color, $key: "overlay-color");
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     display: none;
   }
-  #{&}__perview-button{
+  #{&}__perview-button {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: map-get($map:$background-color , $key:"button-secondary" );
-    color: map-get($map: $background-color, $key:"primary" );
-    font-size: map-get($map: $text-size, $key: "mbregular") ;
-    padding: map-get($map: $padding, $key: "padding-2") map-get($map: $padding, $key:"padding-15");
-    border-radius: map-get($map: $border-round, $key:"boder-radius" );
-    &:hover{
-      background-color: map-get($map:$background-color , $key:"button-secondary" );
+    background-color: map-get(
+      $map: $background-color,
+      $key: "button-secondary"
+    );
+    color: map-get($map: $background-color, $key: "primary");
+    font-size: map-get($map: $text-size, $key: "mbregular");
+    // padding: map-get($map: $padding, $key: "padding-2")
+    //   map-get($map: $padding, $key: "padding-15");
+    @include space(padding, top-bottom, $padding-15, $padding-15);
+    @include space(padding, left-right, $padding-2, $padding-2);
+
+    border-radius: map-get($map: $border-round, $key: "boder-radius");
+    &:hover {
+      background-color: map-get(
+        $map: $background-color,
+        $key: "button-secondary"
+      );
     }
-    &>span{
+    & > span {
       font-size: map-get($map: $text-size, $key: "regular");
       font-weight: map-get($map: $font-weight, $key: "font-normal");
     }
-    .MuiButton-label{
-    >svg{
-      width: 18px;
-      height: 18px;
+    .MuiButton-label {
+      > svg {
+        width: 18px;
+        height: 18px;
+      }
     }
-   }
   }
-  .eyes_icon{
-    margin-right: map-get($map: $margin, $key: "margin-5");
+  .eyes_icon {
+    // margin-right: map-get($map: $margin, $key: "margin-5");
+    @include space(margin, right, $margin-5, 0);
   }
-  #{&}__toolicons{
-    padding:map-get($map: $padding, $key: padding-16); 
+  #{&}__toolicons {
+    // padding: map-get($map: $padding, $key: padding-16);
+    @include space(padding, all, $padding-16, 0);
   }
   #{&}__align {
     display: flex;
@@ -104,21 +124,25 @@
     border: map-get($map: $border-color, $key: "border-width")
       map-get($map: $border-color, $key: bsolid)
       map-get($map: $border-round, $key: accent);
-    border-radius: map-get($map: $border-round, $key: "boder-radius"); 
-    padding: map-get($map: $padding, $key: "padding-8");
-    &>svg{
-       fill: map-get($map:$border-round , $key: "accent");
-       &:hover{
+    border-radius: map-get($map: $border-round, $key: "boder-radius");
+    // padding: map-get($map: $padding, $key: "padding-8");
+    @include space(padding, all, $padding-8, 0);
+
+    & > svg {
+      fill: map-get($map: $border-round, $key: "accent");
+      &:hover {
         fill: map-get($map: $background-color, $key: "button-secondary");
-       }
+      }
     }
-    &:hover{
-      border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map: $background-color, $key: "button-secondary");
+    &:hover {
+      border: map-get($map: $border-color, $key: "border-width")
+        map-get($map: $border-color, $key: "bsolid")
+        map-get($map: $background-color, $key: "button-secondary");
     }
   }
-  #{&}__font-family{
-    font-family: map-get($map:$font-family , $key: "font-barlowmedium");
-    font-size: map-get($map:$text-size , $key: "regular");
+  #{&}__font-family {
+    font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+    font-size: map-get($map: $text-size, $key: "regular");
   }
   #{&}__aligninr1 {
     display: flex;
@@ -130,22 +154,22 @@
     justify-content: flex-end;
   }
   #{&}__toolname {
-    margin-top: map-get($map: $margin, $key: "margin-10");
-    margin-bottom: map-get($map: $margin, $key: "margin-10");
+    // margin-top: map-get($map: $margin, $key: "margin-10");
+    // margin-bottom: map-get($map: $margin, $key: "margin-10");
+    @include space(margin, top-bottom, $margin-10, $margin-10);
   }
-  
-  .popup-container__footer{
+
+  .popup-container__footer {
     display: flex;
-    .add--card{
-       width: 178px !important;
+    .add--card {
+      width: 178px !important;
       margin: 0 auto;
-      .MuiButton-label{>svg{
-        margin-right: map-get($map: $margin, $key:"margin-5");
+      .MuiButton-label {
+        > svg {
+          // margin-right: map-get($map: $margin, $key: "margin-5");
+          @include space(margin, right, $margin-5, 0);
+        }
       }
-    }
     }
   }
 }
-
-
-

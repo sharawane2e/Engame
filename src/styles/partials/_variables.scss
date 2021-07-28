@@ -1,145 +1,131 @@
 $font-family: (
-	"font-barlowmedium": "barlowmedium",
-	"font-barlowbold": "barlowbold",
-	"font-barlowitalic": "barlowitalic",
-	"font-barlowlight": "barlowlight",
-	"font-barlowregular": "barlowregular",
+  "font-barlowmedium": "barlowmedium",
+  "font-barlowbold": "barlowbold",
+  "font-barlowitalic": "barlowitalic",
+  "font-barlowlight": "barlowlight",
+  "font-barlowregular": "barlowregular",
 );
-$text-size: (
-	"xxl": 50px,
-	"xl": 32px,
-	"xl42": 42px,
-	"large25": 25px,
-	"large30": 30px,
-	"large20": 20px,
-	"large": 18px,
-	"regular": 16px,
-	"small": 14px,
-	"xsmall": 12px,
-	"mbregular": 10px,
-);
+
 $heading-size: (
-	"large": 40px,
-	"regular": 30px,
-	"small": 22px,
-	"medium": 20px,
-	"extra-medum": 24px,
+  "large": 40px,
+  "regular": 30px,
+  "small": 22px,
+  "medium": 20px,
+  "extra-medum": 24px,
 );
 
 $opacity: (
-	"opacity-1": 0.1,
-	"opacity-5": 0.5,
-	"opacity-6": 0.6,
-	"opacity-10": 1,
+  "opacity-1": 0.1,
+  "opacity-5": 0.5,
+  "opacity-6": 0.6,
+  "opacity-10": 1,
 );
 
 $background-color: (
-	"primary": #ffffff,
-	"secondary": #ececec,
-	"border-secondary": #efefef,
-	"back-color": #d6d6d6,
-	"button-primary": #f15a5c,
-	"button-secondary": #f15b5b,
-	"transparent": transparent,
-	"overlay-color": rgba(241, 91, 91, 0.31),
+  "primary": #ffffff,
+  "secondary": #ececec,
+  "border-secondary": #efefef,
+  "back-color": #d6d6d6,
+  "button-primary": #f15a5c,
+  "button-secondary": #f15b5b,
+  "transparent": transparent,
+  "overlay-color": rgba(241, 91, 91, 0.31),
 );
 $text-color: (
-	"black-light": #363636,
-	"black-drak": #383838,
-	"black-smooth": #b3b3b3,
-	"black-gray": #9d9d9d,
-	"red-dark": #f15b5b,
+  "black-light": #363636,
+  "black-drak": #383838,
+  "black-smooth": #b3b3b3,
+  "black-gray": #9d9d9d,
+  "red-dark": #f15b5b,
 );
 $border-round: (
-	"accent": #e3ebf7,
-	"light-smooth": #d4d4d4,
-	"boder-radius": 6px,
+  "accent": #e3ebf7,
+  "light-smooth": #d4d4d4,
+  "boder-radius": 6px,
 );
 $border-color: (
-	"border-width": 1px,
-	"bsolid": solid,
-	"dotted": dotted,
-	"red-dark": #f15b5b,
-	"gray": #d6d6d6,
+  "border-width": 1px,
+  "bsolid": solid,
+  "dotted": dotted,
+  "red-dark": #f15b5b,
+  "gray": #d6d6d6,
 );
 $boxshadow: (
-	"red-smooth": rgba(241, 91, 91, 0.5),
-	"black-smooth": rgba(0, 0, 0, 0.25),
-	"black-1": rgba(0, 0, 0, 0.1),
-	"black-4": rgba(0, 0, 0, 0.4),
+  "red-smooth": rgba(241, 91, 91, 0.5),
+  "black-smooth": rgba(0, 0, 0, 0.25),
+  "black-1": rgba(0, 0, 0, 0.1),
+  "black-4": rgba(0, 0, 0, 0.4),
 );
 
 $fill-color: (
-	"primary-color": #ffffff,
-	"black-smdark": rgba(132, 132, 132, 0.5),
+  "primary-color": #ffffff,
+  "black-smdark": rgba(132, 132, 132, 0.5),
 );
 $font-weight: (
-	"bold": bold,
-	"font-normal": normal,
-	"font-500": 500,
-	"font-600": 600,
-	"font-700": 700,
-	"font-800": 800,
+  "bold": bold,
+  "font-normal": normal,
+  "font-500": 500,
+  "font-600": 600,
+  "font-700": 700,
+  "font-800": 800,
 );
 $alignment: (
-	"align-center": center,
-	"align-right": right,
-	"align-left": left,
+  "align-center": center,
+  "align-right": right,
+  "align-left": left,
 );
 $fillcolor: (
-	"red-dark": #f15b5b,
-	"gray-light": #d6d6d6,
+  "red-dark": #f15b5b,
+  "gray-light": #d6d6d6,
 );
 
-$padding: (
-	"padding-2": 2px,
-	"padding-5": 5px,
-	"padding-8": 8px,
-	"padding-10": 10px,
-	"padding-12": 12px,
-	"padding-14": 14px,
-	"padding-15": 15px,
-	"padding-16": 16px,
-	"padding-18": 18px,
-	"padding-20": 20px,
-	"padding-24": 24px,
-	"padding-25": 25px,
-	"padding-30": 30px,
-	"padding-35": 35px,
-	"padding-40": 40px,
-	"padding-50": 50px,
-	"padding-90": 90px,
-);
+// $padding: (
+//   "padding-2": 2px,
+//   "padding-5": 5px,
+//   "padding-8": 8px,
+//   "padding-10": 10px,
+//   "padding-12": 12px,
+//   "padding-14": 14px,
+//   "padding-15": 15px,
+//   "padding-16": 16px,
+//   "padding-18": 18px,
+//   "padding-20": 20px,
+//   "padding-24": 24px,
+//   "padding-25": 25px,
+//   "padding-30": 30px,
+//   "padding-35": 35px,
+//   "padding-40": 40px,
+//   "padding-50": 50px,
+//   "padding-90": 90px,
+// );
 
-$margin: (
-	"margin-0": 0,
-	"margin-5": 5px,
-	"margin-8": 8px,
-	"margin-10": 10px,
-	"margin-12": 12px,
-	"margin-14": 14px,
-	"margin-15": 15px,
-	"margin-16": 16px,
-	"margin-18": 18px,
-	"margin-20": 20px,
-	"margin-25": 25px,
-	"margin-30": 30px,
-	"margin-40": 40px,
-	"margin-45": 45px,
-	"margin-50": 50px,
-);
+// $margin: (
+//   "margin-0": 0,
+//   "margin-5": 5px,
+//   "margin-8": 8px,
+//   "margin-10": 10px,
+//   "margin-12": 12px,
+//   "margin-14": 14px,
+//   "margin-15": 15px,
+//   "margin-16": 16px,
+//   "margin-18": 18px,
+//   "margin-20": 20px,
+//   "margin-25": 25px,
+//   "margin-30": 30px,
+//   "margin-40": 40px,
+//   "margin-45": 45px,
+//   "margin-50": 50px,
+// );
 
 $grid-breakpoints: (
-	xs: 0,
-	sm: 576px,
-	md: 768px,
-	lg: 992px,
-	xl: 1200px,
-	xxl: 1440px,
-	mobile: 640px,
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1440px,
+  mobile: 640px,
 ) !default;
-
-
 
 $padding-0: 0px;
 $padding-2: 2px;
@@ -178,3 +164,28 @@ $margin-35: 35px;
 $margin-40: 40px;
 $margin-50: 50px;
 $margin-86: 86px;
+
+$text-size: (
+  "xxl": 3.125rem,
+  "xl": 2rem,
+  "xl42": 42px,
+  "large25": 2.625rem,
+  "large30": 1.875rem,
+  "large20": 1.25rem,
+  "large": 1.125rem,
+  "regular": 1rem,
+  "small": 0.875rem,
+  "xsmall": 0.75rem,
+  "mbregular": 0.625rem,
+);
+$text-size-xxl: 3.125rem;
+$text-size-xl: 3.125rem;
+$text-size-xl42: 3.125rem;
+$text-size-large25: 3.125rem;
+$text-size-large30: 3.125rem;
+$text-size-large20: 3.125rem;
+$text-size-large: 3.125rem;
+$text-size-regular: 3.125rem;
+$text-size-small: 3.125rem;
+$text-size-xsmall: 3.125rem;
+$text-size-mbregular: 3.125rem;

@@ -1,73 +1,137 @@
 @mixin border-radius($r) {
-	border-radius: $r;
+  border-radius: $r;
 }
 
 @mixin box-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $color: $primary) {
-	box-shadow: $x-axis $y-axis $blur $color;
+  box-shadow: $x-axis $y-axis $blur $color;
 }
 @mixin card-box-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $color: $primary) {
-	box-shadow: $x-axis $y-axis $blur $color !important;
+  box-shadow: $x-axis $y-axis $blur $color !important;
 }
 
 @mixin breakpoint($point) {
-	@if $point == desktop {
-		@media (min-width: 1366px) {
-			@content;
-		}
-	} @else if $point == laptop {
-		@media (min-width: 1400px) {
-			@content;
-		}
-	} 
-	 @else if $point == lg-desktop {
-		@media (min-width: 1920px) {
-			@content;
-		}
-	} 	
-	@else if $point == Ipad {
-		@media (min-width: 768px) {
-			@content;
-		}
-	} @else if $point == Ipad-pro {
-		@media (max-width: 1024px) {
-			@content;
-		}
-	} @else if $point == mobileonly {
-		@media (max-width: 640px) {
-			@content;
-		}
-	}
+  @if $point == desktop {
+    @media (min-width: 1366px) {
+      @content;
+    }
+  } @else if $point == laptop {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  } @else if $point == lg-desktop {
+    @media (min-width: 1920px) {
+      @content;
+    }
+  } @else if $point == Ipad {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      @content;
+    }
+  } @else if $point == Ipad-pro {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $point == mobileonly {
+    @media (max-width: 640px) {
+      @content;
+    }
+  }
 }
 
+// @mixin space($type, $direction, $first, $second) {
+//   @if $type == padding {
+//     @if $direction == all {
+//       padding: $amount;
+//     } @else if $direction == top {
+//       padding-top: $amount;
+//     } @else if $direction == top {
+//       padding-top: $amount;
+//     } @else if $direction == bottom {
+//       padding-bottom: $amount;
+//     } @else if $direction == left {
+//       padding-left: $amount;
+//     } @else if $direction == right {
+//       padding-right: $amount;
+//     }
+//   }
+//   @if $type == margin {
+//     @if $direction == all {
+//       margin: $amount;
+//     } @else if $direction == top {
+//       margin-top: $amount;
+//     } @else if $direction == bottom {
+//       margin-bottom: $amount;
+//     } @else if $direction == left {
+//       margin-left: $amount;
+//     } @else if $direction == right {
+//       margin-right: $amount;
+//     }
+//   }
+// }
 
-@mixin space($type,$direction,$amount) {
-	@if $type == padding {
-	  @if $direction == all {
-		padding: $amount;
-	  } @else if $direction == top {
-		padding-top: $amount;
-	  } @else if $direction == top {
-		padding-top: $amount;
-	  } 
-	  @else if $direction == bottom {
-		padding-bottom: $amount;
-	  } @else if $direction == left {
-		padding-left: $amount;
-	  } @else if $direction == right {
-		padding-right: $amount;
-	  } 
-	} @else {
-	  @if $direction == all {
-		margin: $amount;
-	  } @else if $direction == top {
-		margin-top: $amount;
-	  } @else if $direction == bottom {
-		margin-bottom: $amount;
-	  } @else if $direction == left {
-		margin-left: $amount;
-	  } @else if $direction == right {
-		margin-right: $amount;
-	  } 
-	}
+// // @mixin space($type, $direction, $amount: padding) {
+// //   @if $type == padding {
+// //     @if $direction == all {
+// //       padding: $amount;
+// //     } @else if $direction == top {
+// //       padding-top: $amount;
+// //     } @else if $direction == bottom {
+// //       padding-bottom: $amount;
+// //     } @else if $direction == left {
+// //       padding-left: $amount;
+// //     } @else if $direction == right {
+// //       padding-right: $amount;
+// //     }
+// //   } @else {
+// //     @if $direction == all {
+// //       margin: $amount;
+// //     } @else if $direction == top {
+// //       margin-top: $amount;
+// //     } @else if $direction == bottom {
+// //       margin-bottom: $amount;
+// //     } @else if $direction == left {
+// //       margin-left: $amount;
+// //     } @else if $direction == right {
+// //       margin-right: $amount;
+// //     }
+// //   }
+// // }
+@mixin space($type, $direction, $first, $second) {
+  @if $type == padding {
+    @if $direction == all {
+      padding: $first;
+    } @else if $direction == top-bottom {
+      padding-top: $first;
+      padding-bottom: $second;
+    } @else if $direction == left-right {
+      padding-left: $first;
+      padding-right: $second;
+    } @else if $direction == top {
+      padding-top: $first;
+    } @else if $direction == bottom {
+      padding-bottom: $first;
+    } @else if $direction == left {
+      padding-left: $first;
+    } @else if $direction == right {
+      padding-right: $first;
+    }
   }
-
+  @if $type == margin {
+    @if $direction == all {
+      padding: $first;
+    } @else if $direction == top-bottom {
+      margin-top: $first;
+      margin-bottom: $second;
+    } @else if $direction == left-right {
+      margin-left: $first;
+      margin-right: $second;
+    } @else if $direction == top {
+      margin-top: $first;
+    } @else if $direction == bottom {
+      margin-bottom: $first;
+    } @else if $direction == left {
+      margin-left: $first;
+    } @else if $direction == right {
+      margin-right: $first;
+    }
+  }
+}

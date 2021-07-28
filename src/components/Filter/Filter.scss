@@ -1,49 +1,53 @@
-.filter-tool-shadow{
+.filter-tool-shadow {
   @include box-shadow(
     0px,
     0px,
     6px,
     map-get($map: $boxshadow, $key: "black-smooth")
   );
- &.filter--fixed{
-  // padding-top: 101px;
-}
-
-.filter-section {
-  width: 90%;
-  margin: map-get($map: $margin, $key: "margin-0") auto;
-  .MuiPaper-elevation1 {
-    box-shadow: none !important;
-  }
-  .MuiPaper-root {
-    background-color: map-get(
-      $map: $background-color,
-      $key: "transparent"
-    ) !important;
-  }
-  .review-text {
-    font-weight: map-get($map: $font-weight, $key: "font-600");
-    color: map-get($map: $text-color, $key: "red-dark");
-    font-size: map-get($map: $text-size, $key: "xxl");
+  &.filter--fixed {
+    // padding-top: 101px;
   }
 
-  .filter-text {
-    font-weight: map-get($map: $font-weight, $key: "font-600");
-    color: map-get($map: $text-color, $key: "black-drak");
-    font-size: map-get($map: $text-size, $key: "xxl");
-  }
-  .filter-normal-text {
-    color: map-get($map: $text-color, $key: "black-drak");
-    font-size: map-get($map: $text-size, $key: "large20");
-    font-weight: map-get($map: $font-weight, $key: "font-600");
-    margin-top: map-get($map: $margin, $key: "margin-15");
-  }
-  .paperstyel {
-    > img {
-      max-width: 100%;
+  .filter-section {
+    width: 90%;
+    // margin: map-get($map: $margin, $key: "margin-0") auto;
+    @include space(margin, top-bottom, $margin-8, $margin-8);
+    @include space(margin, left-right, auto, auto);
+
+    .MuiPaper-elevation1 {
+      box-shadow: none !important;
+    }
+    .MuiPaper-root {
+      background-color: map-get(
+        $map: $background-color,
+        $key: "transparent"
+      ) !important;
+    }
+    .review-text {
+      font-weight: map-get($map: $font-weight, $key: "font-600");
+      color: map-get($map: $text-color, $key: "red-dark");
+      font-size: map-get($map: $text-size, $key: "xxl");
+    }
+
+    .filter-text {
+      font-weight: map-get($map: $font-weight, $key: "font-600");
+      color: map-get($map: $text-color, $key: "black-drak");
+      font-size: map-get($map: $text-size, $key: "xxl");
+    }
+    .filter-normal-text {
+      color: map-get($map: $text-color, $key: "black-drak");
+      font-size: map-get($map: $text-size, $key: "large20");
+      font-weight: map-get($map: $font-weight, $key: "font-600");
+      // margin-top: map-get($map: $margin, $key: "margin-15");
+      @include space(margin, top, $margin-15, 0);
+    }
+    .paperstyel {
+      > img {
+        max-width: 100%;
+      }
     }
   }
-}
 }
 .filter-inputsection {
   #{&}__form {
@@ -52,12 +56,14 @@
         $map: $background-color,
         $key: "back-color"
       ) !important;
-      padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-20");
+      // padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-20");
+      @include space(padding, top-bottom, $padding-5, $padding-5);
+      @include space(padding, left-right, $padding-20, $padding-20);
       border-top-left-radius: map-get(
         $map: $border-round,
         $key: "boder-radius"
       );
-      
+
       border-bottom-left-radius: map-get(
         $map: $border-round,
         $key: "boder-radius"
@@ -77,13 +83,19 @@
     }
   }
   #{&}__icon {
-    padding:map-get($map: $padding, $key: "padding-5")  map-get($map: $padding, $key: "padding-20") map-get($map: $padding, $key: "padding-10") map-get($map: $padding, $key: "padding-10");
+    // padding: map-get($map: $padding, $key: "padding-5")
+    //   map-get($map: $padding, $key: "padding-20")
+    //   map-get($map: $padding, $key: "padding-10")
+    //   map-get($map: $padding, $key: "padding-10");
+    @include space(padding, top-bottom, $padding-5, $padding-5);
+    @include space(padding, left-right, $padding-10, $padding-10);
+
     color: map-get($map: $text-color, $key: "black-drak");
     &:hover {
       border-radius: map-get($map: $border-round, $key: "boder-radius");
     }
-    .MuiIconButton-label{
-      >svg{
+    .MuiIconButton-label {
+      > svg {
         margin-right: 10px;
       }
     }
