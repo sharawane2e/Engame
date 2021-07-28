@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import CustomButton from "../../components/widgets/Button";
 import GetAppIcon from '@material-ui/icons/GetApp';
-import copy from "copy-to-clipboard";  
+// import copy from "copy-to-clipboard";  
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 const EmbedCode = ({data, toolId}) => {
@@ -12,7 +12,7 @@ const EmbedCode = ({data, toolId}) => {
         setCopyText(e.target.value);
      } 
      const copyToClipboard = () => {
-        copy(copyText);
+        //copy(copyText);
         alert(`You have copied "${copyText}"`);
      }
 
