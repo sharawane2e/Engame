@@ -1,30 +1,17 @@
 $(document).ready(function(){
 
 
-        fetch("https://api.etherscan.io/api?module=stats&action=ethprice",{
-            method:"POST",
-            // headers:"",
-            body:JSON.stringify()
-        }).then((result)=>result.json())
-        .then((res)=>{
-            if(res.status=="1"){
-                after_logindata();
-                }
-            else{
-                console.log("error");
-            }
-        }
-        )
 
-
-        // $.get("https://api.etherscan.io/api?module=stats&action=ethprice", function(data) {
-        //     console.log(data.result.ethbtc_timestamp)
+        // $.get("https://api.tokenbalance.com/token/" + clientCode + "/" + widgetCode +'', function(data) {
+        //     $("demo").html(data)
         // });
 
- 
-        
-        function after_logindata(){
-            var htmlElemnt='<div class="carousel-container"> \
+        $.get("https://api.etherscan.io/api?module=stats&action=ethprice", function(data) {
+          //  console.log(data.result.ethbtc_timestamp)
+        });
+
+    if(clientCode==clientCode){
+        var htmlElemnt='<div class="carousel-container"> \
         <div class="carousel-slide clearfix"></div> \
             </div> \
             <div class="buttons-continer"> \
@@ -133,7 +120,17 @@ $(document).ready(function(){
     carouselApp.initApp();
     carouselApp.nextRating();
     carouselApp.prevRating();
-        }
-    
+    }
+    else{
+        $("body").addClass("popup");
+         $('body').append('<div class="popup-outer">\
+        <div class="popup-iner">\
+          <div class="popup-text"> You have maxed out your limit. Please upgrade your subscription. \
+          </div> \
+          <div class="links">   <a href="http://localhost:3000/#/">Please click on link and go back</a>\
+           </div>\
+        </div>\
+        \</div>')
+    }
 
 });
