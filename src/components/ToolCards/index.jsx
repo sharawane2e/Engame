@@ -74,23 +74,23 @@ const ToolCards = () => {
                      </CustomButton>
                     </div>
                   </div>
-                  {user ? 
-                  (<div className="toolcard__align toolcard__toolicons">
+              
+                  <div className="toolcard__align toolcard__toolicons">
                     <div className="toolcard__items toolcard__download">
-                      {user.isLoggedIn?
-                        <span className="toolcard__sub-icons">
-                          <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
-                        </span>:null}
+                     {user?
+                      <span className="toolcard__sub-icons">
+                      <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
+                    </span>:null 
+                    }
+                        
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                       <span className="toolcard__sub-icons">
-                        {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> */}
-                        <ShoppingCartIcon />
+                      <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> 
+                        {/* <ShoppingCartIcon /> */}
                       </span>
                     </div>
-                  </div>)
-                  : null  
-                }
+                  </div>
                 </Paper>
                 <div className="toolcard__align toolcard__toolname">
                   <div className="toolcard__aligninr1 toolcard__font-family">{tooldata.toolname}</div>
@@ -150,3 +150,6 @@ const ToolCards = () => {
 };
  
 export default ToolCards;
+
+
+

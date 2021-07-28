@@ -1,0 +1,16 @@
+.curent-tool-name {
+  padding: 20px 0px 20px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: "barlowbold";
+  position: absolute;
+  top: 3px;
+  width: 50%;
+  font-size: 18px;
+}
+
+.tool-perview {
+  margin-top: 40px;
+}
+/*# sourceMappingURL=toolPerview.css.map */

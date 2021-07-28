@@ -6,6 +6,10 @@ import Link from '@material-ui/core/Link';
 import { ForgotValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import CustomButton from "../../components/widgets/Button"
+import { BASE_URL } from "../../config/ApiUrl";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { connect } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 
 class ForgotPassword extends Component {
      state = {
@@ -23,13 +27,27 @@ class ForgotPassword extends Component {
       }
 
       forgotSubmit = (e) => {
+		this.props.dispatch(loadingStart())
          e.preventDefault();
+         const {email} = this.state;
+         console.log(email);
+         fetch(BASE_URL+"user/password/reset/", {
+           method:"POST",
+           headers:{
+             "Content-Type":"application/json"
+           },
+           body:JSON.stringify({email:email})
+         }).then(result => result.json())
+           .then(res => {
+             toast(res.details)
+             this.props.dispatch(loadingStop())
+           })
       }
 
      handleChange = (e, key) => {
         let value = e.target.value;
         const validationResponse = this.ForgotPasswordVali.validateField(key, value);
-        console.log(validationResponse)
+        // console.log(validationResponse)
         const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
             this.setState({
         [key]: value,
@@ -50,12 +68,13 @@ class ForgotPassword extends Component {
         });
       }
      
- 
-render() {
-    return (      
-        <>
+      
+      render() {
+        return (      
+          <>
         {this.state.data?<Login />:
         <div className="form-area forgot--password">
+          <ToastContainer />
             <div className="form-area__login  large-hedding">Forgot Password</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
            <InputLabel htmlFor="standard-adornment-email" className="input-label">E-mail address</InputLabel> 
@@ -88,6 +107,11 @@ render() {
     );
   }
 }
-export default ForgotPassword;
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+export default connect()(ForgotPassword);
 
 

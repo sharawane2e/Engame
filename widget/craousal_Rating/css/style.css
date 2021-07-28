@@ -8,6 +8,40 @@ body,.carousel-rating-container, .carousel-rating-container *{
     box-sizing:border-box;
 	font-family:arial;
 }
+
+.popup-outer {
+    background: #46444447;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.popup-iner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 250px;
+    height: 100px;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+}
+
+.popup-text{
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+.links a{
+    text-decoration: none;
+    color:#f15b5b;
+    font-size: 14px;
+}
+.popup .carousel-rating-container,.popup .output{
+    display: none;
+}
 .respondent-info {
     padding: 10px 15px;
     color: #999;
