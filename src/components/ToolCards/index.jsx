@@ -108,7 +108,7 @@ const ToolCards = () => {
         <CustomPopup
            open={selectedTool}
              onClose={() => setSelectedTool(null)}
-            className="popup-container__iner--md border-radius tool-perview-data"
+            className="popup-container__iner--xxl border-radius tool-perview-data"
             >
           <ToolPerview tool={selectedTool}></ToolPerview>
           </CustomPopup>
@@ -117,7 +117,7 @@ const ToolCards = () => {
           <CustomPopup 
           open={ispopup} onClose={() =>setPopup(false)} 
           headerText="Embed code"
-          className="border-radius popup-container__iner--sm"
+          className="border-radius popup-container__iner--xl-md"
           >
           <Embedcode data={products} toolId={popupId} />
         </CustomPopup>

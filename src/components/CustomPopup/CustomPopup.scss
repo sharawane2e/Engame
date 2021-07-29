@@ -29,32 +29,57 @@
     background: map-get($map: $background-color, $key: "primary");
   }
 
-  #{&}__iner--xl {
-    width: 800px;
-    @include breakpoint(mobileonly) {
-      height: 98%;
-    }
+  #{&}__iner--xxl {
+    width: 1000px;
     @include breakpoint(Ipad-pro) {
       width: 90%;
+      height: 90vh;
+      overflow: auto;
     }
+    // @include breakpoint(mobileonly) {
+    //   height: 98%;
+    // }
+    // @include breakpoint(Ipad-pro) {
+    //   width: 90%;
+    // }
+  }
+
+  #{&}__iner--xl {
+    width: 800px;
+    // @include breakpoint(mobileonly) {
+    //   height: 98%;
+    // }
+    // @include breakpoint(Ipad-pro) {
+    //   width: 90%;
+    // }
   }
 
   #{&}__iner--md {
-    width: 75%;
-    @include breakpoint(mobileonly) {
-      width: 75%;
-    }
-    @include breakpoint(Ipad) {
-      width: 80%;
-    }
+    width: 500px;
+    
+    // @include breakpoint(Ipad) {
+    //   width: 80%;
+    // }
+    // @include breakpoint(Ipad-pro) {
+    //   width: 90%;
+    // }
+  }
+  #{&}__iner--xl-md {
+    width: 600px;
+    // @include breakpoint(mobileonly) {
+    //   width: 75%;
+    // }
+    // @include breakpoint(Ipad) {
+    //   width: 80%;
+    // }
     // @include breakpoint(Ipad-pro) {
     //   width: 90%;
     // }
   }
   #{&}__iner--sm {
-    width: 35%;
+    width: 400px;
     @include breakpoint(mobileonly) {
-      width: 75%;
+      // width: 75%;
     }
     // @include breakpoint(Ipad) {
     // 	width: 70%;
@@ -69,8 +94,8 @@
     //   map-get($map: $padding, $key: "padding-30")
     //   map-get($map: $padding, $key: "padding-20")
     //   map-get($map: $padding, $key: "padding-30");
-    @include space(padding, top-bottom, $padding-20, $padding-30);
-    @include space(padding, left-right, $padding-20, $padding-30);
+    @include space(padding, top-bottom, $padding-20, $padding-20);
+    @include space(padding, left-right, $padding-30, $padding-30);
 
     //  @include space(padding) {
     // 	width: 75%;

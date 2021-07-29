@@ -32,7 +32,7 @@ const EmbedCode = ({data, toolId}) => {
         <div className="embeded-conatiner">
         <TextareaAutosize
         ref={textAreaRef}
-        className="embeded-conatiner__embeded-code-textarea border-radius"
+        className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
             aria-label="maximum height"
             id="text-area"
             value= {state.map(item => item.id===toolId ? item.widget_embed_code : null)}

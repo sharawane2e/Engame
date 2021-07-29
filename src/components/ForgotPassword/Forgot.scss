@@ -1,12 +1,13 @@
 .forgot--password {
   // padding-top: map-get($map: $padding, $key: "padding-40");
-  @include space(padding, top, $padding-40, 0);
+  // @include space(padding, top, $padding-40, 0);
 
   .form-button-grop {
     .forgot__button {
       min-width: 292px !important;
+      width: 100%;
       // padding: 15px !important;
-      @include space(padding, all, $padding-15 !important, 0);
+      @include space(padding, all, $padding-12 !important, 0);
       font-size: map-get($map: $text-size, $key: "large20");
       @media (min-width: 1280px) and (max-width: 1365px) {
         font-size: map-get($map: $text-size, $key: "xsmall");
@@ -19,6 +20,8 @@
 }
 
 .forgot {
+  
+
   .form-area__control {
     width: 100%;
   }
@@ -28,12 +31,22 @@
   width: 100%;
   display: flex;
   align-items: center;
+  @include breakpoint(mobileonly) {
+   // min-height: 76vh;
+  }
   form {
     width: 30%;
     padding: 30px;
     border-radius: 10px;
     background-color: #fff;
     margin: 0 auto;
+    @include breakpoint(Ipad) {
+     width: 50%;
+    }
+    @include breakpoint(mobileonly) {
+     width: 90%;
+    }
+
     .form-group {
       margin-bottom: 25px;
       &:last-child {
@@ -47,7 +60,7 @@
     input {
       display: block;
       width: 100%;
-      height: 50px;
+      height: 40px;
       outline: none;
       padding: 0 0 0 10px;
     }

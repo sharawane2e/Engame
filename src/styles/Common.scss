@@ -26,6 +26,9 @@ body {
   // padding: map-get($map: $padding, $key: padding-16);
   @include space(padding, all, $padding-16, 0);
   text-align: map-get($map: $alignment, $key: align-left);
+  @include breakpoint(Ipad-pro) {
+    padding: 0;
+  }
 }
 .input {
   flex: 1;
@@ -39,6 +42,9 @@ body {
 .divider {
   height: 40px !important;
   margin: 4px !important;
+  @include breakpoint(Ipad-pro) {
+    height: 30px !important;
+  }
 }
 
 .large-hedding {
@@ -71,13 +77,13 @@ body {
 .border-bottom {
   border-bottom: map-get($map: $border-color, $key: border-width)
     map-get($map: $border-color, $key: bsolid)
-    map-get($map: $text-color, $key: black-smooth);
+    map-get($map: $border-color, $key: "gray");
 }
 
 .border-allside {
   border: map-get($map: $border-color, $key: border-width)
     map-get($map: $border-color, $key: bsolid)
-    map-get($map: $border-color, $key: red-dark);
+    map-get($map: $border-color, $key: "dark-gray");
 }
 .border-allside-gray {
   border: map-get($map: $border-color, $key: border-width)
@@ -104,7 +110,7 @@ a {
   ) !important;
   line-height: inherit !important;
   border-radius: map-get($map: $border-round, $key: "boder-radius") !important;
-  font-size: map-get($map: $text-size, $key: "large20") !important;
+  font-size: map-get($map: $text-size, $key: "regular") !important;
   @include box-shadow(
     0px,
     10px,
@@ -112,16 +118,13 @@ a {
     map-get($map: $boxshadow, $key: "red-smooth")
   );
   @media (min-width: 1280px) and (max-width: 1365px) {
-    min-width: 250px !important;
+    //min-width: 250px !important;
     // padding: map-get($map: $padding, $key: "padding-10") !important;
-    @include space(padding, all, $padding-10 !important, 0);
+   // @include space(padding, all, $padding-10 !important, 0);
   }
 }
 .secondary-button {
-  @include breakpoint(mobileonly) {
-    padding: unset !important;
-    min-width: none !important;
-  }
+  
   background: map-get($map: $text-color, $key: "black-gray") !important;
   color: map-get($map: $background-color, $key: "primary") !important;
   //   padding: map-get($map: $padding, $key: "padding-10") !important;
@@ -131,7 +134,11 @@ a {
   font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
   line-height: inherit !important;
   border-radius: map-get($map: $border-round, $key: "boder-radius") !important;
-  font-size: map-get($map: $text-size, $key: "large20") !important;
+  font-size: map-get($map: $text-size, $key: "regular") !important;
+  // @include breakpoint(mobileonly) {
+  //   padding: unset !important;
+  //   min-width: none !important;
+  // }
   @include box-shadow(
     0px,
     10px,
@@ -139,9 +146,9 @@ a {
     map-get($map: $boxshadow, $key: "black-smooth")
   );
   @media (min-width: 1280px) and (max-width: 1365px) {
-    min-width: 290px !important;
+    //min-width: 290px !important;
     // padding: map-get($map: $padding, $key: "padding-10") !important;
-    @include space(padding, all, $padding-10 !important, 0);
+   // @include space(padding, all, $padding-10 !important, 0);
   }
   @media all and (max-width: 1024px) {
     font-size: map-get($map: $text-size, $key: "small") !important;
@@ -254,4 +261,8 @@ a {
   margin-top: 15px;
   margin-left: 15px;
   font-weight: bold;
+}
+
+.MuiAppBar-colorPrimary{
+  background-color: #ececec  !important;
 }

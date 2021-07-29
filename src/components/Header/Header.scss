@@ -4,6 +4,17 @@
   @include space(padding, top-bottom, $padding-25, $padding-25);
 
   // padding-bottom: map-get($map: $padding, $key: "padding-25");
+  .MuiTypography-h6{
+    >a{
+      img{
+        @include breakpoint(Ipad-pro) {
+          max-width: 80%;
+        }
+      }
+    }
+   
+  }
+  
 }
 .MuiPaper-elevation4 {
   box-shadow: none !important;
@@ -14,6 +25,18 @@
     display: flex;
     align-items: map-get($map: $alignment, $key: align-center);
     color: map-get($map: $text-color, $key: "black-light");
+    @include breakpoint(sm-mobileonly) {
+        .menu-button,.vertical-line{
+          display: none;
+        }
+    }
+    .toggle-icon{
+      display: none;
+      @include breakpoint(sm-mobileonly) {
+          display: block;
+          cursor: pointer;
+    }
+    }
   }
   .shoping__card {
     // padding-left: map-get($map: $padding, $key: "padding-15");

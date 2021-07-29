@@ -5,8 +5,6 @@
   text-align: center;
   font-size: map-get($map: $text-size, $key: "small");
   background-color: map-get($map: $background-color, $key: secondary);
-  // padding: map-get($map: $padding, $key: "padding-15")
-  //   map-get($map: $padding, $key: "padding-24");
-  @include space(padding, top-bottom, $padding-15, $padding-15);
-  @include space(padding, left-right, $padding-24, $padding-24);
+  @include space(padding, top AND right AND bottom AND left, $padding-15, $padding-24);
+
 }

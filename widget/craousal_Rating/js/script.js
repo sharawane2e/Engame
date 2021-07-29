@@ -6,8 +6,17 @@ $(document).ready(function(){
         //     $("demo").html(data)
         // });
 
-        $.get("https://api.etherscan.io/api?module=stats&action=ethprice", function(data) {
-          //  console.log(data.result.ethbtc_timestamp)
+        // $.get("http://192.168.1.124:8000/widget/", function(data) {
+        //     console.log(data);
+        //   //  console.log(data.result.ethbtc_timestamp)
+        // });
+
+        $.ajax({
+            type: "GET",
+             dataType: "json",
+            url: "http://192.168.1.124:8000/widget/"
+        }).then(function(data) {
+          console.log(data)
         });
 
     if(clientCode==clientCode){
