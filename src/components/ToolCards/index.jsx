@@ -85,10 +85,11 @@ const ToolCards = () => {
                         
                     </div>
                     <div className="toolcard__items toolcard__shopping">
-                      <span className="toolcard__sub-icons">
+                    {user? <span className="toolcard__sub-icons">
                       <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> 
                         {/* <ShoppingCartIcon /> */}
-                      </span>
+                      </span>:null 
+                    }
                     </div>
                   </div>
                 </Paper>
