@@ -10,15 +10,20 @@ $(document).ready(function(){
         //     console.log(data);
         //   //  console.log(data.result.ethbtc_timestamp)
         // });
+        var flickerAPI = "http://192.168.1.124:8000/widget/";
+        $.getJSON( flickerAPI, {
+          tags: "mount rainier",
+          tagmode: "any",
+          format: "json"
+        })
+          .done(function( data ) {
+              console.log(data);
+            $.each( data, function( i, item ) {
+                  console.log(item.widgetkey)
+                  });
+          });
 
-        $.ajax({
-            type: "GET",
-             dataType: "json",
-            url: "http://192.168.1.124:8000/widget/"
-        }).then(function(data) {
-          console.log(data)
-        });
-
+  
     if(clientCode==clientCode){
         var htmlElemnt='<div class="carousel-container"> \
         <div class="carousel-slide clearfix"></div> \

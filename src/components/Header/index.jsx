@@ -129,11 +129,11 @@ const Header = ({ props, cart, user }) => {
 			<CustomPopup
 				open={isLoginOpen}
 				onClose={() => setLoginIsOpen(false)}
-				className="popup-container__iner--md border-radius"
+				className="popup-container__iner--xl border-radius"
 			>
 				<Grid container spacing={1}>
-					{/* <Grid item xs={12} sm={6} className="login-background"></Grid> */}
-					<Grid item xs={12} sm={12}>
+					<Grid item xs={6} sm={6} className="login-background"></Grid>
+					<Grid item xs={6} sm={6}>
 						<Login />
 					</Grid>
 				</Grid>
@@ -144,8 +144,8 @@ const Header = ({ props, cart, user }) => {
 				className="popup-container__iner--md border-radius"
 			>
 				<Grid container spacing={3}>
-					{/* <Grid item xs={12} sm={5} className="login-background"></Grid> */}
-					<Grid item xs={12} sm={12}>
+					<Grid item xs={6} sm={6} className="login-background"></Grid>
+					<Grid item xs={6} sm={6}>
 						<Registration />
 					</Grid>
 				</Grid>
