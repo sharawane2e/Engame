@@ -12,8 +12,8 @@
     @include space(padding, all, $padding-10, 0);
 
     border-radius: map-get($map: $border-round, $key: "boder-radius");
-    // margin-bottom: map-get($map: $margin, $key: "margin-30");
-    @include space(margin, right, $margin-30, 0);
+    margin-bottom: map-get($map: $margin, $key: "margin-30");
+   // @include space(margin, right, $margin-30, 0);
   }
   #{&}__iner {
     display: flex;
@@ -36,7 +36,7 @@
   }
   #{&}__amount-text {
     font-family: map-get($map: $font-family, $key: "font-barlowbold");
-    font-size: map-get($map: $text-size, $key: "large25");
+    font-size: map-get($map: $text-size, $key: "large20");
   }
   #{&}__inputbox {
     width: 100px;

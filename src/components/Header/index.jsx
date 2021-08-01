@@ -18,8 +18,9 @@ import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Menu from '@material-ui/core/Menu';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const Header = ({ props, cart, user }) => {
 	const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -58,9 +59,6 @@ const Header = ({ props, cart, user }) => {
 		})
 	}
 
-	const handleOpen = () => {
-		setOpen(true);
-	};
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -90,7 +88,7 @@ const Header = ({ props, cart, user }) => {
 										onClick={() => setLoginIsOpen(true)}>
 										Login
 									</div>
-									|
+									<span className="vertical-line">|</span>
 									<div
 										className="menu-button"
 										onClick={() => setReginIsOpen(true)}
@@ -99,20 +97,7 @@ const Header = ({ props, cart, user }) => {
 									</div>
 								</>
 							) : (
-								// <FormControl className="userForm">
-								// 	<InputLabel id="user-open-select">{user.token.user.first_name}</InputLabel>
-								// 	<Select
-								// 		labelId="user-open-select"
-								// 		id="user-open-select"
-								// 		open={open}
-								// 		onClose={handleClose}
-								// 		onOpen={handleOpen}
-								// 	>
-								// 		<MenuItem value={10} onClick={() => handleLogout()}>Logout</MenuItem>
-								// 		<MenuItem value={20}>Profile</MenuItem>
-								// 	</Select>
-								// </FormControl>
-								<div className="user-after-login" >
+							<div className="user-after-login" >
 								<CustomButton onClick={handleClick}>
 								 	{user.token.user.first_name} <ArrowDropDownIcon/>
 								</CustomButton>
@@ -128,16 +113,14 @@ const Header = ({ props, cart, user }) => {
 								</div>
 							)}
 							<div className="shoping__card">
-								{/* <Link to="/cart">
-									<Badge badgeContent={cartCount} color="secondary">
-										<ShoppingCartIcon />
-									</Badge>
-								</Link> */}
 								<Link to="#!">
 									<Badge badgeContent={cartCount} color="secondary">
 										<ShoppingCartIcon />
 									</Badge>
 								</Link>
+							</div>
+							<div className="toggle-icon">
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Toolbar>
@@ -146,11 +129,11 @@ const Header = ({ props, cart, user }) => {
 			<CustomPopup
 				open={isLoginOpen}
 				onClose={() => setLoginIsOpen(false)}
-				className="popup-container__iner--md border-radius"
+				className="popup-container__iner--xl border-radius"
 			>
 				<Grid container spacing={1}>
-					<Grid item xs={12} sm={6} className="login-background"></Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={6} sm={6} className="login-background"></Grid>
+					<Grid item xs={6} sm={6}>
 						<Login />
 					</Grid>
 				</Grid>
@@ -161,8 +144,8 @@ const Header = ({ props, cart, user }) => {
 				className="popup-container__iner--md border-radius"
 			>
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={5} className="login-background"></Grid>
-					<Grid item xs={12} sm={7}>
+					<Grid item xs={6} sm={6} className="login-background"></Grid>
+					<Grid item xs={6} sm={6}>
 						<Registration />
 					</Grid>
 				</Grid>
@@ -179,3 +162,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Header);
+
+

@@ -6,10 +6,24 @@ $(document).ready(function(){
         //     $("demo").html(data)
         // });
 
-        $.get("https://api.etherscan.io/api?module=stats&action=ethprice", function(data) {
-          //  console.log(data.result.ethbtc_timestamp)
-        });
+        // $.get("http://192.168.1.124:8000/widget/", function(data) {
+        //     console.log(data);
+        //   //  console.log(data.result.ethbtc_timestamp)
+        // });
+        var flickerAPI = "http://192.168.1.124:8000/widget/";
+        $.getJSON( flickerAPI, {
+          tags: "mount rainier",
+          tagmode: "any",
+          format: "json"
+        })
+          .done(function( data ) {
+              console.log(data);
+            $.each( data, function( i, item ) {
+                  console.log(item.widgetkey)
+                  });
+          });
 
+  
     if(clientCode==clientCode){
         var htmlElemnt='<div class="carousel-container"> \
         <div class="carousel-slide clearfix"></div> \

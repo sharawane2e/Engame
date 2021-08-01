@@ -28,12 +28,18 @@
       font-weight: map-get($map: $font-weight, $key: "font-600");
       color: map-get($map: $text-color, $key: "red-dark");
       font-size: map-get($map: $text-size, $key: "xxl");
+      @include breakpoint(Ipad-pro) {
+        font-size: map-get($map: $text-size, $key: "large2");
+      }
     }
 
     .filter-text {
       font-weight: map-get($map: $font-weight, $key: "font-600");
       color: map-get($map: $text-color, $key: "black-drak");
       font-size: map-get($map: $text-size, $key: "xxl");
+      @include breakpoint(Ipad-pro) {
+        font-size: map-get($map: $text-size, $key: "large20");
+      }
     }
     .filter-normal-text {
       color: map-get($map: $text-color, $key: "black-drak");
@@ -41,6 +47,9 @@
       font-weight: map-get($map: $font-weight, $key: "font-600");
       // margin-top: map-get($map: $margin, $key: "margin-15");
       @include space(margin, top, $margin-15, 0);
+      @include breakpoint(Ipad-pro) {
+        font-size: map-get($map: $text-size, $key: "large20");
+      }
     }
     .paperstyel {
       > img {
@@ -78,7 +87,15 @@
           path {
             fill: map-get($map: $background-color, $key: "primary");
           }
+          @include breakpoint(Ipad-pro) {
+            width:25px;
+            height:25px;
+          }
         }
+      }
+      @include breakpoint(Ipad-pro) {
+        @include space(padding, top-bottom, $padding-2, $padding-2);
+        @include space(padding, left-right, $padding-12, $padding-12);
       }
     }
   }
@@ -97,6 +114,13 @@
     .MuiIconButton-label {
       > svg {
         margin-right: 10px;
+        @include breakpoint(Ipad-pro) {
+          width: 20px;
+          height: 20px;
+        }
+      }
+      @include breakpoint(Ipad-pro) {
+        font-size: 16px;
       }
     }
   }

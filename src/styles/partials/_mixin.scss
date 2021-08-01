@@ -35,66 +35,17 @@
       @content;
     }
   }
+  @else if $point == sm-mobileonly {
+    @media (min-width: 320px) and (max-width: 480px) {
+      @content;
+    }
+  }
 }
 
-// @mixin space($type, $direction, $first, $second) {
-//   @if $type == padding {
-//     @if $direction == all {
-//       padding: $amount;
-//     } @else if $direction == top {
-//       padding-top: $amount;
-//     } @else if $direction == top {
-//       padding-top: $amount;
-//     } @else if $direction == bottom {
-//       padding-bottom: $amount;
-//     } @else if $direction == left {
-//       padding-left: $amount;
-//     } @else if $direction == right {
-//       padding-right: $amount;
-//     }
-//   }
-//   @if $type == margin {
-//     @if $direction == all {
-//       margin: $amount;
-//     } @else if $direction == top {
-//       margin-top: $amount;
-//     } @else if $direction == bottom {
-//       margin-bottom: $amount;
-//     } @else if $direction == left {
-//       margin-left: $amount;
-//     } @else if $direction == right {
-//       margin-right: $amount;
-//     }
-//   }
-// }
 
-// // @mixin space($type, $direction, $amount: padding) {
-// //   @if $type == padding {
-// //     @if $direction == all {
-// //       padding: $amount;
-// //     } @else if $direction == top {
-// //       padding-top: $amount;
-// //     } @else if $direction == bottom {
-// //       padding-bottom: $amount;
-// //     } @else if $direction == left {
-// //       padding-left: $amount;
-// //     } @else if $direction == right {
-// //       padding-right: $amount;
-// //     }
-// //   } @else {
-// //     @if $direction == all {
-// //       margin: $amount;
-// //     } @else if $direction == top {
-// //       margin-top: $amount;
-// //     } @else if $direction == bottom {
-// //       margin-bottom: $amount;
-// //     } @else if $direction == left {
-// //       margin-left: $amount;
-// //     } @else if $direction == right {
-// //       margin-right: $amount;
-// //     }
-// //   }
-// // }
+
+
+
 @mixin space($type, $direction, $first, $second) {
   @if $type == padding {
     @if $direction == all {
@@ -113,7 +64,9 @@
       padding-left: $first;
     } @else if $direction == right {
       padding-right: $first;
-    }
+    } @else if ($direction == top AND $direction == right AND $direction == bottom AND $direction == left) {
+      padding: $first  $second   $first  $second;
+    } 
   }
   @if $type == margin {
     @if $direction == all {
@@ -135,3 +88,6 @@
     }
   }
 }
+
+
+
