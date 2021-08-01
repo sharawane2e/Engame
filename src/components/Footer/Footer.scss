@@ -2,9 +2,9 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  text-align: center;
-  font-size: map-get($map: $text-size, $key: "small");
-  background-color: map-get($map: $background-color, $key: secondary);
+  text-align: $align-center;
+  @include font-size($font-xmd-reg);
+  @include bgcolor($gray-primary);
   @include space(padding, top AND right AND bottom AND left, $padding-15, $padding-24);
 
 }

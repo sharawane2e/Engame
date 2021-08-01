@@ -5,8 +5,8 @@
     position: absolute;
     top: 3px;
     width: 50%;
-    font-size: 18px;
+    @include font-size($font-xx-reg18)
 }
 .tool-perview{
-    margin-top: 40px;
+    @include space("margin", top, $padding-40, 0);
 }

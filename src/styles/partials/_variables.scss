@@ -6,51 +6,49 @@ $font-family: (
   "font-barlowregular": "barlowregular",
 );
 
-$heading-size: (
-  "large": 40px,
-  "regular": 30px,
-  "small": 22px,
-  "medium": 20px,
-  "extra-medum": 24px,
-);
+$white:#fff;
+$primary:#f15a5c;
+$secondary:#f15b5b;
+$gray-primary:#ececec;
+$gray-secondary:#efefef;
+$black-primary:#363636;
+$black-secondary:#383838;
+$black-smooth:#b3b3b3;
+$black-gray:#9d9d9d;
+$accent:#e3ebf7;
+$light-smooth:#d4d4d4;
+$dark-gray:#848484;
+$back-color: #d6d6d6;
+$transparent:transparent;
 
-$opacity: (
-  "opacity-1": 0.1,
-  "opacity-5": 0.5,
-  "opacity-6": 0.6,
-  "opacity-10": 1,
-);
 
-$background-color: (
-  "primary": #ffffff,
-  "secondary": #ececec,
-  "border-secondary": #efefef,
-  "back-color": #d6d6d6,
-  "button-primary": #f15a5c,
-  "button-secondary": #f15b5b,
-  "transparent": transparent,
-  "overlay-color": rgba(241, 91, 91, 0.31),
-);
-$text-color: (
-  "black-light": #363636,
-  "black-drak": #383838,
-  "black-smooth": #b3b3b3,
-  "black-gray": #9d9d9d,
-  "red-dark": #f15b5b,
-);
-$border-round: (
-  "accent": #e3ebf7,
-  "light-smooth": #d4d4d4,
-  "boder-radius": 6px,
-);
-$border-color: (
-  "border-width": 1px,
-  "bsolid": solid,
-  "dotted": dotted,
-  "red-dark": #f15b5b,
-  "gray": #d6d6d6,
-  "dark-gray":#848484
-);
+$bold: bold;
+$font-normal: normal;
+$font-500: 500;
+$font-600: 600;
+$font-700: 700;
+$font-800: 800;
+
+
+$align-center: center;
+$align-right: right;
+$align-left: left;
+
+$border-width: 1px;
+$bsolid: solid;
+$dotted: dotted;
+
+$boder-radius: 6px;
+
+
+$red-smooth: rgba(241, 91, 91, 0.5);
+$black-smooth: rgba(0, 0, 0, 0.25);
+$black-1: rgba(0, 0, 0, 0.1);
+$black-4: rgba(0, 0, 0, 0.4);
+$overlay-color: rgba(241, 91, 91, 0.31);
+$black-dark: rgba(132, 132, 132, 0.5);
+$gray-opacity:rgba(132, 132, 132, 1);
+
 $boxshadow: (
   "red-smooth": rgba(241, 91, 91, 0.5),
   "black-smooth": rgba(0, 0, 0, 0.25),
@@ -58,75 +56,6 @@ $boxshadow: (
   "black-4": rgba(0, 0, 0, 0.4),
 );
 
-$fill-color: (
-  "primary-color": #ffffff,
-  "black-smdark": rgba(132, 132, 132, 0.5),
-);
-$font-weight: (
-  "bold": bold,
-  "font-normal": normal,
-  "font-500": 500,
-  "font-600": 600,
-  "font-700": 700,
-  "font-800": 800,
-);
-$alignment: (
-  "align-center": center,
-  "align-right": right,
-  "align-left": left,
-);
-$fillcolor: (
-  "red-dark": #f15b5b,
-  "gray-light": #d6d6d6,
-);
-
-$padding: (
-  "padding-2": 2px,
-  "padding-5": 5px,
-  "padding-8": 8px,
-  "padding-10": 10px,
-  "padding-12": 12px,
-  "padding-14": 14px,
-  "padding-15": 15px,
-  "padding-16": 16px,
-  "padding-18": 18px,
-  "padding-20": 20px,
-  "padding-24": 24px,
-  "padding-25": 25px,
-  "padding-30": 30px,
-  "padding-35": 35px,
-  "padding-40": 40px,
-  "padding-50": 50px,
-  "padding-90": 90px,
-);
-
-$margin: (
-  "margin-0": 0,
-  "margin-5": 5px,
-  "margin-8": 8px,
-  "margin-10": 10px,
-  "margin-12": 12px,
-  "margin-14": 14px,
-  "margin-15": 15px,
-  "margin-16": 16px,
-  "margin-18": 18px,
-  "margin-20": 20px,
-  "margin-25": 25px,
-  "margin-30": 30px,
-  "margin-40": 40px,
-  "margin-45": 45px,
-  "margin-50": 50px,
-);
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1440px,
-  mobile: 640px,
-) !default;
 
 $padding-0: 0px;
 $padding-2: 2px;
@@ -166,28 +95,23 @@ $margin-40: 40px;
 $margin-50: 50px;
 $margin-86: 86px;
 
-$text-size: (
-  "xxl": 3.125rem,
-  "xl": 2rem,
-  "xl42": 42px,
-  "large25": 2.625rem,
-  "large2": 2rem,
-  "large30": 1.875rem,
-  "large20": 1.25rem,
-  "large": 1.125rem,
-  "regular": 1rem,
-  "small": 0.875rem,
-  "xsmall": 0.75rem,
-  "mbregular": 0.625rem,
-);
-$text-size-xxl: 3.125rem;
-$text-size-xl: 3.125rem;
-$text-size-xl42: 3.125rem;
-$text-size-large25: 3.125rem;
-$text-size-large30: 3.125rem;
-$text-size-large20: 3.125rem;
-$text-size-large: 3.125rem;
-$text-size-regular: 3.125rem;
-$text-size-small: 3.125rem;
-$text-size-xsmall: 3.125rem;
-$text-size-mbregular: 3.125rem;
+$font-xxl:50px;
+$font-xl:45px;
+$font-xmd:40px;
+$font-md:45px;
+$font-xlg:40px;
+$font-lg:32px;
+$font-xsm:30px;
+$font-sm:25px;
+$font-xx-reg:20px;
+$font-xx-reg18:18px;
+$font-xl-reg:16px;
+$font-x-reg:15px;
+$font-reg:14px;
+$font-xmd-reg:12px;
+$font-md-reg:10px;
+$font-sm-reg:5px;
+$font-ssm-reg:2px;
+$font-zero:0px;
+
+

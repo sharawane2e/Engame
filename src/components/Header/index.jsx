@@ -141,7 +141,7 @@ const Header = ({ props, cart, user }) => {
 			<CustomPopup
 				open={isReginOpen}
 				onClose={() => setReginIsOpen(false)}
-				className="popup-container__iner--md border-radius"
+				className="popup-container__iner--xl border-radius"
 			>
 				<Grid container spacing={3}>
 					<Grid item xs={6} sm={6} className="login-background"></Grid>

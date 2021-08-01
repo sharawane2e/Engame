@@ -1,9 +1,6 @@
 .header-bg {
-  background-color: map-get($map: $background-color, $key: "secondary");
-  // padding-top: map-get($map: $padding, $key: "padding-25");
+  @include bgcolor($gray-primary);
   @include space(padding, top-bottom, $padding-25, $padding-25);
-
-  // padding-bottom: map-get($map: $padding, $key: "padding-25");
   .MuiTypography-h6{
     >a{
       img{
@@ -12,9 +9,7 @@
         }
       }
     }
-   
   }
-  
 }
 .MuiPaper-elevation4 {
   box-shadow: none !important;
@@ -23,8 +18,8 @@
   z-index: 99;
   .header-text-color {
     display: flex;
-    align-items: map-get($map: $alignment, $key: align-center);
-    color: map-get($map: $text-color, $key: "black-light");
+    align-items: $align-center;
+    @include color($black-primary);
     @include breakpoint(sm-mobileonly) {
         .menu-button,.vertical-line{
           display: none;
@@ -39,13 +34,11 @@
     }
   }
   .shoping__card {
-    // padding-left: map-get($map: $padding, $key: "padding-15");
     @include space(padding, left, $padding-15, 0);
-
     cursor: pointer;
     position: relative;
     a {
-      color: map-get($map: $text-color, $key: "black-light");
+      @include color($black-primary);
     }
   }
   .userForm {
@@ -56,17 +49,14 @@
   }
   .menu-button {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    font-size: map-get($map: $text-size, $key: "large20");
-    // padding: map-get($map: $padding, $key: "padding-15");
+    @include font-size($font-xx-reg);
     @include space(padding, all, $padding-15, 0);
-
     cursor: pointer;
   }
   .user-after-login {
     .custom-button {
-      color: #363636;
-      font-size: 18px;
-      font-family: "barlowmedium";
+      @include color($black-primary);
+      @include font-size($font-xx-reg18);
       cursor: pointer;
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       &:hover {

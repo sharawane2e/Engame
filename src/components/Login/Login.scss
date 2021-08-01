@@ -2,76 +2,48 @@
   @include breakpoint(Ipad-pro) {
     padding: 0;
   }
-  // padding: map-get($map: $padding, $key: "padding-24")
-  // 	map-get($map: $padding, $key: "padding-90")
-  // 	map-get($map: $padding, $key: "padding-24")
-  // 	map-get($map: $padding, $key: "padding-30");
-  @media (min-width: 1280px) and (max-width: 1365px) {
-    // padding: map-get($map: $padding, $key: "padding-5")
-    //   map-get($map: $padding, $key: "padding-90")
-    //   map-get($map: $padding, $key: "padding-15")
-    //   map-get($map: $padding, $key: "padding-30");
+  @include breakpoint(desktop150){
     @include space(padding, top-bottom, $padding-5, $padding-90);
     @include space(padding, left-right, $padding-15, $padding-30);
   }
-  @media (min-width: 1920px) {
-    // padding: map-get($map: $padding, $key: "padding-5")
-    //   map-get($map: $padding, $key: "padding-90")
-    //   map-get($map: $padding, $key: "padding-15")
-    //   map-get($map: $padding, $key: "padding-30");
-    //@include space(padding, top-bottom, $padding-5, $padding-90);
-    //@include space(padding, left-right, $padding-15, $padding-30);
-  }
   &.login--form {
-    // padding-top: map-get($map: $padding, $key: "padding-50");
-    // padding-bottom: map-get($map: $padding, $key: "padding-50");
-
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      // padding-top: map-get($map: $padding, $key: "padding-5");
-      // padding-bottom: map-get($map: $padding, $key: "padding-5");
+    @include breakpoint(desktop150){
       @include space(padding, top-bottom, $padding-5, $padding-5);
     }
   }
 
   #{&}__login {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    font-size: map-get($map: $text-size, $key: "xl");
-    text-align: map-get($map: $alignment, $key: "align-center");
-    // padding-top: map-get($map: $padding, $key: "padding-0");
-    // padding-bottom: map-get($map: $padding, $key: "padding-50");
+    @include font-size($font-lg);
+    text-align: $align-center;
     @include space(padding, top, $padding-20, 0);
     @include space(padding, bottom, $padding-50, 0);
-
     @include breakpoint(desktop) {
       @include space(padding, top-bottom, $padding-10, $padding-40);
     }
 
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      // padding-bottom: map-get($map: $padding, $key: "padding-25");
+    @include breakpoint(desktop150){
       @include space(padding, bottom, $padding-25, 0);
-
-      font-size: map-get($map: $text-size, $key: "large");
+      @include font-size($font-xx-reg18);
     }
   }
   .input-label {
-    font-size: map-get($map: $text-size, $key: "regular");
-    // opacity: map-get($map: $opacity, $key: "opacity-6");
+    @include font-size($font-xl-reg);
     font-family: map-get($map: $font-family, $key: "font-barlowlight");
-    color: map-get($map: $text-color, $key: "black-smooth");
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      font-size: map-get($map: $text-size, $key: "small");
-      margin-bottom: 2px;
+    @include color($black-smooth);
+    @include breakpoint(desktop150) {
+      // font-size: map-get($map: $text-size, $key: "small");
+      @include font-size($font-reg);
+      @include space("margin", bottom, $margin-2, 0);
     }
   }
   .MuiOutlinedInput-input {
     @include space(padding, all, $padding-15, 0);
-    font-size: map-get($map: $text-size, $key: "xsmall");
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      // padding-top: map-get($map: $padding, $key: "padding-10");
-      // padding-bottom: map-get($map: $padding, $key: "padding-10");
+    @include font-size($font-xmd-reg);
+    @include breakpoint(desktop150){
       @include space(padding, top, $padding-10, 0);
       @include space(padding, bottom, $padding-10, 0);
-      font-size: map-get($map: $text-size, $key: "xsmall");
+      @include font-size($font-xmd-reg);
     }
   }
   #{&}__fileds {
@@ -80,14 +52,11 @@
     }
   }
   #{&}__control {
-    // margin-bottom: map-get($map: $margin, $key: margin-10);
     @include space(margin, bottom, $margin-10, 0);
-
     @include breakpoint(desktop) {
       @include space(margin, bottom, $margin-0, 0);
     }
-
-    @media (min-width: 1280px) and (max-width: 1365px) {
+    @include breakpoint(desktop150){
       .MuiIconButton-label {
         > svg {
           width: 18px;
@@ -95,54 +64,42 @@
         }
       }
     }
-  }
-  .forgot-link {
-    font-weight: map-get($map: $font-weight, $key: font-600);
-    text-align: map-get($map: $alignment, $key: align-right);
-    // padding-bottom: map-get($map: $padding, $key: padding-25);
-    @include space(padding, bottom, $padding-25, 0);
-
-    & > a {
-      color: map-get($map: $text-color, $key: red-dark);
-      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-      font-weight: map-get($map: $font-weight, $key: "font-normal");
     }
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      font-size: map-get($map: $text-size, $key: "xsmall");
+  .forgot-link {
+    @include font-weight($font-600);
+    text-align:$align-right;
+    @include space(padding, bottom, $padding-25, 0);
+    & > a {
+      @include color($secondary);
+      @include font-weight($font-normal);
+    }
+    @include breakpoint(desktop150){
+      @include font-size($font-xmd-reg);
     }
   }
   .form-newaccont {
-    text-align: map-get($map: $alignment, $key: align-center);
-    font-size: map-get($map: $text-size, $key: "regular");
+    text-align: $align-center;
+    @include font-size($font-xl-reg);
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    // padding-top: map-get($map: $padding, $key: padding-15);
     @include space(padding, top, $padding-15, 0);
-
     & > a {
       @include space(padding, left, $padding-5, 0);
-      // padding-left: map-get($map: $padding, $key: padding-8);
-      color: map-get($map: $text-color, $key: red-dark);
-    }
+      @include color($secondary);
+   }
   }
 }
 .form-button-grop {
-  text-align: map-get($map: $alignment, $key: "align-center");
-  // padding-top: map-get($map: $padding, $key: "padding-15");
-  // padding-bottom: map-get($map: $padding, $key: "padding-25");
+  text-align: $align-center;
   @include space(padding, top-bottom, $padding-15, $padding-25);
-
   @include breakpoint(desktop) {
     @include space(padding, top-bottom, $padding-15, $padding-15);
   }
-
   .login__button {
     min-width: 292px !important;
     width: 100%;
     @include space(padding, all, $padding-12 !important, 0);
-    @media (min-width: 1280px) and (max-width: 1365px) {
-      font-size: map-get($map: $text-size, $key: "xsmall");
-      // padding-top: map-get($map: $padding, $key: "padding-15");
-      // padding-bottom: map-get($map: $padding, $key: "padding-10");
+    @include breakpoint(desktop150){
+      @include font-size($font-xmd-reg);
       @include space(padding, top-bottom, $padding-15, $padding-10);
     }
   }

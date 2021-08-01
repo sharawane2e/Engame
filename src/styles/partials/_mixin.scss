@@ -35,16 +35,17 @@
       @content;
     }
   }
+  @else if $point == desktop150 {
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      @content;
+    }
+  }
   @else if $point == sm-mobileonly {
     @media (min-width: 320px) and (max-width: 480px) {
       @content;
     }
   }
 }
-
-
-
-
 
 @mixin space($type, $direction, $first, $second) {
   @if $type == padding {
@@ -91,3 +92,50 @@
 
 
 
+/*Font size*/
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: calculateRem($size);
+}
+
+@mixin font-sizeImp($sizeimp) {
+  font-size: calculateRem($sizeimp) !important;
+}
+
+
+/*End*/
+
+@mixin color($color) {
+  color: $color;
+}
+@mixin colorImp($colorImp) {
+  color: $colorImp !important;
+}
+@mixin both-color($bgcolor,$color) {
+  background: $bgcolor !important;
+  color: $color !important;
+}
+
+@mixin bgcolor($bgcolor) {
+  background: $bgcolor;
+}
+@mixin bgcolorImp($bgcolorImp) {
+  background: $bgcolorImp !important;
+}
+
+@mixin font-weight ($weight){
+  font-weight: $weight;
+}
+
+/*Border */
+@mixin border($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-radius($r) {
+  border-radius: $r;
+}
+/*End*/

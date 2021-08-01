@@ -1,8 +1,8 @@
 .embeded-conatiner {
   #{&}__embeded-code-textarea {
-    @media all and (max-width: map-get($map: $grid-breakpoints, $key: mobile)) {
-      min-height: 130px;
-    }
+    // @media all and (max-width: map-get($map: $grid-breakpoints, $key: mobile)) {
+    //   min-height: 130px;
+    // }
     min-height: 438px;
     width: 100%;
     resize: none;

@@ -26,7 +26,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    background: map-get($map: $background-color, $key: "primary");
+    @include bgcolor($white);
   }
 
   #{&}__iner--xxl {
@@ -36,85 +36,41 @@
       height: 90vh;
       overflow: auto;
     }
-    // @include breakpoint(mobileonly) {
-    //   height: 98%;
-    // }
-    // @include breakpoint(Ipad-pro) {
-    //   width: 90%;
-    // }
   }
 
   #{&}__iner--xl {
     width: 800px;
-    // @include breakpoint(mobileonly) {
-    //   height: 98%;
-    // }
-    // @include breakpoint(Ipad-pro) {
-    //   width: 90%;
-    // }
   }
 
   #{&}__iner--md {
     width: 500px;
-    
-    // @include breakpoint(Ipad) {
-    //   width: 80%;
-    // }
-    // @include breakpoint(Ipad-pro) {
-    //   width: 90%;
-    // }
   }
   #{&}__iner--xl-md {
     width: 600px;
-    // @include breakpoint(mobileonly) {
-    //   width: 75%;
-    // }
-    // @include breakpoint(Ipad) {
-    //   width: 80%;
-    // }
-    // @include breakpoint(Ipad-pro) {
-    //   width: 90%;
-    // }
   }
   #{&}__iner--sm {
     width: 400px;
-    @include breakpoint(mobileonly) {
-      // width: 75%;
-    }
-    // @include breakpoint(Ipad) {
-    // 	width: 70%;
-    // }
   }
   #{&}__iner--xsm {
     width: 25%;
   }
   /*End*/
   #{&}__header {
-    // padding: map-get($map: $padding, $key: "padding-20")
-    //   map-get($map: $padding, $key: "padding-30")
-    //   map-get($map: $padding, $key: "padding-20")
-    //   map-get($map: $padding, $key: "padding-30");
     @include space(padding, top-bottom, $padding-20, $padding-20);
     @include space(padding, left-right, $padding-30, $padding-30);
-
-    //  @include space(padding) {
-    // 	width: 75%;
-    // }
-
     display: flex;
     font-family: map-get($map: $font-family, $key: "font-barlowbold");
   }
   #{&}__text {
     display: flex;
     flex: 1;
-    font-size: map-get($map: $text-size, $key: "large20");
-    align-items: center;
+    @include font-size($font-xx-reg);
+    align-items: $align-center;
   }
   #{&}__body {
     @include space(padding, all, $padding-30, 0);
-    // padding: map-get($map: $padding, $key: "padding-30");
     @include breakpoint(mobileonly) {
-      padding: 15px;
+      @include space(padding, all, $padding-15, 0);
     }
     .MuiGrid-spacing-xs-3 > .MuiGrid-item {
       @include breakpoint(mobileonly) {
@@ -131,14 +87,13 @@
     & > svg {
       width: 2rem !important;
       height: 2rem !important;
-      fill: map-get($map: $fill-color, $key: "black-smdark");
+      fill: $black-dark;
     }
   }
   #{&}__close-withoutheader {
     position: absolute;
     right: 0;
     cursor: pointer;
-
     @include space(padding, top, $padding-10, 0);
     @include space(padding, bottom, $padding-10, 0);
     @include space(padding, left, $padding-30, 0);
@@ -146,7 +101,7 @@
     & > svg {
       width: 2rem !important;
       height: 2rem !important;
-      fill: map-get($map: $fill-color, $key: "black-smdark");
+      fill: $black-dark;
     }
   }
   .MuiGrid-grid-sm-6 {

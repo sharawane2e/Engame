@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,iBAAiB,CAAA;EACb,OAAO,EAAE,iBAAiB;EAC1B,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,YAAY;EACzB,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,GAAG;EACR,KAAK,EAAE,GAAG;EACV,SAAS,EAAE,IAAI;CAClB;;AACD,AAAA,aAAa,CAAA;EACT,UAAU,EAAE,IAAI;CACnB",
-    "sources": [
-        "toolPerview.scss"
-    ],
-    "names": [],
-    "file": "toolPerview.css"
-}

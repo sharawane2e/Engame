@@ -1,18 +1,12 @@
 .forgot--password {
-  // padding-top: map-get($map: $padding, $key: "padding-40");
-  // @include space(padding, top, $padding-40, 0);
-
   .form-button-grop {
     .forgot__button {
       min-width: 292px !important;
       width: 100%;
-      // padding: 15px !important;
       @include space(padding, all, $padding-12 !important, 0);
-      font-size: map-get($map: $text-size, $key: "large20");
-      @media (min-width: 1280px) and (max-width: 1365px) {
-        font-size: map-get($map: $text-size, $key: "xsmall");
-        // padding-top: map-get($map: $padding, $key: "padding-15");
-        // padding-bottom: map-get($map: $padding, $key: "padding-10");
+      @include font-size($font-xx-reg);
+      @include breakpoint(Ipad-pro){
+        @include font-size($font-xmd-reg);
         @include space(padding, top-bottom, $padding-15, $padding-10);
       }
     }
@@ -20,25 +14,23 @@
 }
 
 .forgot {
-  
-
   .form-area__control {
     width: 100%;
   }
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  background-color: map-get($map: $background-color, $key: "secondary");
+  @include bgcolor($gray-primary);
   min-height: 88vh;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: $align-center;
   @include breakpoint(mobileonly) {
    // min-height: 76vh;
   }
   form {
     width: 30%;
     padding: 30px;
-    border-radius: 10px;
-    background-color: #fff;
+    @include border-radius($boder-radius);
+    @include bgcolor($white);
     margin: 0 auto;
     @include breakpoint(Ipad) {
      width: 50%;
@@ -55,7 +47,7 @@
     }
     label {
       display: block;
-      text-align: left;
+      text-align: $align-left;
     }
     input {
       display: block;
@@ -69,7 +61,7 @@
       width: 100%;
       text-transform: capitalize;
       font-size: 16px;
-      background-color: map-get($map: $background-color, $key: "secondary");
+      @include bgcolor($gray-primary);
       padding: 10px 0;
       cursor: pointer;
     }

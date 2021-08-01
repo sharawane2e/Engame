@@ -1,15 +1,10 @@
 .toolcard {
-  // padding-top: map-get($map: $padding, $key: "padding-40");
-  // padding-bottom: map-get($map: $padding, $key: "padding-40");
   @include space(padding, top-bottom, $padding-40, $padding-40);
-
   display: block !important;
   padding-left: 0;
   #{&}__imageblck {
     &:hover {
-      border: map-get($map: $border-color, $key: "border-width")
-        map-get($map: $border-color, $key: "bsolid")
-        map-get($map: $text-color, $key: "red-dark");
+      @include border('',$border-width,$bsolid,$secondary);
       @include box-shadow(
         0px,
         0px,
@@ -19,35 +14,23 @@
       .toolcard__preview {
         display: block;
       }
-      // .toolcard__sub-icons{
-      //   border: map-get($map: $border-color, $key: "border-width") map-get($map: $border-color, $key: "bsolid") map-get($map: $background-color, $key: "button-secondary");
-
-      //   &>svg{
-      //     fill: map-get($map: $background-color, $key: "button-secondary");
-      //   }
-      // }
       + .toolcard__align {
-        color: map-get($map: $text-color, $key: "red-dark");
-        font-weight: map-get($map: $font-weight, $key: "font-500");
+        @include color($secondary);
+        @include font-weight($font-500);
       }
     }
-    border: map-get($map: $border-color, $key: "border-width")
-      map-get($map: $border-color, $key: "bsolid")
-      map-get($map: $boxshadow, $key: "black-1");
-    @include box-shadow(
+    @include border("",$border-width,$bsolid,$black-1);
+      @include box-shadow(
       0px,
       0px,
       4px,
       map-get($map: $boxshadow, $key: "black-smooth")
     );
-    border-radius: map-get($map: $border-round, $key: "boder-radius");
+    @include border-radius($boder-radius);
   }
   #{&}__image {
-    text-align: map-get($map: $alignment, $key: "align-center");
-    // padding-top: map-get($map: $padding, $key: padding-16);
-    // padding-bottom: map-get($map: $padding, $key: padding-16);
+    text-align: $align-center;
     @include space(padding, top-bottom, $padding-16, $padding-16);
-
     position: relative;
     > img {
       max-width: 100%;
@@ -57,7 +40,7 @@
   }
   #{&}__preview {
     position: absolute;
-    background: map-get($map: $background-color, $key: "overlay-color");
+    @include bgcolor($overlay-color);
     width: 100%;
     height: 100%;
     top: 0;
@@ -69,27 +52,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: map-get(
-      $map: $background-color,
-      $key: "button-secondary"
-    );
-    color: map-get($map: $background-color, $key: "primary");
-    font-size: map-get($map: $text-size, $key: "mbregular");
-     padding: map-get($map: $padding, $key: "padding-2")
-       map-get($map: $padding, $key: "padding-15");
-  //  @include space(padding, top-bottom, $padding-15, $padding-15);
-  //  @include space(padding, left-right, $padding-2, $padding-2);
-
-    border-radius: map-get($map: $border-round, $key: "boder-radius");
+    @include both-color($secondary,$white);
+    @include font-size($font-md-reg);
+    @include space(padding, top-bottom, $padding-2, $padding-2);
+    @include space(padding, left-right, $padding-15, $padding-15);
+    @include border-radius($boder-radius);
     &:hover {
-      background-color: map-get(
-        $map: $background-color,
-        $key: "button-secondary"
-      );
+      @include bgcolor($secondary);
     }
     & > span {
-      font-size: map-get($map: $text-size, $key: "regular");
-      font-weight: map-get($map: $font-weight, $key: "font-normal");
+      @include font-size($font-xl-reg);
+      @include font-weight($font-normal);
     }
     .MuiButton-label {
       > svg {
@@ -99,11 +72,9 @@
     }
   }
   .eyes_icon {
-    // margin-right: map-get($map: $margin, $key: "margin-5");
     @include space(margin, right, $margin-5, 0);
   }
   #{&}__toolicons {
-    // padding: map-get($map: $padding, $key: padding-16);
     @include space(padding, all, $padding-16, 0);
   }
   #{&}__align {
@@ -121,28 +92,22 @@
   }
   #{&}__sub-icons {
     display: flex;
-    border: map-get($map: $border-color, $key: "border-width")
-      map-get($map: $border-color, $key: bsolid)
-      map-get($map: $border-round, $key: accent);
-    border-radius: map-get($map: $border-round, $key: "boder-radius");
-    // padding: map-get($map: $padding, $key: "padding-8");
+    @include border('',$border-width,$bsolid,$accent);
+    @include border-radius($boder-radius);
     @include space(padding, all, $padding-8, 0);
-
     & > svg {
-      fill: map-get($map: $border-round, $key: "accent");
+      fill: $accent;
       &:hover {
-        fill: map-get($map: $background-color, $key: "button-secondary");
+        fill:$secondary;
       }
     }
     &:hover {
-      border: map-get($map: $border-color, $key: "border-width")
-        map-get($map: $border-color, $key: "bsolid")
-        map-get($map: $background-color, $key: "button-secondary");
-    }
+      @include border('',$border-width,$bsolid,$secondary);
+     }
   }
   #{&}__font-family {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    font-size: map-get($map: $text-size, $key: "regular");
+    @include font-size($font-xl-reg);
   }
   #{&}__aligninr1 {
     display: flex;
@@ -154,8 +119,6 @@
     justify-content: flex-end;
   }
   #{&}__toolname {
-    // margin-top: map-get($map: $margin, $key: "margin-10");
-    // margin-bottom: map-get($map: $margin, $key: "margin-10");
     @include space(margin, top-bottom, $margin-10, $margin-10);
   }
 
@@ -166,7 +129,6 @@
       margin: 0 auto;
       .MuiButton-label {
         > svg {
-          // margin-right: map-get($map: $margin, $key: "margin-5");
           @include space(margin, right, $margin-5, 0);
         }
       }

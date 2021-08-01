@@ -9,92 +9,79 @@
     margin-bottom: 20px;
     .hedding-text {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-      font-size: map-get($map: $text-size, $key: "large20");
+      @include font-size($font-xx-reg);
     }
   }
 
   #{&}__tool-card {
-    // padding: map-get($map: $padding, $key: "padding-20")
-    // map-get($map: $padding, $key: "padding-40")
-    // map-get($map: $padding, $key: "padding-20")
-    // map-get($map: $padding, $key: "padding-40");
     @include space(padding, top-bottom, $padding-20, $padding-40);
     @include space(padding, left-right, $padding-20, $padding-40);
   }
   #{&}__tool-title {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-    font-size: map-get($map: $text-size, $key: "regular");
+    @include font-size($font-xl-reg);
   }
   #{&}__tool-type {
     .subscription-type-text {
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
-      font-size: map-get($map: $text-size, $key: "small");
+      @include font-size($font-reg);
     }
     .subscription-day {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-      font-size: map-get($map: $text-size, $key: "small");
+      @include font-size($font-reg);
     }
   }
   #{&}__tool-validity {
     display: flex;
-    align-items: center;
+    align-items: $align-center;
     .tool-extned {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-      color: map-get($map: $text-color, $key: "red-dark");
+      @include color($secondary);
       text-decoration: underline;
     }
   }
   #{&}__tool-nodays {
     display: flex;
-    justify-content: center;
+    justify-content: $align-center;
     .tool-validity {
-      align-items: center;
+      align-items: $align-center;
     }
   }
   #{&}__tool-left-day {
     font-family: map-get($map: $font-family, $key: "font-barlowbold");
-    font-size: map-get($map: $text-size, $key: "regular");
+    @include font-size($font-xl-reg);
   }
   #{&}__embeded-icon {
     display: flex;
-    border: 1px solid #e3ebf7;
-    border: map-get($map: $border-color, $key: border-width)
-      map-get($map: $border-color, $key: bsolid)
-      map-get($map: $border-round, $key: "accent");
-    // padding: map-get($map: $padding, $key: "padding-8");
+    @include border('', $border-width, $bsolid, $accent);
     @include space(padding, all, $padding-8, 0);
-
-    cursor: pointer;
+   cursor: pointer;
     &:hover {
-      border: map-get($map: $border-color, $key: border-width)
-        map-get($map: $border-color, $key: bsolid)
-        map-get($map: $border-color, $key: red-dark);
+      @include border('', $border-width, $bsolid, $secondary);
     }
     > svg {
-      color: map-get($map: $fillcolor, $key: "gray-light");
+      @include color($back-color);
       &:hover {
-        color: map-get($map: $fillcolor, $key: "red-dark");
-      }
+        @include color($secondary);
+     }
     }
   }
   #{&}__date-time {
-    // margin-top: map-get($map: $margin, $key: "margin-15");
     @include space(margin, top, $margin-15, 0);
-
     .purchased-on {
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
-      font-size: map-get($map: $text-size, $key: "small");
-      color: map-get($map: $text-color, $key: "black-gray");
+      @include font-size($font-xmd-reg);
+      @include color($black-gray);
     }
     .purchased-date {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-      font-size: map-get($map: $text-size, $key: "small");
-      color: map-get($map: $text-color, $key: "black-gray");
+      @include font-size($font-xmd-reg);
+      @include color($black-gray);
     }
   }
   #{&}__expiry-date {
     display: flex;
     justify-content: flex-end;
-    color: map-get($map: $text-color, $key: "black-gray");
+    @include color($black-gray);
   }
 }
