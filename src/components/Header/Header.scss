@@ -1,6 +1,6 @@
 .header-bg {
   @include bgcolor($gray-primary);
-  @include space(padding, top-bottom, $padding-25, $padding-25);
+  @include space(padding, top-bottom, $padding-24, $padding-24);
   .MuiTypography-h6{
     >a{
       img{
@@ -11,6 +11,7 @@
     }
   }
 }
+
 .MuiPaper-elevation4 {
   box-shadow: none !important;
 }
