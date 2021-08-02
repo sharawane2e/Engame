@@ -30,7 +30,7 @@ class ForgotPassword extends Component {
 		this.props.dispatch(loadingStart())
          e.preventDefault();
          const {email} = this.state;
-         console.log(email);
+        //  console.log(email);
          fetch(BASE_URL+"user/password/reset/", {
            method:"POST",
            headers:{
@@ -41,6 +41,7 @@ class ForgotPassword extends Component {
            .then(res => {
              toast(res.details)
              this.props.dispatch(loadingStop())
+             console.log(res);
            })
       }
 
