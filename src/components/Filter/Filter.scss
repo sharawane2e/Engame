@@ -20,7 +20,7 @@
       @include color($secondary);
       @include font-size($font-xxl);
       @include breakpoint(Ipad-pro) {
-        @include font-size($font-ssm-reg);
+        @include font-size($font-xx-reg);
       }
     }
 

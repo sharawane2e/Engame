@@ -2,7 +2,7 @@
   @include space(padding, top-bottom, $padding-40, $padding-40);
   display: block !important;
   padding-left: 0;
-  #{&}__imageblck {
+ #{&}__imageblck {
     &:hover {
       @include border('',$border-width,$bsolid,$secondary);
       @include box-shadow(
