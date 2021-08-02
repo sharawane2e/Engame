@@ -86,8 +86,8 @@ const ToolCards = () => {
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                     {user? <span className="toolcard__sub-icons">
-                      <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> 
-                        {/* <ShoppingCartIcon /> */}
+                      {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
+                        <ShoppingCartIcon />
                       </span>:null 
                     }
                     </div>

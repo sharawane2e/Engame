@@ -1,5 +1,4 @@
-import { Container } from '@material-ui/core'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
 import CustomButton from "../../components/widgets/Button"
@@ -8,6 +7,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 const Forgot = () => {
+    const [passwords, setPasswords] = useState({})
+    useEffect(() => {
+        
+    }, [])
+
+    // handleSubmit
+    const handleSubmit = () => {
+        console.log(passwords);
+    }
     return (
        <>
         <Header/>
@@ -18,12 +26,9 @@ const Forgot = () => {
                         <FormControl className="form-area__control">
                             <TextField
                             id="outlined-email-input"   
-                            placeholder="E-mail address"
-                            // value={this.state.email}
-                           type="email"  variant="outlined"
-                            // onChange={(e) => this.handleChange(e, "email")}
-                            // onBlur={(e) => this.handleBlur(e, "email")}
-                            // message={this.state.formErrors.email}
+                            placeholder="Password"
+                           type="password"  variant="outlined"
+                           onChange={(e) => setPasswords({...passwords, new_password1:e.target.value})}
                         />
                         <div className="validated-error"></div> 
                         </FormControl>
@@ -32,12 +37,9 @@ const Forgot = () => {
                         <FormControl className="form-area__control">
                             <TextField
                             id="outlined-email-input"   
-                            placeholder="E-mail address"
-                            // value={this.state.email}
-                           type="email"  variant="outlined"
-                            // onChange={(e) => this.handleChange(e, "email")}
-                            // onBlur={(e) => this.handleBlur(e, "email")}
-                            // message={this.state.formErrors.email}
+                            placeholder="Confrim Password"
+                           type="password"  variant="outlined"
+                           onChange={(e) => setPasswords({...passwords, new_password2:e.target.value})}
                         />
                         <div className="validated-error"></div> 
                         </FormControl>
@@ -45,7 +47,7 @@ const Forgot = () => {
                     </div>
                     <div className="form-group">
                         <CustomButton  
-                            className='forgot__button primary-button'>
+                            className='forgot__button primary-button' onClick={handleSubmit} >
                                Submit
                         </CustomButton>
     
