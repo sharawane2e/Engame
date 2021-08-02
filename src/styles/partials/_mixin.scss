@@ -90,8 +90,6 @@
   }
 }
 
-
-
 /*Font size*/
 @function calculateRem($size) {
   $remSize: $size / 16px;

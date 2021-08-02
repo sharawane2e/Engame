@@ -3,10 +3,10 @@
   > select {
     width: 100%;
     outline: 0;
-    @include border("bottom",$border-width ,$bsolid,$black-smooth);
+    @include border("-bottom",$border-width ,$bsolid,$black-smooth);
     @include space(padding, all, $padding-10, 0);
     @include border-radius($boder-radius);
-    @include space(margin, all, $margin-30, 0);
+     @include space(margin, bottom, $margin-30, 0);
   }
   #{&}__iner {
     display: flex;

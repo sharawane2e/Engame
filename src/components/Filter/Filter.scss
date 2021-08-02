@@ -54,15 +54,15 @@
     .search-icon {
       @include bgcolorImp($back-color);
       @include space(padding, top-bottom, $padding-5, $padding-5);
-      @include space(padding, left-right, $padding-20, $padding-20);
+      @include space(padding, left-right, $padding-15, $padding-15);
       border-top-left-radius: $boder-radius;
       border-bottom-left-radius: $boder-radius;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       .MuiIconButton-label {
         > svg {
-          width: 30px;
-          height: 30px;
+          width: 25px;
+          height: 25px;
           path {
             fill: $white;
           }
@@ -82,12 +82,15 @@
     @include space(padding, top-bottom, $padding-5, $padding-5);
     @include space(padding, left-right, $padding-10, $padding-10);
     @include color($black-secondary);
+    @include font-size($font-xx-reg18);
     &:hover {
       border-radius: $boder-radius;
     }
     .MuiIconButton-label {
       > svg {
         @include space(margin, right, $padding-10, 0);
+        width: 25px;
+        height: 25px;
         @include breakpoint(Ipad-pro) {
           width: 20px;
           height: 20px;

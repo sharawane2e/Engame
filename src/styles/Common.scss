@@ -37,7 +37,7 @@ body {
   @include space(padding, all, $padding-16, 0);
 }
 .divider {
-  height: 40px !important;
+  height: 35px !important;
   margin: 4px !important;
   @include breakpoint(Ipad-pro) {
     height: 30px !important;
@@ -69,7 +69,7 @@ body {
 }
 /*Use these classes for borders*/
 .border-bottom {
-  @include border('bottom',$border-width,$bsolid,$black-gray);
+  @include border('-bottom',$border-width,$bsolid,$black-gray);
  }
 
 .border-allside {
@@ -107,10 +107,12 @@ a {
   @include breakpoint(desktop150) {
     
   }
-  
+    &:hover{
+      @include box-shadow(0px, 10px, 20px ,$primary-btn-shadow);
+    }
 }
 .secondary-button {
-  @include both-color($black-gray,$primary);
+  @include both-color($black-gray,$white);
   @include space(padding, all, $padding-10 !important, 0);
   text-transform: unset !important;
   // font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
@@ -129,7 +131,9 @@ a {
   @include breakpoint(Ipad-pro) {
        padding: 5px !important;
    }
-  
+   &:hover{
+    @include box-shadow(0px, 10px ,20px, $secondary-btn-shadow);
+  }
 }
 /*End*/
 /*bredcrum*/

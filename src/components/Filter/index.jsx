@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import SearchIcon from "@material-ui/icons/Search";
+import Carousel from "../../util/Carousel";
 
 function Home() {
   return (
@@ -30,6 +31,7 @@ function Home() {
             <Grid item xs={12} sm={4}>
               <Paper className="paperstyel">
                 <img src={librarycards} />
+                {/* <Carousel/> */}
               </Paper>
             </Grid>
           </Grid>

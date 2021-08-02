@@ -113,11 +113,16 @@ const Header = ({ props, cart, user }) => {
 								</div>
 							)}
 							<div className="shoping__card">
-								<Link to="#!">
+								{user.isLoggedIn?
+								<Link to="cart">
 									<Badge badgeContent={cartCount} color="secondary">
 										<ShoppingCartIcon />
 									</Badge>
-								</Link>
+								</Link>:<Link to="#!">
+									<Badge badgeContent={cartCount} color="secondary">
+										<ShoppingCartIcon />
+									</Badge>
+								</Link>}
 							</div>
 							<div className="toggle-icon">
 								<MoreVertIcon/>
