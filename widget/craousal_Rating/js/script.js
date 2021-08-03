@@ -25,8 +25,9 @@ $( window ).load(function() {
       })
       .then(response => response.json())
       .then(result => {
-          if(result.HasSuccess){
-               var htmlElemnt='<div class="carousel-container"> \
+          if(result.HasSuccess === true){
+              console.log(result)
+            var htmlElemnt='<div class="carousel-container"> \
             <div class="carousel-slide clearfix"></div> \
                 </div> \
                 <div class="buttons-continer"> \
@@ -148,7 +149,7 @@ $( window ).load(function() {
 
 
         if($('#outputValue').val("")){
-            console.log("click one");
+            // console.log("click one");
         }
         else{
             $.post("http://192.168.1.124:8000/subscription/validate/", function( data ) {
