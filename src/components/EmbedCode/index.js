@@ -6,6 +6,7 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 const EmbedCode = ({data, toolId}) => {
     const [state] = useState(data);
+    console.log(state)
     const [copySuccess, setCopySuccess] = useState('');
     const textAreaRef = useRef(null);
 
@@ -35,7 +36,7 @@ const EmbedCode = ({data, toolId}) => {
         className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
             aria-label="maximum height"
             id="text-area"
-            value= {state.map(item => item.id===toolId ? item.widget_embed_code : null)}
+            value= {state.map(item => item.widget_data.id===toolId ? item.widget_data.widget_embed_code : null)}
             />
             
             <div className="embeded-conatiner__buttton-group">

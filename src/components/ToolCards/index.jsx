@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
+import { BASE_URL } from "../../config/ApiUrl";
 
 const ToolCards = () => {
   // console.log(user);
@@ -27,7 +28,9 @@ const ToolCards = () => {
   const [isSubscription, setSubscriptionPopup] = useState(false);
   const productList = useSelector(state => state.productList)
   const user  = useSelector(state => state.user.isLoggedIn)
+  const token = useSelector(state => state.user)
   const {loading, error, products} = productList
+  const [productShow, setProductShow] = useState(products)
   const dispatch = useDispatch();
 
   const handleToolClick = (tool) => {
@@ -41,7 +44,25 @@ const ToolCards = () => {
   // Fteching widget's from backend
   useEffect(() => {
     dispatch(listProducts())
-  }, [])
+    // console.log(token);
+    if(user){
+      let id = token.token.access_token
+      console.log(id);
+      fetch(BASE_URL+"widget/user/detail/",{
+        headers:{
+          "Content-Type":"application/json",
+          "Accept":"application/json",
+          "Authorization":`Bearer ${id}`
+        }
+      }).then(result => result.json())
+        .then(response => {
+          console.log("products:-", products)
+          console.log(response)
+          setProductShow(response)
+        })
+    } 
+  }, [token])
+
 
   const handleCart = () => {
     dispatch(addToCart(popupId))
@@ -60,7 +81,47 @@ const ToolCards = () => {
          (
            <Grid container spacing={4}>
         
-        {products.map((tooldata, index) => {
+        {user ? productShow.map((tooldata, index) => {
+          return (
+              <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.widget_data.id}>
+                <Paper 
+                  className="toolcard__imageblck">
+                  <div className="toolcard__image">
+                    <img src={"http://192.168.1.124:8000"+tooldata.widget_data.imgUrl} />
+                    {/* <span>{tooldata.imgUrl}</span> */}
+                    <div className="toolcard__preview">
+                     <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata.widget_data)}>
+                        <RemoveRedEyeIcon className="eyes_icon"/> Preview
+                     </CustomButton>
+                    </div>
+                  </div>
+              
+                  <div className="toolcard__align toolcard__toolicons">
+                    <div className="toolcard__items toolcard__download">
+                     {user?
+                      <span className="toolcard__sub-icons">
+                      <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.widget_data.id)}}/>
+                    </span>:null 
+                    }
+                        
+                    </div>
+                    <div className="toolcard__items toolcard__shopping">
+                    {user? <span className="toolcard__sub-icons">
+                      {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
+                        <ShoppingCartIcon />
+                      </span>:null 
+                    }
+                    </div>
+                  </div>
+                </Paper>
+                <div className="toolcard__align toolcard__toolname">
+                  <div className="toolcard__aligninr1 toolcard__font-family">{tooldata.widget_data.toolname}</div>
+                  <div className="toolcard__aligninr toolcard__font-family">${tooldata.widget_data.price}</div>
+                </div>
+              </Grid>
+          );
+        })
+        :  products.map((tooldata, index) => {
           return (
               <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.id}>
                 <Paper 
@@ -99,7 +160,8 @@ const ToolCards = () => {
                 </div>
               </Grid>
           );
-        })}
+        })
+      }
       </Grid>
       
          )
@@ -120,7 +182,7 @@ const ToolCards = () => {
           headerText="Embed code"
           className="border-radius popup-container__iner--xl-md"
           >
-          <Embedcode data={products} toolId={popupId} />
+          <Embedcode data={productShow} toolId={popupId} />
         </CustomPopup>
         {/*End*/}
         {/*Add to cart */}
