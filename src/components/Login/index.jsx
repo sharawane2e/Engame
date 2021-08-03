@@ -56,7 +56,6 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			// console.log(data);
 			toast.error(data.non_field_errors ? data.non_field_errors.join("") : null )
 			this.props.dispatch(loadingStop())
 			if (data.access_token) {
