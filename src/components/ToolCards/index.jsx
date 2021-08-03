@@ -37,7 +37,7 @@ const ToolCards = () => {
     setSelectedTool(tool);
   };
 
-  if(user.isLoggedIn){
+  if(user.isLoggedIn){ 
     setLoginIsOpen(false)
   }
 
