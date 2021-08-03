@@ -1,21 +1,5 @@
 $( window ).load(function() {
-    // $.post("http://192.168.1.124:8000/subscription/validate/",
-    // {
-    //     userkey: userkey,
-    //     widgetkey:widgetkey
-    // },
-    // function(data,status){
-    //   alert("Data: " + data + "\nStatus: " + status);
-    // });
-    // const fetchPromise = fetch('http://192.168.1.124:8000/subscription/validate/');
-    // // console.log(fetchPromise);
-    // fetchPromise.then(response => {
-
-    //     console.log(response.body.userkey,response.body.widgetkey);
-    //   });
-
     const widgetData ={userkey:userkey,widgetkey:widgetkey}
-
       fetch('http://192.168.1.124:8000/subscription/validate/',{
           method:"POST",
           headers:{
@@ -26,7 +10,6 @@ $( window ).load(function() {
       .then(response => response.json())
       .then(result => {
           if(result.HasSuccess === true){
-              console.log(result)
             var htmlElemnt='<div class="carousel-container"> \
             <div class="carousel-slide clearfix"></div> \
                 </div> \
@@ -113,9 +96,8 @@ $( window ).load(function() {
                     });
 
                 }
+                
                 ObjRef.outputFunction();
-
-
             });
         }
 
@@ -125,46 +107,32 @@ $( window ).load(function() {
                 outputValue.push($(this).attr("data-value"))
             });
             output(outputValue);
-            if(outputValue[0]){
-                // $.post("http://192.168.1.124:8000/subscription/validate/", function( data ) {
-                //     console.log(data);
-                //     $(userkey , widgetkey).html(data);
-                //   });
 
-                //   $.post("http://192.168.1.124:8000/subscription/validate/hitcount/",
-                //     {
-                //     data: userkey,
-                //     status: widgetkey
-                //     },
-                //     function(data,status){
-                //     alert("Data: " + data + "\nStatus: " + status);
-                //     });
-
+            if($("#outputValue").val()=="1,,,,,,,,,"){
+                const hitData ={userkey:userkey,widgetkey:widgetkey}
+                console.log(hitData);
+                fetch('http://192.168.1.124:8000/subscription/validate/hitcount/',{
+                    method:"POST",
+                    headers:{
+                      "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(hitData)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    // console.log(result);                   
+                })
             }
-            else{
-        // console.log('else');
-            }
-
         }
 
-
-        if($('#outputValue').val("")){
-            // console.log("click one");
-        }
-        else{
-            $.post("http://192.168.1.124:8000/subscription/validate/", function( data ) {
-                console.log(data);
-                $(userkey , widgetkey).html(data);
-             });
-            console.log("else");
-            return  false;
-        }
+       
 
         var carouselApp = new CarouselApp(strImgValues,strScaleValues);
         carouselApp.initApp();
         carouselApp.nextRating();
         carouselApp.prevRating();
           }
+
           else{
                 $("body").addClass("popup");
                  $('body').append('<div class="popup-outer">\
@@ -177,11 +145,6 @@ $( window ).load(function() {
                 \</div>')
             }
       })
-
-
-
-
-
   });
 $(document).ready(function(){
 
