@@ -246,7 +246,7 @@ class Registration extends Component {
               </FormControl>
             </form>
             <div className="form-button-grop">
-           <ToastContainer /> 
+           <ToastContainer position="top-right"/> 
               <CustomButton  onClick={this.handleRegister}
               className='register__button primary-button'>
                 Register

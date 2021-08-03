@@ -56,7 +56,7 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			console.log(data);
+			// console.log(data);
 			toast.error(data.non_field_errors ? data.non_field_errors.join("") : null )
 			this.props.dispatch(loadingStop())
 			if (data.access_token) {
@@ -175,7 +175,7 @@ class Login extends Component {
 								</div>
 							</form>
 							<div className="form-button-grop">
-							<ToastContainer />
+							<ToastContainer  position="top-right"/>
 								 <CustomButton
 									onClick={this.handleSubmit}
 									className="login__button primary-button">

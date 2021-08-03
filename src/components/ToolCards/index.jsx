@@ -40,7 +40,18 @@ const ToolCards = () => {
 
   // Fteching widget's from backend
   useEffect(() => {
-    dispatch(listProducts())
+    dispatch(listProducts());
+
+    // if(user.isLoggedIn){
+    //   console.log();
+    // }
+    
+    // const afterLogin= async()=>{
+    //   await fetch('http://192.168.1.124:8000/widget/user/detail/',
+
+    //   )
+    // }
+  
   }, [])
 
   const handleCart = () => {
@@ -66,7 +77,7 @@ const ToolCards = () => {
                 <Paper 
                   className="toolcard__imageblck">
                   <div className="toolcard__image">
-                    <img src={"http://192.168.1.124:8000"+tooldata.imgUrl} />
+                    <img src={"//192.168.1.124:8000"+tooldata.imgUrl} />
                     {/* <span>{tooldata.imgUrl}</span> */}
                     <div className="toolcard__preview">
                      <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata)}>

@@ -1,5 +1,15 @@
+// $( window ).load(function() {
+//     $.post("http://192.168.1.124:8000/subscription/validate/",
+//     {
+//      id: userkey,
+//     },
+//     function(data,status){
+//       alert("Data: " + data + "\nStatus: " + status);
+//     });
+//   });
 $(document).ready(function(){
 
+  
         var flickerAPI = "http://192.168.1.124:8000/widget/";
         $.getJSON( flickerAPI, {
           format: "json"
@@ -108,8 +118,21 @@ $(document).ready(function(){
                         outputValue.push($(this).attr("data-value"))
                     });
                     output(outputValue);
-                    if(outputValue ==0 ){
-                        console.log("value");
+                    if(outputValue[0]){
+                        $.post("http://192.168.1.124:8000/subscription/validate/", function( data ) {
+                            console.log(data);
+                            $(userkey , widgetkey).html(data);
+                          }); 
+                          
+                        //   $.post("http://192.168.1.124:8000/subscription/validate/hitcount/",
+                        //     {
+                        //     data: userkey,
+                        //     status: widgetkey
+                        //     },
+                        //     function(data,status){
+                        //     alert("Data: " + data + "\nStatus: " + status);
+                        //     });
+                                                
                     }
                     else{
 //                        console.log('else');
@@ -117,7 +140,19 @@ $(document).ready(function(){
 
                 }
             
-            
+                
+                if($('#outputValue').val("")){
+                    console.log("click one");
+                }
+                else{
+                    $.post("http://192.168.1.124:8000/subscription/validate/", function( data ) {
+                        console.log(data);
+                        $(userkey , widgetkey).html(data);
+                     }); 
+                    console.log("else");
+                    return  false;
+                }
+
                 var carouselApp = new CarouselApp(strImgValues,strScaleValues);
                 carouselApp.initApp();
                 carouselApp.nextRating();
