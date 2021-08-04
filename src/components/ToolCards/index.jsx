@@ -55,8 +55,6 @@ const ToolCards = () => {
         }
       }).then(result => result.json())
         .then(response => {
-          // console.log("products:-", products)
-          // console.log(response)
           setProductShow(response)
         })
     } 
@@ -122,45 +120,45 @@ const ToolCards = () => {
           );
         })
         :  products.map((tooldata, index) => {
-           return (
-              <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.id}>
-                <Paper 
-                  className="toolcard__imageblck">
-                  <div className="toolcard__image">
-                    <img src={"http://192.168.1.124:8000"+tooldata.imgUrl} />
-                    {/* <span>{tooldata.imgUrl}</span> */}
-                    <div className="toolcard__preview">
-                     <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata)}>
-                        <RemoveRedEyeIcon className="eyes_icon"/> Preview
-                     </CustomButton>
-                    </div>
-                  </div>
-              
-                  <div className="toolcard__align toolcard__toolicons">
-                    <div className="toolcard__items toolcard__download">
-                     {user?
-                      <span className="toolcard__sub-icons">
-                      <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
-                    </span>:null 
-                    }
-                        
-                    </div>
-                    <div className="toolcard__items toolcard__shopping">
-                    {user? <span className="toolcard__sub-icons">
-                      {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
-                        <ShoppingCartIcon />
-                      </span>:null 
-                    }
-                    </div>
-                  </div>
-                </Paper>
-                <div className="toolcard__align toolcard__toolname">
-                  <div className="toolcard__aligninr1 toolcard__font-family">{tooldata.toolname}</div>
-                  <div className="toolcard__aligninr toolcard__font-family">${tooldata.price}</div>
-                </div>
-              </Grid>
-          );
-        })
+          return (
+             <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.id}>
+               <Paper 
+                 className="toolcard__imageblck">
+                 <div className="toolcard__image">
+                   <img src={"http://192.168.1.124:8000"+tooldata.imgUrl} />
+                   {/* <span>{tooldata.imgUrl}</span> */}
+                   <div className="toolcard__preview">
+                    <CustomButton className="toolcard__perview-button" onClick={() => handleToolClick(tooldata)}>
+                       <RemoveRedEyeIcon className="eyes_icon"/> Preview
+                    </CustomButton>
+                   </div>
+                 </div>
+             
+                 <div className="toolcard__align toolcard__toolicons">
+                   <div className="toolcard__items toolcard__download">
+                    {user?
+                     <span className="toolcard__sub-icons">
+                     <SystemUpdateAltIcon onClick={() => {setPopup(true); setPopupId(tooldata.id)}}/>
+                   </span>:null 
+                   }
+                       
+                   </div>
+                   <div className="toolcard__items toolcard__shopping">
+                   {user? <span className="toolcard__sub-icons">
+                     {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
+                       <ShoppingCartIcon />
+                     </span>:null 
+                   }
+                   </div>
+                 </div>
+               </Paper>
+               <div className="toolcard__align toolcard__toolname">
+                 <div className="toolcard__aligninr1 toolcard__font-family">{tooldata.toolname}</div>
+                 <div className="toolcard__aligninr toolcard__font-family">${tooldata.price}</div>
+               </div>
+             </Grid>
+         );
+       })
       }
       </Grid>
       
