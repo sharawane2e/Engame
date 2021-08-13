@@ -56,13 +56,12 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			toast.error(data.non_field_errors ? data.non_field_errors.join("") : toast.success("Thanks for LOGIN") )
+			toast.error(data.non_field_errors ? data.non_field_errors.join("") : toast.success("Thanks for Login") )
 			this.props.dispatch(loadingStop());
-			//this.toast.success("Thanks for LOGIN");
 			if (data.access_token) {
 				this.props.dispatch(loginUser(data))
 			} else{
-				sessionStorage.removeItem("auth")
+				localStorage.removeItem("auth")
 			}
 			
 		})

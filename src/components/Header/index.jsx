@@ -35,14 +35,18 @@ function ElevationScroll(props) {
 	});
   }
 
-
 const Header = ({ props, cart, user }) => {
 	const [isLoginOpen, setLoginIsOpen] = useState(false);
 	const [isReginOpen, setReginIsOpen] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [cartCount, setCartCount] = useState(0);
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
+	
+	useEffect(() => {
+		document.body.classList.toggle('modal-open', isLoginOpen);
+	  },[isLoginOpen])
+
 	useEffect(() => {
 		let count = 0;
 		cart.forEach((item) => {
