@@ -1,4 +1,5 @@
 import * as actionTypes from './user-types';
+import { toast } from 'react-toastify';
 
 export const loginUser = (user) => {
     return (dispatch) => {

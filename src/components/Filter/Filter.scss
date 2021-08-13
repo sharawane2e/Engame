@@ -7,7 +7,7 @@
   );
   .filter-section {
     width: 90%;
-    @include space(margin, top-bottom, $margin-8, $margin-8);
+    // @include space(margin, top-bottom, $margin-8, $margin-8);
     @include space(margin, left-right, auto, auto);
     .MuiPaper-elevation1 {
       box-shadow: none !important;

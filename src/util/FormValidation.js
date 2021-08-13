@@ -1,6 +1,6 @@
 import ValidationRegex from "../constants/ValidationRegex";
 import { ErrorMessages } from "../constants/Messages";
-//import { PASSWORD_MIN_LENGTH } from "../constants/ConstantValues";
+import { PASSWORD_MIN_LENGTH } from "../constants/ConstantValues";
 
 const validateEmailPattern = (email) => ValidationRegex.EMAIL.test(email);
 
@@ -34,7 +34,9 @@ export class LoginValidation extends Validation {
 
     validateField = (field, value) => {
         const validationResponse = new ValidationResponse();
+        console.log(validationResponse)
 
+        console.log(field);
         switch (field) {
             case "email":
                 if (!value) {
@@ -48,15 +50,18 @@ export class LoginValidation extends Validation {
                 }
                 break;
             case "password":
-                if (!value) {
+                console.log(value);
+                if (value) {
+
                     validationResponse.isValid = false;
                     validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
                 }
 
-                // else if (value.length < PASSWORD_MIN_LENGTH) {
-                //   validationResponse.isValid = false;
-                //   validationResponse.message = ErrorMessages.PASSWORD_MIN;
-                // }
+                else if (value.length < PASSWORD_MIN_LENGTH) {
+                    console.log("else if")
+                  validationResponse.isValid = false;
+                  validationResponse.message = ErrorMessages.PASSWORD_MIN;
+                }
 
                 break;
 
@@ -95,11 +100,20 @@ export class UserValidation extends Validation {
                     validationResponse.isValid = false;
                     validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
                 }
+                else if (value.length < PASSWORD_MIN_LENGTH) {
+                  validationResponse.isValid = false;
+                  validationResponse.message = ErrorMessages.PASSWORD_MIN;
+                }
                 break;
             case "confirmpassword":
                 if (!value) {
                     validationResponse.isValid = false;
                     validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+                }
+
+                else if (value.length < PASSWORD_MIN_LENGTH) {
+                  validationResponse.isValid = false;
+                  validationResponse.message = ErrorMessages.PASSWORD_MIN;
                 }
                 break;
 

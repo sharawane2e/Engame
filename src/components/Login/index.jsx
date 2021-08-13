@@ -56,19 +56,19 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			toast.error(data.non_field_errors ? data.non_field_errors.join("") : null )
-			this.props.dispatch(loadingStop())
+			toast.error(data.non_field_errors ? data.non_field_errors.join("") : toast.success("Thanks for LOGIN") )
+			this.props.dispatch(loadingStop());
+			//this.toast.success("Thanks for LOGIN");
 			if (data.access_token) {
 				this.props.dispatch(loginUser(data))
 			} else{
-				localStorage.removeItem("auth")
+				sessionStorage.removeItem("auth")
 			}
+			
 		})
 		.catch((error)=>{
 			toast.error(error);
 		})
-
-		
 	};
 
 	handleClickShowPassword = (e, key) => {

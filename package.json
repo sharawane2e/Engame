@@ -1,7 +1,6 @@
 {
   "name": "html5-widget",
   "version": "0.1.0",
-"homepage": "/swteam/HTML5-widgets/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -16,6 +15,8 @@
     "react-app-polyfill": "^2.0.0",
     "react-bootstrap": "^1.6.1",
     "react-copy-to-clipboard": "^5.0.3",
+    "react-custom-scroll": "^4.3.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-idle": "^3.0.0",
     "react-preloaders": "^3.0.3",
@@ -23,6 +24,7 @@
     "react-responsive-carousel": "^3.2.20",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-scrollbars-custom": "^4.0.25",
     "react-toastify": "^7.0.4",
     "redux": "^4.1.0",
     "redux-persist": "^6.0.0",

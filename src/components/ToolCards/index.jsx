@@ -79,7 +79,6 @@ const ToolCards = () => {
            <Grid container spacing={4}>
         
         {user ? productShow.map((tooldata, index) => {
-          console.log(tooldata.widget_data.imgUrl)
           return (
               <Grid item xs={12} lg={2} sm={4} key={index} id={tooldata.widget_data.id}>
                 <Paper 
