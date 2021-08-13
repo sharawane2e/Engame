@@ -23,17 +23,13 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
-
 function ElevationScroll(props) {
-
 	const { children, window } = props;
 	const trigger = useScrollTrigger({
 	  disableHysteresis: true,
 	  threshold: 0,
 	  target: window ? window() : undefined
 	});
-	console.log(trigger)
-  
 	return React.cloneElement(children, {
 	  elevation: trigger ? 4 : 0
 	});
@@ -57,7 +53,6 @@ const Header = ({ props, cart, user }) => {
 			setLoginIsOpen(false)
 		}
 	}, [cart, cartCount, user]);
-
 
 	const handleLogout = () => {
 		dispatch(loadingStart())
@@ -94,8 +89,8 @@ const Header = ({ props, cart, user }) => {
 		<>
 		 <ElevationScroll {...props}>
 				<AppBar className="flexGrow header-box" position={"sticky"}>
-					<Toolbar className="header-bg header-padding">
-						<Typography variant="h6" className="flexGrow">
+					<Toolbar className="header-padding">
+						<Typography variant="body1" className="flexGrow">
 							<Link to="/">
 								<img src={e2eLogo} />
 							</Link>

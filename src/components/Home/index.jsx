@@ -12,7 +12,7 @@ function header(props) {
             <Header/>
              <Filter/>
             <ToolCards/>
-            <Footer/>
+            {/* <Footer/> */}
 
          {/* </Scrollbars> */}
         </>

@@ -18,6 +18,7 @@ import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL } from "../../config/ApiUrl";
+import Footer from '../Footer';
 
 const ToolCards = () => {
   // console.log(user);
@@ -104,8 +105,8 @@ const ToolCards = () => {
                     </div>
                     <div className="toolcard__items toolcard__shopping">
                     {user? <span className="toolcard__sub-icons">
-                      {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
-                        <ShoppingCartIcon />
+                      <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/> 
+                        {/* <ShoppingCartIcon /> */}
                       </span>:null 
                     }
                     </div>
@@ -204,6 +205,7 @@ const ToolCards = () => {
         {/*End */}
       
     </Toolbar>
+    <Footer/>
    </>
   
   );

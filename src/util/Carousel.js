@@ -7,16 +7,10 @@ import ExclusiveDnd from "../assets/images/Container_exclusive_dnd.svg";
 const customCarousel =()=>{
     return(
           <>
-         <Carousel autoPlay showThumbs={false} showIndicators={false} showStatus={false}>
-            <div>
+         <Carousel autoPlay={10} showThumbs={false} showIndicators={false} showStatus={false} width={250}>
                 <img src={librarycards} />
-            </div>
-            <div>
                 <img src={BrandTargetdnd} />
-            </div>
-            <div>
                 <img src={ExclusiveDnd}/>
-            </div>
         </Carousel>
          </>
       )
