@@ -34,9 +34,6 @@ export class LoginValidation extends Validation {
 
     validateField = (field, value) => {
         const validationResponse = new ValidationResponse();
-        console.log(validationResponse)
-
-        console.log(field);
         switch (field) {
             case "email":
                 if (!value) {
@@ -50,14 +47,11 @@ export class LoginValidation extends Validation {
                 }
                 break;
             case "password":
-                console.log(value);
-                if (value) {
-
+                if (!value) {
                     validationResponse.isValid = false;
                     validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
                 }
-
-                else if (value.length < PASSWORD_MIN_LENGTH) {
+                 if (value.length < PASSWORD_MIN_LENGTH) {
                     console.log("else if")
                   validationResponse.isValid = false;
                   validationResponse.message = ErrorMessages.PASSWORD_MIN;

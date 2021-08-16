@@ -56,7 +56,7 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			toast.error(data.non_field_errors ? data.non_field_errors.join("") : toast.success("Thanks for Login") )
+			toast.error(data.non_field_errors ? data.non_field_errors.join("") :null )
 			this.props.dispatch(loadingStop());
 			if (data.access_token) {
 				this.props.dispatch(loginUser(data))
@@ -66,7 +66,7 @@ class Login extends Component {
 			
 		})
 		.catch((error)=>{
-			toast.error(error);
+			console.log(error);
 		})
 	};
 
@@ -102,7 +102,6 @@ class Login extends Component {
 	render() {
 		return (
 			<>
-				
 					{this.state.forgot ? (
 						<ForgotPassword />
 					) : this.state.data ? (
@@ -199,7 +198,5 @@ const mapStateToProps = state => {
 		user:state.user
 	}
 }
-
-
 
 export default connect(mapStateToProps)(Login);

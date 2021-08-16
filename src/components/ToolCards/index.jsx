@@ -47,11 +47,11 @@ const ToolCards = () => {
   // Fteching widget's from backend
   useEffect(() => {
     dispatch(listProducts());
-    console.log(user);
+//    console.log(user);
     if (token.isLoggedIn) {
-      console.log("Dff")
+    //  console.log("Dff")
       let id = token.token.access_token;
-      console.log(id)
+     // console.log(id)
       fetch(BASE_URL + "widget/user/detail/", {
         headers: {
           "Content-Type": "application/json",

@@ -23,14 +23,13 @@ class ForgotPassword extends Component {
       ForgotPasswordVali = new ForgotValidation();
      
       backLogin = (e) =>{
-        this.setState({data:`data`}); 
+        this.setState({data:`string`}); 
       }
 
       forgotSubmit = (e) => {
-		this.props.dispatch(loadingStart())
+	       this.props.dispatch(loadingStart())
          e.preventDefault();
          const {email} = this.state;
-        //  console.log(email);
          fetch(BASE_URL+"user/password/reset/", {
            method:"POST",
            headers:{
@@ -41,14 +40,12 @@ class ForgotPassword extends Component {
            .then(res => {
              toast(res.details)
              this.props.dispatch(loadingStop())
-             console.log(res);
            })
       }
 
      handleChange = (e, key) => {
         let value = e.target.value;
         const validationResponse = this.ForgotPasswordVali.validateField(key, value);
-        // console.log(validationResponse)
         const errorMessage = validationResponse.isValid ? validationResponse.message: this.state.formErrors[key];
             this.setState({
         [key]: value,
@@ -68,7 +65,6 @@ class ForgotPassword extends Component {
           formErrors: { ...this.state.formErrors, [key]: errorMessage },
         });
       }
-     
       
       render() {
         return (      
