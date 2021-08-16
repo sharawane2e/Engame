@@ -26,7 +26,7 @@ const initialState = {
 }
 const shopReducer = (state = initialState, action) => {
     switch(action.type){
-        case actionTypes.ADD_TO_CART :
+        case actionTypes.ADD_TO_CART : 
             // Get the items data from an array
             const item = state.products[0].find(prop => prop.id == action.payload.id)
             // // check if item is in cart already
