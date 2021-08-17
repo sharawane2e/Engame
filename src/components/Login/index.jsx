@@ -52,7 +52,6 @@ class Login extends Component {
     });
 
     if (validationResponse.isFormValid) {
-      console.log("if");
       this.props.dispatch(loadingStart());
       fetch(BASE_URL + "user/login/", {
         method: "POST",

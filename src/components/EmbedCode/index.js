@@ -14,10 +14,10 @@ const EmbedCode = ({ data, toolId }) => {
     // textAreaRef.current.select();
     document.execCommand("copy");
     e.target.focus();
-    // Toaster.success(setCopySuccess,"topCenter");
-    Toaster.success("success fully copy that", "topCenter");
-    //setCopySuccess("Copied!");
+    setCopySuccess("Copied!");
+    Toaster.sucess("You Copied successfully!", "topCenter");
   };
+
   const downloadfile = (e) => {
     var link = document.createElement("a");
     link.href = window.URL.createObjectURL(
@@ -29,6 +29,7 @@ const EmbedCode = ({ data, toolId }) => {
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {
+      Toaster.sucess("You Download successfully!", "topCenter");
       window.URL.revokeObjectURL(link);
     }, 200);
   };
