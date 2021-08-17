@@ -50,9 +50,12 @@ class Registration extends Component {
       confirmpassword,
     });
     if (validationResponse.isFormValid) {
-      toast.success("Thanks for registration")
+      // console.log("djdfbjh")
+    
+     // toast.success("Thanks for registration")
     } else {
-      delete validationResponse.isFormValid;
+     // console.log("esle part")
+      //delete validationResponse.isFormValid;
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },
       });
@@ -71,15 +74,14 @@ class Registration extends Component {
     })
     .then(result => result.json())
     .then(data => {
-      console.log(data.detail)
       toast.error(data.username ? data.username.join("") : null)
       toast.error(data.email ? data.email.join("") : null)
       toast.error(data.email ? data.email.join("") : null)
       toast.error(data.non_field_errors ? data.non_field_errors.join("") : null)
-     
       this.props.dispatch(loadingStop())
        if(data.detail){
-        window.location.reload()
+        window.location.reload();
+        toast.success("Thanks for registration");
       }
     })
     
@@ -110,9 +112,11 @@ class Registration extends Component {
   handleBlur = (e, key) => {
     let value = e.target.value;
     if (typeof value === "string") {
+      console.log(value)
       value = value.trim();
     }
     const validationResponse = this.UserValidation.validateField(key, value);
+    console.log(validationResponse);
     const errorMessage = validationResponse.message;
     this.setState({
       [key]: value,

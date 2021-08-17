@@ -8,6 +8,7 @@ body {
 }
 .App {
   position: relative;
+  height: 100vh;
 }
 .MuiButton-label {
   text-transform: none;
@@ -19,6 +20,9 @@ body {
   flex-grow: 1;
   display: flex;
   width: 100%;
+}
+.align-item{
+  align-items: center;
 }
 .paperstyel {
   @include space(padding, all, $padding-16, 0);
@@ -212,7 +216,7 @@ a {
 }
 .sticky-position {
   position: sticky;
-  top: 110px;
+  top: 82px;
   height: 100%;
 }
 .sticky-head-position {
@@ -234,4 +238,7 @@ a {
 
 .MuiAppBar-colorPrimary{
   background-color: #ececec  !important;
+}
+.modal-open{
+  overflow: hidden;
 }

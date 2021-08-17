@@ -2,11 +2,17 @@
 	padding:0px;
 	margin:0px;
 }
+/* body{
+    background:  url("../images/watermark.svg") no-repeat;
+    background-size: cover;
+    height: 100vh;
+} */
 body,.carousel-rating-container, .carousel-rating-container *{
     padding:0;
     margin:0;
     box-sizing:border-box;
 	font-family:arial;
+   
 }
 
 .popup-outer {

@@ -5,18 +5,16 @@
     6px,
     map-get($map: $boxshadow, $key: "black-smooth")
   );
+
   .filter-section {
     width: 90%;
-    @include space(margin, top-bottom, $margin-8, $margin-8);
+    @include space(padding, top-bottom, $padding-24, $padding-24);
     @include space(margin, left-right, auto, auto);
-    .MuiPaper-elevation1 {
-      box-shadow: none !important;
-    }
     .MuiPaper-root {
       @include bgcolor($transparent);
     }
     .review-text {
-      @include font-weight($font-600);
+      // @include font-weight($font-600);
       @include color($secondary);
       @include font-size($font-xxl);
       @include breakpoint(Ipad-pro) {
@@ -25,7 +23,7 @@
     }
 
     .filter-text {
-      @include font-weight($font-600);
+      // @include font-weight($font-600);
       @include color($black-secondary);
       @include font-size($font-xxl);
       @include breakpoint(Ipad-pro) {
@@ -35,8 +33,8 @@
     .filter-normal-text {
       @include color($black-secondary);
       @include font-size($font-xx-reg);
-      @include font-weight($font-600);
-      @include font-weight($font-600);
+      // @include font-weight($font-600);
+      // @include font-weight($font-600);
       @include space(margin, top, $margin-15, 0);
       @include breakpoint(Ipad-pro) {
         @include font-size($font-xx-reg);
@@ -47,9 +45,16 @@
         max-width: 100%;
       }
     }
+    .filter-font-family{
+      font-family: map-get($map:$font-family , $key: "font-barlowmedium")
+    }
   }
+  // .grid-paper-style{
+  //   padding-bottom: 40px
+  // }
 }
 .filter-inputsection {
+  @include space(padding, bottom, $padding-16,0);
   #{&}__form {
     .search-icon {
       @include bgcolorImp($back-color);
@@ -61,8 +66,8 @@
       border-bottom-right-radius: 0;
       .MuiIconButton-label {
         > svg {
-          width: 25px;
-          height: 25px;
+          // width: 25px;
+          // height: 25px;
           path {
             fill: $white;
           }
@@ -103,9 +108,9 @@
   }
 }
 .header-bg {
-  .MuiPaper-elevation1 {
-    box-shadow: none !important;
-  }
+  // .MuiPaper-elevation1 {
+  //   box-shadow: none !important;
+  // }
 }
 .makeStyles-root-4 {
   flex-grow: 1;

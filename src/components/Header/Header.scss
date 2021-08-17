@@ -1,6 +1,6 @@
 .header-bg {
   @include bgcolor($gray-primary);
-  @include space(padding, top-bottom, $padding-24, $padding-24);
+  // @include space(padding, top-bottom, $padding-24, $padding-24);
   .MuiTypography-h6{
     >a{
       img{
@@ -13,10 +13,17 @@
 }
 
 .MuiPaper-elevation4 {
-  box-shadow: none !important;
+  // box-shadow: none !important;
+  background: #fff !important;
 }
 .header-box {
   z-index: 99;
+  .header-padding{
+    @include space(padding, top-bottom, $padding-15, $padding-15);
+    a{
+      display: flex;
+    }
+  }
   .header-text-color {
     display: flex;
     align-items: $align-center;

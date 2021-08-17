@@ -4,4 +4,5 @@ export const ErrorMessages = {
     PASSWORD_REQUIRED: "Password is required.",
     PASSWORD_MATCH: "Password did not match.",
     NAME_REQURIED: "Name is required.",
+    PASSWORD_MIN:"This password is too short. It must contain at least 8 characters.",
 };

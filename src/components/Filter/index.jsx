@@ -15,12 +15,12 @@ function Home() {
     <div className="header-bg filter-tool-shadow filter--fixed">
       <Toolbar className="filter-section">
         <div className="flexGrow">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} className="align-item">
             <Grid item xs={12} sm={8}>
-              <Paper className="paperstyel">
+              <Paper className="paperstyel filter-font-family">
                 <span className="review-text">Review 100+ &nbsp;</span>
                 <span className="filter-text">
-                  tools, Select the best for you.
+                  tools, select the best for you.
                 </span>
                 <div className="filter-normal-text">
                   All the tools are well developed and tested, created by our
@@ -29,16 +29,15 @@ function Home() {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Paper className="paperstyel">
-                <img src={librarycards} />
-                {/* <Carousel/> */}
+              <Paper className="paperstyel grid-paper-style">
+                {/* <img src={librarycards} /> */}
+                <Carousel/>
               </Paper>
             </Grid>
           </Grid>
         </div>
       </Toolbar>
       <Toolbar className="filter-inputsection">
-        <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             <Paper
               component="form"
@@ -58,7 +57,6 @@ function Home() {
               </IconButton>
             </Paper>
           </Grid>
-        </Grid>
       </Toolbar>
     </div>
   );

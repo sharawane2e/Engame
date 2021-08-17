@@ -56,19 +56,18 @@ class Login extends Component {
 		})
 		.then(result => result.json())
 		.then((data) => {
-			toast.error(data.non_field_errors ? data.non_field_errors.join("") : null )
-			this.props.dispatch(loadingStop())
+			toast.error(data.non_field_errors ? data.non_field_errors.join("") :null )
+			this.props.dispatch(loadingStop());
 			if (data.access_token) {
 				this.props.dispatch(loginUser(data))
 			} else{
 				localStorage.removeItem("auth")
 			}
+			
 		})
 		.catch((error)=>{
-			toast.error(error);
+			console.log(error);
 		})
-
-		
 	};
 
 	handleClickShowPassword = (e, key) => {
@@ -103,7 +102,6 @@ class Login extends Component {
 	render() {
 		return (
 			<>
-				
 					{this.state.forgot ? (
 						<ForgotPassword />
 					) : this.state.data ? (
@@ -200,7 +198,5 @@ const mapStateToProps = state => {
 		user:state.user
 	}
 }
-
-
 
 export default connect(mapStateToProps)(Login);

@@ -21,6 +21,19 @@ import Menu from '@material-ui/core/Menu';
 import { toast } from 'react-toastify';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+
+function ElevationScroll(props) {
+	const { children, window } = props;
+	const trigger = useScrollTrigger({
+	  disableHysteresis: true,
+	  threshold: 0,
+	  target: window ? window() : undefined
+	});
+	return React.cloneElement(children, {
+	  elevation: trigger ? 4 : 0
+	});
+  }
 
 const Header = ({ props, cart, user }) => {
 	const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -28,7 +41,12 @@ const Header = ({ props, cart, user }) => {
 	const [open, setOpen] = useState(false);
 	const [cartCount, setCartCount] = useState(0);
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
+	
+	useEffect(() => {
+		document.body.classList.toggle('modal-open', isLoginOpen);
+	  },[isLoginOpen])
+
 	useEffect(() => {
 		let count = 0;
 		cart.forEach((item) => {
@@ -40,7 +58,6 @@ const Header = ({ props, cart, user }) => {
 		}
 	}, [cart, cartCount, user]);
 
-
 	const handleLogout = () => {
 		dispatch(loadingStart())
 		fetch(BASE_URL+"user/logout/",{
@@ -49,16 +66,17 @@ const Header = ({ props, cart, user }) => {
 		})
 		.then(result=>result.json())
 		.then(res => {
+			// console.log(res.detail);
 			dispatch(logOutUser())
-			localStorage.removeItem("auth")
-			dispatch(loadingStop())
-			history.push("/")
+			localStorage.removeItem("auth");
+			toast.success(res.detail);
+			dispatch(loadingStop());
+			history.push("/");
 		})
 		.catch((error)=>{
 			toast.error(error);
 		})
 	}
-
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -73,9 +91,10 @@ const Header = ({ props, cart, user }) => {
 
 	return (
 		<>
+		 <ElevationScroll {...props}>
 				<AppBar className="flexGrow header-box" position={"sticky"}>
-					<Toolbar className="header-bg header-padding">
-						<Typography variant="h6" className="flexGrow">
+					<Toolbar className="header-padding">
+						<Typography variant="body1" className="flexGrow">
 							<Link to="/">
 								<img src={e2eLogo} />
 							</Link>
@@ -130,7 +149,7 @@ const Header = ({ props, cart, user }) => {
 						</div>
 					</Toolbar>
 				</AppBar>
-
+		</ElevationScroll>
 			<CustomPopup
 				open={isLoginOpen}
 				onClose={() => setLoginIsOpen(false)}
