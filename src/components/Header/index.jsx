@@ -18,7 +18,7 @@ import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Menu from '@material-ui/core/Menu';
-import { toast } from 'react-toastify';
+import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -45,7 +45,11 @@ const Header = ({ props, cart, user }) => {
 	
 	useEffect(() => {
 		document.body.classList.toggle('modal-open', isLoginOpen);
-	  },[isLoginOpen])
+	},[isLoginOpen])
+
+	useEffect(() => {
+		document.body.classList.toggle('modal-open', isReginOpen);
+	},[isReginOpen])
 
 	useEffect(() => {
 		let count = 0;
@@ -69,12 +73,12 @@ const Header = ({ props, cart, user }) => {
 			// console.log(res.detail);
 			dispatch(logOutUser())
 			localStorage.removeItem("auth");
-			toast.success(res.detail);
+			Toaster.success(res.detail,"topCenter");
 			dispatch(loadingStop());
 			history.push("/");
 		})
 		.catch((error)=>{
-			toast.error(error);
+			Toaster.error(error,"topCenter");
 		})
 	}
 

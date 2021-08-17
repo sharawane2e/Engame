@@ -15,8 +15,7 @@ const customCarousel =()=>{
          </>
       )
   }
-  
-  
+ 
   export default customCarousel;
   
 

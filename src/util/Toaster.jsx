@@ -7,23 +7,21 @@ const Toaster = {
       toast.success(message, {
         position: pos,
         autoClose: 3000,
-        closeButton: false,
+        closeButton: true,
         newestOnTop: true,
       });
     },
     error: async function (message, position = "topCenter") {
       let pos = await this.toasterPosition(position);
-  
       toast.error(message, {
         position: pos,
         autoClose: 3000,
-        closeButton: false,
+        closeButton: true,
         newestOnTop: true,
       });
     },
     warn: async function (message, position = "topCenter") {
       let pos = await this.toasterPosition(position);
-  
       toast.warn(message, {
         position: pos,
         autoClose: 3000,
@@ -33,7 +31,6 @@ const Toaster = {
     },
     info: async function (message, position = "topCenter") {
       let pos = await this.toasterPosition(position);
-  
       toast.info(message, {
         position: pos,
         autoClose: 3000,
@@ -41,8 +38,7 @@ const Toaster = {
         newestOnTop: true,
       });
     },
-    custom: async function (message, position) {},
-  
+ 
     toasterPosition: async function (position) {
       let pos = toast.POSITION.TOP_CENTER;
       switch (position) {

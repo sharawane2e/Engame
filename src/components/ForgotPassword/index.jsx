@@ -9,7 +9,7 @@ import CustomButton from "../../components/widgets/Button"
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import Toaster from "../../util/Toaster";
 
 class ForgotPassword extends Component {
      state = {
@@ -18,29 +18,38 @@ class ForgotPassword extends Component {
         formErrors: {
           email: "",
         },
-      };
-     
+      };     
       ForgotPasswordVali = new ForgotValidation();
      
       backLogin = (e) =>{
         this.setState({data:`string`}); 
       }
-
       forgotSubmit = (e) => {
-	       this.props.dispatch(loadingStart())
-         e.preventDefault();
-         const {email} = this.state;
-         fetch(BASE_URL+"user/password/reset/", {
-           method:"POST",
-           headers:{
-             "Content-Type":"application/json"
-           },
-           body:JSON.stringify({email:email})
-         }).then(result => result.json())
-           .then(res => {
-             toast(res.details)
-             this.props.dispatch(loadingStop())
-           })
+        e.preventDefault();
+        const { email } = this.state;
+        const validationResponse = this.ForgotPasswordVali.validateForm({
+          email,
+          });
+          if (validationResponse.isFormValid) {
+            this.props.dispatch(loadingStart())
+            const {email} = this.state;
+            fetch(BASE_URL+"user/password/reset/", {
+              method:"POST",
+              headers:{
+                "Content-Type":"application/json"
+              },
+              body:JSON.stringify({email:email})
+            }).then(result => result.json())
+              .then(res => {
+                this.props.dispatch(loadingStop())
+                Toaster.sucess(res.detail,"topCenter")
+              })
+          }
+          else {
+            this.setState({
+              formErrors: { ...this.state.formErrors, ...validationResponse.errors },
+              });
+            }
       }
 
      handleChange = (e, key) => {
@@ -58,7 +67,6 @@ class ForgotPassword extends Component {
           value = value.trim();
         }
         const validationResponse = this.ForgotPasswordVali.validateField(key, value);
-        console.log(validationResponse)
         const errorMessage = validationResponse.message;
         this.setState({
           [key]: value,
@@ -71,8 +79,7 @@ class ForgotPassword extends Component {
           <>
         {this.state.data?<Login />:
         <div className="form-area forgot--password">
-          <ToastContainer />
-            <div className="form-area__login  large-hedding">Forgot Password</div>
+         <div className="form-area__login  large-hedding">Forgot Password</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
            <InputLabel htmlFor="standard-adornment-email" className="input-label">E-mail address</InputLabel> 
                 <FormControl className="form-area__control">
@@ -104,11 +111,7 @@ class ForgotPassword extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
 
-  }
-}
 export default connect()(ForgotPassword);
 
 

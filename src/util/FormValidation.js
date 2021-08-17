@@ -47,12 +47,11 @@ export class LoginValidation extends Validation {
                 }
                 break;
             case "password":
-                if (!value) {
-                    validationResponse.isValid = false;
-                    validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
-                }
+                // if (value) {
+                //     validationResponse.isValid = false;
+                //     validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+                // }
                  if (value.length < PASSWORD_MIN_LENGTH) {
-                    console.log("else if")
                   validationResponse.isValid = false;
                   validationResponse.message = ErrorMessages.PASSWORD_MIN;
                 }
