@@ -91,7 +91,7 @@ const ToolCards = () => {
                       key={index}
                       id={tooldata.widget_data.id}
                     >
-                      <Paper className="toolcard__imageblck">
+                      <Paper className="toolcard__imageblck ">
                         <div className="toolcard__image">
                           <img
                             src={
