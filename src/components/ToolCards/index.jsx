@@ -38,14 +38,13 @@ const ToolCards = () => {
     setSelectedTool(tool);
   };
 
-  
-	useEffect(() => {
-    document.body.classList.toggle('modal-open', ispopup);
-	},[ispopup])
-  
   useEffect(() => {
-  	document.body.classList.toggle('modal-open', isSubscription);
-  },[isSubscription])
+    document.body.classList.toggle("modal-open", ispopup);
+  }, [ispopup]);
+
+  useEffect(() => {
+    document.body.classList.toggle("modal-open", isSubscription);
+  }, [isSubscription]);
 
   if (user.isLoggedIn) {
     setLoginIsOpen(false);
@@ -97,9 +96,8 @@ const ToolCards = () => {
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
                           <img
-                            src={BASE_URL+
-                              "media/" +
-                              tooldata.widget_data.imgUrl
+                            src={
+                              BASE_URL + "media/" + tooldata.widget_data.imgUrl
                             }
                           />
                           {/* <span>{tooldata.imgUrl}</span> */}
@@ -118,20 +116,26 @@ const ToolCards = () => {
                         <div className="toolcard__align toolcard__toolicons">
                           <div className="toolcard__items toolcard__download">
                             {user ? (
-                              <div className="toolcard__sub-icons"  onClick={() => {
-                                setPopup(true);
-                                setPopupId(tooldata.widget_data.id);
-                              }}>
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={() => {
+                                  setPopup(true);
+                                  setPopupId(tooldata.widget_data.id);
+                                }}
+                              >
                                 <SystemUpdateAltIcon />
                               </div>
                             ) : null}
                           </div>
                           <div className="toolcard__items toolcard__shopping">
                             {user ? (
-                              <div className="toolcard__sub-icons"  onClick={(id) => {
-                                setSubscriptionPopup(true);
-                                setPopupId(tooldata.id);
-                              }}> 
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={(id) => {
+                                  setSubscriptionPopup(true);
+                                  setPopupId(tooldata.id);
+                                }}
+                              >
                                 <ShoppingCartIcon />
                                 {/* <ShoppingCartIcon /> */}
                               </div>
@@ -179,11 +183,14 @@ const ToolCards = () => {
                         <div className="toolcard__align toolcard__toolicons">
                           <div className="toolcard__items toolcard__download">
                             {user ? (
-                              <div className="toolcard__sub-icons" onClick={() => {
-                                setPopup(true);
-                                setPopupId(tooldata.id);
-                              }}>
-                                <SystemUpdateAltIcon/>
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={() => {
+                                  setPopup(true);
+                                  setPopupId(tooldata.id);
+                                }}
+                              >
+                                <SystemUpdateAltIcon />
                               </div>
                             ) : null}
                           </div>

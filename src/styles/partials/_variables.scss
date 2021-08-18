@@ -6,21 +6,20 @@ $font-family: (
   "font-barlowregular": "barlowregular",
 );
 
-$white:#fff;
-$primary:#f15a5c;
-$secondary:#f15b5b;
-$gray-primary:#ececec;
-$gray-secondary:#efefef;
-$black-primary:#363636;
-$black-secondary:#383838;
-$black-smooth:#b3b3b3;
-$black-gray:#9d9d9d;
-$accent:#e3ebf7;
-$light-smooth:#d4d4d4;
-$dark-gray:#848484;
+$white: #fff;
+$primary: #f15a5c;
+$secondary: #f15b5b;
+$gray-primary: #ececec;
+$gray-secondary: #efefef;
+$black-primary: #363636;
+$black-secondary: #383838;
+$black-smooth: #b3b3b3;
+$black-gray: #9d9d9d;
+$accent: #e3ebf7;
+$light-smooth: #d4d4d4;
+$dark-gray: #848484;
 $back-color: #d6d6d6;
-$transparent:transparent;
-
+$transparent: transparent;
 
 $bold: bold;
 $font-normal: normal;
@@ -28,7 +27,6 @@ $font-500: 500;
 $font-600: 600;
 $font-700: 700;
 $font-800: 800;
-
 
 $align-center: center;
 $align-right: right;
@@ -40,25 +38,22 @@ $dotted: dotted;
 
 $boder-radius: 6px;
 
-
 $red-smooth: rgba(241, 91, 91, 0.5);
-$black-smooth: rgba(0, 0, 0, 0.25);
+$black-smooth: rgba(0, 0, 0, 0.5);
 $black-1: rgba(0, 0, 0, 0.1);
 $black-4: rgba(0, 0, 0, 0.4);
 $overlay-color: rgba(241, 91, 91, 0.31);
 $black-dark: rgba(132, 132, 132, 0.5);
-$gray-opacity:rgba(132, 132, 132, 1);
-$primary-btn-shadow:rgba(239 ,0 ,0 , 0.5);
-$secondary-btn-shadow:rgba(157, 157, 157);
+$gray-opacity: rgba(132, 132, 132, 1);
+$primary-btn-shadow: rgba(239, 0, 0, 0.5);
+$secondary-btn-shadow: rgba(157, 157, 157);
 
 $boxshadow: (
   "red-smooth": rgba(241, 91, 91, 0.5),
   "black-smooth": rgba(0, 0, 0, 0.25),
   "black-1": rgba(0, 0, 0, 0.1),
   "black-4": rgba(0, 0, 0, 0.4),
-
 );
-
 
 $padding-0: 0px;
 $padding-2: 2px;
@@ -98,23 +93,21 @@ $margin-40: 40px;
 $margin-50: 50px;
 $margin-86: 86px;
 
-$font-xxl:50px;
-$font-xl:45px;
-$font-xmd:40px;
-$font-md:45px;
-$font-xlg:40px;
-$font-lg:32px;
-$font-xsm:30px;
-$font-sm:25px;
-$font-xx-reg:20px;
-$font-xx-reg18:18px;
-$font-xl-reg:16px;
-$font-x-reg:15px;
-$font-reg:14px;
-$font-xmd-reg:12px;
-$font-md-reg:10px;
-$font-sm-reg:5px;
-$font-ssm-reg:2px;
-$font-zero:0px;
-
-
+$font-xxl: 50px;
+$font-xl: 45px;
+$font-xmd: 40px;
+$font-md: 45px;
+$font-xlg: 40px;
+$font-lg: 32px;
+$font-xsm: 30px;
+$font-sm: 25px;
+$font-xx-reg: 20px;
+$font-xx-reg18: 18px;
+$font-xl-reg: 16px;
+$font-x-reg: 15px;
+$font-reg: 14px;
+$font-xmd-reg: 12px;
+$font-md-reg: 10px;
+$font-sm-reg: 5px;
+$font-ssm-reg: 2px;
+$font-zero: 0px;

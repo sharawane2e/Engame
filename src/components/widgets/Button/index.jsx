@@ -4,12 +4,13 @@ import { getClassNames } from "../../../util/Utility";
 
 const CustomButton = (props) => {
   return (
-      <>
-     <Button {...props}  
-       className={getClassNames("custom-button", props.className)}
+    <>
+      <Button
+        {...props}
+        className={getClassNames("custom-button", props.className)}
       >
-      {props.children}
-     </Button>
+        {props.children}
+      </Button>
     </>
   );
 };

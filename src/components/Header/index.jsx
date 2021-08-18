@@ -17,178 +17,181 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
-import Menu from '@material-ui/core/Menu';
+import Menu from "@material-ui/core/Menu";
 import Toaster from "../../util/Toaster";
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 function ElevationScroll(props) {
-	const { children, window } = props;
-	const trigger = useScrollTrigger({
-	  disableHysteresis: true,
-	  threshold: 0,
-	  target: window ? window() : undefined
-	});
-	return React.cloneElement(children, {
-	  elevation: trigger ? 4 : 0
-	});
-  }
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
 
 const Header = ({ props, cart, user }) => {
-	const [isLoginOpen, setLoginIsOpen] = useState(false);
-	const [isReginOpen, setReginIsOpen] = useState(false);
-	const [open, setOpen] = useState(false);
-	const [cartCount, setCartCount] = useState(0);
-	const dispatch = useDispatch();
-	const history = useHistory();
-	
-	useEffect(() => {
-		document.body.classList.toggle('modal-open', isLoginOpen);
-	},[isLoginOpen])
+  const [isLoginOpen, setLoginIsOpen] = useState(false);
+  const [isReginOpen, setReginIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-	useEffect(() => {
-		document.body.classList.toggle('modal-open', isReginOpen);
-	},[isReginOpen])
+  useEffect(() => {
+    document.body.classList.toggle("modal-open", isLoginOpen);
+  }, [isLoginOpen]);
 
-	useEffect(() => {
-		let count = 0;
-		cart.forEach((item) => {
-			count += item.qty;
-		});
-		setCartCount(count)
-		if(user.isLoggedIn){
-			setLoginIsOpen(false)
-		}
-	}, [cart, cartCount, user]);
+  useEffect(() => {
+    document.body.classList.toggle("modal-open", isReginOpen);
+  }, [isReginOpen]);
 
-	const handleLogout = () => {
-		dispatch(loadingStart())
-		fetch(BASE_URL+"user/logout/",{
-			method:"POST",
-			body:JSON.stringify("")
-		})
-		.then(result=>result.json())
-		.then(res => {
-			// console.log(res.detail);
-			dispatch(logOutUser())
-			localStorage.removeItem("auth");
-			Toaster.success(res.detail,"topCenter");
-			dispatch(loadingStop());
-			history.push("/");
-		})
-		.catch((error)=>{
-			Toaster.error(error,"topCenter");
-		})
-	}
+  useEffect(() => {
+    let count = 0;
+    cart.forEach((item) => {
+      count += item.qty;
+    });
+    setCartCount(count);
+    if (user.isLoggedIn) {
+      setLoginIsOpen(false);
+    }
+  }, [cart, cartCount, user]);
 
-	const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleLogout = () => {
+    dispatch(loadingStart());
+    fetch(BASE_URL + "user/logout/", {
+      method: "POST",
+      body: JSON.stringify(""),
+    })
+      .then((result) => result.json())
+      .then((res) => {
+        console.log(res.detail);
+        dispatch(logOutUser());
+        localStorage.removeItem("auth");
+        history.push("/");
+        dispatch(loadingStop());
+        Toaster.success(res.detail, "topCenter");
+      })
+      .catch((error) => {
+        Toaster.error(error, "topCenter");
+      });
+  };
 
-	const handleClick = (event) => {
-	  setAnchorEl(event.currentTarget);
-	};
-  
-	const handleClose = () => {
-	  setAnchorEl(null);
-	  setOpen(false);
-	};
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-	return (
-		<>
-		 <ElevationScroll {...props}>
-				<AppBar className="flexGrow header-box" position={"sticky"}>
-					<Toolbar className="header-padding">
-						<Typography variant="body1" className="flexGrow">
-							<Link to="/">
-								<img src={e2eLogo} />
-							</Link>
-						</Typography>
-						<div className="header-text-color">
-							{!user.isLoggedIn ? (
-								<>
-									<div
-										className="menu-button"
-										onClick={() => setLoginIsOpen(true)}>
-										Login
-									</div>
-									<span className="vertical-line">|</span>
-									<div
-										className="menu-button"
-										onClick={() => setReginIsOpen(true)}
-									>
-										Register
-									</div>
-								</>
-							) : (
-							<div className="user-after-login" >
-								<CustomButton onClick={handleClick}>
-								 	{user.token.user.first_name} <ArrowDropDownIcon/>
-								</CustomButton>
-									<Menu
-										id="simple-menu"
-										anchorEl={anchorEl}
-										keepMounted
-										open={Boolean(anchorEl)}
-										onClose={handleClose}>
-										<MenuItem onClick={handleClose}>Profile</MenuItem>
-										<MenuItem onClick={() => handleLogout()} >Logout</MenuItem>
-									</Menu>
-								</div>
-							)}
-							<div className="shoping__card">
-								{user.isLoggedIn?
-								<Link to="cart">
-									<Badge badgeContent={cartCount} color="secondary">
-										<ShoppingCartIcon />
-									</Badge>
-								</Link>:<Link to="#!">
-									<Badge badgeContent={cartCount} color="secondary">
-										<ShoppingCartIcon />
-									</Badge>
-								</Link>}
-							</div>
-							<div className="toggle-icon">
-								<MoreVertIcon/>
-							</div>
-						</div>
-					</Toolbar>
-				</AppBar>
-		</ElevationScroll>
-			<CustomPopup
-				open={isLoginOpen}
-				onClose={() => setLoginIsOpen(false)}
-				className="popup-container__iner--xl border-radius"
-			>
-				<Grid container spacing={1}>
-					<Grid item xs={6} sm={6} className="login-background"></Grid>
-					<Grid item xs={6} sm={6}>
-						<Login />
-					</Grid>
-				</Grid>
-			</CustomPopup>
-			<CustomPopup
-				open={isReginOpen}
-				onClose={() => setReginIsOpen(false)}
-				className="popup-container__iner--xl border-radius"
-			>
-				<Grid container spacing={3}>
-					<Grid item xs={6} sm={6} className="login-background"></Grid>
-					<Grid item xs={6} sm={6}>
-						<Registration />
-					</Grid>
-				</Grid>
-			</CustomPopup>
-		</>
-	);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <ElevationScroll {...props}>
+        <AppBar className="flexGrow header-box" position={"sticky"}>
+          <Toolbar className="header-padding">
+            <Typography variant="body1" className="flexGrow">
+              <Link to="/">
+                <img src={e2eLogo} />
+              </Link>
+            </Typography>
+            <div className="header-text-color">
+              {!user.isLoggedIn ? (
+                <>
+                  <div
+                    className="menu-button"
+                    onClick={() => setLoginIsOpen(true)}
+                  >
+                    Login
+                  </div>
+                  <span className="vertical-line">|</span>
+                  <div
+                    className="menu-button"
+                    onClick={() => setReginIsOpen(true)}
+                  >
+                    Register
+                  </div>
+                </>
+              ) : (
+                <div className="user-after-login">
+                  <CustomButton onClick={handleClick}>
+                    {user.token.user.first_name} <ArrowDropDownIcon />
+                  </CustomButton>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+                  </Menu>
+                </div>
+              )}
+              <div className="shoping__card">
+                {user.isLoggedIn ? (
+                  <Link to="cart">
+                    <Badge badgeContent={cartCount} color="secondary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </Link>
+                ) : (
+                  <Link to="#!">
+                    <Badge badgeContent={cartCount} color="secondary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </Link>
+                )}
+              </div>
+              <div className="toggle-icon">
+                <MoreVertIcon />
+              </div>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <CustomPopup
+        open={isLoginOpen}
+        onClose={() => setLoginIsOpen(false)}
+        className="popup-container__iner--xl border-radius"
+      >
+        <Grid container spacing={1}>
+          <Grid item xs={6} sm={6} className="login-background"></Grid>
+          <Grid item xs={6} sm={6}>
+            <Login />
+          </Grid>
+        </Grid>
+      </CustomPopup>
+      <CustomPopup
+        open={isReginOpen}
+        onClose={() => setReginIsOpen(false)}
+        className="popup-container__iner--xl border-radius"
+      >
+        <Grid container spacing={3}>
+          <Grid item xs={6} sm={6} className="login-background"></Grid>
+          <Grid item xs={6} sm={6}>
+            <Registration />
+          </Grid>
+        </Grid>
+      </CustomPopup>
+    </>
+  );
 };
 
 const mapStateToProps = (state) => {
-	return {
-		cart: state.shop.cart,
-		user:state.user
-	};
+  return {
+    cart: state.shop.cart,
+    user: state.user,
+  };
 };
 
 export default connect(mapStateToProps)(Header);
-
-
