@@ -12,7 +12,7 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
-import { ToastContainer, toast } from "react-toastify";
+import Toaster from "../../util/Toaster";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
@@ -38,13 +38,19 @@ const ToolCards = () => {
     setSelectedTool(tool);
   };
 
+  
+	useEffect(() => {
+    document.body.classList.toggle('modal-open', ispopup);
+	},[ispopup])
+  
+  useEffect(() => {
+  	document.body.classList.toggle('modal-open', isSubscription);
+  },[isSubscription])
+
   if (user.isLoggedIn) {
     setLoginIsOpen(false);
   }
-  //console.log(token)
-  //console.log(token.isLoggedIn)
 
-  // Fteching widget's from backend
   useEffect(() => {
     dispatch(listProducts())
     // console.log(token);
@@ -66,7 +72,7 @@ const ToolCards = () => {
 
   const handleCart = () => {
     dispatch(addToCart(popupId));
-    toast.success("Your Item is added to shopping cart!");
+    Toaster.success("Your Item is added to shopping cart!");
   };
 
   return (
@@ -92,8 +98,8 @@ const ToolCards = () => {
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
                           <img
-                            src={
-                              "http://192.168.1.124:8000/media/" +
+                            src={BASE_URL+
+                              "media/" +
                               tooldata.widget_data.imgUrl
                             }
                           />
@@ -113,27 +119,23 @@ const ToolCards = () => {
                         <div className="toolcard__align toolcard__toolicons">
                           <div className="toolcard__items toolcard__download">
                             {user ? (
-                              <span className="toolcard__sub-icons">
-                                <SystemUpdateAltIcon
-                                  onClick={() => {
-                                    setPopup(true);
-                                    setPopupId(tooldata.widget_data.id);
-                                  }}
-                                />
-                              </span>
+                              <div className="toolcard__sub-icons"  onClick={() => {
+                                setPopup(true);
+                                setPopupId(tooldata.widget_data.id);
+                              }}>
+                                <SystemUpdateAltIcon />
+                              </div>
                             ) : null}
                           </div>
                           <div className="toolcard__items toolcard__shopping">
                             {user ? (
-                              <span className="toolcard__sub-icons">
-                                <ShoppingCartIcon
-                                  onClick={(id) => {
-                                    setSubscriptionPopup(true);
-                                    setPopupId(tooldata.id);
-                                  }}
-                                />
+                              <div className="toolcard__sub-icons"  onClick={(id) => {
+                                setSubscriptionPopup(true);
+                                setPopupId(tooldata.id);
+                              }}> 
+                                <ShoppingCartIcon />
                                 {/* <ShoppingCartIcon /> */}
-                              </span>
+                              </div>
                             ) : null}
                           </div>
                         </div>
@@ -178,22 +180,20 @@ const ToolCards = () => {
                         <div className="toolcard__align toolcard__toolicons">
                           <div className="toolcard__items toolcard__download">
                             {user ? (
-                              <span className="toolcard__sub-icons">
-                                <SystemUpdateAltIcon
-                                  onClick={() => {
-                                    setPopup(true);
-                                    setPopupId(tooldata.id);
-                                  }}
-                                />
-                              </span>
+                              <div className="toolcard__sub-icons" onClick={() => {
+                                setPopup(true);
+                                setPopupId(tooldata.id);
+                              }}>
+                                <SystemUpdateAltIcon/>
+                              </div>
                             ) : null}
                           </div>
                           <div className="toolcard__items toolcard__shopping">
                             {user ? (
-                              <span className="toolcard__sub-icons">
+                              <div className="toolcard__sub-icons">
                                 {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
                                 <ShoppingCartIcon />
-                              </span>
+                              </div>
                             ) : null}
                           </div>
                         </div>
@@ -240,7 +240,6 @@ const ToolCards = () => {
           className="border-radius popup-container__iner--sm"
         >
           <Subscription data={products} toolId={popupId} />
-          <ToastContainer />
           <div className="popup-container__footer">
             <CustomButton
               className="primary-button add--card"

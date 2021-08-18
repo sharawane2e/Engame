@@ -1,56 +1,67 @@
-import React, { useRef,useState } from "react";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import React, { useRef, useState } from "react";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import CustomButton from "../../components/widgets/Button";
-import GetAppIcon from '@material-ui/icons/GetApp';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
+import GetAppIcon from "@material-ui/icons/GetApp";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import Toaster from "../../util/Toaster";
 
-const EmbedCode = ({data, toolId}) => {
-    const [state] = useState(data);
-    console.log(state)
-    const [copySuccess, setCopySuccess] = useState('');
-    const textAreaRef = useRef(null);
+const EmbedCode = ({ data, toolId }) => {
+  const [state] = useState(data);
+  const [copySuccess, setCopySuccess] = useState("");
+  const textAreaRef = useRef(null);
 
-    const copyToClipboard=(e)=>{
-        textAreaRef.current.select();
-        document.execCommand('copy');
-        e.target.focus();
-        setCopySuccess('Copied!');
-    }
-    const downloadfile=(e)=>{
-          var link = document.createElement("a");
-         link.href = window.URL.createObjectURL(
-            new Blob([document.getElementById('text-area').value], { type: "application/octet-stream" })
-          );
-          link.download = "embeded.text";
-          document.body.appendChild(link);
-          link.click();
-          setTimeout(function () {
-            window.URL.revokeObjectURL(link);
-          }, 200);        
-    }
+  const copyToClipboard = (e) => {
+    // textAreaRef.current.select();
+    document.execCommand("copy");
+    e.target.focus();
+    setCopySuccess("Copied!");
+    Toaster.sucess("You Copied successfully!", "topCenter");
+  };
 
-    return(
-        <div className="embeded-conatiner">
-        <TextareaAutosize
+  const downloadfile = (e) => {
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(
+      new Blob([document.getElementById("text-area").value], {
+        type: "application/octet-stream",
+      })
+    );
+    link.download = state[0].widget_data.name + "embeded.text";
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(function () {
+      Toaster.sucess("You Download successfully!", "topCenter");
+      window.URL.revokeObjectURL(link);
+    }, 200);
+  };
+
+  return (
+    <div className="embeded-conatiner">
+      <TextareaAutosize
         ref={textAreaRef}
         className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
-            aria-label="maximum height"
-            id="text-area"
-            value= {state.map(item => item.widget_data.id===toolId ? item.widget_data.widget_embed_code : null)}
-            />
-            
-            <div className="embeded-conatiner__buttton-group">
-                 <CustomButton  onClick={copyToClipboard}
-                    className='secondary-button margin-right-20'>
-                    <FileCopyIcon className="margin-right-15"/> {copySuccess ? copySuccess : "Copy to Clipboard"} 
-                </CustomButton>
-                <CustomButton onClick={downloadfile}
-                    className='primary-button'>
-                    <GetAppIcon className="margin-right-15"/>   Download
-                </CustomButton>
-            </div>
-        </div>
-    )
-}
+        aria-label="maximum height"
+        id="text-area"
+        value={state.map((item) =>
+          item.widget_data.id === toolId
+            ? item.widget_data.widget_embed_code
+            : null
+        )}
+      />
+
+      <div className="embeded-conatiner__buttton-group">
+        <CustomButton
+          onClick={copyToClipboard}
+          className="secondary-button margin-right-20"
+        >
+          <FileCopyIcon className="margin-right-15" />{" "}
+          {copySuccess ? copySuccess : "Copy to Clipboard"}
+        </CustomButton>
+        <CustomButton onClick={downloadfile} className="primary-button">
+          <GetAppIcon className="margin-right-15" /> Download
+        </CustomButton>
+      </div>
+    </div>
+  );
+};
 
 export default EmbedCode;

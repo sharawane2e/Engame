@@ -4,7 +4,7 @@ const initialState = {
 }
 
  const getAuthState = () => {
-        const auth = localStorage.getItem("auth")
+        const auth = sessionStorage.getItem("auth")
         try{
             const authObj = JSON.parse(auth)
             const {access_token,refresh_token} = authObj.token

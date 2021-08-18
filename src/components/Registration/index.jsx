@@ -10,7 +10,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { UserValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import Link from "@material-ui/core/Link";
-import { ToastContainer, toast } from 'react-toastify';
+import Toaster from "../../util/Toaster";
 import CustomButton from "../../components/widgets/Button"
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
@@ -50,40 +50,35 @@ class Registration extends Component {
       confirmpassword,
     });
     if (validationResponse.isFormValid) {
-      // console.log("djdfbjh")
-    
-     // toast.success("Thanks for registration")
+      // loader's
+        this.props.dispatch(loadingStart())
+        // api's
+        fetch(BASE_URL+"user/", {
+          method:'POST',
+          headers : {
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(user)
+        })
+        .then(result => result.json())
+        .then(data => {
+          Toaster.error(data.username ? data.username.join("") : null,"topCenter")
+          Toaster.error(data.email ? data.email.join("") : null,"topCenter")
+          Toaster.error(data.non_field_errors ? data.non_field_errors.join("") : null,"topCenter")
+          this.props.dispatch(loadingStop());
+
+            if(data.detail){
+             window.location.reload();
+             Toaster.success("Thanks for registration","topCenter");
+          }
+        })
     } else {
-     // console.log("esle part")
-      //delete validationResponse.isFormValid;
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },
       });
     }
 
-    // loader's
-    this.props.dispatch(loadingStart())
-
-    // api's
-    fetch(BASE_URL+"user/", {
-      method:'POST',
-      headers : {
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(user)
-    })
-    .then(result => result.json())
-    .then(data => {
-      toast.error(data.username ? data.username.join("") : null)
-      toast.error(data.email ? data.email.join("") : null)
-      toast.error(data.email ? data.email.join("") : null)
-      toast.error(data.non_field_errors ? data.non_field_errors.join("") : null)
-      this.props.dispatch(loadingStop())
-       if(data.detail){
-        window.location.reload();
-        toast.success("Thanks for registration");
-      }
-    })
+   
     
   };
 
@@ -112,11 +107,9 @@ class Registration extends Component {
   handleBlur = (e, key) => {
     let value = e.target.value;
     if (typeof value === "string") {
-      console.log(value)
       value = value.trim();
     }
     const validationResponse = this.UserValidation.validateField(key, value);
-    console.log(validationResponse);
     const errorMessage = validationResponse.message;
     this.setState({
       [key]: value,
@@ -250,8 +243,7 @@ class Registration extends Component {
               </FormControl>
             </form>
             <div className="form-button-grop">
-           <ToastContainer position="top-right"/> 
-              <CustomButton  onClick={this.handleRegister}
+             <CustomButton  onClick={this.handleRegister}
               className='register__button primary-button'>
                 Register
               </CustomButton>

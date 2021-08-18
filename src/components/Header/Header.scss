@@ -1,9 +1,9 @@
 .header-bg {
   @include bgcolor($gray-primary);
   // @include space(padding, top-bottom, $padding-24, $padding-24);
-  .MuiTypography-h6{
-    >a{
-      img{
+  .MuiTypography-h6 {
+    > a {
+      img {
         @include breakpoint(Ipad-pro) {
           max-width: 80%;
         }
@@ -18,9 +18,9 @@
 }
 .header-box {
   z-index: 99;
-  .header-padding{
+  .header-padding {
     @include space(padding, top-bottom, $padding-15, $padding-15);
-    a{
+    a {
       display: flex;
     }
   }
@@ -29,16 +29,17 @@
     align-items: $align-center;
     @include color($black-primary);
     @include breakpoint(sm-mobileonly) {
-        .menu-button,.vertical-line{
-          display: none;
-        }
+      .menu-button,
+      .vertical-line {
+        display: none;
+      }
     }
-    .toggle-icon{
+    .toggle-icon {
       display: none;
       @include breakpoint(sm-mobileonly) {
-          display: block;
-          cursor: pointer;
-    }
+        display: block;
+        cursor: pointer;
+      }
     }
   }
   .shoping__card {
