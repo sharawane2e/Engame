@@ -6,7 +6,6 @@ let data = [];
 async function getRadomeData() {
   const response = await fetch(BASE_URL + "widget/");
   const data = await response.json();
-
   addData(data.flat());
 }
 

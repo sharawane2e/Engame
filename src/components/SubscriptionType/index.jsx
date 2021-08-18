@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 
 const SubscriptionType = ({ data, toolId }) => {
+  console.log(toolId);
   const [state] = useState(data);
   return (
     <>

@@ -1,0 +1,28 @@
+
+    <script type="text/javascript" src="https://e2eresearch.com/swteam/html5Tools/testTool/Aladdin-O-drag-n-drop/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://e2eresearch.com/swteam/html5Tools/testTool/Aladdin-O-drag-n-drop/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://e2eresearch.com/swteam/html5Tools/testTool/Aladdin-O-drag-n-drop/js/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://e2eresearch.com/swteam/html5Tools/testTool/Aladdin-O-drag-n-drop/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://e2eresearch.com/swteam/html5Tools/testTool/Aladdin-O-drag-n-drop/css/customStyle.min.css">
+    <script type="text/javascript" src="https://e2eresearch.com/swteam/html5Tools/testTool/Aladdin-O-drag-n-drop/js/customScript.min.js"></script>
+    <script type="text/javascript">
+        var hinttextStr = ""
+        var scalesStr = "1 </br>(not at all)|2|3|4|5|6|7 </br>(extremely)";
+        var precodeStr = "1|2|3|4|5|6|7";
+        var backpunch = "";
+        var scaleWithPesnt = true; //true for tool 100%
+
+        function getRanke(data) {
+            $("#outdata").val(data);
+        }
+    </script>
+
+
+    <div class="title-toll">
+        Please circle the number below by moving the <strong>circle</strong> to the right over your chosen number
+    </div>
+    <div class="toolbind"></div>
+
+    <div style="clear: both; height: 10px;"></div>
+
+    <input type="hidden" id="outdata" name="outdata">
