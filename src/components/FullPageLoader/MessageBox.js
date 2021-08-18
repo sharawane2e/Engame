@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const MessageBox = (props) => {
-    return (
-        <div className="message_box">
-            {props.children}
-        </div>
-    )
-}
+  return <div className="message_box">{props.children}</div>;
+};
 
-export default MessageBox
+export default MessageBox;

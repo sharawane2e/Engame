@@ -1,37 +1,37 @@
-import * as actionTypes from './shopping-types'; 
+import * as actionTypes from "./shopping-types";
 // import { BASE_URL } from '../../config/ApiUrl';
 // import axios from 'axios';
 export const addToCart = (productId) => {
-   return {
-       type:actionTypes.ADD_TO_CART,
-       payload: {
-           id:productId
-       }
-   }
-}
+  return {
+    type: actionTypes.ADD_TO_CART,
+    payload: {
+      id: productId,
+    },
+  };
+};
 
 export const removeFromCart = (itemId) => {
-    return {
-        type:actionTypes.REMOVE_FROM_CART,
-        payload : {
-            id: itemId
-        }
-    }
-}
+  return {
+    type: actionTypes.REMOVE_FROM_CART,
+    payload: {
+      id: itemId,
+    },
+  };
+};
 
 export const adjustQty = (itemId, value) => {
-    return {
-        type: actionTypes.ADJUST_QTY,
-        payload: {
-            id:itemId,
-            qty:value
-        }
-    }
-}
+  return {
+    type: actionTypes.ADJUST_QTY,
+    payload: {
+      id: itemId,
+      qty: value,
+    },
+  };
+};
 
-export const loadCurrentItem = (item) =>{
-    return {
-        type: actionTypes.LOAD_CURRENT_ITEM,
-        payload: item
-    }
-}
+export const loadCurrentItem = (item) => {
+  return {
+    type: actionTypes.LOAD_CURRENT_ITEM,
+    payload: item,
+  };
+};

@@ -1,29 +1,27 @@
+import { BASE_URL } from "../../config/ApiUrl";
+import * as actionTypes from "./shopping-types";
 
-import { BASE_URL } from '../../config/ApiUrl';
-import * as actionTypes from './shopping-types';
+let data = [];
 
-let data =[]
+async function getRadomeData() {
+  const response = await fetch(BASE_URL + "widget/");
+  const data = await response.json();
 
-async function getRadomeData(){
-    const response = await fetch(BASE_URL+"widget/")
-    const data = await response.json()
-
-    addData(data.flat())
+  addData(data.flat());
 }
 
-function addData(object){
-    // data.push(object)
-    object.map(item => {
-        data.push(item)
-    })
+function addData(object) {
+  // data.push(object)
+  object.map((item) => {
+    data.push(item);
+  });
 }
-getRadomeData()
-
+getRadomeData();
 
 const initialState = {
-    products:[data], //{id, title, descr, price, img}
-    cart:[], //{id, title, descr, price, img}
-}
+  products: [data], //{id, title, descr, price, img}
+  cart: [], //{id, title, descr, price, img}
+};
 const shopReducer = (state = initialState, action) => {
     switch(action.type){
         case actionTypes.ADD_TO_CART : 

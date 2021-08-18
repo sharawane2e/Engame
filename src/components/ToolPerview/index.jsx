@@ -1,12 +1,13 @@
 import { React } from "react";
 
 const ToolDemo = (props) => {
-  const { tool} = props;
+  const { tool } = props;
 
   return (
     <>
       <div className="curent-tool-name">{tool.name}</div>
-      <iframe className="tool-perview"
+      <iframe
+        className="tool-perview"
         width="100%"
         height="650"
         scrolling="yes"

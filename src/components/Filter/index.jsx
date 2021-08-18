@@ -31,32 +31,32 @@ function Home() {
             <Grid item xs={12} sm={4}>
               <Paper className="paperstyel grid-paper-style">
                 {/* <img src={librarycards} /> */}
-                <Carousel/>
+                <Carousel />
               </Paper>
             </Grid>
           </Grid>
         </div>
       </Toolbar>
       <Toolbar className="filter-inputsection">
-          <Grid item xs={12} sm={12}>
-            <Paper
-              component="form"
-              className="flexGrow filter-inputsection__form"
+        <Grid item xs={12} sm={12}>
+          <Paper
+            component="form"
+            className="flexGrow filter-inputsection__form"
+          >
+            <IconButton className="iconButton search-icon" aria-label="menu">
+              <SearchIcon fontSize="large" />
+            </IconButton>
+            <InputBase className="input" />
+            <Divider className="divider" orientation="vertical" />
+            <IconButton
+              className="iconButton filter-inputsection__icon"
+              aria-label="directions"
             >
-              <IconButton className="iconButton search-icon" aria-label="menu">
-                <SearchIcon fontSize="large" />
-              </IconButton>
-              <InputBase className="input" />
-              <Divider className="divider" orientation="vertical" />
-              <IconButton
-                className="iconButton filter-inputsection__icon"
-                aria-label="directions"
-              >
-                <FilterListIcon fontSize="large" />
-                Filters
-              </IconButton>
-            </Paper>
-          </Grid>
+              <FilterListIcon fontSize="large" />
+              Filters
+            </IconButton>
+          </Paper>
+        </Grid>
       </Toolbar>
     </div>
   );

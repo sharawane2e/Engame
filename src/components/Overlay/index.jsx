@@ -1,10 +1,10 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
-const Overlay = (props)=>{
-     const {position} = props;
-    return(
-        <div className={clsx('popup-overlay',position?position:'small')}></div>
-    )
-}
+const Overlay = (props) => {
+  const { position } = props;
+  return (
+    <div className={clsx("popup-overlay", position ? position : "small")}></div>
+  );
+};
 
-export default Overlay
+export default Overlay;
