@@ -21,7 +21,6 @@ import { BASE_URL } from "../../config/ApiUrl";
 import Footer from "../Footer";
 
 const ToolCards = () => {
-  // console.log(user);
   const [selectedTool, setSelectedTool] = useState(null);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [popupId, setPopupId] = useState();
@@ -70,7 +69,7 @@ const ToolCards = () => {
 
   const handleCart = () => {
     dispatch(addToCart(popupId));
-    Toaster.success("Your Item is added to shopping cart!");
+    Toaster.sucess("Your Item is added to shopping cart!", "topCenter");
   };
 
   return (
