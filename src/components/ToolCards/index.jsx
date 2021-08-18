@@ -13,7 +13,6 @@ import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
 import Toaster from "../../util/Toaster";
-import "react-toastify/dist/ReactToastify.css";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
@@ -68,8 +67,8 @@ const ToolCards = () => {
   }, [token]);
 
   const handleCart = () => {
-    dispatch(addToCart(popupId));
     Toaster.sucess("Your Item is added to shopping cart!", "topCenter");
+    dispatch(addToCart(popupId));
   };
 
   return (
@@ -132,7 +131,7 @@ const ToolCards = () => {
                                 className="toolcard__sub-icons"
                                 onClick={(id) => {
                                   setSubscriptionPopup(true);
-                                  setPopupId(tooldata.id);
+                                  setPopupId(tooldata.widget_data.id);
                                 }}
                               >
                                 <ShoppingCartIcon />
