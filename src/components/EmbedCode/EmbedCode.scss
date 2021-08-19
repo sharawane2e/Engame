@@ -9,6 +9,8 @@
     outline: 0;
     // padding: map-get($map: $padding, $key: "padding-12");
     @include space(padding, all, $padding-12, 0);
+    min-height: 491px !important;
+    overflow-y: scroll !important;
   }
   #{&}__buttton-group {
     display: flex;

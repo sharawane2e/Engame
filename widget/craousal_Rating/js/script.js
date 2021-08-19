@@ -1,16 +1,17 @@
-$( window ).load(function() {
-    const widgetData ={userkey:userkey,widgetkey:widgetkey}
-      fetch('http://192.168.1.124:8000/subscription/validate/',{
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify(widgetData)
-      })
-      .then(response => response.json())
-      .then(result => {
-          if(result.HasSuccess === true){
-            var htmlElemnt='<div class="carousel-container"> \
+$(window).load(function () {
+  const widgetData = { userkey: userkey, widgetkey: widgetkey };
+  fetch("http://192.168.1.124:8000/subscription/validate/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(widgetData),
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.HasSuccess === true) {
+        var htmlElemnt =
+          '<div class="carousel-container"> \
             <div class="carousel-slide clearfix"></div> \
                 </div> \
                 <div class="buttons-continer"> \
@@ -25,132 +26,146 @@ $( window ).load(function() {
                  \
                 <div class="output-container"> \
                 <input class="output" type="hidden" /> \
-            </div>'
+            </div>';
 
         $("#toolwrapper").html(htmlElemnt);
 
-        function CarouselApp(strImgValues,strScaleValues){
-            this.strImgValues = strImgValues;
-            this.strScaleValues = strScaleValues;
+        function CarouselApp(strImgValues, strScaleValues) {
+          this.strImgValues = strImgValues;
+          this.strScaleValues = strScaleValues;
         }
 
-        CarouselApp.prototype.initApp = function(){
-            var strImgValuesSplit = this.strImgValues.split("||");
-            var strImgValuesSplitLen = strImgValuesSplit.length;
-            var strScaleValuesSplit = this.strScaleValues.split("||");
-            var strScaleValuesSplitLen = strScaleValuesSplit.length;
+        CarouselApp.prototype.initApp = function () {
+          var strImgValuesSplit = this.strImgValues.split("||");
+          var strImgValuesSplitLen = strImgValuesSplit.length;
+          var strScaleValuesSplit = this.strScaleValues.split("||");
+          var strScaleValuesSplitLen = strScaleValuesSplit.length;
 
-            for(var i=0; i<strImgValuesSplitLen; i++){
-                if(i==0){
-                    $(".carousel-slide").append("<div class='slide active' data-slide="+[i+1]+"><div class='slideTxt'>"+strImgValuesSplit[i]+"</div></div>");
-                }else{
-                    $(".carousel-slide").append("<div class='slide' data-slide="+[i+1]+"><div class='slideTxt'>"+strImgValuesSplit[i]+"</div></div>");
+          for (var i = 0; i < strImgValuesSplitLen; i++) {
+            if (i == 0) {
+              $(".carousel-slide").append(
+                "<div class='slide active' data-slide=" +
+                  [i + 1] +
+                  "><div class='slideTxt'>" +
+                  strImgValuesSplit[i] +
+                  "</div></div>"
+              );
+            } else {
+              $(".carousel-slide").append(
+                "<div class='slide' data-slide=" +
+                  [i + 1] +
+                  "><div class='slideTxt'>" +
+                  strImgValuesSplit[i] +
+                  "</div></div>"
+              );
+            }
+          }
+
+          for (var j = 0; j < strScaleValuesSplitLen; j++) {
+            $(".forwrdButtons").append(
+              '<div class="RatingButton" data-value="' +
+                [j + 1] +
+                '"><div>' +
+                strScaleValuesSplit[j] +
+                "</div></div>"
+            );
+          }
+
+          $(".carousel-slide").css("width", strImgValuesSplitLen * 100 + "%");
+          $(".slide").css("width", 100 / strImgValuesSplitLen + "%");
+        };
+
+        CarouselApp.prototype.nextRating = function () {
+          var ObjRef = this;
+          $(".RatingButton").click(function () {
+            var currentActiveNumber = $(".active").attr("data-slide");
+            var rateValue = $(this).attr("data-value");
+            var animateValue = 100 * currentActiveNumber;
+            $(".RatingButton").removeClass("selected");
+            $(this).addClass("selected");
+            $(".active").attr("data-value", rateValue);
+            if ($(".slide").length == currentActiveNumber) {
+            } else {
+              $(".carousel-slide").animate(
+                { left: -animateValue + "%" },
+                "2000",
+                function () {
+                  $(".RatingButton").removeClass("selected");
                 }
+              );
+              $(".active").removeClass("active").next().addClass("active");
+            }
+            ObjRef.outputFunction();
+          });
+        };
+
+        CarouselApp.prototype.prevRating = function () {
+          var ObjRef = this;
+          $(".previous-button").click(function () {
+            var currentActiveNumber = $(".active").attr("data-slide");
+            var prevAnimateValue = 100 * [currentActiveNumber - 2];
+            var currentBoxRating;
+            if (currentActiveNumber == 1) {
+            } else {
+              $(".RatingButton").removeClass("selected");
+              $(".carousel-slide").animate(
+                { left: -prevAnimateValue + "%" },
+                "2000",
+                function () {
+                  $(".active").removeClass("active").prev().addClass("active");
+                  currentBoxRating = $(".active").attr("data-value");
+                  $(
+                    ".RatingButton[data-value=" + currentBoxRating + "]"
+                  ).addClass("selected");
+                }
+              );
             }
 
-            for(var j=0; j<strScaleValuesSplitLen; j++){
-                $(".forwrdButtons").append('<div class="RatingButton" data-value="'+[j+1]+'"><div>'+strScaleValuesSplit[j]+'</div></div>');
-            }
+            ObjRef.outputFunction();
+          });
+        };
 
-            $(".carousel-slide").css("width",strImgValuesSplitLen*100+"%");
-            $(".slide").css("width",100/strImgValuesSplitLen+"%");
-        }
+        CarouselApp.prototype.outputFunction = function () {
+          var outputValue = [];
+          $(".slide").each(function () {
+            outputValue.push($(this).attr("data-value"));
+          });
+          output(outputValue);
 
-        CarouselApp.prototype.nextRating = function(){
-            var ObjRef = this;
-            $(".RatingButton").click(function(){
-                var currentActiveNumber = $(".active").attr("data-slide");
-                var rateValue = $(this).attr("data-value");
-                var animateValue = 100 * currentActiveNumber;
-                $(".RatingButton").removeClass("selected");
-                $(this).addClass("selected");
-                $(".active").attr("data-value",rateValue);
-                if($(".slide").length == currentActiveNumber){
+          if ($("#outputValue").val() == "1,,,,,,,,,") {
+            const hitData = { userkey: userkey, widgetkey: widgetkey };
+            console.log(hitData);
+            fetch("http://192.168.1.124:8000/subscription/validate/hitcount/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(hitData),
+            })
+              .then((response) => response.json())
+              .then((result) => {
+                // console.log(result);
+              });
+          }
+        };
 
-                }else{
-                    $(".carousel-slide").animate({"left": -animateValue+"%"},"2000",function(){
-                        $(".RatingButton").removeClass("selected");
-                    });
-                    $(".active").removeClass("active").next().addClass("active");
-
-                }
-                ObjRef.outputFunction();
-
-             });
-        }
-
-        CarouselApp.prototype.prevRating = function(){
-             var ObjRef = this;
-            $(".previous-button").click(function(){
-                var currentActiveNumber = $(".active").attr("data-slide");
-                var prevAnimateValue = 100 * [currentActiveNumber - 2];
-                var currentBoxRating;
-                if(currentActiveNumber == 1){
-
-                }else{
-                    $(".RatingButton").removeClass("selected");
-                    $(".carousel-slide").animate({"left": -prevAnimateValue+"%"},"2000",function(){
-                        $(".active").removeClass("active").prev().addClass("active");
-                        currentBoxRating = $(".active").attr("data-value");
-                        $(".RatingButton[data-value="+currentBoxRating+"]").addClass("selected");
-                    });
-
-                }
-                
-                ObjRef.outputFunction();
-            });
-        }
-
-        CarouselApp.prototype.outputFunction = function(){
-           var outputValue = [];
-            $(".slide").each(function(){
-                outputValue.push($(this).attr("data-value"))
-            });
-            output(outputValue);
-
-            if($("#outputValue").val()=="1,,,,,,,,,"){
-                const hitData ={userkey:userkey,widgetkey:widgetkey}
-                console.log(hitData);
-                fetch('http://192.168.1.124:8000/subscription/validate/hitcount/',{
-                    method:"POST",
-                    headers:{
-                      "Content-Type":"application/json"
-                    },
-                    body:JSON.stringify(hitData)
-                })
-                .then(response => response.json())
-                .then(result => {
-                    // console.log(result);                   
-                })
-            }
-        }
-
-       
-
-        var carouselApp = new CarouselApp(strImgValues,strScaleValues);
+        var carouselApp = new CarouselApp(strImgValues, strScaleValues);
         carouselApp.initApp();
         carouselApp.nextRating();
         carouselApp.prevRating();
-          }
-
-          else{
-                $("body").addClass("popup");
-                 $('body').append('<div class="popup-outer">\
-                <div class="popup-iner">\
-                  <div class="popup-text"> You have maxed out your limit. Please upgrade your subscription. \
-                  </div> \
-                  <div class="links">   <a href="http://localhost:3000/#/">Please click on link and go back</a>\
-                   </div>\
-                </div>\
-                \</div>')
-            }
-      })
-  });
-$(document).ready(function(){
-
-              
-            
-
-
-
+      } else {
+        $("body").addClass("popup");
+        $("body").append(
+          '<div class="popup-model"><div class="popup-outer">   \
+                       <div class="popup-iner"><div class="popup-header"><h5>Craousal_Rating</h5>\
+                       <button type="button" class="btn-close"></button></div>          \
+                               <div class="popup-body"><div class="popup-text"> You have maxed out your limit. Please upgrade your subscription.       \
+                                           </div><a class="links" href="http://localhost:3000/#/">Please click on link and go back</a> </div>                  \
+                                         <!--   <div class="footer-links">   <a href="http://localhost:3000/#/">Please click on link and go back</a>   \
+                                                            </div>              -->  </div>       \
+                                                                     </div></div>'
+        );
+      }
+    });
 });
+$(document).ready(function () {});

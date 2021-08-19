@@ -89,15 +89,11 @@ const ToolCards = () => {
                       lg={2}
                       sm={4}
                       key={index}
-                      id={tooldata.widget_data.id}
+                      id={tooldata.id}
                     >
                       <Paper className="toolcard__imageblck ">
                         <div className="toolcard__image">
-                          <img
-                            src={
-                              BASE_URL + "media/" + tooldata.widget_data.imgUrl
-                            }
-                          />
+                          <img src={BASE_URL + "media/" + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton
@@ -118,7 +114,7 @@ const ToolCards = () => {
                                 className="toolcard__sub-icons"
                                 onClick={() => {
                                   setPopup(true);
-                                  setPopupId(tooldata.widget_data.id);
+                                  setPopupId(tooldata.id);
                                 }}
                               >
                                 <SystemUpdateAltIcon />
@@ -143,10 +139,10 @@ const ToolCards = () => {
                       </Paper>
                       <div className="toolcard__align toolcard__toolname">
                         <div className="toolcard__aligninr1 toolcard__font-family">
-                          {tooldata.widget_data.toolname}
+                          {tooldata.toolname}
                         </div>
                         <div className="toolcard__aligninr toolcard__font-family">
-                          ${tooldata.widget_data.price}
+                          ${tooldata.price}
                         </div>
                       </div>
                     </Grid>

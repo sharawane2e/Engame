@@ -4,6 +4,7 @@ import CustomButton from "../../components/widgets/Button";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Toaster from "../../util/Toaster";
+import Scrollbars from "react-custom-scrollbars";
 
 const EmbedCode = ({ data, toolId }) => {
   const [state] = useState(data);
@@ -25,7 +26,7 @@ const EmbedCode = ({ data, toolId }) => {
         type: "application/octet-stream",
       })
     );
-    link.download = state[0].widget_data.name + "embeded.text";
+    link.download = state[0].name + "embeded.text";
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {
@@ -42,9 +43,7 @@ const EmbedCode = ({ data, toolId }) => {
         aria-label="maximum height"
         id="text-area"
         value={state.map((item) =>
-          item.widget_data.id === toolId
-            ? item.widget_data.widget_embed_code
-            : null
+          item.id === toolId ? item.widget_embed_code : null
         )}
       />
 
