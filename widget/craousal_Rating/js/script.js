@@ -159,8 +159,8 @@ $(window).load(function () {
           '<div class="popup-model"><div class="popup-outer">   \
                        <div class="popup-iner"><div class="popup-header"><h5>Craousal_Rating</h5>\
                        <button type="button" class="btn-close"></button></div>          \
-                               <div class="popup-body"><div class="popup-text"> You have maxed out your limit. Please upgrade your subscription.       \
-                                           </div><a class="links" href="http://localhost:3000/#/">Please click on link and go back</a> </div>                  \
+                               <div class="popup-body"><div class="popup-text"> Could not run the widget as the subscribed limit has exceeded. You may need to upgrade your subscription to extend the limit.      \
+                                           </div></div>                  \
                                          <!--   <div class="footer-links">   <a href="http://localhost:3000/#/">Please click on link and go back</a>   \
                                                             </div>              -->  </div>       \
                                                                      </div></div>'

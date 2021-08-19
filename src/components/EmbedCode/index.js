@@ -4,10 +4,10 @@ import CustomButton from "../../components/widgets/Button";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Toaster from "../../util/Toaster";
-import Scrollbars from "react-custom-scrollbars";
 
 const EmbedCode = ({ data, toolId }) => {
   const [state] = useState(data);
+  console.log(state);
   const [copySuccess, setCopySuccess] = useState("");
   const textAreaRef = useRef(null);
 
@@ -26,7 +26,8 @@ const EmbedCode = ({ data, toolId }) => {
         type: "application/octet-stream",
       })
     );
-    link.download = state[0].name + "embeded.text";
+
+    link.download = "embeded.text";
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {
