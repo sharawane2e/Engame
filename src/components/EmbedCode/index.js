@@ -42,9 +42,7 @@ const EmbedCode = ({ data, toolId }) => {
         aria-label="maximum height"
         id="text-area"
         value={state.map((item) =>
-          item.widget_data.id === toolId
-            ? item.widget_data.widget_embed_code
-            : null
+          item.id === toolId ? item.widget_embed_code : null
         )}
       />
 
