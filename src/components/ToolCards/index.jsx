@@ -69,11 +69,6 @@ const ToolCards = () => {
     }
   }, [token]);
 
-  const handleCart = () => {
-    Toaster.sucess("Your Item is added to shopping cart!", "topCenter");
-    dispatch(addToCart(popupId));
-  };
-
   return (
     <>
       <Toolbar className="toolcard">
@@ -243,14 +238,6 @@ const ToolCards = () => {
           className="border-radius popup-container__iner--sm"
         >
           <Subscription data={products} toolId={popupId} />
-          <div className="popup-container__footer">
-            <CustomButton
-              className="primary-button add--card"
-              onClick={handleCart}
-            >
-              <ShoppingCartIcon /> Add to Cart
-            </CustomButton>
-          </div>
         </CustomPopup>
         {/*End */}
       </Toolbar>

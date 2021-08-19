@@ -1,7 +1,6 @@
 {
   "name": "html5-widget",
   "version": "0.1.0",
-  "homepage": "/swteam/HTML5-widgets/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",

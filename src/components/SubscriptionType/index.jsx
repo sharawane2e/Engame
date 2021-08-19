@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import CustomButton from "../../components/widgets/Button";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 const SubscriptionType = ({ data, toolId }) => {
   const [state] = useState(data);
@@ -37,6 +39,7 @@ const SubscriptionType = ({ data, toolId }) => {
     base,
     setBase,
   ]);
+
   return (
     <>
       <div className="subscription-type">
@@ -60,6 +63,11 @@ const SubscriptionType = ({ data, toolId }) => {
             ${price}
           </div>
         </div>
+      </div>
+      <div className="popup-container__footer">
+        <CustomButton className="primary-button add--card">
+          <ShoppingCartIcon /> Add to Cart
+        </CustomButton>
       </div>
     </>
   );
