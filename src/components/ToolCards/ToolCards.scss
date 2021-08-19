@@ -1,12 +1,12 @@
 .toolcard {
   @include space(padding, top-bottom, $padding-40, $padding-24);
   padding-left: 0;
-  .MuiGrid-container{
+  .MuiGrid-container {
     min-height: 50vh;
   }
- #{&}__imageblck {
+  #{&}__imageblck {
     &:hover {
-      @include border('',$border-width,$bsolid,$secondary);
+      @include border("", $border-width, $bsolid, $secondary);
       @include card-box-shadow(
         0px,
         0px,
@@ -21,8 +21,8 @@
         @include font-weight($font-500);
       }
     }
-    @include border("",$border-width,$bsolid,$black-1);
-      @include card-box-shadow(
+    @include border("", $border-width, $bsolid, $black-1);
+    @include card-box-shadow(
       0px,
       0px,
       4px,
@@ -55,7 +55,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    @include both-color($secondary,$white);
+    @include both-color($secondary, $white);
     @include font-size($font-md-reg);
     @include space(padding, top-bottom, $padding-2, $padding-2);
     @include space(padding, left-right, $padding-12, $padding-12);
@@ -95,18 +95,18 @@
   }
   #{&}__sub-icons {
     display: flex;
-    @include border('',$border-width,$bsolid,$accent);
+    @include border("", $border-width, $bsolid, $accent);
     @include border-radius($boder-radius);
     @include space(padding, all, $padding-8, 0);
     & > svg {
       fill: $accent;
     }
     &:hover {
-      @include border('',$border-width,$bsolid,$secondary);
-    svg {
-          fill:$secondary;
-       }
-     }
+      @include border("", $border-width, $bsolid, $secondary);
+      svg {
+        fill: $secondary;
+      }
+    }
   }
   #{&}__font-family {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
@@ -130,11 +130,17 @@
     .add--card {
       width: 178px !important;
       margin: 0 auto;
+      &:disabled {
+        background-color: #999;
+      }
       .MuiButton-label {
         > svg {
           @include space(margin, right, $margin-5, 0);
         }
       }
+    }
+    .add--card[disabled] {
+      background-color: #999 !important;
     }
   }
 }

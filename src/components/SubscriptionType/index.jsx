@@ -2,32 +2,40 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cart/action";
 
 const SubscriptionType = ({ data, toolId }) => {
   const [state] = useState(data);
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
-  const [price, setPrice] = useState(base);
+  const [valuePrice, setValuePrice] = useState(0);
+  const [price, setPrice] = useState(0);
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setSubscription(e.target.value);
+    setValuePrice("");
+    setPrice(0);
+  };
+
+  const handleCart = () => {
+    dispatch(addToCart(toolId));
   };
 
   const handleCalculatePrice = (e) => {
     let value = e.target.value * base;
     setPrice(value);
+    setValuePrice(e.target.value);
   };
   // console.log(subscription);
   useEffect(() => {
     if (subscription == 1) {
       setBase(10);
       setType("Days");
-    } else if (subscription == 2) {
+    } else {
       setType("Hits");
       setBase(5);
-    } else {
-      setType("");
-      setBase(0);
     }
   }, [
     handleChange,
@@ -44,9 +52,10 @@ const SubscriptionType = ({ data, toolId }) => {
     <>
       <div className="subscription-type">
         <select onChange={handleChange}>
-          <option value="">---Select---</option>
           <option value="1">Number of days</option>
-          <option value="2">Number of hits</option>
+          <option value="2" selected>
+            Number of hits
+          </option>
         </select>
 
         <div className="subscription-type__iner">
@@ -55,6 +64,7 @@ const SubscriptionType = ({ data, toolId }) => {
               id="outlined-basic"
               variant="outlined"
               className="subscription-type__inputbox"
+              value={valuePrice}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{type}</div>
@@ -65,7 +75,11 @@ const SubscriptionType = ({ data, toolId }) => {
         </div>
       </div>
       <div className="popup-container__footer">
-        <CustomButton className="primary-button add--card">
+        <CustomButton
+          className="primary-button add--card"
+          onClick={handleCart}
+          disabled={valuePrice == 0 || valuePrice == "" ? true : false}
+        >
           <ShoppingCartIcon /> Add to Cart
         </CustomButton>
       </div>

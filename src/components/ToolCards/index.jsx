@@ -35,6 +35,7 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+  console.log(productShow);
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
     if (productShow.length == 0) {
@@ -238,6 +239,14 @@ const ToolCards = () => {
           className="border-radius popup-container__iner--sm"
         >
           <Subscription data={products} toolId={popupId} />
+          {/* <div className="popup-container__footer">
+            <CustomButton
+              className="primary-button add--card"
+              onClick={handleCart}
+            >
+              <ShoppingCartIcon /> Add to Cart
+            </CustomButton>
+          </div> */}
         </CustomPopup>
         {/*End */}
       </Toolbar>
