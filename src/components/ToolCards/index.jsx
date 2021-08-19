@@ -7,7 +7,7 @@ import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/shopping/shopping-action";
+import { addToCart } from "../../redux/cart/action";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
@@ -35,9 +35,11 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
-
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
+    if (productShow.length == 0) {
+      localStorage.removeItem("auth");
+    }
   }, [ispopup]);
 
   useEffect(() => {
@@ -50,7 +52,8 @@ const ToolCards = () => {
 
   useEffect(() => {
     dispatch(listProducts());
-    if (token.isLoggedIn) {
+    // console.log(token);
+    if (user) {
       let id = token.token.access_token;
       fetch(BASE_URL + "widget/user/detail/", {
         headers: {
@@ -127,7 +130,7 @@ const ToolCards = () => {
                                 className="toolcard__sub-icons"
                                 onClick={(id) => {
                                   setSubscriptionPopup(true);
-                                  setPopupId(tooldata.widget_data.id);
+                                  setPopupId(tooldata.id);
                                 }}
                               >
                                 <ShoppingCartIcon />

@@ -44,6 +44,7 @@ const Header = ({ props, cart, user }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  console.log(cart);
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
   }, [isLoginOpen]);
@@ -190,7 +191,7 @@ const Header = ({ props, cart, user }) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.shop.cart,
+    cart: state.cart.cartItems,
     user: state.user,
   };
 };

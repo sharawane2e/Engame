@@ -15,20 +15,20 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
-import { removeFromCart } from "../../redux/shopping/shopping-action";
+import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 
 const Cart = ({ cart }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItem, setTotalItem] = useState(0);
   const dispatch = useDispatch();
-
+  console.log(cart);
   useEffect(() => {
     let items = 0;
     let price = 0;
     cart.forEach((item) => {
       items += item.qty;
-      price += item.qty * item.price;
+      price += +item.price;
     });
     setTotalPrice(price);
     setTotalItem(items);
@@ -111,7 +111,7 @@ const Cart = ({ cart }) => {
                           <ButtonBase className="curent-tool-img">
                             <img
                               alt=""
-                              src={"//192.168.1.124:8000" + item.imgUrl}
+                              src={"//192.168.1.124:8000" + item.image}
                             />
                           </ButtonBase>
                         </Grid>
@@ -215,7 +215,7 @@ const Cart = ({ cart }) => {
                                 <DeleteIcon
                                   className="shoping-cart__tool-delete"
                                   onClick={() =>
-                                    dispatch(removeFromCart(item.id))
+                                    dispatch(removeFromCart(item.product))
                                   }
                                 />
                               </Typography>
@@ -282,7 +282,7 @@ const Cart = ({ cart }) => {
 
 const mapDispatchToProp = (state) => {
   return {
-    cart: state.shop.cart,
+    cart: state.cart.cartItems,
   };
 };
 
