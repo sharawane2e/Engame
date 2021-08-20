@@ -35,7 +35,7 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
-  console.log(productShow);
+
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
     if (productShow.length == 0) {

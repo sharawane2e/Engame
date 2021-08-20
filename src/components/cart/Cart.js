@@ -14,7 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DoneIcon from "@material-ui/icons/Done";
+import { BASE_URL } from "../../config/ApiUrl";
 import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 
@@ -196,6 +196,7 @@ const Cart = ({ cart }) => {
                               >
                                 <span>Validity:</span>
                                 <TextField
+                                  type="number"
                                   id={"input-filed" + item.id}
                                   variant="outlined"
                                 />

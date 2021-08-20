@@ -1,5 +1,8 @@
 $(window).load(function () {
-  const widgetData = { userkey: userkey, widgetkey: widgetkey };
+  var popupText =
+    " Could not run the widget as the subscribed limit has exceeded. You may need to <span>upgrade your subscription</span> to extend the limit.";
+
+  const widgetData = { client_key: client_key };
   fetch("http://192.168.1.124:8000/subscription/validate/", {
     method: "POST",
     headers: {
@@ -133,7 +136,7 @@ $(window).load(function () {
           output(outputValue);
 
           if ($("#outputValue").val() == "1,,,,,,,,,") {
-            const hitData = { userkey: userkey, widgetkey: widgetkey };
+            const hitData = { client_key: client_key };
             console.log(hitData);
             fetch("http://192.168.1.124:8000/subscription/validate/hitcount/", {
               method: "POST",
@@ -157,20 +160,19 @@ $(window).load(function () {
         $("body").addClass("popup");
         $("body").append(
           '<div class="popup-model"><div class="popup-outer">   \
-                       <div class="popup-iner"><div class="popup-header"><h5>Craousal_Rating</h5>\
+                       <div class="popup-iner"><div class="popup-header"><h5>Subscription expired</h5>\
                    </div>          \
-                               <div class="popup-body"><div class="popup-text"> Could not run the widget as the subscribed limit has exceeded. <br>You may need to upgrade your subscription to extend the limit.      \
-                                           </div>    <div class="right-image"><div class="exclamation">\
-                                           <svg width="48" height="48" viewBox="0 0 48 48">\
-                                              <circle cx="24" cy="24" r="23.5" fill="#ffc107" />\
-                                              <path id="exclamation" d="M7,25.01a3,3,0,1,1,3,3A3,3,0,0,1,7,25.01ZM7.3,7a2.715,2.715,0,1,1,5.4,0L11.65,17.521a1.656,1.656,0,0,1-3.3,0Z" fill="#fff" />\
-                                           </svg>\
-                                       </div>\
-                                           <img src="images/oops.png">\
-                                           </div> </div>             \
-                                         <!--   <div class="footer-links">   <a href="http://localhost:3000/#/">Please click on link and go back</a>   \
-                                                            </div>              -->  </div>       \
-                                                                     </div></div>'
+                   <div class="popup-body"><div class="exclamation"><svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 47 47">\
+                   <g id="esclamination-mark" transform="translate(-1.1 -0.6)">\
+                     <circle id="exclamation" data-name="Ellipse 2" cx="23.5" cy="23.5" r="23.5" transform="translate(1.1 0.6)" fill="#ffbf00"/>\
+                     <path id="exclamation" d="M21.6,33.1a3,3,0,1,1,3,3A2.946,2.946,0,0,1,21.6,33.1Zm.3-18a2.717,2.717,0,0,1,5.4-.6v.6L26.2,25.6a1.669,1.669,0,0,1-1.8,1.5,1.7,1.7,0,0,1-1.5-1.5Z" fill="#fff"/>\
+                   </g>\
+                 </svg> </div>\
+                   <div class="popup-text"> ' +
+            popupText +
+            "\
+                    </div> </div>\
+                   </div>"
         );
       }
     });
