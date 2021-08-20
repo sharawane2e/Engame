@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cart/action";
 
 const SubscriptionType = ({ data, toolId }) => {
@@ -13,6 +13,7 @@ const SubscriptionType = ({ data, toolId }) => {
   const [valuePrice, setValuePrice] = useState(0);
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
+  const [itemId] = useSelector((state) => state.cart.cartItems);
   const handleChange = (e) => {
     setSubscription(e.target.value);
     setValuePrice("");
