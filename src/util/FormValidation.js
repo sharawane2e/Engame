@@ -135,3 +135,24 @@ export class ForgotValidation extends Validation {
     return validationResponse;
   };
 }
+export class InputValidation extends Validation {
+  validateField = (field, value) => {
+    const validationResponse = new ValidationResponse();
+    switch (field) {
+      case "email":
+        if (!value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.EMAIL_INVALID;
+        } else {
+          if (!validateEmailPattern(value)) {
+            validationResponse.isValid = false;
+            validationResponse.message = ErrorMessages.EMAIL_INVALID;
+          }
+        }
+        break;
+      default:
+      // break;
+    }
+    return validationResponse;
+  };
+}

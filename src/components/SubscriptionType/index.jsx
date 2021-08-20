@@ -4,6 +4,7 @@ import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cart/action";
+import Toaster from "../../util/Toaster";
 
 const SubscriptionType = ({ data, toolId }) => {
   const [state] = useState(data);
@@ -22,6 +23,7 @@ const SubscriptionType = ({ data, toolId }) => {
 
   const handleCart = () => {
     dispatch(addToCart(toolId));
+    Toaster.sucess("You have add successfully!", "topCenter");
   };
 
   const handleCalculatePrice = (e) => {
@@ -38,16 +40,7 @@ const SubscriptionType = ({ data, toolId }) => {
       setType("Hits");
       setBase(5);
     }
-  }, [
-    handleChange,
-    subscription,
-    setSubscription,
-    type,
-    setType,
-    price,
-    base,
-    setBase,
-  ]);
+  }, [handleChange, subscription, type, price, base]);
 
   return (
     <>

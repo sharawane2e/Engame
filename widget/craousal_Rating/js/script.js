@@ -158,9 +158,16 @@ $(window).load(function () {
         $("body").append(
           '<div class="popup-model"><div class="popup-outer">   \
                        <div class="popup-iner"><div class="popup-header"><h5>Craousal_Rating</h5>\
-                       <button type="button" class="btn-close"></button></div>          \
-                               <div class="popup-body"><div class="popup-text"> You have maxed out your limit. Please upgrade your subscription.       \
-                                           </div><a class="links" href="http://localhost:3000/#/">Please click on link and go back</a> </div>                  \
+                   </div>          \
+                               <div class="popup-body"><div class="popup-text"> Could not run the widget as the subscribed limit has exceeded. <br>You may need to upgrade your subscription to extend the limit.      \
+                                           </div>    <div class="right-image"><div class="exclamation">\
+                                           <svg width="48" height="48" viewBox="0 0 48 48">\
+                                              <circle cx="24" cy="24" r="23.5" fill="#ffc107" />\
+                                              <path id="exclamation" d="M7,25.01a3,3,0,1,1,3,3A3,3,0,0,1,7,25.01ZM7.3,7a2.715,2.715,0,1,1,5.4,0L11.65,17.521a1.656,1.656,0,0,1-3.3,0Z" fill="#fff" />\
+                                           </svg>\
+                                       </div>\
+                                           <img src="images/oops.png">\
+                                           </div> </div>             \
                                          <!--   <div class="footer-links">   <a href="http://localhost:3000/#/">Please click on link and go back</a>   \
                                                             </div>              -->  </div>       \
                                                                      </div></div>'

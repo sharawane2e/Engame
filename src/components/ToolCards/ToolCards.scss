@@ -1,6 +1,7 @@
 .toolcard {
   @include space(padding, top-bottom, $padding-40, $padding-24);
   padding-left: 0;
+  background: $white;
   .MuiGrid-container {
     min-height: 50vh;
   }
@@ -141,6 +142,7 @@
     }
     .add--card[disabled] {
       background-color: #999 !important;
+      box-shadow: 0px 10px 20px rgb(0 0 0 / 25%);
     }
   }
 }

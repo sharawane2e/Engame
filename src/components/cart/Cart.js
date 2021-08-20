@@ -36,9 +36,9 @@ const Cart = ({ cart }) => {
 
   return (
     <>
-      <div className="shoping-cart bredcrum-conatiner">
-        <Header />
-        <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
+      <Header />
+      <div class="bredcrum-conatiner sticky-position">
+        <div className="bredcrum-conatiner__bredcrum_inr ">
           <Container maxWidth="lg">
             <Breadcrumbs
               aria-label="breadcrumb"
@@ -54,7 +54,9 @@ const Cart = ({ cart }) => {
             </Breadcrumbs>
           </Container>
         </div>
-        {cart.length !== 0 ? (
+      </div>
+      {cart.length !== 0 ? (
+        <div className="shoping-cart">
           <Container
             maxWidth="lg"
             className="shoping-cart__container sticky-position margin-top-174"
@@ -210,8 +212,6 @@ const Cart = ({ cart }) => {
                               className="shoping-cart__tool-icons"
                             >
                               <Typography component="div">
-                                <DoneIcon className="shoping-cart__tool-tick" />{" "}
-                                |{" "}
                                 <DeleteIcon
                                   className="shoping-cart__tool-delete"
                                   onClick={() =>
@@ -228,9 +228,8 @@ const Cart = ({ cart }) => {
                 })}
                 <div className="continue-button">
                   <Link to="/">
-                    {" "}
                     <CustomButton className="secondary-button shopping-button">
-                      <PlayCircleFilledWhiteIcon className="margin-right" />{" "}
+                      <PlayCircleFilledWhiteIcon className="margin-right" />
                       Continue Shopping
                     </CustomButton>
                   </Link>
@@ -269,12 +268,12 @@ const Cart = ({ cart }) => {
             </Grid>
             {/*End card data*/}
           </Container>
-        ) : (
-          <div className="empty_cart margin-top-174">
-            <img src={empty} alt="" />
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="empty_cart ">
+          <img src={empty} alt="" />
+        </div>
+      )}
       <Footer />
     </>
   );

@@ -9,6 +9,7 @@ body {
 .App {
   position: relative;
   height: 100vh;
+  background: #efefef;
 }
 .MuiButton-label {
   text-transform: none;
@@ -21,7 +22,7 @@ body {
   display: flex;
   width: 100%;
 }
-.align-item{
+.align-item {
   align-items: center;
 }
 .paperstyel {
@@ -49,8 +50,8 @@ body {
 }
 
 .large-hedding {
-  @include color($black-secondary) ;
- // color: map-get($map: $text-color, $key: black-drak);
+  @include color($black-secondary);
+  // color: map-get($map: $text-color, $key: black-drak);
 }
 .input-label {
   //   margin-bottom: map-get($map: $margin, $key: margin-10);
@@ -62,10 +63,10 @@ body {
   @include color($primary);
   @include font-size($font-reg);
   @include space(margin, top-bottom, $margin-5, $margin-5);
-  @include breakpoint(desktop150){
+  @include breakpoint(desktop150) {
     @include font-size($font-xmd-reg);
     @include space(margin, all, 0, 0);
-  };
+  }
 }
 
 .header-margin-top {
@@ -73,14 +74,14 @@ body {
 }
 /*Use these classes for borders*/
 .border-bottom {
-  @include border('-bottom',$border-width,$bsolid,$black-gray);
- }
+  @include border("-bottom", $border-width, $bsolid, $black-gray);
+}
 
 .border-allside {
-  @include border('',$border-width,$bsolid,$dark-gray);
+  @include border("", $border-width, $bsolid, $dark-gray);
 }
 .border-allside-gray {
-  @include border('',$border-width,$bsolid,$black-gray);
+  @include border("", $border-width, $bsolid, $black-gray);
 }
 .border-radius {
   border-radius: $boder-radius !important;
@@ -109,14 +110,13 @@ a {
     map-get($map: $boxshadow, $key: "red-smooth")
   );
   @include breakpoint(desktop150) {
-    
   }
-    &:hover{
-      @include box-shadow(0px, 10px, 20px ,$primary-btn-shadow);
-    }
+  &:hover {
+    @include box-shadow(0px, 10px, 20px, $primary-btn-shadow);
+  }
 }
 .secondary-button {
-  @include both-color($black-gray,$white);
+  @include both-color($black-gray, $white);
   @include space(padding, all, $padding-10 !important, 0);
   text-transform: unset !important;
   // font-family: map-get($map: $font-family, $key: font-barlowmedium) !important;
@@ -130,13 +130,12 @@ a {
     map-get($map: $boxshadow, $key: "black-smooth")
   );
   @include breakpoint(desktop150) {
-    
   }
   @include breakpoint(Ipad-pro) {
-       padding: 5px !important;
-   }
-   &:hover{
-    @include box-shadow(0px, 10px ,20px, $secondary-btn-shadow);
+    padding: 5px !important;
+  }
+  &:hover {
+    @include box-shadow(0px, 10px, 20px, $secondary-btn-shadow);
   }
 }
 /*End*/
@@ -144,32 +143,32 @@ a {
 .bredcrum-conatiner {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   @include bgcolor($gray-primary);
+  z-index: 99;
   #{&}__bredcrum_inr {
     width: 100%;
     z-index: 99;
     @include bgcolor($back-color);
   }
   #{&}__bredcrum-text {
-    @include space(padding, all, $padding-20, 0);
-    @include space(padding, all, $padding-20, 0);
+    @include space(padding, top-bottom, $padding-20, $padding-20);
     ol {
       .MuiBreadcrumbs-separator {
         @include color($black-secondary);
         font-family: map-get($map: $font-family, $key: "font-barlowbold");
         @include font-weight($font-700);
         @include font-size($font-xl-reg);
-       }
+      }
       li {
         > a {
           text-decoration: none;
           font-family: map-get($map: $font-family, $key: "font-barlowmedium");
           @include color($secondary);
           @include font-size($font-xl-reg);
-          }
+        }
         > p {
           font-family: map-get($map: $font-family, $key: "font-barlowbold");
           @include color($black-secondary);
-            @include font-weight($font-700);
+          @include font-weight($font-700);
           @include font-size($font-xl-reg);
         }
       }
@@ -193,7 +192,7 @@ a {
 /*End*/
 
 .margin-top-174 {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .MuiPaper-elevation1 {
   box-shadow: none !important;
@@ -216,8 +215,8 @@ a {
 }
 .sticky-position {
   position: sticky;
-  top: 82px;
-  height: 100%;
+  top: 80px;
+  // height: 100%;
 }
 .sticky-head-position {
   position: sticky;
@@ -236,9 +235,9 @@ a {
   font-weight: bold;
 }
 
-.MuiAppBar-colorPrimary{
-  background-color: #ececec  !important;
+.MuiAppBar-colorPrimary {
+  background-color: #ececec !important;
 }
-.modal-open{
+.modal-open {
   overflow: hidden;
 }

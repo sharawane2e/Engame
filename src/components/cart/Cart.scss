@@ -1,7 +1,11 @@
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   @include bgcolor($gray-secondary);
+  margin-top: 12px;
   // min-height: 100vh;
+  #{&}__container {
+    //height: 80vh;
+  }
   #{&}__container-inr {
     @include space(padding, bottom, $padding-15, 0);
   }
@@ -58,7 +62,7 @@
       align-items: center;
       margin-right: 10px;
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
-      @include breakpoint(Ipad-pro){
+      @include breakpoint(Ipad-pro) {
         @include font-size($font-reg);
       }
     }
@@ -66,14 +70,14 @@
       display: flex;
       width: fit-content;
       @include space(padding, all, $padding-12, 0);
-      @include border('',$border-width,$bsolid,$black-secondary);
+      @include border("", $border-width, $bsolid, $black-secondary);
       outline: 0;
       &:hover {
-       @include border('',$border-width,$bsolid,$gray-opacity);
+        @include border("", $border-width, $bsolid, $gray-opacity);
       }
-      @include breakpoint(Ipad-pro){
-         @include font-size($font-md-reg);
-          width: fit-content;
+      @include breakpoint(Ipad-pro) {
+        @include font-size($font-md-reg);
+        width: fit-content;
         @include space(padding, all, $padding-5, 0);
       }
     }
@@ -89,7 +93,7 @@
       align-items: $align-center;
       @include space(margin, right, $margin-10, 0);
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
-      @include breakpoint(Ipad-pro){
+      @include breakpoint(Ipad-pro) {
         @include font-size($font-reg);
       }
     }
@@ -161,7 +165,7 @@
         width: 80%;
         outline: none;
         @include space(padding, all, $padding-15, 0);
-        @include border('',$border-width,$dotted,$black-secondary);
+        @include border("", $border-width, $dotted, $black-secondary);
         border-right: none;
         border-top-left-radius: $boder-radius;
         border-bottom-left-radius: $boder-radius;
@@ -169,13 +173,13 @@
       button {
         border: none;
         text-transform: capitalize;
-        @include both-color($back-color,$white);
+        @include both-color($back-color, $white);
         @include space(padding, all, $padding-15, 0);
         border-top-right-radius: $boder-radius;
         border-bottom-right-radius: $boder-radius;
         outline: none;
         font-family: map-get($map: $font-family, $key: "font-barlowbold");
-        @include font-size($font-xl-reg)
+        @include font-size($font-xl-reg);
       }
 
       @media all and (max-width: 1025px) {
@@ -203,14 +207,14 @@
         @include space(margin, right, $margin-15, 0);
       }
     }
-    @include breakpoint(Ipad){
+    @include breakpoint(Ipad) {
       width: 106px !important;
       padding: 10px 16px !important;
-     .MuiButton-label {
+      .MuiButton-label {
         @include font-size($font-xmd-reg);
       }
     }
-   
+
     @media all and (min-width: 1024px) and (max-width: 1366px) {
       width: 178px !important;
       padding: 10px 16px !important;
@@ -219,10 +223,11 @@
       }
     }
   }
-  .empty_cart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-  }
+}
+.empty_cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #efefef;
 }
