@@ -90,6 +90,7 @@ const SubscriptionType = ({ data, toolId }) => {
         <div className="subscription-type__iner">
           <div className="subscription-type__days">
             <TextField
+              type="number"
               id="outlined-basic"
               variant="outlined"
               className="subscription-type__inputbox"

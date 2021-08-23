@@ -196,6 +196,7 @@ const Cart = ({ cart }) => {
                               >
                                 <span>Validity:</span>
                                 <TextField
+                                  type="number"
                                   id={"input-filed" + item.id}
                                   variant="outlined"
                                 />
