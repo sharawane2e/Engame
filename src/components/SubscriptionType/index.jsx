@@ -5,6 +5,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cart/action";
 import Toaster from "../../util/Toaster";
+import { BASE_URL } from "../../config/ApiUrl";
 
 const SubscriptionType = ({ data, toolId }) => {
   const [state] = useState(data);
@@ -15,15 +16,49 @@ const SubscriptionType = ({ data, toolId }) => {
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
   const [itemId] = useSelector((state) => state.cart.cartItems);
+
+  // get auth details from localstorage
+  let auth = localStorage.getItem("auth");
+  let res = JSON.parse(auth);
+
+  let plans = { user: res.token.user.pk, plan_type: type };
   const handleChange = (e) => {
     setSubscription(e.target.value);
     setValuePrice("");
     setPrice(0);
+    // fetch(BASE_URL + "cart/standard_price/", {
+    //   method: "GET",
+    //   headers:{
+
+    //   },
+    //   body: JSON.stringify(plans),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => console.log(result));
+  };
+
+  const user = {
+    user: res.token.user.pk,
+    widget: toolId,
+    plan_type: "hits",
+    plan_value: "2700",
+    price: 110,
+    currency: "$",
   };
 
   const handleCart = () => {
     dispatch(addToCart(toolId));
     Toaster.sucess("You have add successfully!", "topCenter");
+    // fetch(BASE_URL + "cart/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${res.token.access_token}`,
+    //   },
+    //   body: JSON.stringify(user),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => console.log(result));
   };
 
   const handleCalculatePrice = (e) => {

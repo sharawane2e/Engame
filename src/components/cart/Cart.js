@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import empty from "../../assets/images/empty.gif";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Breadcrumbs } from "@material-ui/core";
@@ -15,15 +15,17 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
-import { removeFromCart } from "../../redux/cart/action";
+import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 
 const Cart = ({ cart }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItem, setTotalItem] = useState(0);
   const dispatch = useDispatch();
-  console.log(cart);
+  const carts = useSelector((state) => state.cart.carts);
+  console.log(carts);
   useEffect(() => {
+    dispatch(getItemFromCart());
     let items = 0;
     let price = 0;
     cart.forEach((item) => {
@@ -36,9 +38,9 @@ const Cart = ({ cart }) => {
 
   return (
     <>
-      <Header />
-      <div class="bredcrum-conatiner sticky-position">
-        <div className="bredcrum-conatiner__bredcrum_inr ">
+      <div className="shoping-cart bredcrum-conatiner">
+        <Header />
+        <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
           <Container maxWidth="lg">
             <Breadcrumbs
               aria-label="breadcrumb"
@@ -54,9 +56,7 @@ const Cart = ({ cart }) => {
             </Breadcrumbs>
           </Container>
         </div>
-      </div>
-      {cart.length !== 0 ? (
-        <div className="shoping-cart">
+        {cart.length !== 0 ? (
           <Container
             maxWidth="lg"
             className="shoping-cart__container sticky-position margin-top-174"
@@ -212,6 +212,8 @@ const Cart = ({ cart }) => {
                               className="shoping-cart__tool-icons"
                             >
                               <Typography component="div">
+                                <DoneIcon className="shoping-cart__tool-tick" />{" "}
+                                |{" "}
                                 <DeleteIcon
                                   className="shoping-cart__tool-delete"
                                   onClick={() =>
@@ -228,8 +230,9 @@ const Cart = ({ cart }) => {
                 })}
                 <div className="continue-button">
                   <Link to="/">
+                    {" "}
                     <CustomButton className="secondary-button shopping-button">
-                      <PlayCircleFilledWhiteIcon className="margin-right" />
+                      <PlayCircleFilledWhiteIcon className="margin-right" />{" "}
                       Continue Shopping
                     </CustomButton>
                   </Link>
@@ -268,12 +271,12 @@ const Cart = ({ cart }) => {
             </Grid>
             {/*End card data*/}
           </Container>
-        </div>
-      ) : (
-        <div className="empty_cart ">
-          <img src={empty} alt="" />
-        </div>
-      )}
+        ) : (
+          <div className="empty_cart margin-top-174">
+            <img src={empty} alt="" />
+          </div>
+        )}
+      </div>
       <Footer />
     </>
   );
