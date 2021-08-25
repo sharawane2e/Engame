@@ -7,12 +7,12 @@ import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/cart/action";
+// import { addToCart } from "../../redux/cart/action";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
-import Toaster from "../../util/Toaster";
+// import Toaster from "../../util/Toaster";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
@@ -37,9 +37,6 @@ const ToolCards = () => {
   };
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
-    // if (productShow.length == 0) {
-    //   localStorage.removeItem("auth");
-    // }
   }, [ispopup]);
 
   useEffect(() => {
@@ -52,9 +49,9 @@ const ToolCards = () => {
 
   useEffect(() => {
     dispatch(listProducts());
-    // console.log(token);
     if (user) {
       let id = token.token.access_token;
+      console.log("id", id);
       fetch(BASE_URL + "widget/user/detail/", {
         headers: {
           "Content-Type": "application/json",
@@ -158,9 +155,7 @@ const ToolCards = () => {
                     >
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
-                          <img
-                            src={"http://192.168.1.124:8000" + tooldata.imgUrl}
-                          />
+                          <img src={BASE_URL + "/" + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton

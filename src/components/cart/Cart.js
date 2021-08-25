@@ -14,7 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DoneIcon from "@material-ui/icons/Done";
+// import DoneIcon from "@material-ui/icons/Done";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 
@@ -38,8 +38,8 @@ const Cart = ({ cart }) => {
 
   return (
     <>
-      <div className="shoping-cart bredcrum-conatiner">
-        <Header />
+      <Header />
+      <div className="bredcrum-conatiner">
         <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
           <Container maxWidth="lg">
             <Breadcrumbs
@@ -56,6 +56,8 @@ const Cart = ({ cart }) => {
             </Breadcrumbs>
           </Container>
         </div>
+      </div>
+      <div className="shoping-cart ">
         {cart.length !== 0 ? (
           <Container
             maxWidth="lg"
@@ -213,8 +215,7 @@ const Cart = ({ cart }) => {
                               className="shoping-cart__tool-icons"
                             >
                               <Typography component="div">
-                                <DoneIcon className="shoping-cart__tool-tick" />{" "}
-                                |{" "}
+                                {/* <DoneIcon className="shoping-cart__tool-tick" />{" "} */}
                                 <DeleteIcon
                                   className="shoping-cart__tool-delete"
                                   onClick={() =>

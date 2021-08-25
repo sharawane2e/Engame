@@ -2,12 +2,12 @@
   @include breakpoint(Ipad-pro) {
     padding: 0;
   }
-  @include breakpoint(desktop150){
+  @include breakpoint(desktop150) {
     @include space(padding, top-bottom, $padding-5, $padding-90);
     @include space(padding, left-right, $padding-15, $padding-30);
   }
   &.login--form {
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       @include space(padding, top-bottom, $padding-5, $padding-5);
     }
   }
@@ -19,10 +19,10 @@
     @include space(padding, top, $padding-20, 0);
     @include space(padding, bottom, $padding-50, 0);
     @include breakpoint(desktop) {
-      @include space(padding, top-bottom, $padding-10, $padding-40);
+      @include space(padding, top-bottom, $padding-20, $padding-40);
     }
 
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       @include space(padding, bottom, $padding-25, 0);
       @include font-size($font-xx-reg18);
     }
@@ -40,7 +40,7 @@
   .MuiOutlinedInput-input {
     @include space(padding, all, $padding-15, 0);
     @include font-size($font-xmd-reg);
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       @include space(padding, top, $padding-10, 0);
       @include space(padding, bottom, $padding-10, 0);
       @include font-size($font-xmd-reg);
@@ -56,7 +56,7 @@
     @include breakpoint(desktop) {
       @include space(margin, bottom, $margin-0, 0);
     }
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       .MuiIconButton-label {
         > svg {
           width: 18px;
@@ -64,16 +64,16 @@
         }
       }
     }
-    }
+  }
   .forgot-link {
     @include font-weight($font-600);
-    text-align:$align-right;
+    text-align: $align-right;
     @include space(padding, bottom, $padding-25, 0);
     & > a {
       @include color($secondary);
       @include font-weight($font-normal);
     }
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       @include font-size($font-xmd-reg);
     }
   }
@@ -85,7 +85,7 @@
     & > a {
       @include space(padding, left, $padding-5, 0);
       @include color($secondary);
-   }
+    }
   }
 }
 .form-button-grop {
@@ -98,7 +98,7 @@
     min-width: 292px !important;
     width: 100%;
     @include space(padding, all, $padding-12 !important, 0);
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       @include font-size($font-xmd-reg);
       @include space(padding, top-bottom, $padding-15, $padding-10);
     }
