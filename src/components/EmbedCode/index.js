@@ -12,7 +12,7 @@ const EmbedCode = ({ data, toolId }) => {
   const textAreaRef = useRef(null);
 
   const copyToClipboard = (e) => {
-    // textAreaRef.current.select();
+    textAreaRef.current.select();
     document.execCommand("copy");
     e.target.focus();
     setCopySuccess("Copied!");

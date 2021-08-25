@@ -51,7 +51,6 @@ const ToolCards = () => {
     dispatch(listProducts());
     if (user) {
       let id = token.token.access_token;
-      console.log("id", id);
       fetch(BASE_URL + "widget/user/detail/", {
         headers: {
           "Content-Type": "application/json",
@@ -93,9 +92,7 @@ const ToolCards = () => {
                           <div className="toolcard__preview">
                             <CustomButton
                               className="toolcard__perview-button"
-                              onClick={() =>
-                                handleToolClick(tooldata.widget_data)
-                              }
+                              onClick={() => handleToolClick(tooldata)}
                             >
                               <RemoveRedEyeIcon className="eyes_icon" /> Preview
                             </CustomButton>
@@ -155,7 +152,9 @@ const ToolCards = () => {
                     >
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
-                          <img src={BASE_URL + "/" + tooldata.imgUrl} />
+                          <img
+                            src={"http://192.168.1.124:8000" + tooldata.imgUrl}
+                          />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton

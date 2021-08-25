@@ -40,7 +40,7 @@ class Registration extends Component {
   };
 
   handleRegister = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const { name, email, setpassword, confirmpassword } = this.state;
     const user = {
       username: name,
@@ -90,6 +90,13 @@ class Registration extends Component {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },
       });
+    }
+  };
+
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.handleRegister();
     }
   };
 
@@ -153,6 +160,7 @@ class Registration extends Component {
                   message={this.state.formErrors.name}
                   type="Name"
                   variant="outlined"
+                  onKeyDown={this._handleKeyDown}
                 />
                 <div className="validated-error">
                   {this.state.formErrors.name}
@@ -175,6 +183,7 @@ class Registration extends Component {
                   onChange={(e) => this.handleChange(e, "email")}
                   onBlur={(e) => this.handleBlur(e, "email")}
                   message={this.state.formErrors.email}
+                  onKeyDown={this._handleKeyDown}
                 />
                 <div className="validated-error">
                   {this.state.formErrors.email}
@@ -196,6 +205,7 @@ class Registration extends Component {
                   onChange={(e) => this.handleChange(e, "setpassword")}
                   onBlur={(e) => this.handleBlur(e, "setpassword")}
                   message={this.state.formErrors.setpassword}
+                  onKeyDown={this._handleKeyDown}
                   endAdornment={
                     <InputAdornment position="end" label="Outlined">
                       <IconButton
@@ -232,6 +242,7 @@ class Registration extends Component {
                   onChange={(e) => this.handleChange(e, "confirmpassword")}
                   onBlur={(e) => this.handleBlur(e, "confirmpassword")}
                   message={this.state.formErrors.confirmpassword}
+                  onKeyDown={this._handleKeyDown}
                   endAdornment={
                     <InputAdornment position="end" label="Outlined">
                       <IconButton

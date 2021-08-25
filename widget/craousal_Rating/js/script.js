@@ -13,6 +13,7 @@ $(window).load(function () {
     },
     data: JSON.stringify(widgetData),
     success: function (response) {
+      console.log(response);
       // You will get response from your PHP page (what you echo or print)
       if (response.HasSuccess === true) {
         var htmlElemnt =

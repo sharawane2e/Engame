@@ -13,7 +13,9 @@ body,
 }
 .popup {
   background: url(../images/craousal_Rating.png) no-repeat;
-  background-position: top center;
+  background-size: auto;
+  background-attachment: fixed;
+  background-position: center;
 }
 .popup-model {
   position: fixed;
@@ -96,6 +98,27 @@ body,
   line-height: 1.5;
   margin-top: 26px;
 }
+.trial-version {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  text-align: right;
+  margin-top: 10px;
+}
+.trial-version-text {
+  display: inline-block;
+  background: #d6d0d0;
+  padding: 15px;
+  margin-right: 7px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.trial-version-text span {
+  padding-right: 5px;
+  color: #f15b5b;
+}
 .popup-text > span {
   color: #f15b5b;
 }
@@ -144,7 +167,7 @@ body,
   box-shadow: 1px 0px 15px 0px #e8e8e8;
   border-radius: 10px;
   padding-top: 15px;
-  margin-top: 25px;
+  /* margin-top: 40px; */
 }
 .carousel-container {
   width: 250px;

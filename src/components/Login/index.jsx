@@ -89,12 +89,19 @@ class Login extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.handelLogin();
+    }
+  };
+
   handleChange = (e, key) => {
-    let value = e.target.value;
-    const validationResponse = this.loginValidation.validateField(key, value);
-    const errorMessage = validationResponse.isValid
-      ? validationResponse.message
-      : this.state.formErrors[key];
+    const value = e.target.value;
+    let errorMessage = this.state.formErrors[key];
+    if (this.loginValidation.validateField(key, value).isValid) {
+      errorMessage = "";
+    }
     this.setState({
       [key]: value,
       formErrors: { ...this.state.formErrors, [key]: errorMessage },
@@ -105,10 +112,9 @@ class Login extends Component {
     if (typeof value === "string") {
       value = value.trim();
     }
-    const validationResponse = this.loginValidation.validateField(key, value);
-    const errorMessage = validationResponse.message;
+    const errorMessage = this.loginValidation.validateField(key, value).message;
     this.setState({
-      [key]: value,
+      key: value,
       formErrors: { ...this.state.formErrors, [key]: errorMessage },
     });
   };
@@ -140,6 +146,7 @@ class Login extends Component {
                   message={this.state.formErrors.email}
                   type="Email"
                   variant="outlined"
+                  onKeyDown={this._handleKeyDown}
                 />
                 <div className="validated-error">
                   {this.state.formErrors.email}
@@ -161,6 +168,7 @@ class Login extends Component {
                   onChange={(e) => this.handleChange(e, "password")}
                   onBlur={(e) => this.handleBlur(e, "password")}
                   message={this.state.formErrors.password}
+                  onKeyDown={this._handleKeyDown}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton

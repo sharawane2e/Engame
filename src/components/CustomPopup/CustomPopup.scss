@@ -40,10 +40,20 @@
 
   #{&}__iner--xl {
     width: 800px;
+    @include breakpoint(Ipad-pro) {
+      width: 90%;
+      height: 90vh;
+      overflow: auto;
+    }
   }
 
   #{&}__iner--md {
     width: 500px;
+    @include breakpoint(Ipad-pro) {
+      width: 90%;
+      height: 90vh;
+      overflow: auto;
+    }
   }
   #{&}__iner--xl-md {
     width: 600px;
