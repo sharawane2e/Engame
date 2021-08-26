@@ -14,7 +14,7 @@ $(window).load(function () {
     data: JSON.stringify(widgetData),
     success: function (response) {
       // You will get response from your PHP page (what you echo or print)
-      if (response.HasSuccess === false) {
+      if (response.HasSuccess === true) {
         if (response.DataObject.plan_type == "free_hit_trial_version") {
           $("#toolwrapper").before(
             '<div class="trial-version">\
