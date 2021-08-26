@@ -44,7 +44,6 @@ const Header = ({ props, cart, user }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  console.log(cart);
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
   }, [isLoginOpen]);

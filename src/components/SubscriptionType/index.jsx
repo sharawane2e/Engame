@@ -3,16 +3,16 @@ import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/cart/action";
 import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 
 const SubscriptionType = ({ data, toolId }) => {
   const [state] = useState(data);
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
-  const [valuePrice, setValuePrice] = useState(0);
+  const [valuePrice, setValuePrice] = useState();
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
   const [itemId] = useSelector((state) => state.cart.cartItems);
@@ -20,45 +20,57 @@ const SubscriptionType = ({ data, toolId }) => {
   // get auth details from localstorage
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
+  console.log(base);
 
-  let plans = { user: res.token.user.pk, plan_type: type };
   const handleChange = (e) => {
+    let plans = { user: res.token.user.pk, plan_type: e.target.value };
     setSubscription(e.target.value);
+    setType(e.target.value);
     setValuePrice("");
+    if (e.target.value === 1) {
+      setType("days");
+    } else {
+      setType("hits");
+    }
     setPrice(0);
-    // fetch(BASE_URL + "cart/standard_price/", {
-    //   method: "GET",
-    //   headers:{
-
-    //   },
-    //   body: JSON.stringify(plans),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => console.log(result));
+    dispatch(loadingStart());
+    fetch(BASE_URL + "cart/standard_price/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${res.token.access_token}`,
+      },
+      body: JSON.stringify(plans),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setBase(result.base_price);
+        dispatch(loadingStop());
+      });
   };
 
   const user = {
     user: res.token.user.pk,
     widget: toolId,
-    plan_type: "hits",
-    plan_value: "2700",
-    price: 110,
+    plan_type: type,
+    plan_value: valuePrice,
+    price: price,
     currency: "$",
   };
 
   const handleCart = () => {
-    dispatch(addToCart(toolId));
+    // dispatch(addToCart(toolId));
     Toaster.sucess("You have add successfully!", "topCenter");
-    // fetch(BASE_URL + "cart/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${res.token.access_token}`,
-    //   },
-    //   body: JSON.stringify(user),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => console.log(result));
+    fetch(BASE_URL + "cart/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${res.token.access_token}`,
+      },
+      body: JSON.stringify(user),
+    })
+      .then((response) => response.json())
+      .then((result) => console.log(result));
   };
 
   const handleCalculatePrice = (e) => {
@@ -68,12 +80,11 @@ const SubscriptionType = ({ data, toolId }) => {
   };
   // console.log(subscription);
   useEffect(() => {
-    if (subscription == 1) {
-      setBase(10);
-      setType("Days");
+    if (subscription == "days") {
+      setType("days");
     } else {
-      setType("Hits");
-      setBase(5);
+      setType("hits");
+      setBase(0.1);
     }
   }, [handleChange, subscription, type, price, base]);
 
@@ -81,8 +92,8 @@ const SubscriptionType = ({ data, toolId }) => {
     <>
       <div className="subscription-type">
         <select onChange={handleChange}>
-          <option value="1">Number of days</option>
-          <option value="2" selected>
+          <option value="days">Number of days</option>
+          <option value="hits" selected>
             Number of hits
           </option>
         </select>
@@ -100,7 +111,7 @@ const SubscriptionType = ({ data, toolId }) => {
             <div className="subscription-type__text">{type}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-            ${price}
+            ${price.toFixed(2)}
           </div>
         </div>
       </div>

@@ -15,26 +15,45 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
-import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
+import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
+import { BASE_URL } from "../../config/ApiUrl";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import axios from "axios";
 
 const Cart = ({ cart }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [totalItem, setTotalItem] = useState(0);
+  const [carts, setCarts] = useState([]);
+  const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.cart.carts);
-  console.log(carts);
+  let auth = localStorage.getItem("auth");
+  let res = JSON.parse(auth);
+  const token = useSelector((state) => state.user.token.access_token);
   useEffect(() => {
-    dispatch(getItemFromCart());
-    let items = 0;
-    let price = 0;
-    cart.forEach((item) => {
-      items += item.qty;
-      price += +item.price;
+    const fetchCartItem = async () => {
+      dispatch(loadingStart());
+      await fetch(BASE_URL + "cart/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          setCarts(result);
+          setPlanValue(result.planValue);
+        });
+      dispatch(loadingStop());
+    };
+    fetchCartItem();
+  }, []);
+  console.log("carts", carts);
+
+  const handleRemove = (productId) => {
+    const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
+      headers: { Authorization: `Bearer ${res.token.access_token}` },
     });
-    setTotalPrice(price);
-    setTotalItem(items);
-  }, [cart, totalItem, totalPrice, setTotalItem, setTotalPrice]);
+    const item = carts.filter((x) => x.id !== productId);
+    setCarts(item);
+  };
 
   return (
     <>
@@ -56,7 +75,7 @@ const Cart = ({ cart }) => {
             </Breadcrumbs>
           </Container>
         </div>
-        {cart.length !== 0 ? (
+        {carts.length !== 0 ? (
           <Container
             maxWidth="lg"
             className="shoping-cart__container sticky-position margin-top-174"
@@ -94,7 +113,7 @@ const Cart = ({ cart }) => {
 
             <Grid container spacing={3}>
               <Grid item xl={9} lg={9} sm={9} xs={12}>
-                {cart.map((item, index) => {
+                {carts.map((item, index) => {
                   return (
                     <Paper
                       className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
@@ -113,7 +132,7 @@ const Cart = ({ cart }) => {
                           <ButtonBase className="curent-tool-img">
                             <img
                               alt=""
-                              src={"//192.168.1.124:8000" + item.image}
+                              src={"//192.168.1.124:8000" + item.widget.imgUrl}
                             />
                           </ButtonBase>
                         </Grid>
@@ -141,7 +160,7 @@ const Cart = ({ cart }) => {
                                 component="div"
                                 className="shoping-cart__tool-title"
                               >
-                                {item.name}
+                                {item.widget.name}
                               </Typography>
                               <Typography
                                 variant="body2"
@@ -179,12 +198,8 @@ const Cart = ({ cart }) => {
                               >
                                 <span>Subscription:</span>
                                 <select className="border-radius">
-                                  <option>Number of days</option>
-                                  <option>2</option>
-                                  <option>1</option>
-                                  <option>1</option>
-                                  <option>1</option>
-                                  <option>1</option>
+                                  <option value="days">Number of days</option>
+                                  <option value="hits">Number of hits</option>
                                 </select>
                               </Typography>
                             </Grid>
@@ -199,9 +214,10 @@ const Cart = ({ cart }) => {
                                   type="number"
                                   id={"input-filed" + item.id}
                                   variant="outlined"
+                                  value={item.plan_value}
                                 />
                                 <span className="shoping-cart__input-days">
-                                  Days
+                                  {item.plan_type}
                                 </span>
                               </Typography>
                             </Grid>
@@ -217,9 +233,10 @@ const Cart = ({ cart }) => {
                                 |{" "}
                                 <DeleteIcon
                                   className="shoping-cart__tool-delete"
-                                  onClick={() =>
-                                    dispatch(removeFromCart(item.product))
-                                  }
+                                  onClick={() => {
+                                    // dispatch(removeFromCart(item.id));
+                                    handleRemove(item.id);
+                                  }}
                                 />
                               </Typography>
                             </Grid>
@@ -252,7 +269,10 @@ const Cart = ({ cart }) => {
                     Need to pay
                   </div>
                   <div className="shoping-cart__coupon-amount">
-                    ${totalPrice}
+                    $
+                    {carts
+                      .map((item) => item.price)
+                      .reduce((acc, value) => +acc + +value)}
                   </div>
                   <div className="shoping-cart__coupon-code">
                     <span align="center">Promotion code</span>
