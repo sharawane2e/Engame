@@ -63,6 +63,7 @@ const Header = ({ props, cart, user }) => {
       setLoginIsOpen(false);
     }
   }, [cart, cartCount, user]);
+  console.log(cartCount);
 
   const handleLogout = () => {
     dispatch(loadingStart());
