@@ -37,6 +37,7 @@ function ElevationScroll(props) {
 }
 
 const Header = ({ props, cart, user }) => {
+  const [anchorEl, setAnchorEl] = React.useState(false);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -71,19 +72,18 @@ const Header = ({ props, cart, user }) => {
     })
       .then((result) => result.json())
       .then((res) => {
-        console.log(res.detail);
-        dispatch(logOutUser());
-        localStorage.removeItem("auth");
-        history.push("/");
-        dispatch(loadingStop());
-        Toaster.success(res.detail, "topCenter");
+        if (res.detail) {
+          dispatch(logOutUser());
+          localStorage.removeItem("auth");
+          dispatch(loadingStop());
+          history.push("/");
+          Toaster.success("logout sucess", "topCenter");
+        }
       })
       .catch((error) => {
         Toaster.error(error, "topCenter");
       });
   };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -91,7 +91,6 @@ const Header = ({ props, cart, user }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
-    setOpen(false);
   };
 
   return (
@@ -126,6 +125,16 @@ const Header = ({ props, cart, user }) => {
                   <CustomButton onClick={handleClick}>
                     {user.token.user.first_name} <ArrowDropDownIcon />
                   </CustomButton>
+                  {/* <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+                  </Menu> */}
                   <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
@@ -134,6 +143,7 @@ const Header = ({ props, cart, user }) => {
                     onClose={handleClose}
                   >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                     <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
                   </Menu>
                 </div>
@@ -167,7 +177,7 @@ const Header = ({ props, cart, user }) => {
       >
         <Grid container spacing={1}>
           <Grid item xs={6} sm={6} className="login-background"></Grid>
-          <Grid item xs={6} sm={6}>
+          <Grid item xs={12} sm={6} lg={6}>
             <Login />
           </Grid>
         </Grid>
@@ -179,7 +189,7 @@ const Header = ({ props, cart, user }) => {
       >
         <Grid container spacing={3}>
           <Grid item xs={6} sm={6} className="login-background"></Grid>
-          <Grid item xs={6} sm={6}>
+          <Grid item xs={12} sm={6} lg={6}>
             <Registration />
           </Grid>
         </Grid>

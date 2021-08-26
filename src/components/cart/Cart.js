@@ -57,8 +57,8 @@ const Cart = ({ cart }) => {
 
   return (
     <>
-      <div className="shoping-cart bredcrum-conatiner">
-        <Header />
+      <Header />
+      <div className="bredcrum-conatiner">
         <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
           <Container maxWidth="lg">
             <Breadcrumbs
@@ -229,8 +229,7 @@ const Cart = ({ cart }) => {
                               className="shoping-cart__tool-icons"
                             >
                               <Typography component="div">
-                                <DoneIcon className="shoping-cart__tool-tick" />{" "}
-                                |{" "}
+                                {/* <DoneIcon className="shoping-cart__tool-tick" />{" "} */}
                                 <DeleteIcon
                                   className="shoping-cart__tool-delete"
                                   onClick={() => {
