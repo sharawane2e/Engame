@@ -37,12 +37,14 @@ function ElevationScroll(props) {
 }
 
 const Header = ({ props, cart, user }) => {
+  const [anchorEl, setAnchorEl] = React.useState(false);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
+
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
   }, [isLoginOpen]);
@@ -83,15 +85,12 @@ const Header = ({ props, cart, user }) => {
       });
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    setOpen(false);
   };
 
   return (
@@ -126,6 +125,16 @@ const Header = ({ props, cart, user }) => {
                   <CustomButton onClick={handleClick}>
                     {user.token.user.first_name} <ArrowDropDownIcon />
                   </CustomButton>
+                  {/* <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+                  </Menu> */}
                   <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
@@ -134,6 +143,7 @@ const Header = ({ props, cart, user }) => {
                     onClose={handleClose}
                   >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                     <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
                   </Menu>
                 </div>

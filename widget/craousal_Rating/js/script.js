@@ -13,9 +13,16 @@ $(window).load(function () {
     },
     data: JSON.stringify(widgetData),
     success: function (response) {
-      console.log(response);
       // You will get response from your PHP page (what you echo or print)
-      if (response.HasSuccess === true) {
+      if (response.HasSuccess === false) {
+        if (response.DataObject.plan_type == "free_hit_trial_version") {
+          $("#toolwrapper").before(
+            '<div class="trial-version">\
+        <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
+      </div>'
+          );
+        }
+
         var htmlElemnt =
           '<div class="carousel-container"> \
             <div class="carousel-slide clearfix"></div> \
