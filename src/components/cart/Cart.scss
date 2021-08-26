@@ -19,8 +19,8 @@
     justify-content: flex-end;
   }
   #{&}__tool-card {
-    @include space(padding, top-bottom, $padding-20, $padding-40);
-    @include space(padding, left-right, $padding-20, $padding-40);
+    @include space(padding, top-bottom, $padding-20, $padding-20);
+    @include space(padding, left-right, $padding-20, $padding-20);
     @include space(margin, bottom, $margin-10, 0);
     .curent-tool-img {
       width: 100%;

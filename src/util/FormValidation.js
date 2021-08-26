@@ -37,20 +37,17 @@ export class LoginValidation extends Validation {
       case "email":
         if (!value) {
           validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.EMAIL_REQUIRED;
+        } else if (!validateEmailPattern(value)) {
+          validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.EMAIL_INVALID;
-        } else {
-          if (!validateEmailPattern(value)) {
-            validationResponse.isValid = false;
-            validationResponse.message = ErrorMessages.EMAIL_INVALID;
-          }
         }
         break;
       case "password":
-        // if (value) {
-        //     validationResponse.isValid = false;
-        //     validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
-        // }
-        if (value.length < PASSWORD_MIN_LENGTH) {
+        if (!value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+        } else if (value.length < PASSWORD_MIN_LENGTH) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_MIN;
         }
@@ -121,7 +118,7 @@ export class ForgotValidation extends Validation {
       case "email":
         if (!value) {
           validationResponse.isValid = false;
-          validationResponse.message = ErrorMessages.EMAIL_INVALID;
+          validationResponse.message = ErrorMessages.EMAIL_REQUIRED;
         } else {
           if (!validateEmailPattern(value)) {
             validationResponse.isValid = false;

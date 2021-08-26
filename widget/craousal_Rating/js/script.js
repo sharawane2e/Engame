@@ -1,18 +1,28 @@
 $(window).load(function () {
+  var strImgValues_ = strImgValues.split("||");
   var popupText =
     " Could not run the widget as the subscribed limit has exceeded. You may need to <span>upgrade your subscription</span> to extend the limit.";
 
   const widgetData = { client_key: client_key };
-  fetch("http://192.168.1.124:8000/subscription/validate/", {
-    method: "POST",
+  $.ajax({
+    url: "http://192.168.1.124:8000/subscription/validate/",
+    type: "POST",
+    dataType: "json",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(widgetData),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.HasSuccess === true) {
+    data: JSON.stringify(widgetData),
+    success: function (response) {
+      // You will get response from your PHP page (what you echo or print)
+      if (response.HasSuccess === true) {
+        if (response.DataObject.plan_type == "free_hit_trial_version") {
+          $("#toolwrapper").before(
+            '<div class="trial-version">\
+        <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
+      </div>'
+          );
+        }
+
         var htmlElemnt =
           '<div class="carousel-container"> \
             <div class="carousel-slide clearfix"></div> \
@@ -99,6 +109,19 @@ $(window).load(function () {
               $(".active").removeClass("active").next().addClass("active");
             }
             ObjRef.outputFunction();
+            if ($("#outputValue").val().length == strImgValues_.length) {
+              const hitData = { client_key: client_key };
+              $.ajax({
+                url: "http://192.168.1.124:8000/subscription/validate/hitcount/",
+                type: "POST",
+                dataType: "json",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: JSON.stringify(hitData),
+                success: function (response) {},
+              });
+            }
           });
         };
 
@@ -134,22 +157,6 @@ $(window).load(function () {
             outputValue.push($(this).attr("data-value"));
           });
           output(outputValue);
-
-          if ($("#outputValue").val() == "1,,,,,,,,,") {
-            const hitData = { client_key: client_key };
-            console.log(hitData);
-            fetch("http://192.168.1.124:8000/subscription/validate/hitcount/", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(hitData),
-            })
-              .then((response) => response.json())
-              .then((result) => {
-                // console.log(result);
-              });
-          }
         };
 
         var carouselApp = new CarouselApp(strImgValues, strScaleValues);
@@ -175,6 +182,20 @@ $(window).load(function () {
                    </div>"
         );
       }
-    });
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+    },
+
+    // const widgetData = { client_key: client_key };
+    // fetch("http://192.168.1.124:8000/subscription/validate/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(widgetData),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+  });
 });
-$(document).ready(function () {});

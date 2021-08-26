@@ -1,31 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>100 Counter</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="css/coutmoduleStyle.min.css" type="text/css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="css/coutmoduleStyle.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/countScriptApp.min.js"></script>
+    <script type="text/javascript" src="js/countScriptApp.js"></script>
     <script type="text/javascript">
-        var lengthOfCol = 5;
-        var topheadStr = "Newly Diagnosed|1L ITP Patients|2L ITP Patients|3L ITP Patients|4L ITP Patients"
-        var subheadStr = "Treatment Never Needed|No treatment after 1L|No treatment after 2L|No treatment after 3L"
-        var countVal = 100;
+      var lengthOfCol = 5;
+      var topheadStr =
+        "Newly Diagnosed|1L ITP Patients|2L ITP Patients|3L ITP Patients|4L ITP Patients";
+      var subheadStr =
+        "Treatment Never Needed|No treatment after 1L|No treatment after 2L|No treatment after 3L";
+      var countVal = 100;
+      var client_key =
+        "aYBsuee6_UL7ed_jvxJw1QABhqCAAAAAAGEmO4FqPQsDvPznTUyv3aH-pIFLFiZEvizy3EeLSUUFnwJhBJTIN0qrRY08SliNnYM60ZBcNcDNg-_KFaE-cMbrahDXWz9Qi6MJ02HUBQIabVcQCczE_Sn2LnMVJuxiqmPje43ytuy3goVS8GpoGrkYIfXhL_c5tcFHi41sfhg5J8FP3I260ZmNfS3lVOjfjpghCnx3fq6ISjzqmaWnr1tyOwftfmEruamm5p_asg3YHzkP5BUx7t6diB-gBb43zASbrawzwC7aXgTM3Mb6Rik45AKA";
 
-        function outputvalue(data1, data2) {
-            $("#otVal1").val(data1)
-            $("#otVal2").val(data2)
-        }
+      function outputvalue(data1, data2) {
+        $("#otVal1").val(data1);
+        $("#otVal2").val(data2);
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="count-contaner"></div>
-    <input type="hidden" id="otVal1" name="otVal1">
-    <input type="hidden" id="otVal2" name="otVal2">
-</body>
-
+    <input type="text" id="otVal1" name="otVal1" />
+    <input type="text" id="otVal2" name="otVal2" />
+  </body>
 </html>

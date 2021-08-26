@@ -25,6 +25,9 @@ function Purchased(props) {
               <Link color="inherit" to="/">
                 Home
               </Link>
+              <Link color="inherit" to="/cart">
+                Shopping Cart
+              </Link>
               <Typography color="textPrimary">Purchased tool</Typography>
             </Breadcrumbs>
           </Container>

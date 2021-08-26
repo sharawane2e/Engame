@@ -3,17 +3,17 @@
   > select {
     width: 100%;
     outline: 0;
-    @include border("-bottom",$border-width ,$bsolid,$black-smooth);
+    @include border("-bottom", $border-width, $bsolid, $black-smooth);
     @include space(padding, all, $padding-10, 0);
     @include border-radius($boder-radius);
-     @include space(margin, bottom, $margin-30, 0);
+    @include space(margin, bottom, $margin-30, 0);
   }
   #{&}__iner {
     display: flex;
   }
   #{&}__days {
     display: flex;
-    flex: 0 0 80%;
+    flex: 0 0 40%;
   }
   #{&}__text {
     display: flex;
@@ -22,9 +22,11 @@
   }
   #{&}__amount {
     display: flex;
-    flex: 0 0 20%;
+    flex: 0 0 60%;
     justify-content: flex-end;
     align-items: $align-center;
+    word-break: break-all;
+    @include space(padding, left, $padding-10, 0);
   }
   #{&}__amount-text {
     font-family: map-get($map: $font-family, $key: "font-barlowbold");

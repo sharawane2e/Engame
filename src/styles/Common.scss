@@ -230,13 +230,14 @@ a {
 
 .pagenot-found {
   font-size: 25px;
-  margin-top: 15px;
-  margin-left: 15px;
-  font-weight: bold;
+  font-weight: $bold;
+  background-color: $white;
+  padding: 25px;
+  height: 100vh;
 }
 
 .MuiAppBar-colorPrimary {
-  background-color: #ececec !important;
+  background-color: $gray-primary !important;
 }
 .modal-open {
   overflow: hidden;
