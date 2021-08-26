@@ -12,7 +12,7 @@ const SubscriptionType = ({ data, toolId }) => {
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
-  const [valuePrice, setValuePrice] = useState();
+  const [valuePrice, setValuePrice] = useState("");
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
   const [itemId] = useSelector((state) => state.cart.cartItems);
