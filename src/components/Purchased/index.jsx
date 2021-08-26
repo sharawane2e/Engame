@@ -10,6 +10,9 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import e2eLogo from "../../assets/images/E2E-logo.png";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
+import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
+import TimerIcon from "@material-ui/icons/Timer";
+import checkCircle from "../../assets/images/check-circle.svg";
 
 function Purchased(props) {
   return (
@@ -28,7 +31,7 @@ function Purchased(props) {
               <Link color="inherit" to="/cart">
                 Shopping Cart
               </Link>
-              <Typography color="textPrimary">Purchased tool</Typography>
+              <Typography color="textPrimary">My Widgets</Typography>
             </Breadcrumbs>
           </Container>
         </div>
@@ -39,7 +42,7 @@ function Purchased(props) {
           <Grid container spacing={3}>
             <Grid item xs={12} className="purchased-tool__hedding">
               <Typography component="div" className="hedding-text">
-                Purchased Tool
+                My Widgets
               </Typography>
             </Grid>
           </Grid>
@@ -50,6 +53,29 @@ function Purchased(props) {
                 <Grid container spacing={3}>
                   <Grid
                     item
+                    xs={12}
+                    container
+                    className="purchased-tool__tool-type-data"
+                  >
+                    <div className="purchased-tool__purchased-date">
+                      <img src={checkCircle} />
+                      <span className="purchased-tool__date-type-text purchased-curent-text">
+                        Purchased Date:
+                      </span>
+                      <span className="purchased-tool__date-type-text">
+                        10/01/2021
+                      </span>
+                      <span className="purchased-tool__date-type-time">
+                        12:00PM
+                      </span>
+                    </div>
+                    {/* <ButtonBase>
+                      <img alt="" src={e2eLogo} />
+                    </ButtonBase> */}
+                  </Grid>
+
+                  <Grid
+                    item
                     xs={2}
                     container
                     className="purchased-tool__tool-image"
@@ -58,8 +84,14 @@ function Purchased(props) {
                       <img alt="" src={e2eLogo} />
                     </ButtonBase>
                   </Grid>
-                  <Grid item xs={10} sm container>
-                    <Grid item xs={3} container direction="column" spacing={2}>
+                  <Grid
+                    item
+                    xs={10}
+                    sm
+                    container
+                    className="purchased-tool__tool-data"
+                  >
+                    <Grid item xs={11} container direction="column" spacing={2}>
                       <Grid item>
                         <Typography
                           component="div"
@@ -73,7 +105,7 @@ function Purchased(props) {
                         >
                           <span className="subscription-type-text">
                             Subscription type:
-                          </span>{" "}
+                          </span>
                           <span className="subscription-day">Days</span>
                         </Typography>
                         <Typography
@@ -81,13 +113,13 @@ function Purchased(props) {
                           className="purchased-tool__tool-type"
                         >
                           <span className="subscription-type-text">
-                            Access code:
-                          </span>{" "}
+                            Trial Key:
+                          </span>
                           <span className="subscription-day">251AB</span>
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Grid
+                    {/* <Grid
                       item
                       xs={2}
                       container
@@ -104,8 +136,8 @@ function Purchased(props) {
                           10 days left
                         </Typography>
                       </Grid>
-                    </Grid>
-                    <Grid
+                    </Grid> */}
+                    {/* <Grid
                       item
                       sm
                       xs={5}
@@ -114,8 +146,8 @@ function Purchased(props) {
                       <Typography component="div" className="tool-extned">
                         Extend validity
                       </Typography>
-                    </Grid>
-                    <Grid item>
+                    </Grid> */}
+                    <Grid item xs={1}>
                       <Typography
                         component="div"
                         className="purchased-tool__embeded-icon border-radius"
@@ -139,10 +171,7 @@ function Purchased(props) {
                   <Grid item xs={6} className="purchased-tool__expiry-date">
                     <Typography component="div" className="">
                       <span className="purchased-on">Expiry Date:</span>{" "}
-                      <span className="purchased-date">
-                        {" "}
-                        21/06/2021 12:00PM
-                      </span>
+                      <span className="purchased-date">21/06/2021 12:00PM</span>
                     </Typography>
                   </Grid>
                 </Grid>

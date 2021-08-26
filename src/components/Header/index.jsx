@@ -90,7 +90,6 @@ const Header = ({ props, cart, user }) => {
 
   useEffect(() => {
     let count = 0;
-    console.log(cart);
     cart.forEach((item) => {
       count += item.qty;
     });

@@ -12,7 +12,37 @@
       @include font-size($font-xx-reg);
     }
   }
-
+  #{&}__tool-type-data {
+    padding: 12px 0 8px !important;
+  }
+  #{&}__purchased-date {
+    > img {
+      display: inline-flex;
+      vertical-align: middle;
+    }
+    .purchased-tool__date-type-text,
+    .purchased-tool__date-type-time {
+      display: inline-flex;
+      vertical-align: middle;
+    }
+    .purchased-curent-text {
+      color: $black-secondary;
+      font-weight: 700;
+    }
+    .purchased-tool__date-type-text {
+      padding-left: 4px;
+    }
+    .purchased-tool__date-type-time {
+      padding-left: 15px;
+    }
+  }
+  #{&}__tool-image {
+    background: $dark-bg;
+    margin-right: 3px;
+  }
+  #{&}__tool-data {
+    background: $dark-bg;
+  }
   #{&}__tool-card {
     @include space(padding, top-bottom, $padding-20, $padding-40);
     @include space(padding, left-right, $padding-20, $padding-40);
@@ -20,6 +50,7 @@
   #{&}__tool-title {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     @include font-size($font-xl-reg);
+    padding-bottom: 4px;
   }
   #{&}__tool-type {
     .subscription-type-text {
@@ -53,17 +84,17 @@
   }
   #{&}__embeded-icon {
     display: flex;
-    @include border('', $border-width, $bsolid, $accent);
+    @include border("", $border-width, $bsolid, $accent);
     @include space(padding, all, $padding-8, 0);
-   cursor: pointer;
+    cursor: pointer;
     &:hover {
-      @include border('', $border-width, $bsolid, $secondary);
+      @include border("", $border-width, $bsolid, $secondary);
     }
     > svg {
       @include color($back-color);
       &:hover {
         @include color($secondary);
-     }
+      }
     }
   }
   #{&}__date-time {
