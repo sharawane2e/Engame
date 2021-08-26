@@ -5,6 +5,7 @@ const ValidationRegex = {
   ALPHA_NUMERIC: /^[a-zA-Z0-9_]*$/,
   ONLY_ALPHA: /^[a-zA-Z ]*$/,
   NUM_DECIMALS: /^\d*\.?\d*$/,
+  ONLY_NUMBER: /^[0-9\b]+$/,
 };
 
 export default ValidationRegex;

@@ -16,11 +16,12 @@ const SubscriptionType = ({ data, toolId }) => {
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
   const [itemId] = useSelector((state) => state.cart.cartItems);
+  const intialValues = { email: "" };
+  const [formValues, setFormValues] = useState(intialValues);
 
   // get auth details from localstorage
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
-  console.log(base);
 
   const handleChange = (e) => {
     let plans = { user: res.token.user.pk, plan_type: e.target.value };
@@ -88,6 +89,22 @@ const SubscriptionType = ({ data, toolId }) => {
     }
   }, [handleChange, subscription, type, price, base]);
 
+  const handleBlur = (e, key) => {
+    // let value = e.target.value;
+    // console.log(value);
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+    console.log(name);
+    // if (typeof value === "string") {
+    //   value = value.trim();
+    // }
+    // const errorMessage = inputValidation.validateField(key, value).message;
+    // this.setState({
+    //   key: value,
+    //   formErrors: { ...this.state.formErrors, [key]: errorMessage },
+    // });
+  };
+
   return (
     <>
       <div className="subscription-type">
@@ -104,8 +121,10 @@ const SubscriptionType = ({ data, toolId }) => {
               type="number"
               id="outlined-basic"
               variant="outlined"
+              name="hits"
               className="subscription-type__inputbox"
               value={valuePrice}
+              onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{type}</div>

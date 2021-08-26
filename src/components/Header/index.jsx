@@ -1,28 +1,61 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+// import AccountCircle from "@material-ui/icons/AccountCircle";
+import MoreIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { Link, useHistory } from "react-router-dom";
 import e2eLogo from "../../assets/images/E2E-logo.png";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
-import { connect } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import Badge from "@material-ui/core/Badge";
 import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+// import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
-import Menu from "@material-ui/core/Menu";
 import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+// import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
+const useStyles = makeStyles((theme) => ({
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
+
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+}));
 function ElevationScroll(props) {
   const { children, window } = props;
 
@@ -37,13 +70,15 @@ function ElevationScroll(props) {
 }
 
 const Header = ({ props, cart, user }) => {
-  const [anchorEl, setAnchorEl] = React.useState(false);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
@@ -55,6 +90,7 @@ const Header = ({ props, cart, user }) => {
 
   useEffect(() => {
     let count = 0;
+    console.log(cart);
     cart.forEach((item) => {
       count += item.qty;
     });
@@ -84,93 +120,181 @@ const Header = ({ props, cart, user }) => {
       .catch((error) => {
         Toaster.error(error, "topCenter");
       });
+    handleMenuClose();
   };
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleClick = (event) => {
+  const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
   };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      {!user.isLoggedIn ? (
+        <>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <div className="menu-button" onClick={() => setLoginIsOpen(true)}>
+              Login
+            </div>
+          </MenuItem>
+          <MenuItem>
+            <div className="menu-button" onClick={() => setReginIsOpen(true)}>
+              Register
+            </div>
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            ></IconButton>
+            <div className="user-after-login">
+              <CustomButton onClick={handleProfileMenuOpen}>
+                {user.token.user.first_name} <ArrowDropDownIcon />
+              </CustomButton>
+            </div>
+          </MenuItem>
+
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            ></IconButton>
+            <div className="menu-button" onClick={() => handleLogout()}>
+              Logout
+            </div>
+          </MenuItem>
+        </>
+      )}
+    </Menu>
+  );
 
   return (
     <>
+      {/* <ElevationScroll {...props}></ElevationScroll> */}
       <ElevationScroll {...props}>
-        <AppBar className="flexGrow header-box" position={"sticky"}>
-          <Toolbar className="header-padding">
+        <AppBar className="flexGrow header-box " position={"sticky"}>
+          <Toolbar className="header-padding header-text-color">
             <Typography variant="body1" className="flexGrow">
               <Link to="/">
                 <img src={e2eLogo} />
               </Link>
             </Typography>
-            <div className="header-text-color">
-              {!user.isLoggedIn ? (
-                <>
-                  <div
-                    className="menu-button"
-                    onClick={() => setLoginIsOpen(true)}
-                  >
-                    Login
-                  </div>
-                  <span className="vertical-line">|</span>
-                  <div
-                    className="menu-button"
-                    onClick={() => setReginIsOpen(true)}
-                  >
-                    Register
-                  </div>
-                </>
-              ) : (
+            {!user.isLoggedIn ? (
+              <>
+                <div
+                  className="menu-button"
+                  onClick={() => setLoginIsOpen(true)}
+                >
+                  Login
+                </div>
+                <span className="vertical-line">|</span>
+                <div
+                  className="menu-button"
+                  onClick={() => setReginIsOpen(true)}
+                >
+                  Register
+                </div>
+              </>
+            ) : null}
+
+            {user.isLoggedIn ? (
+              <div className={classes.sectionDesktop}>
+                {/* <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton> */}
                 <div className="user-after-login">
-                  <CustomButton onClick={handleClick}>
+                  <CustomButton onClick={handleProfileMenuOpen}>
                     {user.token.user.first_name} <ArrowDropDownIcon />
                   </CustomButton>
-                  {/* <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
-                  </Menu> */}
-                  <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                    <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
-                  </Menu>
                 </div>
-              )}
-              <div className="shoping__card">
-                {user.isLoggedIn ? (
-                  <Link to="cart">
-                    <Badge badgeContent={cartCount} color="secondary">
-                      <ShoppingCartIcon />
-                    </Badge>
-                  </Link>
-                ) : (
-                  <Link to="#!">
-                    <Badge badgeContent={cartCount} color="secondary">
-                      <ShoppingCartIcon />
-                    </Badge>
-                  </Link>
-                )}
               </div>
-              <div className="toggle-icon">
-                <MoreVertIcon />
-              </div>
+            ) : null}
+
+            <div className="shoping__card">
+              {user.isLoggedIn ? (
+                <Link to="cart">
+                  <Badge badgeContent={1} color="secondary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </Link>
+              ) : // <Link to="#!">
+              //   <Badge badgeContent={1} color="secondary">
+              //     <ShoppingCartIcon />
+              //   </Badge>
+              // </Link>
+              null}
+            </div>
+
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
             </div>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
+      {renderMobileMenu}
+      {renderMenu}
+
       <CustomPopup
         open={isLoginOpen}
         onClose={() => setLoginIsOpen(false)}
