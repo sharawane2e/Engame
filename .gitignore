@@ -10,7 +10,7 @@
 
 # production
 /build
-/widget
+# /widget
 
 # misc
 .DS_Store

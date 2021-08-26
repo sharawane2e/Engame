@@ -12,7 +12,7 @@ $(document).ready(function () {
     },
     data: JSON.stringify(widgetData),
     success: function (response) {
-      if (response.HasSuccess === false) {
+      if (response.HasSuccess === true) {
         audioWediget();
         if (response.DataObject.plan_type == "free_hit_trial_version") {
           $(".audiRting-tool").before(

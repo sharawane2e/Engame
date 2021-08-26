@@ -152,7 +152,9 @@ $(window).on("load", function () {
         }
       } else {
         $("body").addClass("popup");
-        $(".outpy-cont").css("display", "none");
+        $(".count-contaner").css("display", "none");
+        $("#otVal1").css("display", "none");
+        $("#otVal2").css("display", "none");
         $("body").append(
           '<div class="popup-model"><div class="popup-outer">   \
                        <div class="popup-iner"><div class="popup-header"><span>Subscription expired</span>\
