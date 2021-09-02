@@ -19,6 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Footer from "../Footer";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
 const Cart = ({ cart }) => {
@@ -26,6 +27,7 @@ const Cart = ({ cart }) => {
   const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
   let auth = localStorage.getItem("auth");
+  const user = useSelector((state) => state.user.token);
   let res = JSON.parse(auth);
   const token = useSelector((state) => state.user.token.access_token);
   useEffect(() => {
@@ -45,7 +47,6 @@ const Cart = ({ cart }) => {
     };
     fetchCartItem();
   }, []);
-  console.log("carts", carts);
 
   const handleRemove = (productId) => {
     const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
@@ -53,6 +54,31 @@ const Cart = ({ cart }) => {
     });
     const item = carts.filter((x) => x.id !== productId);
     setCarts(item);
+  };
+
+  // handleCheckout
+  const handleCheckout = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
+    );
+    try {
+      await fetch(BASE_URL + "payments/checkout-session/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.access_token}`,
+        },
+        body: JSON.stringify({ user: user.user.pk }),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          sessionStorage.setItem("sessionId", result.sessionId);
+          console.log(result);
+          stripe.redirectToCheckout({ sessionId: result.sessionId });
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -292,8 +318,11 @@ const Cart = ({ cart }) => {
                         <button>Apply</button>
                       </div>
                     </div>
-                    <CustomButton className="primary-button checkout-button">
-                      <CheckCircleIcon /> <Link to="/purchased">Checkout</Link>
+                    <CustomButton
+                      onClick={handleCheckout}
+                      className="primary-button checkout-button"
+                    >
+                      <CheckCircleIcon /> Checkout
                     </CustomButton>
                   </Paper>
                 </Grid>

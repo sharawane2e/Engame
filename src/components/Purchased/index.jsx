@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -13,8 +13,30 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
+import { BASE_URL } from "../../config/ApiUrl";
+import { useSelector } from "react-redux";
 
 function Purchased(props) {
+  const token = useSelector((state) => state.user.token);
+  useEffect(() => {
+    const search = props.location.search;
+    const params = new URLSearchParams(search);
+    const session_id = params.get("session_id");
+    console.log(session_id);
+    async function paymentSuccess() {
+      fetch(BASE_URL + "payments/success/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.access_token}`,
+        },
+        body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
+      })
+        .then((response) => response.json())
+        .then((result) => console.log(result));
+    }
+    paymentSuccess();
+  }, []);
   return (
     <>
       <div className="purchased-tool bredcrum-conatiner">

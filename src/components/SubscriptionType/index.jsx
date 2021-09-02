@@ -6,13 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { Redirect, useHistory } from "react-router-dom";
 
 const SubscriptionType = ({ data, toolId }) => {
   const [state] = useState(data);
+  const history = useHistory();
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
-  const [valuePrice, setValuePrice] = useState("");
+  const [valuePrice, setValuePrice] = useState(10);
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
   const [itemId] = useSelector((state) => state.cart.cartItems);
@@ -27,13 +29,13 @@ const SubscriptionType = ({ data, toolId }) => {
     let plans = { user: res.token.user.pk, plan_type: e.target.value };
     setSubscription(e.target.value);
     setType(e.target.value);
-    setValuePrice("");
+    // setValuePrice("");
     if (e.target.value === 1) {
       setType("days");
     } else {
       setType("hits");
     }
-    setPrice(0);
+    // setPrice(0);
     dispatch(loadingStart());
     fetch(BASE_URL + "cart/standard_price/", {
       method: "POST",
@@ -71,7 +73,10 @@ const SubscriptionType = ({ data, toolId }) => {
       body: JSON.stringify(user),
     })
       .then((response) => response.json())
-      .then((result) => console.log(result));
+      .then((result) => {
+        console.log(result);
+        history.push("/");
+      });
   };
 
   const handleCalculatePrice = (e) => {
@@ -83,9 +88,11 @@ const SubscriptionType = ({ data, toolId }) => {
   useEffect(() => {
     if (subscription == "days") {
       setType("days");
+      setPrice(valuePrice * base);
     } else {
       setType("hits");
       setBase(0.1);
+      setPrice(valuePrice * base);
     }
   }, [handleChange, subscription, type, price, base]);
 

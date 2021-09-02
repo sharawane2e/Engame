@@ -133,9 +133,9 @@ const ToolCards = () => {
                         <div className="toolcard__aligninr1 toolcard__font-family">
                           {tooldata.toolname}
                         </div>
-                        <div className="toolcard__aligninr toolcard__font-family">
+                        {/* <div className="toolcard__aligninr toolcard__font-family">
                           ${tooldata.price}
-                        </div>
+                        </div> */}
                       </div>
                     </Grid>
                   );
@@ -194,9 +194,9 @@ const ToolCards = () => {
                         <div className="toolcard__aligninr1 toolcard__font-family">
                           {tooldata.toolname}
                         </div>
-                        <div className="toolcard__aligninr toolcard__font-family">
+                        {/* <div className="toolcard__aligninr toolcard__font-family">
                           ${tooldata.price}
-                        </div>
+                        </div> */}
                       </div>
                     </Grid>
                   );
