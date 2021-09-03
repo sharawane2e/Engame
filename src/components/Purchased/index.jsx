@@ -15,6 +15,8 @@ import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
 import { BASE_URL } from "../../config/ApiUrl";
 import { useSelector } from "react-redux";
+import PauseIcon from "@material-ui/icons/Pause";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 function Purchased(props) {
   const token = useSelector((state) => state.user.token);
@@ -91,9 +93,6 @@ function Purchased(props) {
                         12:00PM
                       </span>
                     </div>
-                    {/* <ButtonBase>
-                      <img alt="" src={e2eLogo} />
-                    </ButtonBase> */}
                   </Grid>
 
                   <Grid
@@ -113,7 +112,7 @@ function Purchased(props) {
                     container
                     className="purchased-tool__tool-data"
                   >
-                    <Grid item xs={11} container direction="column" spacing={2}>
+                    <Grid item xs={10}>
                       <Grid item>
                         <Typography
                           component="div"
@@ -141,60 +140,67 @@ function Purchased(props) {
                         </Typography>
                       </Grid>
                     </Grid>
-                    {/* <Grid
-                      item
-                      xs={2}
-                      container
-                      direction="column"
-                      spacing={2}
-                      className="purchased-tool__tool-nodays"
-                    >
-                      <Grid item>
-                        <Typography
-                          gutterBottom
-                          component="div"
-                          className="purchased-tool__tool-left-day"
-                        >
-                          10 days left
-                        </Typography>
-                      </Grid>
-                    </Grid> */}
-                    {/* <Grid
-                      item
-                      sm
-                      xs={5}
-                      className="purchased-tool__tool-validity"
-                    >
-                      <Typography component="div" className="tool-extned">
-                        Extend validity
+                    <Grid item xs={2} className="grid-flex">
+                      <Typography
+                        component="div"
+                        className="purchased-tool__embeded-icon border-radius icon-margin"
+                      >
+                        <PauseIcon />
                       </Typography>
-                    </Grid> */}
-                    <Grid item xs={1}>
                       <Typography
                         component="div"
                         className="purchased-tool__embeded-icon border-radius"
                       >
                         <SystemUpdateAltIcon />
                       </Typography>
+                      <Typography component="div">fsdbkjfdhsfkj</Typography>
                     </Grid>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  spacing={2}
-                  className="purchased-tool__date-time"
-                >
-                  <Grid item xs={6}>
-                    <Typography component="div">
-                      <span className="purchased-on">Purchased on:</span>{" "}
-                      <span className="purchased-date">10/01/2021 12:00PM</span>
+                    <Typography
+                      component="div"
+                      className="purchased-tool__tool-type"
+                    >
+                      <span className="subscription-type-text">
+                        Expiry Date:
+                      </span>
+                      <span className="subscription-day">
+                        21/06/2021 12:00PM
+                      </span>
                     </Typography>
                   </Grid>
-                  <Grid item xs={6} className="purchased-tool__expiry-date">
-                    <Typography component="div" className="">
-                      <span className="purchased-on">Expiry Date:</span>{" "}
-                      <span className="purchased-date">21/06/2021 12:00PM</span>
-                    </Typography>
+
+                  <Grid
+                    item
+                    xs={12}
+                    container
+                    className="purchased-tool__tool-data accordion-margin"
+                  >
+                    <Grid item xs={6}>
+                      <Typography component="div">
+                        <span className="purchased-on">Total Amount:</span>
+                        <span className="purchased-date">$512</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} className="purchased-tool__expiry-date">
+                      <Typography component="div" className="">
+                        <span className="purchased-on">
+                          <GetAppIcon />
+                        </span>
+                        <span className="purchased-date">Net banking</span>
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                      <Typography component="div">
+                        <span className="purchased-on">Total Amount:</span>
+                        <span className="purchased-date">$512</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} className="purchased-tool__expiry-date">
+                      <Typography component="div" className="">
+                        <span className="purchased-on">Payment Method: </span>
+                        <span className="purchased-date"> Net banking</span>
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Paper>

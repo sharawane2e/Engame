@@ -44,8 +44,8 @@
     background: $dark-bg;
   }
   #{&}__tool-card {
-    @include space(padding, top-bottom, $padding-20, $padding-40);
-    @include space(padding, left-right, $padding-20, $padding-40);
+    @include space(padding, top-bottom, $padding-20, $padding-30);
+    @include space(padding, left-right, $padding-40, $padding-40);
   }
   #{&}__tool-title {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
@@ -78,15 +78,28 @@
       align-items: $align-center;
     }
   }
+  .grid-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
   #{&}__tool-left-day {
     font-family: map-get($map: $font-family, $key: "font-barlowbold");
     @include font-size($font-xl-reg);
+  }
+  .icon-margin {
+    margin-right: 15px;
+  }
+  .accordion-margin {
+    margin-top: 4px;
   }
   #{&}__embeded-icon {
     display: flex;
     @include border("", $border-width, $bsolid, $accent);
     @include space(padding, all, $padding-8, 0);
     cursor: pointer;
+    width: 45px;
+    height: 45px;
     &:hover {
       @include border("", $border-width, $bsolid, $secondary);
     }

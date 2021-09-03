@@ -114,8 +114,8 @@
     @include font-size($font-xl-reg);
   }
   #{&}__aligninr1 {
-    display: flex;
-    flex: 0 0 80%;
+    // display: flex;
+    flex: 0 0 100%;
   }
   #{&}__aligninr {
     display: flex;
@@ -124,6 +124,8 @@
   }
   #{&}__toolname {
     @include space(margin, top-bottom, $margin-10, $margin-10);
+
+    text-align: center;
   }
 
   .popup-container__footer {
