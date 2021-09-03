@@ -1,7 +1,7 @@
 {
   "name": "html5-widget",
   "version": "0.1.0",
-  "homepage": "var/www/html/e2ewidget",
+  "homepage": "http://192.168.1.124/e2ewidget/#/",
   "private": true,
   "dependencies": {
     "3d-react-carousal": "^4.0.2",
