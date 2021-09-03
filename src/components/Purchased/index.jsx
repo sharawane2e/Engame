@@ -39,21 +39,14 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
+// const [copied, setCopied] = useState(false);
+
 function Purchased(props) {
   const [isActive, setActive] = useState(false);
 
   const toggleClass = () => {
     console.log();
     setActive(!isActive);
-  };
-  const [text, setText] = useState("");
-  const [isCopied, setIsCopied] = useState(false);
-
-  const onCopyText = () => {
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
   };
 
   const token = useSelector((state) => state.user.token);
@@ -185,11 +178,7 @@ function Purchased(props) {
                           <span className="subscription-type-text">
                             Subscription Key:
                           </span>
-                          <span
-                            className="subscription-day margin-rightdata copy-to-clip"
-                            value={text}
-                            onChange={(event) => setText(event.target.value)}
-                          >
+                          <span className="subscription-day margin-rightdata copy-to-clip">
                             bmdVOX1cyFYx7p**************
                             <FileCopyIcon />
                           </span>
@@ -222,7 +211,12 @@ function Purchased(props) {
                       </Typography>
                     </Grid>
 
-                    <Grid item xs={12} container>
+                    <Grid
+                      item
+                      xs={12}
+                      container
+                      className="purchased-tool__tool-margin"
+                    >
                       <Grid item xs={4}>
                         <Typography
                           component="div"
@@ -386,11 +380,7 @@ function Purchased(props) {
                           <span className="subscription-type-text">
                             Subscription Key:
                           </span>
-                          <span
-                            className="subscription-day margin-rightdata copy-to-clip"
-                            value={text}
-                            onChange={(event) => setText(event.target.value)}
-                          >
+                          <span className="subscription-day margin-rightdata copy-to-clip">
                             bmdVOX1cyFYx7p**************
                             <FileCopyIcon />
                           </span>
