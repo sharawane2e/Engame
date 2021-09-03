@@ -1,3 +1,6 @@
+.border--colordata {
+  border: 1px solid $back-color;
+}
 .purchased-tool {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   #{&}__container {
@@ -11,15 +14,45 @@
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-xx-reg);
     }
+    .tab--button {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-right: 10px;
+      background-color: $tabcolor;
+      color: $black-secondary;
+      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+      font-size: 14px;
+      width: 120px;
+      text-align: center;
+      justify-content: center;
+    }
+    .tab--active {
+      background-color: $secondary;
+      color: $white;
+    }
+    .tab--button:last-child {
+      margin-right: 0;
+    }
+  }
+  .timer-svg {
+    > svg {
+      fill: $red;
+    }
   }
   #{&}__tool-type-data {
     padding: 12px 0 8px !important;
   }
+
   #{&}__purchased-date {
-    > img {
+    > img,
+    svg {
       display: inline-flex;
       vertical-align: middle;
     }
+
     .purchased-tool__date-type-text,
     .purchased-tool__date-type-time {
       display: inline-flex;
@@ -31,10 +64,36 @@
     }
     .purchased-tool__date-type-text {
       padding-left: 4px;
+      font-size: 14px;
     }
     .purchased-tool__date-type-time {
       padding-left: 15px;
+      font-size: 14px;
     }
+  }
+  .purchased-tool__toggleclass {
+    cursor: pointer;
+  }
+
+  .hide--accordion {
+    display: none;
+  }
+  .expiry-type {
+    color: $black-gray;
+  }
+  .purchased-types {
+    text-decoration: underline;
+  }
+  .purchased-tool__hover {
+    :hover {
+      color: $secondary;
+    }
+  }
+  .margin-rightdata {
+    margin-left: 5px;
+  }
+  .curent-time {
+    padding-left: 15px;
   }
   #{&}__tool-image {
     background: $dark-bg;
@@ -44,8 +103,8 @@
     background: $dark-bg;
   }
   #{&}__tool-card {
-    @include space(padding, top-bottom, $padding-20, $padding-40);
-    @include space(padding, left-right, $padding-20, $padding-40);
+    @include space(padding, top-bottom, $padding-20, $padding-30);
+    @include space(padding, left-right, $padding-40, $padding-40);
   }
   #{&}__tool-title {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
@@ -78,23 +137,52 @@
       align-items: $align-center;
     }
   }
+  .grid-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
   #{&}__tool-left-day {
     font-family: map-get($map: $font-family, $key: "font-barlowbold");
     @include font-size($font-xl-reg);
   }
+  .icon-margin {
+    margin-right: 15px;
+  }
+  .accordion-margin {
+    margin-top: 4px;
+  }
+  .show--toogle {
+    color: $dark-gray;
+    .purchased-curent-text {
+      color: $dark-gray;
+      font-weight: normal;
+    }
+  }
+  .copy-to-clip {
+    > svg {
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+  }
   #{&}__embeded-icon {
     display: flex;
-    @include border("", $border-width, $bsolid, $accent);
+    @include border("", $border-width, $bsolid, $black-gray);
     @include space(padding, all, $padding-8, 0);
     cursor: pointer;
+    width: 45px;
+    height: 43px;
+    align-items: center;
+    justify-content: center;
     &:hover {
       @include border("", $border-width, $bsolid, $secondary);
-    }
-    > svg {
-      @include color($back-color);
-      &:hover {
+      svg {
         @include color($secondary);
       }
+    }
+    > svg {
+      @include color($black-gray);
     }
   }
   #{&}__date-time {

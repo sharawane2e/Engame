@@ -265,7 +265,8 @@ const Header = ({ props, cart, user }) => {
             <div className="shoping__card">
               {user.isLoggedIn ? (
                 <Link to="cart">
-                  <Badge badgeContent={1} color="secondary">
+                  <Badge color="secondary">
+                    {/* <Badge badgeContent={} color="secondary"> */}
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>

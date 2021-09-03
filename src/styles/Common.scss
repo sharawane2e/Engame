@@ -17,6 +17,18 @@ body {
     font-size: 12px;
   }
 }
+.progress-yellow {
+  background-color: $yelow;
+}
+.progress-green {
+  background-color: $green-color;
+}
+.progress-red {
+  background-color: $secondary;
+}
+.cursor--pointer {
+  cursor: pointer;
+}
 .flexGrow {
   flex-grow: 1;
   display: flex;
