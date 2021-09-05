@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useRef, useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -23,6 +23,8 @@ import { withStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Toaster from "../../util/Toaster";
+
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -39,15 +41,43 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-// const [copied, setCopied] = useState(false);
-
 function Purchased(props) {
   const [isActive, setActive] = useState(false);
+  // const [copySuccess, setCopySuccess] = useState("");
+  // const textAreaRef = useRef(null);
+  // const textAreaRef1 = useRef(null);
 
-  const toggleClass = () => {
-    console.log();
-    setActive(!isActive);
+
+  // useEffect(() => {
+  //   setActive(isActive);
+  // });
+
+  // const truncateString = (string, limit) => {
+  //   if (string.length > limit) {
+  //     return string.substring(0, limit) + "*****"
+  //   } else {
+  //     return string
+  //   }
+  // };
+  const [copySuccess, setCopySuccess] = useState('');
+  const textAreaRef = useRef(null);
+  const textAreaRef1 = useRef(null);
+
+  function copyToClipboard(e) {
+    e.target.focus();
+    textAreaRef.current.select();
+    document.execCommand('copy');
+    setCopySuccess('Copied!');
+    Toaster.sucess("You Copied successfully!","topcenter");
   };
+  function copyToClipboard1(e) {
+    textAreaRef1.current.select();
+    document.execCommand('copy');
+    e.target.focus();
+    setCopySuccess('Copied!');
+    Toaster.sucess("You Copied successfully!","topcenter");
+  };
+
 
   const token = useSelector((state) => state.user.token);
   useEffect(() => {
@@ -69,7 +99,7 @@ function Purchased(props) {
     }
     paymentSuccess();
   }, []);
-
+ 
   return (
     <>
       <div className="purchased-tool bredcrum-conatiner">
@@ -122,7 +152,7 @@ function Purchased(props) {
             </Grid>
           </Grid>
           {/*Card start */}
-          <Grid container spacing={3}>
+          <Grid container spacing={3} >
             <Grid item xs={12}>
               <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius">
                 <Grid container spacing={3}>
@@ -179,8 +209,14 @@ function Purchased(props) {
                             Subscription Key:
                           </span>
                           <span className="subscription-day margin-rightdata copy-to-clip">
-                            bmdVOX1cyFYx7p**************
-                            <FileCopyIcon />
+                            {/* <span>{ truncateString("npC1kgKBYLApXevz9u3NtwABhqCAAAAAAGEx5I4A5LKTpBeLEqYHP_vZVS6I05pq_-O7A-IeKs3__p9Q4VVeAlvAlGIxdNulJxBpTA2fyCrzpuq0I-WaJIGz5XvnorJPD8VvI16Zp-cwrs4kK2NKh__UNMyMfWE5k7bgyulig3mJAqR7VFNdzLO_a2KBrPyz3VTUo9csG1j4C-RH1QHm5I-oRKKjrC8WTjJCvX_weK47BRRFqbqkjh_S9cVTEoNoR4Zxt4aTIYM6LU9iYQJPWW19RdEbiMUAH9kBasEg9qFcV2c6w3SJDp0KfqIm", 30)}</span> */}
+                            <input type="text"
+                            ref={textAreaRef}
+                            className="textbox-hide" 
+                            value= "npC1kgKBYLApXevz9u3NtwABhqCAAAAAAGEx5I4A5LKTpBeLEqYHP_vZVS6I05pq_-O7A-IeKs3__p9Q4VVeAlvAlGIxdNulJxBpTA2fyCrzpuq0I-WaJIGz5XvnorJPD8VvI16Zp-cwrs4kK2NKh__UNMyMfWE5k7bgyulig3mJAqR7VFNdzLO_a2KBrPyz3VTUo9csG1j4C-RH1QHm5I-oRKKjrC8WTjJCvX_weK47BRRFqbqkjh_S9cVTEoNoR4Zxt4aTIYM6LU9iYQJPWW19RdEbiMUAH9kBasEg9qFcV2c6w3SJDp0KfqIm"
+                             />          
+                                          
+                            <FileCopyIcon  onClick={copyToClipboard}/>
                           </span>
                         </Typography>
                         <Typography
@@ -191,7 +227,14 @@ function Purchased(props) {
                             Trial Key:
                           </span>
                           <span className="subscription-day margin-rightdata copy-to-clip">
-                            bmdVOX1cyFYx7p************** <FileCopyIcon />
+                          {/* { truncateString("EmJR_3YogCCgK3UW-B7KjwABhqCAAAAAAGEx5I4omHWvMaHcE3zlIBcA557ZvJsjyju39wf_tC5Lwshy36WmQ5quKhr279GXqmgSeehBsLaydwdYr7JlWU4moHRDrsO-MiVeDIt4L0R4EJVAMv_6toKrHEZa4D_SXWybYvQjUXnf8RRnsc53a6MsqndTbU58n_JghfAHXG-24vXuEWEJgF7MfpMWGdeUzXFwN_FXl36x6s587JjsXOB8fOwxiJhLqzwVQ2mkofHdzh2QLkIwrflFCRpI5bc2GN77qKTEc7na17Gr0REZPdvwtp9j", 30)} */}
+                          <input type="text"
+                          ref={textAreaRef1}
+                            className="textbox-hide" 
+                            id="text2"
+                            value= "EmJR_3YogCCgK3UW-B7KjwABhqCAAAAAAGEx5I4omHWvMaHcE3zlIBcA557ZvJsjyju39wf_tC5Lwshy36WmQ5quKhr279GXqmgSeehBsLaydwdYr7JlWU4moHRDrsO-MiVeDIt4L0R4EJVAMv_6toKrHEZa4D_SXWybYvQjUXnf8RRnsc53a6MsqndTbU58n_JghfAHXG-24vXuEWEJgF7MfpMWGdeUzXFwN_FXl36x6s587JjsXOB8fOwxiJhLqzwVQ2mkofHdzh2QLkIwrflFCRpI5bc2GN77qKTEc7na17Gr0REZPdvwtp9j"
+                             />                     
+                            <FileCopyIcon onClick={copyToClipboard1} />
                           </span>
                         </Typography>
                       </Grid>
@@ -251,7 +294,7 @@ function Purchased(props) {
                       <Grid item xs={6} className="grid-flex">
                         <div
                           className="purchased-tool__purchased-date purchased-tool__toggleclass show--toogle"
-                          onClick={toggleClass}
+                          onClick={()=>setActive(!isActive)}
                         >
                           <span className="purchased-tool__date-type-text purchased-curent-text">
                             {isActive ? "Show Less" : "Show More"}
@@ -269,10 +312,12 @@ function Purchased(props) {
                     xs={12}
                     container
                     className={
+                    
                       isActive
                         ? "purchased-tool__tool-data accordion-margin show--accordion"
                         : "purchased-tool__tool-data accordion-margin hide--accordion"
                     }
+                   
                   >
                     <Grid item xs={6}>
                       <Typography component="div">
@@ -322,9 +367,8 @@ function Purchased(props) {
             </Grid>
           </Grid>
           {/*Card end */}
-
           {/*Card start */}
-          <Grid container spacing={3}>
+          <Grid container spacing={3} >
             <Grid item xs={12}>
               <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius">
                 <Grid container spacing={3}>
@@ -335,7 +379,7 @@ function Purchased(props) {
                     className="purchased-tool__tool-type-data"
                   >
                     <div className="purchased-tool__purchased-date timer-svg">
-                      <TimerIcon />
+                    <TimerIcon />
                       <span className="purchased-tool__date-type-text purchased-curent-text">
                         Purchased Date:
                       </span>
@@ -381,8 +425,14 @@ function Purchased(props) {
                             Subscription Key:
                           </span>
                           <span className="subscription-day margin-rightdata copy-to-clip">
-                            bmdVOX1cyFYx7p**************
-                            <FileCopyIcon />
+                            {/* <span>{ truncateString("npC1kgKBYLApXevz9u3NtwABhqCAAAAAAGEx5I4A5LKTpBeLEqYHP_vZVS6I05pq_-O7A-IeKs3__p9Q4VVeAlvAlGIxdNulJxBpTA2fyCrzpuq0I-WaJIGz5XvnorJPD8VvI16Zp-cwrs4kK2NKh__UNMyMfWE5k7bgyulig3mJAqR7VFNdzLO_a2KBrPyz3VTUo9csG1j4C-RH1QHm5I-oRKKjrC8WTjJCvX_weK47BRRFqbqkjh_S9cVTEoNoR4Zxt4aTIYM6LU9iYQJPWW19RdEbiMUAH9kBasEg9qFcV2c6w3SJDp0KfqIm", 30)}</span> */}
+                            <input type="text"
+                            ref={textAreaRef}
+                            className="textbox-hide" 
+                            value= "npC1kgKBYLApXevz9u3NtwABhqCAAAAAAGEx5I4A5LKTpBeLEqYHP_vZVS6I05pq_-O7A-IeKs3__p9Q4VVeAlvAlGIxdNulJxBpTA2fyCrzpuq0I-WaJIGz5XvnorJPD8VvI16Zp-cwrs4kK2NKh__UNMyMfWE5k7bgyulig3mJAqR7VFNdzLO_a2KBrPyz3VTUo9csG1j4C-RH1QHm5I-oRKKjrC8WTjJCvX_weK47BRRFqbqkjh_S9cVTEoNoR4Zxt4aTIYM6LU9iYQJPWW19RdEbiMUAH9kBasEg9qFcV2c6w3SJDp0KfqIm"
+                             />          
+                                          
+                            <FileCopyIcon  onClick={copyToClipboard}/>
                           </span>
                         </Typography>
                         <Typography
@@ -393,7 +443,14 @@ function Purchased(props) {
                             Trial Key:
                           </span>
                           <span className="subscription-day margin-rightdata copy-to-clip">
-                            bmdVOX1cyFYx7p************** <FileCopyIcon />
+                          {/* { truncateString("EmJR_3YogCCgK3UW-B7KjwABhqCAAAAAAGEx5I4omHWvMaHcE3zlIBcA557ZvJsjyju39wf_tC5Lwshy36WmQ5quKhr279GXqmgSeehBsLaydwdYr7JlWU4moHRDrsO-MiVeDIt4L0R4EJVAMv_6toKrHEZa4D_SXWybYvQjUXnf8RRnsc53a6MsqndTbU58n_JghfAHXG-24vXuEWEJgF7MfpMWGdeUzXFwN_FXl36x6s587JjsXOB8fOwxiJhLqzwVQ2mkofHdzh2QLkIwrflFCRpI5bc2GN77qKTEc7na17Gr0REZPdvwtp9j", 30)} */}
+                          <input type="text"
+                          ref={textAreaRef1}
+                            className="textbox-hide" 
+                            id="text2"
+                            value= "EmJR_3YogCCgK3UW-B7KjwABhqCAAAAAAGEx5I4omHWvMaHcE3zlIBcA557ZvJsjyju39wf_tC5Lwshy36WmQ5quKhr279GXqmgSeehBsLaydwdYr7JlWU4moHRDrsO-MiVeDIt4L0R4EJVAMv_6toKrHEZa4D_SXWybYvQjUXnf8RRnsc53a6MsqndTbU58n_JghfAHXG-24vXuEWEJgF7MfpMWGdeUzXFwN_FXl36x6s587JjsXOB8fOwxiJhLqzwVQ2mkofHdzh2QLkIwrflFCRpI5bc2GN77qKTEc7na17Gr0REZPdvwtp9j"
+                             />                     
+                            <FileCopyIcon onClick={copyToClipboard1} />
                           </span>
                         </Typography>
                       </Grid>
@@ -413,7 +470,12 @@ function Purchased(props) {
                       </Typography>
                     </Grid>
 
-                    <Grid item xs={12} container>
+                    <Grid
+                      item
+                      xs={12}
+                      container
+                      className="purchased-tool__tool-margin"
+                    >
                       <Grid item xs={4}>
                         <Typography
                           component="div"
@@ -448,7 +510,7 @@ function Purchased(props) {
                       <Grid item xs={6} className="grid-flex">
                         <div
                           className="purchased-tool__purchased-date purchased-tool__toggleclass show--toogle"
-                          onClick={toggleClass}
+                          onClick={()=>setActive(!isActive)}
                         >
                           <span className="purchased-tool__date-type-text purchased-curent-text">
                             {isActive ? "Show Less" : "Show More"}
@@ -467,9 +529,10 @@ function Purchased(props) {
                     container
                     className={
                       isActive
-                        ? "purchased-tool__tool-data accordion-margin show--accordion"
-                        : "purchased-tool__tool-data accordion-margin hide--accordion"
+                        ? "purchased-tool__tool-data accordion-margin show--"
+                        : "purchased-tool__tool-data accordion-margin hide--"
                     }
+                   
                   >
                     <Grid item xs={6}>
                       <Typography component="div">
@@ -519,6 +582,7 @@ function Purchased(props) {
             </Grid>
           </Grid>
           {/*Card end */}
+
         </Container>
         <Footer />
       </div>

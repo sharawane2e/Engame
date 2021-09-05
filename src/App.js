@@ -4,6 +4,7 @@ import FullPageLoader from "./components/FullPageLoader";
 import { ToastContainer } from "react-toastify";
 import "./styles/App.scss";
 
+
 function App() {
   return (
     <div className="App">
