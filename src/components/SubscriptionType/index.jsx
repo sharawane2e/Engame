@@ -8,7 +8,7 @@ import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { Redirect, useHistory } from "react-router-dom";
 
-const SubscriptionType = ({ data, toolId }) => {
+const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
   const history = useHistory();
   const [subscription, setSubscription] = useState("");
@@ -78,6 +78,7 @@ const SubscriptionType = ({ data, toolId }) => {
       .then((result) => {
         console.log(result);
         history.push("/");
+        onClose();
       });
   };
 

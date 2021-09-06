@@ -231,7 +231,11 @@ const ToolCards = () => {
           footerButton={true}
           className="border-radius popup-container__iner--sm"
         >
-          <Subscription data={products} toolId={popupId} />
+          <Subscription
+            data={products}
+            toolId={popupId}
+            onClose={() => setSubscriptionPopup(false)}
+          />
           {/* <div className="popup-container__footer">
             <CustomButton
               className="primary-button add--card"
