@@ -267,9 +267,8 @@ const Cart = ({ cart }) => {
                                     type="number"
                                     id={"input-filed" + item.id}
                                     variant="outlined"
-                                    ref={(planValue) =>
-                                      (planValue = item.plan_value)
-                                    }
+                                    value={item.plan_value}
+                                    onChange={item.plan_value}
                                   />
                                   <span className="shoping-cart__input-days">
                                     {item.plan_type}
