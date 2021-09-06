@@ -7,7 +7,6 @@ import Toaster from "../../util/Toaster";
 
 const EmbedCode = ({ data, toolId }) => {
   const [state] = useState(data);
-  console.log(state);
   const [copySuccess, setCopySuccess] = useState("");
   const textAreaRef = useRef(null);
 

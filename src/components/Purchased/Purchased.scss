@@ -7,6 +7,15 @@
     padding-top: 35px;
     min-height: 763px;
   }
+  .textbox-hide{
+    outline: 0;
+    border: 0;
+    background: transparent;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+  }
 
   #{&}__hedding {
     margin-bottom: 20px;

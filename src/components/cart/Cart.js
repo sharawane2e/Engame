@@ -58,6 +58,7 @@ const Cart = ({ cart }) => {
 
   // handleCheckout
   const handleCheckout = async () => {
+    dispatch(loadingStart());
     const stripe = await loadStripe(
       "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
     );
@@ -75,6 +76,7 @@ const Cart = ({ cart }) => {
           sessionStorage.setItem("sessionId", result.sessionId);
           console.log(result);
           stripe.redirectToCheckout({ sessionId: result.sessionId });
+          dispatch(loadingStop());
         });
     } catch (error) {
       console.error(error);
