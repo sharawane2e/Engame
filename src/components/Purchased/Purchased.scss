@@ -7,14 +7,13 @@
     padding-top: 35px;
     min-height: 763px;
   }
-  .textbox-hide{
+  .textbox-hide {
     outline: 0;
     border: 0;
     background: transparent;
     width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
-
   }
 
   #{&}__hedding {
@@ -57,6 +56,9 @@
   #{&}__tool-margin {
     margin-top: 10px;
   }
+  .show--accordion_0 {
+    display: block;
+  }
 
   #{&}__purchased-date {
     > img,
@@ -87,8 +89,19 @@
     cursor: pointer;
   }
 
-  .hide--accordion {
+  .hide--accordion_0,
+  .hide--accordion_1,
+  .hide--accordion_2,
+  .hide--accordion_3,
+  .hide--accordion_4 {
     display: none;
+  }
+  .show--accordion_0,
+  .show--accordion_1,
+  .show--accordion_2,
+  .show--accordion_3,
+  .show--accordion_4 {
+    display: flex;
   }
   .expiry-type {
     color: $black-gray;

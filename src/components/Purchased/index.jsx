@@ -41,14 +41,17 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 function Purchased(props) {
-  const [isActive, setActive] = useState(false);
+  const [isShow, setActive] = useState(false);
   const [widgets, setWwidgets] = useState([]);
-  const toggleClass = () => {
-    console.log();
-    setActive(!isActive);
+
+  const toggleClass = (e) => {
+    // e.preventDefault();
+    setActive(!isShow);
   };
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
@@ -85,7 +88,6 @@ function Purchased(props) {
     };
     myWwidgets();
   }, []);
-  console.log("widget", widgets);
 
   return (
     <>
@@ -170,12 +172,13 @@ function Purchased(props) {
                       container
                       className="purchased-tool__tool-image"
                     >
-                      <ButtonBase>
-                        <img
-                          alt=""
-                          src={"http://192.168.1.124:8000" + item.widget.imgUrl}
-                        />
-                      </ButtonBase>
+                      <img
+                        alt=""
+                        src={"http://192.168.1.124:8000" + item.widget.imgUrl}
+                      />
+                      {/* <ButtonBase>
+                       
+                      </ButtonBase> */}
                     </Grid>
                     <Grid
                       item
@@ -273,17 +276,13 @@ function Purchased(props) {
                         <Grid item xs={6} className="grid-flex">
                           <div
                             className="purchased-tool__purchased-date purchased-tool__toggleclass show--toogle"
-                            onClick={toggleClass}
+                            onClick={(e) => toggleClass()}
                           >
                             <span className="purchased-tool__date-type-text purchased-curent-text">
-                              {isActive ? "Show Less" : "Show More"}
+                              {isShow ? "Show Less" : "Show More"}
                             </span>
                             <span className="purchased-tool__date-type-text">
-                              {isActive ? (
-                                <ExpandLessIcon />
-                              ) : (
-                                <ExpandMoreIcon />
-                              )}
+                              {isShow ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                             </span>
                           </div>
                         </Grid>
@@ -294,11 +293,7 @@ function Purchased(props) {
                       item
                       xs={12}
                       container
-                      className={
-                        isActive
-                          ? "purchased-tool__tool-data accordion-margin show--accordion"
-                          : "purchased-tool__tool-data accordion-margin hide--accordion"
-                      }
+                      className="purchased-tool__tool-data accordion-margin"
                     >
                       <Grid item xs={6}>
                         <Typography component="div">
