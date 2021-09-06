@@ -16,15 +16,15 @@ $(window).load(function () {
       // You will get response from your PHP page (what you echo or print)
       if (response.HasSuccess === true) {
         if (response.DataObject.plan_type == "free_hit_trial_version") {
-          $("#toolwrapper").before(
-            '<div class="trial-version">\
-        <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
-      </div>'
-          );
+          //     $("#toolwrapper1").before(
+          //       '<div class="trial-version">\
+          //   <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
+          // </div>'
+          //     );
+          $(".trial").append('<div class="e2e-trial">e2eresearch.com</div>');
         }
 
-        var htmlElemnt =
-          '<div class="carousel-container"> \
+        var htmlElemnt = `<div class="carousel-container"> \
             <div class="carousel-slide clearfix"></div> \
                 </div> \
                 <div class="buttons-continer"> \
@@ -34,12 +34,16 @@ $(window).load(function () {
                 <div class="previous-buttons"> \
                     <div class="previous-button"> \
                     <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDQ1OSA0NTkiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ1OSA0NTk7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiM4RThFOEU7fQ0KPC9zdHlsZT4NCjxnPg0KCTxnIGlkPSJyZXBseSI+DQoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNzguNSwxNDAuMnYtMTAyTDAsMjE2LjdsMTc4LjUsMTc4LjVWMjkwLjdjMTI3LjUsMCwyMTYuOCw0MC44LDI4MC41LDEzMA0KCQkJQzQzMy41LDI5My4zLDM1NywxNjUuNywxNzguNSwxNDAuMnoiLz4NCgk8L2c+DQo8L2c+DQo8L3N2Zz4NCg=="/> \
-                    </div> \
+                    </div> ${
+                      response.DataObject.plan_type === "free_hit_trial_version"
+                        ? '<div class="e2e-trial">e2eresearch.com</div>'
+                        : null
+                    }\
                 </div> \
                  \
                 <div class="output-container"> \
                 <input class="output" type="hidden" /> \
-            </div>';
+            </div>`;
 
         $("#toolwrapper").html(htmlElemnt);
 

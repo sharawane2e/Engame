@@ -15,11 +15,12 @@ $(document).ready(function () {
       if (response.HasSuccess === true) {
         audioWediget();
         if (response.DataObject.plan_type == "free_hit_trial_version") {
-          $(".audiRting-tool").before(
-            '<div class="trial-version">\
-            <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
-          </div>'
-          );
+          // $(".audiRting-tool").before(
+          //   '<div class="trial-version">\
+          //   <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
+          // </div>'
+          // );
+          $(".play-btn").after('<div class="e2e-trial">e2eresearch.com</div>');
         }
       } else {
         $("body").addClass("popup");

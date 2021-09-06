@@ -30,6 +30,13 @@ body {
   animation-iteration-count: infinite;
 }
 
+.e2e-trial {
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+  margin-right: 11px;
+  font-size: 12px;
+}
 @keyframes playSound {
   0% {
     background-position: 0% 100%;

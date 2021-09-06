@@ -296,6 +296,14 @@ body,
 .previous-buttons {
   text-align: center;
   margin-top: 10px;
+  position: relative;
+}
+.e2e-trial {
+  position: absolute;
+  right: 0;
+  bottom: 9px;
+  margin-right: 11px;
+  font-size: 12px;
 }
 .previous-button {
   display: inline-block;

@@ -120,6 +120,16 @@
   .curent-time {
     padding-left: 15px;
   }
+  .purchased-image {
+    align-items: center;
+    img {
+      width: 206px;
+      height: 90px;
+    }
+  }
+  .tool-hits-days {
+    text-align: center;
+  }
   #{&}__tool-image {
     background: $dark-bg;
     margin-right: 3px;
