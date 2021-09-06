@@ -14,7 +14,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
-  const [valuePrice, setValuePrice] = useState(10);
+  const [valuePrice, setValuePrice] = useState(1000);
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
   const [itemId] = useSelector((state) => state.cart.cartItems);
@@ -93,10 +93,12 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     if (subscription == "days") {
       setType("days");
       setPrice(valuePrice * base);
+      setValuePrice(7);
     } else {
       setType("hits");
       setBase(0.1);
       setPrice(valuePrice * base);
+      setValuePrice(1000);
     }
   }, [handleChange, subscription, type, price, base]);
 
