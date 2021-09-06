@@ -36,9 +36,10 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: "#fff684",
+    backgroundColor: "#8aff8a",
   },
 }))(LinearProgress);
+
 
 function Purchased(props) {
   const [isActive, setActive] = useState(false);
@@ -47,8 +48,13 @@ function Purchased(props) {
     console.log();
     setActive(!isActive);
   };
+
+  
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+
+
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
@@ -85,7 +91,10 @@ function Purchased(props) {
     };
     myWwidgets();
   }, []);
+
   console.log("widget", widgets);
+
+
 
   return (
     <>
@@ -140,6 +149,7 @@ function Purchased(props) {
           </Grid>
           {/*Card start */}
           {widgets.map((item, index) => (
+
             <Grid container spacing={3} key={index}>
               <Grid item xs={12}>
                 <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius">
@@ -156,7 +166,7 @@ function Purchased(props) {
                           Purchased Date:
                         </span>
                         <span className="purchased-tool__date-type-text">
-                          10/01/2021
+                          {item.purchase_date}
                         </span>
                         <span className="purchased-tool__date-type-time">
                           12:00PM
@@ -170,12 +180,12 @@ function Purchased(props) {
                       container
                       className="purchased-tool__tool-image"
                     >
-                      <ButtonBase>
+                      {/* <ButtonBase> */}
                         <img
                           alt=""
                           src={"http://192.168.1.124:8000" + item.widget.imgUrl}
                         />
-                      </ButtonBase>
+                      {/* </ButtonBase> */}
                     </Grid>
                     <Grid
                       item
@@ -261,11 +271,14 @@ function Purchased(props) {
                             className="purchased-tool__tool-type"
                           >
                             <span className="subscription-type-text">
-                              210 days left
+                              {/* 210 days left */}
+                              {item.plan.plan_value}&nbsp;&nbsp; 
+
+                              {item.plan.plan_type}
                             </span>
                             <BorderLinearProgress
                               variant="determinate"
-                              value={50}
+                              value={100}
                               className="progress-yellow"
                             />
                           </Typography>
