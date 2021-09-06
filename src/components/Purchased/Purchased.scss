@@ -7,14 +7,13 @@
     padding-top: 35px;
     min-height: 763px;
   }
-  .textbox-hide{
+  .textbox-hide {
     outline: 0;
     border: 0;
     background: transparent;
     width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
-
   }
 
   #{&}__hedding {
@@ -106,6 +105,16 @@
   }
   .curent-time {
     padding-left: 15px;
+  }
+  .purchased-image {
+    align-items: center;
+    img {
+      width: 206px;
+      height: 90px;
+    }
+  }
+  .tool-hits-days {
+    text-align: center;
   }
   #{&}__tool-image {
     background: $dark-bg;

@@ -192,6 +192,7 @@ const Header = ({ props, cart, user }) => {
             ></IconButton>
             <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
+                {console.log(user.token.user.first_name)}
                 {user.token.user.first_name} <ArrowDropDownIcon />
               </CustomButton>
             </div>

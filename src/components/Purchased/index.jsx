@@ -24,6 +24,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import Toaster from "../../util/Toaster";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: "#fff684",
+    backgroundColor: "#8aff8a",
   },
 }))(LinearProgress);
 
@@ -47,8 +48,10 @@ function Purchased(props) {
     console.log();
     setActive(!isActive);
   };
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
@@ -85,7 +88,7 @@ function Purchased(props) {
     };
     myWwidgets();
   }, []);
-  console.log("widget", widgets);
+  console.log(widgets);
 
   return (
     <>
@@ -166,14 +169,14 @@ function Purchased(props) {
                       item
                       xs={2}
                       container
-                      className="purchased-tool__tool-image"
+                      className="purchased-tool__tool-image purchased-image"
                     >
-                      <ButtonBase>
-                        <img
-                          alt=""
-                          src={"http://192.168.1.124:8000" + item.widget.imgUrl}
-                        />
-                      </ButtonBase>
+                      {/* <ButtonBase> */}
+                      <img
+                        alt=""
+                        src={"http://192.168.1.124:8000" + item.widget.imgUrl}
+                      />
+                      {/* </ButtonBase> */}
                     </Grid>
                     <Grid
                       item
@@ -199,7 +202,14 @@ function Purchased(props) {
                             </span>
                             <span className="subscription-day margin-rightdata copy-to-clip">
                               {item.secrate_key.substr(0, 10)}************
-                              <FileCopyIcon />
+                              <FileCopyIcon
+                                onClick={() => {
+                                  navigator.clipboard.writeText(
+                                    item.secrate_key
+                                  );
+                                  Toaster.sucess("code copied!", "topCenter");
+                                }}
+                              />
                             </span>
                           </Typography>
                           <Typography
@@ -211,7 +221,12 @@ function Purchased(props) {
                             </span>
                             <span className="subscription-day margin-rightdata copy-to-clip">
                               {item.trial_key.substr(0, 10)}************
-                              <FileCopyIcon />
+                              <FileCopyIcon
+                                onClick={() => {
+                                  navigator.clipboard.writeText(item.trial_key);
+                                  Toaster.sucess("code copied!", "topCenter");
+                                }}
+                              />
                             </span>
                           </Typography>
                         </Grid>
@@ -243,27 +258,29 @@ function Purchased(props) {
                             className="purchased-tool__tool-type"
                           >
                             <span className="subscription-type-text expiry-type">
-                              Expiry Date:
+                              {item.plan.plan_type === "hits"
+                                ? " Expiry"
+                                : " Expiry Date:"}
                             </span>
                             <span className="subscription-day expiry-type margin-rightdata">
-                              21/06/2021
-                              <span class="purchased-tool__date-type-time curent-time">
-                                12:00PM
-                              </span>
+                              {item.plan.plan_type === "hits" ? "..." : null}
+                              <span class="purchased-tool__date-type-time curent-time"></span>
                             </span>
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
                           <Typography
                             component="div"
-                            className="purchased-tool__tool-type"
+                            className="purchased-tool__tool-type tool-hits-days"
                           >
                             <span className="subscription-type-text">
-                              210 days left
+                              {/* 210 days left */}
+                              {item.plan.plan_value}&nbsp;&nbsp;
+                              {item.plan.plan_type}
                             </span>
                             <BorderLinearProgress
                               variant="determinate"
-                              value={50}
+                              value={100}
                               className="progress-yellow"
                             />
                           </Typography>
@@ -309,35 +326,29 @@ function Purchased(props) {
                       </Grid>
                       <Grid item xs={6} className="purchased-tool__expiry-date">
                         <Typography component="div" className="cursor--pointer">
-                          <div className="purchased-tool__purchased-date purchased-tool__hover">
-                            <span className="purchased-tool__date-type-text purchased-curent-text">
-                              <GetAppIcon />
-                            </span>
-                            <span className="purchased-tool__date-type-text purchased-types">
-                              Net banking
-                            </span>
-                          </div>
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Typography component="div">
-                          <div className="purchased-tool__purchased-date">
-                            <span className="purchased-tool__date-type-text purchased-curent-text">
-                              Payment Method: Net banking
-                            </span>
-                          </div>
+                          <span className="subscription-type-text expiry-type">
+                            Expiry Date:
+                          </span>
+                          {/* <span className="subscription-day expiry-type margin-rightdata">
+                              21/06/2021
+                              <span class="purchased-tool__date-type-time curent-time">
+                                12:00PM
+                              </span>
+                            </span> */}
                         </Typography>
                       </Grid>
                       <Grid item xs={6} className="purchased-tool__expiry-date">
                         <Typography component="div" className="cursor--pointer">
-                          <div className="purchased-tool__purchased-date purchased-tool__hover">
-                            <span className="purchased-tool__date-type-text purchased-curent-text">
-                              <GetAppIcon />
-                            </span>
-                            <span className="purchased-tool__date-type-text purchased-types">
-                              Consumption statement
-                            </span>
-                          </div>
+                          <span className="subscription-type-text">
+                            {/* 210 days left */}
+                            {item.plan.plan_value}&nbsp;&nbsp;
+                            {item.plan.plan_type}
+                          </span>
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={100}
+                            className="progress-yellow"
+                          />
                         </Typography>
                       </Grid>
                     </Grid>
