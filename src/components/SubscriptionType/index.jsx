@@ -97,6 +97,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
       setType("hits");
       setBase(0.1);
       setPrice(valuePrice * base);
+      setValuePrice(1000);
     }
   }, [handleChange, subscription, type, price, base]);
 
