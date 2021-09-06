@@ -156,11 +156,9 @@ function Purchased(props) {
                           Purchased Date:
                         </span>
                         <span className="purchased-tool__date-type-text">
-                          10/01/2021
+                          {item.purchase_date}
                         </span>
-                        <span className="purchased-tool__date-type-time">
-                          12:00PM
-                        </span>
+                        <span className="purchased-tool__date-type-time"></span>
                       </div>
                     </Grid>
 

@@ -233,8 +233,26 @@ const Cart = ({ cart }) => {
                                 >
                                   <span>Subscription:</span>
                                   <select className="border-radius">
-                                    <option value="days">Number of days</option>
-                                    <option value="hits">Number of hits</option>
+                                    <option
+                                      value="days"
+                                      selected={
+                                        item.plan_type == "days"
+                                          ? item.plan_type
+                                          : null
+                                      }
+                                    >
+                                      Number of days
+                                    </option>
+                                    <option
+                                      value="hits"
+                                      selected={
+                                        item.plan_type == "hits"
+                                          ? item.plan_type
+                                          : null
+                                      }
+                                    >
+                                      Number of hits
+                                    </option>
                                   </select>
                                 </Typography>
                               </Grid>
