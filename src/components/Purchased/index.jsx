@@ -92,9 +92,6 @@ function Purchased(props) {
     myWwidgets();
   }, []);
 
-  console.log("widget", widgets);
-
-
 
   return (
     <>
@@ -257,12 +254,12 @@ function Purchased(props) {
                             <span className="subscription-type-text expiry-type">
                               Expiry Date:
                             </span>
-                            <span className="subscription-day expiry-type margin-rightdata">
+                            {/* <span className="subscription-day expiry-type margin-rightdata">
                               21/06/2021
                               <span class="purchased-tool__date-type-time curent-time">
                                 12:00PM
                               </span>
-                            </span>
+                            </span> */}
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
@@ -273,7 +270,6 @@ function Purchased(props) {
                             <span className="subscription-type-text">
                               {/* 210 days left */}
                               {item.plan.plan_value}&nbsp;&nbsp; 
-
                               {item.plan.plan_type}
                             </span>
                             <BorderLinearProgress
@@ -317,7 +313,8 @@ function Purchased(props) {
                         <Typography component="div">
                           <div className="purchased-tool__purchased-date">
                             <span className="purchased-tool__date-type-text purchased-curent-text">
-                              Total Amount:$512
+                              {/* Total Amount:$512 */}
+                              Total Amount: ${item.plan.price}
                             </span>
                           </div>
                         </Typography>
@@ -338,7 +335,7 @@ function Purchased(props) {
                         <Typography component="div">
                           <div className="purchased-tool__purchased-date">
                             <span className="purchased-tool__date-type-text purchased-curent-text">
-                              Payment Method: Net banking
+                              Payment Method: {item.payment_method}
                             </span>
                           </div>
                         </Typography>

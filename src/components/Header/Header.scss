@@ -63,6 +63,11 @@
     cursor: pointer;
   }
   .user-after-login {
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
     .custom-button {
       @include color($black-primary);
       @include font-size($font-xx-reg18);
