@@ -214,7 +214,7 @@ const Cart = ({ cart }) => {
                                 className="shoping-cart__total-amount"
                               >
                                 {item.currency}
-                                {item.price}
+                                {Number(item.price).toFixed(2)}
                               </Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} container>
@@ -233,8 +233,26 @@ const Cart = ({ cart }) => {
                                 >
                                   <span>Subscription:</span>
                                   <select className="border-radius">
-                                    <option value="days">Number of days</option>
-                                    <option value="hits">Number of hits</option>
+                                    <option
+                                      value="days"
+                                      selected={
+                                        item.plan_type == "days"
+                                          ? item.plan_type
+                                          : null
+                                      }
+                                    >
+                                      Number of days
+                                    </option>
+                                    <option
+                                      value="hits"
+                                      selected={
+                                        item.plan_type == "hits"
+                                          ? item.plan_type
+                                          : null
+                                      }
+                                    >
+                                      Number of hits
+                                    </option>
                                   </select>
                                 </Typography>
                               </Grid>
@@ -250,9 +268,7 @@ const Cart = ({ cart }) => {
                                     id={"input-filed" + item.id}
                                     variant="outlined"
                                     value={item.plan_value}
-                                    onChange={(e) =>
-                                      setPlanValue(e.target.value)
-                                    }
+                                    onChange={item.plan_value}
                                   />
                                   <span className="shoping-cart__input-days">
                                     {item.plan_type}
@@ -308,7 +324,8 @@ const Cart = ({ cart }) => {
                       $
                       {carts
                         .map((item) => item.price)
-                        .reduce((acc, value) => +acc + +value)}
+                        .reduce((acc, value) => +acc + +value)
+                        .toFixed(2)}
                     </div>
                     <div className="shoping-cart__coupon-code">
                       <span align="center">Promotion code</span>
