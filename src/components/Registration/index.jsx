@@ -60,6 +60,7 @@ class Registration extends Component {
     if (validationResponse.isFormValid) {
       // loader's
       this.props.dispatch(loadingStart());
+
       // api's
       fetch(BASE_URL + "user/", {
         method: "POST",
@@ -80,8 +81,9 @@ class Registration extends Component {
             "topCenter"
           );
           this.props.dispatch(loadingStop());
-
+          // console.log(data);
           if (data.detail) {
+            //console.log("succes register");
             window.location.reload();
             Toaster.success("Thanks for registration", "topCenter");
           }

@@ -110,7 +110,10 @@ const Header = ({ props, cart, user }) => {
       .then((res) => {
         if (res.detail) {
           dispatch(logOutUser());
-          localStorage.removeItem("auth");
+          setTimeout(() => {
+            localStorage.removeItem("auth");
+          }, 3600);
+
           dispatch(loadingStop());
           history.push("/");
           Toaster.success("logout sucess", "topCenter");
