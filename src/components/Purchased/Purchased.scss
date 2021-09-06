@@ -5,7 +5,8 @@
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   #{&}__container {
     padding-top: 35px;
-    min-height: 763px;
+
+    padding-bottom: 75px;
   }
   .textbox-hide {
     outline: 0;
@@ -89,20 +90,6 @@
     cursor: pointer;
   }
 
-  .hide--accordion_0,
-  .hide--accordion_1,
-  .hide--accordion_2,
-  .hide--accordion_3,
-  .hide--accordion_4 {
-    display: none;
-  }
-  .show--accordion_0,
-  .show--accordion_1,
-  .show--accordion_2,
-  .show--accordion_3,
-  .show--accordion_4 {
-    display: flex;
-  }
   .expiry-type {
     color: $black-gray;
   }
