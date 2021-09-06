@@ -214,7 +214,7 @@ const Cart = ({ cart }) => {
                                 className="shoping-cart__total-amount"
                               >
                                 {item.currency}
-                                {item.price}
+                                {Number(item.price).toFixed(2)}
                               </Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} container>
@@ -324,7 +324,8 @@ const Cart = ({ cart }) => {
                       $
                       {carts
                         .map((item) => item.price)
-                        .reduce((acc, value) => +acc + +value)}
+                        .reduce((acc, value) => +acc + +value)
+                        .toFixed(2)}
                     </div>
                     <div className="shoping-cart__coupon-code">
                       <span align="center">Promotion code</span>
