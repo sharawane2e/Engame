@@ -69,7 +69,7 @@ function Purchased(props) {
     }
     paymentSuccess();
     //  my widgets
-  }, []);
+  }, [0]);
   useEffect(() => {
     const myWwidgets = async () => {
       dispatch(loadingStart());
@@ -87,7 +87,7 @@ function Purchased(props) {
         });
     };
     myWwidgets();
-  }, []);
+  }, [0]);
 
   // console.log("widget", widgets);
 

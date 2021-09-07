@@ -91,7 +91,7 @@ const Header = ({ props, cart, user }) => {
       Toaster.sucess("logout sucessfully", "topCenter");
       localStorage.removeItem("auth");
       window.location.reload();
-    }, 360000);
+    }, 3600000);
   }, [0]);
 
   const handleLogout = () => {
