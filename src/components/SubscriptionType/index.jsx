@@ -20,7 +20,6 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   const [itemId] = useSelector((state) => state.cart.cartItems);
   const intialValues = { email: "" };
   const [formValues, setFormValues] = useState(intialValues);
-  const [isSubscription, setSubscriptionPopup] = useState(true);
 
   // get auth details from localstorage
   let auth = localStorage.getItem("auth");
@@ -63,9 +62,6 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   };
 
   const handleCart = () => {
-    // dispatch(addToCart(toolId));
-    //setSubscriptionPopup(false);
-    console.log(isSubscription);
     Toaster.sucess("You have add successfully!", "topCenter");
     fetch(BASE_URL + "cart/", {
       method: "POST",

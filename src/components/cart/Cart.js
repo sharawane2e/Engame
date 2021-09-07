@@ -17,7 +17,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 // import DoneIcon from "@material-ui/icons/Done";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
@@ -164,9 +164,7 @@ const Cart = ({ cart }) => {
                             <ButtonBase className="curent-tool-img">
                               <img
                                 alt=""
-                                src={
-                                  "//192.168.1.124:8000" + item.widget.imgUrl
-                                }
+                                src={BASE_URL_1 + item.widget.imgUrl}
                               />
                             </ButtonBase>
                           </Grid>

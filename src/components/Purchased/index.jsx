@@ -13,7 +13,7 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
 import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -43,7 +43,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 function Purchased(props) {
   const [isActive, setActive] = useState(false);
-  const [widgets, setWwidgets] = useState([]);
+  const [widgets, setWidgets] = useState([]);
   const toggleClass = () => {
     console.log();
     setActive(!isActive);
@@ -51,11 +51,11 @@ function Purchased(props) {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
-
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
+    console.log(session_id);
     async function paymentSuccess() {
       await fetch(BASE_URL + "payments/success/", {
         method: "POST",
@@ -69,8 +69,9 @@ function Purchased(props) {
         .then((result) => console.log(result));
     }
     paymentSuccess();
-
     //  my widgets
+  }, []);
+  useEffect(() => {
     const myWwidgets = async () => {
       dispatch(loadingStart());
       await fetch(BASE_URL + "widget/user/purchased/", {
@@ -82,14 +83,14 @@ function Purchased(props) {
         .then((response) => response.json())
         .then((result) => {
           dispatch(loadingStop());
-          setWwidgets(result);
+          setWidgets(result);
           // console.log(result);
         });
     };
     myWwidgets();
   }, []);
 
-  console.log("widget", widgets);
+  // console.log("widget", widgets);
 
   return (
     <>
@@ -179,10 +180,7 @@ function Purchased(props) {
                         container
                         className="purchased-tool__tool-image purchased-image"
                       >
-                        <img
-                          alt=""
-                          src={"http://192.168.1.124:8000" + item.widget.imgUrl}
-                        />
+                        <img alt="" src={BASE_URL_1 + item.widget.imgUrl} />
                       </Grid>
                       <Grid
                         item

@@ -25,6 +25,7 @@ class Registration extends Component {
     data: "",
     showPassword: false,
     showPasswordConfirm: false,
+    isReginOpen: false,
     formErrors: {
       name: "",
       email: "",
@@ -41,6 +42,7 @@ class Registration extends Component {
 
   handleRegister = (e) => {
     // e.preventDefault();
+    this.isReginOpen(false);
     const { name, email, setpassword, confirmpassword } = this.state;
     const user = {
       username: name,
@@ -57,6 +59,7 @@ class Registration extends Component {
       setpassword,
       confirmpassword,
     });
+    console.log(this.state);
     if (validationResponse.isFormValid) {
       // loader's
       this.props.dispatch(loadingStart());
@@ -71,6 +74,7 @@ class Registration extends Component {
       })
         .then((result) => result.json())
         .then((data) => {
+          console.log("curent data", data);
           Toaster.error(
             data.username ? data.username.join("") : null,
             "topCenter"
@@ -81,11 +85,9 @@ class Registration extends Component {
             "topCenter"
           );
           this.props.dispatch(loadingStop());
-          // console.log(data);
           if (data.detail) {
-            //console.log("succes register");
+            Toaster.sucess(data.detail, "topCenter");
             window.location.reload();
-            Toaster.success("Thanks for registration", "topCenter");
           }
         });
     } else {

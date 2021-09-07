@@ -16,7 +16,7 @@ import Subscription from "../../components/SubscriptionType";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
 
 const ToolCards = () => {
@@ -152,9 +152,7 @@ const ToolCards = () => {
                     >
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
-                          <img
-                            src={"http://192.168.1.124:8000" + tooldata.imgUrl}
-                          />
+                          <img src={BASE_URL_1 + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton
@@ -231,7 +229,11 @@ const ToolCards = () => {
           footerButton={true}
           className="border-radius popup-container__iner--sm"
         >
-          <Subscription data={products} toolId={popupId} />
+          <Subscription
+            data={products}
+            toolId={popupId}
+            onClose={() => setSubscriptionPopup(false)}
+          />
           {/* <div className="popup-container__footer">
             <CustomButton
               className="primary-button add--card"

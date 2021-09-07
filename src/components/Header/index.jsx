@@ -30,19 +30,6 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
-
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
@@ -58,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 function ElevationScroll(props) {
   const { children, window } = props;
-
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
@@ -73,7 +59,7 @@ const Header = ({ props, cart, user }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -98,7 +84,7 @@ const Header = ({ props, cart, user }) => {
       setLoginIsOpen(false);
     }
   }, [cart, cartCount, user]);
-  console.log(cartCount);
+  console.log(cart, props);
 
   const handleLogout = () => {
     dispatch(loadingStart());
@@ -113,7 +99,6 @@ const Header = ({ props, cart, user }) => {
           setTimeout(() => {
             localStorage.removeItem("auth");
           }, 3600);
-
           dispatch(loadingStop());
           history.push("/");
           Toaster.success("logout sucess", "topCenter");
@@ -155,7 +140,12 @@ const Header = ({ props, cart, user }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
+      <MenuItem onClick={handleMenuClose}>
+        <Link color="inherit" to="/Purchased">
+          Profile
+        </Link>
+      </MenuItem>
       <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
     </Menu>
   );
@@ -195,7 +185,6 @@ const Header = ({ props, cart, user }) => {
             ></IconButton>
             <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
-                {console.log(user.token.user.first_name)}
                 {user.token.user.first_name} <ArrowDropDownIcon />
               </CustomButton>
             </div>
@@ -265,22 +254,16 @@ const Header = ({ props, cart, user }) => {
                 </div>
               </div>
             ) : null}
-
-            <div className="shoping__card">
-              {user.isLoggedIn ? (
+            {user.isLoggedIn ? (
+              <div className="shoping__card">
                 <Link to="cart">
-                  <Badge color="secondary">
-                    {/* <Badge badgeContent={} color="secondary"> */}
-                    <ShoppingCartIcon />
-                  </Badge>
+                  {/* <Badge color="secondary"> */}
+                  {/* <Badge badgeContent={1} color="secondary"> */}
+                  <ShoppingCartIcon />
+                  {/* </Badge> */}
                 </Link>
-              ) : // <Link to="#!">
-              //   <Badge badgeContent={1} color="secondary">
-              //     <ShoppingCartIcon />
-              //   </Badge>
-              // </Link>
-              null}
-            </div>
+              </div>
+            ) : null}
 
             <div className={classes.sectionMobile}>
               <IconButton
