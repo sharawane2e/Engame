@@ -84,7 +84,15 @@ const Header = ({ props, cart, user }) => {
       setLoginIsOpen(false);
     }
   }, [cart, cartCount, user]);
-  console.log(cart, props);
+  // console.log(cart, props);
+
+  useEffect(() => {
+    setTimeout(() => {
+      Toaster.sucess("logout sucessfully", "topCenter");
+      localStorage.removeItem("auth");
+      window.location.reload();
+    }, 360000);
+  }, [0]);
 
   const handleLogout = () => {
     dispatch(loadingStart());
@@ -96,12 +104,10 @@ const Header = ({ props, cart, user }) => {
       .then((res) => {
         if (res.detail) {
           dispatch(logOutUser());
-          setTimeout(() => {
-            localStorage.removeItem("auth");
-          }, 3600);
+          localStorage.removeItem("auth");
           dispatch(loadingStop());
           history.push("/");
-          Toaster.success("logout sucess", "topCenter");
+          Toaster.sucess("logout sucessfully", "topCenter");
         }
       })
       .catch((error) => {
@@ -109,6 +115,7 @@ const Header = ({ props, cart, user }) => {
       });
     handleMenuClose();
   };
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 

@@ -1,0 +1,36 @@
+.wrapper {
+  height: 100vh;
+}
+.img-404 {
+  text-align: center;
+  padding-top: 40px;
+}
+.back-btn {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  align-items: center;
+}
+.back-btn button {
+  background-color: #f15b5b;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.back-btn button span {
+  color: #fff;
+  font-size: 16px;
+  padding-left: 5px;
+}
+.back-color {
+  color: #fff;
+}
+@media all and (max-width: 767px) {
+  .img-404 img {
+    width: 100%;
+  }
+}
