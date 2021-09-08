@@ -89,18 +89,29 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     if (subscription == "days") {
       setType("days");
       setPrice(valuePrice * base);
-      // setValuePrice(7);
+      setValuePrice(7);
     } else {
       setType("hits");
       setBase(0.1);
       setPrice(valuePrice * base);
-      // setValuePrice(1000);
+      setValuePrice(1000);
     }
   }, [handleChange, subscription, type, price, base]);
 
-  const handleBlur = (e) => {
+  const handleBlur = (e, key) => {
+    // let value = e.target.value;
+    // console.log(value);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    // console.log(name);
+    // if (typeof value === "string") {
+    //   value = value.trim();
+    // }
+    // const errorMessage = inputValidation.validateField(key, value).message;
+    // this.setState({
+    //   key: value,
+    //   formErrors: { ...this.state.formErrors, [key]: errorMessage },
+    // });
   };
 
   return (
@@ -122,8 +133,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
               name="hits"
               className="subscription-type__inputbox"
               value={valuePrice}
-              min="0"
-              onBlur={(e) => handleBlur(e)}
+              onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{type}</div>
