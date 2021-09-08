@@ -30,7 +30,6 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 // import { useDispatch } from "react-redux";
 
-
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "none",
@@ -45,10 +44,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-
-
-
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -87,16 +82,20 @@ const Header = ({ props, cart, user }) => {
     let count = 0;
     cart.forEach((item) => {
       count += item.qty;
-
     });
     setCartCount(count);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
     }
   }, [cart, cartCount, user]);
-  console.log("yes value",cart, props);
 
-
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      localStorage.removeItem("auth");
+      window.location.reload();
+    }, 360000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLogout = () => {
     dispatch(loadingStart());
@@ -269,9 +268,9 @@ const Header = ({ props, cart, user }) => {
               <div className="shoping__card">
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
-                  
+
                   <Badge badgeContent={0} color="secondary">
-                  <ShoppingCartIcon />
+                    <ShoppingCartIcon />
                   </Badge>
                 </Link>
               </div>
