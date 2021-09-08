@@ -22,9 +22,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
+// import { useHistory } from "react-router-dom";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -49,6 +49,9 @@ function Purchased(props) {
     setActive(!isActive);
   };
 
+  // let history = useHistory();
+  // console.log(history);
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
 
@@ -56,6 +59,11 @@ function Purchased(props) {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
+<<<<<<< HEAD
+=======
+    console.log(session_id);
+
+>>>>>>> faa97e908c8baac4dd91875349fc820593cb8bb2
     async function paymentSuccess() {
       await fetch(BASE_URL + "payments/success/", {
         method: "POST",
@@ -66,11 +74,23 @@ function Purchased(props) {
         body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
       })
         .then((response) => response.json())
-        .then((result) => console.log(result));
+        .then((result) => {
+          console.log(result.details);
+          if (result) {
+            Toaster.sucess(result.details, "topCenter");
+          }
+          // history.push(history.path);
+        });
     }
     paymentSuccess();
 
     //  my widgets
+<<<<<<< HEAD
+=======
+  }, []);
+
+  useEffect(() => {
+>>>>>>> faa97e908c8baac4dd91875349fc820593cb8bb2
     const myWwidgets = async () => {
       dispatch(loadingStart());
       await fetch(BASE_URL + "widget/user/purchased/", {
@@ -87,8 +107,12 @@ function Purchased(props) {
         });
     };
     myWwidgets();
+<<<<<<< HEAD
   }, []);
   console.log(widgets);
+=======
+  }, [0]);
+>>>>>>> faa97e908c8baac4dd91875349fc820593cb8bb2
 
   return (
     <>

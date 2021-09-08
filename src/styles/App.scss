@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @import "./Partial.scss"; //this is all partials combined
 @import "../styles/Common.scss";
 @import "../components/Overlay/Overlay.scss";
@@ -16,4 +16,4 @@
 @import "../components/EmbedCode/EmbedCode.scss";
 @import "../components/FullPageLoader/loader.scss";
 @import "../components/ToolPerview/toolPerview.scss";
-
+@import "../screens/PageNotFoundScreen/Pagenotfound.scss";

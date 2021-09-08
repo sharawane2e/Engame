@@ -42,7 +42,7 @@ class Registration extends Component {
 
   handleRegister = (e) => {
     // e.preventDefault();
-    this.isReginOpen(false);
+    // this.isReginOpen(false);
     const { name, email, setpassword, confirmpassword } = this.state;
     const user = {
       username: name,
@@ -152,7 +152,7 @@ class Registration extends Component {
                 htmlFor="standard-adornment-name"
                 className="input-label"
               >
-                Name
+                Username
               </InputLabel>
               <FormControl className="form-area__control">
                 <TextField

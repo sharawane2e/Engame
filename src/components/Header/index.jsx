@@ -108,12 +108,10 @@ const Header = ({ props, cart, user }) => {
       .then((res) => {
         if (res.detail) {
           dispatch(logOutUser());
-          setTimeout(() => {
-            localStorage.removeItem("auth");
-          }, 3600);
+          localStorage.removeItem("auth");
           dispatch(loadingStop());
           history.push("/");
-          Toaster.success("logout sucess", "topCenter");
+          Toaster.sucess("logout sucessfully", "topCenter");
         }
       })
       .catch((error) => {
@@ -121,6 +119,7 @@ const Header = ({ props, cart, user }) => {
       });
     handleMenuClose();
   };
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 

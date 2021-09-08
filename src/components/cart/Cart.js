@@ -73,8 +73,7 @@ const Cart = ({ cart }) => {
       })
         .then((response) => response.json())
         .then((result) => {
-          sessionStorage.setItem("sessionId", result.sessionId);
-          console.log(result);
+          //sessionStorage.setItem("sessionId", result.sessionId);
           stripe.redirectToCheckout({ sessionId: result.sessionId });
           dispatch(loadingStop());
         });
