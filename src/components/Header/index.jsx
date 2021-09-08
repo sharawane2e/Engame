@@ -16,9 +16,9 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
-import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
 // import { useDispatch } from "react-redux";
+// import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
@@ -28,6 +28,8 @@ import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+// import { useDispatch } from "react-redux";
+
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -43,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+
+
+
+
 function ElevationScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -66,6 +73,8 @@ const Header = ({ props, cart, user }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  console.log("dispatch", cart);
+
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
   }, [isLoginOpen]);
@@ -78,13 +87,16 @@ const Header = ({ props, cart, user }) => {
     let count = 0;
     cart.forEach((item) => {
       count += item.qty;
+
     });
     setCartCount(count);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
     }
   }, [cart, cartCount, user]);
-  console.log(cart, props);
+  console.log("yes value",cart, props);
+
+
 
   const handleLogout = () => {
     dispatch(loadingStart());
@@ -258,9 +270,10 @@ const Header = ({ props, cart, user }) => {
               <div className="shoping__card">
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
-                  {/* <Badge badgeContent={1} color="secondary"> */}
+                  
+                  <Badge badgeContent={0} color="secondary">
                   <ShoppingCartIcon />
-                  {/* </Badge> */}
+                  </Badge>
                 </Link>
               </div>
             ) : null}
