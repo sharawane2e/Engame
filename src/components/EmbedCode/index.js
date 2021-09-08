@@ -42,7 +42,6 @@ const EmbedCode = ({ data, toolId }) => {
         className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
         value={state
           .map((item) => {
-            // state[0].widget_embed_code
             return item.id === toolId ? item.widget_embed_code : "";
           })
           .join("")}

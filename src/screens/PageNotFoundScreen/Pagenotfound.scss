@@ -2,32 +2,33 @@
   height: 100vh;
 }
 .img-404 {
-  text-align: center;
-  padding-top: 40px;
+  text-align: $align-center;
+  @include space(padding, top, $padding-40, 0);
 }
+
 .back-btn {
   display: flex;
-  justify-content: center;
-  text-align: center;
-  padding: 15px;
-  align-items: center;
+  justify-content: $align-center;
+  text-align: $align-center;
+  align-items: $align-center;
+  @include space(padding, "", $padding-15, 0);
 }
 .back-btn button {
-  background-color: #f15b5b;
+  background-color: $secondary;
   border: none;
-  border-radius: 4px;
+  border-radius: $boder-radius;
   cursor: pointer;
-  padding: 10px;
+  @include space(padding, top, $padding-10, 0);
   display: flex;
-  align-items: center;
+  align-items: $align-center;
 }
 .back-btn button span {
-  color: #fff;
-  font-size: 16px;
-  padding-left: 5px;
+  color: $white;
+  @include font-size($font-xl-reg);
+  @include space(padding, left, $padding-5, 0);
 }
 .back-color {
-  color: #fff;
+  color: $white;
 }
 @media all and (max-width: 767px) {
   .img-404 img {

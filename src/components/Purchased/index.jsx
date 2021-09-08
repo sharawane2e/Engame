@@ -24,7 +24,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -49,8 +49,8 @@ function Purchased(props) {
     setActive(!isActive);
   };
 
-  let history = useHistory();
-  console.log(history);
+  // let history = useHistory();
+  // console.log(history);
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
@@ -75,12 +75,12 @@ function Purchased(props) {
           if (result) {
             Toaster.sucess(result.details, "topCenter");
           }
-          history.push(history.path);
+          // history.push(history.path);
         });
     }
     paymentSuccess();
     //  my widgets
-  }, [history.location.search]);
+  }, []);
 
   useEffect(() => {
     const myWwidgets = async () => {
