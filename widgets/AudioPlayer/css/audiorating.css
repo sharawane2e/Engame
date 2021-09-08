@@ -63,10 +63,14 @@ body {
   left: 0px;
 }
 .popup {
-  background: url(../images/craousal_Rating.png) no-repeat;
+  background: url(../images/audio.png) no-repeat;
   background-size: auto;
   background-attachment: fixed;
   background-position: center;
+}
+.popup .outpy-cont,
+.popup .audiRting-tool {
+  display: none;
 }
 .popup-model {
   position: fixed;
@@ -118,6 +122,9 @@ body {
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
 }
+.popup-header h5 {
+  margin: 0;
+}
 .popup-header span {
   font-size: 18px;
   font-weight: 600;
@@ -144,13 +151,12 @@ body {
 }
 .trial-version-text {
   display: inline-block;
-  background: #d6d0d0;
-  padding: 12px;
+  background: #f5f3f3;
+  padding: 8px;
   margin-right: 7px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 12px;
 }
 .trial-version-text span {
   padding-right: 5px;
@@ -298,7 +304,8 @@ body {
 }
 
 @media all and (min-width: 320px) and (max-width: 480px) {
-  .audiRting-tool {
+  .audiRting-tool,
+  .trial-version {
     width: 95%;
     margin: 0 auto;
   }
@@ -325,7 +332,8 @@ body {
 }
 
 @media all and (min-width: 481px) and (max-width: 767px) {
-  .audiRting-tool {
+  .audiRting-tool,
+  .trial-version {
     width: 95%;
     margin: 0 auto;
   }
@@ -352,7 +360,8 @@ body {
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
-  .audiRting-tool {
+  .audiRting-tool,
+  .trial-version {
     width: 60%;
     margin: 0 auto;
   }

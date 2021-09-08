@@ -30,11 +30,19 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     setSubscription(e.target.value);
     setType(e.target.value);
     // setValuePrice("");
+    // alert(e.target.value);
     if (e.target.value === 1) {
       setType("days");
     } else {
       setType("hits");
     }
+
+    if (e.target.value == "days") {
+      setValuePrice(7);
+    } else {
+      setValuePrice(1000);
+    }
+
     // setPrice(0);
     dispatch(loadingStart());
     fetch(BASE_URL + "cart/standard_price/", {
@@ -83,18 +91,23 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     let value = e.target.value * base;
     setPrice(value);
     setValuePrice(e.target.value);
+    console.log("hello",e.target.value);
+
+    if (e.target.value <= 0) {
+      setValuePrice(1);
+    }
   };
   // console.log(subscription);
   useEffect(() => {
     if (subscription == "days") {
       setType("days");
       setPrice(valuePrice * base);
-      setValuePrice(7);
+      setValuePrice(valuePrice);
     } else {
       setType("hits");
       setBase(0.1);
       setPrice(valuePrice * base);
-      setValuePrice(1000);
+      setValuePrice(valuePrice);
     }
   }, [handleChange, subscription, type, price, base]);
 

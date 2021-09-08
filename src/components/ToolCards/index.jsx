@@ -211,6 +211,7 @@ const ToolCards = () => {
           <ToolPerview tool={selectedTool}></ToolPerview>
         </CustomPopup>
         {/*End */}
+
         {/*Emneded code popup */}
         <CustomPopup
           open={ispopup}
@@ -221,6 +222,7 @@ const ToolCards = () => {
           <Embedcode data={productShow} toolId={popupId} />
         </CustomPopup>
         {/*End*/}
+        
         {/*Add to cart */}
         <CustomPopup
           open={isSubscription}

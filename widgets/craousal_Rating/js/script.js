@@ -193,7 +193,6 @@ $(window).load(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(errorThrown);
       if (errorThrown) {
         $("body").addClass("popup");
         $("body").append(

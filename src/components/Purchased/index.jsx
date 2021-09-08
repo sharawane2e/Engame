@@ -60,23 +60,6 @@ function Purchased(props) {
     const session_id = params.get("session_id");
     // console.log(session_id);
 
-    const myWwidgets = async () => {
-      dispatch(loadingStart());
-      await fetch(BASE_URL + "widget/user/purchased/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          dispatch(loadingStop());
-          setWidgets(result);
-          // window.location.reload();
-          // console.log(result);
-        });
-    };
-
     async function paymentSuccess() {
       await fetch(BASE_URL + "payments/success/", {
         method: "POST",
@@ -93,15 +76,29 @@ function Purchased(props) {
           if (result) {
             // Toaster.sucess(result.details, "topCenter");
             // window.location.reload();
-            myWwidgets();
           }
           // history.push(history.path);
         });
     }
     paymentSuccess();
     //  my widgets
-
-    // myWwidgets();
+    const myWwidgets = async () => {
+      dispatch(loadingStart());
+      await fetch(BASE_URL + "widget/user/purchased/", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.access_token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          dispatch(loadingStop());
+          setWidgets(result);
+          // window.location.reload();
+          // console.log(result);
+        });
+    };
+    myWwidgets();
   }, []);
   console.log(widgets);
 
