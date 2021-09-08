@@ -24,7 +24,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -44,13 +44,13 @@ const BorderLinearProgress = withStyles((theme) => ({
 function Purchased(props) {
   const [isActive, setActive] = useState(false);
   const [widgets, setWidgets] = useState([]);
+
   const toggleClass = () => {
-    console.log();
     setActive(!isActive);
   };
 
-  // let history = useHistory();
-  // console.log(history);
+  let history = useHistory();
+  console.log(history);
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
@@ -58,7 +58,24 @@ function Purchased(props) {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-    console.log(session_id);
+    // console.log(session_id);
+
+    const myWwidgets = async () => {
+      dispatch(loadingStart());
+      await fetch(BASE_URL + "widget/user/purchased/", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.access_token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          dispatch(loadingStop());
+          setWidgets(result);
+          // window.location.reload();
+          // console.log(result);
+        });
+    };
 
     async function paymentSuccess() {
       await fetch(BASE_URL + "payments/success/", {
@@ -72,34 +89,21 @@ function Purchased(props) {
         .then((response) => response.json())
         .then((result) => {
           console.log(result.details);
+          //setWidgets(result);
           if (result) {
-            Toaster.sucess(result.details, "topCenter");
+            // Toaster.sucess(result.details, "topCenter");
+            // window.location.reload();
+            myWwidgets();
           }
           // history.push(history.path);
         });
     }
     paymentSuccess();
     //  my widgets
-  }, []);
 
-  useEffect(() => {
-    const myWwidgets = async () => {
-      dispatch(loadingStart());
-      await fetch(BASE_URL + "widget/user/purchased/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          dispatch(loadingStop());
-          setWidgets(result);
-          // console.log(result);
-        });
-    };
-    myWwidgets();
-  }, [0]);
+    // myWwidgets();
+  }, []);
+  console.log(widgets);
 
   return (
     <>

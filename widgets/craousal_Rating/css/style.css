@@ -1,10 +1,11 @@
 * {
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
 }
+
+body,
 .carousel-rating-container,
-.carousel-rating-container *,
-body {
+.carousel-rating-container * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -29,6 +30,7 @@ body {
   outline: 0;
   background: rgba(0, 0, 0, 0.37);
 }
+
 .popup-outer {
   position: absolute;
   top: 50%;
@@ -40,6 +42,7 @@ body {
   max-width: 400px;
   margin: 1.75rem auto;
 }
+
 .popup-iner {
   position: relative;
   display: flex;
@@ -53,6 +56,7 @@ body {
   outline: 0;
   min-height: 240px;
 }
+
 .popup-header {
   display: flex;
   flex-shrink: 0;
@@ -67,6 +71,20 @@ body {
   font-size: 18px;
   font-weight: 600;
 }
+/* .btn-close {
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 0.25em;
+  color: #000;
+  background: transparent
+    url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%23000"%3e%3cpath d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/%3e%3c/svg%3e')
+    center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.25rem;
+  opacity: 0.5;
+} */
+
 .popup-body {
   position: relative;
   flex: 1 1 auto;
@@ -86,13 +104,12 @@ body {
 }
 .trial-version-text {
   display: inline-block;
-  background: #d6d0d0;
-  padding: 12px;
+  background: #f5f3f3;
+  padding: 8px;
   margin-right: 7px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 12px;
 }
 .trial-version-text span {
   padding-right: 5px;
@@ -140,11 +157,13 @@ body {
 }
 .carousel-rating-container {
   width: 60%;
-  margin: 0 auto;
-  background: #fff;
-  box-shadow: 1px 0 15px 0 #e8e8e8;
+  /* border: 1px solid #eee; */
+  margin: 0px auto;
+  background: #ffffff;
+  box-shadow: 1px 0px 15px 0px #e8e8e8;
   border-radius: 10px;
   padding-top: 15px;
+  /* margin-top: 40px; */
 }
 .carousel-container {
   width: 250px;
@@ -155,23 +174,28 @@ body {
   border-radius: 10px;
   background: #f5f5f5;
   margin-top: 10px;
+  /* box-shadow: 0px 2px 9px -5px #8e8a8a; */
 }
+
 .carousel-slide {
   position: relative;
   height: 100%;
 }
+
 .clearfix:after,
 .clearfix:before {
   content: "";
   display: table;
   clear: both;
 }
+
 .slide {
   float: left;
   height: 100%;
   display: table;
   padding: 10px;
 }
+
 .slideTxt {
   display: table-cell;
   vertical-align: middle;
@@ -180,9 +204,11 @@ body {
   font-size: 24px;
   padding: 10px;
 }
+
 .buttons-continer {
   margin-top: 30px;
 }
+
 .forwrdButtons {
   width: 80%;
   margin: 0 auto;
@@ -190,6 +216,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .RatingButton {
   text-align: center;
   color: #fff;
@@ -197,64 +224,74 @@ body {
   height: 100px;
   margin: 10px;
   line-height: 100px;
+  /* background-color: #24c230cc; */
   font-weight: 800;
   cursor: pointer;
   border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  /* box-shadow: 1px 0px 10px -2px #8e8a8a; */
   user-select: none;
 }
 .RatingButton:hover {
   background: #c5c4c4b5;
   border-radius: 4px;
 }
+/* .RatingButton.selected{
+    background-color: #a9a9a9;
+} */
 .RatingButton.selected {
   border: 1px solid #fff;
   transition: 0.3s all;
   transform: scale(1.2);
-  box-shadow: 0 0 10px 0 #c3c3c3;
+  box-shadow: 0px 0px 10px 0px #c3c3c3;
+  /* background: url(../images/check.png) no-repeat right top #8cd000!important; */
+  /* background: url(../images/back-btn2.png) no-repeat center #dcdcdc; */
 }
+
 .RatingButton:nth-child(1) {
   background-color: #f36164;
 }
 .RatingButton:nth-child(1):hover {
   transition: 0.3s all;
   background-color: #f36164;
-  box-shadow: 0 0 10px 0 #f36164;
+  box-shadow: 0px 0px 10px 0px #f36164;
 }
+
 .RatingButton:nth-child(2) {
-  background-color: #f90;
+  background-color: #ff9900;
 }
 .RatingButton:nth-child(2):hover {
   transition: 0.3s all;
-  background-color: #f90;
-  box-shadow: 0 0 10px 0 #f90;
+  background-color: #ff9900;
+  box-shadow: 0px 0px 10px 0px #ff9900;
 }
+
 .RatingButton:nth-child(3) {
   background-color: #ecc728;
 }
 .RatingButton:nth-child(3):hover {
   transition: 0.3s all;
   background-color: #ecc728;
-  box-shadow: 0 0 10px 0 #ecc728;
+  box-shadow: 0px 0px 10px 0px #ecc728;
 }
+
 .RatingButton:nth-child(4) {
   background-color: #8cd000;
 }
 .RatingButton:nth-child(4):hover {
   transition: 0.3s all;
   background-color: #8cd000;
-  box-shadow: 0 0 10px 0 #8cd000;
+  box-shadow: 0px 0px 10px 0px #8cd000;
 }
+
 .RatingButton:nth-child(5) {
   background-color: #07c516;
 }
 .RatingButton:nth-child(5):hover {
   transition: 0.3s all;
   background-color: #07c516;
-  box-shadow: 0 0 10px 0 #07c516;
+  box-shadow: 0px 0px 10px 0px #07c516;
 }
+
 .previous-buttons {
   text-align: center;
   margin-top: 10px;
@@ -274,6 +311,7 @@ body {
 .previous-button img {
   height: 42px;
 }
+
 .toll-info-title {
   width: 95%;
   border-radius: 10px;
@@ -290,15 +328,10 @@ body {
   position: relative;
 }
 .exclamation {
-  -webkit-animation: ease-out;
   animation: ease-out;
-  -webkit-animation-duration: 2.5s;
   animation-duration: 2.5s;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  -webkit-animation-name: bouncing;
   animation-name: bouncing;
   transform-origin: center bottom;
   margin-left: -31px;
@@ -307,60 +340,37 @@ body {
   display: block;
   margin: 0 auto;
 }
-@-webkit-keyframes bouncing {
-  0%,
-  10%,
-  100%,
-  26%,
-  40%,
-  50% {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    transform: translate(14.5px, 10px);
-  }
-  20%,
-  21% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    transform: translate(14.5px, 2px);
-  }
-  35% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    transform: translate(14.5px, 4px);
-  }
-  45% {
-    transform: translate(14.5px, 8px);
-  }
-}
+
 @keyframes bouncing {
   0%,
   10%,
-  100%,
   26%,
   40%,
-  50% {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  50%,
+  100% {
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
     transform: translate(14.5px, 10px);
   }
+
   20%,
   21% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     transform: translate(14.5px, 2px);
   }
+
   35% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     transform: translate(14.5px, 4px);
   }
+
   45% {
     transform: translate(14.5px, 8px);
   }
 }
+
 @media all and (min-width: 220px) and (max-width: 319px) {
-  .carousel-rating-container {
+  .carousel-rating-container,
+  .trial-version {
     width: 90%;
   }
   .forwrdButtons {
@@ -373,18 +383,18 @@ body {
     margin: 10px 6px;
     line-height: 70px;
     border-radius: 4px;
-    box-shadow: 1px 0 10px -2px #8e8a8a;
+    box-shadow: 1px 0px 10px -2px #8e8a8a;
   }
   .buttons-continer {
     margin-top: 15px;
   }
   .respondent-info {
     width: 82%;
-    margin: 0 0 0 18px;
+    margin: 0px 0px 0px 18px;
   }
   .output-info {
     width: 82%;
-    margin: 20px 0 18px 15px;
+    margin: 20px 0px 18px 15px;
   }
   .tool-title {
     width: 90% !important;
@@ -395,16 +405,17 @@ body {
   }
 }
 @media all and (min-width: 320px) and (max-width: 480px) {
-  .carousel-rating-container {
+  .carousel-rating-container,
+  .trial-version {
     width: 90%;
   }
   .respondent-info {
     width: 82%;
-    margin: 0 0 0 18px;
+    margin: 0px 0px 0px 18px;
   }
   .output-info {
     width: 82%;
-    margin: 20px 0 18px 15px;
+    margin: 20px 0px 18px 15px;
   }
   .tool-title {
     width: 90% !important;
@@ -424,7 +435,7 @@ body {
     margin: 10px 6px;
     line-height: 85px;
     border-radius: 4px;
-    box-shadow: 1px 0 10px -2px #8e8a8a;
+    box-shadow: 1px 0px 10px -2px #8e8a8a;
   }
   .buttons-continer {
     margin-top: 15px;
@@ -434,16 +445,17 @@ body {
   }
 }
 @media all and (min-width: 481px) and (max-width: 767px) {
-  .carousel-rating-container {
+  .carousel-rating-container,
+  .trial-version {
     width: 90%;
   }
   .respondent-info {
     width: 90%;
-    margin: 0 0 0 18px;
+    margin: 0px 0px 0px 18px;
   }
   .output-info {
     width: 90%;
-    margin: 20px 0 18px 15px;
+    margin: 20px 0px 18px 15px;
   }
   .tool-title {
     width: 96% !important;
@@ -463,7 +475,7 @@ body {
     margin: 10px 6px;
     line-height: 85px;
     border-radius: 4px;
-    box-shadow: 1px 0 10px -2px #8e8a8a;
+    box-shadow: 1px 0px 10px -2px #8e8a8a;
   }
   .buttons-continer {
     margin-top: 15px;
@@ -473,7 +485,8 @@ body {
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
-  .carousel-rating-container {
+  .carousel-rating-container,
+  .trial-version {
     width: 90%;
   }
   .respondent-info {
@@ -499,14 +512,15 @@ body {
     margin: 10px 6px;
     line-height: 85px;
     border-radius: 4px;
-    box-shadow: 1px 0 10px -2px #8e8a8a;
+    box-shadow: 1px 0px 10px -2px #8e8a8a;
   }
   .buttons-continer {
     margin-top: 15px;
   }
 }
 @media all and (max-width: 1024px) {
-  .carousel-rating-container {
+  .carousel-rating-container,
+  .trial-version {
     width: 90%;
   }
   .forwrdButtons {

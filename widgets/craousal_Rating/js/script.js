@@ -1,11 +1,16 @@
 $(window).load(function () {
+  const apiUrl = "http://182.73.21.21:39051";
+  var keyNotValid =
+    "Key Expired|Your key is not valid please put your valid key.";
+
   var strImgValues_ = strImgValues.split("||");
   var popupText =
     " Could not run the widget as the subscribed limit has exceeded. You may need to <span>upgrade your subscription</span> to extend the limit.";
+  var trialVersion = "Free Trial Version";
 
   const widgetData = { client_key: client_key };
   $.ajax({
-    url: "http://192.168.1.124:8000/subscription/validate/",
+    url: apiUrl + "/subscription/validate/",
     type: "POST",
     dataType: "json",
     headers: {
@@ -16,12 +21,14 @@ $(window).load(function () {
       // You will get response from your PHP page (what you echo or print)
       if (response.HasSuccess === true) {
         if (response.DataObject.plan_type == "free_hit_trial_version") {
-          //     $("#toolwrapper1").before(
-          //       '<div class="trial-version">\
-          //   <div class="trial-version-text"><span>E2E</span>Research Pvt. Ltd</div>\
-          // </div>'
-          //     );
-          $(".trial").append('<div class="e2e-trial">e2eresearch.com</div>');
+          $(".carousel-rating-container").before(
+            '<div class="trial-version">\
+            <div class="trial-version-text">' +
+              trialVersion +
+              "</div>\
+          </div>"
+          );
+          //          $(".trial").append('<div class="e2e-trial">e2eresearch.com</div>');
         }
 
         var htmlElemnt = `<div class="carousel-container"> \
@@ -34,11 +41,7 @@ $(window).load(function () {
                 <div class="previous-buttons"> \
                     <div class="previous-button"> \
                     <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDQ1OSA0NTkiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ1OSA0NTk7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiM4RThFOEU7fQ0KPC9zdHlsZT4NCjxnPg0KCTxnIGlkPSJyZXBseSI+DQoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNzguNSwxNDAuMnYtMTAyTDAsMjE2LjdsMTc4LjUsMTc4LjVWMjkwLjdjMTI3LjUsMCwyMTYuOCw0MC44LDI4MC41LDEzMA0KCQkJQzQzMy41LDI5My4zLDM1NywxNjUuNywxNzguNSwxNDAuMnoiLz4NCgk8L2c+DQo8L2c+DQo8L3N2Zz4NCg=="/> \
-                    </div> ${
-                      response.DataObject.plan_type === "free_hit_trial_version"
-                        ? '<div class="e2e-trial">e2eresearch.com</div>'
-                        : null
-                    }\
+                    </div> \
                 </div> \
                  \
                 <div class="output-container"> \
@@ -116,14 +119,16 @@ $(window).load(function () {
             if ($("#outputValue").val().length == strImgValues_.length) {
               const hitData = { client_key: client_key };
               $.ajax({
-                url: "http://192.168.1.124:8000/subscription/validate/hitcount/",
+                url: apiUrl + "/subscription/validate/hitcount/",
                 type: "POST",
                 dataType: "json",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 data: JSON.stringify(hitData),
-                success: function (response) {},
+                success: function (response) {
+                  // console.log(response);
+                },
               });
             }
           });
@@ -188,18 +193,28 @@ $(window).load(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus, errorThrown);
+      console.log(errorThrown);
+      if (errorThrown) {
+        $("body").addClass("popup");
+        $("body").append(
+          '<div class="popup-model"><div class="popup-outer">   \
+                       <div class="popup-iner"><div class="popup-header"><h5>' +
+            keyNotValid.split("|")[0] +
+            '</h5>\
+                   </div>          \
+                   <div class="popup-body"><div class="exclamation"><svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 47 47">\
+                   <g id="esclamination-mark" transform="translate(-1.1 -0.6)">\
+                     <circle id="exclamation" data-name="Ellipse 2" cx="23.5" cy="23.5" r="23.5" transform="translate(1.1 0.6)" fill="#ffbf00"/>\
+                     <path id="exclamation" d="M21.6,33.1a3,3,0,1,1,3,3A2.946,2.946,0,0,1,21.6,33.1Zm.3-18a2.717,2.717,0,0,1,5.4-.6v.6L26.2,25.6a1.669,1.669,0,0,1-1.8,1.5,1.7,1.7,0,0,1-1.5-1.5Z" fill="#fff"/>\
+                   </g>\
+                 </svg> </div>\
+                   <div class="popup-text"> ' +
+            keyNotValid.split("|")[1] +
+            "\
+                    </div> </div>\
+                   </div>"
+        );
+      }
     },
-
-    // const widgetData = { client_key: client_key };
-    // fetch("http://192.168.1.124:8000/subscription/validate/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(widgetData),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
   });
 });

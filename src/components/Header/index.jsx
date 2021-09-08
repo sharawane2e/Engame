@@ -150,7 +150,7 @@ const Header = ({ props, cart, user }) => {
       {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
       <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
-          Profile
+          My Widgets
         </Link>
       </MenuItem>
       <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
