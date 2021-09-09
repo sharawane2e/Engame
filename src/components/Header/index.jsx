@@ -28,7 +28,6 @@ import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-// import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -68,7 +67,13 @@ const Header = ({ props, cart, user }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  console.log("dispatch", cart);
+  // console.log("dispatch", cart);
+
+  const myState = useSelector((state) => state.shop);
+  
+  console.log("Redux", myState.products);
+
+
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
@@ -269,7 +274,7 @@ const Header = ({ props, cart, user }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge badgeContent={0} color="secondary">
+                  <Badge badgeContent={myState.products?myState.products.length : 0} color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>
