@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
@@ -21,7 +21,6 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   const intialValues = { email: "" };
   const [formValues, setFormValues] = useState(intialValues);
 
-  // get auth details from localstorage
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
 
@@ -29,8 +28,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     let plans = { user: res.token.user.pk, plan_type: e.target.value };
     setSubscription(e.target.value);
     setType(e.target.value);
-    // setValuePrice("");
-    // alert(e.target.value);
+
     if (e.target.value === 1) {
       setType("days");
     } else {
@@ -81,7 +79,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         history.push("/");
         onClose();
       });
@@ -91,13 +89,11 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     let value = e.target.value * base;
     setPrice(value);
     setValuePrice(e.target.value);
-    console.log("hello",e.target.value);
-
     if (e.target.value <= 0) {
       setValuePrice(1);
     }
   };
-  // console.log(subscription);
+
   useEffect(() => {
     if (subscription == "days") {
       setType("days");
@@ -112,19 +108,8 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   }, [handleChange, subscription, type, price, base]);
 
   const handleBlur = (e, key) => {
-    // let value = e.target.value;
-    // console.log(value);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    // console.log(name);
-    // if (typeof value === "string") {
-    //   value = value.trim();
-    // }
-    // const errorMessage = inputValidation.validateField(key, value).message;
-    // this.setState({
-    //   key: value,
-    //   formErrors: { ...this.state.formErrors, [key]: errorMessage },
-    // });
   };
 
   return (

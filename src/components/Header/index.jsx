@@ -28,7 +28,7 @@ import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-// import { useDispatch } from "react-redux";
+import { LOGOUT_TIME } from "../../constants/ConstantValues";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -57,26 +57,24 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user }) => {
+const Header = ({ props, cart, user, state, data }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
+  // const [state] = useState(data);
   const classes = useStyles();
   // const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  console.log("dispatch", cart);
+  // console.log("sd", dispatch);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
-  }, [isLoginOpen]);
-
-  useEffect(() => {
     document.body.classList.toggle("modal-open", isReginOpen);
-  }, [isReginOpen]);
+  }, [isLoginOpen, isReginOpen]);
 
   useEffect(() => {
     let count = 0;
@@ -93,7 +91,8 @@ const Header = ({ props, cart, user }) => {
     const timer = setTimeout(() => {
       localStorage.removeItem("auth");
       window.location.reload();
-    }, 360000);
+      history.push("/");
+    }, LOGOUT_TIME);
     return () => clearTimeout(timer);
   }, []);
 

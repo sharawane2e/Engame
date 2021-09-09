@@ -17,7 +17,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 // import DoneIcon from "@material-ui/icons/Done";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
-import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
@@ -30,6 +30,9 @@ const Cart = ({ cart }) => {
   const user = useSelector((state) => state.user.token);
   let res = JSON.parse(auth);
   const token = useSelector((state) => state.user.token.access_token);
+
+  // console.log(carts);
+
   useEffect(() => {
     const fetchCartItem = async () => {
       dispatch(loadingStart());
@@ -59,9 +62,7 @@ const Cart = ({ cart }) => {
   // handleCheckout
   const handleCheckout = async () => {
     dispatch(loadingStart());
-    const stripe = await loadStripe(
-      "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
-    );
+    const stripe = await loadStripe(STRIPE);
     try {
       await fetch(BASE_URL + "payments/checkout-session/", {
         method: "POST",
@@ -229,7 +230,10 @@ const Cart = ({ cart }) => {
                                   className="shoping-cart__subscription"
                                 >
                                   <span>Subscription:</span>
-                                  <select className="border-radius">
+                                  <select
+                                    className="border-radius"
+                                    defaultValue="0"
+                                  >
                                     <option
                                       value="days"
                                       selected={

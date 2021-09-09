@@ -8,7 +8,8 @@ body {
 }
 .App {
   position: relative;
-  height: 100vh;
+  // height: 100vh;
+  height: 100%;
   background: #efefef;
 }
 .MuiButton-label {
@@ -17,15 +18,24 @@ body {
     font-size: 12px;
   }
 }
-.progress-yellow {
-  background-color: $yelow;
+.progress-yellow .MuiLinearProgress-barColorPrimary {
+  background-color: $yelow !important;
 }
-.progress-green {
-  background-color: $green-color;
+.progress-green .MuiLinearProgress-barColorPrimary {
+  background-color: $green-color !important;
 }
-.progress-red {
-  background-color: $secondary;
+.progress-red .MuiLinearProgress-barColorPrimary {
+  background-color: $secondary !important;
 }
+// .progress-yellow {
+//   background-color: $yelow !important;
+// }
+// .progress-green {
+//   background-color: $green-color !important;
+// }
+// .progress-red {
+//   background-color: $secondary !important;
+// }
 .cursor--pointer {
   cursor: pointer;
 }
@@ -154,7 +164,8 @@ a {
 /*bredcrum*/
 .bredcrum-conatiner {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  @include bgcolor($gray-primary);
+  // @include bgcolor($gray-primary);
+  min-height: 850px;
   z-index: 99;
   #{&}__bredcrum_inr {
     width: 100%;
