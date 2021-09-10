@@ -27,6 +27,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
 
   const handleChange = (e) => {
     let plans = { user: res.token.user.pk, plan_type: e.target.value };
+
     setSubscription(e.target.value);
     setType(e.target.value);
 
@@ -69,8 +70,10 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   };
 
   const handleCart = () => {
+    dispatch(loadingStart());
     dispatch(addToCart(user));
     onClose();
+    dispatch(loadingStop());
     // Toaster.sucess("You have add successfully!", "topCenter");
     // fetch(BASE_URL + "cart/", {
     //   method: "POST",

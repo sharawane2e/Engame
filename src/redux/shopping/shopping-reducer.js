@@ -1,102 +1,40 @@
-// import { BASE_URL } from "../../config/ApiUrl";
-// import * as actionTypes from "./shopping-types";
-// import { CART_ADD_ITEM, CART_REMOVE_ITEM, GET_CART_ITEM } from "./types";
-
-// let data = [];
-
-// // async function getRadomeData() {
-// //   const response = await fetch(BASE_URL + "widget/");
-// //   const data = await response.json();
-// //   addData(data.flat());
-// // }
-
-// // function addData(object) {
-// //   // data.push(object)
-// //   object.map((item) => {
-// //     data.push(item);
-// //   });
-// // }
-// // getRadomeData();
-
-// // const initialState = {
-// //   products: [data], //{id, title, descr, price, img}
-// //   cart: [], //{id, title, descr, price, img}
-// // };
-// const shopReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case actionTypes.CART_ADD_ITEM:
-//       // Get the items data from an array
-//       const item = state.products[0].find(
-//         (prop) => prop.id == action.payload.id
-//       );
-//       // // check if item is in cart already
-//       const inCart = state.cart.find((item) =>
-//         item.id === action.payload.id ? true : false
-//       );
-//       return {
-//         ...state,
-//         cart: inCart
-//           ? state.cart.map((item) =>
-//               item.id === action.payload.id ? { ...item, qty: item.qty } : item
-//             )
-//           : [...state.cart, { ...item, qty: 1 }],
-//       };
-//     case actionTypes.CART_REMOVE_ITEM:
-//       return {
-//         ...state,
-//         cart: state.cart.filter((item) => item.id !== action.payload.id),
-//       };
-
-//     default:
-//       return state;
-//   }
-// };
-
-// export default shopReducer;
-
-// // import { CART_ADD_ITEM, CART_REMOVE_ITEM, GET_CART_ITEM } from "./types";
-
-// // export const shoppingReducer = (state = { cartItems: [] }, action) => {
-// //   switch (action.type) {
-// //     case CART_ADD_ITEM:
-// //       const item = action.payload;
-// //       const existItem = state.cartItems.find((x) => x.product === item.product);
-// //       if (existItem) {
-// //         return {
-// //           ...state,
-// //           cartItems: state.cartItems.map((x) =>
-// //             x.product === existItem.product ? item : x
-// //           ),
-// //         };
-// //       } else {
-// //         return {
-// //           ...state,
-// //           cartItems: [...state.cartItems, item],
-// //         };
-// //       }
-// //     case GET_CART_ITEM:
-// //       return { ...state, carts: action.payload };
-// //     case CART_REMOVE_ITEM:
-// //       return {
-// //         ...state,
-// //         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
-// //       };
-// //     default:
-// //       return state;
-// //   }
-// // };
 
 import { CART_ADD_ITEM, CART_REMOVE_ITEM, GET_CART_ITEM } from "./types";
 //state = { cartItems: [] }
 export const shoppingReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
+
+      let addedItem = state.cartItems.find(item=> item.id === action.id)
+      //check if the action id exists in the addedItems
+     let existed_item= state.addedItem.find(item=> action.id === item.id)
+  //  const existItem = state.cartItems.find((x) => x.product === item.product);
+    if (existed_item) {
+      addedItem.quantity += 1 
+
       return {
         ...state,
-        cartItems: state.cartItems.map((product) =>
-          product.id === action.id ? { ...product, selected: true } : product
+        state: [...state],
+        cartItems: state.cartItems.map((x) =>
+          x.product === existed_item.product ? x.item : x
         ),
       };
+    } else {
+      addedItem.quantity = 1;
+      return {
+        
+        ...state,
+        cartItems: [...state.cartItems],
+      };
+    }
+
+
+      // return {
+      //   ...state,
+      //   cartItems: state.cartItems.map((product) =>
+      //     product.id === action.id ? { ...product, selected: true } : product
+      //   ),
+      // };
 
     //   case CART_ADD_ITEM:
     // const item = action.payload;

@@ -93,59 +93,61 @@
 import * as actionTypes from "./types";
 import axios from "axios";
 import { BASE_URL } from "../../config/ApiUrl";
-import React, { useState, useEffect } from "react";
 
-export const addToCart = (user, qty) => async (dispatch, getState) => {
-  // let auth = localStorage.getItem("auth");
-  // let res = JSON.parse(auth);
-  // alert(productId);
-  // const { data } = await axios.get(`${BASE_URL}widget/detail/${productId}/`);
-  // console.log("add data", data);
-  // dispatch({
-  //   type: actionTypes.CART_ADD_ITEM,
-  //   payload: {
-  //     name: data.name,
-  //     image: data.imgUrl,
-  //     widgetType: data.widget_type,
-  //     price: data.price,
-  //     currency: data.currency,
-  //     product: data.id,
-  //     qty: 1,
-  //   },
-  // });
 
-  // localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-  // const user = {
-  //   user: res.token.user.pk,
-  //   widget: productId,
-  //   plan_type: "hits",
-  //   plan_value: "15",
-  //   price: 110,
-  //   currency: "$",
-  // };
+// export const addToCart = (userData, qty) => async (dispatch, getState) => {
+
+// console.log(userData);
+
+
+// const response = await fetch(BASE_URL + "cart/",{
+//   method: "POST",
+  // headers: {
+  //   "Content-Type": "application/json",
+  //   Authorization: `Bearer ${res.token.access_token}`,
+  // },
+//   body: JSON.stringify(user),
+// });
+
+
+//   await const cartData= fetch(BASE_URL + "cart/", {
+   
+//   })
+//     .then((response) => response.json())
+//     .then((result) => {
+//       // history.push("/");
+//       // console.log("add to cart", result);
+//       // dispatch(addToCart(result.id));
+//       // dispatch(addToCart(result.id));
+//       // onClose();
+//       console.log("curent rtesult", result.id);
+//       dispatch({ type: actionTypes.GET_CART_ITEM, payload: result.id });
+//     });  
+// };
+
+
+//Add to cart
+
+export const addToCart = (userData) =>async (dispatch, getState) => {
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
-
-  fetch(BASE_URL + "cart/", {
+ 
+  await fetch(BASE_URL + "cart/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${res.token.access_token}`,
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(userData),
   })
     .then((response) => response.json())
     .then((result) => {
-      // history.push("/");
-      // console.log("add to cart", result);
-      // dispatch(addToCart(result.id));
-      // dispatch(addToCart(result.id));
-      // onClose();
-      console.log("curent rtesult", result.id);
-      dispatch({ type: actionTypes.GET_CART_ITEM, payload: result.id });
+        dispatch({ type: actionTypes.GET_CART_ITEM, payload: result });
     });
+  // dispatch(loadingStop());
 };
+
 
 // GET ITEM FROM CART
 
