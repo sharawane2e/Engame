@@ -28,6 +28,7 @@ import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import { LOGOUT_TIME } from "../../constants/ConstantValues";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -56,32 +57,28 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user }) => {
+const Header = ({ props, cart, user, state, data, shop }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
+  // const [state] = useState(data);
   const classes = useStyles();
   // const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  // console.log("dispatch", cart);
-
-  const myState = useSelector((state) => state.shop);
+  const CartValue = useSelector((state) => shop.cart.length);
   
-  console.log("Redux", myState.products);
-
+  console.log("Redux data on shop", shop);
+  console.log("Redux data on cart", cart);
 
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
-  }, [isLoginOpen]);
-
-  useEffect(() => {
     document.body.classList.toggle("modal-open", isReginOpen);
-  }, [isReginOpen]);
+  }, [isLoginOpen, isReginOpen]);
 
   useEffect(() => {
     let count = 0;
@@ -98,7 +95,8 @@ const Header = ({ props, cart, user }) => {
     const timer = setTimeout(() => {
       localStorage.removeItem("auth");
       window.location.reload();
-    }, 360000);
+      history.push("/");
+    }, LOGOUT_TIME);
     return () => clearTimeout(timer);
   }, []);
 
@@ -274,7 +272,7 @@ const Header = ({ props, cart, user }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge badgeContent={myState.products?myState.products.length : 0} color="secondary">
+                  <Badge badgeContent={CartValue.products?CartValue.products.length : 0} color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>
@@ -330,7 +328,9 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart.cartItems,
     user: state.user,
+    shop: state.shop,
   };
 };
+
 
 export default connect(mapStateToProps)(Header);

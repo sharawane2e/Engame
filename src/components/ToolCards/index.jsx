@@ -18,6 +18,11 @@ import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
+import PropTypes from "prop-types";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Skeleton from "@material-ui/lab/Skeleton";
+import { addToCart } from "../../redux/shopping/shopping-action";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -60,6 +65,7 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
+          console.log(response);
           setProductShow(response);
         });
     }
@@ -69,7 +75,16 @@ const ToolCards = () => {
     <>
       <Toolbar className="toolcard">
         {loading ? (
-          <LoadingBox />
+          <>
+            <LoadingBox />
+            {/* <Box width={210} marginRight={0.5} my={5}>
+              <Skeleton variant="rect" width={210} height={118} />
+              <Box pt={0.5}>
+                <Skeleton />
+                <Skeleton width="60%" />
+              </Box>
+            </Box> */}
+          </>
         ) : error ? (
           <MessageBox>{error}</MessageBox>
         ) : (
@@ -120,10 +135,10 @@ const ToolCards = () => {
                                 onClick={(id) => {
                                   setSubscriptionPopup(true);
                                   setPopupId(tooldata.id);
+                                  dispatch(addToCart(tooldata.id));
                                 }}
                               >
                                 <ShoppingCartIcon />
-                                {/* <ShoppingCartIcon /> */}
                               </div>
                             ) : null}
                           </div>
@@ -222,7 +237,7 @@ const ToolCards = () => {
           <Embedcode data={productShow} toolId={popupId} />
         </CustomPopup>
         {/*End*/}
-        
+
         {/*Add to cart */}
         <CustomPopup
           open={isSubscription}

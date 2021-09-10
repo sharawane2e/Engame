@@ -7,8 +7,6 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Footer from "../../components/Footer";
 import Paper from "@material-ui/core/Paper";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import e2eLogo from "../../assets/images/E2E-logo.png";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import TimerIcon from "@material-ui/icons/Timer";
@@ -24,7 +22,8 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import ReceiptIcon from "@material-ui/icons/Receipt";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -37,20 +36,16 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: "#8aff8a",
+    // backgroundColor: "#8aff8a",
   },
 }))(LinearProgress);
 
 function Purchased(props) {
-  const [isActive, setActive] = useState(false);
+  const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
 
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
-
-  let history = useHistory();
-  console.log(history);
+  // let history = useHistory();
+  // console.log(history);
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
@@ -71,10 +66,8 @@ function Purchased(props) {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log(result.details);
-          //setWidgets(result);
           if (result) {
-            // Toaster.sucess(result.details, "topCenter");
+            Toaster.sucess(result.details, "topCenter");
             // window.location.reload();
           }
           // history.push(history.path);
@@ -94,13 +87,16 @@ function Purchased(props) {
         .then((result) => {
           dispatch(loadingStop());
           setWidgets(result);
-          // window.location.reload();
-          // console.log(result);
+
+          const isShowArr = [];
+          result.forEach((el, index) => {
+            isShowArr.push(false);
+          });
+          setShow(isShowArr);
         });
     };
     myWwidgets();
   }, []);
-  console.log(widgets);
 
   return (
     <>
@@ -155,10 +151,12 @@ function Purchased(props) {
           </Grid>
           {/*Card start */}
           {widgets.map((item, index) => {
+            console.log(item);
             let purchasedDateTime = new Date(item.purchase_date);
             purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
             const purchase_date = purchasedDateTime.split(",")[0];
             const purchase_time = purchasedDateTime.split(",")[1];
+
             return (
               <Grid container spacing={3} key={index}>
                 <Grid item xs={12}>
@@ -291,26 +289,46 @@ function Purchased(props) {
                             >
                               <span className="subscription-type-text ">
                                 {/* 210 days left */}
-                                {item.plan.plan_value}&nbsp;&nbsp;
+                                {item.remaining_value}&nbsp;&nbsp;
                                 {item.plan.plan_type}
                               </span>
                               <BorderLinearProgress
                                 variant="determinate"
-                                value={100}
-                                className="progress-yellow"
+                                value={
+                                  (item.remaining_value * 50) / 1000
+                                    ? 50
+                                    : ""
+                                    ? (item.remaining_value * 80) / 1000
+                                      ? 80
+                                      : ""
+                                    : "s"
+                                }
+                                className={
+                                  (item.remaining_value * 50) / 1000
+                                    ? "progress-bar progress-red"
+                                    : ""
+                                    ? (item.remaining_value * 80) / 1000
+                                      ? "progress-bar progress-yellow"
+                                      : ""
+                                    : "progress-bar progress-green"
+                                }
                               />
                             </Typography>
                           </Grid>
                           <Grid item xs={6} className="grid-flex">
                             <div
                               className="purchased-tool__purchased-date purchased-tool__toggleclass show--toogle"
-                              onClick={toggleClass}
+                              onClick={() => {
+                                const currentActive = [...isShow];
+                                currentActive[index] = !currentActive[index];
+                                setShow(currentActive);
+                              }}
                             >
                               <span className="purchased-tool__date-type-text purchased-curent-text">
-                                {isActive ? "Show Less" : "Show More"}
+                                {isShow[index] ? "Show Less" : "Show More "}
                               </span>
                               <span className="purchased-tool__date-type-text">
-                                {isActive ? (
+                                {isShow[index] ? (
                                   <ExpandLessIcon />
                                 ) : (
                                   <ExpandMoreIcon />
@@ -321,73 +339,78 @@ function Purchased(props) {
                         </Grid>
                       </Grid>
 
-                      <Grid
-                        item
-                        xs={12}
-                        container
-                        className={
-                          isActive
-                            ? "purchased-tool__tool-data accordion-margin show--accordion"
-                            : "purchased-tool__tool-data accordion-margin hide--accordion"
-                        }
-                      >
-                        <Grid item xs={6}>
-                          <Typography component="div">
-                            <div className="purchased-tool__purchased-date">
-                              <span className="purchased-tool__date-type-text purchased-curent-text">
-                                Total Amount:$512
-                              </span>
-                            </div>
-                          </Typography>
-                        </Grid>
+                      {isShow[index] ? (
                         <Grid
                           item
-                          xs={6}
-                          className="purchased-tool__expiry-date"
+                          xs={12}
+                          container
+                          className={
+                            isShow
+                              ? "purchased-tool__tool-data accordion-margin show--accordion"
+                              : "purchased-tool__tool-data accordion-margin hide--accordion"
+                          }
                         >
-                          <Typography
-                            component="div"
-                            className="cursor--pointer"
+                          <Grid item xs={6}>
+                            <Typography component="div">
+                              <div className="purchased-tool__purchased-date">
+                                <span className="purchased-tool__date-type-text purchased-curent-text">
+                                  Total Amount:
+                                </span>
+                                <span className="purchased-tool__date-type-text ">
+                                  ${item.plan.price}
+                                </span>
+                              </div>
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={6}
+                            className="purchased-tool__expiry-date"
                           >
-                            <div className="purchased-tool__purchased-date purchased-tool__hover">
-                              <span className="purchased-tool__date-type-text purchased-curent-text">
-                                <GetAppIcon />
-                              </span>
-                              <span className="purchased-tool__date-type-text purchased-types">
-                                Net banking
-                              </span>
-                            </div>
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography component="div">
-                            <div className="purchased-tool__purchased-date">
-                              <span className="purchased-tool__date-type-text purchased-curent-text">
-                                Payment Method: Net banking
-                              </span>
-                            </div>
-                          </Typography>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={6}
-                          className="purchased-tool__expiry-date"
-                        >
-                          <Typography
-                            component="div"
-                            className="cursor--pointer"
+                            <Typography
+                              component="div"
+                              className="cursor--pointer"
+                            >
+                              <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                <span className="purchased-tool__date-type-text purchased-curent-text"></span>
+                                <span className="purchased-tool__date-type-text purchased-types">
+                                  <GetAppIcon />
+                                  Download Invoice
+                                </span>
+                              </div>
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography component="div">
+                              <div className="purchased-tool__purchased-date">
+                                <span className="purchased-tool__date-type-text purchased-curent-text">
+                                  Payment Method:
+                                </span>
+                                <span className="purchased-tool__date-type-text">
+                                  {item.payment_method}
+                                </span>
+                              </div>
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={6}
+                            className="purchased-tool__expiry-date"
                           >
-                            <div className="purchased-tool__purchased-date purchased-tool__hover">
-                              <span className="purchased-tool__date-type-text purchased-curent-text">
-                                <GetAppIcon />
-                              </span>
-                              <span className="purchased-tool__date-type-text purchased-types">
-                                Consumption statement
-                              </span>
-                            </div>
-                          </Typography>
+                            <Typography
+                              component="div"
+                              className="cursor--pointer"
+                            >
+                              <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                <span className="purchased-tool__date-type-text purchased-curent-text"></span>
+                                <span className="purchased-tool__date-type-text purchased-types">
+                                  <ReceiptIcon /> Consumption statement
+                                </span>
+                              </div>
+                            </Typography>
+                          </Grid>
                         </Grid>
-                      </Grid>
+                      ) : null}
                     </Grid>
                   </Paper>
                 </Grid>
