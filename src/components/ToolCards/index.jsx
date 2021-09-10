@@ -135,7 +135,7 @@ const ToolCards = () => {
                                 onClick={(id) => {
                                   setSubscriptionPopup(true);
                                   setPopupId(tooldata.id);
-                                  dispatch(addToCart(tooldata.id));
+                                  dispatch(addToCart(tooldata));
                                 }}
                               >
                                 <ShoppingCartIcon />
