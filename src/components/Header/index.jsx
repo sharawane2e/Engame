@@ -69,27 +69,26 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const CartValue = useSelector((state) => shop.cart.length);
-  
-  console.log("Redux data on shop", shop);
-  console.log("Redux data on cart", cart);
+  //const CartValue = useSelector((state) => shop.cart.length);
 
+  //  console.log("Redux data on shop", shop);
+  //console.log("Redux data on cart", cart);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
   }, [isLoginOpen, isReginOpen]);
 
-  useEffect(() => {
-    let count = 0;
-    cart.forEach((item) => {
-      count += item.qty;
-    });
-    setCartCount(count);
-    if (user.isLoggedIn) {
-      setLoginIsOpen(false);
-    }
-  }, [cart, cartCount, user]);
+  // useEffect(() => {
+  //   let count = 0;
+  //   cart.forEach((item) => {
+  //     count += item.qty;
+  //   });
+  //   setCartCount(count);
+  //   if (user.isLoggedIn) {
+  //     setLoginIsOpen(false);
+  //   }
+  // }, [cart, cartCount, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -272,7 +271,12 @@ const Header = ({ props, cart, user, state, data, shop }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge badgeContent={CartValue.products?CartValue.products.length : 0} color="secondary">
+                  <Badge
+                    // badgeContent={
+                    //   CartValue.products ? CartValue.products.length : 0
+                    // }
+                    color="secondary"
+                  >
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>
@@ -331,6 +335,5 @@ const mapStateToProps = (state) => {
     shop: state.shop,
   };
 };
-
 
 export default connect(mapStateToProps)(Header);

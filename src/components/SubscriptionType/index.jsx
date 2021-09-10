@@ -7,7 +7,7 @@ import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { useHistory } from "react-router-dom";
-import {addToCart} from "../../redux/shopping/shopping-action";
+import { addToCart } from "../../redux/shopping/shopping-action";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
@@ -69,22 +69,25 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   };
 
   const handleCart = () => {
-    Toaster.sucess("You have add successfully!", "topCenter");
-    fetch(BASE_URL + "cart/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${res.token.access_token}`,
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        history.push("/");
-        console.log("add to cart",result);
-        dispatch(addToCart(result.id));
-        onClose();
-      });
+    dispatch(addToCart(user));
+    onClose();
+    // Toaster.sucess("You have add successfully!", "topCenter");
+    // fetch(BASE_URL + "cart/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${res.token.access_token}`,
+    //   },
+    //   body: JSON.stringify(user),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     history.push("/");
+    //     console.log("add to cart", result);
+    //     dispatch(addToCart(result.id));
+    //     // dispatch(addToCart(result.id));
+    //     onClose();
+    //   });
   };
 
   const handleCalculatePrice = (e) => {
@@ -147,7 +150,8 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
         <CustomButton
           className="primary-button add--card"
           onClick={handleCart}
-          disabled={valuePrice <= 0 || valuePrice == "" ? true : false}>
+          disabled={valuePrice <= 0 || valuePrice == "" ? true : false}
+        >
           <ShoppingCartIcon /> Add to Cart
         </CustomButton>
       </div>

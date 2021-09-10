@@ -22,7 +22,7 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { addToCart } from "../../redux/shopping/shopping-action";
+// import { addToCart } from "../../redux/shopping/shopping-action";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -135,7 +135,6 @@ const ToolCards = () => {
                                 onClick={(id) => {
                                   setSubscriptionPopup(true);
                                   setPopupId(tooldata.id);
-                                  dispatch(addToCart(tooldata));
                                 }}
                               >
                                 <ShoppingCartIcon />

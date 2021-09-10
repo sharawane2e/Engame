@@ -20,43 +20,54 @@ import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/shopping/shopping-action";
+
 import axios from "axios";
 
-const Cart = ({ cart }) => {
-  const [carts, setCarts] = useState([]);
+const Cart = ({ shop }) => {
+  //const [cart, setCarts] = useState([]);
   const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
   let auth = localStorage.getItem("auth");
   const user = useSelector((state) => state.user.token);
+  //const carts = useSelector((state) => state.shop.cartItems);
   let res = JSON.parse(auth);
   const token = useSelector((state) => state.user.token.access_token);
+  const [isProduct, setProduct] = useState("");
 
-  // console.log(carts);
-
+  // alert(shop);
   useEffect(() => {
-    const fetchCartItem = async () => {
-      dispatch(loadingStart());
-      await fetch(BASE_URL + "cart/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          setCarts(result);
-          setPlanValue(result.planValue);
-        });
-      dispatch(loadingStop());
-    };
-    fetchCartItem();
+    dispatch(getItemFromCart());
+    // const fetchCartItem = async () => {
+    //   dispatch(loadingStart());
+    //   await fetch(BASE_URL + "cart/", {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //       setCarts(result);
+    //       setPlanValue(result.planValue);
+    //     });
+    //   dispatch(loadingStop());
+    // };
+    // fetchCartItem();
   }, []);
 
+  useEffect(() => {
+    //dispatch(removeFromCart(isProduct));
+  });
+
   const handleRemove = (productId) => {
-    const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
-      headers: { Authorization: `Bearer ${res.token.access_token}` },
-    });
-    const item = carts.filter((x) => x.id !== productId);
-    setCarts(item);
+    // const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
+    //   headers: { Authorization: `Bearer ${res.token.access_token}` },
+    // });
+    // const item = carts.filter((x) => x.id !== productId);
+    // setCarts(item);
   };
 
   // handleCheckout
@@ -104,7 +115,7 @@ const Cart = ({ cart }) => {
           </Container>
         </div>
         <div className="shoping-cart">
-          {carts.length !== 0 ? (
+          {shop.length != 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -145,7 +156,7 @@ const Cart = ({ cart }) => {
 
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
-                  {carts.map((item, index) => {
+                  {shop.map((item, index) => {
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
@@ -289,7 +300,10 @@ const Cart = ({ cart }) => {
                                     className="shoping-cart__tool-delete"
                                     onClick={() => {
                                       // dispatch(removeFromCart(item.id));
-                                      handleRemove(item.id);
+                                      // handleRemove(item.id);
+                                      // setProduct(item.id);
+                                      dispatch(removeFromCart(item.id));
+                                      // dispatch(removeFromCart(item.id));
                                     }}
                                   />
                                 </Typography>
@@ -323,7 +337,7 @@ const Cart = ({ cart }) => {
                     </div>
                     <div className="shoping-cart__coupon-amount">
                       $
-                      {carts
+                      {shop
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}
                     </div>
@@ -365,7 +379,7 @@ const Cart = ({ cart }) => {
 
 const mapDispatchToProp = (state) => {
   return {
-    cart: state.cart.cartItems,
+    shop: state.shop.cartItems,
   };
 };
 
