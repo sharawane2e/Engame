@@ -82,11 +82,11 @@ const Header = ({ props, cart, user, state, data, shop }) => {
     document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
-      //const getCartItems = () => async (dispatch) => {
+      const getCartItems = () => async (dispatch) => {
         dispatch(getItemFromCart());
         console.log("curent header data with add to cart click", carts);
-      //}
-      //getCartItems();
+      }
+      getCartItems();
     }
   }, [isLoginOpen, isReginOpen,user]);
 

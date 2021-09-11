@@ -14,6 +14,8 @@ import { BASE_URL } from "../../config/ApiUrl";
 
 
 export const addToCart = (userData, qty) => async (dispatch, getState) => {
+  let auth = localStorage.getItem("auth");
+ let res = JSON.parse(auth);
    await fetch(BASE_URL + "cart/", {
     method: "POST",
     headers: {
