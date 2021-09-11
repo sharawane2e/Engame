@@ -73,7 +73,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
 
   const handleAddCart = async() => {
     dispatch(addToCart(user));
-    Toaster.sucess("You have add successfully!", "topCenter");
+    Toaster.sucess("You have item add successfully!", "topCenter");
     onClose();
     // fetch(BASE_URL + "cart/", {
     //   method: "POST",

@@ -73,8 +73,9 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
+  //const carts = useSelector((state) =>cart)
 
-  console.log("curent cart remove with by click", carts);
+
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
@@ -83,6 +84,7 @@ const Header = ({ props, cart, user, state, data, shop }) => {
       setLoginIsOpen(false);
       //const getCartItems = () => async (dispatch) => {
         dispatch(getItemFromCart());
+        console.log("curent header data with add to cart click", carts);
       //}
       //getCartItems();
     }
@@ -335,10 +337,11 @@ const Header = ({ props, cart, user, state, data, shop }) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log("state data items with header",state.cart.cartItems)
   return {
     cart: state.cart.cartItems,
     user: state.user,
-    shop: state.shop,
+    // shop: state.shop,
   };
 };
 

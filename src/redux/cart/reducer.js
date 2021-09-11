@@ -34,9 +34,9 @@ export const cartReducers = (state = initialState, action) => {
     case CART_REMOVE_ITEM:
      state.cartItems.pop();
       return {
-        // ...state,
+        ...state,
         //  cartItems:[...state.cartItems.filter((x) => x.product !== action.payload)],
-         ...state,
+       //  ...state,
         // cartItems: [...state.cartItems.filter((x) => x.product !== action.payload)]
 
         //...state,cartItems: state.cartItems.filter((x) => x.product !== action.payload),

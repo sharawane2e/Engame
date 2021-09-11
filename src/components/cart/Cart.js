@@ -27,7 +27,7 @@ import {
 } from "../../redux/cart/action";
 
 
-const Cart = ({ cart }) => {
+const Cart = ({ prop ,cart }) => {
   //const [carts, setCarts] = useState([]);
   const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
@@ -36,12 +36,15 @@ const Cart = ({ cart }) => {
   let res = JSON.parse(auth);
   // const token = useSelector((state) => state.user.token.access_token);
 
+  //const carts = useSelector((state) => state.cart.cartItems);
   const carts = useSelector((state) => state.cart.cartItems);
   const [isProduct, setProduct] = useState("");
   // const [cartsData, setCarts] = useState(carts);
 
- 
+  
 
+  
+  
   // useEffect(() => {
   //   //const fetchCartItem = async () => {
   //     dispatch(loadingStart());
@@ -63,28 +66,22 @@ const Cart = ({ cart }) => {
   // },[]);
 
   useEffect(() => {
-      
-  // dispatch(getItemFromCart());
    dispatch(getItemFromCart());
-  console.log("remove carts",carts);
-
-  }, [carts.length])
+  },[])
 
   
   // dispatch(removeFromCart(isProduct));
 
   const handleRemove = async(isProduct) => {
-    // const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
-    //   headers: { Authorization: `Bearer ${res.token.access_token}` },
-    // });
-    // const item = carts.filter((x) => x.id !== productId);
-    //setCarts(item);
-
-    dispatch(removeFromCart(isProduct));
-    //dispatch(getItemFromCart());
-    console.log("remove carts",carts);
-    //setCarts(productId);
+     dispatch(removeFromCart(isProduct));
+    //  dispatch(getItemFromCart());
+     console.log("remove carts",carts);
   };
+
+
+  // useEffect(() => {
+  //   dispatch(getItemFromCart());
+  //  },[])
 
   // handleCheckout
   const handleCheckout = async () => {
@@ -131,7 +128,7 @@ const Cart = ({ cart }) => {
           </Container>
         </div>
         <div className="shoping-cart">
-          {carts.length !== 0 ? (
+            {cart.length !== 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -172,7 +169,7 @@ const Cart = ({ cart }) => {
 
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
-                  {carts.map((item, index) => {
+                  {cart.map((item, index) => {
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
@@ -350,7 +347,7 @@ const Cart = ({ cart }) => {
                     </div>
                     <div className="shoping-cart__coupon-amount">
                       $
-                      {carts
+                      {cart
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}
                     </div>
@@ -391,6 +388,7 @@ const Cart = ({ cart }) => {
 };
 
 const mapDispatchToProp = (state) => {
+  console.log("state main cred data items with cart",state.cart.cartItems)
   return {
     cart: state.cart.cartItems,
   };
