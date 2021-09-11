@@ -39,13 +39,11 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+  
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
-  }, [ispopup]);
-
-  useEffect(() => {
     document.body.classList.toggle("modal-open", isSubscription);
-  }, [isSubscription]);
+  }, [ispopup,isSubscription]);
 
   if (user.isLoggedIn) {
     setLoginIsOpen(false);
@@ -64,7 +62,7 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           setProductShow(response);
         });
     }

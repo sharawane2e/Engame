@@ -29,6 +29,10 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -68,24 +72,32 @@ const Header = ({ props, cart, user, state, data }) => {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const carts = useSelector((state) => state.cart.cartItems);
 
-  // console.log("sd", dispatch);
+  console.log("curent cart remove with by click", carts);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
-  }, [isLoginOpen, isReginOpen]);
-
-  useEffect(() => {
-    let count = 0;
-    cart.forEach((item) => {
-      count += item.qty;
-    });
-    setCartCount(count);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
+      //const getCartItems = () => async (dispatch) => {
+        dispatch(getItemFromCart());
+      //}
+      //getCartItems();
     }
-  }, [cart, cartCount, user]);
+  }, [isLoginOpen, isReginOpen,user]);
+
+  // useEffect(() => {
+  //   let count = 0;
+  //   cart.forEach((item) => {
+  //     count += item.qty;
+  //   });
+  //   setCartCount(count);
+  //   if (user.isLoggedIn) {
+  //     setLoginIsOpen(false);
+  //   }
+  // }, [cart, cartCount, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -268,7 +280,9 @@ const Header = ({ props, cart, user, state, data }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge badgeContent={0} color="secondary">
+                  <Badge badgeContent={
+                      carts.length ? carts.length : 0
+                    } color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>
