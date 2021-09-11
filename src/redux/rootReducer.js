@@ -12,7 +12,7 @@ import { cartReducers } from "./cart/reducer";
 // import { cartReducers } from "./cart/reducer";
 
 const rootReducer = combineReducers({
-  shop: shoppingReducer,
+  // shop: shoppingReducer,
   loader: loaderReducer,
   productList: productListReducer,
   user: userReducer,

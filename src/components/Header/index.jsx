@@ -29,6 +29,10 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -68,16 +72,21 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const carts = useSelector((state) => state.cart.cartItems);
 
-  //const CartValue = useSelector((state) => shop.cart.length);
-
-  //  console.log("Redux data on shop", shop);
-  //console.log("Redux data on cart", cart);
+  console.log("curent cart remove with by click", carts);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
-  }, [isLoginOpen, isReginOpen]);
+    if (user.isLoggedIn) {
+      setLoginIsOpen(false);
+      //const getCartItems = () => async (dispatch) => {
+        dispatch(getItemFromCart());
+      //}
+      //getCartItems();
+    }
+  }, [isLoginOpen, isReginOpen,user]);
 
   // useEffect(() => {
   //   let count = 0;
@@ -271,12 +280,9 @@ const Header = ({ props, cart, user, state, data, shop }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge
-                    // badgeContent={
-                    //   CartValue.products ? CartValue.products.length : 0
-                    // }
-                    color="secondary"
-                  >
+                  <Badge badgeContent={
+                      carts.length ? carts.length : 0
+                    } color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>

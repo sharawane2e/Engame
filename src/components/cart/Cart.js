@@ -20,54 +20,70 @@ import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 import {
   getItemFromCart,
   removeFromCart,
-} from "../../redux/shopping/shopping-action";
+} from "../../redux/cart/action";
 
-import axios from "axios";
 
-const Cart = ({ shop }) => {
-  //const [cart, setCarts] = useState([]);
+const Cart = ({ cart }) => {
+  //const [carts, setCarts] = useState([]);
   const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
   let auth = localStorage.getItem("auth");
   const user = useSelector((state) => state.user.token);
-  //const carts = useSelector((state) => state.shop.cartItems);
   let res = JSON.parse(auth);
-  const token = useSelector((state) => state.user.token.access_token);
+  // const token = useSelector((state) => state.user.token.access_token);
+
+  const carts = useSelector((state) => state.cart.cartItems);
   const [isProduct, setProduct] = useState("");
+  // const [cartsData, setCarts] = useState(carts);
 
-  // alert(shop);
+ 
+
+  // useEffect(() => {
+  //   //const fetchCartItem = async () => {
+  //     dispatch(loadingStart());
+  //       dispatch(getItemFromCart())
+  //     dispatch(loadingStop());
+  //   //   fetch(BASE_URL + "cart/", {
+  //   //     headers: {
+  //   //       Authorization: `Bearer ${token}`,
+  //   //     },
+  //   //   })
+  //   //     .then((response) => response.json())
+  //   //     .then((result) => {
+  //   //       setCarts(result);
+  //   //       setPlanValue(result.planValue);
+  //   //     });
+  //   //   dispatch(loadingStop());
+  //   // };
+  //   //fetchCartItem();
+  // },[]);
+
   useEffect(() => {
-    dispatch(getItemFromCart());
-    // const fetchCartItem = async () => {
-    //   dispatch(loadingStart());
-    //   await fetch(BASE_URL + "cart/", {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //     .then((response) => response.json())
-    //     .then((result) => {
-    //       setCarts(result);
-    //       setPlanValue(result.planValue);
-    //     });
-    //   dispatch(loadingStop());
-    // };
-    // fetchCartItem();
-  }, []);
+      
+  // dispatch(getItemFromCart());
+   dispatch(getItemFromCart());
+  console.log("remove carts",carts);
 
-  useEffect(() => {
-    //dispatch(removeFromCart(isProduct));
-  });
+  }, [carts.length])
 
-  const handleRemove = (productId) => {
+  
+  // dispatch(removeFromCart(isProduct));
+
+  const handleRemove = async(isProduct) => {
     // const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
     //   headers: { Authorization: `Bearer ${res.token.access_token}` },
     // });
     // const item = carts.filter((x) => x.id !== productId);
-    // setCarts(item);
+    //setCarts(item);
+
+    dispatch(removeFromCart(isProduct));
+    //dispatch(getItemFromCart());
+    console.log("remove carts",carts);
+    //setCarts(productId);
   };
 
   // handleCheckout
@@ -115,7 +131,7 @@ const Cart = ({ shop }) => {
           </Container>
         </div>
         <div className="shoping-cart">
-          {shop.length != 0 ? (
+          {carts.length !== 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -156,7 +172,7 @@ const Cart = ({ shop }) => {
 
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
-                  {shop.map((item, index) => {
+                  {carts.map((item, index) => {
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
@@ -243,7 +259,6 @@ const Cart = ({ shop }) => {
                                   <span>Subscription:</span>
                                   <select
                                     className="border-radius"
-                                    defaultValue="0"
                                   >
                                     <option
                                       value="days"
@@ -280,7 +295,7 @@ const Cart = ({ shop }) => {
                                     id={"input-filed" + item.id}
                                     variant="outlined"
                                     value={item.plan_value}
-                                    onChange={item.plan_value}
+                                   // onChange={item.plan_value}
                                   />
                                   <span className="shoping-cart__input-days">
                                     {item.plan_type}
@@ -300,10 +315,8 @@ const Cart = ({ shop }) => {
                                     className="shoping-cart__tool-delete"
                                     onClick={() => {
                                       // dispatch(removeFromCart(item.id));
-                                      // handleRemove(item.id);
-                                      // setProduct(item.id);
-                                      dispatch(removeFromCart(item.id));
-                                      // dispatch(removeFromCart(item.id));
+                                       handleRemove(item.id);
+                                      //setProduct(item.id);
                                     }}
                                   />
                                 </Typography>
@@ -316,7 +329,7 @@ const Cart = ({ shop }) => {
                   })}
                   <div className="continue-button">
                     <Link to="/">
-                      <CustomButton className="secondary-button shopping-button">
+                      <CustomButton className="secondary-button">
                         <PlayCircleFilledWhiteIcon className="margin-right" />
                         Continue Shopping
                       </CustomButton>
@@ -337,7 +350,7 @@ const Cart = ({ shop }) => {
                     </div>
                     <div className="shoping-cart__coupon-amount">
                       $
-                      {shop
+                      {carts
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}
                     </div>
@@ -379,7 +392,7 @@ const Cart = ({ shop }) => {
 
 const mapDispatchToProp = (state) => {
   return {
-    shop: state.shop.cartItems,
+    cart: state.cart.cartItems,
   };
 };
 

@@ -7,7 +7,9 @@ import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { useHistory } from "react-router-dom";
-import { addToCart } from "../../redux/shopping/shopping-action";
+import {
+  addToCart,
+} from "../../redux/cart/action";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
@@ -69,12 +71,10 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     currency: "$",
   };
 
-  const handleCart = () => {
-    dispatch(loadingStart());
+  const handleAddCart = async() => {
     dispatch(addToCart(user));
+    Toaster.sucess("You have add successfully!", "topCenter");
     onClose();
-    dispatch(loadingStop());
-    // Toaster.sucess("You have add successfully!", "topCenter");
     // fetch(BASE_URL + "cart/", {
     //   method: "POST",
     //   headers: {
@@ -85,10 +85,8 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     // })
     //   .then((response) => response.json())
     //   .then((result) => {
+    //     // console.log(result);
     //     history.push("/");
-    //     console.log("add to cart", result);
-    //     dispatch(addToCart(result.id));
-    //     // dispatch(addToCart(result.id));
     //     onClose();
     //   });
   };
@@ -123,7 +121,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   return (
     <>
       <div className="subscription-type">
-        <select onChange={handleChange}>
+        <select onChange={handleChange} defaultValue="hits">
           <option value="days">Number of days</option>
           <option value="hits" selected>
             Number of hits
@@ -152,8 +150,8 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
       <div className="popup-container__footer">
         <CustomButton
           className="primary-button add--card"
-          onClick={handleCart}
-          disabled={valuePrice <= 0 || valuePrice == "" ? true : false}
+          onClick={handleAddCart}
+          disabled={valuePrice == 0 || valuePrice == "" ? true : false}
         >
           <ShoppingCartIcon /> Add to Cart
         </CustomButton>
