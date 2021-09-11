@@ -68,7 +68,7 @@ function Purchased(props) {
         .then((result) => {
           if (result) {
             Toaster.sucess(result.details, "topCenter");
-            // window.location.reload();
+            //window.location.reload();
           }
           // history.push(history.path);
         });
@@ -294,24 +294,8 @@ function Purchased(props) {
                               </span>
                               <BorderLinearProgress
                                 variant="determinate"
-                                value={
-                                  (item.remaining_value * 50) / 1000
-                                    ? 50
-                                    : ""
-                                    ? (item.remaining_value * 80) / 1000
-                                      ? 80
-                                      : ""
-                                    : "s"
-                                }
-                                className={
-                                  (item.remaining_value * 50) / 1000
-                                    ? "progress-bar progress-red"
-                                    : ""
-                                    ? (item.remaining_value * 80) / 1000
-                                      ? "progress-bar progress-yellow"
-                                      : ""
-                                    : "progress-bar progress-green"
-                                }
+                                value={50}
+                                className="progress-bar progress-red"
                               />
                             </Typography>
                           </Grid>
