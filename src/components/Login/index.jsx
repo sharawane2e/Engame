@@ -69,7 +69,7 @@ class Login extends Component {
           this.props.dispatch(loadingStop());
           if (data.access_token) {
             this.props.dispatch(loginUser(data));
-            Toaster.sucess("You login successfully!", "topCenter");
+            //Toaster.sucess("You login successfully!", "topCenter");
           } else {
             localStorage.removeItem("auth");
           }
@@ -134,7 +134,7 @@ class Login extends Component {
                 htmlFor="standard-adornment-email"
                 className="input-label"
               >
-                E-mail address
+                E-mail address / Usernames
               </InputLabel>
               <FormControl className="form-area__control">
                 <TextField

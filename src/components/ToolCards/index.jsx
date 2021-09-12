@@ -249,14 +249,6 @@ const ToolCards = () => {
             toolId={popupId}
             onClose={() => setSubscriptionPopup(false)}
           />
-          {/* <div className="popup-container__footer">
-            <CustomButton
-              className="primary-button add--card"
-              onClick={handleCart}
-            >
-              <ShoppingCartIcon /> Add to Cart
-            </CustomButton>
-          </div> */}
         </CustomPopup>
         {/*End */}
       </Toolbar>
