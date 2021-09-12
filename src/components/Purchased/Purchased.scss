@@ -58,9 +58,10 @@
     @include space(
       padding,
       left-right,
-      $padding-12 !important,
-      $padding-8 !important
+      $padding-0 !important,
+     0 !important
     );
+    @include space(padding, top, $padding-5 !important, 0);
   }
   #{&}__tool-margin {
     @include space(margin, top, $padding-10, 0);
@@ -183,7 +184,7 @@
     }
   }
   .accordion-margin {
-    @include space(margin, top, $padding-5, 0);
+    @include space(margin, top, $margin-3, 0);
   }
   .show--toogle {
     color: $dark-gray;

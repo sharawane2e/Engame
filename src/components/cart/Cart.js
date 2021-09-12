@@ -128,7 +128,7 @@ const Cart = () => {
                   {cart.map((item, index) => {
                     return (
                       <Paper
-                        className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
+                        className="shoping-cart__tool-card card-box-shadow border--colordata border-radius"
                         key={index}
                       >
                         <Grid container spacing={3}>
