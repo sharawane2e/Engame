@@ -49,6 +49,9 @@ function Purchased(props) {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+
+  
+
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
@@ -96,7 +99,7 @@ function Purchased(props) {
         });
     };
     myWwidgets();
-  }, []);
+  }, [token]);
 
   return (
     <>

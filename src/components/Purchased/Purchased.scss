@@ -23,7 +23,7 @@
       @include font-size($font-xx-reg);
     }
     .tab--button {
-      width: 120px;
+      width: 130px;
       display: flex;
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);

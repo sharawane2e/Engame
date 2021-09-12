@@ -18,7 +18,7 @@ import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
 // import { useDispatch } from "react-redux";
 // import { connect } from "react-redux";
-import { connect, useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
@@ -31,7 +31,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import {
   getItemFromCart,
-  removeFromCart,
 } from "../../redux/cart/action";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,18 +60,16 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user, state, data, shop }) => {
+const Header = ({ props, cart, state, data, shop }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  // const [state] = useState(data);
   const classes = useStyles();
-  // const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
+  const user = useSelector((state) => state.user);
   //const carts = useSelector((state) =>cart)
 
 
@@ -82,12 +79,7 @@ const Header = ({ props, cart, user, state, data, shop }) => {
     document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
-      //const getCartItems = () => async (dispatch) => {
-
-        dispatch(getItemFromCart());
-        console.log("curent header data with add to cart click", carts);
-      //}
-      //getCartItems();
+      dispatch(getItemFromCart());
     }
 
   }, [isLoginOpen, isReginOpen,user]);
@@ -338,13 +330,5 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log("state data items with header",state.cart.cartItems)
-  return {
-    cart: state.cart.cartItems,
-    user: state.user,
-    // shop: state.shop,
-  };
-};
 
-export default connect(mapStateToProps)(Header);
+export default Header;

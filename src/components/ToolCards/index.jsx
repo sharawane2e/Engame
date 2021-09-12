@@ -40,6 +40,7 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+
   
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);

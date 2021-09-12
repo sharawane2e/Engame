@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import { connect, useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import empty from "../../assets/images/empty.gif";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Breadcrumbs } from "@material-ui/core";
@@ -20,68 +20,24 @@ import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 import {
   getItemFromCart,
   removeFromCart,
 } from "../../redux/cart/action";
 
 
-const Cart = ({ prop ,cart }) => {
-  //const [carts, setCarts] = useState([]);
-  const [planValue, setPlanValue] = useState();
+const Cart = () => {
   const dispatch = useDispatch();
-  let auth = localStorage.getItem("auth");
   const user = useSelector((state) => state.user.token);
-  let res = JSON.parse(auth);
-  // const token = useSelector((state) => state.user.token.access_token);
-
-  //const carts = useSelector((state) => state.cart.cartItems);
-  const carts = useSelector((state) => state.cart.cartItems);
-  const [isProduct, setProduct] = useState("");
-  // const [cartsData, setCarts] = useState(carts);
-
-  
-
-  
-  
-  // useEffect(() => {
-  //   //const fetchCartItem = async () => {
-  //     dispatch(loadingStart());
-  //       dispatch(getItemFromCart())
-  //     dispatch(loadingStop());
-  //   //   fetch(BASE_URL + "cart/", {
-  //   //     headers: {
-  //   //       Authorization: `Bearer ${token}`,
-  //   //     },
-  //   //   })
-  //   //     .then((response) => response.json())
-  //   //     .then((result) => {
-  //   //       setCarts(result);
-  //   //       setPlanValue(result.planValue);
-  //   //     });
-  //   //   dispatch(loadingStop());
-  //   // };
-  //   //fetchCartItem();
-  // },[]);
+  const cart = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
    dispatch(getItemFromCart());
   },[])
 
-  
-  // dispatch(removeFromCart(isProduct));
-
   const handleRemove = async(isProduct) => {
      dispatch(removeFromCart(isProduct));
-    //  dispatch(getItemFromCart());
-     console.log("remove carts",carts);
   };
-
-
-  // useEffect(() => {
-  //   dispatch(getItemFromCart());
-  //  },[])
 
   // handleCheckout
   const handleCheckout = async () => {
@@ -143,7 +99,7 @@ const Cart = ({ prop ,cart }) => {
                   xl={8}
                   lg={8}
                   md={8}
-                  sm={12}
+                  sm={6}
                   xs={12}
                   className="shoping-cart__left-card"
                 >
@@ -154,7 +110,7 @@ const Cart = ({ prop ,cart }) => {
                   xl={4}
                   lg={4}
                   md={4}
-                  sm={12}
+                  sm={6}
                   xs={12}
                   className="shoping-cart__right-card"
                 >
@@ -387,11 +343,5 @@ const Cart = ({ prop ,cart }) => {
   );
 };
 
-const mapDispatchToProp = (state) => {
-  console.log("state main cred data items with cart",state.cart.cartItems)
-  return {
-    cart: state.cart.cartItems,
-  };
-};
 
-export default connect(mapDispatchToProp)(Cart);
+export default Cart;

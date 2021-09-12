@@ -167,6 +167,9 @@ a {
   // @include bgcolor($gray-primary);
   min-height: 850px;
   z-index: 99;
+  @include breakpoint(Ipad) {
+    min-height: 900px;
+  }
   #{&}__bredcrum_inr {
     width: 100%;
     z-index: 99;
