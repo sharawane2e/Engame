@@ -83,11 +83,11 @@ const Header = ({ props, cart, user, state, data, shop }) => {
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
       //const getCartItems = () => async (dispatch) => {
-        dispatch(getItemFromCart());
-        console.log("curent header data with add to cart click", carts);
+      dispatch(getItemFromCart());
+        //console.log("curent header data with add to cart click", carts);
       }
-      getCartItems();
-    }
+      //getCartItems();
+    
   }, [isLoginOpen, isReginOpen,user]);
 
   // useEffect(() => {
