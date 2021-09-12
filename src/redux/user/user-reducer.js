@@ -7,7 +7,7 @@ const getAuthState = () => {
   const auth = localStorage.getItem("auth");
   try {
     const authObj = JSON.parse(auth);
-   // const { access_token, refresh_token } = authObj.token;
+    const { access_token, refresh_token } = authObj.token;
     return authObj;
   } catch (error) {
     return initialState;
