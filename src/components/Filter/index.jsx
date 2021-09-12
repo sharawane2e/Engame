@@ -44,7 +44,7 @@ const Home = () => {
             className="flexGrow filter-inputsection__form"
           >
             <IconButton className="iconButton search-icon" aria-label="menu">
-              <SearchIcon fontSize="large" />
+              <SearchIcon fontSize="middle" />
             </IconButton>
             <InputBase className="input" />
             <Divider className="divider" orientation="vertical" />

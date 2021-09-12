@@ -53,7 +53,7 @@ body {
    @include space(padding, all, $padding-16, 0);
 }
 .divider {
-  height: 35px !important;
+  height: 45px !important;
   margin: 4px !important;
   @include breakpoint(Ipad-pro) {
     height: 30px !important;
@@ -152,7 +152,7 @@ a {
 .bredcrum-conatiner {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   // @include bgcolor($gray-primary);
-  min-height: 850px;
+  min-height: 895px;
   z-index: 99;
   @include breakpoint(Ipad) {
     min-height: 900px;

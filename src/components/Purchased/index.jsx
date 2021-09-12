@@ -24,6 +24,7 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 // import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -253,13 +254,17 @@ function Purchased(props) {
                             component="div"
                             className="purchased-tool__embeded-icon border-radius icon-margin"
                           >
+                            <Tooltip title="Pause" placement="top">
                             <PauseIcon />
+                             </Tooltip>
                           </Typography>
                           <Typography
                             component="div"
                             className="purchased-tool__embeded-icon border-radius"
                           >
-                            <SystemUpdateAltIcon />
+                             <Tooltip title="Embeded Code" placement="top">
+                              <SystemUpdateAltIcon />
+                             </Tooltip>
                           </Typography>
                         </Grid>
 

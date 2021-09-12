@@ -18,6 +18,7 @@ import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
+import Tooltip from '@material-ui/core/Tooltip';
 // import PropTypes from "prop-types";
 // import Box from "@material-ui/core/Box";
 // import Typography from "@material-ui/core/Typography";
@@ -122,8 +123,9 @@ const ToolCards = () => {
                                   setPopup(true);
                                   setPopupId(tooldata.id);
                                 }}
-                              >
-                                <SystemUpdateAltIcon />
+                              > <Tooltip title="Embeded Code" placement="top">
+                                  <SystemUpdateAltIcon />
+                                </Tooltip>
                               </div>
                             ) : null}
                           </div>
@@ -136,7 +138,9 @@ const ToolCards = () => {
                                   setPopupId(tooldata.id);
                                 }}
                               >
+                              <Tooltip title="Add To Cart" placement="top">
                                 <ShoppingCartIcon />
+                                </Tooltip>
                               </div>
                             ) : null}
                           </div>

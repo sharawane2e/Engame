@@ -32,6 +32,7 @@ import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import {
   getItemFromCart,
 } from "../../redux/cart/action";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -254,7 +255,9 @@ const Header = ({ props, cart, state, data, shop }) => {
                   <Badge badgeContent={
                       carts.length ? carts.length : 0
                     } color="secondary">
+                 <Tooltip title="Cart Items" placement="top">
                     <ShoppingCartIcon />
+                    </Tooltip>
                   </Badge>
                 </Link>
               </div>

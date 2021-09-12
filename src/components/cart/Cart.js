@@ -24,7 +24,7 @@ import {
   getItemFromCart,
   removeFromCart,
 } from "../../redux/cart/action";
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -143,7 +143,7 @@ const Cart = () => {
                           >
                             <ButtonBase className="curent-tool-img">
                               <img
-                                alt=""
+                                alt= {item.widget.name} title= {item.widget.name}
                                 src={BASE_URL_1 + item.widget.imgUrl}
                               />
                             </ButtonBase>
@@ -264,15 +264,17 @@ const Cart = () => {
                               >
                                 <Typography component="div">
                                   {/* <DoneIcon className="shoping-cart__tool-tick" />{" "} */}
-                                  <DeleteIcon
-                                    className="shoping-cart__tool-delete"
-                                    onClick={() => {
-                                      // dispatch(removeFromCart(item.id));
-                                       handleRemove(item.id);
-                                      //setProduct(item.id);
-                                    }}
-                                  />
-                                </Typography>
+                                  <Tooltip title="Delete" placement="top">
+                                      <DeleteIcon
+                                        className="shoping-cart__tool-delete"
+                                        onClick={() => {
+                                          // dispatch(removeFromCart(item.id));
+                                          handleRemove(item.id);
+                                          //setProduct(item.id);
+                                        }}
+                                      />
+                                    </Tooltip>
+                                 </Typography>
                               </Grid>
                             </Grid>
                           </Grid>
