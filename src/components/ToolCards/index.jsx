@@ -37,8 +37,6 @@ const ToolCards = () => {
   const [productShow, setProductShow] = useState(products);
   const dispatch = useDispatch();
 
-  console.log("user already login",token)
-
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
