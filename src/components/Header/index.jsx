@@ -83,19 +83,13 @@ const Header = ({ props, cart, user, state, data, shop }) => {
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
       //const getCartItems = () => async (dispatch) => {
-<<<<<<< HEAD
-      dispatch(getItemFromCart());
-        //console.log("curent header data with add to cart click", carts);
-      }
-      //getCartItems();
-    
-=======
+
         dispatch(getItemFromCart());
         console.log("curent header data with add to cart click", carts);
       //}
       //getCartItems();
     }
->>>>>>> parent of df8bed6 (cart new update)
+
   }, [isLoginOpen, isReginOpen,user]);
 
   // useEffect(() => {
