@@ -22,7 +22,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
-// import { useHistory } from "react-router-dom";
+ import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -44,7 +44,7 @@ function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
 
-  // let history = useHistory();
+  let history = useHistory();
   // console.log(history);
 
   const dispatch = useDispatch();
@@ -69,6 +69,7 @@ function Purchased(props) {
           if (result) {
             Toaster.sucess(result.details, "topCenter");
             //window.location.reload();
+            history.push(history.path);
           }
           // history.push(history.path);
         });
@@ -151,7 +152,7 @@ function Purchased(props) {
           </Grid>
           {/*Card start */}
           {widgets.map((item, index) => {
-            console.log(item);
+            // console.log(item);
             let purchasedDateTime = new Date(item.purchase_date);
             purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
             const purchase_date = purchasedDateTime.split(",")[0];
