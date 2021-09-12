@@ -27,15 +27,6 @@ body {
 .progress-red .MuiLinearProgress-barColorPrimary {
   background-color: $secondary !important;
 }
-// .progress-yellow {
-//   background-color: $yelow !important;
-// }
-// .progress-green {
-//   background-color: $green-color !important;
-// }
-// .progress-red {
-//   background-color: $secondary !important;
-// }
 .cursor--pointer {
   cursor: pointer;
 }
@@ -56,12 +47,10 @@ body {
 }
 .input {
   flex: 1;
-  //   margin-left: map-get($map: $margin, $key: margin-8);
-  @include space(margin, left, $margin-8, 0);
+   @include space(margin, left, $margin-8, 0);
 }
 .iconButton {
-  //   padding: map-get($map: $padding, $key: padding-10);
-  @include space(padding, all, $padding-16, 0);
+   @include space(padding, all, $padding-16, 0);
 }
 .divider {
   height: 35px !important;
@@ -73,11 +62,9 @@ body {
 
 .large-hedding {
   @include color($black-secondary);
-  // color: map-get($map: $text-color, $key: black-drak);
 }
 .input-label {
-  //   margin-bottom: map-get($map: $margin, $key: margin-10);
-  @include space(margin, bottom, $margin-10, 0);
+   @include space(margin, bottom, $margin-10, 0);
 }
 
 .validated-error {
