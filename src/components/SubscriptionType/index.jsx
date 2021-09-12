@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom";
 import {
   addToCart,
 } from "../../redux/cart/action";
+import { connect, useSelector } from "react-redux";
+import Toaster from "../../util/Toaster";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
