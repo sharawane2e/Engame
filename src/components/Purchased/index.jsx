@@ -68,7 +68,7 @@ function Purchased(props) {
         .then((result) => {
           if (result) {
             Toaster.sucess(result.details, "topCenter");
-            // window.location.reload();
+            //window.location.reload();
           }
           // history.push(history.path);
         });

@@ -85,8 +85,8 @@ const Header = ({ props, cart, user, state, data, shop }) => {
       //const getCartItems = () => async (dispatch) => {
         dispatch(getItemFromCart());
         console.log("curent header data with add to cart click", carts);
-      //}
-      //getCartItems();
+      }
+      getCartItems();
     }
   }, [isLoginOpen, isReginOpen,user]);
 
