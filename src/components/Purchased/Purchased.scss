@@ -5,7 +5,7 @@
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   #{&}__container {
     @include space(padding, top, $padding-10, 0);
-    @include space(padding, top-bottom, $padding-35, $padding-75);
+    @include space(padding, top-bottom, $padding-40, $padding-40);
   }
   .textbox-hide {
     outline: 0;
@@ -23,7 +23,7 @@
       @include font-size($font-xx-reg);
     }
     .tab--button {
-      width: 120px;
+      width: 130px;
       display: flex;
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);
@@ -35,6 +35,11 @@
       align-items: $align-center;
       text-align: $align-center;
       cursor: pointer;
+      @include breakpoint(Ipad) {
+          width: 86px;
+          line-height: 1.2rem;
+          padding: 5px;
+      }
     }
     .tab--active {
       background-color: $secondary;
@@ -173,6 +178,9 @@
   }
   .icon-margin {
     @include space(margin, right, $padding-15, 0);
+    @include breakpoint(Ipad) {
+      @include space(margin, right,0, 0);
+    }
   }
   .accordion-margin {
     @include space(margin, top, $padding-5, 0);

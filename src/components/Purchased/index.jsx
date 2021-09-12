@@ -49,6 +49,9 @@ function Purchased(props) {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+
+  
+
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
@@ -68,11 +71,7 @@ function Purchased(props) {
         .then((result) => {
           if (result) {
             Toaster.sucess(result.details, "topCenter");
-<<<<<<< HEAD
-            // window.location.reload();
-=======
             //window.location.reload();
->>>>>>> parent of 144673d (chnages update with scss and data)
           }
           // history.push(history.path);
         });
@@ -100,7 +99,7 @@ function Purchased(props) {
         });
     };
     myWwidgets();
-  }, []);
+  }, [token]);
 
   return (
     <>

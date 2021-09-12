@@ -16,13 +16,9 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
+import { useDispatch, useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 // import { connect } from "react-redux";
-<<<<<<< HEAD
-import { connect,useDispatch, useSelector } from "react-redux";
-=======
-import { connect, useDispatch, useSelector } from "react-redux";
->>>>>>> parent of 144673d (chnages update with scss and data)
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
@@ -35,7 +31,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import {
   getItemFromCart,
-  removeFromCart,
 } from "../../redux/cart/action";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,45 +60,26 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user, state, data, shop }) => {
+const Header = ({ props, cart, state, data, shop }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  // const [state] = useState(data);
   const classes = useStyles();
-  // const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
-  //const carts = useSelector((state) =>cart)
-
-
-
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
-      const getCartItems = () => async (dispatch) => {
-        dispatch(getItemFromCart());
-        console.log("curent header data with add to cart click", carts);
-      }
-      getCartItems();
+      dispatch(getItemFromCart());
     }
+
   }, [isLoginOpen, isReginOpen,user]);
 
-  // useEffect(() => {
-  //   let count = 0;
-  //   cart.forEach((item) => {
-  //     count += item.qty;
-  //   });
-  //   setCartCount(count);
-  //   if (user.isLoggedIn) {
-  //     setLoginIsOpen(false);
-  //   }
-  // }, [cart, cartCount, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -167,7 +143,6 @@ const Header = ({ props, cart, user, state, data, shop }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
       <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
           My Widgets
@@ -264,16 +239,6 @@ const Header = ({ props, cart, user, state, data, shop }) => {
 
             {user.isLoggedIn ? (
               <div className={classes.sectionDesktop}>
-                {/* <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton> */}
                 <div className="user-after-login">
                   <CustomButton onClick={handleProfileMenuOpen}>
                     {user.token.user.first_name} <ArrowDropDownIcon />
@@ -340,13 +305,5 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log("state data items with header",state.cart.cartItems)
-  return {
-    cart: state.cart.cartItems,
-    user: state.user,
-    // shop: state.shop,
-  };
-};
 
-export default connect(mapStateToProps)(Header);
+export default Header;

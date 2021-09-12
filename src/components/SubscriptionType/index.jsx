@@ -10,8 +10,6 @@ import { useHistory } from "react-router-dom";
 import {
   addToCart,
 } from "../../redux/cart/action";
-import { connect, useSelector } from "react-redux";
-import Toaster from "../../util/Toaster";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
@@ -22,9 +20,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   const [valuePrice, setValuePrice] = useState(1000);
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
-  const [itemId] = useSelector((state) => state.cart.cartItems);
-  const intialValues = { email: "" };
-  const [formValues, setFormValues] = useState(intialValues);
+  //const [itemId] = useSelector((state) => state.cart.cartItems);
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
@@ -75,22 +71,8 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
 
   const handleAddCart = async() => {
     dispatch(addToCart(user));
-    Toaster.sucess("You have item add successfully!", "topCenter");
+   // Toaster.sucess("You have item add successfully!", "topCenter");
     onClose();
-    // fetch(BASE_URL + "cart/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${res.token.access_token}`,
-    //   },
-    //   body: JSON.stringify(user),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     // console.log(result);
-    //     history.push("/");
-    //     onClose();
-    //   });
   };
 
   const handleCalculatePrice = (e) => {
@@ -103,7 +85,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   };
 
   useEffect(() => {
-    if (subscription == "days") {
+    if (subscription === "days") {
       setType("days");
       setPrice(valuePrice * base);
       setValuePrice(valuePrice);
@@ -115,10 +97,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     }
   }, [handleChange, subscription, type, price, base]);
 
-  const handleBlur = (e, key) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
+
 
   return (
     <>
@@ -139,7 +118,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
               name="hits"
               className="subscription-type__inputbox"
               value={valuePrice}
-              onBlur={(e) => handleBlur(e, "email")}
+              // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{type}</div>
@@ -153,7 +132,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
         <CustomButton
           className="primary-button add--card"
           onClick={handleAddCart}
-          disabled={valuePrice == 0 || valuePrice == "" ? true : false}
+          disabled={valuePrice === 0 || valuePrice === "" ? true : false}
         >
           <ShoppingCartIcon /> Add to Cart
         </CustomButton>

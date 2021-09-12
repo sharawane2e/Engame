@@ -1,7 +1,7 @@
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   @include bgcolor($gray-secondary);
-  margin-top: 12px;
+  @include space(margin ,top, $padding-20, 0);
   // min-height: 100vh;
   #{&}__container {
     //height: 80vh;
@@ -32,6 +32,9 @@
   #{&}__card-coupon {
     @include space(padding, all, $padding-30, 0);
     @include space(margin, bottom, $margin-10, 0);
+    @include breakpoint(Ipad) {
+      @include space(padding, all, $padding-20, 0);
+    }
   }
   .continue-button {
     display: flex;
@@ -40,6 +43,10 @@
   }
   .margin-right {
     @include space(margin, right, $margin-10, 0);
+    @include breakpoint(Ipad) {
+        width: 20px;
+        @include space(margin, right, $margin-5, 0);
+    }
   }
   #{&}__tool-title {
     @include font-size($font-xl-reg);
@@ -189,7 +196,7 @@
         button {
           @include font-size($font-xmd-reg);
           width: 60%;
-          @include space(padding, top-bottom, $padding-12, 0);
+          @include space(padding, top-bottom, $padding-12, $padding-12);
           text-align: $align-center;
         }
       }
@@ -205,11 +212,15 @@
     .MuiButton-label {
       > svg {
         @include space(margin, right, $margin-15, 0);
+        @include breakpoint(Ipad) {
+          width: 20px;
+          @include space(margin, right, $margin-5, 0);
+        }
       }
     }
     @include breakpoint(Ipad) {
-      width: 106px !important;
-      padding: 10px 16px !important;
+      width: 110px !important;
+      padding: 5px !important;
       .MuiButton-label {
         @include font-size($font-xmd-reg);
       }

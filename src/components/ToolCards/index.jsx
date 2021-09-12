@@ -18,10 +18,10 @@ import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
-import PropTypes from "prop-types";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Skeleton from "@material-ui/lab/Skeleton";
+// import PropTypes from "prop-types";
+// import Box from "@material-ui/core/Box";
+// import Typography from "@material-ui/core/Typography";
+// import Skeleton from "@material-ui/lab/Skeleton";
 // import { addToCart } from "../../redux/shopping/shopping-action";
 
 const ToolCards = () => {
@@ -37,14 +37,10 @@ const ToolCards = () => {
   const [productShow, setProductShow] = useState(products);
   const dispatch = useDispatch();
 
-<<<<<<< HEAD
-=======
-  console.log("user already login",token)
-
->>>>>>> parent of 144673d (chnages update with scss and data)
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+
   
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
