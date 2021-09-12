@@ -29,7 +29,10 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
-import {getItemFromCart} from "../../redux/cart/action";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -58,19 +61,18 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props }) => {
+const Header = ({ props, cart, user, state, data, shop }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   // const [state] = useState(data);
   const classes = useStyles();
   // const [open, setOpen] = useState(false);
-  //const [cartCount, setCartCount] = useState(data);
+  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
-  const user = useSelector((state) =>  state.user);
   //const carts = useSelector((state) =>cart)
 
 
@@ -159,7 +161,7 @@ const Header = ({ props }) => {
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
-     onClose={handleMenuClose}
+      onClose={handleMenuClose}
     >
       {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
       <MenuItem onClick={handleMenuClose}>
@@ -229,6 +231,7 @@ const Header = ({ props }) => {
 
   return (
     <>
+      {/* <ElevationScroll {...props}></ElevationScroll> */}
       <ElevationScroll {...props}>
         <AppBar className="flexGrow header-box " position={"sticky"}>
           <Toolbar className="header-padding header-text-color">
@@ -333,4 +336,13 @@ const Header = ({ props }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  console.log("state data items with header",state.cart.cartItems)
+  return {
+    cart: state.cart.cartItems,
+    user: state.user,
+    // shop: state.shop,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

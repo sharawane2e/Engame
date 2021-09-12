@@ -6,23 +6,23 @@ import { useDispatch } from "react-redux";
 //import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   addToCart,
 } from "../../redux/cart/action";
 
-const SubscriptionType = ({ toolId, onClose }) => {
-  // const [state] = useState(data);
-  // const history = useHistory();
+const SubscriptionType = ({ data, toolId, onClose }) => {
+  const [state] = useState(data);
+  const history = useHistory();
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
   const [valuePrice, setValuePrice] = useState(1000);
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
-  // const [itemId] = useSelector((state) => state.cart.cartItems);
+  const [itemId] = useSelector((state) => state.cart.cartItems);
   const intialValues = { email: "" };
-  // const [formValues, setFormValues] = useState(intialValues);
+  const [formValues, setFormValues] = useState(intialValues);
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
@@ -73,7 +73,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
 
   const handleAddCart = async() => {
     dispatch(addToCart(user));
-      // Toaster.sucess("You have item add successfully!", "topCenter");
+    Toaster.sucess("You have item add successfully!", "topCenter");
     onClose();
     // fetch(BASE_URL + "cart/", {
     //   method: "POST",
@@ -113,10 +113,10 @@ const SubscriptionType = ({ toolId, onClose }) => {
     }
   }, [handleChange, subscription, type, price, base]);
 
-  // const handleBlur = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormValues({ ...formValues, [name]: value });
-  // };
+  const handleBlur = (e, key) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   return (
     <>
@@ -137,7 +137,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
               name="hits"
               className="subscription-type__inputbox"
               value={valuePrice}
-              // onBlur={(e) => handleBlur(e, "email")}
+              onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{type}</div>

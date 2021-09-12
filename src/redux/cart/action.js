@@ -1,14 +1,21 @@
 import * as actionTypes from "./types";
 import axios from "axios";  
 import { BASE_URL } from "../../config/ApiUrl";
-// import { useDispatch } from "react-redux";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+ let auth = localStorage.getItem("auth");
+ let res = JSON.parse(auth);
 
-export const addToCart = (userData) => async (dispatch) => {
+
+// export const removeFromCart = (productId) => async (dispatch, getState) => {
+//   const { data } = await axios.delete(BASE_URL + `cart/detail/${productId}`, {
+//     headers: { Authorization: `Bearer ${res.token.access_token}` },
+//   });
+//   dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: productId });
+// };
+
+
+export const addToCart = (userData, qty) => async (dispatch, getState) => {
   let auth = localStorage.getItem("auth");
  let res = JSON.parse(auth);
-//  const dispatch = useDispatch();
-  dispatch(loadingStart());
    await fetch(BASE_URL + "cart/", {
     method: "POST",
     headers: {
@@ -20,7 +27,6 @@ export const addToCart = (userData) => async (dispatch) => {
     .then((response) => response.json())
     .then((result) => {
        dispatch({ type: actionTypes.CART_ADD_ITEM, payload: result });
-       dispatch(loadingStop());
     });
  
 };
@@ -28,22 +34,17 @@ export const addToCart = (userData) => async (dispatch) => {
 export const getItemFromCart = () => async (dispatch) => {
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
-  dispatch(loadingStart());
   const { data } = await axios.get(BASE_URL + "cart/", {
     headers: { Authorization: `Bearer ${res.token.access_token}` },
   });
-  dispatch({ type: actionTypes.CART_ITEM_GET, payload: data });
-  dispatch(loadingStop());
+  dispatch({ type: actionTypes.GET_CART_ITEM, payload: data });
 };
 
-export const removeFromCart = (productId) => async (dispatch) => {
-  let auth = localStorage.getItem("auth");
-  let res = JSON.parse(auth);
-  dispatch(loadingStart());
+export const removeFromCart = (productId) => async (dispatch,getState) => {
   const { data } = await axios.delete(BASE_URL + `cart/detail/${productId}`, {
     headers: { Authorization: `Bearer ${res.token.access_token}` },
   });
+  console.log("action data will we show",data)
   dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: productId });
-  dispatch(loadingStop());
 };
 

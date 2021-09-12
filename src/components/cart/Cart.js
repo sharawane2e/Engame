@@ -1,8 +1,8 @@
-import React, {useEffect,useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import empty from "../../assets/images/empty.gif";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Breadcrumbs } from "@material-ui/core";
@@ -14,28 +14,76 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
+// import DoneIcon from "@material-ui/icons/Done";
+// import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
-import {getItemFromCart, removeFromCart} from "../../redux/cart/action";
+import axios from "axios";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
 
-const Cart = () => {
+
+const Cart = ({ prop ,cart }) => {
+  //const [carts, setCarts] = useState([]);
+  const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
-  // let auth = localStorage.getItem("auth");
+  let auth = localStorage.getItem("auth");
   const user = useSelector((state) => state.user.token);
-  // let res = JSON.parse(auth);
+  let res = JSON.parse(auth);
+  // const token = useSelector((state) => state.user.token.access_token);
+
+  //const carts = useSelector((state) => state.cart.cartItems);
   const carts = useSelector((state) => state.cart.cartItems);
-  const [type, setType] = useState("");
+  const [isProduct, setProduct] = useState("");
+  // const [cartsData, setCarts] = useState(carts);
+
+  
+
+  
+  
+  // useEffect(() => {
+  //   //const fetchCartItem = async () => {
+  //     dispatch(loadingStart());
+  //       dispatch(getItemFromCart())
+  //     dispatch(loadingStop());
+  //   //   fetch(BASE_URL + "cart/", {
+  //   //     headers: {
+  //   //       Authorization: `Bearer ${token}`,
+  //   //     },
+  //   //   })
+  //   //     .then((response) => response.json())
+  //   //     .then((result) => {
+  //   //       setCarts(result);
+  //   //       setPlanValue(result.planValue);
+  //   //     });
+  //   //   dispatch(loadingStop());
+  //   // };
+  //   //fetchCartItem();
+  // },[]);
 
   useEffect(() => {
    dispatch(getItemFromCart());
   },[])
 
- const handleRemove = async(isProduct) => {
+  
+  // dispatch(removeFromCart(isProduct));
+
+  const handleRemove = async(isProduct) => {
      dispatch(removeFromCart(isProduct));
+    //  dispatch(getItemFromCart());
+     console.log("remove carts",carts);
   };
 
+
+  // useEffect(() => {
+  //   dispatch(getItemFromCart());
+  //  },[])
+
+  // handleCheckout
   const handleCheckout = async () => {
     dispatch(loadingStart());
     const stripe = await loadStripe(STRIPE);
@@ -58,20 +106,10 @@ const Cart = () => {
       console.error(error);
     }
   };
-  
- // alert("set type",type)
 
-  const handleChange = (e) => {
-  setType(e.target.value);
-  if (e.target.value === 1) {
-    setType("days");
-  } else {
-    setType("hits");
-  }
-  }
   return (
     <>
-     <Header />
+      <Header />
       <div className="bredcrum-conatiner ">
         <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
           <Container maxWidth="lg">
@@ -90,7 +128,7 @@ const Cart = () => {
           </Container>
         </div>
         <div className="shoping-cart">
-            {carts.length !== 0 ? (
+            {cart.length !== 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -104,9 +142,9 @@ const Cart = () => {
                   item
                   xl={8}
                   lg={8}
-                  md={6}
-                  sm={6}
-                  xs={4}
+                  md={8}
+                  sm={12}
+                  xs={12}
                   className="shoping-cart__left-card"
                 >
                   Shopping Cart
@@ -116,7 +154,7 @@ const Cart = () => {
                   xl={4}
                   lg={4}
                   md={4}
-                  sm={6}
+                  sm={12}
                   xs={12}
                   className="shoping-cart__right-card"
                 >
@@ -131,7 +169,7 @@ const Cart = () => {
 
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
-                  {carts.map((item, index) => {
+                  {cart.map((item, index) => {
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
@@ -167,13 +205,12 @@ const Cart = () => {
                             <Grid
                               item
                               xs
-                              // md={10}
                               container
                               direction="row"
                               spacing={2}
                               className="shoping-cart__subscription-card"
                             >
-                              <Grid item xl >
+                              <Grid item xs>
                                 <Typography
                                   gutterBottom
                                   component="div"
@@ -219,7 +256,6 @@ const Cart = () => {
                                   <span>Subscription:</span>
                                   <select
                                     className="border-radius"
-                                    onChange={handleChange}
                                   >
                                     <option
                                       value="days"
@@ -311,7 +347,7 @@ const Cart = () => {
                     </div>
                     <div className="shoping-cart__coupon-amount">
                       $
-                      {carts
+                      {cart
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}
                     </div>
@@ -348,8 +384,14 @@ const Cart = () => {
       </div>
       <Footer />
     </>
-
   );
 };
 
-export default Cart;
+const mapDispatchToProp = (state) => {
+  console.log("state main cred data items with cart",state.cart.cartItems)
+  return {
+    cart: state.cart.cartItems,
+  };
+};
+
+export default connect(mapDispatchToProp)(Cart);
