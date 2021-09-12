@@ -37,6 +37,8 @@ const ToolCards = () => {
   const [productShow, setProductShow] = useState(products);
   const dispatch = useDispatch();
 
+  console.log("user already login",token)
+
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
@@ -100,7 +102,7 @@ const ToolCards = () => {
                     >
                       <Paper className="toolcard__imageblck ">
                         <div className="toolcard__image">
-                          <img src={BASE_URL_1 + "/media/" + tooldata.imgUrl} />
+                          <img src={BASE_URL + "media/" + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton

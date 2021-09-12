@@ -18,7 +18,7 @@ import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
 // import { useDispatch } from "react-redux";
 // import { connect } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
@@ -84,7 +84,7 @@ const Header = ({ props, cart, user, state, data, shop }) => {
       setLoginIsOpen(false);
       const getCartItems = () => async (dispatch) => {
         dispatch(getItemFromCart());
-        // console.log("curent header data with add to cart click", carts);
+        console.log("curent header data with add to cart click", carts);
       }
       getCartItems();
     }
