@@ -14,7 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
-// import DoneIcon from "@material-ui/icons/Done";
+import DoneIcon from "@material-ui/icons/Done";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
@@ -259,7 +259,8 @@ const Cart = () => {
                                 className="shoping-cart__tool-icons"
                               >
                                 <Typography component="div">
-                                  {/* <DoneIcon className="shoping-cart__tool-tick" />{" "} */}
+                                  <DoneIcon className="shoping-cart__tool-tick" />
+                                  |
                                   <Tooltip title="Delete" placement="top">
                                     <DeleteIcon
                                       className="shoping-cart__tool-delete"

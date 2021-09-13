@@ -72,7 +72,7 @@ const ToolCards = () => {
             localStorage.removeItem("auth");
             dispatch(loadingStop());
             history.push("/");
-            console.log("token expire", response);
+            // console.log("token expire", response);
           } else {
             setProductShow(response);
           }
