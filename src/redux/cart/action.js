@@ -40,5 +40,5 @@ export const removeFromCart = (productId) => async (dispatch) => {
   });
   // console.log("action data will we show", data);
   dispatch(loadingStop());
-  dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: data });
+  dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: productId });
 };

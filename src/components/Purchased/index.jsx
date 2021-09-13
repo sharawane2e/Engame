@@ -101,6 +101,10 @@ function Purchased(props) {
     myWwidgets();
   }, [token]);
 
+  // useEffect(() => {
+  //   isShow;
+  // });
+
   return (
     <>
       <div className="purchased-tool bredcrum-conatiner">
