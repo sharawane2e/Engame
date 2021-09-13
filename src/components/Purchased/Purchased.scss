@@ -35,6 +35,11 @@
       align-items: $align-center;
       text-align: $align-center;
       cursor: pointer;
+      @include breakpoint(Ipad-pro) {
+        width: 120px;
+        line-height: 1.2rem;
+        padding: 5px;
+      }
       @include breakpoint(Ipad) {
         width: 86px;
         line-height: 1.2rem;

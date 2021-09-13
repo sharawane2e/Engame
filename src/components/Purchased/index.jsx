@@ -8,8 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import Footer from "../../components/Footer";
 import Paper from "@material-ui/core/Paper";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
-import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
-import TimerIcon from "@material-ui/icons/Timer";
+// import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
+// import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +44,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
-  const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
+  // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
 
   // let history = useHistory();
   // console.log(history);
