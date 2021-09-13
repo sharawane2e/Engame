@@ -47,13 +47,13 @@ body {
 }
 .input {
   flex: 1;
-   @include space(margin, left, $margin-8, 0);
+  @include space(margin, left, $margin-8, 0);
 }
 .iconButton {
-   @include space(padding, all, $padding-16, 0);
+  @include space(padding, all, $padding-16, 0);
 }
 .divider {
-  height: 45px !important;
+  height: 35px !important;
   margin: 4px !important;
   @include breakpoint(Ipad-pro) {
     height: 30px !important;
@@ -64,7 +64,7 @@ body {
   @include color($black-secondary);
 }
 .input-label {
-   @include space(margin, bottom, $margin-10, 0);
+  @include space(margin, bottom, $margin-10, 0);
 }
 
 .validated-error {

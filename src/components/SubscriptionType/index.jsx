@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch, useSelector } from "react-redux";
-import Toaster from "../../util/Toaster";
+import { useDispatch } from "react-redux";
+//import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { useHistory } from "react-router-dom";
-import {
-  addToCart,
-} from "../../redux/cart/action";
+//import { useHistory } from "react-router-dom";
+import { addToCart } from "../../redux/cart/action";
 
-const SubscriptionType = ({ data, toolId, onClose }) => {
-  const [state] = useState(data);
-  const history = useHistory();
+const SubscriptionType = ({ toolId, onClose }) => {
+  //const [state] = useState(data);
+  // const history = useHistory();
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
@@ -69,9 +67,9 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     currency: "$",
   };
 
-  const handleAddCart = async() => {
+  const handleAddCart = async () => {
     dispatch(addToCart(user));
-   // Toaster.sucess("You have item add successfully!", "topCenter");
+    // Toaster.sucess("You have item add successfully!", "topCenter");
     onClose();
   };
 
@@ -96,8 +94,6 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
       setValuePrice(valuePrice);
     }
   }, [handleChange, subscription, type, price, base]);
-
-
 
   return (
     <>

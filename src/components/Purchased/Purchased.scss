@@ -36,9 +36,9 @@
       text-align: $align-center;
       cursor: pointer;
       @include breakpoint(Ipad) {
-          width: 86px;
-          line-height: 1.2rem;
-          padding: 5px;
+        width: 86px;
+        line-height: 1.2rem;
+        padding: 5px;
       }
     }
     .tab--active {
@@ -55,19 +55,11 @@
     }
   }
   #{&}__tool-type-data {
-    @include space(
-      padding,
-      left-right,
-      $padding-0 !important,
-     0 !important
-    );
+    @include space(padding, left-right, $padding-0 !important, 0 !important);
     @include space(padding, top, $padding-5 !important, 0);
   }
   #{&}__tool-margin {
     @include space(margin, top, $padding-10, 0);
-  }
-  .show--accordion_0 {
-    display: block;
   }
 
   #{&}__purchased-date {
@@ -180,7 +172,7 @@
   .icon-margin {
     @include space(margin, right, $padding-15, 0);
     @include breakpoint(Ipad) {
-      @include space(margin, right,0, 0);
+      @include space(margin, right, 0, 0);
     }
   }
   .accordion-margin {

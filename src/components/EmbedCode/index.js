@@ -25,19 +25,19 @@ const EmbedCode = ({ data, toolId }) => {
         type: "application/octet-stream",
       })
     );
-
     link.download = "embeded.text";
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {
-      Toaster.sucess("You Download successfully!", "topCenter");
+      //   Toaster.sucess("You Download successfully!", "topCenter");
       window.URL.revokeObjectURL(link);
     }, 200);
   };
 
   return (
     <div className="embeded-conatiner">
-      <textarea
+      <TextareaAutosize
+        id="text-area"
         ref={textAreaRef}
         className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
         value={state

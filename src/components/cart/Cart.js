@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import empty from "../../assets/images/empty.gif";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Breadcrumbs } from "@material-ui/core";
@@ -20,11 +20,8 @@ import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
-import {
-  getItemFromCart,
-  removeFromCart,
-} from "../../redux/cart/action";
-import Tooltip from '@material-ui/core/Tooltip';
+import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -32,11 +29,11 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
-   dispatch(getItemFromCart());
-  },[])
+    dispatch(getItemFromCart());
+  }, []);
 
-  const handleRemove = async(isProduct) => {
-     dispatch(removeFromCart(isProduct));
+  const handleRemove = (isProduct) => {
+    dispatch(removeFromCart(isProduct));
   };
 
   // handleCheckout
@@ -84,7 +81,7 @@ const Cart = () => {
           </Container>
         </div>
         <div className="shoping-cart">
-            {cart.length !== 0 ? (
+          {cart.length !== 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -143,7 +140,8 @@ const Cart = () => {
                           >
                             <ButtonBase className="curent-tool-img">
                               <img
-                                alt= {item.widget.name} title= {item.widget.name}
+                                alt={item.widget.name}
+                                title={item.widget.name}
                                 src={BASE_URL_1 + item.widget.imgUrl}
                               />
                             </ButtonBase>
@@ -210,13 +208,11 @@ const Cart = () => {
                                   className="shoping-cart__subscription"
                                 >
                                   <span>Subscription:</span>
-                                  <select
-                                    className="border-radius"
-                                  >
+                                  <select className="border-radius">
                                     <option
                                       value="days"
                                       selected={
-                                        item.plan_type == "days"
+                                        item.plan_type === "days"
                                           ? item.plan_type
                                           : null
                                       }
@@ -226,7 +222,7 @@ const Cart = () => {
                                     <option
                                       value="hits"
                                       selected={
-                                        item.plan_type == "hits"
+                                        item.plan_type === "hits"
                                           ? item.plan_type
                                           : null
                                       }
@@ -248,7 +244,7 @@ const Cart = () => {
                                     id={"input-filed" + item.id}
                                     variant="outlined"
                                     value={item.plan_value}
-                                   // onChange={item.plan_value}
+                                    // onChange={item.plan_value}
                                   />
                                   <span className="shoping-cart__input-days">
                                     {item.plan_type}
@@ -265,16 +261,16 @@ const Cart = () => {
                                 <Typography component="div">
                                   {/* <DoneIcon className="shoping-cart__tool-tick" />{" "} */}
                                   <Tooltip title="Delete" placement="top">
-                                      <DeleteIcon
-                                        className="shoping-cart__tool-delete"
-                                        onClick={() => {
-                                          // dispatch(removeFromCart(item.id));
-                                          handleRemove(item.id);
-                                          //setProduct(item.id);
-                                        }}
-                                      />
-                                    </Tooltip>
-                                 </Typography>
+                                    <DeleteIcon
+                                      className="shoping-cart__tool-delete"
+                                      onClick={() => {
+                                        // dispatch(removeFromCart(item.id));
+                                        handleRemove(item.id);
+                                        //setProduct(item.id);
+                                      }}
+                                    />
+                                  </Tooltip>
+                                </Typography>
                               </Grid>
                             </Grid>
                           </Grid>
@@ -344,6 +340,5 @@ const Cart = () => {
     </>
   );
 };
-
 
 export default Cart;

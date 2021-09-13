@@ -7,7 +7,6 @@ import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import { useDispatch, useSelector } from "react-redux";
-// import { addToCart } from "../../redux/cart/action";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
@@ -18,7 +17,10 @@ import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from "@material-ui/core/Tooltip";
+import { logOutUser } from "../../redux/user/user-action";
+import { useHistory } from "react-router-dom";
+import { loadingStop } from "../../redux/loader/loader-actions";
 // import PropTypes from "prop-types";
 // import Box from "@material-ui/core/Box";
 // import Typography from "@material-ui/core/Typography";
@@ -37,16 +39,16 @@ const ToolCards = () => {
   const { loading, error, products } = productList;
   const [productShow, setProductShow] = useState(products);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
 
-  
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
     document.body.classList.toggle("modal-open", isSubscription);
-  }, [ispopup,isSubscription]);
+  }, [ispopup, isSubscription]);
 
   if (user.isLoggedIn) {
     setLoginIsOpen(false);
@@ -65,8 +67,15 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
-          //console.log(response);
-          setProductShow(response);
+          if (response.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            history.push("/");
+            console.log("token expire", response);
+          } else {
+            setProductShow(response);
+          }
         });
     }
   }, [token]);
@@ -123,7 +132,8 @@ const ToolCards = () => {
                                   setPopup(true);
                                   setPopupId(tooldata.id);
                                 }}
-                              > <Tooltip title="Embeded Code" placement="top">
+                              >
+                                <Tooltip title="Embeded Code" placement="top">
                                   <SystemUpdateAltIcon />
                                 </Tooltip>
                               </div>
@@ -138,8 +148,8 @@ const ToolCards = () => {
                                   setPopupId(tooldata.id);
                                 }}
                               >
-                              <Tooltip title="Add To Cart" placement="top">
-                                <ShoppingCartIcon />
+                                <Tooltip title="Add To Cart" placement="top">
+                                  <ShoppingCartIcon />
                                 </Tooltip>
                               </div>
                             ) : null}

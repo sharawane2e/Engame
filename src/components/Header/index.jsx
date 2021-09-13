@@ -18,21 +18,16 @@ import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
-// import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
-import {
-  getItemFromCart,
-} from "../../redux/cart/action";
-import Tooltip from '@material-ui/core/Tooltip';
+import { getItemFromCart } from "../../redux/cart/action";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -61,7 +56,7 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, state, data, shop }) => {
+const Header = ({ props }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   const classes = useStyles();
@@ -71,6 +66,7 @@ const Header = ({ props, cart, state, data, shop }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
   const user = useSelector((state) => state.user);
+
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
@@ -78,9 +74,7 @@ const Header = ({ props, cart, state, data, shop }) => {
       setLoginIsOpen(false);
       dispatch(getItemFromCart());
     }
-
-  }, [isLoginOpen, isReginOpen,user]);
-
+  }, [isLoginOpen, isReginOpen, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -252,11 +246,12 @@ const Header = ({ props, cart, state, data, shop }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge badgeContent={
-                      carts.length ? carts.length : 0
-                    } color="secondary">
-                 <Tooltip title="Cart Items" placement="top">
-                    <ShoppingCartIcon />
+                  <Badge
+                    badgeContent={carts.length ? carts.length : 0}
+                    color="secondary"
+                  >
+                    <Tooltip title="Cart Items" placement="top">
+                      <ShoppingCartIcon />
                     </Tooltip>
                   </Badge>
                 </Link>
@@ -307,6 +302,5 @@ const Header = ({ props, cart, state, data, shop }) => {
     </>
   );
 };
-
 
 export default Header;

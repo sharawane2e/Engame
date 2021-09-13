@@ -24,7 +24,7 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 // import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from "@material-ui/core/Tooltip";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -44,14 +44,13 @@ const BorderLinearProgress = withStyles((theme) => ({
 function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
+  const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
 
   // let history = useHistory();
   // console.log(history);
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
-
-  
 
   useEffect(() => {
     const search = props.location.search;
@@ -89,9 +88,9 @@ function Purchased(props) {
       })
         .then((response) => response.json())
         .then((result) => {
+          console.log("result", result);
           dispatch(loadingStop());
           setWidgets(result);
-
           const isShowArr = [];
           result.forEach((el, index) => {
             isShowArr.push(false);
@@ -192,7 +191,11 @@ function Purchased(props) {
                         container
                         className="purchased-tool__tool-image purchased-image"
                       >
-                        <img alt="" src={BASE_URL_1 + item.widget.imgUrl} />
+                        <img
+                          alt={item.widget.name}
+                          title={item.widget.name}
+                          src={BASE_URL_1 + item.widget.imgUrl}
+                        />
                       </Grid>
                       <Grid
                         item
@@ -255,16 +258,16 @@ function Purchased(props) {
                             className="purchased-tool__embeded-icon border-radius icon-margin"
                           >
                             <Tooltip title="Pause" placement="top">
-                            <PauseIcon />
-                             </Tooltip>
+                              <PauseIcon />
+                            </Tooltip>
                           </Typography>
                           <Typography
                             component="div"
                             className="purchased-tool__embeded-icon border-radius"
                           >
-                             <Tooltip title="Embeded Code" placement="top">
+                            <Tooltip title="Embeded Code" placement="top">
                               <SystemUpdateAltIcon />
-                             </Tooltip>
+                            </Tooltip>
                           </Typography>
                         </Grid>
 
@@ -352,11 +355,7 @@ function Purchased(props) {
                           item
                           xs={12}
                           container
-                          className={
-                            isShow
-                              ? "purchased-tool__tool-data accordion-margin show--accordion"
-                              : "purchased-tool__tool-data accordion-margin hide--accordion"
-                          }
+                          className="purchased-tool__tool-data accordion-margin show--accordion"
                         >
                           <Grid item xs={6}>
                             <Typography component="div">

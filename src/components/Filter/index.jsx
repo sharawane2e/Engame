@@ -44,7 +44,7 @@ const Home = () => {
             className="flexGrow filter-inputsection__form"
           >
             <IconButton className="iconButton search-icon" aria-label="menu">
-              <SearchIcon fontSize="middle" />
+              <SearchIcon fontSize="inherit" />
             </IconButton>
             <InputBase className="input" />
             <Divider className="divider" orientation="vertical" />
@@ -60,6 +60,6 @@ const Home = () => {
       </Toolbar>
     </div>
   );
-}
+};
 
 export default Home;
