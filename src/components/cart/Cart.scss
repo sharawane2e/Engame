@@ -1,7 +1,7 @@
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  @include bgcolor($gray-secondary);
-  @include space(margin ,top, $padding-30, 0);
+  // @include bgcolor($gray-secondary);
+  @include space(padding, top, $padding-30, 0);
   // min-height: 100vh;
   #{&}__container {
     //height: 80vh;
@@ -44,10 +44,10 @@
   .margin-right {
     @include space(margin, right, $margin-10, 0);
     width: 25px !important;
-      height: 25px !important;
+    height: 25px !important;
     @include breakpoint(Ipad) {
-        width: 20px;
-        @include space(margin, right, $margin-5, 0);
+      width: 20px;
+      @include space(margin, right, $margin-5, 0);
     }
   }
   #{&}__tool-title {
@@ -208,7 +208,7 @@
   .checkout-button {
     @include space(margin, bottom, $padding-50, 0);
     width: 150px !important;
-    
+
     a {
       color: inherit;
     }
@@ -216,7 +216,7 @@
       > svg {
         @include space(margin, right, $margin-8, 0);
         width: 25px !important;
-       height: 25px  !important;
+        height: 25px !important;
         @include breakpoint(Ipad) {
           width: 20px;
           @include space(margin, right, $margin-5, 0);
@@ -239,7 +239,6 @@
       }
     }
   }
- 
 }
 .empty_cart {
   display: flex;

@@ -10,7 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import { Link, useHistory } from "react-router-dom";
-import e2eLogo from "../../assets/images/E2E-logo.png";
+import Engame_logo from "../../assets/images/Engame_logo.svg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CustomPopup from "../CustomPopup";
 import Login from "../Login";
@@ -211,7 +211,7 @@ const Header = ({ props }) => {
           <Toolbar className="header-padding header-text-color">
             <Typography variant="body1" className="flexGrow">
               <Link to="/">
-                <img src={e2eLogo} />
+                <img src={Engame_logo} />
               </Link>
             </Typography>
             {!user.isLoggedIn ? (
