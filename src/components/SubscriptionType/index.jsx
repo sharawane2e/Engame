@@ -78,7 +78,10 @@ const SubscriptionType = ({ toolId, onClose }) => {
     setPrice(value);
     setValuePrice(e.target.value);
     if (e.target.value <= 0) {
-      setValuePrice(1);
+      setValuePrice(0);
+    }
+    if (e.target.value >= 2500000) {
+      setValuePrice("");
     }
   };
 

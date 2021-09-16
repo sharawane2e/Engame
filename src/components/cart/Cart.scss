@@ -61,6 +61,8 @@
     text-align: $align-right;
     @include color($black-secondary);
     @include font-size($font-sm);
+    word-break: break-all;
+    line-height: 24px;
   }
   #{&}__subscription {
     display: flex;
@@ -159,6 +161,8 @@
   #{&}__coupon-amount {
     @include font-size($font-xsm);
     text-align: $align-center;
+    word-break: break-all;
+    line-height: 24px;
   }
   #{&}__coupon-code {
     text-align: $align-left;
