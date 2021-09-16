@@ -37,14 +37,14 @@ const EmbedCode = ({ data, toolId }) => {
 
   return (
     <div className="embeded-conatiner">
-      <TextareaAutosize
+      <textarea
         ref={textAreaRef}
         className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
-        aria-label="maximum height"
-        id="text-area"
-        value={state.map((item) =>
-          item.id === toolId ? item.widget_embed_code : null
-        )}
+        value={state
+          .map((item) => {
+            return item.id === toolId ? item.widget_embed_code : "";
+          })
+          .join("")}
       />
 
       <div className="embeded-conatiner__buttton-group">

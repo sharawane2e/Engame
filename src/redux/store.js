@@ -18,3 +18,13 @@ export const store = createStore(
 );
 
 export default store;
+
+
+
+// import { createStore } from "redux";
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import rootReducer from "./rootReducer";
+
+// export const store = createStore(rootReducer, composeWithDevTools());
+
+// export default store;

@@ -9,7 +9,7 @@ const ToolDemo = (props) => {
       <iframe
         className="tool-perview"
         width="100%"
-        height="650"
+        height="500"
         scrolling="yes"
         // /frameborder="no"
         allow="autoplay"

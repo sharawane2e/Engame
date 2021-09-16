@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch, useSelector } from "react-redux";
-import Toaster from "../../util/Toaster";
+import { useDispatch } from "react-redux";
+//import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import {
+  addToCart,
+} from "../../redux/cart/action";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
@@ -20,22 +23,28 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   const [itemId] = useSelector((state) => state.cart.cartItems);
   const intialValues = { email: "" };
   const [formValues, setFormValues] = useState(intialValues);
-  const [isSubscription, setSubscriptionPopup] = useState(true);
 
-  // get auth details from localstorage
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
 
   const handleChange = (e) => {
     let plans = { user: res.token.user.pk, plan_type: e.target.value };
+
     setSubscription(e.target.value);
     setType(e.target.value);
-    // setValuePrice("");
+
     if (e.target.value === 1) {
       setType("days");
     } else {
       setType("hits");
     }
+
+    if (e.target.value == "days") {
+      setValuePrice(7);
+    } else {
+      setValuePrice(1000);
+    }
+
     // setPrice(0);
     dispatch(loadingStart());
     fetch(BASE_URL + "cart/standard_price/", {
@@ -62,66 +71,57 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     currency: "$",
   };
 
-  const handleCart = () => {
-    // dispatch(addToCart(toolId));
-    //setSubscriptionPopup(false);
-    console.log(isSubscription);
-    Toaster.sucess("You have add successfully!", "topCenter");
-    fetch(BASE_URL + "cart/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${res.token.access_token}`,
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        history.push("/");
-        onClose();
-      });
+  const handleAddCart = async() => {
+    dispatch(addToCart(user));
+    Toaster.sucess("You have item add successfully!", "topCenter");
+    onClose();
+    // fetch(BASE_URL + "cart/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${res.token.access_token}`,
+    //   },
+    //   body: JSON.stringify(user),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     // console.log(result);
+    //     history.push("/");
+    //     onClose();
+    //   });
   };
 
   const handleCalculatePrice = (e) => {
     let value = e.target.value * base;
     setPrice(value);
     setValuePrice(e.target.value);
+    if (e.target.value <= 0) {
+      setValuePrice(1);
+    }
   };
-  // console.log(subscription);
+
   useEffect(() => {
     if (subscription == "days") {
       setType("days");
       setPrice(valuePrice * base);
-      setValuePrice(7);
+      setValuePrice(valuePrice);
     } else {
       setType("hits");
       setBase(0.1);
       setPrice(valuePrice * base);
-      setValuePrice(1000);
+      setValuePrice(valuePrice);
     }
   }, [handleChange, subscription, type, price, base]);
 
   const handleBlur = (e, key) => {
-    // let value = e.target.value;
-    // console.log(value);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    // console.log(name);
-    // if (typeof value === "string") {
-    //   value = value.trim();
-    // }
-    // const errorMessage = inputValidation.validateField(key, value).message;
-    // this.setState({
-    //   key: value,
-    //   formErrors: { ...this.state.formErrors, [key]: errorMessage },
-    // });
   };
 
   return (
     <>
       <div className="subscription-type">
-        <select onChange={handleChange}>
+        <select onChange={handleChange} defaultValue="hits">
           <option value="days">Number of days</option>
           <option value="hits" selected>
             Number of hits
@@ -150,7 +150,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
       <div className="popup-container__footer">
         <CustomButton
           className="primary-button add--card"
-          onClick={handleCart}
+          onClick={handleAddCart}
           disabled={valuePrice == 0 || valuePrice == "" ? true : false}
         >
           <ShoppingCartIcon /> Add to Cart

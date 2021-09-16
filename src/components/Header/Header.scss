@@ -43,7 +43,7 @@
     }
   }
   .shoping__card {
-    @include space(padding, left, $padding-15, 0);
+    //@include space(padding, left, $padding-15, 0);
     cursor: pointer;
     position: relative;
     a {

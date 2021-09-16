@@ -17,51 +17,76 @@ import DeleteIcon from "@material-ui/icons/Delete";
 // import DoneIcon from "@material-ui/icons/Done";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
 
-const Cart = ({ cart }) => {
-  const [carts, setCarts] = useState([]);
+
+const Cart = ({ prop ,cart }) => {
+  //const [carts, setCarts] = useState([]);
   const [planValue, setPlanValue] = useState();
   const dispatch = useDispatch();
   let auth = localStorage.getItem("auth");
   const user = useSelector((state) => state.user.token);
   let res = JSON.parse(auth);
-  const token = useSelector((state) => state.user.token.access_token);
-  useEffect(() => {
-    const fetchCartItem = async () => {
-      dispatch(loadingStart());
-      await fetch(BASE_URL + "cart/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          setCarts(result);
-          setPlanValue(result.planValue);
-        });
-      dispatch(loadingStop());
-    };
-    fetchCartItem();
-  }, []);
+  // const token = useSelector((state) => state.user.token.access_token);
 
-  const handleRemove = (productId) => {
-    const { data } = axios.delete(BASE_URL + `cart/detail/${productId}`, {
-      headers: { Authorization: `Bearer ${res.token.access_token}` },
-    });
-    const item = carts.filter((x) => x.id !== productId);
-    setCarts(item);
+  //const carts = useSelector((state) => state.cart.cartItems);
+  const carts = useSelector((state) => state.cart.cartItems);
+  const [isProduct, setProduct] = useState("");
+  // const [cartsData, setCarts] = useState(carts);
+
+  
+
+  
+  
+  // useEffect(() => {
+  //   //const fetchCartItem = async () => {
+  //     dispatch(loadingStart());
+  //       dispatch(getItemFromCart())
+  //     dispatch(loadingStop());
+  //   //   fetch(BASE_URL + "cart/", {
+  //   //     headers: {
+  //   //       Authorization: `Bearer ${token}`,
+  //   //     },
+  //   //   })
+  //   //     .then((response) => response.json())
+  //   //     .then((result) => {
+  //   //       setCarts(result);
+  //   //       setPlanValue(result.planValue);
+  //   //     });
+  //   //   dispatch(loadingStop());
+  //   // };
+  //   //fetchCartItem();
+  // },[]);
+
+  useEffect(() => {
+   dispatch(getItemFromCart());
+  },[])
+
+  
+  // dispatch(removeFromCart(isProduct));
+
+  const handleRemove = async(isProduct) => {
+     dispatch(removeFromCart(isProduct));
+    //  dispatch(getItemFromCart());
+     console.log("remove carts",carts);
   };
+
+
+  // useEffect(() => {
+  //   dispatch(getItemFromCart());
+  //  },[])
 
   // handleCheckout
   const handleCheckout = async () => {
     dispatch(loadingStart());
-    const stripe = await loadStripe(
-      "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
-    );
+    const stripe = await loadStripe(STRIPE);
     try {
       await fetch(BASE_URL + "payments/checkout-session/", {
         method: "POST",
@@ -73,8 +98,7 @@ const Cart = ({ cart }) => {
       })
         .then((response) => response.json())
         .then((result) => {
-          sessionStorage.setItem("sessionId", result.sessionId);
-          console.log(result);
+          //sessionStorage.setItem("sessionId", result.sessionId);
           stripe.redirectToCheckout({ sessionId: result.sessionId });
           dispatch(loadingStop());
         });
@@ -104,7 +128,7 @@ const Cart = ({ cart }) => {
           </Container>
         </div>
         <div className="shoping-cart">
-          {carts.length !== 0 ? (
+            {cart.length !== 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -145,7 +169,7 @@ const Cart = ({ cart }) => {
 
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
-                  {carts.map((item, index) => {
+                  {cart.map((item, index) => {
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
@@ -164,9 +188,7 @@ const Cart = ({ cart }) => {
                             <ButtonBase className="curent-tool-img">
                               <img
                                 alt=""
-                                src={
-                                  "//192.168.1.124:8000" + item.widget.imgUrl
-                                }
+                                src={BASE_URL_1 + item.widget.imgUrl}
                               />
                             </ButtonBase>
                           </Grid>
@@ -232,7 +254,9 @@ const Cart = ({ cart }) => {
                                   className="shoping-cart__subscription"
                                 >
                                   <span>Subscription:</span>
-                                  <select className="border-radius">
+                                  <select
+                                    className="border-radius"
+                                  >
                                     <option
                                       value="days"
                                       selected={
@@ -268,7 +292,7 @@ const Cart = ({ cart }) => {
                                     id={"input-filed" + item.id}
                                     variant="outlined"
                                     value={item.plan_value}
-                                    onChange={item.plan_value}
+                                   // onChange={item.plan_value}
                                   />
                                   <span className="shoping-cart__input-days">
                                     {item.plan_type}
@@ -288,7 +312,8 @@ const Cart = ({ cart }) => {
                                     className="shoping-cart__tool-delete"
                                     onClick={() => {
                                       // dispatch(removeFromCart(item.id));
-                                      handleRemove(item.id);
+                                       handleRemove(item.id);
+                                      //setProduct(item.id);
                                     }}
                                   />
                                 </Typography>
@@ -301,7 +326,7 @@ const Cart = ({ cart }) => {
                   })}
                   <div className="continue-button">
                     <Link to="/">
-                      <CustomButton className="secondary-button shopping-button">
+                      <CustomButton className="secondary-button">
                         <PlayCircleFilledWhiteIcon className="margin-right" />
                         Continue Shopping
                       </CustomButton>
@@ -322,7 +347,7 @@ const Cart = ({ cart }) => {
                     </div>
                     <div className="shoping-cart__coupon-amount">
                       $
-                      {carts
+                      {cart
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}
                     </div>
@@ -363,6 +388,7 @@ const Cart = ({ cart }) => {
 };
 
 const mapDispatchToProp = (state) => {
+  console.log("state main cred data items with cart",state.cart.cartItems)
   return {
     cart: state.cart.cartItems,
   };

@@ -16,8 +16,13 @@ import Subscription from "../../components/SubscriptionType";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
+import PropTypes from "prop-types";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Skeleton from "@material-ui/lab/Skeleton";
+// import { addToCart } from "../../redux/shopping/shopping-action";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -35,13 +40,11 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
+  
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
-  }, [ispopup]);
-
-  useEffect(() => {
     document.body.classList.toggle("modal-open", isSubscription);
-  }, [isSubscription]);
+  }, [ispopup,isSubscription]);
 
   if (user.isLoggedIn) {
     setLoginIsOpen(false);
@@ -60,6 +63,7 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
+          //console.log(response);
           setProductShow(response);
         });
     }
@@ -69,7 +73,16 @@ const ToolCards = () => {
     <>
       <Toolbar className="toolcard">
         {loading ? (
-          <LoadingBox />
+          <>
+            <LoadingBox />
+            {/* <Box width={210} marginRight={0.5} my={5}>
+              <Skeleton variant="rect" width={210} height={118} />
+              <Box pt={0.5}>
+                <Skeleton />
+                <Skeleton width="60%" />
+              </Box>
+            </Box> */}
+          </>
         ) : error ? (
           <MessageBox>{error}</MessageBox>
         ) : (
@@ -87,7 +100,7 @@ const ToolCards = () => {
                     >
                       <Paper className="toolcard__imageblck ">
                         <div className="toolcard__image">
-                          <img src={BASE_URL + "media/" + tooldata.imgUrl} />
+                          <img src={BASE_URL_1 + "/media/" + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton
@@ -123,7 +136,6 @@ const ToolCards = () => {
                                 }}
                               >
                                 <ShoppingCartIcon />
-                                {/* <ShoppingCartIcon /> */}
                               </div>
                             ) : null}
                           </div>
@@ -152,9 +164,7 @@ const ToolCards = () => {
                     >
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
-                          <img
-                            src={"http://192.168.1.124:8000" + tooldata.imgUrl}
-                          />
+                          <img src={BASE_URL_1 + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton
@@ -213,6 +223,7 @@ const ToolCards = () => {
           <ToolPerview tool={selectedTool}></ToolPerview>
         </CustomPopup>
         {/*End */}
+
         {/*Emneded code popup */}
         <CustomPopup
           open={ispopup}
@@ -223,6 +234,7 @@ const ToolCards = () => {
           <Embedcode data={productShow} toolId={popupId} />
         </CustomPopup>
         {/*End*/}
+
         {/*Add to cart */}
         <CustomPopup
           open={isSubscription}

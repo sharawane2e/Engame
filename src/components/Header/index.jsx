@@ -16,9 +16,9 @@ import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
-import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
 // import { useDispatch } from "react-redux";
+// import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
@@ -28,21 +28,13 @@ import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import { LOGOUT_TIME } from "../../constants/ConstantValues";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
-
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
@@ -56,9 +48,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 function ElevationScroll(props) {
   const { children, window } = props;
-
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
@@ -69,36 +61,54 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user }) => {
+const Header = ({ props, cart, user, state, data, shop }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
+  // const [state] = useState(data);
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  // const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const carts = useSelector((state) => state.cart.cartItems);
+  //const carts = useSelector((state) =>cart)
+
+
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
-  }, [isLoginOpen]);
-
-  useEffect(() => {
     document.body.classList.toggle("modal-open", isReginOpen);
-  }, [isReginOpen]);
-
-  useEffect(() => {
-    let count = 0;
-    cart.forEach((item) => {
-      count += item.qty;
-    });
-    setCartCount(count);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
+      const getCartItems = () => async (dispatch) => {
+        dispatch(getItemFromCart());
+        // console.log("curent header data with add to cart click", carts);
+      }
+      getCartItems();
     }
-  }, [cart, cartCount, user]);
-  console.log(cartCount);
+  }, [isLoginOpen, isReginOpen,user]);
+
+  // useEffect(() => {
+  //   let count = 0;
+  //   cart.forEach((item) => {
+  //     count += item.qty;
+  //   });
+  //   setCartCount(count);
+  //   if (user.isLoggedIn) {
+  //     setLoginIsOpen(false);
+  //   }
+  // }, [cart, cartCount, user]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      localStorage.removeItem("auth");
+      window.location.reload();
+      history.push("/");
+    }, LOGOUT_TIME);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLogout = () => {
     dispatch(loadingStart());
@@ -113,7 +123,7 @@ const Header = ({ props, cart, user }) => {
           localStorage.removeItem("auth");
           dispatch(loadingStop());
           history.push("/");
-          Toaster.success("logout sucess", "topCenter");
+          Toaster.sucess("logout sucessfully", "topCenter");
         }
       })
       .catch((error) => {
@@ -121,6 +131,7 @@ const Header = ({ props, cart, user }) => {
       });
     handleMenuClose();
   };
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -152,7 +163,12 @@ const Header = ({ props, cart, user }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
+      <MenuItem onClick={handleMenuClose}>
+        <Link color="inherit" to="/Purchased">
+          My Widgets
+        </Link>
+      </MenuItem>
       <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
     </Menu>
   );
@@ -192,7 +208,6 @@ const Header = ({ props, cart, user }) => {
             ></IconButton>
             <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
-                {console.log(user.token.user.first_name)}
                 {user.token.user.first_name} <ArrowDropDownIcon />
               </CustomButton>
             </div>
@@ -262,22 +277,19 @@ const Header = ({ props, cart, user }) => {
                 </div>
               </div>
             ) : null}
-
-            <div className="shoping__card">
-              {user.isLoggedIn ? (
+            {user.isLoggedIn ? (
+              <div className="shoping__card">
                 <Link to="cart">
-                  <Badge color="secondary">
-                    {/* <Badge badgeContent={} color="secondary"> */}
+                  {/* <Badge color="secondary"> */}
+
+                  <Badge badgeContent={
+                      carts.length ? carts.length : 0
+                    } color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
                 </Link>
-              ) : // <Link to="#!">
-              //   <Badge badgeContent={1} color="secondary">
-              //     <ShoppingCartIcon />
-              //   </Badge>
-              // </Link>
-              null}
-            </div>
+              </div>
+            ) : null}
 
             <div className={classes.sectionMobile}>
               <IconButton
@@ -325,9 +337,11 @@ const Header = ({ props, cart, user }) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log("state data items with header",state.cart.cartItems)
   return {
     cart: state.cart.cartItems,
     user: state.user,
+    // shop: state.shop,
   };
 };
 

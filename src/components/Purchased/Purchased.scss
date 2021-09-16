@@ -1,11 +1,11 @@
 .border--colordata {
-  border: 1px solid $back-color;
+  @include border("", $border-width, $bsolid, $back-color);
 }
 .purchased-tool {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   #{&}__container {
-    padding-top: 35px;
-    min-height: 763px;
+    @include space(padding, top, $padding-10, 0);
+    @include space(padding, top-bottom, $padding-35, $padding-75);
   }
   .textbox-hide {
     outline: 0;
@@ -17,25 +17,24 @@
   }
 
   #{&}__hedding {
-    margin-bottom: 20px;
+    @include space(margin, bottom, $margin-20, 0);
     .hedding-text {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-xx-reg);
     }
     .tab--button {
-      cursor: pointer;
+      width: 120px;
       display: flex;
-      align-items: center;
-      padding-left: 10px;
-      padding-right: 10px;
-      margin-right: 10px;
+      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+      @include font-size($font-reg);
+      @include space(padding, left-right, $padding-10, $padding-10);
+      @include space(margin, right, $margin-10, 0);
+      justify-content: $align-center;
       background-color: $tabcolor;
       color: $black-secondary;
-      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-      font-size: 14px;
-      width: 120px;
-      text-align: center;
-      justify-content: center;
+      align-items: $align-center;
+      text-align: $align-center;
+      cursor: pointer;
     }
     .tab--active {
       background-color: $secondary;
@@ -51,10 +50,15 @@
     }
   }
   #{&}__tool-type-data {
-    padding: 12px 0 8px !important;
+    @include space(
+      padding,
+      left-right,
+      $padding-12 !important,
+      $padding-8 !important
+    );
   }
   #{&}__tool-margin {
-    margin-top: 10px;
+    @include space(margin, top, $padding-10, 0);
   }
   .show--accordion_0 {
     display: block;
@@ -74,35 +78,21 @@
     }
     .purchased-curent-text {
       color: $black-secondary;
-      font-weight: 700;
+      font-weight: $font-700;
     }
     .purchased-tool__date-type-text {
-      padding-left: 4px;
-      font-size: 14px;
+      @include font-size($font-reg);
+      @include space(padding, left, $padding-5, 0);
     }
     .purchased-tool__date-type-time {
-      padding-left: 15px;
-      font-size: 14px;
+      @include font-size($font-reg);
+      @include space(padding, left, $padding-15, 0);
     }
   }
   .purchased-tool__toggleclass {
     cursor: pointer;
   }
 
-  .hide--accordion_0,
-  .hide--accordion_1,
-  .hide--accordion_2,
-  .hide--accordion_3,
-  .hide--accordion_4 {
-    display: none;
-  }
-  .show--accordion_0,
-  .show--accordion_1,
-  .show--accordion_2,
-  .show--accordion_3,
-  .show--accordion_4 {
-    display: flex;
-  }
   .expiry-type {
     color: $black-gray;
   }
@@ -115,24 +105,24 @@
     }
   }
   .margin-rightdata {
-    margin-left: 5px;
+    @include space(margin, left, $padding-5, 0);
   }
   .curent-time {
-    padding-left: 15px;
+    @include space(margin, left, $padding-15, 0);
   }
   .purchased-image {
-    align-items: center;
+    align-items: $align-center;
     img {
       width: 206px;
       height: 90px;
     }
   }
   .tool-hits-days {
-    text-align: center;
+    text-align: $align-center;
   }
   #{&}__tool-image {
     background: $dark-bg;
-    margin-right: 3px;
+    @include space(margin, right, $margin-3, 0);
   }
   #{&}__tool-data {
     background: $dark-bg;
@@ -144,7 +134,7 @@
   #{&}__tool-title {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     @include font-size($font-xl-reg);
-    padding-bottom: 4px;
+    @include space(padding, bottom, $padding-5, 0);
   }
   #{&}__tool-type {
     .subscription-type-text {
@@ -182,16 +172,16 @@
     @include font-size($font-xl-reg);
   }
   .icon-margin {
-    margin-right: 15px;
+    @include space(margin, right, $padding-15, 0);
   }
   .accordion-margin {
-    margin-top: 4px;
+    @include space(margin, top, $padding-5, 0);
   }
   .show--toogle {
     color: $dark-gray;
     .purchased-curent-text {
       color: $dark-gray;
-      font-weight: normal;
+      font-weight: $font-normal;
     }
   }
   .copy-to-clip {
@@ -208,8 +198,8 @@
     cursor: pointer;
     width: 45px;
     height: 43px;
-    align-items: center;
-    justify-content: center;
+    align-items: $align-center;
+    justify-content: $align-center;
     &:hover {
       @include border("", $border-width, $bsolid, $secondary);
       svg {
