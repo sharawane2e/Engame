@@ -30,7 +30,7 @@ const EmbedCode = ({ data, toolId }) => {
     link.click();
     setTimeout(function () {
       //   Toaster.sucess("You Download successfully!", "topCenter");
-      window.URL.revokeObjectURL(link);
+      //window.URL.revokeObjectURL(link);
     }, 200);
   };
 
@@ -39,20 +39,19 @@ const EmbedCode = ({ data, toolId }) => {
       <TextareaAutosize
         id="text-area"
         ref={textAreaRef}
-        className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
+        className="embeded-conatiner__embeded-code-textarea border-radius border-allside custom-scroll"
         value={state
           .map((item) => {
             return item.id === toolId ? item.widget_embed_code : "";
           })
           .join("")}
       />
-
       <div className="embeded-conatiner__buttton-group">
         <CustomButton
           onClick={copyToClipboard}
           className="secondary-button margin-right-20"
         >
-          <FileCopyIcon className="margin-right-15" />{" "}
+          <FileCopyIcon className="margin-right-15" />
           {copySuccess ? copySuccess : "Copy to Clipboard"}
         </CustomButton>
         <CustomButton onClick={downloadfile} className="primary-button">

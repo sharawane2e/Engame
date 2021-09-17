@@ -251,3 +251,21 @@ a {
 .align-center {
   text-align: $align-center;
 }
+
+/*For Custom Scroll*/
+body::-webkit-scrollbar,
+.custom-scroll::-webkit-scrollbar {
+  width: 0.35em;
+}
+
+body::-webkit-scrollbar-track,
+.custom-scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb,
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+/*end Custom Scroll*/

@@ -11,7 +11,7 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 // import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 // import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
-import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
 import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -25,6 +25,7 @@ import Toaster from "../../util/Toaster";
 // import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import Tooltip from "@material-ui/core/Tooltip";
+// import { loadStripe } from "@stripe/stripe-js";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -42,39 +43,63 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 function Purchased(props) {
+  const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
+  const [is_renew, setRenew] = useState("false");
+  const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
 
   // let history = useHistory();
   // console.log(history);
 
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-    // console.log(session_id);
 
     async function paymentSuccess() {
-      await fetch(BASE_URL + "payments/success/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-        body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result) {
-            Toaster.sucess(result.details, "topCenter");
-            //window.location.reload();
-          }
-          // history.push(history.path);
-        });
+      if (is_renew == "false") {
+        await fetch(BASE_URL + "payments/success/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+          body: JSON.stringify({
+            user: token.user.pk,
+            session_id: session_id,
+            is_renew: is_renew,
+          }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result) {
+              Toaster.sucess(result.details, "topCenter");
+              //window.location.reload();
+            }
+            // history.push(history.path);
+          });
+      } else {
+        await fetch(BASE_URL + "payments/success/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+          body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result) {
+              Toaster.sucess(result.details, "topCenter");
+              //window.location.reload();
+            }
+            // history.push(history.path);
+          });
+      }
     }
     paymentSuccess();
     //  my widgets
@@ -88,7 +113,6 @@ function Purchased(props) {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log("result", result);
           dispatch(loadingStop());
           setWidgets(result);
           const isShowArr = [];
@@ -100,6 +124,60 @@ function Purchased(props) {
     };
     myWwidgets();
   }, [token]);
+
+  const downloadfile = (fileName, embedcode) => {
+    // console.log(embedcode);
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(
+      new Blob([embedcode], {
+        type: "application/octet-stream",
+      })
+    );
+    link.download = fileName + ".text";
+    document.body.appendChild(link);
+    link.click();
+  };
+
+  const handleExtend = async (widgetId) => {
+    // const plan_newValue,planId,
+    //console.log("widgets", widgetId);
+    // // const plan = widgets.plan.id;
+    // // const plan_new_value = "2306";
+    // // const subscription = widgetId;
+    // // const widget = widgets.widget.id;
+    // // const price = "200";
+    // // const currency = "USD";
+    // setRenew(true);
+    // dispatch(loadingStart());
+    // const stripe = await loadStripe(STRIPE);
+    // try {
+    //   await fetch(BASE_URL + "payments/checkout-session/", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${user.access_token}`,
+    //     },
+    //     body: JSON.stringify({
+    //       user: user.user.pk,
+    //       is_renew: is_renew,
+    //       plan_new_value: plan_new_value,
+    //       plan: plan,
+    //       subscription: subscription,
+    //       widget: widget,
+    //       price: price,
+    //       currency: currency,
+    //     }),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //       //sessionStorage.setItem("sessionId", result.sessionId);
+    //       stripe.redirectToCheckout({ sessionId: result.sessionId });
+    //       dispatch(loadingStop());
+    //     });
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  };
 
   // useEffect(() => {
   //   isShow;
@@ -158,7 +236,6 @@ function Purchased(props) {
           </Grid>
           {/*Card start */}
           {widgets.map((item, index) => {
-            console.log(item);
             let purchasedDateTime = new Date(item.purchase_date);
             purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
             const purchase_date = purchasedDateTime.split(",")[0];
@@ -268,10 +345,25 @@ function Purchased(props) {
                           <Typography
                             component="div"
                             className="purchased-tool__embeded-icon border-radius"
+                            onClick={() =>
+                              downloadfile(
+                                item.widget.name,
+                                item.widget.widget_embed_code
+                              )
+                            }
                           >
                             <Tooltip title="Embeded Code" placement="top">
                               <SystemUpdateAltIcon />
                             </Tooltip>
+                          </Typography>
+                          <Typography
+                            component="div"
+                            className="extend-validity"
+                            onClick={() => handleExtend(item.widget.id)}
+                          >
+                            {/* <Tooltip title="Embeded Code" placement="top"> */}
+                            Extend validity
+                            {/* </Tooltip> */}
                           </Typography>
                         </Grid>
 

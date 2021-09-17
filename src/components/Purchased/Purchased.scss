@@ -54,6 +54,11 @@
       margin-right: 0;
     }
   }
+  .extend-validity {
+    cursor: pointer;
+    text-decoration: underline;
+    padding-top: 5px;
+  }
   .timer-svg {
     > svg {
       fill: $red;

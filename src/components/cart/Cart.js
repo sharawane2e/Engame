@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
@@ -27,6 +27,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.token);
   const cart = useSelector((state) => state.cart.cartItems);
+  const [is_renew, setRenew] = useState("false");
 
   useEffect(() => {
     dispatch(getItemFromCart());
