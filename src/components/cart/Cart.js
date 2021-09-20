@@ -308,14 +308,14 @@ const Cart = () => {
                         .reduce((acc, value) => +acc + +value)}
                     </div>
                     <div className="shoping-cart__coupon-code">
-                      <span align="center">Promotion code</span>
+                      {/* <span align="center">Promotion code</span> */}
                       <div
                         className="shoping-cart__coupon-apply"
                         align="center"
                       >
                         <input
                           type="text"
-                          className="shoping-cart__coupon-apply-input"
+                          className="shoping-cart__coupon-apply-input" placeholder="Enter Promotion code"
                         />
                         <button>Apply</button>
                       </div>

@@ -216,6 +216,7 @@ class Registration extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
                         edge="end"
+                        tabindex="-1"
                       >
                         {this.state.showPassword ? (
                           <Visibility />
@@ -253,6 +254,7 @@ class Registration extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.confirmPasswordShow}
                         edge="end"
+                        tabindex="-1"
                       >
                         {this.state.showPasswordConfirm ? (
                           <Visibility />

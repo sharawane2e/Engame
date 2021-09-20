@@ -134,7 +134,7 @@ class Login extends Component {
                 htmlFor="standard-adornment-email"
                 className="input-label"
               >
-                E-mail address / Usernames
+                E-mail address
               </InputLabel>
               <FormControl className="form-area__control">
                 <TextField
@@ -175,6 +175,7 @@ class Login extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
                         edge="end"
+                        tabindex="-1"
                       >
                         {this.state.showPassword ? (
                           <Visibility />
