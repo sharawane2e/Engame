@@ -241,6 +241,8 @@ function Purchased(props) {
             const purchase_date = purchasedDateTime.split(",")[0];
             const purchase_time = purchasedDateTime.split(",")[1];
 
+            const ConsumptionValue = item.remaining_value * 100/item.plan.plan_value
+
             return (
               <Grid container spacing={3} key={index}>
                 <Grid item xs={12}>
@@ -395,29 +397,17 @@ function Purchased(props) {
                               className="purchased-tool__tool-type align-center"
                             >
                               <span className="subscription-type-text ">
-                                {/* 210 days left */}
                                 {item.remaining_value}&nbsp;&nbsp;
-                                {item.plan.plan_type}
+                                {item.plan.plan_type} left
                               </span>
+                              
                               <BorderLinearProgress
                                 variant="determinate"
-                                value={
-                                  (item.remaining_value * 50) / 1000
-                                    ? 50
-                                    : ""
-                                    ? (item.remaining_value * 80) / 1000
-                                      ? 80
-                                      : ""
-                                    : "s"
-                                }
+                                value ={ConsumptionValue}
                                 className={
-                                  (item.remaining_value * 50) / 1000
-                                    ? "progress-bar progress-red"
-                                    : ""
-                                    ? (item.remaining_value * 80) / 1000
-                                      ? "progress-bar progress-yellow"
-                                      : ""
-                                    : "progress-bar progress-green"
+                                  (ConsumptionValue > 80) ? "progress-bar progress-green"
+                                    :(ConsumptionValue > 30 && ConsumptionValue < 80) ? "progress-bar progress-yellow"
+                                    : "progress-bar progress-red"
                                 }
                               />
                             </Typography>

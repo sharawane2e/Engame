@@ -21,12 +21,14 @@ const CutomPopup = (props) => {
             </div>
           ) : (
             <>
+            {onClose &&
               <div
                 className="popup-container__close-withoutheader"
                 onClick={onClose}
               >
                 <CloseOutlinedIcon />
               </div>
+}
             </>
           )}
           <div className="popup-container__body">{children}</div>
