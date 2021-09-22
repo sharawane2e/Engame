@@ -15,6 +15,8 @@ import CustomButton from "../../components/widgets/Button";
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
+import { v4 as uuidv4 } from 'uuid';
+
 
 class Registration extends Component {
   state = {
@@ -44,8 +46,19 @@ class Registration extends Component {
     // e.preventDefault();
     // this.isReginOpen(false);
     const { name, email, setpassword, confirmpassword } = this.state;
+
+    var fullEmail = email;
+    var splitEmail = fullEmail.split("@");
+
+    var firstPart = (Math.random() * 46656) | 0;
+    var secondPart = (Math.random() * 47756) | 0;
+    firstPart = ("" + firstPart.toString()).slice(-5);
+    secondPart = ("" + secondPart.toString()).slice(-5);
+
+    var uservalue = splitEmail[0]+"_"+firstPart+secondPart;
+
     const user = {
-      username: name,
+      username: uservalue,
       email: email,
       password1: setpassword,
       password2: confirmpassword,

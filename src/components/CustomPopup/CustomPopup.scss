@@ -20,6 +20,12 @@
   left: 0;
   z-index: 9999;
   top: 0;
+  .message__img{
+    width: 75px;
+  }
+  .sucess_message{
+    padding: 20px 5px;
+  }
   #{&}__iner {
     position: absolute;
     top: 50%;
@@ -63,6 +69,7 @@
   }
   #{&}__iner--sm {
     width: 400px;
+
   }
   #{&}__iner--xsm {
     width: 25%;
