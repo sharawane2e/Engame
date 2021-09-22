@@ -24,8 +24,9 @@ import { loadingStop } from "../../redux/loader/loader-actions";
 import Swal from 'sweetalert2'
 import Login from "../Login";
 import Registration from "../Registration";
-import success_icon from "../../assets/images/success_icon.svg";
+import warning_icon from "../../assets/images/warning_icon.svg";
 import EmailActive from "../EmailActivation";
+import {ErrorMessages} from "../../constants/Messages";
 
 
 
@@ -64,11 +65,16 @@ const ToolCards = () => {
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
     document.body.classList.toggle("modal-open", isSubscription);
-  }, [ispopup, isSubscription]);
+    if (user) {
+      setLoginIsOpen(false);
+      setReginIsOpen(false);
+    }
+  }, [ispopup, isSubscription, user]);
 
-  if (user.isLoggedIn) {
-    setLoginIsOpen(false);
-  }
+
+
+ 
+
 
   useEffect(() => {
     dispatch(listProducts());
@@ -289,12 +295,12 @@ const ToolCards = () => {
 
       <CustomPopup
         open={isLoginrequire}
-        className="popup-container__iner--sm border-radius"
+        className="popup-container__iner--sm border-radius loginAlert"
       >
           <Grid container spacing={4} align="center">
             <Grid item xs={12}>
-              <img src={success_icon} alt="Registration Sucessfully" />
-              <p className="sucess_message">Please login before add to cart.</p>
+              <img className="message__img" src={warning_icon} alt="Registration Sucessfully" />
+              <p className="sucess_message">{ErrorMessages.loginAlert}</p>
               <CustomButton className="primary-button" style={{marginRight: "20px"}} onClick= { setLoginAlert}>
                     Login Here
               </CustomButton>
@@ -343,23 +349,6 @@ const ToolCards = () => {
           />
         </CustomPopup>
         {/*End */}
-
-        {/* <CustomPopup
-          open={true}
-          // open={isLoginOpen}
-          // onClose={() => setLoginIsOpen(false)}
-          className="popup-container__iner--sm border-radius"
-        >
-            <Grid container spacing={4} align="center">
-                <Grid item xs={12}>
-                    <img src={success_icon} alt="Registration Sucessfully" />
-                    <p className="sucess_message">Registration has been sucessfully</p>
-                    <CustomButton className="primary-button">
-                        OK
-                    </CustomButton>
-                </Grid>
-            </Grid>
-        </CustomPopup> */}
       </Toolbar>
       <Footer />
     </>

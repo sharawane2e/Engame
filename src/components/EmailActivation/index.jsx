@@ -5,7 +5,9 @@ import Grid from "@material-ui/core/Grid";
 import CustomButton from "../../components/widgets/Button";
 import { Link, useHistory } from "react-router-dom";
 import success_icon from "../../assets/images/success_icon.svg";
-import { wait } from "@testing-library/dom";
+
+
+
 
 
 
@@ -13,12 +15,21 @@ const EmailActivation = (EmailActive) =>{
   const history = useHistory();
 
   useEffect(() => {
-    history.push("/");
+    
+    let timeout;
+    timeout = setTimeout(() => history.push("/"), 3000);
   });
+
+    
   return(
-    <>
-    <h6>Do not refresh...</h6>
-    </>
+    <Grid container spacing={4} align="center">
+        <Grid item xs={12}>
+            <div className="emailActivation">
+                <img src={success_icon} alt="Registration Sucessfully" />
+                <p className="sucess_message">Registration has been sucessfully</p>
+            </div>
+        </Grid>
+    </Grid>
   );
 }
 

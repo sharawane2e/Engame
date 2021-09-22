@@ -14,15 +14,22 @@ const Routes = [
     exact: true,
   },
   {
-    path: ["/", "/forgot", "/user/account-confirm-email"],
+    path: ["/user/account-confirm-email"],
     component: PublicScreen,
-    exact: true,
+    //exact: true,
     routes: [
       {
         path: "/user/account-confirm-email",
         component: EmailActivation,
-        isExact: true,
-      },
+        isExact: false,
+      }
+    ],
+  },
+  {
+    path: ["/", "/forgot"],
+    component: PublicScreen,
+    exact: true,
+    routes: [
       {
         path: "/forgot",
         component: Forgot,

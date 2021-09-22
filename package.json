@@ -39,6 +39,7 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.35.1",
     "sweetalert2": "^11.1.6",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
