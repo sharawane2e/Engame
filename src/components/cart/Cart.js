@@ -14,7 +14,8 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DoneIcon from "@material-ui/icons/Done";
+import EditIcon from "@material-ui/icons/Edit";
+import CustomPopup from "../CustomPopup";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
@@ -22,12 +23,14 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
+import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.token);
   const cart = useSelector((state) => state.cart.cartItems);
-  const [is_renew, setRenew] = useState("false");
+  const [is_renew, setRenew] = useState(false);
+  const [productShow, setProductShow] = useState([]);
 
   useEffect(() => {
     dispatch(getItemFromCart());
@@ -35,6 +38,11 @@ const Cart = () => {
 
   const handleRemove = (isProduct) => {
     dispatch(removeFromCart(isProduct));
+  };
+
+  const cartUpdate = (productShow) => {
+    //dispatch(removeFromCart(isProduct));
+    //console.log("isProductUpdate", productShow);
   };
 
   // handleCheckout
@@ -260,7 +268,13 @@ const Cart = () => {
                                 className="shoping-cart__tool-icons"
                               >
                                 <Typography component="div">
-                                  <DoneIcon className="shoping-cart__tool-tick" />
+                                  <EditIcon
+                                    className="shoping-cart__tool-tick"
+                                    onClick={() => {
+                                      setRenew(true);
+                                      setProductShow(item);
+                                    }}
+                                  />
                                   |
                                   <Tooltip title="Delete" placement="top">
                                     <DeleteIcon
@@ -315,7 +329,8 @@ const Cart = () => {
                       >
                         <input
                           type="text"
-                          className="shoping-cart__coupon-apply-input" placeholder="Enter Promotion code"
+                          className="shoping-cart__coupon-apply-input"
+                          placeholder="Enter Promotion code"
                         />
                         <button>Apply</button>
                       </div>
@@ -338,6 +353,17 @@ const Cart = () => {
           )}
         </div>
       </div>
+      {/*Update into card*/}
+      <CustomPopup
+        open={is_renew}
+        onClose={() => setRenew(false)}
+        headerText="Subscription Update"
+        footerButton={true}
+        className="border-radius popup-container__iner--sm"
+      >
+        <SubscriptionUpdate updateData={productShow} />
+      </CustomPopup>
+      {/*End*/}
       <Footer />
     </>
   );

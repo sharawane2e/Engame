@@ -21,13 +21,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 import { loadingStop } from "../../redux/loader/loader-actions";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import Login from "../Login";
 import Registration from "../Registration";
 import success_icon from "../../assets/images/success_icon.svg";
 import EmailActive from "../EmailActivation";
-
-
 
 // import PropTypes from "prop-types";
 // import Box from "@material-ui/core/Box";
@@ -54,12 +52,11 @@ const ToolCards = () => {
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
- 
-  const setLoginAlert = (e) =>{
+
+  const setLoginAlert = (e) => {
     setisLoginrequire(false);
     setLoginIsOpen(true);
-  }
-
+  };
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", ispopup);
@@ -219,16 +216,16 @@ const ToolCards = () => {
                               >
                                 <SystemUpdateAltIcon />
                               </div>
-                            ) : 
-                            <div
-                            className="toolcard__sub-icons"
-                            onClick={() => setisLoginrequire(true)}
-                          >
-                            <Tooltip title="Embeded Code" placement="top">
-                              <SystemUpdateAltIcon />
-                            </Tooltip>
-                          </div>
-                            }
+                            ) : (
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={() => setisLoginrequire(true)}
+                              >
+                                <Tooltip title="Embeded Code" placement="top">
+                                  <SystemUpdateAltIcon />
+                                </Tooltip>
+                              </div>
+                            )}
                           </div>
                           <div className="toolcard__items toolcard__shopping">
                             {user ? (
@@ -236,16 +233,16 @@ const ToolCards = () => {
                                 {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
                                 <ShoppingCartIcon />
                               </div>
-                            ) : 
-                            <div
-                            className="toolcard__sub-icons"
-                            onClick={() => setisLoginrequire(true)}
-                            >
-                            <Tooltip title="Add To Cart" placement="top">
-                              <ShoppingCartIcon />
-                            </Tooltip>
-                          </div>
-                            }
+                            ) : (
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={() => setisLoginrequire(true)}
+                              >
+                                <Tooltip title="Add To Cart" placement="top">
+                                  <ShoppingCartIcon />
+                                </Tooltip>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </Paper>
@@ -263,49 +260,54 @@ const ToolCards = () => {
           </Grid>
         )}
 
-
-         <CustomPopup
-        open={isLoginOpen ||isReginOpen}
-        onClose={() => setLoginIsOpen(false)}
-        className="popup-container__iner--xl border-radius"
-      >
-        {isLoginOpen?
-          <Grid container spacing={1}>
-            <Grid item xs={6} sm={6} className="login-background"></Grid>
-            <Grid item xs={12} sm={6} lg={6}>
-              <Login />
+        <CustomPopup
+          open={isLoginOpen || isReginOpen}
+          onClose={() => setLoginIsOpen(false)}
+          className="popup-container__iner--xl border-radius"
+        >
+          {isLoginOpen ? (
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={6} className="login-background"></Grid>
+              <Grid item xs={12} sm={6} lg={6}>
+                <Login />
+              </Grid>
             </Grid>
-          </Grid>
-        :isReginOpen?
-          <Grid container spacing={3}>
-            <Grid item xs={6} sm={6} className="login-background"></Grid>
-            <Grid item xs={12} sm={6} lg={6}>
-              <Registration />
+          ) : isReginOpen ? (
+            <Grid container spacing={3}>
+              <Grid item xs={6} sm={6} className="login-background"></Grid>
+              <Grid item xs={12} sm={6} lg={6}>
+                <Registration />
+              </Grid>
             </Grid>
-          </Grid>
-        : ""
-        }
-      </CustomPopup>
+          ) : (
+            ""
+          )}
+        </CustomPopup>
 
-      <CustomPopup
-        open={isLoginrequire}
-        className="popup-container__iner--sm border-radius"
-      >
+        <CustomPopup
+          open={isLoginrequire}
+          className="popup-container__iner--sm border-radius"
+        >
           <Grid container spacing={4} align="center">
             <Grid item xs={12}>
               <img src={success_icon} alt="Registration Sucessfully" />
               <p className="sucess_message">Please login before add to cart.</p>
-              <CustomButton className="primary-button" style={{marginRight: "20px"}} onClick= { setLoginAlert}>
-                    Login Here
+              <CustomButton
+                className="primary-button"
+                style={{ marginRight: "20px" }}
+                onClick={setLoginAlert}
+              >
+                Login Here
               </CustomButton>
-              <CustomButton className="secondary-button" onClick= {() =>  setisLoginrequire(false)}>
-                    Cancel
+              <CustomButton
+                className="secondary-button"
+                onClick={() => setisLoginrequire(false)}
+              >
+                Cancel
               </CustomButton>
             </Grid>
           </Grid>
-        
-      </CustomPopup>
-
+        </CustomPopup>
 
         {/*Perview tools code popup */}
         <CustomPopup

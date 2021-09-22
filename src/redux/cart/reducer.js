@@ -1,4 +1,9 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_ITEM_GET } from "./types";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_ITEM_GET,
+  CART_ITEM_UPDATE,
+} from "./types";
 
 const initialState = { cartItems: [], carts: [] };
 
@@ -11,6 +16,8 @@ export const cartReducers = (state = initialState, action) => {
         ...state,
         cartItems: [...state.cartItems, item],
       };
+    case CART_ITEM_UPDATE:
+      return { ...state, cartItems: action.payload };
     case CART_ITEM_GET:
       return { ...state, cartItems: action.payload };
     case CART_REMOVE_ITEM:

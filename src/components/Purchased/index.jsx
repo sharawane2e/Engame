@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -241,7 +241,8 @@ function Purchased(props) {
             const purchase_date = purchasedDateTime.split(",")[0];
             const purchase_time = purchasedDateTime.split(",")[1];
 
-            const ConsumptionValue = item.remaining_value * 100/item.plan.plan_value
+            const ConsumptionValue =
+              (item.remaining_value * 100) / item.plan.plan_value;
 
             return (
               <Grid container spacing={3} key={index}>
@@ -400,13 +401,16 @@ function Purchased(props) {
                                 {item.remaining_value}&nbsp;&nbsp;
                                 {item.plan.plan_type} left
                               </span>
-                              
+
                               <BorderLinearProgress
                                 variant="determinate"
-                                value ={ConsumptionValue}
+                                value={ConsumptionValue}
                                 className={
-                                  (ConsumptionValue > 80) ? "progress-bar progress-green"
-                                    :(ConsumptionValue > 30 && ConsumptionValue < 80) ? "progress-bar progress-yellow"
+                                  ConsumptionValue > 80
+                                    ? "progress-bar progress-green"
+                                    : ConsumptionValue > 30 &&
+                                      ConsumptionValue < 80
+                                    ? "progress-bar progress-yellow"
                                     : "progress-bar progress-red"
                                 }
                               />
