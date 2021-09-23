@@ -154,7 +154,7 @@ a {
 .bredcrum-conatiner {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   // @include bgcolor($gray-primary);
-  min-height: 895px;
+  // min-height: 895px;
   z-index: 99;
   @include breakpoint(Ipad) {
     min-height: 900px;

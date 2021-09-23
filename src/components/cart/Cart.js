@@ -95,7 +95,7 @@ const Cart = () => {
             </Breadcrumbs>
           </Container>
         </div>
-        <div className="shoping-cart">
+        <div className="shoping-cart shopping-cart-data">
           {cart.length !== 0 ? (
             <Container
               maxWidth="lg"
@@ -357,8 +357,7 @@ const Cart = () => {
                       $
                       {cart
                         .map((item) => item.price)
-                        .reduce((acc, value) => +acc + +value)
-                        .toFixed(2)}
+                        .reduce((acc, value) => +acc + +value)}
                     </div>
                     <div className="shoping-cart__coupon-code">
                       {/* <span align="center">Promotion code</span> */}
