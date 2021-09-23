@@ -79,7 +79,7 @@ const Cart = () => {
     <>
       <Header />
       <div className="bredcrum-conatiner ">
-        <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
+        <div className="bredcrum-conatiner__bredcrum_inr">
           <Container maxWidth="lg">
             <Breadcrumbs
               aria-label="breadcrumb"
@@ -91,7 +91,7 @@ const Cart = () => {
               {/* <Link color="inherit" to="" >
                         Shopping Cart
               </Link> */}
-              <Typography color="textPrimary">Shopping Cart</Typography>
+              <Typography color="textPrimary ">Shopping Cart</Typography>
             </Breadcrumbs>
           </Container>
         </div>
@@ -108,16 +108,16 @@ const Cart = () => {
               >
                 <Grid
                   item
-                  xl={8}
-                  lg={8}
-                  md={8}
-                  sm={6}
+                  xl={12}
+                  lg={12}
+                  md={12}
+                  sm={12}
                   xs={12}
                   className="shoping-cart__left-card"
                 >
                   Shopping Cart
                 </Grid>
-                <Grid
+                {/* <Grid
                   item
                   xl={4}
                   lg={4}
@@ -132,7 +132,7 @@ const Cart = () => {
                       Continue Shopping
                     </CustomButton>
                   </Link>
-                </Grid>
+                </Grid> */}
               </Grid>
 
               <Grid container spacing={3}>
@@ -332,14 +332,14 @@ const Cart = () => {
                       </Paper>
                     );
                   })}
-                  <div className="continue-button">
+                  {/* <div className="continue-button">
                     <Link to="/">
                       <CustomButton className="secondary-button">
                         <PlayCircleFilledWhiteIcon className="margin-right" />
                         Continue Shopping
                       </CustomButton>
                     </Link>
-                  </div>
+                  </div> */}
                 </Grid>
                 <Grid
                   item
@@ -380,6 +380,14 @@ const Cart = () => {
                       <CheckCircleIcon /> Checkout
                     </CustomButton>
                   </Paper>
+                  <div className="continue-button">
+                    <Link to="/">
+                      <CustomButton className="secondary-button">
+                        {/* <PlayCircleFilledWhiteIcon className="margin-right" /> */}
+                        Continue Shopping
+                      </CustomButton>
+                    </Link>
+                  </div>
                 </Grid>
               </Grid>
               {/*End card data*/}
@@ -395,7 +403,7 @@ const Cart = () => {
       <CustomPopup
         open={is_renew}
         onClose={() => setRenew(false)}
-        headerText="Subscription Update"
+        headerText="Edit Subscription"
         footerButton={true}
         className="border-radius popup-container__iner--sm"
       >

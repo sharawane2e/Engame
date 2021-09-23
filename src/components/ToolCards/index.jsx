@@ -223,9 +223,9 @@ const ToolCards = () => {
                                 className="toolcard__sub-icons"
                                 onClick={() => setisLoginrequire(true)}
                               >
-                                <Tooltip title="Embeded Code" placement="top">
-                                  <SystemUpdateAltIcon />
-                                </Tooltip>
+                                {/* <Tooltip title="Embeded Code" placement="top"> */}
+                                <SystemUpdateAltIcon />
+                                {/* </Tooltip> */}
                               </div>
                             )}
                           </div>
@@ -240,9 +240,9 @@ const ToolCards = () => {
                                 className="toolcard__sub-icons"
                                 onClick={() => setisLoginrequire(true)}
                               >
-                                <Tooltip title="Add To Cart" placement="top">
-                                  <ShoppingCartIcon />
-                                </Tooltip>
+                                {/* <Tooltip title="Add To Cart" placement="top"> */}
+                                <ShoppingCartIcon />
+                                {/* </Tooltip> */}
                               </div>
                             )}
                           </div>

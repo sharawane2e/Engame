@@ -1,13 +1,14 @@
 {
   "name": "html5-widget",
   "version": "0.1.0",
-  "homepage": "/e2ewidget",
+  "homepage": "/engame",
   "private": true,
   "dependencies": {
     "3d-react-carousal": "^4.0.2",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "@mui/material": "^5.0.1",
     "@mui/styles": "^5.0.0-rc.1",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.17.1",
