@@ -51,6 +51,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
     if (e.target.value <= 0) {
       setCurentPrice(0);
     }
+
     if (e.target.value >= 2500000) {
       setCurentPrice("");
     }

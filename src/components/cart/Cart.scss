@@ -16,6 +16,10 @@
     display: flex;
     align-items: $align-center;
     @include font-size($font-xx-reg);
+    @include border("-bottom", $border-width, $bsolid, $seconday-shadow);
+    padding: 0 !important;
+    margin: 12px;
+    line-height: 2;
   }
   #{&}__right-card {
     display: flex;
@@ -46,7 +50,14 @@
   .continue-button {
     display: flex;
     justify-content: flex-end;
-    @include space(margin, top-bottom, $margin-40, $margin-50);
+    @include space(margin, top-bottom, $margin-20, $margin-20);
+    > a {
+      display: flex;
+      width: 100%;
+      .custom-button {
+        min-width: 100% !important;
+      }
+    }
   }
   .margin-right {
     @include space(margin, right, $margin-10, 0);
@@ -191,7 +202,7 @@
       .shoping-cart__coupon-apply-input {
         width: 80%;
         outline: none;
-        @include space(padding, all, $padding-15, 0);
+        @include space(padding, all, $padding-10, 0);
         @include border("", $border-width, $dotted, $black-secondary);
         border-right: none;
         border-top-left-radius: $boder-radius;
@@ -201,7 +212,7 @@
         border: none;
         text-transform: capitalize;
         @include both-color($back-color, $white);
-        @include space(padding, all, $padding-15, 0);
+        @include space(padding, all, $padding-10, 0);
         border-top-right-radius: $boder-radius;
         border-bottom-right-radius: $boder-radius;
         outline: none;
@@ -225,7 +236,7 @@
 
   .checkout-button {
     @include space(margin, bottom, $padding-50, 0);
-    width: 150px !important;
+    width: 100% !important;
 
     a {
       color: inherit;

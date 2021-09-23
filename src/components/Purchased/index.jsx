@@ -125,6 +125,7 @@ function Purchased(props) {
           } else {
             dispatch(loadingStop());
             setWidgets(result);
+            console.log(result);
             const isShowArr = [];
             result.forEach((el, index) => {
               isShowArr.push(false);
