@@ -52,11 +52,11 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
     // Toaster.sucess("You have item add successfully!", "topCenter");
    // onClose();
     //console.log("data user",widgetid)
-   let plans = { user: res.token.user.pk ,widget:updateData.widget.id, plan_type: istype,plan_value:valuePrice,price:isCurentPrice,currency:updateData.currency };
-  //  console.log("plans",plans)
+   let plans = { user: res.token.user.pk ,widget:updateData.widget.id, id: updateData.id, plan_type: istype,plan_value:valuePrice,price:isCurentPrice,currency:updateData.currency };
+   console.log("plans",plans)
 
     dispatch(loadingStart());
-    fetch(BASE_URL + "cart/detail/", {
+    fetch(BASE_URL + `cart/detail/${updateData.id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
