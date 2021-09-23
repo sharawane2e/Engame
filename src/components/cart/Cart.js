@@ -31,6 +31,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.cartItems);
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
+  const [issetProdusctId, setProdusctId] = useState("");
 
   useEffect(() => {
     dispatch(getItemFromCart());
@@ -40,7 +41,8 @@ const Cart = () => {
     dispatch(removeFromCart(isProduct));
   };
 
-  const cartUpdate = (productShow) => {
+  const cartUpdate = (productShow,issetProdusctId) => {
+    console.log(productShow,issetProdusctId)
     //dispatch(removeFromCart(isProduct));
     //console.log("isProductUpdate", productShow);
   };
@@ -272,8 +274,8 @@ const Cart = () => {
                                     className="shoping-cart__tool-tick"
                                     onClick={() => {
                                       setRenew(true);
-                                      setProductShow(item);
-                                    }}
+                                      setProductShow(item)
+                                     }}
                                   />
                                   |
                                   <Tooltip title="Delete" placement="top">
@@ -359,9 +361,11 @@ const Cart = () => {
         onClose={() => setRenew(false)}
         headerText="Subscription Update"
         footerButton={true}
-        className="border-radius popup-container__iner--sm"
+        className="border-radius popup-container__iner--md"
       >
-        <SubscriptionUpdate updateData={productShow} />
+        <SubscriptionUpdate updateData={productShow}
+         onClose={() => setRenew(false)}
+        />
       </CustomPopup>
       {/*End*/}
       <Footer />

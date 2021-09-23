@@ -31,15 +31,21 @@ export const getItemFromCart = () => async (dispatch) => {
   dispatch({ type: actionTypes.CART_ITEM_GET, payload: data });
 };
 
-export const updateItemFromCart = () => async (dispatch) => {
-  //dispatch(loadingStart());
+export const updateCartIteam = () => async (dispatch) => {
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
-  // const { data } = await axios.put(BASE_URL + "cart/", {
-  //   headers: { Authorization: `Bearer ${res.token.access_token}` },
-  // });
-  // dispatch(loadingStop());
-  // dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: data });
+  await fetch(BASE_URL + `cart/detail`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${res.token.access_token}`,
+    },
+    body: JSON.stringify(),
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      dispatch({ type: actionTypes.CART_ADD_ITEM, payload: result });
+    });
 };
 
 export const removeFromCart = (productId) => async (dispatch) => {
