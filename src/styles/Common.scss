@@ -96,6 +96,7 @@ body {
 .border-radius {
   border-radius: $boder-radius !important;
 }
+
 /*End*/
 /*Use thses classes for buttons*/
 a {
@@ -193,7 +194,7 @@ a {
 /*icon space set */
 .margin-right-15 {
   //   margin-right: map-get($map: $margin, $key: "margin-15");
-  @include space(margin, right, $margin-15, 0);
+  @include space(margin, right, $margin-8, 0);
   @include breakpoint(mobileonly) {
     @include font-size(15px);
     margin: 0;
@@ -229,7 +230,7 @@ a {
 }
 .sticky-position {
   position: sticky;
-  top: 99px;
+  top: 92px;
   // height: 100%;
 }
 .sticky-head-position {
@@ -251,6 +252,9 @@ a {
 .align-center {
   text-align: $align-center;
 }
+.gray-color {
+  color: $black-gray;
+}
 
 /*For Custom Scroll*/
 body::-webkit-scrollbar,
@@ -270,7 +274,6 @@ body::-webkit-scrollbar-thumb,
 }
 /*end Custom Scroll*/
 
-.pdl-2{
+.pdl-2 {
   padding-left: 15px;
 }
-

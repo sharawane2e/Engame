@@ -27,7 +27,8 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import Tooltip from "@material-ui/core/Tooltip";
 // import { loadStripe } from "@stripe/stripe-js";
 import Switch from "@material-ui/core/Switch";
-import { v4 as uuidv4 } from "uuid";
+import { logOutUser } from "../../redux/user/user-action";
+import { useHistory } from "react-router-dom";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ function Purchased(props) {
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
   const [copy, setCopy] = useState(false);
+  const history = useHistory();
 
   // let history = useHistory();
   // console.log(history);
@@ -62,7 +64,6 @@ function Purchased(props) {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-
     async function paymentSuccess() {
       if (is_renew == "false") {
         await fetch(BASE_URL + "payments/success/", {
@@ -116,13 +117,20 @@ function Purchased(props) {
       })
         .then((response) => response.json())
         .then((result) => {
-          dispatch(loadingStop());
-          setWidgets(result);
-          const isShowArr = [];
-          result.forEach((el, index) => {
-            isShowArr.push(false);
-          });
-          setShow(isShowArr);
+          if (result.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            history.push("/");
+          } else {
+            dispatch(loadingStop());
+            setWidgets(result);
+            const isShowArr = [];
+            result.forEach((el, index) => {
+              isShowArr.push(false);
+            });
+            setShow(isShowArr);
+          }
         });
     };
     myWwidgets();

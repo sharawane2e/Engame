@@ -24,6 +24,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
+import { logOutUser } from "../../redux/user/user-action";
+import { useHistory } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const Cart = () => {
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
   const [issetProdusctId, setProdusctId] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getItemFromCart());
@@ -39,12 +42,6 @@ const Cart = () => {
 
   const handleRemove = (isProduct) => {
     dispatch(removeFromCart(isProduct));
-  };
-
-  const cartUpdate = (productShow,issetProdusctId) => {
-    console.log(productShow,issetProdusctId)
-    //dispatch(removeFromCart(isProduct));
-    //console.log("isProductUpdate", productShow);
   };
 
   // handleCheckout
@@ -62,9 +59,16 @@ const Cart = () => {
       })
         .then((response) => response.json())
         .then((result) => {
-          //sessionStorage.setItem("sessionId", result.sessionId);
-          stripe.redirectToCheckout({ sessionId: result.sessionId });
-          dispatch(loadingStop());
+          if (result.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            history.push("/");
+          } else {
+            //sessionStorage.setItem("sessionId", result.sessionId);
+            stripe.redirectToCheckout({ sessionId: result.sessionId });
+            dispatch(loadingStop());
+          }
         });
     } catch (error) {
       console.error(error);
@@ -148,6 +152,7 @@ const Cart = () => {
                             sm={2}
                             xs={12}
                             container
+                            className="shoping-cart__tool-images"
                           >
                             <ButtonBase className="curent-tool-img">
                               <img
@@ -205,7 +210,7 @@ const Cart = () => {
                               </Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} container>
-                              <Grid
+                              {/* <Grid
                                 item
                                 md={6}
                                 sm={12}
@@ -262,6 +267,29 @@ const Cart = () => {
                                   </span>
                                 </Typography>
                               </Grid>
+                              */}
+                              <Grid item md={10} sm={10} xs={10}>
+                                <Typography
+                                  component="div"
+                                  className="shoping-cart__validity-input"
+                                >
+                                  <Typography
+                                    component="p"
+                                    className="shoping-cart__subscription-text"
+                                  >
+                                    Subscription For
+                                  </Typography>
+                                  <Typography component="span">
+                                    {item.plan_value}
+                                  </Typography>
+                                  <Typography
+                                    component="span"
+                                    className="shoping-cart__input-days"
+                                  >
+                                    {item.plan_type}
+                                  </Typography>
+                                </Typography>
+                              </Grid>
                               <Grid
                                 item
                                 md={2}
@@ -270,14 +298,22 @@ const Cart = () => {
                                 className="shoping-cart__tool-icons"
                               >
                                 <Typography component="div">
-                                  <EditIcon
-                                    className="shoping-cart__tool-tick"
-                                    onClick={() => {
-                                      setRenew(true);
-                                      setProductShow(item)
-                                     }}
-                                  />
-                                  |
+                                  <Tooltip title="Edit" placement="top">
+                                    <EditIcon
+                                      className="shoping-cart__tool-tick"
+                                      onClick={() => {
+                                        setRenew(true);
+                                        setProductShow(item);
+                                      }}
+                                    />
+                                  </Tooltip>
+                                  <Typography
+                                    component="span"
+                                    className="gray-color"
+                                  >
+                                    |
+                                  </Typography>
+
                                   <Tooltip title="Delete" placement="top">
                                     <DeleteIcon
                                       className="shoping-cart__tool-delete"
@@ -321,7 +357,8 @@ const Cart = () => {
                       $
                       {cart
                         .map((item) => item.price)
-                        .reduce((acc, value) => +acc + +value)}
+                        .reduce((acc, value) => +acc + +value)
+                        .toFixed(2)}
                     </div>
                     <div className="shoping-cart__coupon-code">
                       {/* <span align="center">Promotion code</span> */}
@@ -361,10 +398,11 @@ const Cart = () => {
         onClose={() => setRenew(false)}
         headerText="Subscription Update"
         footerButton={true}
-        className="border-radius popup-container__iner--md"
+        className="border-radius popup-container__iner--sm"
       >
-        <SubscriptionUpdate updateData={productShow}
-         onClose={() => setRenew(false)}
+        <SubscriptionUpdate
+          updateData={productShow}
+          onClose={() => setRenew(false)}
         />
       </CustomPopup>
       {/*End*/}

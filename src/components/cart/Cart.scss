@@ -22,12 +22,16 @@
     @include space(padding, top-bottom, $padding-20, $padding-20);
     @include space(padding, left-right, $padding-20, $padding-20);
     @include space(margin, bottom, $margin-10, 0);
+
     .curent-tool-img {
-      width: 100%;
+      width: 85px;
       > img {
         max-width: 100%;
       }
     }
+  }
+  #{&}__tool-images {
+    justify-content: center;
   }
   #{&}__card-coupon {
     @include space(padding, all, $padding-30, 0);
@@ -43,8 +47,8 @@
   }
   .margin-right {
     @include space(margin, right, $margin-10, 0);
-    width: 25px !important;
-    height: 25px !important;
+    width: 20px !important;
+    height: 20px !important;
     @include breakpoint(Ipad) {
       width: 20px;
       @include space(margin, right, $margin-5, 0);
@@ -102,7 +106,7 @@
     > span {
       display: flex;
       align-items: $align-center;
-      @include space(margin, right, $margin-10, 0);
+      @include space(margin, left-right, $margin-8, 0);
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
       @include breakpoint(Ipad-pro) {
         @include font-size($font-reg);
@@ -122,9 +126,12 @@
       }
     }
     .shoping-cart__input-days {
-      @include space(margin, left, $margin-15, 0);
+      @include space(margin, left, $margin-8, 0);
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     }
+  }
+  #{&}__subscription-text {
+    @include font-size($font-xl-reg);
   }
   #{&}__tool-icons {
     display: flex;
@@ -137,12 +144,14 @@
   }
   #{&}__tool-tick {
     @include space(margin, right, $margin-5, 0);
+    fill: $black-gray;
     &:hover {
       fill: $secondary;
     }
   }
   #{&}__tool-delete {
     margin-left: 5px;
+    fill: $black-gray;
     &:hover {
       fill: $secondary;
     }
@@ -219,8 +228,8 @@
     .MuiButton-label {
       > svg {
         @include space(margin, right, $margin-8, 0);
-        width: 25px !important;
-        height: 25px !important;
+        width: 20px !important;
+        height: 20px !important;
         @include breakpoint(Ipad) {
           width: 20px;
           @include space(margin, right, $margin-5, 0);

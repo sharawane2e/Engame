@@ -15,8 +15,7 @@ import CustomButton from "../../components/widgets/Button";
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
-import { v4 as uuidv4 } from 'uuid';
-
+import { v4 as uuidv4 } from "uuid";
 
 class Registration extends Component {
   state = {
@@ -55,7 +54,7 @@ class Registration extends Component {
     firstPart = ("" + firstPart.toString()).slice(-5);
     secondPart = ("" + secondPart.toString()).slice(-5);
 
-    var uservalue = splitEmail[0]+"_"+firstPart+secondPart;
+    var uservalue = splitEmail[0] + "_" + firstPart + secondPart;
 
     const user = {
       username: uservalue,
@@ -165,7 +164,7 @@ class Registration extends Component {
                 htmlFor="standard-adornment-name"
                 className="input-label"
               >
-                Username
+                Name
               </InputLabel>
               <FormControl className="form-area__control">
                 <TextField

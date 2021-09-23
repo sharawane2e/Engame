@@ -2,6 +2,8 @@
   @include space(padding, top-bottom, $padding-40, $padding-40);
   padding-left: 0;
   background: $white;
+  min-height: 52vh !important;
+  align-items: inherit !important;
   .MuiGrid-container {
     // min-height: 50vh;
   }

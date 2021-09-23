@@ -7,11 +7,11 @@ import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 //import { useHistory } from "react-router-dom";
-import { addToCart } from "../../redux/cart/action";
+// import { addToCart } from "../../redux/cart/action";
 import { getItemFromCart } from "../../redux/cart/action";
 
 const SubscriptionUpdate = ({ updateData, onClose }) => {
-  console.log(updateData);
+  // console.log(updateData);
   //const [subscription, setSubscription] = useState("");
   const [istype, setType] = useState(updateData.plan_type);
   const [valuePrice, setValuePrice] = useState(updateData.plan_value);
@@ -61,11 +61,6 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   }, [isUpdateResult]);
 
   const cartUpdate = () => {
-    console.log(istype, valuePrice, isCurentPrice);
-    // dispatch(addToCart(user));
-    // Toaster.sucess("You have item add successfully!", "topCenter");
-    // onClose();
-    //console.log("data user",widgetid)
     let plans = {
       user: res.token.user.pk,
       widget: updateData.widget.id,
@@ -88,7 +83,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       .then((response) => response.json())
       .then((result) => {
         setUpdateResult(result);
-        console.log(result);
+        // console.log(result);
         onClose();
         dispatch(loadingStop());
       });
@@ -125,13 +120,13 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
           </div>
         </div>
       </div>
-      <div className="popup-container__footer">
+      <div className="popup-container__footer popup--text">
         <CustomButton
           className="primary-button add--card"
           onClick={cartUpdate}
           disabled={valuePrice === 0 || valuePrice === "" ? true : false}
         >
-          <ShoppingCartIcon /> Update Cart
+          <ShoppingCartIcon className="margin-right-15" /> Update Cart
         </CustomButton>
       </div>
     </>
