@@ -26,6 +26,7 @@ import Login from "../Login";
 import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
 import EmailActive from "../EmailActivation";
+import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 
 // import PropTypes from "prop-types";
@@ -296,7 +297,10 @@ const ToolCards = () => {
                 src={warning_icon}
                 alt="Registration Sucessfully"
               />
-              <p className="sucess_message">{ErrorMessages.loginAlert}</p>
+              <Typography component="p" className="sucess_message">
+                {ErrorMessages.EmbededAlert}
+              </Typography>
+              {/* <p className="sucess_message"></p> */}
               <CustomButton
                 className="primary-button"
                 style={{ marginRight: "20px" }}

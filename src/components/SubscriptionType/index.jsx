@@ -54,6 +54,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
       .then((response) => response.json())
       .then((result) => {
         setBase(result.base_price);
+        console.log("result.base_price", result.base_price);
         dispatch(loadingStop());
       });
   };
