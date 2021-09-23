@@ -109,7 +109,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
               variant="outlined"
               name="hits"
               className="subscription-type__inputbox"
-              value={valuePrice}
+              value={(valuePrice<=0) ? 0 : valuePrice }
               // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
