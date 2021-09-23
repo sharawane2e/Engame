@@ -1,3 +1,6 @@
+.shopping-cart-data {
+  min-height: 740px;
+}
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   // @include bgcolor($gray-secondary);
@@ -145,6 +148,8 @@
   #{&}__tool-tick {
     @include space(margin, right, $margin-5, 0);
     fill: $black-gray;
+    width: 20px !important;
+    height: 20px !important;
     &:hover {
       fill: $secondary;
     }
