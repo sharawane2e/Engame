@@ -55,7 +55,6 @@ function Purchased(props) {
   const [copy, setCopy] = useState(false);
   const history = useHistory();
 
-
   // let history = useHistory();
   // console.log(history);
 
@@ -209,9 +208,9 @@ function Purchased(props) {
               <Link color="inherit" to="/">
                 Home
               </Link>
-              <Link color="inherit" to="/cart">
+              {/* <Link color="inherit" to="/cart">
                 Shopping Cart
-              </Link>
+              </Link> */}
               <Typography color="textPrimary">My Widgets</Typography>
             </Breadcrumbs>
           </Container>
@@ -316,21 +315,24 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Subscription Key:
                               </span>
-                                <Tooltip title={copy? "Copied" : "copy"} placement="top">
-                              <span 
-                              className="subscription-day margin-rightdata copy-to-clip display-flex"
-                              onClick={() => {
-                                navigator.clipboard.writeText(
-                                  item.secrate_key
-                                  );
-                                  setCopy(true);
-                                  setTimeout(() => setCopy(false), 1000)
-                                }}
+                              <Tooltip
+                                title={copy ? "Copied" : "copy"}
+                                placement="top"
                               >
-                                {item.secrate_key.substr(0, 10)}************
+                                <span
+                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(
+                                      item.secrate_key
+                                    );
+                                    setCopy(true);
+                                    setTimeout(() => setCopy(false), 1000);
+                                  }}
+                                >
+                                  {item.secrate_key.substr(0, 10)}************
                                   <FileCopyIcon className="subscription-day__icon" />
-                              </span>
-                                </Tooltip>
+                                </span>
+                              </Tooltip>
                             </Typography>
                             <Typography
                               component="div"
@@ -339,20 +341,27 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Trial Key:
                               </span>
-                                <Tooltip title={copy? "Copied" : "copy"} placement="top">
-                              <span 
-                              className="subscription-day margin-rightdata copy-to-clip display-flex" 
-                              onClick={() => {
+                              <Tooltip
+                                title={copy ? "Copied" : "copy"}
+                                placement="top"
+                              >
+                                <span
+                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                  onClick={() => {
                                     navigator.clipboard.writeText(
                                       item.trial_key
                                     );
                                     setCopy(true);
                                     setTimeout(() => setCopy(false), 1000);
-                                  }}>
-                               <span className="display-flex"> {item.trial_key.substr(0, 10)}************</span>
-                                <FileCopyIcon className="subscription-day__icon"/>
-                              </span>
-                                </Tooltip>
+                                  }}
+                                >
+                                  <span className="display-flex">
+                                    {" "}
+                                    {item.trial_key.substr(0, 10)}************
+                                  </span>
+                                  <FileCopyIcon className="subscription-day__icon" />
+                                </span>
+                              </Tooltip>
                             </Typography>
                           </Grid>
                         </Grid>
@@ -364,7 +373,7 @@ function Purchased(props) {
                             
                           </Typography> */}
                           <Switch />
-                         
+
                           <Typography
                             component="div"
                             className="extend-validity"
@@ -447,7 +456,10 @@ function Purchased(props) {
                       </Grid>
 
                       {isShow[index] ? (
-                        <Grid item xs={12} container
+                        <Grid
+                          item
+                          xs={12}
+                          container
                           className="purchased-tool__tool-data accordion-margin show--accordion"
                         >
                           <Grid item xs={6}>
@@ -473,8 +485,10 @@ function Purchased(props) {
                               </div>
                             </Typography>
                           </Grid>
-                          
-                          <Grid item xs={6}
+
+                          <Grid
+                            item
+                            xs={6}
                             className="purchased-tool__expiry-date"
                           >
                             <div>
@@ -520,7 +534,7 @@ function Purchased(props) {
                               </Typography>
                             </div>
                           </Grid>
-                          
+
                           {/* <Grid item xs={6}>
                             <Typography component="div">
                               <div className="purchased-tool__purchased-date">
@@ -533,7 +547,7 @@ function Purchased(props) {
                               </div>
                             </Typography>
                           </Grid> */}
-{/*                           
+                          {/*                           
                           <Grid item xs={6}
                             className="purchased-tool__expiry-date"
                           >
@@ -550,7 +564,6 @@ function Purchased(props) {
                             </Typography>
                           </Grid> */}
                         </Grid>
-
                       ) : null}
                     </Grid>
                   </Paper>
