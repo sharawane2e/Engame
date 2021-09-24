@@ -63,15 +63,17 @@ class Registration extends Component {
       password2: confirmpassword,
       first_name: name,
       last_name: "s",
-      mobile: "9191",
+      mobile: "91",
     };
+
+    // console.log("name", user);
     const validationResponse = this.UserValidation.validateForm({
       name,
       email,
       setpassword,
       confirmpassword,
     });
-    console.log(this.state);
+    // console.log(this.state);
     if (validationResponse.isFormValid) {
       // loader's
       this.props.dispatch(loadingStart());
@@ -86,7 +88,7 @@ class Registration extends Component {
       })
         .then((result) => result.json())
         .then((data) => {
-          console.log("curent data", data);
+          // console.log("curent data", data);
           Toaster.error(
             data.username ? data.username.join("") : null,
             "topCenter"
@@ -99,7 +101,7 @@ class Registration extends Component {
           this.props.dispatch(loadingStop());
           if (data.detail) {
             Toaster.sucess(data.detail, "topCenter");
-            window.location.reload();
+            //window.location.reload();
           }
         });
     } else {

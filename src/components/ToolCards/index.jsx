@@ -298,7 +298,7 @@ const ToolCards = () => {
                 alt="Registration Sucessfully"
               />
               <Typography component="p" className="sucess_message">
-                {ErrorMessages.EmbededAlert}
+                {ErrorMessages.loginAlert}
               </Typography>
               {/* <p className="sucess_message"></p> */}
               <CustomButton
@@ -328,7 +328,7 @@ const ToolCards = () => {
         </CustomPopup>
         {/*End */}
 
-        {/*Emneded code popup */}
+        {/*Embeded code popup */}
         <CustomPopup
           open={ispopup}
           onClose={() => setPopup(false)}

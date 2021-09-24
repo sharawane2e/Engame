@@ -98,7 +98,7 @@ const Header = ({ props }) => {
           localStorage.removeItem("auth");
           dispatch(loadingStop());
           history.push("/");
-          Toaster.sucess("logout sucessfully", "topCenter");
+          Toaster.sucess(res.detail, "topCenter");
         }
       })
       .catch((error) => {

@@ -62,8 +62,8 @@ const Cart = () => {
           if (result.code == "token_not_valid") {
             dispatch(logOutUser());
             localStorage.removeItem("auth");
-            dispatch(loadingStop());
             history.push("/");
+            dispatch(loadingStop());
           } else {
             //sessionStorage.setItem("sessionId", result.sessionId);
             stripe.redirectToCheckout({ sessionId: result.sessionId });
