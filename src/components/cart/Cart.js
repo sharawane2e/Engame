@@ -12,19 +12,19 @@ import Grid from "@material-ui/core/Grid";
 import CustomButton from "../../components/widgets/Button";
 import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import TextField from "@material-ui/core/TextField";
+// import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import CustomPopup from "../CustomPopup";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+// import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
-import { logOutUser } from "../../redux/user/user-action";
+// import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 
 const Cart = () => {
@@ -45,35 +45,48 @@ const Cart = () => {
   };
 
   // handleCheckout
-  const handleCheckout = async () => {
-    dispatch(loadingStart());
-    const stripe = await loadStripe(STRIPE);
-    try {
-      await fetch(BASE_URL + "payments/checkout-session/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.access_token}`,
-        },
-        body: JSON.stringify({ user: user.user.pk }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.code == "token_not_valid") {
-            dispatch(logOutUser());
-            localStorage.removeItem("auth");
-            history.push("/");
-            dispatch(loadingStop());
-          } else {
-            //sessionStorage.setItem("sessionId", result.sessionId);
-            stripe.redirectToCheckout({ sessionId: result.sessionId });
-            dispatch(loadingStop());
-          }
-        });
-    } catch (error) {
-      console.error(error);
-    }
+  const handleCheckout = () => {
+    //dispatch(loadingStart());
+    const reducer = (previousValue, currentValue) =>
+      +previousValue + +currentValue;
+    console.log(cart.reduce(reducer));
+    // cart
+    //   .map((item) => {
+    //     console.log("check out callculate all value");
+    //   })
+    //   .reduce(reducer);
+    // .reduce((acc, value) => +acc + +value);
+    //console.log("check out callculate all value");
   };
+  // const handleCheckout = async () => {
+  //   dispatch(loadingStart());
+  // const stripe = await loadStripe(STRIPE);
+  // try {
+  //   await fetch(BASE_URL + "payments/checkout-session/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${user.access_token}`,
+  //     },
+  //     body: JSON.stringify({ user: user.user.pk }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       if (result.code == "token_not_valid") {
+  //         dispatch(logOutUser());
+  //         localStorage.removeItem("auth");
+  //         history.push("/");
+  //         dispatch(loadingStop());
+  //       } else {
+  //         //sessionStorage.setItem("sessionId", result.sessionId);
+  //         stripe.redirectToCheckout({ sessionId: result.sessionId });
+  //         dispatch(loadingStop());
+  //       }
+  //     });
+  // } catch (error) {
+  //   console.error(error);
+  // }
+  //  };
 
   return (
     <>
@@ -91,7 +104,9 @@ const Cart = () => {
               {/* <Link color="inherit" to="" >
                         Shopping Cart
               </Link> */}
-              <Typography color="textPrimary ">Shopping Cart</Typography>
+              <Typography omponent="div" color="textPrimary">
+                Shopping Cart
+              </Typography>
             </Breadcrumbs>
           </Container>
         </div>
