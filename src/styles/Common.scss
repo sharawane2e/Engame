@@ -25,8 +25,11 @@ body {
 .progress-green .MuiLinearProgress-barColorPrimary {
   background-color: $green-color !important;
 }
+.progress-embeded .MuiLinearProgress-barColorPrimary {
+  background-color: $red-yellow !important;
+}
 .progress-red .MuiLinearProgress-barColorPrimary {
-  background-color: $secondary !important;
+  background-color: $red !important;
 }
 .cursor--pointer {
   cursor: pointer;
