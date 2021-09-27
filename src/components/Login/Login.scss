@@ -15,7 +15,7 @@
   #{&}__login {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     @include font-size($font-lg);
-    text-align: $align-center;
+    text-align: $align-left;
     @include space(padding, top, $padding-20, 0);
     @include space(padding, bottom, $padding-50, 0);
     @include breakpoint(desktop) {
@@ -53,9 +53,9 @@
   }
   #{&}__control {
     @include space(margin, bottom, $margin-10, 0);
-    @include breakpoint(desktop) {
-      @include space(margin, bottom, $margin-0, 0);
-    }
+    // @include breakpoint(desktop) {
+    //   @include space(margin, bottom, $margin-10, 0);
+    // }
     @include breakpoint(desktop150) {
       .MuiIconButton-label {
         > svg {
@@ -86,6 +86,9 @@
       @include space(padding, left, $padding-5, 0);
       @include color($secondary);
     }
+  }
+  .MuiFilledInput-root {
+    background-color: $white !important;
   }
 }
 .form-button-grop {

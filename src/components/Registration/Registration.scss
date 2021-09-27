@@ -1,6 +1,9 @@
 .registration--form {
-  @include breakpoint(desktop150){
+  @include breakpoint(desktop150) {
     @include space(padding, top-bottom, $padding-10, $padding-10);
+  }
+  .MuiFilledInput-root {
+    background-color: $white !important;
   }
 }
 .back-button {
@@ -15,7 +18,7 @@
       text-decoration: none !important;
     }
   }
-  @include breakpoint(desktop150){
+  @include breakpoint(desktop150) {
     @include font-size($font-xmd-reg);
   }
   @include breakpoint(desktop) {
@@ -27,7 +30,7 @@
     min-width: 292px !important;
     width: 100%;
     @include space(padding, all, $padding-12 !important, 0);
-    @include breakpoint(desktop150){
+    @include breakpoint(desktop150) {
       @include font-size($font-xmd-reg);
     }
   }
