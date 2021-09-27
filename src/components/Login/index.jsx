@@ -161,8 +161,8 @@ class Login extends Component {
               >
                 Password
               </InputLabel> */}
-              <FormControl className="form-area__control" variant="outlined">
-                <InputLabel htmlFor="filled-adornment-password">
+              <FormControl className="form-area__control" variant="filled">
+                <InputLabel htmlFor="standard-adornment-password">
                   Password
                 </InputLabel>
                 <FilledInput

@@ -32,8 +32,8 @@ import { useHistory } from "react-router-dom";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
-    height: 10,
-    borderRadius: 5,
+    height: 6,
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
@@ -211,7 +211,9 @@ function Purchased(props) {
               {/* <Link color="inherit" to="/cart">
                 Shopping Cart
               </Link> */}
-              <Typography color="textPrimary">My Widgets</Typography>
+              <Typography color="textPrimary" variant="span">
+                My Widgets
+              </Typography>
             </Breadcrumbs>
           </Container>
         </div>
@@ -220,12 +222,22 @@ function Purchased(props) {
           className="purchased-tool__container  margin-top-174"
         >
           <Grid container spacing={3}>
-            <Grid item xs={4} className="purchased-tool__hedding">
+            <Grid
+              item
+              xs={12}
+              className="purchased-tool__hedding purchased-tool__borderdata"
+            >
               <Typography component="div" className="hedding-text">
                 My Widgets
               </Typography>
             </Grid>
-            <Grid item xs={8} className="purchased-tool__hedding grid-flex">
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid
+              item
+              xs={12}
+              className="purchased-tool__hedding purchased-tool__tabing"
+            >
               <Typography
                 component="div"
                 className="tab--button border-radius tab--active"
@@ -243,6 +255,12 @@ function Purchased(props) {
               </Typography>
               <Typography component="div" className="tab--button border-radius">
                 Paused
+              </Typography>
+              <Typography component="div" className="tab--button border-radius">
+                Days Subs.
+              </Typography>
+              <Typography component="div" className="tab--button border-radius">
+                Hits Subs.
               </Typography>
             </Grid>
           </Grid>
@@ -322,12 +340,27 @@ function Purchased(props) {
                                 <span
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
                                   onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.secrate_key
-                                    );
-                                    setCopy(true);
+                                    navigator.clipboard
+                                      .writeText(item.trial_key)
+                                      .then(
+                                        function () {
+                                          setCopy(true);
+                                          console.log("success");
+                                          setTimeout(
+                                            () => setCopy(false),
+                                            1000
+                                          );
+                                        },
+                                        function (err) {
+                                          console.log("error copy");
+                                        }
+                                      );
+                                    // navigator.clipboard.writeText(
+                                    //   item.secrate_key
+                                    // );
+                                    // setCopy(true);
                                     // setCopy((false), 1000);
-                                    console.log("copied");
+                                    // console.log("copied");
                                   }}
                                 >
                                   {item.secrate_key.substr(0, 10)}************
@@ -349,15 +382,27 @@ function Purchased(props) {
                                 <span
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
                                   onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.trial_key
-                                    );
-                                    setCopy(true);
-                                    setTimeout(() => setCopy(false), 1000);
+                                    navigator.clipboard
+                                      .writeText(item.trial_key)
+                                      .then(
+                                        function () {
+                                          setCopy(true);
+                                          console.log("success");
+                                          setTimeout(
+                                            () => setCopy(false),
+                                            1000
+                                          );
+                                        },
+                                        function (err) {
+                                          console.log("error copy");
+                                        }
+                                      );
+                                    // navigator.clipboard.writeText(
+                                    //   item.trial_key
+                                    // );
                                   }}
                                 >
                                   <span className="display-flex">
-                                    {" "}
                                     {item.trial_key.substr(0, 10)}************
                                   </span>
                                   <FileCopyIcon className="subscription-day__icon" />
@@ -424,11 +469,13 @@ function Purchased(props) {
                                 className={
                                   ConsumptionValue > 79
                                     ? "progress-bar progress-green"
-                                    : (ConsumptionValue > 49 && ConsumptionValue < 80)
+                                    : ConsumptionValue > 49 &&
+                                      ConsumptionValue < 80
                                     ? "progress-bar progress-yellow"
-                                    : (ConsumptionValue > 19 && ConsumptionValue < 50)
+                                    : ConsumptionValue > 19 &&
+                                      ConsumptionValue < 50
                                     ? "progress-bar progress-embeded"
-                                    :"progress-bar progress-red"
+                                    : "progress-bar progress-red"
                                 }
                               />
                             </Typography>

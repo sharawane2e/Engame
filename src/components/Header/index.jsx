@@ -9,6 +9,7 @@ import Menu from "@material-ui/core/Menu";
 // import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 import { Link, useHistory } from "react-router-dom";
 import Engame_logo from "../../assets/images/Engame_logo.svg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -24,6 +25,7 @@ import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import { getItemFromCart } from "../../redux/cart/action";
@@ -174,12 +176,12 @@ const Header = ({ props }) => {
       ) : (
         <>
           <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            ></IconButton>
+            {/* <IconButton
+            // aria-label="account of current user"
+            // aria-controls="primary-search-account-menu"
+            // aria-haspopup="true"
+            // color="inherit"
+            ></IconButton> */}
             <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
                 {user.token.user.first_name} <ArrowDropDownIcon />
@@ -188,12 +190,12 @@ const Header = ({ props }) => {
           </MenuItem>
 
           <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            ></IconButton>
+            {/* <IconButton
+            // aria-label="account of current user"
+            // aria-controls="primary-search-account-menu"
+            // aria-haspopup="true"
+            // color="inherit"
+            ></IconButton> */}
             <div className="menu-button" onClick={() => handleLogout()}>
               Logout
             </div>
@@ -233,19 +235,51 @@ const Header = ({ props }) => {
             ) : null}
 
             {user.isLoggedIn ? (
-              <div className={classes.sectionDesktop}>
-                <div className="user-after-login">
-                  <CustomButton onClick={handleProfileMenuOpen}>
-                    {user.token.user.first_name} <ArrowDropDownIcon />
-                  </CustomButton>
+              <>
+                <div className={classes.sectionDesktop}>
+                  <div className="user-after-login">
+                    <Link
+                      color="inherit"
+                      to="/Purchased"
+                      className="my-widgets"
+                    >
+                      My Widgets
+                    </Link>
+                    <div className="shoping__card">
+                      <Link to="cart">
+                        {/* <Badge color="secondary"> */}
+                        <Badge
+                          badgeContent={carts.length ? carts.length : 0}
+                          color="secondary"
+                        >
+                          <Tooltip title="Cart Items" placement="top">
+                            <ShoppingCartIcon />
+                          </Tooltip>
+                        </Badge>
+                      </Link>
+                    </div>
+
+                    <CustomButton
+                      onClick={handleProfileMenuOpen}
+                      className="custom-avtar"
+                    >
+                      <Avatar sx="">
+                        {user.token.user.first_name[0]}
+                        {user.token.user.first_name[1]}
+                        {/* {`${user.token.user.first_name[0][0]}${
+                          user.token.user.first_name.split(" ")[1][0]
+                        }`} */}
+                      </Avatar>
+                      <KeyboardArrowDown />
+                    </CustomButton>
+                  </div>
                 </div>
-              </div>
+              </>
             ) : null}
-            {user.isLoggedIn ? (
+            {/* {user.isLoggedIn ? (
               <div className="shoping__card">
                 <Link to="cart">
-                  {/* <Badge color="secondary"> */}
-
+         
                   <Badge
                     badgeContent={carts.length ? carts.length : 0}
                     color="secondary"
@@ -256,8 +290,7 @@ const Header = ({ props }) => {
                   </Badge>
                 </Link>
               </div>
-            ) : null}
-
+            ) : null} */}
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-label="show more"
