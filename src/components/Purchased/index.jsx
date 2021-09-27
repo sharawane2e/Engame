@@ -326,7 +326,8 @@ function Purchased(props) {
                                       item.secrate_key
                                     );
                                     setCopy(true);
-                                    setTimeout(() => setCopy(false), 1000);
+                                    // setCopy((false), 1000);
+                                    console.log("copied");
                                   }}
                                 >
                                   {item.secrate_key.substr(0, 10)}************
