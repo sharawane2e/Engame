@@ -17,6 +17,7 @@ import ForgotPassword from "../../components/ForgotPassword";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/user/user-action";
+import FilledInput from "@material-ui/core/FilledInput";
 
 class Login extends Component {
   state = {
@@ -130,12 +131,12 @@ class Login extends Component {
           <div className="form-area login--form">
             <div className="form-area__login  large-hedding">Login</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-email"
                 className="input-label"
               >
                 E-mail address
-              </InputLabel>
+              </InputLabel> */}
               <FormControl className="form-area__control">
                 <TextField
                   id="outlined-email-input"
@@ -145,7 +146,8 @@ class Login extends Component {
                   onBlur={(e) => this.handleBlur(e, "email")}
                   message={this.state.formErrors.email}
                   type="Email"
-                  variant="outlined"
+                  variant="filled"
+                  label="Email"
                   onKeyDown={this._handleKeyDown}
                 />
                 <div className="validated-error">
@@ -153,14 +155,17 @@ class Login extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-password"
                 className="input-label"
               >
                 Password
-              </InputLabel>
+              </InputLabel> */}
               <FormControl className="form-area__control" variant="outlined">
-                <OutlinedInput
+                <InputLabel htmlFor="filled-adornment-password">
+                  Password
+                </InputLabel>
+                <FilledInput
                   id="outlined-adornment-password"
                   placeholder="***********************"
                   type={this.state.showPassword ? "text" : "password"}
