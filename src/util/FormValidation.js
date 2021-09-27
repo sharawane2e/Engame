@@ -3,8 +3,8 @@ import { ErrorMessages } from "../constants/Messages";
 import { PASSWORD_MIN_LENGTH } from "../constants/ConstantValues";
 
 const validateEmailPattern = (email) => ValidationRegex.EMAIL.test(email);
-const namePattern = (name) => ValidationRegex.NAME.test(name);
-
+const namePattern = (name) => ValidationRegex.ONLY_ALPHA.test(name);
+const passwordPattern = (password) => ValidationRegex.PASSWORD.test(password);
 
 class ValidationResponse {
   isValid = true;
@@ -86,7 +86,7 @@ export class UserValidation extends Validation {
         }else{
           if(!namePattern(value)){
             validationResponse.isValid = false;
-            validationResponse.message = ErrorMessages.NAME_REQURIED;
+            validationResponse.message = ErrorMessages.NAME_PATTERN;
           }
         }
         break;
@@ -96,6 +96,9 @@ export class UserValidation extends Validation {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
         } else if (value.length < PASSWORD_MIN_LENGTH) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+        } else if (!passwordPattern(value)) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_MIN;
         }
