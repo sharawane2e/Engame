@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef , useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -59,6 +59,8 @@ function Purchased(props) {
   // console.log(history);
 
   const token = useSelector((state) => state.user.token);
+
+  
 
   useEffect(() => {
     const search = props.location.search;
@@ -195,6 +197,13 @@ function Purchased(props) {
   //   isShow;
   // });
 
+
+  const  CCopy= (yes)=> {
+    var copyText = yes;
+    copyText.select();
+    document.execCommand("copy");
+  }
+
   return (
     <>
       <div className="purchased-tool bredcrum-conatiner">
@@ -321,15 +330,23 @@ function Purchased(props) {
                               >
                                 <span
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                  onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.secrate_key
-                                    );
+                                  // onClick={() => {
+                                  //   navigator.clipboard.writeText(
+                                  //     item.secrate_key
+                                  //   );
+                                  //   setCopy(true);
+                                  //   setTimeout(() => setCopy(false), 1000);
+                                  //   console.log("copied");
+                                  // }}
+                                  onClick={()=>
+                                    navigator.clipboard.writeText(item.secrate_key).then(()=> {
                                     setCopy(true);
-                                    // setCopy((false), 1000);
-                                    console.log("copied");
-                                  }}
+                                    setTimeout(() => setCopy(false), 1000);
+                                  })
+                                  
+                                  }
                                 >
+                                
                                   {item.secrate_key.substr(0, 10)}************
                                   <FileCopyIcon className="subscription-day__icon" />
                                 </span>
