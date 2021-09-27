@@ -326,7 +326,8 @@ function Purchased(props) {
                                       item.secrate_key
                                     );
                                     setCopy(true);
-                                    setTimeout(() => setCopy(false), 1000);
+                                    // setCopy((false), 1000);
+                                    console.log("copied");
                                   }}
                                 >
                                   {item.secrate_key.substr(0, 10)}************
@@ -421,12 +422,13 @@ function Purchased(props) {
                                 variant="determinate"
                                 value={ConsumptionValue}
                                 className={
-                                  ConsumptionValue > 80
+                                  ConsumptionValue > 79
                                     ? "progress-bar progress-green"
-                                    : ConsumptionValue > 30 &&
-                                      ConsumptionValue < 80
+                                    : (ConsumptionValue > 49 && ConsumptionValue < 80)
                                     ? "progress-bar progress-yellow"
-                                    : "progress-bar progress-red"
+                                    : (ConsumptionValue > 19 && ConsumptionValue < 50)
+                                    ? "progress-bar progress-embeded"
+                                    :"progress-bar progress-red"
                                 }
                               />
                             </Typography>

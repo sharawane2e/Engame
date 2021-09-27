@@ -198,7 +198,7 @@ class Login extends Component {
 
               <div className="forgot-link">
                 <Link href="#" onClick={this.forgotPassword}>
-                  Forgot password ?
+                  Forgot password?
                 </Link>
               </div>
             </form>
