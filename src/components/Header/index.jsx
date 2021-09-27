@@ -140,11 +140,11 @@ const Header = ({ props }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
+      {/* <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
           My Widgets
         </Link>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
     </Menu>
   );
