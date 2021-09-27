@@ -149,6 +149,22 @@ function Purchased(props) {
     document.body.appendChild(link);
     link.click();
   };
+  const handleCopied = (copyCode) => {
+    // console.log("CopyCode", copyCode);
+    var clipboard = navigator.clipboard;
+    if (clipboard == undefined) {
+      console.log("clipboard is undefined");
+    } else {
+      clipboard.writeText(copyCode).then(
+        function () {
+          console.log("Copied to clipboard successfully!");
+        },
+        function () {
+          console.error("Unable to write to clipboard. :-(");
+        }
+      );
+    }
+  };
 
   const handleExtend = async (widgetId) => {
     // const plan_newValue,planId,
@@ -340,21 +356,22 @@ function Purchased(props) {
                                 <span
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
                                   onClick={() => {
-                                    navigator.clipboard
-                                      .writeText(item.trial_key)
-                                      .then(
-                                        function () {
-                                          setCopy(true);
-                                          console.log("success");
-                                          setTimeout(
-                                            () => setCopy(false),
-                                            1000
-                                          );
-                                        },
-                                        function (err) {
-                                          console.log("error copy");
-                                        }
-                                      );
+                                    handleCopied(item.secrate_key);
+                                    // navigator.clipboard;
+                                    // .writeText(item.trial_key)
+                                    // .then(
+                                    //   function () {
+                                    //     setCopy(true);
+                                    //     console.log("success");
+                                    //     setTimeout(
+                                    //       () => setCopy(false),
+                                    //       1000
+                                    //     );
+                                    //   },
+                                    //   function (err) {
+                                    //     console.log("error copy");
+                                    //   }
+                                    // );
                                     // navigator.clipboard.writeText(
                                     //   item.secrate_key
                                     // );
@@ -382,21 +399,22 @@ function Purchased(props) {
                                 <span
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
                                   onClick={() => {
-                                    navigator.clipboard
-                                      .writeText(item.trial_key)
-                                      .then(
-                                        function () {
-                                          setCopy(true);
-                                          console.log("success");
-                                          setTimeout(
-                                            () => setCopy(false),
-                                            1000
-                                          );
-                                        },
-                                        function (err) {
-                                          console.log("error copy");
-                                        }
-                                      );
+                                    handleCopied(item.trial_key);
+                                    // navigator.clipboard
+                                    //   .writeText(item.trial_key)
+                                    //   .then(
+                                    //     function () {
+                                    //       setCopy(true);
+                                    //       console.log("success");
+                                    //       setTimeout(
+                                    //         () => setCopy(false),
+                                    //         1000
+                                    //       );
+                                    //     },
+                                    //     function (err) {
+                                    //       console.log("error copy");
+                                    //     }
+                                    //   );
                                     // navigator.clipboard.writeText(
                                     //   item.trial_key
                                     // );
