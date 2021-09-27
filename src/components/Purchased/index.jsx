@@ -154,6 +154,14 @@ function Purchased(props) {
     var clipboard = navigator.clipboard;
     if (clipboard == undefined) {
       console.log("clipboard is undefined");
+      clipboard.writeText(copyCode).then(
+        function () {
+          console.log("Copied to clipboard successfully!");
+        },
+        function () {
+          console.error("Unable to write to clipboard. :-(");
+        }
+      );
     } else {
       clipboard.writeText(copyCode).then(
         function () {
