@@ -60,9 +60,9 @@
     //   @include space(margin, bottom, $margin-10, 0);
     // }
     .MuiFilledInput-input {
-      @include breakpoint(desktop) {
-        padding: 18px 12px 10px;
-      }
+      // @include breakpoint(desktop) {
+      //   padding: 18px 12px 10px;
+      // }
       @include breakpoint(mobileonly) {
         padding: 15px 10px 10px;
       }
