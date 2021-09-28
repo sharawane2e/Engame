@@ -79,7 +79,7 @@
     @include breakpoint(Ipad-pro) {
       width: 90%;
       // height: 90vh;
-      min-height: 500px;
+      // min-height: 500px;
       overflow-y: auto;
     }
   }
@@ -89,7 +89,7 @@
     @include breakpoint(Ipad-pro) {
       width: 90%;
       // min-height: 90vh;
-      min-height: 480px;
+      // min-height: 480px;
       // overflow-x: auto;
     }
   }
@@ -99,7 +99,7 @@
     @include breakpoint(Ipad-pro) {
       width: 90%;
       // height: 90vh;
-      min-height: 500px;
+      // min-height: 500px;
       overflow-y: auto;
     }
   }

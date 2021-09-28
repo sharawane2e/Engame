@@ -66,7 +66,7 @@ const Cart = () => {
     //console.log("check out callculate all value");
   };
   // const handleCheckout = async () => {
-  //   dispatch(loadingStart());
+  //   dispatch(lo`ad`ingStart());
   // const stripe = await loadStripe(STRIPE);
   // try {
   //   await fetch(BASE_URL + "payments/checkout-session/", {

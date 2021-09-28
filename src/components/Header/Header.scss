@@ -69,7 +69,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
+    @include breakpoint(mobileonly) {
+      min-width: 120px;
+    }
     .custom-button {
       @include color($black-primary);
       @include font-size($font-xx-reg18);
@@ -78,6 +80,7 @@
       &:hover {
         background-color: transparent !important;
       }
+      
     }
     .user-btn {
       width: auto !important;
@@ -86,6 +89,9 @@
       // margin-right: 14px;
       color: $black-primary;
       // font-family: Barlow;
+      @include breakpoint(mobileonly) {
+          display: none;
+      }
     }
     .custom-avtar {
       > .MuiButton-label {
@@ -101,4 +107,16 @@
       }
     }
   }
+ 
 }
+
+.makeStyles-sectionMobile-4,.makeStyles-sectionMobile-2,.makeStyles-sectionMobile-3{
+  >.MuiIconButton-colorInherit{
+    padding: 4px !important;
+  }
+}
+// .MuiListItem-button{  
+//   @include breakpoint(mobileonly) {
+//     display: none;
+//   }
+// }

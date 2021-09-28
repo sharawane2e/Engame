@@ -24,7 +24,7 @@ import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+// import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
@@ -32,15 +32,15 @@ import { getItemFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
+  // sectionDesktop: {
+  //   display: "none",
+  //   [theme.breakpoints.up("sm")]: {
+  //     display: "flex",
+  //   },
+  // },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none",
     },
   },
@@ -150,7 +150,7 @@ const Header = ({ props }) => {
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
+  const renderMobileMenu = (<>
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -159,6 +159,7 @@ const Header = ({ props }) => {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      className="mobile-view-menu"
     >
       {!user.isLoggedIn ? (
         <>
@@ -167,7 +168,7 @@ const Header = ({ props }) => {
               Login
             </div>
           </MenuItem>
-          <MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
             <div className="menu-button" onClick={() => setReginIsOpen(true)}>
               Register
             </div>
@@ -175,19 +176,19 @@ const Header = ({ props }) => {
         </>
       ) : (
         <>
-          <MenuItem onClick={handleProfileMenuOpen}>
+          {/* <MenuItem onClick={handleProfileMenuOpen}> */}
             {/* <IconButton
             // aria-label="account of current user"
             // aria-controls="primary-search-account-menu"
             // aria-haspopup="true"
             // color="inherit"
             ></IconButton> */}
-            <div className="user-after-login">
+            {/* <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
                 {user.token.user.first_name} <ArrowDropDownIcon />
               </CustomButton>
-            </div>
-          </MenuItem>
+            </div> */}
+          {/* </MenuItem> */}
 
           <MenuItem onClick={handleProfileMenuOpen}>
             {/* <IconButton
@@ -196,18 +197,24 @@ const Header = ({ props }) => {
             // aria-haspopup="true"
             // color="inherit"
             ></IconButton> */}
-            <div className="menu-button" onClick={() => handleLogout()}>
+             <Link
+                      color="inherit"
+                      to="/Purchased"
+                      className="my-widgets"
+                    >
+                      My Widgets
+                    </Link>
+            {/* <div className="menu-button" onClick={() => handleLogout()}>
               Logout
-            </div>
+            </div> */}
           </MenuItem>
         </>
       )}
-    </Menu>
+    </Menu></>
   );
 
   return (
     <>
-      {/* <ElevationScroll {...props}></ElevationScroll> */}
       <ElevationScroll {...props}>
         <AppBar className="flexGrow header-box " position={"sticky"}>
           <Toolbar className="header-padding header-text-color">
