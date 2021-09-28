@@ -1,4 +1,4 @@
-import React, { useRef , useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -29,6 +29,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Switch from "@material-ui/core/Switch";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -52,7 +53,7 @@ function Purchased(props) {
   const [is_renew, setRenew] = useState("false");
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
-  const [copy, setCopy] = useState(false);
+  const [sucess, setSucess] = useState('Copy');
   const history = useHistory();
 
   // let history = useHistory();
@@ -151,30 +152,6 @@ function Purchased(props) {
     document.body.appendChild(link);
     link.click();
   };
-  const handleCopied = (copyCode) => {
-    // console.log("CopyCode", copyCode);
-    var clipboard = navigator.clipboard;
-    if (clipboard == undefined) {
-      console.log("clipboard is undefined");
-      clipboard.writeText(copyCode).then(
-        function () {
-          console.log("Copied to clipboard successfully!");
-        },
-        function () {
-          console.error("Unable to write to clipboard. :-(");
-        }
-      );
-    } else {
-      clipboard.writeText(copyCode).then(
-        function () {
-          console.log("Copied to clipboard successfully!");
-        },
-        function () {
-          console.error("Unable to write to clipboard. :-(");
-        }
-      );
-    }
-  };
 
   const handleExtend = async (widgetId) => {
     // const plan_newValue,planId,
@@ -220,13 +197,6 @@ function Purchased(props) {
   // useEffect(() => {
   //   isShow;
   // });
-
-
-  const  CCopy= (yes)=> {
-    var copyText = yes;
-    copyText.select();
-    document.execCommand("copy");
-  }
 
   return (
     <>
@@ -366,41 +336,18 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Subscription Key:
                               </span>
-                              <Tooltip
-                                title={copy ? "Copied" : "copy"}
-                                placement="top"
-                              >
-                                <span
-                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
+                              <Tooltip title={sucess} placement="top" >
+                                <CopyToClipboard text={item.secrate_key}  className="subscription-day margin-rightdata copy-to-clip display-flex">
+                                <span className="subscription-day margin-rightdata copy-to-clip display-flex" 
                                   onClick={() => {
-                                    handleCopied(item.secrate_key);
-                                    // navigator.clipboard;
-                                    // .writeText(item.trial_key)
-                                    // .then(
-                                    //   function () {
-                                    //     setCopy(true);
-                                    //     console.log("success");
-                                    //     setTimeout(
-                                    //       () => setCopy(false),
-                                    //       1000
-                                    //     );
-                                    //   },
-                                    //   function (err) {
-                                    //     console.log("error copy");
-                                    //   }
-                                    // );
-                                    // navigator.clipboard.writeText(
-                                    //   item.secrate_key
-                                    // );
-                                    // setCopy(true);
-                                    // setCopy((false), 1000);
-                                    // console.log("copied");
+                                    setSucess('Copied');
+                                    setTimeout(() => setSucess('Copy'), 500);
                                   }}
                                 >
-                                
                                   {item.secrate_key.substr(0, 10)}************
                                   <FileCopyIcon className="subscription-day__icon" />
                                 </span>
+                                </CopyToClipboard>
                               </Tooltip>
                             </Typography>
                             <Typography
@@ -410,32 +357,15 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Trial Key:
                               </span>
-                              <Tooltip
-                                title={copy ? "Copied" : "copy"}
+                              <Tooltip 
+                                title={sucess}
                                 placement="top"
                               >
-                                <span
-                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                <CopyToClipboard  text={item.trial_key} className="subscription-day margin-rightdata copy-to-clip display-flex">
+                                <span className="subscription-day margin-rightdata copy-to-clip display-flex" 
                                   onClick={() => {
-                                    handleCopied(item.trial_key);
-                                    // navigator.clipboard
-                                    //   .writeText(item.trial_key)
-                                    //   .then(
-                                    //     function () {
-                                    //       setCopy(true);
-                                    //       console.log("success");
-                                    //       setTimeout(
-                                    //         () => setCopy(false),
-                                    //         1000
-                                    //       );
-                                    //     },
-                                    //     function (err) {
-                                    //       console.log("error copy");
-                                    //     }
-                                    //   );
-                                    // navigator.clipboard.writeText(
-                                    //   item.trial_key
-                                    // );
+                                    setSucess('Copied');
+                                    setTimeout(() => setSucess('Copy'), 500);
                                   }}
                                 >
                                   <span className="display-flex">
@@ -443,6 +373,7 @@ function Purchased(props) {
                                   </span>
                                   <FileCopyIcon className="subscription-day__icon" />
                                 </span>
+                                </CopyToClipboard>
                               </Tooltip>
                             </Typography>
                           </Grid>
