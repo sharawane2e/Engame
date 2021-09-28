@@ -2,7 +2,7 @@ import React from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import librarycards from "../../assets/images/library-cards.svg";
+// import librarycards from "../../assets/images/library-cards.svg";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -10,7 +10,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import SearchIcon from "@material-ui/icons/Search";
 import Carousel from "../../util/Carousel";
 
-function Home() {
+const Home = () => {
   return (
     <div className="header-bg filter-tool-shadow filter--fixed">
       <Toolbar className="filter-section">
@@ -44,7 +44,7 @@ function Home() {
             className="flexGrow filter-inputsection__form"
           >
             <IconButton className="iconButton search-icon" aria-label="menu">
-              <SearchIcon fontSize="large" />
+              <SearchIcon fontSize="inherit" />
             </IconButton>
             <InputBase className="input" />
             <Divider className="divider" orientation="vertical" />
@@ -60,6 +60,6 @@ function Home() {
       </Toolbar>
     </div>
   );
-}
+};
 
 export default Home;

@@ -9,31 +9,27 @@ import Menu from "@material-ui/core/Menu";
 // import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 import { Link, useHistory } from "react-router-dom";
-import e2eLogo from "../../assets/images/E2E-logo.png";
+import Engame_logo from "../../assets/images/Engame_logo.svg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
+import { useDispatch, useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
-// import { connect } from "react-redux";
-import { connect, useDispatch, useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
+import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
-import {
-  getItemFromCart,
-  removeFromCart,
-} from "../../redux/cart/action";
-
+import { getItemFromCart } from "../../redux/cart/action";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -62,43 +58,25 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user, state, data }) => {
+const Header = ({ props }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  // const [state] = useState(data);
   const classes = useStyles();
-  // const [open, setOpen] = useState(false);
-  // const [cartCount, setCartCount] = useState(0);
-
-  const carts = useSelector((state) => state.cart.cartItems);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  //const CartValue = useSelector((state) => shop.cart.length);
-
-  //  console.log("Redux data on shop", shop);
-  console.log("Redux data on cart", carts.length);
+  const carts = useSelector((state) => state.cart.cartItems);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    document.body.classList.toggle("modal-open", isLoginOpen);
-    document.body.classList.toggle("modal-open", isReginOpen);
-    dispatch(getItemFromCart());
-    //dispatch(removeFromCart());
-  }, [isLoginOpen, isReginOpen]);
-
-  // useEffect(() => {
-  //   let count = 0;
-  //   cart.forEach((item) => {
-  //     count += item.qty;
-  //   });
-  //   setCartCount(count);
-  //   if (user.isLoggedIn) {
-  //     setLoginIsOpen(false);
-  //   }
-  // }, [curentCart, cartCount, user]);
+    // document.body.classList.toggle("modal-open", isLoginOpen);
+    //  document.body.classList.toggle("modal-open", isReginOpen);
+    if (user.isLoggedIn) {
+      setLoginIsOpen(false);
+      dispatch(getItemFromCart());
+    }
+  }, [user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -122,7 +100,7 @@ const Header = ({ props, cart, user, state, data }) => {
           localStorage.removeItem("auth");
           dispatch(loadingStop());
           history.push("/");
-          Toaster.sucess("logout sucessfully", "topCenter");
+          Toaster.sucess(res.detail, "topCenter");
         }
       })
       .catch((error) => {
@@ -162,12 +140,11 @@ const Header = ({ props, cart, user, state, data }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
-      <MenuItem onClick={handleMenuClose}>
+      {/* <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
           My Widgets
         </Link>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
     </Menu>
   );
@@ -199,12 +176,12 @@ const Header = ({ props, cart, user, state, data }) => {
       ) : (
         <>
           <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            ></IconButton>
+            {/* <IconButton
+            // aria-label="account of current user"
+            // aria-controls="primary-search-account-menu"
+            // aria-haspopup="true"
+            // color="inherit"
+            ></IconButton> */}
             <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
                 {user.token.user.first_name} <ArrowDropDownIcon />
@@ -213,12 +190,12 @@ const Header = ({ props, cart, user, state, data }) => {
           </MenuItem>
 
           <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            ></IconButton>
+            {/* <IconButton
+            // aria-label="account of current user"
+            // aria-controls="primary-search-account-menu"
+            // aria-haspopup="true"
+            // color="inherit"
+            ></IconButton> */}
             <div className="menu-button" onClick={() => handleLogout()}>
               Logout
             </div>
@@ -236,7 +213,7 @@ const Header = ({ props, cart, user, state, data }) => {
           <Toolbar className="header-padding header-text-color">
             <Typography variant="body1" className="flexGrow">
               <Link to="/">
-                <img src={e2eLogo} />
+                <img src={Engame_logo} />
               </Link>
             </Typography>
             {!user.isLoggedIn ? (
@@ -258,41 +235,62 @@ const Header = ({ props, cart, user, state, data }) => {
             ) : null}
 
             {user.isLoggedIn ? (
-              <div className={classes.sectionDesktop}>
-                {/* <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton> */}
-                <div className="user-after-login">
-                  <CustomButton onClick={handleProfileMenuOpen}>
-                    {user.token.user.first_name} <ArrowDropDownIcon />
-                  </CustomButton>
+              <>
+                <div className={classes.sectionDesktop}>
+                  <div className="user-after-login">
+                    <Link
+                      color="inherit"
+                      to="/Purchased"
+                      className="my-widgets"
+                    >
+                      My Widgets
+                    </Link>
+                    <div className="shoping__card">
+                      <Link to="cart">
+                        {/* <Badge color="secondary"> */}
+                        <Badge
+                          badgeContent={carts.length ? carts.length : 0}
+                          color="secondary"
+                        >
+                          <Tooltip title="Cart Items" placement="top">
+                            <ShoppingCartIcon />
+                          </Tooltip>
+                        </Badge>
+                      </Link>
+                    </div>
+
+                    <CustomButton
+                      onClick={handleProfileMenuOpen}
+                      className="custom-avtar"
+                    >
+                      <Avatar sx="">
+                        {user.token.user.first_name[0]}
+                        {user.token.user.first_name[1]}
+                        {/* {`${user.token.user.first_name[0][0]}${
+                          user.token.user.first_name.split(" ")[1][0]
+                        }`} */}
+                      </Avatar>
+                      <KeyboardArrowDown />
+                    </CustomButton>
+                  </div>
                 </div>
-              </div>
+              </>
             ) : null}
-            {user.isLoggedIn ? (
+            {/* {user.isLoggedIn ? (
               <div className="shoping__card">
                 <Link to="cart">
-                  {/* <Badge color="secondary"> */}
-
+         
                   <Badge
-                    badgeContent={
-                      carts.length ? carts.length : 0
-                    }
+                    badgeContent={carts.length ? carts.length : 0}
                     color="secondary"
                   >
-                    <ShoppingCartIcon />
+                    <Tooltip title="Cart Items" placement="top">
+                      <ShoppingCartIcon />
+                    </Tooltip>
                   </Badge>
                 </Link>
               </div>
-            ) : null}
-
+            ) : null} */}
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-label="show more"
@@ -313,11 +311,11 @@ const Header = ({ props, cart, user, state, data }) => {
       <CustomPopup
         open={isLoginOpen}
         onClose={() => setLoginIsOpen(false)}
-        className="popup-container__iner--xl border-radius"
+        className="popup-background popup-container__iner--xl border-radius "
       >
-        <Grid container spacing={1}>
-          <Grid item xs={6} sm={6} className="login-background"></Grid>
-          <Grid item xs={12} sm={6} lg={6}>
+        <Grid container spacing={1} className="popup-padding">
+          {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+          <Grid item xs={12} sm={12} lg={12}>
             <Login />
           </Grid>
         </Grid>
@@ -325,11 +323,11 @@ const Header = ({ props, cart, user, state, data }) => {
       <CustomPopup
         open={isReginOpen}
         onClose={() => setReginIsOpen(false)}
-        className="popup-container__iner--xl border-radius"
+        className="popup-background popup-container__iner--xl border-radius "
       >
-        <Grid container spacing={3}>
-          <Grid item xs={6} sm={6} className="login-background"></Grid>
-          <Grid item xs={12} sm={6} lg={6}>
+        <Grid container spacing={3} className="popup-padding">
+          {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+          <Grid item xs={12} sm={12} lg={12}>
             <Registration />
           </Grid>
         </Grid>
@@ -338,11 +336,4 @@ const Header = ({ props, cart, user, state, data }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cartItems,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

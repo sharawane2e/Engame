@@ -5,12 +5,25 @@ import Home from "../components/Home";
 import Purchased from "../components/Purchased";
 import Cart from "../components/cart/Cart";
 import Forgot from "../components/ForgotPassword/Forgot";
+import EmailActivation from "../components/EmailActivation";
 
 const Routes = [
   {
     path: "/pagenotfound",
     component: PageNotFoundScreen,
     exact: true,
+  },
+  {
+    path: ["/user/account-confirm-email"],
+    component: PublicScreen,
+    //exact: true,
+    routes: [
+      {
+        path: "/user/account-confirm-email",
+        component: EmailActivation,
+        isExact: false,
+      }
+    ],
   },
   {
     path: ["/", "/forgot"],
@@ -26,7 +39,7 @@ const Routes = [
         path: "/",
         component: Home,
         isExact: true,
-      },
+      }
     ],
   },
   {

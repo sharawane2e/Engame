@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -8,10 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import Footer from "../../components/Footer";
 import Paper from "@material-ui/core/Paper";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
-import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
-import TimerIcon from "@material-ui/icons/Timer";
+// import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
+// import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
-import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
 import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -24,11 +24,17 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 // import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
+import Tooltip from "@material-ui/core/Tooltip";
+// import { loadStripe } from "@stripe/stripe-js";
+import Switch from "@material-ui/core/Switch";
+import { logOutUser } from "../../redux/user/user-action";
+import { useHistory } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
-    height: 10,
-    borderRadius: 5,
+    height: 6,
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
@@ -41,37 +47,64 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 function Purchased(props) {
+  const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
+  const [is_renew, setRenew] = useState("false");
+  const user = useSelector((state) => state.user.token);
+  // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
+  const [sucess, setSucess] = useState("Copy");
+  const history = useHistory();
 
   // let history = useHistory();
   // console.log(history);
 
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+
   useEffect(() => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-    // console.log(session_id);
-
     async function paymentSuccess() {
-      await fetch(BASE_URL + "payments/success/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-        body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result) {
-            Toaster.sucess(result.details, "topCenter");
-            // window.location.reload();
-          }
-          // history.push(history.path);
-        });
+      if (is_renew == "false") {
+        await fetch(BASE_URL + "payments/success/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+          body: JSON.stringify({
+            user: token.user.pk,
+            session_id: session_id,
+            is_renew: is_renew,
+          }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result) {
+              Toaster.sucess(result.details, "topCenter");
+              //window.location.reload();
+            }
+            // history.push(history.path);
+          });
+      } else {
+        await fetch(BASE_URL + "payments/success/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+          body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result) {
+              Toaster.sucess(result.details, "topCenter");
+              //window.location.reload();
+            }
+            // history.push(history.path);
+          });
+      }
     }
     paymentSuccess();
     //  my widgets
@@ -85,18 +118,83 @@ function Purchased(props) {
       })
         .then((response) => response.json())
         .then((result) => {
-          dispatch(loadingStop());
-          setWidgets(result);
-
-          const isShowArr = [];
-          result.forEach((el, index) => {
-            isShowArr.push(false);
-          });
-          setShow(isShowArr);
+          if (result.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            history.push("/");
+          } else {
+            dispatch(loadingStop());
+            setWidgets(result);
+            console.log(result);
+            const isShowArr = [];
+            result.forEach((el, index) => {
+              isShowArr.push(false);
+            });
+            setShow(isShowArr);
+          }
         });
     };
     myWwidgets();
-  }, []);
+  }, [token]);
+
+  const downloadfile = (fileName, embedcode) => {
+    // console.log(embedcode);
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(
+      new Blob([embedcode], {
+        type: "application/octet-stream",
+      })
+    );
+    link.download = fileName + ".text";
+    document.body.appendChild(link);
+    link.click();
+  };
+
+  const handleExtend = async (widgetId) => {
+    // const plan_newValue,planId,
+    //console.log("widgets", widgetId);
+    // // const plan = widgets.plan.id;
+    // // const plan_new_value = "2306";
+    // // const subscription = widgetId;
+    // // const widget = widgets.widget.id;
+    // // const price = "200";
+    // // const currency = "USD";
+    // setRenew(true);
+    // dispatch(loadingStart());
+    // const stripe = await loadStripe(STRIPE);
+    // try {
+    //   await fetch(BASE_URL + "payments/checkout-session/", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${user.access_token}`,
+    //     },
+    //     body: JSON.stringify({
+    //       user: user.user.pk,
+    //       is_renew: is_renew,
+    //       plan_new_value: plan_new_value,
+    //       plan: plan,
+    //       subscription: subscription,
+    //       widget: widget,
+    //       price: price,
+    //       currency: currency,
+    //     }),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //       //sessionStorage.setItem("sessionId", result.sessionId);
+    //       stripe.redirectToCheckout({ sessionId: result.sessionId });
+    //       dispatch(loadingStop());
+    //     });
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  };
+
+  // useEffect(() => {
+  //   isShow;
+  // });
 
   return (
     <>
@@ -111,10 +209,12 @@ function Purchased(props) {
               <Link color="inherit" to="/">
                 Home
               </Link>
-              <Link color="inherit" to="/cart">
+              {/* <Link color="inherit" to="/cart">
                 Shopping Cart
-              </Link>
-              <Typography color="textPrimary">My Widgets</Typography>
+              </Link> */}
+              <Typography color="textPrimary" variant="span">
+                My Widgets
+              </Typography>
             </Breadcrumbs>
           </Container>
         </div>
@@ -123,12 +223,22 @@ function Purchased(props) {
           className="purchased-tool__container  margin-top-174"
         >
           <Grid container spacing={3}>
-            <Grid item xs={4} className="purchased-tool__hedding">
+            <Grid
+              item
+              xs={12}
+              className="purchased-tool__hedding purchased-tool__borderdata"
+            >
               <Typography component="div" className="hedding-text">
                 My Widgets
               </Typography>
             </Grid>
-            <Grid item xs={8} className="purchased-tool__hedding grid-flex">
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid
+              item
+              xs={12}
+              className="purchased-tool__hedding purchased-tool__tabing"
+            >
               <Typography
                 component="div"
                 className="tab--button border-radius tab--active"
@@ -147,15 +257,23 @@ function Purchased(props) {
               <Typography component="div" className="tab--button border-radius">
                 Paused
               </Typography>
+              <Typography component="div" className="tab--button border-radius">
+                Days Subs.
+              </Typography>
+              <Typography component="div" className="tab--button border-radius">
+                Hits Subs.
+              </Typography>
             </Grid>
           </Grid>
           {/*Card start */}
           {widgets.map((item, index) => {
-            console.log(item);
             let purchasedDateTime = new Date(item.purchase_date);
             purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
             const purchase_date = purchasedDateTime.split(",")[0];
             const purchase_time = purchasedDateTime.split(",")[1];
+
+            const ConsumptionValue =
+              (item.remaining_value * 100) / item.plan.plan_value;
 
             return (
               <Grid container spacing={3} key={index}>
@@ -188,7 +306,11 @@ function Purchased(props) {
                         container
                         className="purchased-tool__tool-image purchased-image"
                       >
-                        <img alt="" src={BASE_URL_1 + item.widget.imgUrl} />
+                        <img
+                          alt={item.widget.name}
+                          title={item.widget.name}
+                          src={BASE_URL_1 + item.widget.imgUrl}
+                        />
                       </Grid>
                       <Grid
                         item
@@ -207,56 +329,75 @@ function Purchased(props) {
                             </Typography>
                             <Typography
                               component="div"
-                              className="purchased-tool__tool-type"
+                              className="purchased-tool__tool-type display-flex"
                             >
                               <span className="subscription-type-text">
                                 Subscription Key:
                               </span>
-                              <span className="subscription-day margin-rightdata copy-to-clip">
-                                {item.secrate_key.substr(0, 10)}************
-                                <FileCopyIcon
-                                  onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.secrate_key
-                                    );
-                                    Toaster.sucess("Code copied!", "topCenter");
-                                  }}
-                                />
-                              </span>
+                              <Tooltip title={sucess} placement="top">
+                                <CopyToClipboard
+                                  text={item.secrate_key}
+                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                >
+                                  <span
+                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    onClick={() => {
+                                      setSucess("Copied");
+                                      setTimeout(() => setSucess("Copy"), 500);
+                                    }}
+                                  >
+                                    {item.secrate_key.substr(0, 10)}************
+                                    <FileCopyIcon className="subscription-day__icon" />
+                                  </span>
+                                </CopyToClipboard>
+                              </Tooltip>
                             </Typography>
                             <Typography
                               component="div"
-                              className="purchased-tool__tool-type"
+                              className="purchased-tool__tool-type display-flex"
                             >
                               <span className="subscription-type-text">
                                 Trial Key:
                               </span>
-                              <span className="subscription-day margin-rightdata copy-to-clip">
-                                {item.trial_key.substr(0, 10)}************
-                                <FileCopyIcon
-                                  onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.trial_key
-                                    );
-                                    Toaster.sucess("Code copied!", "topCenter");
-                                  }}
-                                />
-                              </span>
+                              <Tooltip title={sucess} placement="top">
+                                <CopyToClipboard
+                                  text={item.trial_key}
+                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                >
+                                  <span
+                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    onClick={() => {
+                                      setSucess("Copied");
+                                      setTimeout(() => setSucess("Copy"), 500);
+                                    }}
+                                  >
+                                    <span className="display-flex">
+                                      {item.trial_key.substr(0, 10)}************
+                                    </span>
+                                    <FileCopyIcon className="subscription-day__icon" />
+                                  </span>
+                                </CopyToClipboard>
+                              </Tooltip>
                             </Typography>
                           </Grid>
                         </Grid>
                         <Grid item xs={2} className="grid-flex">
-                          <Typography
+                          {/* <Typography
                             component="div"
                             className="purchased-tool__embeded-icon border-radius icon-margin"
                           >
-                            <PauseIcon />
-                          </Typography>
+                            
+                          </Typography> */}
+                          <Switch />
+
                           <Typography
                             component="div"
-                            className="purchased-tool__embeded-icon border-radius"
+                            className="extend-validity"
+                            onClick={() => handleExtend(item.widget.id)}
                           >
-                            <SystemUpdateAltIcon />
+                            {/* <Tooltip title="Embeded Code" placement="top"> */}
+                            Extend validity
+                            {/* </Tooltip> */}
                           </Typography>
                         </Grid>
 
@@ -288,29 +429,23 @@ function Purchased(props) {
                               className="purchased-tool__tool-type align-center"
                             >
                               <span className="subscription-type-text ">
-                                {/* 210 days left */}
                                 {item.remaining_value}&nbsp;&nbsp;
-                                {item.plan.plan_type}
+                                {item.plan.plan_type} left
                               </span>
+
                               <BorderLinearProgress
                                 variant="determinate"
-                                value={
-                                  (item.remaining_value * 50) / 1000
-                                    ? 50
-                                    : ""
-                                    ? (item.remaining_value * 80) / 1000
-                                      ? 80
-                                      : ""
-                                    : "s"
-                                }
+                                value={ConsumptionValue}
                                 className={
-                                  (item.remaining_value * 50) / 1000
-                                    ? "progress-bar progress-red"
-                                    : ""
-                                    ? (item.remaining_value * 80) / 1000
-                                      ? "progress-bar progress-yellow"
-                                      : ""
-                                    : "progress-bar progress-green"
+                                  ConsumptionValue > 79
+                                    ? "progress-bar progress-green"
+                                    : ConsumptionValue > 49 &&
+                                      ConsumptionValue < 80
+                                    ? "progress-bar progress-yellow"
+                                    : ConsumptionValue > 19 &&
+                                      ConsumptionValue < 50
+                                    ? "progress-bar progress-embeded"
+                                    : "progress-bar progress-red"
                                 }
                               />
                             </Typography>
@@ -344,11 +479,7 @@ function Purchased(props) {
                           item
                           xs={12}
                           container
-                          className={
-                            isShow
-                              ? "purchased-tool__tool-data accordion-margin show--accordion"
-                              : "purchased-tool__tool-data accordion-margin hide--accordion"
-                          }
+                          className="purchased-tool__tool-data accordion-margin show--accordion"
                         >
                           <Grid item xs={6}>
                             <Typography component="div">
@@ -361,26 +492,7 @@ function Purchased(props) {
                                 </span>
                               </div>
                             </Typography>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={6}
-                            className="purchased-tool__expiry-date"
-                          >
-                            <Typography
-                              component="div"
-                              className="cursor--pointer"
-                            >
-                              <div className="purchased-tool__purchased-date purchased-tool__hover">
-                                <span className="purchased-tool__date-type-text purchased-curent-text"></span>
-                                <span className="purchased-tool__date-type-text purchased-types">
-                                  <GetAppIcon />
-                                  Download Invoice
-                                </span>
-                              </div>
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={6}>
+
                             <Typography component="div">
                               <div className="purchased-tool__purchased-date">
                                 <span className="purchased-tool__date-type-text purchased-curent-text">
@@ -392,9 +504,70 @@ function Purchased(props) {
                               </div>
                             </Typography>
                           </Grid>
+
                           <Grid
                             item
                             xs={6}
+                            className="purchased-tool__expiry-date"
+                          >
+                            <div>
+                              <Typography
+                                component="div"
+                                className="cursor--pointer"
+                              >
+                                <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                  <span className="purchased-tool__date-type-text purchased-curent-text"></span>
+                                  <span className="purchased-tool__date-type-text purchased-types">
+                                    <GetAppIcon />
+                                    Download Invoice
+                                  </span>
+                                </div>
+                              </Typography>
+
+                              <Typography
+                                component="div"
+                                className="cursor--pointer"
+                              >
+                                <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                  <span className="purchased-tool__date-type-text purchased-curent-text"></span>
+                                  <span className="purchased-tool__date-type-text purchased-types">
+                                    <ReceiptIcon /> Consumption statement
+                                  </span>
+                                </div>
+                              </Typography>
+                            </div>
+                            <div className="pdl-2">
+                              <Typography
+                                component="div"
+                                className="purchased-tool__embeded-icon border-radius"
+                                onClick={() =>
+                                  downloadfile(
+                                    item.widget.name,
+                                    item.widget.widget_embed_code
+                                  )
+                                }
+                              >
+                                <Tooltip title="Embeded Code" placement="top">
+                                  <SystemUpdateAltIcon />
+                                </Tooltip>
+                              </Typography>
+                            </div>
+                          </Grid>
+
+                          {/* <Grid item xs={6}>
+                            <Typography component="div">
+                              <div className="purchased-tool__purchased-date">
+                                <span className="purchased-tool__date-type-text purchased-curent-text">
+                                  Payment Method:
+                                </span>
+                                <span className="purchased-tool__date-type-text">
+                                  {item.payment_method}
+                                </span>
+                              </div>
+                            </Typography>
+                          </Grid> */}
+                          {/*                           
+                          <Grid item xs={6}
                             className="purchased-tool__expiry-date"
                           >
                             <Typography
@@ -408,7 +581,7 @@ function Purchased(props) {
                                 </span>
                               </div>
                             </Typography>
-                          </Grid>
+                          </Grid> */}
                         </Grid>
                       ) : null}
                     </Grid>

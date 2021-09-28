@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import FilledInput from "@material-ui/core/FilledInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
@@ -15,6 +16,7 @@ import CustomButton from "../../components/widgets/Button";
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
+import { v4 as uuidv4 } from "uuid";
 
 class Registration extends Component {
   state = {
@@ -44,22 +46,35 @@ class Registration extends Component {
     // e.preventDefault();
     // this.isReginOpen(false);
     const { name, email, setpassword, confirmpassword } = this.state;
+
+    var fullEmail = email;
+    var splitEmail = fullEmail.split("@");
+
+    var firstPart = (Math.random() * 46656) | 0;
+    var secondPart = (Math.random() * 47756) | 0;
+    firstPart = ("" + firstPart.toString()).slice(-5);
+    secondPart = ("" + secondPart.toString()).slice(-5);
+
+    var uservalue = splitEmail[0] + "_" + firstPart + secondPart;
+
     const user = {
-      username: name,
+      username: uservalue,
       email: email,
       password1: setpassword,
       password2: confirmpassword,
       first_name: name,
       last_name: "s",
-      mobile: "9191",
+      mobile: "91",
     };
+
+    // console.log("name", user);
     const validationResponse = this.UserValidation.validateForm({
       name,
       email,
       setpassword,
       confirmpassword,
     });
-    console.log(this.state);
+    // console.log(this.state);
     if (validationResponse.isFormValid) {
       // loader's
       this.props.dispatch(loadingStart());
@@ -74,7 +89,7 @@ class Registration extends Component {
       })
         .then((result) => result.json())
         .then((data) => {
-          console.log("curent data", data);
+          // console.log("curent data", data);
           Toaster.error(
             data.username ? data.username.join("") : null,
             "topCenter"
@@ -146,24 +161,27 @@ class Registration extends Component {
           <Login />
         ) : (
           <div className="form-area registration--form">
-            <div className="form-area__login  large-hedding">Registration</div>
+            <div className="form-area__login  large-hedding">Register</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-name"
                 className="input-label"
               >
-                Username
-              </InputLabel>
+                Name
+              </InputLabel> */}
               <FormControl className="form-area__control">
+                {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
                 <TextField
                   id="outlined-name-input"
                   placeholder="Name"
+                  label="Name"
+                  variant="filled"
                   value={this.state.name}
                   onChange={(e) => this.handleChange(e, "name")}
                   onBlur={(e) => this.handleBlur(e, "name")}
                   message={this.state.formErrors.name}
                   type="Name"
-                  variant="outlined"
+                  // variant="outlined"
                   onKeyDown={this._handleKeyDown}
                 />
                 <div className="validated-error">
@@ -171,18 +189,19 @@ class Registration extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-email"
                 className="input-label"
               >
                 E-mail
-              </InputLabel>
+              </InputLabel> */}
               <FormControl className="form-area__control">
                 <TextField
                   id="outlined-email-input"
                   placeholder="Emails"
                   type="Email"
-                  variant="outlined"
+                  label="E-mail"
+                  variant="filled"
                   value={this.state.email}
                   onChange={(e) => this.handleChange(e, "email")}
                   onBlur={(e) => this.handleBlur(e, "email")}
@@ -194,14 +213,22 @@ class Registration extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-password"
                 className="input-label"
               >
                 Password
-              </InputLabel>
-              <FormControl className="form-area__control" variant="outlined">
-                <OutlinedInput
+              </InputLabel> */}
+              <FormControl
+                className="form-area__control"
+                variant="filled"
+                label="Password"
+              >
+                <InputLabel htmlFor="filled-adornment-password">
+                  Password
+                </InputLabel>
+                <FilledInput
+                  label="E-mail"
                   id="outlined-adornment-password"
                   placeholder="Password "
                   type={this.state.showPassword ? "text" : "password"}
@@ -211,11 +238,12 @@ class Registration extends Component {
                   message={this.state.formErrors.setpassword}
                   onKeyDown={this._handleKeyDown}
                   endAdornment={
-                    <InputAdornment position="end" label="Outlined">
+                    <InputAdornment position="end" label="filled">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
                         edge="end"
+                        tabindex="-1"
                       >
                         {this.state.showPassword ? (
                           <Visibility />
@@ -231,16 +259,23 @@ class Registration extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-password"
                 className="input-label"
               >
                 Confirm Password
-              </InputLabel>
-              <FormControl className="form-area__control" variant="outlined">
-                <OutlinedInput
+              </InputLabel> */}
+              <FormControl
+                className="form-area__control"
+                variant="filled"
+                label="Confirm Password"
+              >
+                <InputLabel htmlFor="filled-adornment-password">
+                  Confirm Password
+                </InputLabel>
+                <FilledInput
                   id="outlined-adornment-confirmpassword"
-                  placeholder="Password "
+                  placeholder="Confirm Password"
                   type={this.state.showPasswordConfirm ? "text" : "password"}
                   value={this.state.confirmpassword}
                   onChange={(e) => this.handleChange(e, "confirmpassword")}
@@ -248,11 +283,12 @@ class Registration extends Component {
                   message={this.state.formErrors.confirmpassword}
                   onKeyDown={this._handleKeyDown}
                   endAdornment={
-                    <InputAdornment position="end" label="Outlined">
+                    <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={this.confirmPasswordShow}
                         edge="end"
+                        tabindex="-1"
                       >
                         {this.state.showPasswordConfirm ? (
                           <Visibility />
@@ -276,11 +312,18 @@ class Registration extends Component {
                 Register
               </CustomButton>
             </div>
-            <div className="back-button">
+            <div className="form-newaccont">
+              <span>Already a member?</span>
               <Link href="#" onClick={this.backLogin} className="">
-                Back to login
+                Login
               </Link>
             </div>
+            {/* <div className="back-button">
+              <span>Already a member?</span>
+              <Link href="#" onClick={this.backLogin} className="">
+                Login
+              </Link>
+            </div> */}
           </div>
         )}
       </>

@@ -5,12 +5,14 @@
 }
 body {
   font-family: map-get($map: $font-family, $key: font-barlowregular);
+  padding: 0 !important;
 }
 .App {
   position: relative;
   // height: 100vh;
   height: 100%;
-  background: #efefef;
+  // background: #efefef;
+  @include bgcolor($gray-secondary);
 }
 .MuiButton-label {
   text-transform: none;
@@ -24,18 +26,12 @@ body {
 .progress-green .MuiLinearProgress-barColorPrimary {
   background-color: $green-color !important;
 }
-.progress-red .MuiLinearProgress-barColorPrimary {
-  background-color: $secondary !important;
+.progress-embeded .MuiLinearProgress-barColorPrimary {
+  background-color: $red-yellow !important;
 }
-// .progress-yellow {
-//   background-color: $yelow !important;
-// }
-// .progress-green {
-//   background-color: $green-color !important;
-// }
-// .progress-red {
-//   background-color: $secondary !important;
-// }
+.progress-red .MuiLinearProgress-barColorPrimary {
+  background-color: $red !important;
+}
 .cursor--pointer {
   cursor: pointer;
 }
@@ -56,11 +52,9 @@ body {
 }
 .input {
   flex: 1;
-  //   margin-left: map-get($map: $margin, $key: margin-8);
   @include space(margin, left, $margin-8, 0);
 }
 .iconButton {
-  //   padding: map-get($map: $padding, $key: padding-10);
   @include space(padding, all, $padding-16, 0);
 }
 .divider {
@@ -72,11 +66,9 @@ body {
 }
 
 .large-hedding {
-  @include color($black-secondary);
-  // color: map-get($map: $text-color, $key: black-drak);
+  @include color($black-gray);
 }
 .input-label {
-  //   margin-bottom: map-get($map: $margin, $key: margin-10);
   @include space(margin, bottom, $margin-10, 0);
 }
 
@@ -108,6 +100,7 @@ body {
 .border-radius {
   border-radius: $boder-radius !important;
 }
+
 /*End*/
 /*Use thses classes for buttons*/
 a {
@@ -165,8 +158,11 @@ a {
 .bredcrum-conatiner {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
   // @include bgcolor($gray-primary);
-  min-height: 850px;
+  // min-height: 895px;
   z-index: 99;
+  @include breakpoint(Ipad) {
+    min-height: 900px;
+  }
   #{&}__bredcrum_inr {
     width: 100%;
     z-index: 99;
@@ -202,7 +198,7 @@ a {
 /*icon space set */
 .margin-right-15 {
   //   margin-right: map-get($map: $margin, $key: "margin-15");
-  @include space(margin, right, $margin-15, 0);
+  @include space(margin, right, $margin-8, 0);
   @include breakpoint(mobileonly) {
     @include font-size(15px);
     margin: 0;
@@ -238,7 +234,7 @@ a {
 }
 .sticky-position {
   position: sticky;
-  top: 80px;
+  top: 92px;
   // height: 100%;
 }
 .sticky-head-position {
@@ -259,4 +255,45 @@ a {
 }
 .align-center {
   text-align: $align-center;
+}
+.gray-color {
+  color: $black-gray;
+}
+
+/*For Custom Scroll*/
+body::-webkit-scrollbar,
+.custom-scroll::-webkit-scrollbar {
+  width: 0.35em;
+}
+
+body::-webkit-scrollbar-track,
+.custom-scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb,
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+/*end Custom Scroll*/
+
+.pdl-2 {
+  padding-left: 15px;
+}
+
+input:-internal-autofill-selected {
+  // appearance: menulist-button;
+  // background-image: none !important;
+  // background-color: -internal-light-dark(
+  //   rgb(48, 48, 48),
+  //   rgba(70, 90, 126, 0.4)
+  // ) !important;
+  background-color: $white !important;
+  color: -internal-light-dark(black, white) !important;
+}
+
+input,
+input::-webkit-input-placeholder {
+  @include font-size($font-reg);
 }

@@ -7,7 +7,6 @@ import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import { useDispatch, useSelector } from "react-redux";
-// import { addToCart } from "../../redux/cart/action";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
@@ -18,15 +17,29 @@ import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 import Footer from "../Footer";
-import PropTypes from "prop-types";
-import Box from "@material-ui/core/Box";
+import Tooltip from "@material-ui/core/Tooltip";
+import { logOutUser } from "../../redux/user/user-action";
+import { useHistory } from "react-router-dom";
+import { loadingStop } from "../../redux/loader/loader-actions";
+// import Swal from "sweetalert2";
+import Login from "../Login";
+import Registration from "../Registration";
+import warning_icon from "../../assets/images/warning_icon.svg";
+// import EmailActive from "../EmailActivation";
 import Typography from "@material-ui/core/Typography";
-import Skeleton from "@material-ui/lab/Skeleton";
+import { ErrorMessages } from "../../constants/Messages";
+
+// import PropTypes from "prop-types";
+// import Box from "@material-ui/core/Box";
+// import Typography from "@material-ui/core/Typography";
+// import Skeleton from "@material-ui/lab/Skeleton";
 // import { addToCart } from "../../redux/shopping/shopping-action";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
+  const [isReginOpen, setReginIsOpen] = useState(false);
+  const [isLoginrequire, setisLoginrequire] = useState(false);
   const [popupId, setPopupId] = useState();
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
@@ -36,21 +49,25 @@ const ToolCards = () => {
   const { loading, error, products } = productList;
   const [productShow, setProductShow] = useState(products);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
   };
-  useEffect(() => {
-    document.body.classList.toggle("modal-open", ispopup);
-  }, [ispopup]);
+
+  const setLoginAlert = (e) => {
+    setisLoginrequire(false);
+    setLoginIsOpen(true);
+  };
 
   useEffect(() => {
-    document.body.classList.toggle("modal-open", isSubscription);
-  }, [isSubscription]);
-
-  if (user.isLoggedIn) {
-    setLoginIsOpen(false);
-  }
+    // document.body.classList.toggle("modal-open", ispopup);
+    //document.body.classList.toggle("modal-open", isSubscription);
+    if (user) {
+      setLoginIsOpen(false);
+      setReginIsOpen(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     dispatch(listProducts());
@@ -65,8 +82,15 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
-          //console.log(response);
-          setProductShow(response);
+          if (response.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            history.push("/");
+            // console.log("token expire", response);
+          } else {
+            setProductShow(response);
+          }
         });
     }
   }, [token]);
@@ -124,7 +148,9 @@ const ToolCards = () => {
                                   setPopupId(tooldata.id);
                                 }}
                               >
-                                <SystemUpdateAltIcon />
+                                <Tooltip title="Embeded Code" placement="top">
+                                  <SystemUpdateAltIcon />
+                                </Tooltip>
                               </div>
                             ) : null}
                           </div>
@@ -137,7 +163,9 @@ const ToolCards = () => {
                                   setPopupId(tooldata.id);
                                 }}
                               >
-                                <ShoppingCartIcon />
+                                <Tooltip title="Add To Cart" placement="top">
+                                  <ShoppingCartIcon />
+                                </Tooltip>
                               </div>
                             ) : null}
                           </div>
@@ -190,7 +218,16 @@ const ToolCards = () => {
                               >
                                 <SystemUpdateAltIcon />
                               </div>
-                            ) : null}
+                            ) : (
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={() => setisLoginrequire(true)}
+                              >
+                                {/* <Tooltip title="Embeded Code" placement="top"> */}
+                                <SystemUpdateAltIcon />
+                                {/* </Tooltip> */}
+                              </div>
+                            )}
                           </div>
                           <div className="toolcard__items toolcard__shopping">
                             {user ? (
@@ -198,7 +235,16 @@ const ToolCards = () => {
                                 {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
                                 <ShoppingCartIcon />
                               </div>
-                            ) : null}
+                            ) : (
+                              <div
+                                className="toolcard__sub-icons"
+                                onClick={() => setisLoginrequire(true)}
+                              >
+                                {/* <Tooltip title="Add To Cart" placement="top"> */}
+                                <ShoppingCartIcon />
+                                {/* </Tooltip> */}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </Paper>
@@ -216,6 +262,62 @@ const ToolCards = () => {
           </Grid>
         )}
 
+        <CustomPopup
+          open={isLoginOpen || isReginOpen}
+          onClose={() => setLoginIsOpen(false)}
+          className="popup-container__iner--xl border-radius popup-background"
+        >
+          {isLoginOpen ? (
+            <Grid container spacing={3} className="popup-padding">
+              {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+              <Grid item xs={12} sm={12} lg={12}>
+                <Login />
+              </Grid>
+            </Grid>
+          ) : isReginOpen ? (
+            <Grid container spacing={3} className="popup-padding">
+              {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+              <Grid item xs={12} sm={12} lg={12}>
+                <Registration />
+              </Grid>
+            </Grid>
+          ) : (
+            ""
+          )}
+        </CustomPopup>
+
+        <CustomPopup
+          open={isLoginrequire}
+          className="popup-container__iner--sm border-radius loginAlert "
+        >
+          <Grid container spacing={4} align="center">
+            <Grid item xs={12}>
+              <img
+                className="message__img"
+                src={warning_icon}
+                alt="Registration Sucessfully"
+              />
+              <Typography component="p" className="sucess_message">
+                {ErrorMessages.loginAlert}
+              </Typography>
+              {/* <p className="sucess_message"></p> */}
+              <CustomButton
+                className="primary-button"
+                style={{ marginRight: "20px" }}
+                onClick={setLoginAlert}
+              >
+                Login Here
+              </CustomButton>
+              <CustomButton
+                className="secondary-button"
+                onClick={() => setisLoginrequire(false)}
+              >
+                Cancel
+              </CustomButton>
+            </Grid>
+          </Grid>
+        </CustomPopup>
+
         {/*Perview tools code popup */}
         <CustomPopup
           open={selectedTool}
@@ -226,7 +328,7 @@ const ToolCards = () => {
         </CustomPopup>
         {/*End */}
 
-        {/*Emneded code popup */}
+        {/*Embeded code popup */}
         <CustomPopup
           open={ispopup}
           onClose={() => setPopup(false)}
@@ -250,14 +352,6 @@ const ToolCards = () => {
             toolId={popupId}
             onClose={() => setSubscriptionPopup(false)}
           />
-          {/* <div className="popup-container__footer">
-            <CustomButton
-              className="primary-button add--card"
-              onClick={handleCart}
-            >
-              <ShoppingCartIcon /> Add to Cart
-            </CustomButton>
-          </div> */}
         </CustomPopup>
         {/*End */}
       </Toolbar>

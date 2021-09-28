@@ -41,3 +41,14 @@
     }
   }
 }
+.subscription-update {
+  display: flex;
+  > button {
+    width: 170px !important;
+    margin: 0 auto;
+  }
+}
+.popup--text {
+  display: flex;
+  justify-content: center;
+}

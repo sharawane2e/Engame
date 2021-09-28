@@ -1,7 +1,10 @@
+.shopping-cart-data {
+  min-height: 740px;
+}
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  @include bgcolor($gray-secondary);
-  margin-top: 12px;
+  // @include bgcolor($gray-secondary);
+  @include space(padding, top, $padding-30, 0);
   // min-height: 100vh;
   #{&}__container {
     //height: 80vh;
@@ -13,6 +16,10 @@
     display: flex;
     align-items: $align-center;
     @include font-size($font-xx-reg);
+    @include border("-bottom", 2px, $bsolid, $seconday-shadow);
+    padding: 0 !important;
+    margin: 12px;
+    line-height: 2;
   }
   #{&}__right-card {
     display: flex;
@@ -22,24 +29,44 @@
     @include space(padding, top-bottom, $padding-20, $padding-20);
     @include space(padding, left-right, $padding-20, $padding-20);
     @include space(margin, bottom, $margin-10, 0);
+
     .curent-tool-img {
-      width: 100%;
+      width: 85px;
       > img {
         max-width: 100%;
       }
     }
   }
+  #{&}__tool-images {
+    justify-content: center;
+  }
   #{&}__card-coupon {
     @include space(padding, all, $padding-30, 0);
     @include space(margin, bottom, $margin-10, 0);
+    @include breakpoint(Ipad) {
+      @include space(padding, all, $padding-20, 0);
+    }
   }
   .continue-button {
     display: flex;
     justify-content: flex-end;
-    @include space(margin, top-bottom, $margin-40, $margin-50);
+    @include space(margin, top-bottom, $margin-20, $margin-20);
+    > a {
+      display: flex;
+      width: 100%;
+      .custom-button {
+        min-width: 100% !important;
+      }
+    }
   }
   .margin-right {
     @include space(margin, right, $margin-10, 0);
+    width: 20px !important;
+    height: 20px !important;
+    @include breakpoint(Ipad) {
+      width: 20px;
+      @include space(margin, right, $margin-5, 0);
+    }
   }
   #{&}__tool-title {
     @include font-size($font-xl-reg);
@@ -52,6 +79,8 @@
     text-align: $align-right;
     @include color($black-secondary);
     @include font-size($font-sm);
+    word-break: break-all;
+    line-height: 24px;
   }
   #{&}__subscription {
     display: flex;
@@ -91,7 +120,7 @@
     > span {
       display: flex;
       align-items: $align-center;
-      @include space(margin, right, $margin-10, 0);
+      @include space(margin, left-right, $margin-8, 0);
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
       @include breakpoint(Ipad-pro) {
         @include font-size($font-reg);
@@ -111,9 +140,12 @@
       }
     }
     .shoping-cart__input-days {
-      @include space(margin, left, $margin-15, 0);
+      @include space(margin, left, $margin-8, 0);
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     }
+  }
+  #{&}__subscription-text {
+    @include font-size($font-xl-reg);
   }
   #{&}__tool-icons {
     display: flex;
@@ -126,12 +158,16 @@
   }
   #{&}__tool-tick {
     @include space(margin, right, $margin-5, 0);
+    fill: $black-gray;
+    width: 20px !important;
+    height: 20px !important;
     &:hover {
       fill: $secondary;
     }
   }
   #{&}__tool-delete {
     margin-left: 5px;
+    fill: $black-gray;
     &:hover {
       fill: $secondary;
     }
@@ -150,6 +186,8 @@
   #{&}__coupon-amount {
     @include font-size($font-xsm);
     text-align: $align-center;
+    word-break: break-all;
+    line-height: 24px;
   }
   #{&}__coupon-code {
     text-align: $align-left;
@@ -164,7 +202,7 @@
       .shoping-cart__coupon-apply-input {
         width: 80%;
         outline: none;
-        @include space(padding, all, $padding-15, 0);
+        @include space(padding, all, $padding-10, 0);
         @include border("", $border-width, $dotted, $black-secondary);
         border-right: none;
         border-top-left-radius: $boder-radius;
@@ -174,7 +212,7 @@
         border: none;
         text-transform: capitalize;
         @include both-color($back-color, $white);
-        @include space(padding, all, $padding-15, 0);
+        @include space(padding, all, $padding-10, 0);
         border-top-right-radius: $boder-radius;
         border-bottom-right-radius: $boder-radius;
         outline: none;
@@ -189,7 +227,7 @@
         button {
           @include font-size($font-xmd-reg);
           width: 60%;
-          @include space(padding, top-bottom, $padding-12, 0);
+          @include space(padding, top-bottom, $padding-12, $padding-12);
           text-align: $align-center;
         }
       }
@@ -198,25 +236,32 @@
 
   .checkout-button {
     @include space(margin, bottom, $padding-50, 0);
-    width: 210px !important;
+    width: 100% !important;
+
     a {
       color: inherit;
     }
     .MuiButton-label {
       > svg {
-        @include space(margin, right, $margin-15, 0);
+        @include space(margin, right, $margin-8, 0);
+        width: 20px !important;
+        height: 20px !important;
+        @include breakpoint(Ipad) {
+          width: 20px;
+          @include space(margin, right, $margin-5, 0);
+        }
       }
     }
     @include breakpoint(Ipad) {
-      width: 106px !important;
-      padding: 10px 16px !important;
+      width: 110px !important;
+      padding: 5px !important;
       .MuiButton-label {
         @include font-size($font-xmd-reg);
       }
     }
 
     @media all and (min-width: 1024px) and (max-width: 1366px) {
-      width: 178px !important;
+      // width: 178px !important;
       padding: 10px 16px !important;
       .MuiButton-label {
         @include font-size($font-xmd-reg);

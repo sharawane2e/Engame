@@ -1,10 +1,9 @@
 .footer {
-  position: fixed;
+  position: static;
   bottom: 0;
   width: 100%;
   text-align: $align-center;
   @include font-size($font-xmd-reg);
   @include bgcolor($gray-primary);
   @include space(padding, top AND right AND bottom AND left, $padding-15, $padding-24);
-
 }

@@ -11,6 +11,9 @@
     @include space(padding, all, $padding-12, 0);
     height: 491px !important;
     overflow-y: scroll !important;
+    @include breakpoint(desktop) {
+      height: 430px !important;
+    }
   }
   #{&}__buttton-group {
     display: flex;

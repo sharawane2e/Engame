@@ -19,7 +19,7 @@
 .header-box {
   z-index: 99;
   .header-padding {
-    @include space(padding, top-bottom, $padding-15, $padding-15);
+    @include space(padding, top-bottom, $padding-20, $padding-20);
     a {
       display: flex;
     }
@@ -48,6 +48,8 @@
     position: relative;
     a {
       @include color($black-primary);
+      margin-left: 15px;
+      margin-right: 15px;
     }
   }
   .userForm {
@@ -79,6 +81,24 @@
     }
     .user-btn {
       width: auto !important;
+    }
+    .my-widgets {
+      // margin-right: 14px;
+      color: $black-primary;
+      // font-family: Barlow;
+    }
+    .custom-avtar {
+      > .MuiButton-label {
+        .MuiAvatar-colorDefault {
+          color: $secondary;
+          background-color: transparent;
+          border: 1px solid $secondary;
+        }
+        > svg {
+          fill: $secondary;
+          font-size: 0.95rem;
+        }
+      }
     }
   }
 }

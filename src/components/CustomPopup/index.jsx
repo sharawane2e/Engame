@@ -4,7 +4,7 @@ import Overlay from "../Overlay";
 import { getClassNames } from "../../util/Utility";
 
 const CutomPopup = (props) => {
-  const { children, open, onClose, headerText = "" } = props;
+  const { children, open, onClose, headerText = "", footerButton } = props;
   return open ? (
     <>
       <Overlay position="absolute" />
@@ -21,18 +21,17 @@ const CutomPopup = (props) => {
             </div>
           ) : (
             <>
-              <div
-                className="popup-container__close-withoutheader"
-                onClick={onClose}
-              >
-                <CloseOutlinedIcon />
-              </div>
+              {onClose && (
+                <div className="popup-close" onClick={onClose}>
+                  <CloseOutlinedIcon />
+                </div>
+              )}
             </>
           )}
           <div className="popup-container__body">{children}</div>
-          {/* {footerButton?<div className="popup-container__footer">
-             dfsdfsdf
-        </div>:null} */}
+          {/* {footerButton ? (
+            <div className="popup-container__footer"></div>
+          ) : null} */}
         </div>
       </div>
     </>

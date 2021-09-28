@@ -1,18 +1,57 @@
-.login-background {
-  background: url("../../assets/images/login.png") no-repeat;
-  min-height: 520px;
-  background-position: left bottom;
-  background-size: 70%;
-  @include breakpoint(mobileonly) {
-    display: none;
-  }
-  @include breakpoint(Ipad) {
-    background-size: 60%;
-    opacity: 0.8;
-    display: none;
+// .login-background {
+//   background: url("../../assets/images/login.png") no-repeat;
+//   min-height: 520px;
+//   background-position: left bottom;
+//   background-size: 70%;
+//   @include breakpoint(mobileonly) {
+//     display: none;
+//   }
+//   @include breakpoint(Ipad) {
+//     background-size: 60%;
+//     opacity: 0.8;
+//     display: none;
+//   }
+// }login-registartion
+.popup-background {
+  background: $gray-primary url("../../assets/images/login-registartion.svg")
+    no-repeat !important;
+}
+.popup-background:before {
+  content: "";
+  position: absolute;
+  right: -32px;
+  top: -7px;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 50px solid #f15b5b;
+  transform: rotate(225deg);
+}
+.popup-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  cursor: pointer;
+  > svg {
+    fill: $white;
   }
 }
-
+.tool-perview-data {
+  .popup-close {
+    > svg {
+      fill: #000 !important;
+    }
+  }
+}
+.popup-padding {
+  @include space(padding, all, $padding-50, 0);
+  // padding-right: 50px;
+  @include breakpoint(desktop) {
+    @include space(padding, all, $padding-30, 0);
+  }
+  @include breakpoint(mobileonly) {
+    @include space(padding, all, $padding-0, 0);
+  }
+}
 .popup-container {
   position: fixed;
   width: 100%;
@@ -20,6 +59,12 @@
   left: 0;
   z-index: 9999;
   top: 0;
+  .message__img {
+    width: 75px;
+  }
+  .sucess_message {
+    padding: 20px 5px;
+  }
   #{&}__iner {
     position: absolute;
     top: 50%;
@@ -40,12 +85,12 @@
   }
 
   #{&}__iner--xl {
-    width: 800px;
+    width: 520px;
     @include breakpoint(Ipad-pro) {
       width: 90%;
       // min-height: 90vh;
-      min-height: 500px;
-      overflow-y: auto;
+      min-height: 480px;
+      // overflow-x: auto;
     }
   }
 
@@ -63,6 +108,9 @@
   }
   #{&}__iner--sm {
     width: 400px;
+    @include breakpoint(mobileonly) {
+      width: 90%;
+    }
   }
   #{&}__iner--xsm {
     width: 25%;
@@ -131,4 +179,7 @@
       flex-basis: 100% !important;
     }
   }
+  // .popup-container__footer {
+  //   display: flex;
+  // }
 }

@@ -6,7 +6,7 @@ export const loginUser = (user) => {
     try {
       dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: user });
     } catch (error) {
-      console.error(error);
+      console.error("error", error);
       // dispatch({type:actionTypes.LOGIN_FAIL,payload:{}})
     }
   };
