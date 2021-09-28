@@ -70,13 +70,13 @@ const Header = ({ props }) => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    document.body.classList.toggle("modal-open", isLoginOpen);
-    document.body.classList.toggle("modal-open", isReginOpen);
+    // document.body.classList.toggle("modal-open", isLoginOpen);
+    //  document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
       dispatch(getItemFromCart());
     }
-  }, [isLoginOpen, isReginOpen, user]);
+  }, [user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

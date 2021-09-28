@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -31,7 +31,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import Switch from "@material-ui/core/Switch";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -56,15 +56,13 @@ function Purchased(props) {
   const [productShow, setProductShow] = useState([]);
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
-  const [sucess, setSucess] = useState('Copy');
+  const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
 
   // let history = useHistory();
   // console.log(history);
 
   const token = useSelector((state) => state.user.token);
-
-  
 
   useEffect(() => {
     const search = props.location.search;
@@ -341,17 +339,21 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Subscription Key:
                               </span>
-                              <Tooltip title={sucess} placement="top" >
-                                <CopyToClipboard text={item.secrate_key}  className="subscription-day margin-rightdata copy-to-clip display-flex">
-                                <span className="subscription-day margin-rightdata copy-to-clip display-flex" 
-                                  onClick={() => {
-                                    setSucess('Copied');
-                                    setTimeout(() => setSucess('Copy'), 500);
-                                  }}
+                              <Tooltip title={sucess} placement="top">
+                                <CopyToClipboard
+                                  text={item.secrate_key}
+                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
                                 >
-                                  {item.secrate_key.substr(0, 10)}************
-                                  <FileCopyIcon className="subscription-day__icon" />
-                                </span>
+                                  <span
+                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    onClick={() => {
+                                      setSucess("Copied");
+                                      setTimeout(() => setSucess("Copy"), 500);
+                                    }}
+                                  >
+                                    {item.secrate_key.substr(0, 10)}************
+                                    <FileCopyIcon className="subscription-day__icon" />
+                                  </span>
                                 </CopyToClipboard>
                               </Tooltip>
                             </Typography>
@@ -362,22 +364,23 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Trial Key:
                               </span>
-                              <Tooltip 
-                                title={sucess}
-                                placement="top"
-                              >
-                                <CopyToClipboard  text={item.trial_key} className="subscription-day margin-rightdata copy-to-clip display-flex">
-                                <span className="subscription-day margin-rightdata copy-to-clip display-flex" 
-                                  onClick={() => {
-                                    setSucess('Copied');
-                                    setTimeout(() => setSucess('Copy'), 500);
-                                  }}
+                              <Tooltip title={sucess} placement="top">
+                                <CopyToClipboard
+                                  text={item.trial_key}
+                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
                                 >
-                                  <span className="display-flex">
-                                    {item.trial_key.substr(0, 10)}************
+                                  <span
+                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    onClick={() => {
+                                      setSucess("Copied");
+                                      setTimeout(() => setSucess("Copy"), 500);
+                                    }}
+                                  >
+                                    <span className="display-flex">
+                                      {item.trial_key.substr(0, 10)}************
+                                    </span>
+                                    <FileCopyIcon className="subscription-day__icon" />
                                   </span>
-                                  <FileCopyIcon className="subscription-day__icon" />
-                                </span>
                                 </CopyToClipboard>
                               </Tooltip>
                             </Typography>
