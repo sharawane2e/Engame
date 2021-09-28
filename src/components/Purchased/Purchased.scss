@@ -169,6 +169,16 @@
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
       @include font-size($font-reg);
     }
+    .CopyToClipboard{
+      cursor: pointer;
+    }
+    .tooltip__key{
+      cursor: pointer;
+      @include font-size($font-reg);
+      .tooltip__keyCode{
+      }
+    }
+    
     .subscription-day {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);
@@ -176,11 +186,12 @@
       &:hover {
         @include color($secondary);
         .subscription-day__icon {
-          display: flex;
+          display: flex!important;
           @include color($secondary);
         }
       }
     }
+
   }
   #{&}__tool-validity {
     display: flex;

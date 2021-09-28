@@ -21,11 +21,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 import { loadingStop } from "../../redux/loader/loader-actions";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import Login from "../Login";
 import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
-import EmailActive from "../EmailActivation";
+// import EmailActive from "../EmailActivation";
 import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 

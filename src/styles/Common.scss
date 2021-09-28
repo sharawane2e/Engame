@@ -292,3 +292,8 @@ input:-internal-autofill-selected {
   background-color: $white !important;
   color: -internal-light-dark(black, white) !important;
 }
+
+input,
+input::-webkit-input-placeholder {
+  @include font-size($font-reg);
+}

@@ -43,8 +43,14 @@
   }
 }
 .popup-padding {
-  padding-left: 50px;
-  padding-right: 50px;
+  @include space(padding, all, $padding-50, 0);
+  // padding-right: 50px;
+  @include breakpoint(desktop) {
+    @include space(padding, all, $padding-30, 0);
+  }
+  @include breakpoint(mobileonly) {
+    @include space(padding, all, $padding-0, 0);
+  }
 }
 .popup-container {
   position: fixed;
@@ -83,8 +89,8 @@
     @include breakpoint(Ipad-pro) {
       width: 90%;
       // min-height: 90vh;
-      min-height: 500px;
-      overflow-y: auto;
+      min-height: 480px;
+      // overflow-x: auto;
     }
   }
 
@@ -102,6 +108,9 @@
   }
   #{&}__iner--sm {
     width: 400px;
+    @include breakpoint(mobileonly) {
+      width: 90%;
+    }
   }
   #{&}__iner--xsm {
     width: 25%;
