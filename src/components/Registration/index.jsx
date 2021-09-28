@@ -102,7 +102,7 @@ class Registration extends Component {
           this.props.dispatch(loadingStop());
           if (data.detail) {
             Toaster.sucess(data.detail, "topCenter");
-            //window.location.reload();
+            window.location.reload();
           }
         });
     } else {

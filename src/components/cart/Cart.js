@@ -26,6 +26,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 // import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ const Cart = () => {
   const [productShow, setProductShow] = useState([]);
   const [issetProdusctId, setProdusctId] = useState("");
   const history = useHistory();
+  const stripePromise = loadStripe(
+    "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
+  );
 
   useEffect(() => {
     dispatch(getItemFromCart());
@@ -50,6 +55,7 @@ const Cart = () => {
     const reducer = (previousValue, currentValue) =>
       +previousValue + +currentValue;
     console.log(cart.reduce(reducer));
+
     // cart
     //   .map((item) => {
     //     console.log("check out callculate all value");

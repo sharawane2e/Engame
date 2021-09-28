@@ -1,27 +1,49 @@
 import * as actionTypes from "./types";
 import axios from "axios";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, ADD_CART } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import ApiRequest from "../../util/ApiRequest";
 
 export const addToCart = (userData) => async (dispatch) => {
-  let auth = localStorage.getItem("auth");
-  let res = JSON.parse(auth);
-  await fetch(BASE_URL + "cart/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${res.token.access_token}`,
-    },
-    body: JSON.stringify(userData),
+  // let auth = localStorage.getItem("auth");
+  // let res = JSON.parse(auth);
+
+  ApiRequest.request(ADD_CART, "POST", {
+    data: userData,
+    //Token: res.token.access_token,
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${res.token.access_token}`,
+    // },
+    // body: JSON.stringify(userData),
   })
-    .then((response) => response.json())
-    .then((result) => {
-      // if(result.code == "token_not_valid"){
-      //   dispatch(logOutUser());
-      //   localStorage.removeItem("auth");
-      // }
-      dispatch({ type: actionTypes.CART_ADD_ITEM, payload: result });
+    .then((res) => {
+      console.log("res", res);
+      dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res });
+    })
+    .catch((error) => {
+      // this.setState({ disableSubmit: false });
+      console.log(error);
+    })
+    .finally(() => {
+      dispatch(loadingStop());
     });
+  // await fetch(BASE_URL + "cart/", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${res.token.access_token}`,
+  //   },
+  //   body: JSON.stringify(userData),
+  // })
+  //   .then((response) => response.json())
+  //   .then((result) => {
+  //     // if(result.code == "token_not_valid"){
+  //     //   dispatch(logOutUser());
+  //     //   localStorage.removeItem("auth");
+  //     // }
+  //     dispatch({ type: actionTypes.CART_ADD_ITEM, payload: result });
+  //   });
 };
 
 export const getItemFromCart = () => async (dispatch) => {
