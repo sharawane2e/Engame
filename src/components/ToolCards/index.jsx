@@ -61,13 +61,13 @@ const ToolCards = () => {
   };
 
   useEffect(() => {
-    document.body.classList.toggle("modal-open", ispopup);
-    document.body.classList.toggle("modal-open", isSubscription);
+    // document.body.classList.toggle("modal-open", ispopup);
+    //document.body.classList.toggle("modal-open", isSubscription);
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
     }
-  }, [ispopup, isSubscription, user]);
+  }, [user]);
 
   useEffect(() => {
     dispatch(listProducts());
@@ -265,19 +265,19 @@ const ToolCards = () => {
         <CustomPopup
           open={isLoginOpen || isReginOpen}
           onClose={() => setLoginIsOpen(false)}
-          className="popup-container__iner--xl border-radius"
+          className="popup-container__iner--xl border-radius popup-background"
         >
           {isLoginOpen ? (
-            <Grid container spacing={1}>
-              <Grid item xs={6} sm={6} className="login-background"></Grid>
-              <Grid item xs={12} sm={6} lg={6}>
+            <Grid container spacing={3} className="popup-padding">
+              {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+              <Grid item xs={12} sm={12} lg={12}>
                 <Login />
               </Grid>
             </Grid>
           ) : isReginOpen ? (
-            <Grid container spacing={3}>
-              <Grid item xs={6} sm={6} className="login-background"></Grid>
-              <Grid item xs={12} sm={6} lg={6}>
+            <Grid container spacing={3} className="popup-padding">
+              {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+              <Grid item xs={12} sm={12} lg={12}>
                 <Registration />
               </Grid>
             </Grid>
@@ -288,7 +288,7 @@ const ToolCards = () => {
 
         <CustomPopup
           open={isLoginrequire}
-          className="popup-container__iner--sm border-radius loginAlert"
+          className="popup-container__iner--sm border-radius loginAlert "
         >
           <Grid container spacing={4} align="center">
             <Grid item xs={12}>

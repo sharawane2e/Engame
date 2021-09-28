@@ -1,4 +1,4 @@
-import React, { useRef , useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-ui/core";
@@ -59,8 +59,6 @@ function Purchased(props) {
   // console.log(history);
 
   const token = useSelector((state) => state.user.token);
-
-  
 
   useEffect(() => {
     const search = props.location.search;
@@ -221,12 +219,11 @@ function Purchased(props) {
   //   isShow;
   // });
 
-
-  const  CCopy= (yes)=> {
+  const CCopy = (yes) => {
     var copyText = yes;
     copyText.select();
     document.execCommand("copy");
-  }
+  };
 
   return (
     <>
@@ -397,7 +394,6 @@ function Purchased(props) {
                                     // console.log("copied");
                                   }}
                                 >
-                                
                                   {item.secrate_key.substr(0, 10)}************
                                   <FileCopyIcon className="subscription-day__icon" />
                                 </span>
