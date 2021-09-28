@@ -55,7 +55,7 @@ const Cart = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.access_token}`,
         },
-        body: JSON.stringify({ user: user.user.pk }),
+        body: JSON.stringify({ user: user.user.pk, is_renew: false }),
       })
         .then((response) => response.json())
         .then((result) => {
@@ -399,6 +399,7 @@ const Cart = () => {
           )}
         </div>
       </div>
+      
       {/*Update into card*/}
       <CustomPopup
         open={is_renew}

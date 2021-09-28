@@ -22,10 +22,12 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
+import CustomPopup from "../CustomPopup";
+import SubscriptionRenew from "../../components/SubscriptionType/subscriptRenew";
 // import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import Tooltip from "@material-ui/core/Tooltip";
-// import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import Switch from "@material-ui/core/Switch";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
@@ -50,7 +52,8 @@ function Purchased(props) {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
-  const [is_renew, setRenew] = useState("false");
+  const [is_renew, setRenew] = useState(false);
+  const [productShow, setProductShow] = useState([]);
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
   const [sucess, setSucess] = useState('Copy');
@@ -109,6 +112,7 @@ function Purchased(props) {
       }
     }
     paymentSuccess();
+
     //  my widgets
     const myWwidgets = async () => {
       dispatch(loadingStart());
@@ -154,14 +158,14 @@ function Purchased(props) {
   };
 
   const handleExtend = async (widgetId) => {
-    // const plan_newValue,planId,
-    //console.log("widgets", widgetId);
-    // // const plan = widgets.plan.id;
-    // // const plan_new_value = "2306";
-    // // const subscription = widgetId;
-    // // const widget = widgets.widget.id;
-    // // const price = "200";
-    // // const currency = "USD";
+    // const plan_new_value, planId
+    console.log("widgets", widgetId);
+    // const plan = widgets.plan.id;
+    // const plan_new_value = "2306";
+    // const subscription = widgetId;
+    // const widget = widgets.widget.id;
+    // const price = "200";
+    // const currency = "USD";
     // setRenew(true);
     // dispatch(loadingStart());
     // const stripe = await loadStripe(STRIPE);
@@ -267,6 +271,7 @@ function Purchased(props) {
               </Typography>
             </Grid>
           </Grid>
+
           {/*Card start */}
           {widgets.map((item, index) => {
             let purchasedDateTime = new Date(item.purchase_date);
@@ -390,7 +395,11 @@ function Purchased(props) {
                           <Typography
                             component="div"
                             className="extend-validity"
-                            onClick={() => handleExtend(item.widget.id)}
+                            // onClick={() => //handleExtend(item)}
+                            onClick={() => {
+                              setRenew(true);
+                              setProductShow(item);
+                            }}
                           >
                             {/* <Tooltip title="Embeded Code" placement="top"> */}
                             Extend validity
@@ -588,6 +597,22 @@ function Purchased(props) {
             );
           })}
         </Container>
+
+        {/*Renew Subscription*/}
+      <CustomPopup
+        open={is_renew}
+        onClose={() => setRenew(false)}
+        headerText="Renew Subscription"
+        footerButton={true}
+        className="border-radius popup-container__iner--sm"
+      >
+        <SubscriptionRenew
+          updateData={productShow}
+          onClose={() => setRenew(false)}
+        />
+        {console.log("hello bhai log", productShow)}
+      </CustomPopup>
+
         <Footer />
       </div>
     </>
