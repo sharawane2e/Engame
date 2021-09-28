@@ -98,9 +98,9 @@ export class UserValidation extends Validation {
         } else if (value.length < PASSWORD_MIN_LENGTH) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_MIN;
-        } else if (!passwordPattern(value)) {
+        } else if (passwordPattern(value)) {
           validationResponse.isValid = false;
-          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+          validationResponse.message = ErrorMessages.PASSWORD_PATTERN;
         }
         break;
       case "confirmpassword":

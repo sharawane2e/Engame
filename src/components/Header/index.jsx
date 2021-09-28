@@ -74,6 +74,7 @@ const Header = ({ props }) => {
     //  document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
+      setReginIsOpen(false);
       dispatch(getItemFromCart());
     }
   }, [user]);

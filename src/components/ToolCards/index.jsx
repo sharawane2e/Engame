@@ -29,6 +29,7 @@ import warning_icon from "../../assets/images/warning_icon.svg";
 import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 
+
 // import PropTypes from "prop-types";
 // import Box from "@material-ui/core/Box";
 // import Typography from "@material-ui/core/Typography";
@@ -48,6 +49,7 @@ const ToolCards = () => {
   const token = useSelector((state) => state.user);
   const { loading, error, products } = productList;
   const [productShow, setProductShow] = useState(products);
+  const [TypeClick, setTypeClick] = useState('')
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -221,7 +223,10 @@ const ToolCards = () => {
                             ) : (
                               <div
                                 className="toolcard__sub-icons"
-                                onClick={() => setisLoginrequire(true)}
+                                onClick={() => {
+                                  setisLoginrequire(true);
+                                  setTypeClick(ErrorMessages.EmbededAlert);
+                                }}
                               >
                                 {/* <Tooltip title="Embeded Code" placement="top"> */}
                                 <SystemUpdateAltIcon />
@@ -238,7 +243,10 @@ const ToolCards = () => {
                             ) : (
                               <div
                                 className="toolcard__sub-icons"
-                                onClick={() => setisLoginrequire(true)}
+                                onClick={() => {
+                                  setisLoginrequire(true);
+                                  setTypeClick(ErrorMessages.loginAlert);
+                                }}
                               >
                                 {/* <Tooltip title="Add To Cart" placement="top"> */}
                                 <ShoppingCartIcon />
@@ -298,7 +306,7 @@ const ToolCards = () => {
                 alt="Registration Sucessfully"
               />
               <Typography component="p" className="sucess_message">
-                {ErrorMessages.EmbededAlert}
+                {TypeClick}
               </Typography>
               {/* <p className="sucess_message"></p> */}
               <CustomButton

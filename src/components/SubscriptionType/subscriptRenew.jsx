@@ -2,45 +2,52 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import Toaster from "../../util/Toaster";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL,BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import { addToCart } from "../../redux/cart/action";
 import { getItemFromCart } from "../../redux/cart/action";
+import { loadStripe } from "@stripe/stripe-js";
+import { logOutUser } from "../../redux/user/user-action";
+
+
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
-  console.log("cart value", updateData.is_active);
+  console.log("cart value", updateData.plan.plan_value);
+  const user = useSelector((state) => state.user.token);
   //const [subscription, setSubscription] = useState("");
-  const [istype, setType] = useState(updateData.plan_type);
-  const [valuePrice, setValuePrice] = useState(updateData.plan_value);
-  const [isCurentPrice, setCurentPrice] = useState(updateData.price);
+  const [istype, setType] = useState(updateData.plan.plan_type);
+  const [valuePrice, setValuePrice] = useState();
+  const [RemainvaluePrice, setRemainvaluePrice] = useState(updateData.plan.plan_value);
+  const [isCurentPrice, setCurentPrice] = useState(updateData.plan.price);
   const [isUpdateResult, setUpdateResult] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
 
-  const handleChange = (e) => {
-    if (e.target.value === "days") {
-      setType("days");
-      updateData.plan_type === "days"
-        ? setValuePrice(updateData.plan_value)
-        : setValuePrice(7);
-      updateData.plan_type === "days"
-        ? setCurentPrice(updateData.plan_value * 5)
-        : setCurentPrice(7 * 5);
-    } else {
-      setType("hits");
-      updateData.plan_type === "hits"
-        ? setValuePrice(updateData.plan_value)
-        : setValuePrice(1000);
-      updateData.plan_type === "hits"
-        ? setCurentPrice(updateData.plan_value * 0.1)
-        : setCurentPrice(1000 * 0.1);
-    }
-  };
+  // const handleChange = (e) => {
+  //   if (e.target.value === "days") {
+  //     setType("days");
+  //     updateData.plan.plan_type === "days"
+  //       ? setValuePrice(updateData.plan_value)
+  //       : setValuePrice(7);
+  //     updateData.plan_type === "days"
+  //       ? setCurentPrice(updateData.plan_value * 5)
+  //       : setCurentPrice(7 * 5);
+  //   } else {
+  //     setType("hits");
+  //     updateData.plan_type === "hits"
+  //       ? setValuePrice(updateData.plan_value)
+  //       : setValuePrice(1000);
+  //     updateData.plan_type === "hits"
+  //       ? setCurentPrice(updateData.plan_value * 0.1)
+  //       : setCurentPrice(1000 * 0.1);
+  //   }
+  // };
 
   const handleCalculatePrice = (e) => {
     let value = e.target.value;
@@ -48,6 +55,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
     istype === "days"
       ? setCurentPrice(value * 5)
       : setCurentPrice((value * 0.1).toFixed(2));
+
     if (e.target.value <= 0) {
       setCurentPrice(0);
     }
@@ -61,44 +69,62 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
     dispatch(getItemFromCart());
   }, [isUpdateResult]);
 
-  const cartUpdate = () => {
+  useEffect(() => {
+    if (istype === "days") {
+      setType("days");
+      setCurentPrice(7 * 5)
+      setValuePrice(7);
+    } else {
+      setType("hits");
+      setCurentPrice((1000 * 0.1).toFixed(2))
+      setValuePrice(1000);
+    }
+  }, [istype]);
+
+  const ItemRenew = async () => {
     let plans = {
       user: res.token.user.pk,
-      widget: updateData.widget.id,
-      plan_type: istype,
-      plan_value: valuePrice,
-      price: isCurentPrice,
-      currency: updateData.currency,
+      is_renew: true,
+      plan_new_value: valuePrice,
+      plan_type: istype
     };
     //console.log("plans", res.token.user.pk);
 
     dispatch(loadingStart());
-    fetch(BASE_URL + `cart/detail/${updateData.id}/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${res.token.access_token}`,
-      },
-      body: JSON.stringify(plans),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setUpdateResult(result);
-        // console.log(result);
-        onClose();
-        dispatch(loadingStop());
-      });
+    const stripe = await loadStripe(STRIPE);
+    try {
+      await fetch(BASE_URL + "payments/checkout-session/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.access_token}`,
+        },
+        body: JSON.stringify({plans}),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            history.push("/");
+          } else {
+            //sessionStorage.setItem("sessionId", result.sessionId);
+            stripe.redirectToCheckout({ sessionId: result.sessionId });
+            dispatch(loadingStop());
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <>
       <div className="subscription-type">
-        <select onChange={handleChange}>
-          <option value="days" selected={istype == "days"}>
-            Number of days
-          </option>
-          <option value="hits" selected={istype == "hits"}>
-            Number of hits
+        <select>
+          <option value={updateData.plan.plan_type} selected={istype == "days"}>
+            {updateData.plan.plan_type == "days" ? "Number of days" : "Number of hits"}
           </option>
         </select>
 
@@ -124,7 +150,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
       <div className="popup-container__footer popup--text">
         <CustomButton
           className="primary-button add--card"
-          onClick={cartUpdate}
+          onClick={ItemRenew}
           disabled={valuePrice === 0 || valuePrice === "" ? true : false}
         >
           <ShoppingCartIcon className="margin-right-15" />Extend Now
