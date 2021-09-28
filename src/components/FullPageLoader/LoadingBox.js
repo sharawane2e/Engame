@@ -1,5 +1,5 @@
 import React from "react";
-import loaderImg from "../../assets/images/loader.svg";
+import loaderImg from "../../assets/images/loader_engame.gif";
 import Overlay from "../Overlay";
 
 const LoadingBox = () => {
