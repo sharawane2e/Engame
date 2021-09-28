@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import FilledInput from "@material-ui/core/FilledInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
@@ -160,24 +161,27 @@ class Registration extends Component {
           <Login />
         ) : (
           <div className="form-area registration--form">
-            <div className="form-area__login  large-hedding">Registration</div>
+            <div className="form-area__login  large-hedding">Register</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-name"
                 className="input-label"
               >
                 Name
-              </InputLabel>
+              </InputLabel> */}
               <FormControl className="form-area__control">
+                {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
                 <TextField
                   id="outlined-name-input"
                   placeholder="Name"
+                  label="Name"
+                  variant="filled"
                   value={this.state.name}
                   onChange={(e) => this.handleChange(e, "name")}
                   onBlur={(e) => this.handleBlur(e, "name")}
                   message={this.state.formErrors.name}
                   type="Name"
-                  variant="outlined"
+                  // variant="outlined"
                   onKeyDown={this._handleKeyDown}
                 />
                 <div className="validated-error">
@@ -185,18 +189,19 @@ class Registration extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-email"
                 className="input-label"
               >
                 E-mail
-              </InputLabel>
+              </InputLabel> */}
               <FormControl className="form-area__control">
                 <TextField
                   id="outlined-email-input"
                   placeholder="Emails"
                   type="Email"
-                  variant="outlined"
+                  label="E-mail"
+                  variant="filled"
                   value={this.state.email}
                   onChange={(e) => this.handleChange(e, "email")}
                   onBlur={(e) => this.handleBlur(e, "email")}
@@ -208,14 +213,22 @@ class Registration extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-password"
                 className="input-label"
               >
                 Password
-              </InputLabel>
-              <FormControl className="form-area__control" variant="outlined">
-                <OutlinedInput
+              </InputLabel> */}
+              <FormControl
+                className="form-area__control"
+                variant="filled"
+                label="Password"
+              >
+                <InputLabel htmlFor="filled-adornment-password">
+                  Password
+                </InputLabel>
+                <FilledInput
+                  label="E-mail"
                   id="outlined-adornment-password"
                   placeholder="Password "
                   type={this.state.showPassword ? "text" : "password"}
@@ -225,7 +238,7 @@ class Registration extends Component {
                   message={this.state.formErrors.setpassword}
                   onKeyDown={this._handleKeyDown}
                   endAdornment={
-                    <InputAdornment position="end" label="Outlined">
+                    <InputAdornment position="end" label="filled">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
@@ -246,16 +259,23 @@ class Registration extends Component {
                 </div>
               </FormControl>
 
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-password"
                 className="input-label"
               >
                 Confirm Password
-              </InputLabel>
-              <FormControl className="form-area__control" variant="outlined">
-                <OutlinedInput
+              </InputLabel> */}
+              <FormControl
+                className="form-area__control"
+                variant="filled"
+                label="Confirm Password"
+              >
+                <InputLabel htmlFor="filled-adornment-password">
+                  Confirm Password
+                </InputLabel>
+                <FilledInput
                   id="outlined-adornment-confirmpassword"
-                  placeholder="Password "
+                  placeholder="Confirm Password"
                   type={this.state.showPasswordConfirm ? "text" : "password"}
                   value={this.state.confirmpassword}
                   onChange={(e) => this.handleChange(e, "confirmpassword")}
@@ -263,7 +283,7 @@ class Registration extends Component {
                   message={this.state.formErrors.confirmpassword}
                   onKeyDown={this._handleKeyDown}
                   endAdornment={
-                    <InputAdornment position="end" label="Outlined">
+                    <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={this.confirmPasswordShow}
@@ -292,11 +312,18 @@ class Registration extends Component {
                 Register
               </CustomButton>
             </div>
-            <div className="back-button">
+            <div className="form-newaccont">
+              <span>Already a member?</span>
               <Link href="#" onClick={this.backLogin} className="">
-                Back to login
+                Login
               </Link>
             </div>
+            {/* <div className="back-button">
+              <span>Already a member?</span>
+              <Link href="#" onClick={this.backLogin} className="">
+                Login
+              </Link>
+            </div> */}
           </div>
         )}
       </>

@@ -15,8 +15,8 @@
   #{&}__login {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     @include font-size($font-lg);
-    text-align: $align-center;
-    @include space(padding, top, $padding-20, 0);
+    text-align: $align-left;
+    // @include space(padding, top, $padding-20, 0);
     @include space(padding, bottom, $padding-50, 0);
     @include breakpoint(desktop) {
       @include space(padding, top-bottom, $padding-20, $padding-40);
@@ -25,6 +25,9 @@
     @include breakpoint(desktop150) {
       @include space(padding, bottom, $padding-25, 0);
       @include font-size($font-xx-reg18);
+    }
+    @include breakpoint(mobileonly) {
+      @include space(padding, top, $padding-15, 0);
     }
   }
   .input-label {
@@ -52,10 +55,19 @@
     }
   }
   #{&}__control {
-    @include space(margin, bottom, $margin-10, 0);
-    @include breakpoint(desktop) {
-      @include space(margin, bottom, $margin-0, 0);
+    @include space(margin, bottom, $margin-5, 0);
+    // @include breakpoint(desktop) {
+    //   @include space(margin, bottom, $margin-10, 0);
+    // }
+    .MuiFilledInput-input {
+      // @include breakpoint(desktop) {
+      //   padding: 18px 12px 10px;
+      // }
+      @include breakpoint(mobileonly) {
+        padding: 15px 10px 10px;
+      }
     }
+
     @include breakpoint(desktop150) {
       .MuiIconButton-label {
         > svg {
@@ -86,6 +98,9 @@
       @include space(padding, left, $padding-5, 0);
       @include color($secondary);
     }
+  }
+  .MuiFilledInput-root {
+    background-color: $white !important;
   }
 }
 .form-button-grop {

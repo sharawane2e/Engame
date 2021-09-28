@@ -15,6 +15,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  #{&}__borderdata {
+    display: flex;
+    align-items: $align-center;
+    @include font-size($font-xx-reg);
+    @include border("-bottom", 2px, $bsolid, $seconday-shadow);
+    padding: 0 !important;
+    margin: 12px;
+    line-height: 2;
+  }
+  #{&}__tabing {
+    display: flex;
+    justify-content: flex-end;
+  }
 
   #{&}__hedding {
     @include space(margin, bottom, $margin-20, 0);
@@ -27,7 +40,7 @@
       display: flex;
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);
-      @include space(padding, left-right, $padding-10, $padding-10);
+      @include space(padding, all, $padding-5, $padding-10);
       @include space(margin, right, $margin-10, 0);
       justify-content: $align-center;
       background-color: $tabcolor;
@@ -144,10 +157,10 @@
     @include font-size($font-xl-reg);
     @include space(padding, bottom, $padding-5, 0);
   }
-  .subscription-day__icon{
+  .subscription-day__icon {
     display: none;
   }
-  .display-flex{
+  .display-flex {
     display: flex;
   }
 
@@ -156,19 +169,29 @@
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
       @include font-size($font-reg);
     }
+    .CopyToClipboard{
+      cursor: pointer;
+    }
+    .tooltip__key{
+      cursor: pointer;
+      @include font-size($font-reg);
+      .tooltip__keyCode{
+      }
+    }
+    
     .subscription-day {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);
       cursor: pointer;
-      &:hover{
+      &:hover {
         @include color($secondary);
-        .subscription-day__icon{
-          display: flex;
+        .subscription-day__icon {
+          display: flex!important;
           @include color($secondary);
         }
-      } 
+      }
     }
-    
+
   }
   #{&}__tool-validity {
     display: flex;

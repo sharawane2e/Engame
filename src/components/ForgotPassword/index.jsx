@@ -100,19 +100,20 @@ class ForgotPassword extends Component {
               Forgot Password
             </div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-              <InputLabel
+              {/* <InputLabel
                 htmlFor="standard-adornment-email"
                 className="input-label"
               >
                 E-mail address
-              </InputLabel>
+              </InputLabel> */}
               <FormControl className="form-area__control">
                 <TextField
                   id="outlined-email-input"
                   placeholder="E-mail address"
                   value={this.state.email}
                   type="email"
-                  variant="outlined"
+                  variant="filled"
+                  label="E-mail address"
                   onChange={(e) => this.handleChange(e, "email")}
                   onBlur={(e) => this.handleBlur(e, "email")}
                   message={this.state.formErrors.email}

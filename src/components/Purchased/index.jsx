@@ -29,11 +29,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Switch from "@material-ui/core/Switch";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
-    height: 10,
-    borderRadius: 5,
+    height: 6,
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
@@ -52,7 +53,7 @@ function Purchased(props) {
   const [is_renew, setRenew] = useState("false");
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
-  const [copy, setCopy] = useState(false);
+  const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
 
   // let history = useHistory();
@@ -211,7 +212,9 @@ function Purchased(props) {
               {/* <Link color="inherit" to="/cart">
                 Shopping Cart
               </Link> */}
-              <Typography color="textPrimary">My Widgets</Typography>
+              <Typography color="textPrimary" variant="span">
+                My Widgets
+              </Typography>
             </Breadcrumbs>
           </Container>
         </div>
@@ -220,12 +223,22 @@ function Purchased(props) {
           className="purchased-tool__container  margin-top-174"
         >
           <Grid container spacing={3}>
-            <Grid item xs={4} className="purchased-tool__hedding">
+            <Grid
+              item
+              xs={12}
+              className="purchased-tool__hedding purchased-tool__borderdata"
+            >
               <Typography component="div" className="hedding-text">
                 My Widgets
               </Typography>
             </Grid>
-            <Grid item xs={8} className="purchased-tool__hedding grid-flex">
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid
+              item
+              xs={12}
+              className="purchased-tool__hedding purchased-tool__tabing"
+            >
               <Typography
                 component="div"
                 className="tab--button border-radius tab--active"
@@ -243,6 +256,12 @@ function Purchased(props) {
               </Typography>
               <Typography component="div" className="tab--button border-radius">
                 Paused
+              </Typography>
+              <Typography component="div" className="tab--button border-radius">
+                Days Subs.
+              </Typography>
+              <Typography component="div" className="tab--button border-radius">
+                Hits Subs.
               </Typography>
             </Grid>
           </Grid>
@@ -315,23 +334,22 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Subscription Key:
                               </span>
-                              <Tooltip
-                                title={copy ? "Copied" : "copy"}
-                                placement="top"
-                              >
-                                <span
+                              <Tooltip title={sucess} placement="top">
+                                <CopyToClipboard
+                                  text={item.secrate_key}
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                  onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.secrate_key
-                                    );
-                                    setCopy(true);
-                                    setTimeout(() => setCopy(false), 1000);
-                                  }}
                                 >
-                                  {item.secrate_key.substr(0, 10)}************
-                                  <FileCopyIcon className="subscription-day__icon" />
-                                </span>
+                                  <span
+                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    onClick={() => {
+                                      setSucess("Copied");
+                                      setTimeout(() => setSucess("Copy"), 500);
+                                    }}
+                                  >
+                                    {item.secrate_key.substr(0, 10)}************
+                                    <FileCopyIcon className="subscription-day__icon" />
+                                  </span>
+                                </CopyToClipboard>
                               </Tooltip>
                             </Typography>
                             <Typography
@@ -341,26 +359,24 @@ function Purchased(props) {
                               <span className="subscription-type-text">
                                 Trial Key:
                               </span>
-                              <Tooltip
-                                title={copy ? "Copied" : "copy"}
-                                placement="top"
-                              >
-                                <span
+                              <Tooltip title={sucess} placement="top">
+                                <CopyToClipboard
+                                  text={item.trial_key}
                                   className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                  onClick={() => {
-                                    navigator.clipboard.writeText(
-                                      item.trial_key
-                                    );
-                                    setCopy(true);
-                                    setTimeout(() => setCopy(false), 1000);
-                                  }}
                                 >
-                                  <span className="display-flex">
-                                    {" "}
-                                    {item.trial_key.substr(0, 10)}************
+                                  <span
+                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    onClick={() => {
+                                      setSucess("Copied");
+                                      setTimeout(() => setSucess("Copy"), 500);
+                                    }}
+                                  >
+                                    <span className="display-flex">
+                                      {item.trial_key.substr(0, 10)}************
+                                    </span>
+                                    <FileCopyIcon className="subscription-day__icon" />
                                   </span>
-                                  <FileCopyIcon className="subscription-day__icon" />
-                                </span>
+                                </CopyToClipboard>
                               </Tooltip>
                             </Typography>
                           </Grid>
@@ -421,11 +437,14 @@ function Purchased(props) {
                                 variant="determinate"
                                 value={ConsumptionValue}
                                 className={
-                                  ConsumptionValue > 80
+                                  ConsumptionValue > 79
                                     ? "progress-bar progress-green"
-                                    : ConsumptionValue > 30 &&
+                                    : ConsumptionValue > 49 &&
                                       ConsumptionValue < 80
                                     ? "progress-bar progress-yellow"
+                                    : ConsumptionValue > 19 &&
+                                      ConsumptionValue < 50
+                                    ? "progress-bar progress-embeded"
                                     : "progress-bar progress-red"
                                 }
                               />

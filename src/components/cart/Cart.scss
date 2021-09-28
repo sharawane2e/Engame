@@ -16,7 +16,7 @@
     display: flex;
     align-items: $align-center;
     @include font-size($font-xx-reg);
-    @include border("-bottom", $border-width, $bsolid, $seconday-shadow);
+    @include border("-bottom", 2px, $bsolid, $seconday-shadow);
     padding: 0 !important;
     margin: 12px;
     line-height: 2;
@@ -261,7 +261,7 @@
     }
 
     @media all and (min-width: 1024px) and (max-width: 1366px) {
-      width: 178px !important;
+      // width: 178px !important;
       padding: 10px 16px !important;
       .MuiButton-label {
         @include font-size($font-xmd-reg);
