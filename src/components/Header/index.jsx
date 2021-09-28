@@ -29,6 +29,11 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
+import {
+  getItemFromCart,
+  removeFromCart,
+} from "../../redux/cart/action";
+
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -57,13 +62,16 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user, state, data, shop }) => {
+const Header = ({ props, cart, user, state, data }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
   // const [state] = useState(data);
   const classes = useStyles();
   // const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(data);
+  // const [cartCount, setCartCount] = useState(0);
+
+  const carts = useSelector((state) => state.cart.cartItems);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -72,11 +80,13 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   //const CartValue = useSelector((state) => shop.cart.length);
 
   //  console.log("Redux data on shop", shop);
-  //console.log("Redux data on cart", cart);
+  console.log("Redux data on cart", carts.length);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
+    dispatch(getItemFromCart());
+    //dispatch(removeFromCart());
   }, [isLoginOpen, isReginOpen]);
 
   // useEffect(() => {
@@ -88,7 +98,7 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   //   if (user.isLoggedIn) {
   //     setLoginIsOpen(false);
   //   }
-  // }, [cart, cartCount, user]);
+  // }, [curentCart, cartCount, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -272,9 +282,9 @@ const Header = ({ props, cart, user, state, data, shop }) => {
                   {/* <Badge color="secondary"> */}
 
                   <Badge
-                    // badgeContent={
-                    //   CartValue.products ? CartValue.products.length : 0
-                    // }
+                    badgeContent={
+                      carts.length ? carts.length : 0
+                    }
                     color="secondary"
                   >
                     <ShoppingCartIcon />
@@ -330,9 +340,8 @@ const Header = ({ props, cart, user, state, data, shop }) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart.cartItems,
+    cart: state.cartItems,
     user: state.user,
-    shop: state.shop,
   };
 };
 

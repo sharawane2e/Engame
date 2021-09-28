@@ -7,11 +7,11 @@ import Toaster from "../../util/Toaster";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { useHistory } from "react-router-dom";
-import { addToCart } from "../../redux/shopping/shopping-action";
+import { addToCart } from "../../redux/cart/action";
 
 const SubscriptionType = ({ data, toolId, onClose }) => {
   const [state] = useState(data);
-  const history = useHistory();
+  // const history = useHistory();
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
@@ -21,7 +21,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
   const [itemId] = useSelector((state) => state.cart.cartItems);
   const intialValues = { email: "" };
   const [formValues, setFormValues] = useState(intialValues);
-
+  
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
 
@@ -58,6 +58,7 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
         setBase(result.base_price);
         dispatch(loadingStop());
       });
+      
   };
 
   const user = {
@@ -71,9 +72,9 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
 
   const handleCart = () => {
     dispatch(loadingStart());
-    dispatch(addToCart(user));
-    onClose();
-    dispatch(loadingStop());
+     dispatch(addToCart(user));
+     onClose();
+    // dispatch(loadingStop());
     // Toaster.sucess("You have add successfully!", "topCenter");
     // fetch(BASE_URL + "cart/", {
     //   method: "POST",
@@ -85,13 +86,17 @@ const SubscriptionType = ({ data, toolId, onClose }) => {
     // })
     //   .then((response) => response.json())
     //   .then((result) => {
+    //     console.log(result);
     //     history.push("/");
     //     console.log("add to cart", result);
     //     dispatch(addToCart(result.id));
-    //     // dispatch(addToCart(result.id));
+    //     dispatch(addToCart(result.id));
     //     onClose();
     //   });
+     dispatch(loadingStop());
+ 
   };
+
 
   const handleCalculatePrice = (e) => {
     let value = e.target.value * base;

@@ -130,21 +130,21 @@ import { BASE_URL } from "../../config/ApiUrl";
 
 export const addToCart = (userData) =>async (dispatch, getState) => {
 
-  let auth = localStorage.getItem("auth");
-  let res = JSON.parse(auth);
+  // let auth = localStorage.getItem("auth");
+  // let res = JSON.parse(auth);
  
-  await fetch(BASE_URL + "cart/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${res.token.access_token}`,
-    },
-    body: JSON.stringify(userData),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-        dispatch({ type: actionTypes.GET_CART_ITEM, payload: result });
-    });
+  // await fetch(BASE_URL + "cart/", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${res.token.access_token}`,
+  //   },
+  //   body: JSON.stringify(userData),
+  // })
+  //   .then((response) => response.json())
+  //   .then((result) => {
+  //      dispatch({ type: actionTypes.GET_CART_ITEM, payload: result });
+  //   });
   // dispatch(loadingStop());
 };
 

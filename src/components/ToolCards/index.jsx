@@ -65,7 +65,7 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           setProductShow(response);
         });
     }
