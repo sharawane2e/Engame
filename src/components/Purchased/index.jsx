@@ -53,7 +53,7 @@ function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState(false);
-  const[isextend, setExtend] = useState(false);
+  const[isextend, setExtend] = useState("false");
   const [productShow, setProductShow] = useState([]);
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
@@ -71,7 +71,7 @@ function Purchased(props) {
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
     async function paymentSuccess() {
-      if (isextend == "false") {
+      if (isextend == "false" || isextend == false) {
         await fetch(BASE_URL + "payments/success/", {
           method: "POST",
           headers: {
@@ -192,7 +192,6 @@ function Purchased(props) {
             isShowArr.push(false);
           });
           setShow(isShowArr);
-          setExtend(false);
         }
       });
   };
@@ -419,7 +418,6 @@ function Purchased(props) {
                                     onClick={() => {
                                       setSucess("Copied");
                                       setTimeout(() => setSucess("Copy"), 500);
-                                      setExtend(true);
                                     }}
                                   >
                                     <span className="display-flex">
