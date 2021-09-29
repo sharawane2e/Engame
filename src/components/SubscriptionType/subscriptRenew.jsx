@@ -28,6 +28,8 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
+  console.log("valuePrice",valuePrice)
+  
 
   // const handleChange = (e) => {
   //   if (e.target.value === "days") {
