@@ -53,6 +53,7 @@ function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState(false);
+  const[isextend, setExtend] = useState(false);
   const [productShow, setProductShow] = useState([]);
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
@@ -60,7 +61,7 @@ function Purchased(props) {
   const history = useHistory();
 
   // let history = useHistory();
-  // console.log(history);
+  console.log("products", productShow);
 
   const token = useSelector((state) => state.user.token);
 
@@ -70,37 +71,42 @@ function Purchased(props) {
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
     async function paymentSuccess() {
-    //   if (is_renew == "false") {
-    //     await fetch(BASE_URL + "payments/success/", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${token.access_token}`,
-    //       },
-    //       body: JSON.stringify({
-    //         user: token.user.pk,
-    //         session_id: session_id,
-    //         is_renew: is_renew,
-    //       }),
-    //     })
-    //       .then((response) => response.json())
-    //       .then((result) => {
-    //         if (result) {
-    //           Toaster.sucess(result.details, "topCenter");
-    //           //window.location.reload();
-    //         }
-    //         // history.push(history.path);
-    //       });
-    //   } else {
+      if (isextend == "false") {
         await fetch(BASE_URL + "payments/success/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token.access_token}`,
           },
-          // if()
-          // body: JSON.stringify({ user: token.user.pk, session_id: session_id,  }),
-          body: JSON.stringify({ user: token.user.pk, session_id: session_id,  }),
+          body: JSON.stringify({
+            user: token.user.pk,
+            session_id: session_id,
+            is_renew: "false"
+          }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result) {
+              Toaster.sucess(result.details, "topCenter");
+              //window.location.reload();
+            }
+            // history.push(history.path);
+          });
+      } else {
+        await fetch(BASE_URL + "payments/success/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+          
+            body: JSON.stringify({
+               user: token.user.pk,
+               session_id: session_id,
+              is_renew: "true",
+              plan_new_value: "100012",
+              subscription: productShow.length > 0 ? productShow.plan.id : ""
+              }) 
 
         })
           .then((response) => response.json())
@@ -111,7 +117,7 @@ function Purchased(props) {
             }
             // history.push(history.path);
           });
-      //}
+      }
     }
     paymentSuccess();
 
@@ -186,6 +192,7 @@ function Purchased(props) {
             isShowArr.push(false);
           });
           setShow(isShowArr);
+          setExtend(false);
         }
       });
   };
@@ -412,6 +419,7 @@ function Purchased(props) {
                                     onClick={() => {
                                       setSucess("Copied");
                                       setTimeout(() => setSucess("Copy"), 500);
+                                      setExtend(true);
                                     }}
                                   >
                                     <span className="display-flex">
