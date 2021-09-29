@@ -55,7 +55,7 @@ const Cart = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.access_token}`,
         },
-        body: JSON.stringify({ user: user.user.pk, is_renew: false }),
+        body: JSON.stringify({ user: user.user.pk, is_renew: "false" }),
       })
         .then((response) => response.json())
         .then((result) => {
@@ -65,7 +65,7 @@ const Cart = () => {
             dispatch(loadingStop());
             history.push("/");
           } else {
-            //sessionStorage.setItem("sessionId", result.sessionId);
+            // sessionStorage.setItem("sessionId", result.sessionId);
             stripe.redirectToCheckout({ sessionId: result.sessionId });
             dispatch(loadingStop());
           }
@@ -134,7 +134,7 @@ const Cart = () => {
                   </Link>
                 </Grid> */}
               </Grid>
-
+                {console.log("Cart Data",cart)}
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
                   {cart.map((item, index) => {

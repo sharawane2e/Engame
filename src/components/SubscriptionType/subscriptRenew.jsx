@@ -82,14 +82,6 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   }, [istype]);
 
   const ItemRenew = async () => {
-    let plans = {
-      user: res.token.user.pk,
-      is_renew: true,
-      plan_new_value: valuePrice,
-      plan_type: istype
-    };
-    //console.log("plans", res.token.user.pk);
-
     dispatch(loadingStart());
     const stripe = await loadStripe(STRIPE);
     try {
@@ -99,7 +91,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.access_token}`,
         },
-        body: JSON.stringify({plans}),
+        body: JSON.stringify({user: res.token.user.pk, is_renew : "true", plan_new_value: valuePrice, plan_type: istype}),
       })
         .then((response) => response.json())
         .then((result) => {

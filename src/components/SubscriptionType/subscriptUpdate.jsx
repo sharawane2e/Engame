@@ -67,8 +67,8 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       widget: updateData.widget.id,
       plan_type: istype,
       plan_value: valuePrice,
-      price: isCurentPrice,
       currency: updateData.currency,
+      is_renew: "false",
     };
     //console.log("plans", res.token.user.pk);
 

@@ -66,21 +66,42 @@ function Purchased(props) {
 
   useEffect(() => {
     const search = props.location.search;
+    console.log(props.location.search);
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
     async function paymentSuccess() {
-      if (is_renew == "false") {
+    //   if (is_renew == "false") {
+    //     await fetch(BASE_URL + "payments/success/", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${token.access_token}`,
+    //       },
+    //       body: JSON.stringify({
+    //         user: token.user.pk,
+    //         session_id: session_id,
+    //         is_renew: is_renew,
+    //       }),
+    //     })
+    //       .then((response) => response.json())
+    //       .then((result) => {
+    //         if (result) {
+    //           Toaster.sucess(result.details, "topCenter");
+    //           //window.location.reload();
+    //         }
+    //         // history.push(history.path);
+    //       });
+    //   } else {
         await fetch(BASE_URL + "payments/success/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token.access_token}`,
           },
-          body: JSON.stringify({
-            user: token.user.pk,
-            session_id: session_id,
-            is_renew: is_renew,
-          }),
+          // if()
+          // body: JSON.stringify({ user: token.user.pk, session_id: session_id,  }),
+          body: JSON.stringify({ user: token.user.pk, session_id: session_id,  }),
+
         })
           .then((response) => response.json())
           .then((result) => {
@@ -90,24 +111,7 @@ function Purchased(props) {
             }
             // history.push(history.path);
           });
-      } else {
-        await fetch(BASE_URL + "payments/success/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token.access_token}`,
-          },
-          body: JSON.stringify({ user: token.user.pk, session_id: session_id }),
-        })
-          .then((response) => response.json())
-          .then((result) => {
-            if (result) {
-              Toaster.sucess(result.details, "topCenter");
-              //window.location.reload();
-            }
-            // history.push(history.path);
-          });
-      }
+      //}
     }
     paymentSuccess();
 
@@ -154,6 +158,40 @@ function Purchased(props) {
     document.body.appendChild(link);
     link.click();
   };
+
+
+  const PlayNPause = async (purchaseId,isPaused) => {
+    dispatch(loadingStart());
+    await fetch(BASE_URL + "subscription/pause_resume/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+      body: JSON.stringify({ user: token.user.pk,  purchased_id: purchaseId, is_paused: isPaused}),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.code == "token_not_valid") {
+          dispatch(logOutUser());
+          localStorage.removeItem("auth");
+          dispatch(loadingStop());
+          history.push("/");
+        } else {
+          dispatch(loadingStop());
+          setWidgets(result);
+          console.log(result);
+          const isShowArr = [];
+          result.forEach((el, index) => {
+            isShowArr.push(false);
+          });
+          setShow(isShowArr);
+        }
+      });
+  };
+
+
+
 
   const handleExtend = async (widgetId) => {
     // const plan_new_value, planId
@@ -393,7 +431,7 @@ function Purchased(props) {
                           >
                             
                           </Typography> */}
-                          <Switch />
+                          <Switch onClick={()=>PlayNPause(item.plan.id, item.isActive? false : true)}/>
 
                           <Typography
                             component="div"
