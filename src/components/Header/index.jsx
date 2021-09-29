@@ -20,7 +20,7 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { BASE_URL } from "../../config/ApiUrl";
+// import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
@@ -30,6 +30,8 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import { getItemFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
+import ApiRequest from "../../util/ApiRequest";
+import { LOGOUT } from "../../config/ApiUrl";
 
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
@@ -89,23 +91,46 @@ const Header = ({ props }) => {
 
   const handleLogout = () => {
     dispatch(loadingStart());
-    fetch(BASE_URL + "user/logout/", {
-      method: "POST",
-      body: JSON.stringify(""),
-    })
-      .then((result) => result.json())
+    ApiRequest.request(LOGOUT, "POST", "")
       .then((res) => {
-        if (res.detail) {
-          dispatch(logOutUser());
-          localStorage.removeItem("auth");
-          dispatch(loadingStop());
-          history.push("/");
-          Toaster.sucess(res.detail, "topCenter");
-        }
+        dispatch(logOutUser());
+        localStorage.removeItem("auth");
+        //dispatch(loadingStop());
+        history.push("/");
+        Toaster.sucess(res.detail, "topCenter");
+        // if (res.non_field_errors) {
+        //   Toaster.error(
+        //     res.non_field_errors ? res.non_field_errors.join("") : null,
+        //     "topCenter"
+        //   );
+        // } else {
+        //   this.props.dispatch(loginUser(res));
+        // }
       })
       .catch((error) => {
-        Toaster.error(error, "topCenter");
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(loadingStop());
       });
+
+    // fetch(BASE_URL + "user/logout/", {
+    //   method: "POST",
+    //   body: JSON.stringify(""),
+    // })
+    //   .then((result) => result.json())
+    //   .then((res) => {
+    //     if (res.detail) {
+    //       dispatch(logOutUser());
+    //       localStorage.removeItem("auth");
+    //       dispatch(loadingStop());
+    //       history.push("/");
+    //       Toaster.sucess(res.detail, "topCenter");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     Toaster.error(error, "topCenter");
+    //   });
     handleMenuClose();
   };
 
@@ -150,33 +175,34 @@ const Header = ({ props }) => {
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (<>
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-      className="mobile-view-menu"
-    >
-      {!user.isLoggedIn ? (
-        <>
-          <MenuItem onClick={handleProfileMenuOpen}>
-            <div className="menu-button" onClick={() => setLoginIsOpen(true)}>
-              Login
-            </div>
-          </MenuItem>
-          <MenuItem onClick={handleProfileMenuOpen}>
-            <div className="menu-button" onClick={() => setReginIsOpen(true)}>
-              Register
-            </div>
-          </MenuItem>
-        </>
-      ) : (
-        <>
-          {/* <MenuItem onClick={handleProfileMenuOpen}> */}
+  const renderMobileMenu = (
+    <>
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+        className="mobile-view-menu"
+      >
+        {!user.isLoggedIn ? (
+          <>
+            <MenuItem onClick={handleProfileMenuOpen}>
+              <div className="menu-button" onClick={() => setLoginIsOpen(true)}>
+                Login
+              </div>
+            </MenuItem>
+            <MenuItem onClick={handleProfileMenuOpen}>
+              <div className="menu-button" onClick={() => setReginIsOpen(true)}>
+                Register
+              </div>
+            </MenuItem>
+          </>
+        ) : (
+          <>
+            {/* <MenuItem onClick={handleProfileMenuOpen}> */}
             {/* <IconButton
             // aria-label="account of current user"
             // aria-controls="primary-search-account-menu"
@@ -188,29 +214,26 @@ const Header = ({ props }) => {
                 {user.token.user.first_name} <ArrowDropDownIcon />
               </CustomButton>
             </div> */}
-          {/* </MenuItem> */}
+            {/* </MenuItem> */}
 
-          <MenuItem onClick={handleProfileMenuOpen}>
-            {/* <IconButton
+            <MenuItem onClick={handleProfileMenuOpen}>
+              {/* <IconButton
             // aria-label="account of current user"
             // aria-controls="primary-search-account-menu"
             // aria-haspopup="true"
             // color="inherit"
             ></IconButton> */}
-             <Link
-                      color="inherit"
-                      to="/Purchased"
-                      className="my-widgets"
-                    >
-                      My Widgets
-                    </Link>
-            {/* <div className="menu-button" onClick={() => handleLogout()}>
+              <Link color="inherit" to="/Purchased" className="my-widgets">
+                My Widgets
+              </Link>
+              {/* <div className="menu-button" onClick={() => handleLogout()}>
               Logout
             </div> */}
-          </MenuItem>
-        </>
-      )}
-    </Menu></>
+            </MenuItem>
+          </>
+        )}
+      </Menu>
+    </>
   );
 
   return (

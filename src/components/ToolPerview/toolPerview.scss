@@ -1,12 +1,15 @@
-.curent-tool-name{
-    padding: 20px 0px 20px 0px;
-    display: flex;
-    font-family: "barlowbold";
-    position: absolute;
-    top: 3px;
-    width: 50%;
-    @include font-size($font-xx-reg18)
+.curent-tool-name {
+  padding: 20px 0px 20px 0px;
+  display: flex;
+  font-family: "barlowbold";
+  position: absolute;
+  top: 3px;
+  width: 50%;
+  @include font-size($font-xx-reg18);
 }
-.tool-perview{
-    @include space("margin", top, $padding-40, 0);
+
+#tool-perview {
+  @include space("margin", top, $padding-40, 0);
+  height: 500px;
+  overflow-y: scroll;
 }

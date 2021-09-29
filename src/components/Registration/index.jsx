@@ -15,8 +15,10 @@ import Toaster from "../../util/Toaster";
 import CustomButton from "../../components/widgets/Button";
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { BASE_URL } from "../../config/ApiUrl";
-import { v4 as uuidv4 } from "uuid";
+// import { BASE_URL } from "../../config/ApiUrl";
+// import { v4 as uuidv4 } from "uuid";
+import ApiRequest from "../../util/ApiRequest";
+import { REGISTRATION } from "../../config/ApiUrl";
 
 class Registration extends Component {
   state = {
@@ -49,7 +51,6 @@ class Registration extends Component {
 
     var fullEmail = email;
     var splitEmail = fullEmail.split("@");
-
     var firstPart = (Math.random() * 46656) | 0;
     var secondPart = (Math.random() * 47756) | 0;
     firstPart = ("" + firstPart.toString()).slice(-5);
@@ -74,37 +75,52 @@ class Registration extends Component {
       setpassword,
       confirmpassword,
     });
-    // console.log(this.state);
-    if (validationResponse.isFormValid) {
-      // loader's
-      this.props.dispatch(loadingStart());
 
-      // api's
-      fetch(BASE_URL + "user/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((result) => result.json())
-        .then((data) => {
-          // console.log("curent data", data);
-          Toaster.error(
-            data.username ? data.username.join("") : null,
-            "topCenter"
-          );
-          Toaster.error(data.email ? data.email.join("") : null, "topCenter");
-          Toaster.error(
-            data.non_field_errors ? data.non_field_errors.join("") : null,
-            "topCenter"
-          );
-          this.props.dispatch(loadingStop());
-          if (data.detail) {
-            Toaster.sucess(data.detail, "topCenter");
+    if (validationResponse.isFormValid) {
+      this.props.dispatch(loadingStart());
+      ApiRequest.request(REGISTRATION, "POST", user)
+        .then((res) => {
+          console.log(res.email);
+          if (res.email) {
+            Toaster.error(res.email ? res.email.join("") : null, "topCenter");
+          } else {
+            Toaster.sucess(res.detail, "topCenter");
             window.location.reload();
           }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.props.dispatch(loadingStop());
         });
+
+      // api's
+      // fetch(BASE_URL + "user/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(user),
+      // })
+      //   .then((result) => result.json())
+      //   .then((data) => {
+      //     // console.log("curent data", data);
+      //     Toaster.error(
+      //       data.username ? data.username.join("") : null,
+      //       "topCenter"
+      //     );
+      //     Toaster.error(data.email ? data.email.join("") : null, "topCenter");
+      //     Toaster.error(
+      //       data.non_field_errors ? data.non_field_errors.join("") : null,
+      //       "topCenter"
+      //     );
+      //     this.props.dispatch(loadingStop());
+      //     if (data.detail) {
+      //       Toaster.sucess(data.detail, "topCenter");
+      //       window.location.reload();
+      //     }
+      //   });
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },

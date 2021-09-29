@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
+// import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,7 +10,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import CustomButton from "../../components/widgets/Button";
 import Link from "@material-ui/core/Link";
 import { LoginValidation } from "../../util/FormValidation";
-import { BASE_URL } from "../../config/ApiUrl";
+// import { BASE_URL } from "../../config/ApiUrl";
 import Registration from "../../components/Registration";
 import Toaster from "../../util/Toaster";
 import ForgotPassword from "../../components/ForgotPassword";
@@ -18,6 +18,8 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/user/user-action";
 import FilledInput from "@material-ui/core/FilledInput";
+import ApiRequest from "../../util/ApiRequest";
+import { LOGIN } from "../../config/ApiUrl";
 
 class Login extends Component {
   state = {
@@ -54,29 +56,22 @@ class Login extends Component {
 
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
-      fetch(BASE_URL + "user/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((result) => result.json())
-        .then((data) => {
-          Toaster.error(
-            data.non_field_errors ? data.non_field_errors.join("") : null,
-            "topCenter"
-          );
-          this.props.dispatch(loadingStop());
-          if (data.access_token) {
-            this.props.dispatch(loginUser(data));
-            //Toaster.sucess("You login successfully!", "topCenter");
+      ApiRequest.request(LOGIN, "POST", user)
+        .then((res) => {
+          if (res.non_field_errors) {
+            Toaster.error(
+              res.non_field_errors ? res.non_field_errors.join("") : null,
+              "topCenter"
+            );
           } else {
-            localStorage.removeItem("auth");
+            this.props.dispatch(loginUser(res));
           }
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          this.props.dispatch(loadingStop());
         });
     } else {
       this.setState({

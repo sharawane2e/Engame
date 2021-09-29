@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
+// import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Link from "@material-ui/core/Link";
 import { ForgotValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import CustomButton from "../../components/widgets/Button";
-import { BASE_URL } from "../../config/ApiUrl";
+import { FORGOT } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
+import ApiRequest from "../../util/ApiRequest";
 import Toaster from "../../util/Toaster";
 
 class ForgotPassword extends Component {
@@ -33,18 +34,39 @@ class ForgotPassword extends Component {
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
       const { email } = this.state;
-      fetch(BASE_URL + "user/password/reset/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email }),
-      })
-        .then((result) => result.json())
+
+      ApiRequest.request(FORGOT, "POST", { email: email })
         .then((res) => {
-          this.props.dispatch(loadingStop());
+          console.log("this.state.props", this.state.props);
           Toaster.sucess(res.detail, "topCenter");
+          window.location.reload();
+          // if (res.header.status === 400) {
+          //   console.log("eeroor throw");
+          //   Toaster.error(res.email ? res.email.join("") : null, "topCenter");
+          //   Toaster.error("User not in data base", "topCenter");
+          // } else {
+          //   //window.location.reload();
+          // }
+        })
+        .catch((error) => {
+          // console.log(error);
+        })
+        .finally(() => {
+          this.props.dispatch(loadingStop());
         });
+
+      // fetch(BASE_URL + "user/password/reset/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ email: email }),
+      // })
+      //   .then((result) => result.json())
+      //   .then((res) => {
+      //     this.props.dispatch(loadingStop());
+      //     Toaster.sucess(res.detail, "topCenter");
+      //   });
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },

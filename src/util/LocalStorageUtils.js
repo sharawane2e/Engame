@@ -4,6 +4,11 @@ class LocalStorageUtils {
   static getUserFromLocalStorage() {
     return JSON.parse(localStorage.getItem("auth"));
   }
+
+  // static removeUserFromLocalStorage() {
+  //   localStorage.removeItem("auth");
+  // }
+
   static getToken() {
     const user = this.getUserFromLocalStorage();
     //console.log("user", user);

@@ -26,8 +26,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 // import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
-import { Elements } from "@stripe/react-stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { Checkout } from "../Stripe/StripeButton";
 
 const Cart = () => {
   const dispatch = useDispatch();

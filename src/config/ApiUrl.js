@@ -11,4 +11,10 @@ export const BASE_URL_1 = "http://182.73.21.21:39051";
 export const STRIPE =
   "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL";
 
-export const ADD_CART = "http://182.73.21.21:39051/cart/";
+export const LOGIN = "/user/login/";
+export const REGISTRATION = "/user/";
+export const FORGOT = "/user/password/reset/";
+export const LOGOUT = "/user/logout/";
+export const ADD_CART = "/cart/";
+export const CART_DETAIL = "/cart/detail/";
+export const CART_STANDARD_PRICE = "/cart/standard_price/";

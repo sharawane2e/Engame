@@ -22,11 +22,6 @@ export const cartReducers = (state = initialState, action) => {
         ...state,
         cartItems: [...state.cartItems.filter((x) => x.id !== action.payload)],
       };
-    // return {
-    //   ...state.splice(0, updatedCart),
-    //   // updatedCart,
-    //   // ...state.splice(indexUpdate + 1),
-    // };
 
     case CART_ITEM_GET:
       return { ...state, cartItems: action.payload };

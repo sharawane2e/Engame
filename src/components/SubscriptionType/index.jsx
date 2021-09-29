@@ -3,22 +3,18 @@ import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch } from "react-redux";
-//import Toaster from "../../util/Toaster";
-import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-//import { useHistory } from "react-router-dom";
 import { addToCart } from "../../redux/cart/action";
+import ApiRequest from "../../util/ApiRequest";
+import { CART_STANDARD_PRICE } from "../../config/ApiUrl";
 
 const SubscriptionType = ({ toolId, onClose }) => {
-  //const [state] = useState(data);
-  // const history = useHistory();
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
   const [valuePrice, setValuePrice] = useState(1000);
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
-  //const [itemId] = useSelector((state) => state.cart.cartItems);
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
@@ -41,23 +37,32 @@ const SubscriptionType = ({ toolId, onClose }) => {
       setValuePrice(1000);
     }
 
-    // setPrice(0);
     dispatch(loadingStart());
-    fetch(BASE_URL + "cart/standard_price/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${res.token.access_token}`,
-      },
-      body: JSON.stringify(plans),
-    })
-      .then((response) => response.json())
+    ApiRequest.request(CART_STANDARD_PRICE, "POST", plans)
       .then((result) => {
         setBase(result.base_price);
-        console.log("result.base_price", result.base_price);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
         dispatch(loadingStop());
       });
-      
+
+    // fetch(BASE_URL + "cart/standard_price/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${res.token.access_token}`,
+    //   },
+    //   body: JSON.stringify(plans),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     setBase(result.base_price);
+    //     // console.log("result.base_price", result.base_price);
+    //     dispatch(loadingStop());
+    //   });
   };
 
   const user = {
@@ -74,7 +79,6 @@ const SubscriptionType = ({ toolId, onClose }) => {
     // Toaster.sucess("You have item add successfully!", "topCenter");
     onClose();
   };
-
 
   const handleCalculatePrice = (e) => {
     let value = e.target.value * base;
