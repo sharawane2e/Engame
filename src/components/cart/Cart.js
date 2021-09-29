@@ -134,7 +134,7 @@ const Cart = () => {
                   </Link>
                 </Grid> */}
               </Grid>
-                {console.log("Cart Data",cart)}
+              {console.log("Cart Data", cart)}
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
                   {cart.map((item, index) => {
@@ -399,7 +399,7 @@ const Cart = () => {
           )}
         </div>
       </div>
-      
+
       {/*Update into card*/}
       <CustomPopup
         open={is_renew}

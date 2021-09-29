@@ -16,7 +16,7 @@ import CustomButton from "../../components/widgets/Button";
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 class Registration extends Component {
   state = {

@@ -83,8 +83,8 @@ export class UserValidation extends Validation {
         if (!value) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.NAME_REQURIED;
-        }else{
-          if(!namePattern(value)){
+        } else {
+          if (!namePattern(value)) {
             validationResponse.isValid = false;
             validationResponse.message = ErrorMessages.NAME_PATTERN;
           }
