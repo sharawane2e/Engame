@@ -63,6 +63,12 @@ function Purchased(props) {
   // let history = useHistory();
   console.log("products", productShow);
 
+  // const handleExtendLocal = (itemData) =>{
+  //   localStorage.setItem('ExtendData', JSON.stringify(itemData))
+    
+  //   console.log("Rajdeep", localStorage.getItem("ExtenData"))
+  // }
+
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
@@ -358,7 +364,7 @@ function Purchased(props) {
                         <img
                           alt={item.widget.name}
                           title={item.widget.name}
-                          src={BASE_URL_1 + item.widget.imgUrl}
+                          src={BASE_URL +  "media/" + item.widget.imgUrl}
                         />
                       </Grid>
                       <Grid
@@ -393,6 +399,7 @@ function Purchased(props) {
                                     onClick={() => {
                                       setSucess("Copied");
                                       setTimeout(() => setSucess("Copy"), 500);
+                                      
                                     }}
                                   >
                                     {item.secrate_key.substr(0, 10)}************
@@ -437,7 +444,7 @@ function Purchased(props) {
                           >
                             
                           </Typography> */}
-                          <Switch onClick={()=>PlayNPause(item.plan.id, item.isActive? false : true)}/>
+                          <Switch onClick={()=>PlayNPause(item.plan.id, item.is_paused? false : true)} />
 
                           <Typography
                             component="div"
@@ -446,6 +453,7 @@ function Purchased(props) {
                             onClick={() => {
                               setRenew(true);
                               setProductShow(item);
+                              // handleExtendLocal(item);
                             }}
                           >
                             {/* <Tooltip title="Embeded Code" placement="top"> */}

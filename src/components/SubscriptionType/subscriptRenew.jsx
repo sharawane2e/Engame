@@ -105,6 +105,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
           } else {
             //sessionStorage.setItem("sessionId", result.sessionId);
             stripe.redirectToCheckout({ sessionId: result.sessionId });
+            localStorage.setItem('ExtendData', JSON.stringify(updateData))
             dispatch(loadingStop());
           }
         });
