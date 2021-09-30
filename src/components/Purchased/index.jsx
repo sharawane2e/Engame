@@ -217,6 +217,7 @@ function Purchased(props) {
               //window.location.reload();
             } else {
               Toaster.sucess(result.details, "topCenter");
+              myWwidgets();
             }
             // history.push(history.path);
           });
@@ -247,7 +248,9 @@ function Purchased(props) {
               //Toaster.error("Some thing went wrong", "topCenter");
             } else {
               Toaster.sucess(result.details, "topCenter");
+              myWwidgets();
             } // history.push(history.path);
+            
           });
       }
     }
