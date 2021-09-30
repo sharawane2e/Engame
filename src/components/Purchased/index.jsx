@@ -29,6 +29,8 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import Tooltip from "@material-ui/core/Tooltip";
 import { loadStripe } from "@stripe/stripe-js";
 import Switch from "@material-ui/core/Switch";
+import { styled } from '@mui/system';
+import SwitchUnstyled, { switchUnstyledClasses } from '@mui/core/SwitchUnstyled';
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -48,6 +50,72 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
+// For switch
+const Root = styled('span')(`
+  font-size: 0;
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+  
+  margin: 10px;
+  cursor: pointer;
+
+  &.${switchUnstyledClasses.disabled} {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  & .${switchUnstyledClasses.track} {
+    background: #B3C3D3;
+    border-radius: 10px;
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  & .${switchUnstyledClasses.thumb} {
+    display: block;
+    width: 14px;
+    height: 14px;
+    top: 3px;
+    left: 3px;
+    border-radius: 16px;
+    background-color: #FFF;
+    position: relative;
+    transition: all 200ms ease;
+  }
+
+  &.${switchUnstyledClasses.focusVisible} .${switchUnstyledClasses.thumb} {
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 0 1px 8px rgba(0,0,0,0.25);
+  }
+
+  &.${switchUnstyledClasses.checked} { 
+    .${switchUnstyledClasses.thumb} {
+      left: 14px;
+      top: 3px;
+      background-color: #FFF;
+    }
+
+    .${switchUnstyledClasses.track} {
+      background: #F15B5B;
+    }
+  }
+
+  & .${switchUnstyledClasses.input} {
+    cursor: inherit;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+    margin: 0;
+  }`);
+
 function Purchased(props) {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
@@ -61,7 +129,7 @@ function Purchased(props) {
   const history = useHistory();
 
   // let history = useHistory();
-  console.log("products", productShow);
+  console.log("products", widgets);
 
   // const handleExtendLocal = (itemData) =>{
   //   localStorage.setItem('ExtendData', JSON.stringify(itemData))
@@ -69,7 +137,40 @@ function Purchased(props) {
   //   console.log("Rajdeep", localStorage.getItem("ExtenData"))
   // }
 
+  const label = { componentsProps: { input: { 'aria-label': 'Demo switch' } } }; // for switch button
+
   const token = useSelector((state) => state.user.token);
+
+
+  //  my widgets
+  const myWwidgets = async () => {
+    dispatch(loadingStart());
+    await fetch(BASE_URL + "widget/user/purchased/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.code == "token_not_valid") {
+          dispatch(logOutUser());
+          localStorage.removeItem("auth");
+          dispatch(loadingStop());
+          history.push("/");
+        } else {
+          dispatch(loadingStop());
+          setWidgets(result);
+          console.log(result);
+          const isShowArr = [];
+          result.forEach((el, index) => {
+            isShowArr.push(false);
+          });
+          setShow(isShowArr);
+        }
+      });
+  };
+
 
   useEffect(() => {
     const search = props.location.search;
@@ -127,36 +228,12 @@ function Purchased(props) {
     }
     paymentSuccess();
 
-    //  my widgets
-    const myWwidgets = async () => {
-      dispatch(loadingStart());
-      await fetch(BASE_URL + "widget/user/purchased/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.code == "token_not_valid") {
-            dispatch(logOutUser());
-            localStorage.removeItem("auth");
-            dispatch(loadingStop());
-            history.push("/");
-          } else {
-            dispatch(loadingStop());
-            setWidgets(result);
-            console.log(result);
-            const isShowArr = [];
-            result.forEach((el, index) => {
-              isShowArr.push(false);
-            });
-            setShow(isShowArr);
-          }
-        });
-    };
+    
     myWwidgets();
   }, [token]);
+
+
+  
 
   const downloadfile = (fileName, embedcode) => {
     // console.log(embedcode);
@@ -172,7 +249,8 @@ function Purchased(props) {
   };
 
 
-  const PlayNPause = async (purchaseId,isPaused) => {
+  const PlayNPause = async (purchaseId, Paused) => {
+    let pausedStatus = String(Paused);
     dispatch(loadingStart());
     await fetch(BASE_URL + "subscription/pause_resume/", {
       method: "POST",
@@ -180,24 +258,19 @@ function Purchased(props) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.access_token}`,
       },
-      body: JSON.stringify({ user: token.user.pk,  purchased_id: purchaseId, is_paused: isPaused}),
+      
+      body: JSON.stringify({ user: token.user.pk,  purchased_id: purchaseId, is_paused: pausedStatus }),
     })
       .then((response) => response.json())
       .then((result) => {
         if (result.code == "token_not_valid") {
-          dispatch(logOutUser());
-          localStorage.removeItem("auth");
           dispatch(loadingStop());
-          history.push("/");
+          Toaster.error("Somthing went wrong", "topCenter");
         } else {
+          // window.location.reload();
+          Toaster.sucess("Sucess", "topCenter");
+          myWwidgets();
           dispatch(loadingStop());
-          setWidgets(result);
-          console.log(result);
-          const isShowArr = [];
-          result.forEach((el, index) => {
-            isShowArr.push(false);
-          });
-          setShow(isShowArr);
         }
       });
   };
@@ -438,13 +511,13 @@ function Purchased(props) {
                           </Grid>
                         </Grid>
                         <Grid item xs={2} className="grid-flex">
-                          {/* <Typography
+                          <Typography
                             component="div"
-                            className="purchased-tool__embeded-icon border-radius icon-margin"
+                            className=" border-radius icon-margin"
                           >
-                            
-                          </Typography> */}
-                          <Switch onClick={()=>PlayNPause(item.plan.id, item.is_paused? false : true)} />
+                            <SwitchUnstyled component={Root} {...label} defaultChecked = {item.is_paused ? false: true} onClick={()=>PlayNPause(item.plan.id, item.is_paused)}/>
+                          </Typography>
+
 
                           <Typography
                             component="div"
