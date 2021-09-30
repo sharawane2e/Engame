@@ -32,6 +32,7 @@ import Switch from "@material-ui/core/Switch";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+// import { PaymentData } from "../../redux/payment/paymeant-action";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -53,29 +54,45 @@ function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState(false);
-  const[isextend, setExtend] = useState("false");
+  const [isextend, setExtend] = useState("true");
   const [productShow, setProductShow] = useState([]);
   const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
+  console.log(productShow);
 
-  // let history = useHistory();
-  console.log("products", productShow);
+  // localStorage.setItem(
+  //   "productShow",
+  //   productShow.length > 0 ? productShow.plan.id : ""
+  // );
+  var curentPlanID = localStorage.getItem("productShow");
 
-  // const handleExtendLocal = (itemData) =>{
-  //   localStorage.setItem('ExtendData', JSON.stringify(itemData))
-    
-  //   console.log("Rajdeep", localStorage.getItem("ExtenData"))
-  // }
+  // console.log("productShow", productShow.plan.id);
 
   const token = useSelector((state) => state.user.token);
+
+  var curentUpdatePrice = localStorage.getItem("valuePrice");
+
+  const downloadfile = (fileName, embedcode) => {
+    // console.log(embedcode);
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(
+      new Blob([embedcode], {
+        type: "application/octet-stream",
+      })
+    );
+    link.download = fileName + ".text";
+    document.body.appendChild(link);
+    link.click();
+  };
 
   useEffect(() => {
     const search = props.location.search;
     console.log(props.location.search);
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
+
     async function paymentSuccess() {
       if (isextend == "false" || isextend == false) {
         await fetch(BASE_URL + "payments/success/", {
@@ -87,7 +104,7 @@ function Purchased(props) {
           body: JSON.stringify({
             user: token.user.pk,
             session_id: session_id,
-            is_renew: "false"
+            is_renew: "false",
           }),
         })
           .then((response) => response.json())
@@ -105,23 +122,23 @@ function Purchased(props) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token.access_token}`,
           },
-          
-            body: JSON.stringify({
-               user: token.user.pk,
-               session_id: session_id,
-              is_renew: "true",
-              plan_new_value: "100012",
-              subscription: productShow.length > 0 ? productShow.plan.id : ""
-              }) 
 
+          body: JSON.stringify({
+            user: token.user.pk,
+            session_id: session_id,
+            is_renew: "true",
+            plan_new_value: curentUpdatePrice,
+            subscription: curentPlanID,
+          }),
         })
           .then((response) => response.json())
           .then((result) => {
-            if (result) {
-              Toaster.sucess(result.details, "topCenter");
-              //window.location.reload();
-            }
-            // history.push(history.path);
+            //   console.log("sss", result.deiail);
+            if (result.details == "Payment already done !") {
+              //Toaster.error("Some thing went wrong", "topCenter");
+            } else {
+              Toaster.sucess("you have renew payment", "topCenter");
+            } // history.push(history.path);
           });
       }
     }
@@ -158,21 +175,7 @@ function Purchased(props) {
     myWwidgets();
   }, [token]);
 
-  const downloadfile = (fileName, embedcode) => {
-    // console.log(embedcode);
-    var link = document.createElement("a");
-    link.href = window.URL.createObjectURL(
-      new Blob([embedcode], {
-        type: "application/octet-stream",
-      })
-    );
-    link.download = fileName + ".text";
-    document.body.appendChild(link);
-    link.click();
-  };
-
-
-  const PlayNPause = async (purchaseId,isPaused) => {
+  const PlayNPause = async (purchaseId, isPaused) => {
     dispatch(loadingStart());
     await fetch(BASE_URL + "subscription/pause_resume/", {
       method: "POST",
@@ -180,7 +183,11 @@ function Purchased(props) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.access_token}`,
       },
-      body: JSON.stringify({ user: token.user.pk,  purchased_id: purchaseId, is_paused: isPaused}),
+      body: JSON.stringify({
+        user: token.user.pk,
+        purchased_id: purchaseId,
+        is_paused: isPaused,
+      }),
     })
       .then((response) => response.json())
       .then((result) => {
@@ -202,12 +209,10 @@ function Purchased(props) {
       });
   };
 
-
-
-
-  const handleExtend = async (widgetId) => {
+  const handleExtendLocal = (widgetId) => {
     // const plan_new_value, planId
-    console.log("widgets", widgetId);
+    localStorage.setItem("productShow", widgetId.plan.id);
+    // console.log("widgets");
     // const plan = widgets.plan.id;
     // const plan_new_value = "2306";
     // const subscription = widgetId;
@@ -364,7 +369,7 @@ function Purchased(props) {
                         <img
                           alt={item.widget.name}
                           title={item.widget.name}
-                          src={BASE_URL +  "media/" + item.widget.imgUrl}
+                          src={BASE_URL + "media/" + item.widget.imgUrl}
                         />
                       </Grid>
                       <Grid
@@ -399,7 +404,6 @@ function Purchased(props) {
                                     onClick={() => {
                                       setSucess("Copied");
                                       setTimeout(() => setSucess("Copy"), 500);
-                                      
                                     }}
                                   >
                                     {item.secrate_key.substr(0, 10)}************
@@ -444,7 +448,14 @@ function Purchased(props) {
                           >
                             
                           </Typography> */}
-                          <Switch onClick={()=>PlayNPause(item.plan.id, item.is_paused? false : true)} />
+                          <Switch
+                            onClick={() =>
+                              PlayNPause(
+                                item.plan.id,
+                                item.is_paused ? false : true
+                              )
+                            }
+                          />
 
                           <Typography
                             component="div"
@@ -453,7 +464,8 @@ function Purchased(props) {
                             onClick={() => {
                               setRenew(true);
                               setProductShow(item);
-                              // handleExtendLocal(item);
+                              setExtend(true);
+                              handleExtendLocal(item);
                             }}
                           >
                             {/* <Tooltip title="Embeded Code" placement="top"> */}
@@ -654,19 +666,18 @@ function Purchased(props) {
         </Container>
 
         {/*Renew Subscription*/}
-      <CustomPopup
-        open={is_renew}
-        onClose={() => setRenew(false)}
-        headerText="Renew Subscription"
-        footerButton={true}
-        className="border-radius popup-container__iner--sm"
-      >
-        <SubscriptionRenew
-          updateData={productShow}
+        <CustomPopup
+          open={is_renew}
           onClose={() => setRenew(false)}
-        />
-        {console.log("hello bhai log", productShow)}
-      </CustomPopup>
+          headerText="Renew Subscription"
+          footerButton={true}
+          className="border-radius popup-container__iner--sm"
+        >
+          <SubscriptionRenew
+            updateData={productShow}
+            onClose={() => setRenew(false)}
+          />
+        </CustomPopup>
 
         <Footer />
       </div>
