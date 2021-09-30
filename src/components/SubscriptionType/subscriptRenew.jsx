@@ -103,7 +103,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   return (
     <>
       <div className="subscription-type">
-        <select>
+        <select disabled>
           <option value={updateData.plan.plan_type} selected={istype == "days"}>
             {updateData.plan.plan_type == "days"
               ? "Number of days"

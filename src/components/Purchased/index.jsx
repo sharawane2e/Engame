@@ -11,9 +11,9 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 // import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 // import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
-import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+import { BASE_URL } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
-import PauseIcon from "@material-ui/icons/Pause";
+// import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -27,15 +27,13 @@ import SubscriptionRenew from "../../components/SubscriptionType/subscriptRenew"
 // import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import Tooltip from "@material-ui/core/Tooltip";
-import { loadStripe } from "@stripe/stripe-js";
-import Switch from "@material-ui/core/Switch";
-import { styled } from "@mui/system";
-import SwitchUnstyled, {
-  switchUnstyledClasses,
-} from "@mui/core/SwitchUnstyled";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { styled } from "@mui/system";
+import SwitchUnstyled from "@mui/core/SwitchUnstyled";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+// import { getItemFromCart } from "../../redux/cart/action";
 // import { PaymentData } from "../../redux/payment/paymeant-action";
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -53,97 +51,19 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-// For switch
-const Root = styled("span")(`
-  font-size: 0;
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 20px;
-  
-  margin: 10px;
-  cursor: pointer;
-
-  &.${switchUnstyledClasses.disabled} {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-
-  & .${switchUnstyledClasses.track} {
-    background: #B3C3D3;
-    border-radius: 10px;
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-  }
-
-  & .${switchUnstyledClasses.thumb} {
-    display: block;
-    width: 14px;
-    height: 14px;
-    top: 3px;
-    left: 3px;
-    border-radius: 16px;
-    background-color: #FFF;
-    position: relative;
-    transition: all 200ms ease;
-  }
-
-  &.${switchUnstyledClasses.focusVisible} .${switchUnstyledClasses.thumb} {
-    background-color: rgba(255,255,255,1);
-    box-shadow: 0 0 1px 8px rgba(0,0,0,0.25);
-  }
-
-  &.${switchUnstyledClasses.checked} { 
-    .${switchUnstyledClasses.thumb} {
-      left: 14px;
-      top: 3px;
-      background-color: #FFF;
-    }
-
-    .${switchUnstyledClasses.track} {
-      background: #F15B5B;
-    }
-  }
-
-  & .${switchUnstyledClasses.input} {
-    cursor: inherit;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: 1;
-    margin: 0;
-  }`);
-
 function Purchased(props) {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState(false);
-  const [isextend, setExtend] = useState("true");
+  const [isextend, setExtend] = useState("false");
   const [productShow, setProductShow] = useState([]);
-  const user = useSelector((state) => state.user.token);
-  // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
+  // const user = useSelector((state) => state.user.token);
+  const token = useSelector((state) => state.user.token);
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
-  console.log(productShow);
 
-  // localStorage.setItem(
-  //   "productShow",
-  //   productShow.length > 0 ? productShow.plan.id : ""
-  // );
   var curentPlanID = localStorage.getItem("productShow");
-
-  // console.log("productShow", productShow.plan.id);
-
-  const label = { componentsProps: { input: { "aria-label": "Demo switch" } } }; // for switch button
-
-  const token = useSelector((state) => state.user.token);
-
   var curentUpdatePrice = localStorage.getItem("valuePrice");
 
   const downloadfile = (fileName, embedcode) => {
@@ -159,43 +79,14 @@ function Purchased(props) {
     link.click();
   };
 
-  //  my widgets
-  const myWwidgets = async () => {
-    dispatch(loadingStart());
-    await fetch(BASE_URL + "widget/user/purchased/", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.access_token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.code == "token_not_valid") {
-          dispatch(logOutUser());
-          localStorage.removeItem("auth");
-          dispatch(loadingStop());
-          history.push("/");
-        } else {
-          dispatch(loadingStop());
-          setWidgets(result);
-          console.log(result);
-          const isShowArr = [];
-          result.forEach((el, index) => {
-            isShowArr.push(false);
-          });
-          setShow(isShowArr);
-        }
-      });
-  };
-
   useEffect(() => {
     const search = props.location.search;
-    console.log(props.location.search);
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-
+    dispatch(loadingStart());
+    let subscriptionRenew = localStorage.getItem("ExtendData") ? true : false;
     async function paymentSuccess() {
-      if (isextend == "false" || isextend == false) {
+      if (!subscriptionRenew) {
         await fetch(BASE_URL + "payments/success/", {
           method: "POST",
           headers: {
@@ -214,12 +105,14 @@ function Purchased(props) {
               result.details == "code CE13204 Internal server error!" ||
               result.details == "Payment already done !"
             ) {
-              //window.location.reload();
+              localStorage.removeItem("ExtendData");
+              dispatch(loadingStop());
             } else {
-              Toaster.sucess(result.details, "topCenter");
               myWwidgets();
+              localStorage.removeItem("ExtendData");
+              dispatch(loadingStop());
+              Toaster.sucess(result.details, "topCenter");
             }
-            // history.push(history.path);
           });
       } else {
         await fetch(BASE_URL + "payments/success/", {
@@ -239,25 +132,53 @@ function Purchased(props) {
         })
           .then((response) => response.json())
           .then((result) => {
-            console.log("sss", result);
             if (
               result.details == "code CE13204 Internal server error!" ||
-              result.deiail == "code CE13204 Internal server error!" ||
               result.details == "Payment already done !"
             ) {
+              localStorage.removeItem("ExtendData");
+              dispatch(loadingStop());
               //Toaster.error("Some thing went wrong", "topCenter");
             } else {
-              Toaster.sucess(result.details, "topCenter");
               myWwidgets();
+              localStorage.removeItem("ExtendData");
+              dispatch(loadingStop());
+              Toaster.sucess(result.details, "topCenter");
             } // history.push(history.path);
-            
           });
       }
     }
     paymentSuccess();
-
     myWwidgets();
   }, [token]);
+
+  //  my widgets
+  const myWwidgets = async () => {
+    dispatch(loadingStart());
+    await fetch(BASE_URL + "widget/user/purchased/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.code == "token_not_valid") {
+          dispatch(logOutUser());
+          localStorage.removeItem("auth");
+          dispatch(loadingStop());
+          history.push("/");
+        } else {
+          setWidgets(result);
+          const isShowArr = [];
+          result.forEach((el, index) => {
+            isShowArr.push(false);
+          });
+          setShow(isShowArr);
+          dispatch(loadingStop());
+        }
+      });
+  };
 
   const PlayNPause = async (purchaseId, Paused) => {
     let pausedStatus = String(Paused);
@@ -268,7 +189,6 @@ function Purchased(props) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.access_token}`,
       },
-
       body: JSON.stringify({
         user: token.user.pk,
         purchased_id: purchaseId,
@@ -281,7 +201,6 @@ function Purchased(props) {
           dispatch(loadingStop());
           Toaster.error("Somthing went wrong", "topCenter");
         } else {
-          // window.location.reload();
           Toaster.sucess(result.message, "topCenter");
           myWwidgets();
           dispatch(loadingStop());
@@ -290,50 +209,8 @@ function Purchased(props) {
   };
 
   const handleExtendLocal = (widgetId) => {
-    // const plan_new_value, planId
     localStorage.setItem("productShow", widgetId.plan.id);
-    // console.log("widgets");
-    // const plan = widgets.plan.id;
-    // const plan_new_value = "2306";
-    // const subscription = widgetId;
-    // const widget = widgets.widget.id;
-    // const price = "200";
-    // const currency = "USD";
-    // setRenew(true);
-    // dispatch(loadingStart());
-    // const stripe = await loadStripe(STRIPE);
-    // try {
-    //   await fetch(BASE_URL + "payments/checkout-session/", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${user.access_token}`,
-    //     },
-    //     body: JSON.stringify({
-    //       user: user.user.pk,
-    //       is_renew: is_renew,
-    //       plan_new_value: plan_new_value,
-    //       plan: plan,
-    //       subscription: subscription,
-    //       widget: widget,
-    //       price: price,
-    //       currency: currency,
-    //     }),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((result) => {
-    //       //sessionStorage.setItem("sessionId", result.sessionId);
-    //       stripe.redirectToCheckout({ sessionId: result.sessionId });
-    //       dispatch(loadingStop());
-    //     });
-    // } catch (error) {
-    //   console.error(error);
-    // }
   };
-
-  // useEffect(() => {
-  //   isShow;
-  // });
 
   return (
     <>
@@ -359,7 +236,7 @@ function Purchased(props) {
         </div>
         <Container
           maxWidth="lg"
-          className="purchased-tool__container  margin-top-174"
+          className="purchased-tool__container  margin-top-174 shopping-cart-data"
         >
           <Grid container spacing={3}>
             <Grid
@@ -411,6 +288,11 @@ function Purchased(props) {
             purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
             const purchase_date = purchasedDateTime.split(",")[0];
             const purchase_time = purchasedDateTime.split(",")[1];
+
+            let planExpiry = new Date(item.plan_expire_date);
+            planExpiry = planExpiry.toLocaleString("en-US");
+            const planExpiry_date = planExpiry.split(",")[0];
+            const planExpiry_time = planExpiry.split(",")[1];
 
             const ConsumptionValue =
               (item.remaining_value * 100) / item.plan.plan_value;
@@ -526,31 +408,30 @@ function Purchased(props) {
                             component="div"
                             className=" border-radius icon-margin"
                           >
-                            <SwitchUnstyled
-                              component={Root}
-                              {...label}
-                              defaultChecked={item.is_paused ? false : true}
-                              onClick={() =>
-                                PlayNPause(item.plan.id, item.is_paused)
-                              }
-                            />
+                            <Tooltip title="Play / Pause" placement="top">
+                              <SwitchUnstyled
+                                defaultChecked={item.is_paused ? false : true}
+                                onClick={() =>
+                                  PlayNPause(item.plan.id, item.is_paused)
+                                }
+                              />
+                            </Tooltip>
                           </Typography>
-
-                          <Typography
-                            component="div"
-                            className="extend-validity"
-                            // onClick={() => //handleExtend(item)}
-                            onClick={() => {
-                              setRenew(true);
-                              setProductShow(item);
-                              setExtend(true);
-                              handleExtendLocal(item);
-                            }}
-                          >
-                            {/* <Tooltip title="Embeded Code" placement="top"> */}
-                            Extend validity
-                            {/* </Tooltip> */}
-                          </Typography>
+                          <Tooltip title="Embeded Code" placement="top">
+                            <Typography
+                              component="div"
+                              className="extend-validity"
+                              // onClick={() => //handleExtend(item)}
+                              onClick={() => {
+                                setRenew(true);
+                                setProductShow(item);
+                                setExtend("true");
+                                handleExtendLocal(item);
+                              }}
+                            >
+                              Extend validity
+                            </Typography>
+                          </Tooltip>
                         </Grid>
 
                         <Grid
@@ -568,9 +449,9 @@ function Purchased(props) {
                                 Expiry Date:
                               </span>
                               <span className="subscription-day expiry-type margin-rightdata">
-                                21/06/2021
+                                {planExpiry_date}
                                 <span class="purchased-tool__date-type-time curent-time">
-                                  12:00PM
+                                  {planExpiry_time}
                                 </span>
                               </span>
                             </Typography>
@@ -705,35 +586,6 @@ function Purchased(props) {
                               </Typography>
                             </div>
                           </Grid>
-
-                          {/* <Grid item xs={6}>
-                            <Typography component="div">
-                              <div className="purchased-tool__purchased-date">
-                                <span className="purchased-tool__date-type-text purchased-curent-text">
-                                  Payment Method:
-                                </span>
-                                <span className="purchased-tool__date-type-text">
-                                  {item.payment_method}
-                                </span>
-                              </div>
-                            </Typography>
-                          </Grid> */}
-                          {/*                           
-                          <Grid item xs={6}
-                            className="purchased-tool__expiry-date"
-                          >
-                            <Typography
-                              component="div"
-                              className="cursor--pointer"
-                            >
-                              <div className="purchased-tool__purchased-date purchased-tool__hover">
-                                <span className="purchased-tool__date-type-text purchased-curent-text"></span>
-                                <span className="purchased-tool__date-type-text purchased-types">
-                                  <ReceiptIcon /> Consumption statement
-                                </span>
-                              </div>
-                            </Typography>
-                          </Grid> */}
                         </Grid>
                       ) : null}
                     </Grid>
