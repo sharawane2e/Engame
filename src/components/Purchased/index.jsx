@@ -210,9 +210,13 @@ function Purchased(props) {
         })
           .then((response) => response.json())
           .then((result) => {
-            if (result) {
-              Toaster.sucess(result.details, "topCenter");
+            if (
+              result.details == "code CE13204 Internal server error!" ||
+              result.details == "Payment already done !"
+            ) {
               //window.location.reload();
+            } else {
+              Toaster.sucess(result.details, "topCenter");
             }
             // history.push(history.path);
           });
@@ -234,11 +238,15 @@ function Purchased(props) {
         })
           .then((response) => response.json())
           .then((result) => {
-            //   console.log("sss", result.deiail);
-            if (result.details == "Payment already done !") {
+            console.log("sss", result);
+            if (
+              result.details == "code CE13204 Internal server error!" ||
+              result.deiail == "code CE13204 Internal server error!" ||
+              result.details == "Payment already done !"
+            ) {
               //Toaster.error("Some thing went wrong", "topCenter");
             } else {
-              Toaster.sucess("you have renew payment", "topCenter");
+              Toaster.sucess(result.details, "topCenter");
             } // history.push(history.path);
           });
       }
@@ -271,7 +279,7 @@ function Purchased(props) {
           Toaster.error("Somthing went wrong", "topCenter");
         } else {
           // window.location.reload();
-          Toaster.sucess("Sucess", "topCenter");
+          Toaster.sucess(result.message, "topCenter");
           myWwidgets();
           dispatch(loadingStop());
         }
