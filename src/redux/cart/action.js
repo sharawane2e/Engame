@@ -6,6 +6,7 @@ import ApiRequest from "../../util/ApiRequest";
 
 export const addToCart = (userData) => (dispatch) => {
   dispatch(loadingStart());
+
   ApiRequest.request(ADD_CART, "POST", userData)
     .then((res) => {
       dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res });

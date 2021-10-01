@@ -73,7 +73,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
     price: price,
     currency: "$",
   };
-
+  console.log("user", user);
   const handleAddCart = async () => {
     dispatch(addToCart(user));
     // Toaster.sucess("You have item add successfully!", "topCenter");
