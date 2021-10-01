@@ -40,8 +40,6 @@ import emptyWidgett from "../../assets/images/empty-widget.gif";
 import CustomButton from "../../components/widgets/Button";
 import warning_icon from "../../assets/images/warning_icon.svg";
 
-
-
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 6,
@@ -67,9 +65,8 @@ function Purchased(props) {
   // const user = useSelector((state) => state.user.token);
   const token = useSelector((state) => state.user.token);
   const [isPausePopup, setPausePopup] = useState(false); // Popup on play and Pause
-  const [PlayPauseValue, setPlayPauseValue] = useState('')
-  const [filter, setFilter] =useState('');
-
+  const [PlayPauseValue, setPlayPauseValue] = useState("");
+  const [filter, setFilter] = useState("");
 
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
@@ -247,391 +244,434 @@ function Purchased(props) {
           </Container>
         </div>
         {widgets.length !== 0 ? (
-        <Container
-          maxWidth="lg"
-          className="purchased-tool__container  margin-top-174 shopping-cart-data"
-        >
-          <Grid container spacing={3}>
-            <Grid
-              item
-              xs={12}
-              className="purchased-tool__hedding purchased-tool__borderdata"
-            >
-              <Typography component="div" className="hedding-text">
-                My Widgets
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container spacing={3}>
-            <Grid
-              item
-              xs={12}
-              className="purchased-tool__hedding purchased-tool__tabing"
-            >
-              <Typography
-                component="div"
-                className="tab--button border-radius tab--active" onClick={()=>setFilter("all")}
+          <Container
+            maxWidth="lg"
+            className="purchased-tool__container  margin-top-174 shopping-cart-data"
+          >
+            <Grid container spacing={3}>
+              <Grid
+                item
+                xs={12}
+                className="purchased-tool__hedding purchased-tool__borderdata"
               >
-                All
-              </Typography>
-              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("active")}>
-                Active Only
-              </Typography>
-              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("expiresoon")}>
-                Expiring Soon
-              </Typography>
-              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("expired")}>
-                Expired
-              </Typography>
-              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("paused")}>
-                Paused
-              </Typography>
-              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("days")}>
-                Days Subs
-              </Typography>
-              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("hits")}>
-                Hits Subs.
-              </Typography>
+                <Typography component="div" className="hedding-text">
+                  My Widgets
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
+            <Grid container spacing={3}>
+              <Grid
+                item
+                xs={12}
+                className="purchased-tool__hedding purchased-tool__tabing"
+              >
+                <Typography
+                  component="div"
+                  className="tab--button border-radius tab--active"
+                  onClick={() => setFilter("all")}
+                >
+                  All
+                </Typography>
+                <Typography
+                  component="div"
+                  className="tab--button border-radius"
+                  onClick={() => setFilter("active")}
+                >
+                  Active Only
+                </Typography>
+                <Typography
+                  component="div"
+                  className="tab--button border-radius"
+                  onClick={() => setFilter("expiresoon")}
+                >
+                  Expiring Soon
+                </Typography>
+                <Typography
+                  component="div"
+                  className="tab--button border-radius"
+                  onClick={() => setFilter("expired")}
+                >
+                  Expired
+                </Typography>
+                <Typography
+                  component="div"
+                  className="tab--button border-radius"
+                  onClick={() => setFilter("paused")}
+                >
+                  Paused
+                </Typography>
+                <Typography
+                  component="div"
+                  className="tab--button border-radius"
+                  onClick={() => setFilter("days")}
+                >
+                  Days Subs
+                </Typography>
+                <Typography
+                  component="div"
+                  className="tab--button border-radius"
+                  onClick={() => setFilter("hits")}
+                >
+                  Hits Subs.
+                </Typography>
+              </Grid>
+            </Grid>
 
-          {/*Card start */}
-          {widgets.map((item, index) => {
-            console.log("data", item)
-            if(
-              filter == "active"
-              ? item.is_active 
-              : filter == "expiresoon"
-              ? item.is_expiring_soon
-              : filter == "expired"
-              ? !item.is_active 
-              : filter == "paused"
-              ? item.is_paused
-              : filter == "days"
-              ? item.plan.plan_type == "days"
-              : filter == "hits"
-              ? item.plan.plan_type == "hits"
-              : filter == "all"
-              ? item.id 
-              : item.id){
-            let purchasedDateTime = new Date(item.purchase_date);
-            purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
-            const purchase_date = purchasedDateTime.split(",")[0];
-            const purchase_time = purchasedDateTime.split(",")[1];
+            {/*Card start */}
+            {widgets.map((item, index) => {
+              if (
+                filter == "active"
+                  ? item.is_active
+                  : filter == "expiresoon"
+                  ? item.is_expiring_soon
+                  : filter == "expired"
+                  ? !item.is_active
+                  : filter == "paused"
+                  ? item.is_paused
+                  : filter == "days"
+                  ? item.plan.plan_type == "days"
+                  : filter == "hits"
+                  ? item.plan.plan_type == "hits"
+                  : filter == "all"
+                  ? item.id
+                  : item.id
+              ) {
+                let purchasedDateTime = new Date(item.purchase_date);
+                purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
+                const purchase_date = purchasedDateTime.split(",")[0];
+                const purchase_time = purchasedDateTime.split(",")[1];
 
-            let planExpiry = new Date(item.plan_expire_date);
-            planExpiry = planExpiry.toLocaleString("en-US");
-            const planExpiry_date = planExpiry.split(",")[0];
-            const planExpiry_time = planExpiry.split(",")[1];
+                let planExpiry = new Date(item.plan_expire_date);
+                planExpiry = planExpiry.toLocaleString("en-US");
+                const planExpiry_date = planExpiry.split(",")[0];
+                const planExpiry_time = planExpiry.split(",")[1];
 
-            const ConsumptionValue =
-              (item.remaining_value * 100) / item.plan.plan_value;
+                const ConsumptionValue =
+                  (item.remaining_value * 100) / item.plan.plan_value;
 
-            return (
-              <Grid container spacing={3} key={index}>
-                <Grid item xs={12}>
-                  <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius">
-                    <Grid container spacing={3}>
-                      <Grid
-                        item
-                        xs={12}
-                        container
-                        className="purchased-tool__tool-type-data"
-                      >
-                        <div className="purchased-tool__purchased-date">
-                          <img src={checkCircle} />
-                          <span className="purchased-tool__date-type-text purchased-curent-text">
-                            Purchased Date:
-                          </span>
-                          <span className="purchased-tool__date-type-text">
-                            {purchase_date}
-                          </span>
-                          <span className="purchased-tool__date-type-time">
-                            {purchase_time}
-                          </span>
-                        </div>
-                      </Grid>
-
-                      <Grid
-                        item
-                        xs={2}
-                        container
-                        className="purchased-tool__tool-image purchased-image"
-                      >
-                        <img
-                          alt={item.widget.name}
-                          title={item.widget.name}
-                          src={BASE_URL + "media/" + item.widget.imgUrl}
-                        />
-                      </Grid>
-                      <Grid
-                        item
-                        xs={10}
-                        sm
-                        container
-                        className="purchased-tool__tool-data"
-                      >
-                        <Grid item xs={10}>
-                          <Grid item>
-                            <Typography
-                              component="div"
-                              className="purchased-tool__tool-title"
-                            >
-                              {item.widget.name}
-                            </Typography>
-                            <Typography
-                              component="div"
-                              className="purchased-tool__tool-type display-flex"
-                            >
-                              <span className="subscription-type-text">
-                                Subscription Key:
-                              </span>
-                              <Tooltip title={sucess} placement="top">
-                                <CopyToClipboard
-                                  text={item.secrate_key}
-                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                >
-                                  <span
-                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                    onClick={() => {
-                                      setSucess("Copied");
-                                      setTimeout(() => setSucess("Copy"), 500);
-                                    }}
-                                  >
-                                    {item.secrate_key.substr(0, 10)}************
-                                    <FileCopyIcon className="subscription-day__icon" />
-                                  </span>
-                                </CopyToClipboard>
-                              </Tooltip>
-                            </Typography>
-                            <Typography
-                              component="div"
-                              className="purchased-tool__tool-type display-flex"
-                            >
-                              <span className="subscription-type-text">
-                                Trial Key:
-                              </span>
-                              <Tooltip title={sucess} placement="top">
-                                <CopyToClipboard
-                                  text={item.trial_key}
-                                  className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                >
-                                  <span
-                                    className="subscription-day margin-rightdata copy-to-clip display-flex"
-                                    onClick={() => {
-                                      setSucess("Copied");
-                                      setTimeout(() => setSucess("Copy"), 500);
-                                    }}
-                                  >
-                                    <span className="display-flex">
-                                      {item.trial_key.substr(0, 10)}************
-                                    </span>
-                                    <FileCopyIcon className="subscription-day__icon" />
-                                  </span>
-                                </CopyToClipboard>
-                              </Tooltip>
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={2} className="grid-flex">
-                          <Typography
-                            component="div"
-                            className=" border-radius icon-margin"
+                return (
+                  <Grid container spacing={3} key={index}>
+                    <Grid item xs={12}>
+                      <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius">
+                        <Grid container spacing={3}>
+                          <Grid
+                            item
+                            xs={12}
+                            container
+                            className="purchased-tool__tool-type-data"
                           >
-                            <Tooltip title="Play / Pause" placement="top">
-                              <SwitchUnstyled
-                                defaultChecked={item.is_paused ? false : true}
-                                onClick={() => {
-                                  setPausePopup(true);
-                                  setPlayPauseValue(item);
-                                }}
-                              />
-                            </Tooltip>
-                          </Typography>
-                          <Tooltip title="Embeded Code" placement="top">
-                            <Typography
-                              component="div"
-                              className="extend-validity"
-                              // onClick={() => //handleExtend(item)}
-                              onClick={() => {
-                                setRenew(true);
-                                setProductShow(item);
-                                setExtend("true");
-                                handleExtendLocal(item);
-                              }}
-                            >
-                              Extend validity
-                            </Typography>
-                          </Tooltip>
-                        </Grid>
-
-                        <Grid
-                          item
-                          xs={12}
-                          container
-                          className="purchased-tool__tool-margin"
-                        >
-                          <Grid item xs={4}>
-                            <Typography
-                              component="div"
-                              className="purchased-tool__tool-type"
-                            >
-                              { !item.is_paused?
-                              <>
-                                <span className="subscription-type-text expiry-type">
-                                  Expiry Date:
-                                </span>
-                                <span className="subscription-day expiry-type margin-rightdata">
-                                  {planExpiry_date}
-                                </span>
-                              </>
-
-                                : ""
-                              }
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={2}>
-                            <Typography
-                              component="div"
-                              className="purchased-tool__tool-type align-center"
-                            >
-                              <span className="subscription-type-text ">
-                                {item.remaining_value}&nbsp;&nbsp;
-                                {item.plan.plan_type} left
-                              </span>
-
-                              <BorderLinearProgress
-                                variant="determinate"
-                                value={ConsumptionValue}
-                                className={
-                                  ConsumptionValue > 79
-                                    ? "progress-bar progress-green"
-                                    : ConsumptionValue > 49 &&
-                                      ConsumptionValue < 80
-                                    ? "progress-bar progress-yellow"
-                                    : ConsumptionValue > 19 &&
-                                      ConsumptionValue < 50
-                                    ? "progress-bar progress-embeded"
-                                    : "progress-bar progress-red"
-                                }
-                              />
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={6} className="grid-flex">
-                            <div
-                              className="purchased-tool__purchased-date purchased-tool__toggleclass show--toogle"
-                              onClick={() => {
-                                const currentActive = [...isShow];
-                                currentActive[index] = !currentActive[index];
-                                setShow(currentActive);
-                              }}
-                            >
+                            <div className="purchased-tool__purchased-date">
+                              <img src={checkCircle} />
                               <span className="purchased-tool__date-type-text purchased-curent-text">
-                                {isShow[index] ? "Show Less" : "Show More "}
+                                Purchased Date:
                               </span>
                               <span className="purchased-tool__date-type-text">
-                                {isShow[index] ? (
-                                  <ExpandLessIcon />
-                                ) : (
-                                  <ExpandMoreIcon />
-                                )}
+                                {purchase_date}
+                              </span>
+                              <span className="purchased-tool__date-type-time">
+                                {purchase_time}
                               </span>
                             </div>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-
-                      {isShow[index] ? (
-                        <Grid
-                          item
-                          xs={12}
-                          container
-                          className="purchased-tool__tool-data accordion-margin show--accordion"
-                        >
-                          <Grid item xs={6}>
-                            <Typography component="div">
-                              <div className="purchased-tool__purchased-date">
-                                <span className="purchased-tool__date-type-text purchased-curent-text">
-                                  Total Amount:
-                                </span>
-                                <span className="purchased-tool__date-type-text ">
-                                  ${item.plan.price}
-                                </span>
-                              </div>
-                            </Typography>
-
-                            <Typography component="div">
-                              <div className="purchased-tool__purchased-date">
-                                <span className="purchased-tool__date-type-text purchased-curent-text">
-                                  Payment Method:
-                                </span>
-                                <span className="purchased-tool__date-type-text">
-                                  {item.payment_method}
-                                </span>
-                              </div>
-                            </Typography>
                           </Grid>
 
                           <Grid
                             item
-                            xs={6}
-                            className="purchased-tool__expiry-date"
+                            xs={2}
+                            container
+                            className="purchased-tool__tool-image purchased-image"
                           >
-                            <div>
-                              <Typography
-                                component="div"
-                                className="cursor--pointer"
-                              >
-                                <div className="purchased-tool__purchased-date purchased-tool__hover">
-                                  <span className="purchased-tool__date-type-text purchased-curent-text"></span>
-                                  <span className="purchased-tool__date-type-text purchased-types">
-                                    <GetAppIcon />
-                                    Download Invoice
+                            <img
+                              alt={item.widget.name}
+                              title={item.widget.name}
+                              src={BASE_URL + "media/" + item.widget.imgUrl}
+                            />
+                          </Grid>
+                          <Grid
+                            item
+                            xs={10}
+                            sm
+                            container
+                            className="purchased-tool__tool-data"
+                          >
+                            <Grid item xs={10}>
+                              <Grid item>
+                                <Typography
+                                  component="div"
+                                  className="purchased-tool__tool-title"
+                                >
+                                  {item.widget.name}
+                                </Typography>
+                                <Typography
+                                  component="div"
+                                  className="purchased-tool__tool-type display-flex"
+                                >
+                                  <span className="subscription-type-text">
+                                    Subscription Key:
                                   </span>
-                                </div>
-                              </Typography>
-
-                              <Typography
-                                component="div"
-                                className="cursor--pointer"
-                              >
-                                <div className="purchased-tool__purchased-date purchased-tool__hover">
-                                  <span className="purchased-tool__date-type-text purchased-curent-text"></span>
-                                  <span className="purchased-tool__date-type-text purchased-types">
-                                    <ReceiptIcon /> Consumption statement
+                                  <Tooltip title={sucess} placement="top">
+                                    <CopyToClipboard
+                                      text={item.secrate_key}
+                                      className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    >
+                                      <span
+                                        className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                        onClick={() => {
+                                          setSucess("Copied");
+                                          setTimeout(
+                                            () => setSucess("Copy"),
+                                            500
+                                          );
+                                        }}
+                                      >
+                                        {item.secrate_key.substr(0, 10)}
+                                        ************
+                                        <FileCopyIcon className="subscription-day__icon" />
+                                      </span>
+                                    </CopyToClipboard>
+                                  </Tooltip>
+                                </Typography>
+                                <Typography
+                                  component="div"
+                                  className="purchased-tool__tool-type display-flex"
+                                >
+                                  <span className="subscription-type-text">
+                                    Trial Key:
                                   </span>
-                                </div>
-                              </Typography>
-                            </div>
-                            <div className="pdl-2">
+                                  <Tooltip title={sucess} placement="top">
+                                    <CopyToClipboard
+                                      text={item.trial_key}
+                                      className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                    >
+                                      <span
+                                        className="subscription-day margin-rightdata copy-to-clip display-flex"
+                                        onClick={() => {
+                                          setSucess("Copied");
+                                          setTimeout(
+                                            () => setSucess("Copy"),
+                                            500
+                                          );
+                                        }}
+                                      >
+                                        <span className="display-flex">
+                                          {item.trial_key.substr(0, 10)}
+                                          ************
+                                        </span>
+                                        <FileCopyIcon className="subscription-day__icon" />
+                                      </span>
+                                    </CopyToClipboard>
+                                  </Tooltip>
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                            <Grid item xs={2} className="grid-flex">
                               <Typography
                                 component="div"
-                                className="purchased-tool__embeded-icon border-radius"
-                                onClick={() =>
-                                  downloadfile(
-                                    item.widget.name,
-                                    item.widget.widget_embed_code
-                                  )
-                                }
+                                className=" border-radius icon-margin"
                               >
-                                <Tooltip title="Embeded Code" placement="top">
-                                  <SystemUpdateAltIcon />
+                                <Tooltip title="Play / Pause" placement="top">
+                                  <SwitchUnstyled
+                                    defaultChecked={
+                                      item.is_paused ? false : true
+                                    }
+                                    onClick={() => {
+                                      setPausePopup(true);
+                                      setPlayPauseValue(item);
+                                    }}
+                                  />
                                 </Tooltip>
                               </Typography>
-                            </div>
+                              <Tooltip title="Embeded Code" placement="top">
+                                <Typography
+                                  component="div"
+                                  className="extend-validity"
+                                  // onClick={() => //handleExtend(item)}
+                                  onClick={() => {
+                                    setRenew(true);
+                                    setProductShow(item);
+                                    setExtend("true");
+                                    handleExtendLocal(item);
+                                  }}
+                                >
+                                  Extend validity
+                                </Typography>
+                              </Tooltip>
+                            </Grid>
+
+                            <Grid
+                              item
+                              xs={12}
+                              container
+                              className="purchased-tool__tool-margin"
+                            >
+                              <Grid item xs={4}>
+                                <Typography
+                                  component="div"
+                                  className="purchased-tool__tool-type"
+                                >
+                                  {!item.is_paused ? (
+                                    <>
+                                      <span className="subscription-type-text expiry-type">
+                                        Expiry Date:
+                                      </span>
+                                      <span className="subscription-day expiry-type margin-rightdata">
+                                        {planExpiry_date}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={2}>
+                                <Typography
+                                  component="div"
+                                  className="purchased-tool__tool-type align-center"
+                                >
+                                  <span className="subscription-type-text ">
+                                    {item.remaining_value}&nbsp;&nbsp;
+                                    {item.plan.plan_type} left
+                                  </span>
+
+                                  <BorderLinearProgress
+                                    variant="determinate"
+                                    value={ConsumptionValue}
+                                    className={
+                                      ConsumptionValue > 79
+                                        ? "progress-bar progress-green"
+                                        : ConsumptionValue > 49 &&
+                                          ConsumptionValue < 80
+                                        ? "progress-bar progress-yellow"
+                                        : ConsumptionValue > 19 &&
+                                          ConsumptionValue < 50
+                                        ? "progress-bar progress-embeded"
+                                        : "progress-bar progress-red"
+                                    }
+                                  />
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={6} className="grid-flex">
+                                <div
+                                  className="purchased-tool__purchased-date purchased-tool__toggleclass show--toogle"
+                                  onClick={() => {
+                                    const currentActive = [...isShow];
+                                    currentActive[index] =
+                                      !currentActive[index];
+                                    setShow(currentActive);
+                                  }}
+                                >
+                                  <span className="purchased-tool__date-type-text purchased-curent-text">
+                                    {isShow[index] ? "Show Less" : "Show More "}
+                                  </span>
+                                  <span className="purchased-tool__date-type-text">
+                                    {isShow[index] ? (
+                                      <ExpandLessIcon />
+                                    ) : (
+                                      <ExpandMoreIcon />
+                                    )}
+                                  </span>
+                                </div>
+                              </Grid>
+                            </Grid>
                           </Grid>
+
+                          {isShow[index] ? (
+                            <Grid
+                              item
+                              xs={12}
+                              container
+                              className="purchased-tool__tool-data accordion-margin show--accordion"
+                            >
+                              <Grid item xs={6}>
+                                <Typography component="div">
+                                  <div className="purchased-tool__purchased-date">
+                                    <span className="purchased-tool__date-type-text purchased-curent-text">
+                                      Total Amount:
+                                    </span>
+                                    <span className="purchased-tool__date-type-text ">
+                                      ${item.plan.price}
+                                    </span>
+                                  </div>
+                                </Typography>
+
+                                <Typography component="div">
+                                  <div className="purchased-tool__purchased-date">
+                                    <span className="purchased-tool__date-type-text purchased-curent-text">
+                                      Payment Method:
+                                    </span>
+                                    <span className="purchased-tool__date-type-text">
+                                      {item.payment_method}
+                                    </span>
+                                  </div>
+                                </Typography>
+                              </Grid>
+
+                              <Grid
+                                item
+                                xs={6}
+                                className="purchased-tool__expiry-date"
+                              >
+                                <div>
+                                  <Typography
+                                    component="div"
+                                    className="cursor--pointer"
+                                  >
+                                    <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                      <span className="purchased-tool__date-type-text purchased-curent-text"></span>
+                                      <span className="purchased-tool__date-type-text purchased-types">
+                                        <GetAppIcon />
+                                        Download Invoice
+                                      </span>
+                                    </div>
+                                  </Typography>
+
+                                  <Typography
+                                    component="div"
+                                    className="cursor--pointer"
+                                  >
+                                    <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                      <span className="purchased-tool__date-type-text purchased-curent-text"></span>
+                                      <span className="purchased-tool__date-type-text purchased-types">
+                                        <ReceiptIcon /> Consumption statement
+                                      </span>
+                                    </div>
+                                  </Typography>
+                                </div>
+                                <div className="pdl-2">
+                                  <Typography
+                                    component="div"
+                                    className="purchased-tool__embeded-icon border-radius"
+                                    onClick={() =>
+                                      downloadfile(
+                                        item.widget.name,
+                                        item.widget.widget_embed_code
+                                      )
+                                    }
+                                  >
+                                    <Tooltip
+                                      title="Embeded Code"
+                                      placement="top"
+                                    >
+                                      <SystemUpdateAltIcon />
+                                    </Tooltip>
+                                  </Typography>
+                                </div>
+                              </Grid>
+                            </Grid>
+                          ) : null}
                         </Grid>
-                      ) : null}
+                      </Paper>
                     </Grid>
-                  </Paper>
-                </Grid>
-              </Grid>
-            );
-          }
-          })}
-        </Container>
-        ):( 
-          <EmptyPage heading="I am waiting for your order. You didn't buy anything yet" imgUrl={emptyWidgett} buttonName="Continue Shoping" />
+                  </Grid>
+                );
+              }
+            })}
+          </Container>
+        ) : (
+          <EmptyPage
+            heading="I am waiting for your order. You didn't buy anything yet"
+            imgUrl={emptyWidgett}
+            buttonName="Continue Shoping"
+          />
         )}
         {/*Renew Subscription*/}
         <CustomPopup
@@ -647,7 +687,6 @@ function Purchased(props) {
           />
         </CustomPopup>
 
-
         <CustomPopup
           open={isPausePopup}
           className="popup-container__iner--sm border-radius loginAlert "
@@ -660,7 +699,9 @@ function Purchased(props) {
                 alt="Registration Sucessfully"
               />
               <Typography component="p" className="sucess_message">
-              {`Your are ${PlayPauseValue.is_paused? 'playing' : 'Pausing'} subscription.`}
+                {`Your are ${
+                  PlayPauseValue.is_paused ? "playing" : "Pausing"
+                } subscription.`}
               </Typography>
               {/* <p className="sucess_message"></p> */}
               <CustomButton
@@ -670,7 +711,7 @@ function Purchased(props) {
                   PlayNPause(PlayPauseValue.plan.id, PlayPauseValue.is_paused)
                 }
               >
-                {PlayPauseValue.is_paused? 'Play Now' : 'Pause Now'}
+                {PlayPauseValue.is_paused ? "Play Now" : "Pause Now"}
               </CustomButton>
               <CustomButton
                 className="secondary-button"
