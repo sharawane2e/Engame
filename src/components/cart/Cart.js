@@ -26,6 +26,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
+import EmptyPage from "../emptyPage";
+import emptyImg from "../../assets/images/empty.gif";
+
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -95,8 +98,8 @@ const Cart = () => {
             </Breadcrumbs>
           </Container>
         </div>
-        <div className="shoping-cart shopping-cart-data">
           {cart.length !== 0 ? (
+        <div className="shoping-cart shopping-cart-data">
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -392,12 +395,10 @@ const Cart = () => {
               </Grid>
               {/*End card data*/}
             </Container>
-          ) : (
-            <div className="empty_cart margin-top-174">
-              <img src={empty} alt="" />
             </div>
-          )}
-        </div>
+          ) : (
+            <EmptyPage heading="Your cart is empty, Need to shop" imgUrl={emptyImg} buttonName="Continue Shoping" />
+            )}
       </div>
 
       {/*Update into card*/}

@@ -244,7 +244,7 @@ const Header = ({ props }) => {
                       to="/Purchased"
                       className="my-widgets"
                     >
-                      My Widgets
+                      My widgets
                     </Link>
                     <div className="shoping__card">
                       <Link to="cart">
@@ -259,14 +259,15 @@ const Header = ({ props }) => {
                         </Badge>
                       </Link>
                     </div>
-
                     <CustomButton
                       onClick={handleProfileMenuOpen}
                       className="custom-avtar"
                     >
                       <Avatar sx="">
-                        {user.token.user.first_name[0]}
-                        {user.token.user.first_name[1]}
+                        {user.token.user.first_name.split(/(\s+)/)[0]?user.token.user.first_name.split(/(\s+)/)[0][0] : ""}
+                        {user.token.user.first_name.split(/(\s+)/)[2]?user.token.user.first_name.split(/(\s+)/)[2][0]: ""}
+                        {/* {user.token.user.first_name[0]} */}
+                        {/* {user.token.user.first_name[1]} */}
                         {/* {`${user.token.user.first_name[0][0]}${
                           user.token.user.first_name.split(" ")[1][0]
                         }`} */}

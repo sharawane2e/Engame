@@ -35,6 +35,12 @@ import { useHistory } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // import { getItemFromCart } from "../../redux/cart/action";
 // import { PaymentData } from "../../redux/payment/paymeant-action";
+import EmptyPage from "../emptyPage";
+import emptyWidgett from "../../assets/images/empty-widget.gif";
+import CustomButton from "../../components/widgets/Button";
+import warning_icon from "../../assets/images/warning_icon.svg";
+
+
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -60,6 +66,11 @@ function Purchased(props) {
   const [productShow, setProductShow] = useState([]);
   // const user = useSelector((state) => state.user.token);
   const token = useSelector((state) => state.user.token);
+  const [isPausePopup, setPausePopup] = useState(false); // Popup on play and Pause
+  const [PlayPauseValue, setPlayPauseValue] = useState('')
+  const [filter, setFilter] =useState('');
+
+
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
 
@@ -183,6 +194,7 @@ function Purchased(props) {
   const PlayNPause = async (purchaseId, Paused) => {
     let pausedStatus = String(Paused);
     dispatch(loadingStart());
+    setPausePopup(false);
     await fetch(BASE_URL + "subscription/pause_resume/", {
       method: "POST",
       headers: {
@@ -234,6 +246,7 @@ function Purchased(props) {
             </Breadcrumbs>
           </Container>
         </div>
+        {widgets.length !== 0 ? (
         <Container
           maxWidth="lg"
           className="purchased-tool__container  margin-top-174 shopping-cart-data"
@@ -257,26 +270,26 @@ function Purchased(props) {
             >
               <Typography
                 component="div"
-                className="tab--button border-radius tab--active"
+                className="tab--button border-radius tab--active" onClick={()=>setFilter("all")}
               >
                 All
               </Typography>
-              <Typography component="div" className="tab--button border-radius">
+              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("active")}>
                 Active Only
               </Typography>
-              <Typography component="div" className="tab--button border-radius">
+              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("expiresoon")}>
                 Expiring Soon
               </Typography>
-              <Typography component="div" className="tab--button border-radius">
+              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("expired")}>
                 Expired
               </Typography>
-              <Typography component="div" className="tab--button border-radius">
+              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("paused")}>
                 Paused
               </Typography>
-              <Typography component="div" className="tab--button border-radius">
-                Days Subs.
+              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("days")}>
+                Days Subs
               </Typography>
-              <Typography component="div" className="tab--button border-radius">
+              <Typography component="div" className="tab--button border-radius" onClick={()=>setFilter("hits")}>
                 Hits Subs.
               </Typography>
             </Grid>
@@ -284,6 +297,23 @@ function Purchased(props) {
 
           {/*Card start */}
           {widgets.map((item, index) => {
+            console.log("data", item)
+            if(
+              filter == "active"
+              ? item.is_active 
+              : filter == "expiresoon"
+              ? item.is_expiring_soon
+              : filter == "expired"
+              ? !item.is_active 
+              : filter == "paused"
+              ? item.is_paused
+              : filter == "days"
+              ? item.plan.plan_type == "days"
+              : filter == "hits"
+              ? item.plan.plan_type == "hits"
+              : filter == "all"
+              ? item.id 
+              : item.id){
             let purchasedDateTime = new Date(item.purchase_date);
             purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
             const purchase_date = purchasedDateTime.split(",")[0];
@@ -411,9 +441,10 @@ function Purchased(props) {
                             <Tooltip title="Play / Pause" placement="top">
                               <SwitchUnstyled
                                 defaultChecked={item.is_paused ? false : true}
-                                onClick={() =>
-                                  PlayNPause(item.plan.id, item.is_paused)
-                                }
+                                onClick={() => {
+                                  setPausePopup(true);
+                                  setPlayPauseValue(item);
+                                }}
                               />
                             </Tooltip>
                           </Typography>
@@ -445,15 +476,18 @@ function Purchased(props) {
                               component="div"
                               className="purchased-tool__tool-type"
                             >
-                              <span className="subscription-type-text expiry-type">
-                                Expiry Date:
-                              </span>
-                              <span className="subscription-day expiry-type margin-rightdata">
-                                {planExpiry_date}
-                                <span class="purchased-tool__date-type-time curent-time">
-                                  {planExpiry_time}
+                              { !item.is_paused?
+                              <>
+                                <span className="subscription-type-text expiry-type">
+                                  Expiry Date:
                                 </span>
-                              </span>
+                                <span className="subscription-day expiry-type margin-rightdata">
+                                  {planExpiry_date}
+                                </span>
+                              </>
+
+                                : ""
+                              }
                             </Typography>
                           </Grid>
                           <Grid item xs={2}>
@@ -593,9 +627,12 @@ function Purchased(props) {
                 </Grid>
               </Grid>
             );
+          }
           })}
         </Container>
-
+        ):( 
+          <EmptyPage heading="I am waiting for your order. You didn't buy anything yet" imgUrl={emptyWidgett} buttonName="Continue Shoping" />
+        )}
         {/*Renew Subscription*/}
         <CustomPopup
           open={is_renew}
@@ -608,6 +645,44 @@ function Purchased(props) {
             updateData={productShow}
             onClose={() => setRenew(false)}
           />
+        </CustomPopup>
+
+
+        <CustomPopup
+          open={isPausePopup}
+          className="popup-container__iner--sm border-radius loginAlert "
+        >
+          <Grid container spacing={4} align="center">
+            <Grid item xs={12}>
+              <img
+                className="message__img"
+                src={warning_icon}
+                alt="Registration Sucessfully"
+              />
+              <Typography component="p" className="sucess_message">
+              {`Your are ${PlayPauseValue.is_paused? 'playing' : 'Pausing'} subscription.`}
+              </Typography>
+              {/* <p className="sucess_message"></p> */}
+              <CustomButton
+                className="primary-button"
+                style={{ marginRight: "20px" }}
+                onClick={() =>
+                  PlayNPause(PlayPauseValue.plan.id, PlayPauseValue.is_paused)
+                }
+              >
+                {PlayPauseValue.is_paused? 'Play Now' : 'Pause Now'}
+              </CustomButton>
+              <CustomButton
+                className="secondary-button"
+                onClick={() => {
+                  setPausePopup(false);
+                  window.location.reload(true);
+                }}
+              >
+                Cancel
+              </CustomButton>
+            </Grid>
+          </Grid>
         </CustomPopup>
 
         <Footer />
