@@ -29,13 +29,6 @@ import warning_icon from "../../assets/images/warning_icon.svg";
 import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 
-
-// import PropTypes from "prop-types";
-// import Box from "@material-ui/core/Box";
-// import Typography from "@material-ui/core/Typography";
-// import Skeleton from "@material-ui/lab/Skeleton";
-// import { addToCart } from "../../redux/shopping/shopping-action";
-
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -49,7 +42,7 @@ const ToolCards = () => {
   const token = useSelector((state) => state.user);
   const { loading, error, products } = productList;
   const [productShow, setProductShow] = useState(products);
-  const [TypeClick, setTypeClick] = useState('')
+  const [TypeClick, setTypeClick] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -90,7 +83,7 @@ const ToolCards = () => {
             dispatch(loadingStop());
             history.push("/");
             // console.log("token expire", response);
-            console.log("fail",response);
+            console.log("fail", response);
           } else {
             setProductShow(response);
             console.log("sucess", response);

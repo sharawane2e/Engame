@@ -234,10 +234,7 @@ function Purchased(props) {
               <Link color="inherit" to="/">
                 Home
               </Link>
-              {/* <Link color="inherit" to="/cart">
-                Shopping Cart
-              </Link> */}
-              <Typography color="textPrimary" variant="span">
+              <Typography color="textPrimary" component="div">
                 My Widgets
               </Typography>
             </Breadcrumbs>
@@ -254,7 +251,11 @@ function Purchased(props) {
                 xs={12}
                 className="purchased-tool__hedding purchased-tool__borderdata"
               >
-                <Typography component="div" className="hedding-text">
+                <Typography
+                  color="textPrimary"
+                  component="div"
+                  className="hedding-text"
+                >
                   My Widgets
                 </Typography>
               </Grid>
@@ -266,6 +267,7 @@ function Purchased(props) {
                 className="purchased-tool__hedding purchased-tool__tabing"
               >
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius tab--active"
                   onClick={() => setFilter("all")}
@@ -273,6 +275,7 @@ function Purchased(props) {
                   All
                 </Typography>
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius"
                   onClick={() => setFilter("active")}
@@ -280,6 +283,7 @@ function Purchased(props) {
                   Active Only
                 </Typography>
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius"
                   onClick={() => setFilter("expiresoon")}
@@ -287,6 +291,7 @@ function Purchased(props) {
                   Expiring Soon
                 </Typography>
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius"
                   onClick={() => setFilter("expired")}
@@ -294,6 +299,7 @@ function Purchased(props) {
                   Expired
                 </Typography>
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius"
                   onClick={() => setFilter("paused")}
@@ -301,6 +307,7 @@ function Purchased(props) {
                   Paused
                 </Typography>
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius"
                   onClick={() => setFilter("days")}
@@ -308,6 +315,7 @@ function Purchased(props) {
                   Days Subs
                 </Typography>
                 <Typography
+                  color="textPrimary"
                   component="div"
                   className="tab--button border-radius"
                   onClick={() => setFilter("hits")}
