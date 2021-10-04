@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
-import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
+//import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
 import { useDispatch, useSelector } from "react-redux";
 import empty from "../../assets/images/empty.gif";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
@@ -18,30 +18,31 @@ import EditIcon from "@material-ui/icons/Edit";
 import CustomPopup from "../CustomPopup";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
-import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+//import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+import { BASE_URL_1 } from "../../config/ApiUrl";
 // import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 // import { logOutUser } from "../../redux/user/user-action";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 // import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import { Checkout } from "../Stripe/StripeButton";
+// import { loadStripe } from "@stripe/stripe-js";
+//import { Elements } from "@stripe/react-stripe-js";
+//import { Checkout } from "../Stripe/StripeButton";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.token);
+  //  const user = useSelector((state) => state.user.token);
   const cart = useSelector((state) => state.cart.cartItems);
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
-  const [issetProdusctId, setProdusctId] = useState("");
-  const history = useHistory();
-  const stripePromise = loadStripe(
-    "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
-  );
+  //const [issetProdusctId, setProdusctId] = useState("");
+  //const history = useHistory();
+  //const stripePromise = loadStripe(
+  //"pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL"
+  //);
 
   useEffect(() => {
     //dispatch(loadingStart());

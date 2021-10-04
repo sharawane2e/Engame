@@ -82,7 +82,7 @@ const ToolCards = () => {
       })
         .then((result) => result.json())
         .then((response) => {
-          if (response.code == "token_not_valid") {
+          if (response.code === "token_not_valid") {
             dispatch(logOutUser());
             localStorage.removeItem("auth");
             dispatch(loadingStop());

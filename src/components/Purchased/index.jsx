@@ -11,9 +11,10 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 // import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 // import TimerIcon from "@material-ui/icons/Timer";
 import checkCircle from "../../assets/images/check-circle.svg";
-import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+// import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
-import PauseIcon from "@material-ui/icons/Pause";
+//import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -51,7 +52,7 @@ function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState("false");
-  const user = useSelector((state) => state.user.token);
+  //const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
@@ -66,7 +67,7 @@ function Purchased(props) {
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
     async function paymentSuccess() {
-      if (is_renew == "false") {
+      if (is_renew === "false") {
         await fetch(BASE_URL + "payments/success/", {
           method: "POST",
           headers: {
@@ -128,7 +129,7 @@ function Purchased(props) {
             setWidgets(result);
             console.log(result);
             const isShowArr = [];
-            result.forEach((el, index) => {
+            result.forEach(() => {
               isShowArr.push(false);
             });
             setShow(isShowArr);

@@ -33,7 +33,7 @@ export default {
           let baseUrl = location[0];
           localStorage.removeItem("auth");
           window.location.href = `${baseUrl}#/`;
-          window.location.reload();
+          //window.location.reload();
         } else if (error.response.status === 400) {
           response = error.response.data;
           Toaster.error("Something went wrong", "topCenter");

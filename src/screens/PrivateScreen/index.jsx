@@ -5,10 +5,11 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loginUser } from "../../redux/user/user-action";
 
-const PrivateScreen = (props, user) => {
+const PrivateScreen = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const data = dispatch(loginUser());
+    //const data = dispatch(loginUser());
+    dispatch(loginUser());
   }, []);
 
   return <AppRouting routes={props.route} />;

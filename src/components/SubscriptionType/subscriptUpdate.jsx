@@ -8,7 +8,7 @@ import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 //import { useHistory } from "react-router-dom";
 // import { addToCart } from "../../redux/cart/action";
-import { getItemFromCart, updateCartIteam } from "../../redux/cart/action";
+import { getItemFromCart } from "../../redux/cart/action";
 
 const SubscriptionUpdate = ({ updateData, onClose }) => {
   // console.log(updateData);
@@ -16,7 +16,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   const [istype, setType] = useState(updateData.plan_type);
   const [valuePrice, setValuePrice] = useState(updateData.plan_value);
   const [isCurentPrice, setCurentPrice] = useState(updateData.price);
-  const [isUpdatedID, setUpdateID] = useState(updateData.id);
+  //  const [isUpdatedID, setUpdateID] = useState(updateData.id);
   const [isUpdateResult, setUpdateResult] = useState("");
   const dispatch = useDispatch();
 
