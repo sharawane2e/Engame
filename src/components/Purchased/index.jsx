@@ -642,7 +642,7 @@ function Purchased(props) {
                                       Payment Method:
                                     </span>
                                     <span className="purchased-tool__date-type-text">
-                                      {item.payment_method}
+                                      {item.payment_method.replace(/'/g, "")}
                                     </span>
                                   </div>
                                 </Typography>
