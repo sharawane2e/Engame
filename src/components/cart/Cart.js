@@ -29,7 +29,6 @@ import { useHistory } from "react-router-dom";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 
-
 const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.token);
@@ -98,8 +97,8 @@ const Cart = () => {
             </Breadcrumbs>
           </Container>
         </div>
-          {cart.length !== 0 ? (
-        <div className="shoping-cart shopping-cart-data">
+        {cart.length !== 0 ? (
+          <div className="shoping-cart shopping-cart-data">
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -280,7 +279,7 @@ const Cart = () => {
                                     component="p"
                                     className="shoping-cart__subscription-text"
                                   >
-                                    Subscription For
+                                    Subscription for
                                   </Typography>
                                   <Typography component="span">
                                     {item.plan_value}
@@ -395,10 +394,14 @@ const Cart = () => {
               </Grid>
               {/*End card data*/}
             </Container>
-            </div>
-          ) : (
-            <EmptyPage heading="Your cart is empty, Need to shop" imgUrl={emptyImg} buttonName="Continue Shoping" />
-            )}
+          </div>
+        ) : (
+          <EmptyPage
+            heading="Your cart is empty, Need to shop"
+            imgUrl={emptyImg}
+            buttonName="Continue Shoping"
+          />
+        )}
       </div>
 
       {/*Update into card*/}

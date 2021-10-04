@@ -355,3 +355,24 @@ select:disabled {
 .Mui-checked .MuiSwitch-track {
   background: #f15b5b;
 }
+
+input:-internal-autofill-selected {
+  background-color: $white !important;
+
+  color: -internal-light-dark(#000, $white) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px $white inset !important;
+}
+
+#tool-perview::-webkit-scrollbar {
+  width: 12px;
+}
+
+.fill-red {
+  fill: $secondary !important;
+}

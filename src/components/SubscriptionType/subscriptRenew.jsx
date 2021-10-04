@@ -3,14 +3,13 @@ import TextField from "@material-ui/core/TextField";
 import CustomButton from "../widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-//import Toaster from "../../util/Toaster";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { useHistory } from "react-router-dom";
-// import { addToCart } from "../../redux/cart/action";
 import { getItemFromCart } from "../../redux/cart/action";
 import { loadStripe } from "@stripe/stripe-js";
 import { logOutUser } from "../../redux/user/user-action";
+import Typography from "@material-ui/core/Typography";
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
   console.log("cart value", updateData.plan.plan_value);
@@ -119,7 +118,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
               variant="outlined"
               name="hits"
               className="subscription-type__inputbox"
-              value={valuePrice <= 0 ? 1 : valuePrice}
+              value={valuePrice <= 0 ? 0 : valuePrice}
               // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
@@ -134,7 +133,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
         <CustomButton
           className="primary-button add--card"
           onClick={ItemRenew}
-          disabled={valuePrice === 0 || valuePrice === "" ? true : false}
+          disabled={valuePrice == 0 || valuePrice == "" ? true : false}
         >
           <ShoppingCartIcon className="margin-right-15" />
           Extend Now

@@ -1,23 +1,26 @@
 .emptyPage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    background: #FDFDFD;
-    flex-direction: column;
-    &__headding{
-      margin-bottom: 20px;
-      &__para{
-        font-weight: 500;
-        color: #6a6464;
-        font-size:$font-xsm!important;
-        // @include font-size($font-xxl);
-      }
-    }
-    &__button{
-      margin-top: 20px;
-      .continueShoping{
-        padding: 10px 25px!important;
-      }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #fdfdfd;
+  flex-direction: column;
+  &__headding {
+    margin-bottom: 20px;
+    &__para {
+      font-weight: 500;
+      color: #6a6464;
+      font-size: $font-sm !important;
+      // @include font-size($font-xxl);
     }
   }
+  &__button {
+    margin-top: 20px;
+    .continueShoping {
+      padding: 10px 25px !important;
+    }
+  }
+  @include breakpoint(desktop) {
+    height: 70vh;
+  }
+}

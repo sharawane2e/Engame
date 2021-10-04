@@ -14,6 +14,7 @@ import { Link, useHistory } from "react-router-dom";
 import Engame_logo from "../../assets/images/Engame_logo.svg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CustomPopup from "../CustomPopup";
+
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
@@ -264,8 +265,12 @@ const Header = ({ props }) => {
                       className="custom-avtar"
                     >
                       <Avatar sx="">
-                        {user.token.user.first_name.split(/(\s+)/)[0]?user.token.user.first_name.split(/(\s+)/)[0][0] : ""}
-                        {user.token.user.first_name.split(/(\s+)/)[2]?user.token.user.first_name.split(/(\s+)/)[2][0]: ""}
+                        {user.token.user.first_name.split(/(\s+)/)[0]
+                          ? user.token.user.first_name.split(/(\s+)/)[0][0]
+                          : ""}
+                        {user.token.user.first_name.split(/(\s+)/)[2]
+                          ? user.token.user.first_name.split(/(\s+)/)[2][0]
+                          : ""}
                         {/* {user.token.user.first_name[0]} */}
                         {/* {user.token.user.first_name[1]} */}
                         {/* {`${user.token.user.first_name[0][0]}${

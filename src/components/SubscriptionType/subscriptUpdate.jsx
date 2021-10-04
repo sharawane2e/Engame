@@ -110,7 +110,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
               variant="outlined"
               name="hits"
               className="subscription-type__inputbox"
-              value={valuePrice <= 0 ? 1 : valuePrice}
+              value={valuePrice <= 0 ? 0 : valuePrice}
               // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
@@ -125,7 +125,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
         <CustomButton
           className="primary-button add--card"
           onClick={cartUpdate}
-          disabled={valuePrice === 0 || valuePrice === "" ? true : false}
+          disabled={valuePrice == 0 || valuePrice == "" ? true : false}
         >
           <ShoppingCartIcon className="margin-right-15" /> Update Cart
         </CustomButton>
