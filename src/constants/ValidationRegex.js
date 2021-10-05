@@ -6,7 +6,7 @@ const ValidationRegex = {
   ONLY_ALPHA: /^[a-zA-Z ]*$/,
   NUM_DECIMALS: /^\d*\.?\d*$/,
   ONLY_NUMBER: /^[0-9\b]+$/,
-  PASSWORD: /^[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+  PASSWORD: /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/,
 };
 
 export default ValidationRegex;

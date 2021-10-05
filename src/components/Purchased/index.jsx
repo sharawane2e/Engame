@@ -61,7 +61,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 function Purchased(props) {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
-  const [widgets, setWidgets] = useState([]);
+  const [widgetList, setWidgetList] = useState([]);
   const [is_renew, setRenew] = useState(false);
   const [isextend, setExtend] = useState("false");
   const [productShow, setProductShow] = useState([]);
@@ -180,7 +180,7 @@ function Purchased(props) {
           dispatch(loadingStop());
           history.push("/");
         } else {
-          setWidgets(result);
+          setWidgetList(result);
           const isShowArr = [];
           result.forEach((el, index) => {
             isShowArr.push(false);
@@ -244,7 +244,7 @@ function Purchased(props) {
             </Breadcrumbs>
           </Container>
         </div>
-        {widgets.length !== 0 ? (
+        {widgetList.length !== 0 ? (
           <Container
             maxWidth="lg"
             className="purchased-tool__container  margin-top-174 shopping-cart-data"
@@ -344,7 +344,7 @@ function Purchased(props) {
             </Grid>
 
             {/*Card start */}
-            {widgets.map((item, index) => {
+            {widgetList.map((item, index) => {
               if (
                 filter == "active"
                   ? item.is_active

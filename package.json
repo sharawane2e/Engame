@@ -1,7 +1,7 @@
 {
   "name": "html5-widget",
   "version": "0.1.0",
-  "homepage": "/engame-dev",
+  "homepage": "/engame",
   "private": true,
   "dependencies": {
     "3d-react-carousal": "^4.0.2",

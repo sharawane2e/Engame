@@ -266,10 +266,14 @@ const Header = ({ props }) => {
                     >
                       <Avatar sx="">
                         {user.token.user.first_name.split(/(\s+)/)[0]
-                          ? user.token.user.first_name.split(/(\s+)/)[0][0]
+                          ? user.token.user.first_name
+                              .split(/(\s+)/)[0][0]
+                              .toUpperCase()
                           : ""}
                         {user.token.user.first_name.split(/(\s+)/)[2]
-                          ? user.token.user.first_name.split(/(\s+)/)[2][0]
+                          ? user.token.user.first_name
+                              .split(/(\s+)/)[2][0]
+                              .toUpperCase()
                           : ""}
                         {/* {user.token.user.first_name[0]} */}
                         {/* {user.token.user.first_name[1]} */}

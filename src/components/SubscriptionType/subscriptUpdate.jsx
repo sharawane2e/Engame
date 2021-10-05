@@ -43,18 +43,19 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   };
 
   const handleCalculatePrice = (e) => {
-    let value = e.target.value;
+    let value = e.target.value > 0 ? e.target.value : 1;
+
     setValuePrice(value);
     istype === "days"
       ? setCurentPrice(value * 5)
       : setCurentPrice((value * 0.1).toFixed(2));
-    if (e.target.value <= 0) {
-      setCurentPrice(0);
-    }
+    // if (e.target.value <= 0) {
+    //   setCurentPrice(0);
+    // }
 
-    if (e.target.value >= 2500000) {
-      setCurentPrice("");
-    }
+    // if (e.target.value >= 2500000) {
+    //   setCurentPrice();
+    // }
   };
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
               variant="outlined"
               name="hits"
               className="subscription-type__inputbox"
-              value={valuePrice <= 0 ? 0 : valuePrice}
+              value={valuePrice > 0 ? valuePrice : 1}
               // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
