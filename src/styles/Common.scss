@@ -373,6 +373,9 @@ input:-webkit-autofill:active {
   width: 12px;
 }
 
-.fill-red {
+.fill_red {
   fill: $secondary !important;
+}
+.fill_yellow {
+  fill: $red-yellow !important;
 }

@@ -40,6 +40,8 @@ import EmptyPage from "../emptyPage";
 import emptyWidgett from "../../assets/images/empty-widget.gif";
 import CustomButton from "../../components/widgets/Button";
 import warning_icon from "../../assets/images/warning_icon.svg";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { ErrorMessages } from "../../constants/Messages";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -183,6 +185,7 @@ function Purchased(props) {
           result.forEach((el, index) => {
             isShowArr.push(false);
           });
+          console.log(result);
           setShow(isShowArr);
           dispatch(loadingStop());
         }
@@ -394,15 +397,16 @@ function Purchased(props) {
                           >
                             <div className="purchased-tool__purchased-date">
                               {/* <img src={checkCircle} /> */}
-                              {/* {item?.is_paused ? <CheckCircleIcon /> : null} */}
-                              {/* {ProductStatusIcon && <ProductStatusIcon />} */}
-                              {/* <CheckCircleIcon /> */}
                               {item?.is_paused ? (
-                                <TimerIcon className="fill-red" />
-                              ) : item.is_expiring_soon ? (
-                                <PauseCircleOutlineIcon />
-                              ) : (
+                                <PauseCircleOutlineIcon className="fill_yellow" />
+                              ) : item.plan_expire_date ? (
+                                <TimerIcon className="fill_red" />
+                              ) : item.is_active ? (
                                 <CheckCircleIcon />
+                              ) : !item.is_active ? (
+                                <ErrorOutlineIcon className="fill_red" />
+                              ) : (
+                                ""
                               )}
 
                               <span className="purchased-tool__date-type-text purchased-curent-text">
@@ -711,7 +715,7 @@ function Purchased(props) {
           </Container>
         ) : (
           <EmptyPage
-            heading="I am waiting for your order. You didn't buy anything yet"
+            heading={ErrorMessages.purchaseCart}
             imgUrl={emptyWidgett}
             buttonName="Continue Shoping"
           />
