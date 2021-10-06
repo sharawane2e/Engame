@@ -14,32 +14,32 @@ const Routes = [
     exact: true,
   },
   {
-    path: ["/user/account-confirm-email"],
+    path: ["/user/account-confirm-email", "/forgot"],
     component: PublicScreen,
     //exact: true,
     routes: [
       {
+        path: "/forgot",
+        component: Forgot,
+        exact: false,
+      },
+      {
         path: "/user/account-confirm-email",
         component: EmailActivation,
         isExact: false,
-      }
+      },
     ],
   },
   {
-    path: ["/", "/forgot"],
+    path: ["/"],
     component: PublicScreen,
     exact: true,
     routes: [
       {
-        path: "/forgot",
-        component: Forgot,
-        exact: true,
-      },
-      {
         path: "/",
         component: Home,
         isExact: true,
-      }
+      },
     ],
   },
   {

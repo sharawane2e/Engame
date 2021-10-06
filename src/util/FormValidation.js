@@ -49,9 +49,6 @@ export class LoginValidation extends Validation {
         if (!value) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
-        } else if (value.length < PASSWORD_MIN_LENGTH) {
-          validationResponse.isValid = false;
-          validationResponse.message = ErrorMessages.PASSWORD_MIN;
         }
 
         break;
@@ -138,6 +135,40 @@ export class ForgotValidation extends Validation {
         break;
       default:
       // break;
+    }
+    return validationResponse;
+  };
+}
+
+export class ResetPassword extends Validation {
+  validateField = (field, value, context) => {
+    const validationResponse = new ValidationResponse();
+
+    switch (field) {
+      case "setPassword":
+        if (!value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+        } else if (value.length < PASSWORD_MIN_LENGTH) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+        } else if (passwordPattern(value)) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_PATTERN;
+        }
+        break;
+      case "confirmPassword":
+        if (!value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+        } else if (value.length < PASSWORD_MIN_LENGTH) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+        }
+        break;
+
+      default:
+        break;
     }
     return validationResponse;
   };

@@ -71,8 +71,6 @@ const Header = ({ props }) => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    // document.body.classList.toggle("modal-open", isLoginOpen);
-    //  document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
