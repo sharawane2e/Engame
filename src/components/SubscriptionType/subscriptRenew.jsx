@@ -12,7 +12,7 @@ import { logOutUser } from "../../redux/user/user-action";
 import Typography from "@material-ui/core/Typography";
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
-  console.log("cart value", updateData.plan.plan_value);
+  // console.log("cart value", updateData.plan.plan_value);
   const user = useSelector((state) => state.user.token);
   //const [subscription, setSubscription] = useState("");
   const [istype, setType] = useState(updateData.plan.plan_type);
