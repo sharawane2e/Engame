@@ -14,6 +14,7 @@ import { Link, useHistory } from "react-router-dom";
 import Engame_logo from "../../assets/images/Engame_logo.svg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CustomPopup from "../CustomPopup";
+
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
@@ -72,10 +73,9 @@ const Header = ({ props }) => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    // document.body.classList.toggle("modal-open", isLoginOpen);
-    //  document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
+      setReginIsOpen(false);
       dispatch(getItemFromCart());
     }
   }, [user]);
@@ -95,17 +95,8 @@ const Header = ({ props }) => {
       .then((res) => {
         dispatch(logOutUser());
         localStorage.removeItem("auth");
-        //dispatch(loadingStop());
         history.push("/");
         Toaster.sucess(res.detail, "topCenter");
-        // if (res.non_field_errors) {
-        //   Toaster.error(
-        //     res.non_field_errors ? res.non_field_errors.join("") : null,
-        //     "topCenter"
-        //   );
-        // } else {
-        //   this.props.dispatch(loginUser(res));
-        // }
       })
       .catch((error) => {
         console.log(error);
@@ -113,24 +104,6 @@ const Header = ({ props }) => {
       .finally(() => {
         dispatch(loadingStop());
       });
-
-    // fetch(BASE_URL + "user/logout/", {
-    //   method: "POST",
-    //   body: JSON.stringify(""),
-    // })
-    //   .then((result) => result.json())
-    //   .then((res) => {
-    //     if (res.detail) {
-    //       dispatch(logOutUser());
-    //       localStorage.removeItem("auth");
-    //       dispatch(loadingStop());
-    //       history.push("/");
-    //       Toaster.sucess(res.detail, "topCenter");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     Toaster.error(error, "topCenter");
-    //   });
     handleMenuClose();
   };
 
@@ -273,7 +246,7 @@ const Header = ({ props }) => {
                       to="/Purchased"
                       className="my-widgets"
                     >
-                      My Widgets
+                      My widgets
                     </Link>
                     <div className="shoping__card">
                       <Link to="cart">
@@ -288,14 +261,23 @@ const Header = ({ props }) => {
                         </Badge>
                       </Link>
                     </div>
-
                     <CustomButton
                       onClick={handleProfileMenuOpen}
                       className="custom-avtar"
                     >
                       <Avatar sx="">
-                        {user.token.user.first_name[0]}
-                        {user.token.user.first_name[1]}
+                        {user.token.user.first_name.split(/(\s+)/)[0]
+                          ? user.token.user.first_name
+                              .split(/(\s+)/)[0][0]
+                              .toUpperCase()
+                          : ""}
+                        {user.token.user.first_name.split(/(\s+)/)[2]
+                          ? user.token.user.first_name
+                              .split(/(\s+)/)[2][0]
+                              .toUpperCase()
+                          : ""}
+                        {/* {user.token.user.first_name[0]} */}
+                        {/* {user.token.user.first_name[1]} */}
                         {/* {`${user.token.user.first_name[0][0]}${
                           user.token.user.first_name.split(" ")[1][0]
                         }`} */}

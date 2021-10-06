@@ -264,15 +264,8 @@
       // width: 178px !important;
       padding: 10px 16px !important;
       .MuiButton-label {
-        @include font-size($font-xmd-reg);
+        @include font-size($font-reg);
       }
     }
   }
-}
-.empty_cart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  background: #efefef;
 }

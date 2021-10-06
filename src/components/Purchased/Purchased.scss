@@ -36,6 +36,7 @@
       @include font-size($font-xx-reg);
     }
     .tab--button {
+      border: $border-width $bsolid $tabcolor;
       width: 130px;
       display: flex;
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
@@ -48,6 +49,9 @@
       align-items: $align-center;
       text-align: $align-center;
       cursor: pointer;
+      &:hover {
+        border: $border-width $bsolid $secondary;
+      }
       @include breakpoint(Ipad-pro) {
         width: 120px;
         line-height: 1.2rem;
@@ -62,6 +66,7 @@
     .tab--active {
       background-color: $secondary;
       color: $white;
+      border: $border-width $bsolid $secondary;
     }
     .tab--button:last-child {
       margin-right: 0;
@@ -169,16 +174,16 @@
       font-family: map-get($map: $font-family, $key: "font-barlowbold");
       @include font-size($font-reg);
     }
-    .CopyToClipboard{
+    .CopyToClipboard {
       cursor: pointer;
     }
-    .tooltip__key{
+    .tooltip__key {
       cursor: pointer;
       @include font-size($font-reg);
-      .tooltip__keyCode{
+      .tooltip__keyCode {
       }
     }
-    
+
     .subscription-day {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);
@@ -186,12 +191,11 @@
       &:hover {
         @include color($secondary);
         .subscription-day__icon {
-          display: flex!important;
+          display: flex !important;
           @include color($secondary);
         }
       }
     }
-
   }
   #{&}__tool-validity {
     display: flex;

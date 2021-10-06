@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import loaderImg from "../../assets/images/engame_loader.gif";
+import loaderImg from "../../assets/images/loader_engame.gif";
 import Overlay from "../Overlay";
 
 const FullPageLoader = ({ loading }) => {

@@ -154,9 +154,11 @@ class ForgotPassword extends Component {
                 Forgot Password
               </CustomButton>
             </div>
-            <div className="back-button">
-              <Link href="#" onClick={this.backLogin}>
-                Back to login
+
+            <div className="form-newaccont">
+              <span> Back to</span>
+              <Link href="#" onClick={this.backLogin} className="">
+                Login
               </Link>
             </div>
           </div>

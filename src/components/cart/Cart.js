@@ -18,10 +18,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import CustomPopup from "../CustomPopup";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
-//import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
-import { BASE_URL_1 } from "../../config/ApiUrl";
-// import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { loadStripe } from "@stripe/stripe-js";
+import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
@@ -31,10 +31,14 @@ import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdat
 // import { loadStripe } from "@stripe/stripe-js";
 //import { Elements } from "@stripe/react-stripe-js";
 //import { Checkout } from "../Stripe/StripeButton";
+import { logOutUser } from "../../redux/user/user-action";
+import { useHistory } from "react-router-dom";
+import EmptyPage from "../emptyPage";
+import emptyImg from "../../assets/images/empty.gif";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  //  const user = useSelector((state) => state.user.token);
+  const user = useSelector((state) => state.user.token);
   const cart = useSelector((state) => state.cart.cartItems);
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
@@ -54,19 +58,34 @@ const Cart = () => {
   };
 
   // handleCheckout
-  const handleCheckout = () => {
-    //dispatch(loadingStart());
-    const reducer = (previousValue, currentValue) =>
-      +previousValue + +currentValue;
-    console.log(cart.reduce(reducer));
-
-    // cart
-    //   .map((item) => {
-    //     console.log("check out callculate all value");
-    //   })
-    //   .reduce(reducer);
-    // .reduce((acc, value) => +acc + +value);
-    //console.log("check out callculate all value");
+  const handleCheckout = async () => {
+    dispatch(loadingStart());
+    const stripe = await loadStripe(STRIPE);
+    try {
+      await fetch(BASE_URL + "payments/checkout-session/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.access_token}`,
+        },
+        body: JSON.stringify({ user: user.user.pk, is_renew: "false" }),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.code == "token_not_valid") {
+            dispatch(logOutUser());
+            localStorage.removeItem("auth");
+            dispatch(loadingStop());
+            //            history.push("/");
+          } else {
+            // sessionStorage.setItem("sessionId", result.sessionId);
+            stripe.redirectToCheckout({ sessionId: result.sessionId });
+            dispatch(loadingStop());
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
   // const handleCheckout = async () => {
   //   dispatch(lo`ad`ingStart());
@@ -120,8 +139,8 @@ const Cart = () => {
             </Breadcrumbs>
           </Container>
         </div>
-        <div className="shoping-cart shopping-cart-data">
-          {cart.length !== 0 ? (
+        {cart.length !== 0 ? (
+          <div className="shoping-cart shopping-cart-data">
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -159,7 +178,7 @@ const Cart = () => {
                   </Link>
                 </Grid> */}
               </Grid>
-
+              {console.log("Cart Data", cart)}
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
                   {cart.map((item, index) => {
@@ -302,7 +321,7 @@ const Cart = () => {
                                     component="p"
                                     className="shoping-cart__subscription-text"
                                   >
-                                    Subscription For
+                                    Subscription for
                                   </Typography>
                                   <Typography component="span">
                                     {item.plan_value}
@@ -417,13 +436,16 @@ const Cart = () => {
               </Grid>
               {/*End card data*/}
             </Container>
-          ) : (
-            <div className="empty_cart margin-top-174">
-              <img src={empty} alt="" />
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <EmptyPage
+            heading="Your cart is empty, Need to shop"
+            imgUrl={emptyImg}
+            buttonName="Continue Shoping"
+          />
+        )}
       </div>
+
       {/*Update into card*/}
       <CustomPopup
         open={is_renew}

@@ -1,5 +1,5 @@
 $(window).load(function () {
-  const apiUrl = "http://182.73.21.21:39051";
+  const apiUrl = baseURl;
   var keyNotValid =
     "Key Expired|Your key is not valid please put your valid key.";
 

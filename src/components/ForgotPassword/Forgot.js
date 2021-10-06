@@ -5,14 +5,76 @@ import CustomButton from "../../components/widgets/Button";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import { ResetPassword } from "../../util/FormValidation";
+import { useDispatch, useSelector } from "react-redux";
+import { BASE_URL } from "../../config/ApiUrl";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import Toaster from "../../util/Toaster";
+import { CheckCircleIcon } from "../../assets/images/check-circle.svg";
 
 const Forgot = () => {
-  const [passwords, setPasswords] = useState({});
+  const dispatch = useDispatch();
+  const [newPasswords, setNewPasswords] = useState("");
+  const [conformPasswords, setConformPasswords] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(true);
+
   useEffect(() => {}, []);
+
+  const haldelNewPassword = (e) => {
+    setNewPasswords(e.target.value);
+  };
+
+  const haldelConformPassword = (e) => {
+    setConformPasswords(e.target.value);
+  };
+  const handelMatchPassword = () => {
+    newPasswords === conformPasswords
+      ? setPasswordMatch(true)
+      : setPasswordMatch(false);
+  };
 
   // handleSubmit
   const handleSubmit = () => {
-    console.log(passwords);
+    let uuid = window.location.hash.split("forgot/")[1];
+
+    let onlyuuid = uuid.split("/")[0];
+    let token = uuid.split("/")[1];
+    console.log("passwoird", newPasswords);
+    console.log("conform password", conformPasswords);
+
+    // const validationResponses = ResetPassword.validateForm({
+    //   newPasswords,
+    //   conformPasswords,
+    // });
+
+    dispatch(loadingStart());
+    fetch(
+      BASE_URL + "user/password/reset/confirm/" + onlyuuid + "/" + token + "/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          new_password1: newPasswords,
+          new_password2: conformPasswords,
+          uid: onlyuuid,
+          token: token,
+        }),
+      }
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        Toaster.error(
+          data.non_field_errors ? data.non_field_errors.join("") : null,
+          "topCenter"
+        );
+        console.log(data);
+        dispatch(loadingStop());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -32,9 +94,7 @@ const Forgot = () => {
                 placeholder="Password"
                 type="password"
                 variant="outlined"
-                onChange={(e) =>
-                  setPasswords({ ...passwords, new_password1: e.target.value })
-                }
+                onChange={haldelNewPassword}
               />
               <div className="validated-error"></div>
             </FormControl>
@@ -51,12 +111,14 @@ const Forgot = () => {
                 placeholder="Confrim Password"
                 type="password"
                 variant="outlined"
-                onChange={(e) =>
-                  setPasswords({ ...passwords, new_password2: e.target.value })
-                }
+                onChange={haldelConformPassword}
+                onKeyUp={handelMatchPassword}
               />
               <div className="validated-error"></div>
             </FormControl>
+            <p>
+              {!passwordMatch ? "password you are entered is incurrect" : ""}
+            </p>
           </div>
           <div className="form-group">
             <CustomButton
@@ -67,6 +129,7 @@ const Forgot = () => {
             </CustomButton>
           </div>
         </form>
+        <div>{/* <img src={CheckCircleIcon} alt="success" /> */}</div>
       </div>
 
       <Footer />

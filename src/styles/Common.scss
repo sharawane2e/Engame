@@ -274,10 +274,9 @@ body::-webkit-scrollbar-track,
 }
 
 body::-webkit-scrollbar-thumb,
-.custom-scroll::-webkit-scrollbar-thumb,
-#tool-perview::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: $scroll-color;
+  outline: 1px solid $scroll-border-color;
 }
 /*end Custom Scroll*/
 
@@ -287,6 +286,87 @@ body::-webkit-scrollbar-thumb,
 
 input:-internal-autofill-selected {
   background-color: $white !important;
+  color: -internal-light-dark($black, $white) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px $white inset !important;
+}
+
+#tool-perview::-webkit-scrollbar {
+  width: 12px;
+}
+
+select:disabled {
+  border-color: $disabled-bordercolor;
+  background: $disabled-color;
+}
+
+.MuiSwitch-root {
+  font-size: 0;
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.MuiSwitch-track {
+  background: #b3c3d3;
+  border-radius: 10px;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.MuiSwitch-track {
+  background: #b3c3d3;
+  border-radius: 10px;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.MuiSwitch-thumb {
+  display: block;
+  width: 14px;
+  height: 14px;
+  top: 3px;
+  left: 3px;
+  border-radius: 16px;
+  background-color: #fff;
+  position: relative;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.MuiSwitch-input {
+  cursor: inherit;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+  margin: 0;
+}
+.Mui-checked .MuiSwitch-thumb {
+  left: 14px;
+  top: 3px;
+  background-color: #fff;
+}
+.Mui-checked .MuiSwitch-track {
+  background: #f15b5b;
+}
+
+input:-internal-autofill-selected {
+  background-color: $white !important;
+
   color: -internal-light-dark(#000, $white) !important;
 }
 
@@ -299,4 +379,11 @@ input:-webkit-autofill:active {
 
 #tool-perview::-webkit-scrollbar {
   width: 12px;
+}
+
+.fill_red {
+  fill: $secondary !important;
+}
+.fill_yellow {
+  fill: $red-yellow !important;
 }

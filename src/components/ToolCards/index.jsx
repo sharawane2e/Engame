@@ -11,7 +11,6 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
-// import Toaster from "../../util/Toaster";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
@@ -21,19 +20,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
 import { loadingStop } from "../../redux/loader/loader-actions";
-// import Swal from "sweetalert2";
 import Login from "../Login";
 import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
-// import EmailActive from "../EmailActivation";
 import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
-
-// import PropTypes from "prop-types";
-// import Box from "@material-ui/core/Box";
-// import Typography from "@material-ui/core/Typography";
-// import Skeleton from "@material-ui/lab/Skeleton";
-// import { addToCart } from "../../redux/shopping/shopping-action";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -48,6 +39,7 @@ const ToolCards = () => {
   const token = useSelector((state) => state.user);
   const { loading, error, products } = productList;
   const [productShow, setProductShow] = useState(products);
+  const [TypeClick, setTypeClick] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -88,8 +80,10 @@ const ToolCards = () => {
             dispatch(loadingStop());
             history.push("/");
             // console.log("token expire", response);
+            console.log("fail", response);
           } else {
             setProductShow(response);
+            console.log("sucess", response);
           }
         });
     }
@@ -221,7 +215,10 @@ const ToolCards = () => {
                             ) : (
                               <div
                                 className="toolcard__sub-icons"
-                                onClick={() => setisLoginrequire(true)}
+                                onClick={() => {
+                                  setisLoginrequire(true);
+                                  setTypeClick(ErrorMessages.EmbededAlert);
+                                }}
                               >
                                 {/* <Tooltip title="Embeded Code" placement="top"> */}
                                 <SystemUpdateAltIcon />
@@ -238,7 +235,10 @@ const ToolCards = () => {
                             ) : (
                               <div
                                 className="toolcard__sub-icons"
-                                onClick={() => setisLoginrequire(true)}
+                                onClick={() => {
+                                  setisLoginrequire(true);
+                                  setTypeClick(ErrorMessages.loginAlert);
+                                }}
                               >
                                 {/* <Tooltip title="Add To Cart" placement="top"> */}
                                 <ShoppingCartIcon />

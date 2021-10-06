@@ -49,9 +49,6 @@ export class LoginValidation extends Validation {
         if (!value) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
-        } else if (value.length < PASSWORD_MIN_LENGTH) {
-          validationResponse.isValid = false;
-          validationResponse.message = ErrorMessages.PASSWORD_MIN;
         }
 
         break;
@@ -83,8 +80,8 @@ export class UserValidation extends Validation {
         if (!value) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.NAME_REQURIED;
-        }else{
-          if(!namePattern(value)){
+        } else {
+          if (!namePattern(value)) {
             validationResponse.isValid = false;
             validationResponse.message = ErrorMessages.NAME_PATTERN;
           }
@@ -98,9 +95,9 @@ export class UserValidation extends Validation {
         } else if (value.length < PASSWORD_MIN_LENGTH) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_MIN;
-        } else if (!passwordPattern(value)) {
+        } else if (passwordPattern(value)) {
           validationResponse.isValid = false;
-          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+          validationResponse.message = ErrorMessages.PASSWORD_PATTERN;
         }
         break;
       case "confirmpassword":
@@ -138,6 +135,40 @@ export class ForgotValidation extends Validation {
         break;
       default:
       // break;
+    }
+    return validationResponse;
+  };
+}
+
+export class ResetPassword extends Validation {
+  validateField = (field, value, context) => {
+    const validationResponse = new ValidationResponse();
+
+    switch (field) {
+      case "setPassword":
+        if (!value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+        } else if (value.length < PASSWORD_MIN_LENGTH) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+        } else if (passwordPattern(value)) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_PATTERN;
+        }
+        break;
+      case "confirmPassword":
+        if (!value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+        } else if (value.length < PASSWORD_MIN_LENGTH) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_MIN;
+        }
+        break;
+
+      default:
+        break;
     }
     return validationResponse;
   };

@@ -1,0 +1,2 @@
+// export const PAYMENT_SUCESS = "PAYMENT_SUCESS";
+// export const PAYMENT_NOTSET = "PAYEMNT_NOTSET";

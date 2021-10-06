@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import CustomButton from "../../components/widgets/Button";
+import CustomButton from "../widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch } from "react-redux";
 //import Toaster from "../../util/Toaster";
@@ -16,7 +16,6 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   const [istype, setType] = useState(updateData.plan_type);
   const [valuePrice, setValuePrice] = useState(updateData.plan_value);
   const [isCurentPrice, setCurentPrice] = useState(updateData.price);
-  //  const [isUpdatedID, setUpdateID] = useState(updateData.id);
   const [isUpdateResult, setUpdateResult] = useState("");
   const dispatch = useDispatch();
 
@@ -44,19 +43,18 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   };
 
   const handleCalculatePrice = (e) => {
-    let value = e.target.value > 0 ? e.target.value : 1;
-
+    let value = e.target.value;
     setValuePrice(value);
     istype === "days"
       ? setCurentPrice(value * 5)
       : setCurentPrice((value * 0.1).toFixed(2));
-    // if (e.target.value <= 0) {
-    //   setCurentPrice(0);
-    // }
+    if (e.target.value <= 0) {
+      setCurentPrice(0);
+    }
 
-    // if (e.target.value >= 2500000) {
-    //   setCurentPrice();
-    // }
+    if (e.target.value >= 2500000) {
+      setCurentPrice("");
+    }
   };
 
   useEffect(() => {
@@ -72,8 +70,6 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       currency: updateData.currency,
       is_renew: "false",
     };
-
-    //dispatch(updateCartIteam(isUpdatedID, plans));
     //console.log("plans", res.token.user.pk);
 
     dispatch(loadingStart());
@@ -97,15 +93,6 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   return (
     <>
       <div className="subscription-type">
-        <select onChange={handleChange}>
-          <option value="days" selected={istype == "days"}>
-            Number of days
-          </option>
-          <option value="hits" selected={istype == "hits"}>
-            Number of hits
-          </option>
-        </select>
-
         <div className="subscription-type__iner">
           <div className="subscription-type__days">
             <TextField
@@ -114,7 +101,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
               variant="outlined"
               name="hits"
               className="subscription-type__inputbox"
-              value={valuePrice > 0 ? valuePrice : 1}
+              value={valuePrice <= 0 ? 1 : valuePrice}
               // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
@@ -129,7 +116,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
         <CustomButton
           className="primary-button add--card"
           onClick={cartUpdate}
-          disabled={valuePrice == 0 || valuePrice == "" ? true : false}
+          disabled={valuePrice === 0 || valuePrice === "" ? true : false}
         >
           <ShoppingCartIcon className="margin-right-15" /> Update Cart
         </CustomButton>

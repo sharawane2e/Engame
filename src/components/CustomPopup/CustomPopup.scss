@@ -46,7 +46,7 @@
   @include space(padding, all, $padding-50, 0);
   // padding-right: 50px;
   @include breakpoint(desktop) {
-    @include space(padding, all, $padding-30, 0);
+    @include space(padding, all, $padding-8, 0);
   }
   @include breakpoint(mobileonly) {
     @include space(padding, all, $padding-0, 0);
