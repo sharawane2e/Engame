@@ -7,6 +7,18 @@
   .MuiGrid-container {
     // min-height: 50vh;
   }
+
+  #{&}__tooltip {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    display: none;
+    .MuiSvgIcon-root {
+      color: $secondary;
+    }
+  }
+
   #{&}__imageblck {
     &:hover {
       @include border("", $border-width, $bsolid, $secondary);
@@ -17,6 +29,9 @@
         map-get($map: $boxshadow, $key: "red-smooth")
       );
       .toolcard__preview {
+        display: block;
+      }
+      .toolcard__tooltip {
         display: block;
       }
       + .toolcard__align {

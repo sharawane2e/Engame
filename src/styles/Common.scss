@@ -262,17 +262,23 @@ a {
 
 /*For Custom Scroll*/
 body::-webkit-scrollbar,
-.custom-scroll::-webkit-scrollbar {
+.custom-scroll::-webkit-scrollbar,
+.cardInfo::-webkit-scrollbar,
+.popup-container__iner--xxl::-webkit-scrollbar {
   width: 0.35em;
 }
 
 body::-webkit-scrollbar-track,
-.custom-scroll::-webkit-scrollbar-track {
+.custom-scroll::-webkit-scrollbar-track,
+.cardInfo::-webkit-scrollbar-track,
+.popup-container__iner--xxl::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 body::-webkit-scrollbar-thumb,
-.custom-scroll::-webkit-scrollbar-thumb {
+.custom-scroll::-webkit-scrollbar-thumb,
+.cardInfo::-webkit-scrollbar-thumb,
+.popup-container__iner--xxl::-webkit-scrollbar-thumb {
   background-color: $scroll-color;
   outline: 1px solid $scroll-border-color;
 }

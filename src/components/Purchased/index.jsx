@@ -342,9 +342,9 @@ function Purchased(props) {
                 </Typography>
               </Grid>
             </Grid>
-
             {/*Card start */}
-            {widgetList.map((item, index) => {
+
+            {widgetList?.map((item, index) => {
               if (
                 filter == "active"
                   ? item.is_active
@@ -375,15 +375,6 @@ function Purchased(props) {
                 const ConsumptionValue =
                   (item.remaining_value * 100) / item.plan.plan_value;
 
-                // const ProductStatusIcon = item.is_paused ? (
-                //   <CheckCircleIcon />
-                // ) : (
-                //   <CheckCircleIcon />
-                // );
-
-                // const ProductStatusIcon = item.is_paused
-                //   ? CheckCircleIcon
-                //   : null;
                 return (
                   <Grid container spacing={3} key={index}>
                     <Grid item xs={12}>
@@ -719,6 +710,24 @@ function Purchased(props) {
             imgUrl={emptyWidgett}
             buttonName="Continue Shoping"
           />
+
+          // '''
+          // filter == "active"
+          //         ? item.is_active
+          //         : filter == "expiresoon"
+          //         ? item.is_expiring_soon
+          //         : filter == "expired"
+          //         ? !item.is_active
+          //         : filter == "paused"
+          //         ? item.is_paused
+          //         : filter == "days"
+          //         ? item.plan.plan_type == "days"
+          //         : filter == "hits"
+          //         ? item.plan.plan_type == "hits"
+          //         : filter == "all"
+          //         ? item.id
+          //         : item.id
+          // ''''
         )}
         {/*Renew Subscription*/}
         <CustomPopup
