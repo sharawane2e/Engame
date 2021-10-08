@@ -139,6 +139,7 @@ const Header = ({ props }) => {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      className={classes.sectionDesktop}
     >
       {/* <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
@@ -184,7 +185,7 @@ const Header = ({ props }) => {
             ></IconButton> */}
             <div className="user-after-login">
               <CustomButton onClick={handleProfileMenuOpen}>
-                {user.token.user.first_name} <ArrowDropDownIcon />
+                {user.token.user.first_name}
               </CustomButton>
             </div>
           </MenuItem>

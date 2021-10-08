@@ -398,7 +398,7 @@ function Purchased(props) {
                               {/* <img src={checkCircle} /> */}
                               {item?.is_paused ? (
                                 <PauseCircleOutlineIcon className="fill_yellow" />
-                              ) : item.plan_expire_date ? (
+                              ) : item.is_expiring_soon ? (
                                 <TimerIcon className="fill_red" />
                               ) : item.is_active ? (
                                 <CheckCircleIcon />
@@ -554,7 +554,8 @@ function Purchased(props) {
                                   component="div"
                                   className="purchased-tool__tool-type"
                                 >
-                                  {!item.is_paused ? (
+                                  {!item.is_paused ||
+                                  item.plan_type == "days" ? (
                                     <>
                                       <span className="subscription-type-text expiry-type">
                                         Expiry Date:
