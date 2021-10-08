@@ -238,7 +238,11 @@ function Purchased(props) {
               <Link color="inherit" to="/">
                 Home
               </Link>
-              <Typography color="textPrimary" component="div">
+              <Typography
+                color="textPrimary"
+                component="div"
+                className="bredcrum-conatiner__bredcrum-normaltext"
+              >
                 My Widgets
               </Typography>
             </Breadcrumbs>

@@ -93,7 +93,12 @@ const Cart = () => {
               {/* <Link color="inherit" to="" >
                         Shopping Cart
               </Link> */}
-              <Typography color="textPrimary ">Shopping Cart</Typography>
+              <Typography
+                color="textPrimary"
+                className="bredcrum-conatiner__bredcrum-normaltext"
+              >
+                Shopping Cart
+              </Typography>
             </Breadcrumbs>
           </Container>
         </div>

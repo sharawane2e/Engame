@@ -1,14 +1,12 @@
 .shopping-cart-data {
   min-height: 740px;
+  @include breakpoint(largeDesktop) {
+    min-height: 87vh;
+  }
 }
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  // @include bgcolor($gray-secondary);
   @include space(padding, top, $padding-30, 0);
-  // min-height: 100vh;
-  #{&}__container {
-    //height: 80vh;
-  }
   #{&}__container-inr {
     @include space(padding, bottom, $padding-15, 0);
   }
@@ -29,7 +27,6 @@
     @include space(padding, top-bottom, $padding-20, $padding-20);
     @include space(padding, left-right, $padding-20, $padding-20);
     @include space(margin, bottom, $margin-10, 0);
-
     .curent-tool-img {
       width: 85px;
       > img {

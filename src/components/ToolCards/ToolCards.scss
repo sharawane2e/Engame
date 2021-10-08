@@ -4,8 +4,8 @@
   background: $white;
   min-height: 52vh !important;
   align-items: inherit !important;
-  .MuiGrid-container {
-    // min-height: 50vh;
+  @include breakpoint(largeDesktop) {
+    min-height: 69vh !important;
   }
   #{&}__imageblck {
     &:hover {
@@ -116,7 +116,6 @@
     @include font-size($font-xl-reg);
   }
   #{&}__aligninr1 {
-    // display: flex;
     flex: 0 0 100%;
   }
   #{&}__aligninr {
@@ -136,7 +135,7 @@
       width: 178px !important;
       margin: 0 auto;
       &:disabled {
-        background-color: #999;
+        background-color: $dark-gray-color;
       }
       .MuiButton-label {
         > svg {
@@ -145,8 +144,13 @@
       }
     }
     .add--card[disabled] {
-      background-color: #999 !important;
-      box-shadow: 0px 10px 20px rgb(0 0 0 / 25%);
+      background-color: $dark-gray-color !important;
+      @include box-shadow(
+        0px,
+        10px,
+        20px,
+        map-get($map: $boxshadow, $key: $black-smooth)
+      );
     }
   }
 }

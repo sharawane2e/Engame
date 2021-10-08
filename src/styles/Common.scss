@@ -9,9 +9,7 @@ body {
 }
 .App {
   position: relative;
-  // height: 100vh;
   height: 100%;
-  // background: #efefef;
   @include bgcolor($gray-secondary);
 }
 .MuiButton-label {
@@ -84,7 +82,8 @@ body {
 }
 
 .header-margin-top {
-  margin-top: 110px;
+  // margin-top: 110px;
+  @include space(margin, top, 110px, 0);
 }
 /*Use these classes for borders*/
 .border-bottom {
@@ -184,14 +183,17 @@ a {
           @include color($secondary);
           @include font-size($font-xl-reg);
         }
-        > p {
-          font-family: map-get($map: $font-family, $key: "font-barlowbold");
-          @include color($black-secondary);
-          @include font-weight($font-700);
-          @include font-size($font-xl-reg);
-        }
+        // > p {
+        //   font-family: map-get($map: $font-family, $key: "font-barlowbold");
+        //   @include color($black-secondary);
+        //   @include font-weight($font-700);
+        //   @include font-size($font-xl-reg);
+        // }
       }
     }
+  }
+  #{&}__bredcrum-normaltext {
+    font-size: 0.85rem;
   }
 }
 /*END*/
@@ -235,7 +237,6 @@ a {
 .sticky-position {
   position: sticky;
   top: 92px;
-  // height: 100%;
 }
 .sticky-head-position {
   position: sticky;
@@ -268,7 +269,12 @@ body::-webkit-scrollbar,
 
 body::-webkit-scrollbar-track,
 .custom-scroll::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  @include box-shadow(
+    0px,
+    0px,
+    6px,
+    map-get($map: $boxshadow, $key: $black-smooth)
+  );
 }
 
 body::-webkit-scrollbar-thumb,
@@ -279,7 +285,7 @@ body::-webkit-scrollbar-thumb,
 /*end Custom Scroll*/
 
 .pdl-2 {
-  padding-left: 15px;
+  @include space(padding, left, $margin-15, 0);
 }
 
 input:-internal-autofill-selected {
@@ -308,7 +314,7 @@ select:disabled {
 }
 
 .MuiSwitch-track {
-  background: #b3c3d3;
+  background: $switch-color;
   border-radius: 10px;
   display: block;
   height: 100%;
@@ -317,7 +323,7 @@ select:disabled {
 }
 
 .MuiSwitch-track {
-  background: #b3c3d3;
+  background: $switch-color;
   border-radius: 10px;
   display: block;
   height: 100%;
@@ -331,7 +337,7 @@ select:disabled {
   top: 3px;
   left: 3px;
   border-radius: 16px;
-  background-color: #fff;
+  background-color: $white;
   position: relative;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
@@ -350,10 +356,10 @@ select:disabled {
 .Mui-checked .MuiSwitch-thumb {
   left: 14px;
   top: 3px;
-  background-color: #fff;
+  background-color: $white;
 }
 .Mui-checked .MuiSwitch-track {
-  background: #f15b5b;
+  background: $primary;
 }
 
 input:-internal-autofill-selected {
