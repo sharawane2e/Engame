@@ -361,7 +361,7 @@ const ToolCards = () => {
         <CustomPopup
           open={isInfoPopup}
           onClose={() => setIsInfoPopup(false)}
-          headerText="FAQS"
+          headerText="How it works?"
           footerButton={true}
           className="border-radius popup-container__iner--xxl"
         >

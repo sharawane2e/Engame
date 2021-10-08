@@ -26,7 +26,7 @@ const ToolInfo = (props) => {
           id="panel1bh-header"
         >
           <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            1. What can you test?
+            What can you test?
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -43,7 +43,7 @@ const ToolInfo = (props) => {
           id="panel2bh-header"
         >
           <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            2. Customize
+            Customize
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -59,9 +59,7 @@ const ToolInfo = (props) => {
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            3. Output
-          </Typography>
+          <Typography sx={{ width: "33%", flexShrink: 0 }}>Output</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>TBD</Typography>
@@ -77,7 +75,7 @@ const ToolInfo = (props) => {
           id="panel4bh-header"
         >
           <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            4. Step for implementation
+            Step for implementation
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
