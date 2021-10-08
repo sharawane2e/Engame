@@ -12,7 +12,7 @@ import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import checkCircle from "../../assets/images/check-circle.svg";
 import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
 import TimerIcon from "@material-ui/icons/Timer";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, STRIPE } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
 //import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
