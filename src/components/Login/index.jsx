@@ -60,8 +60,7 @@ class Login extends Component {
         .then((res) => {
           if (res.non_field_errors) {
             Toaster.error(
-              res.non_field_errors ? res.non_field_errors.join("") : null,
-              "topCenter"
+              res.non_field_errors ? res.non_field_errors.join("") : null
             );
           } else {
             this.props.dispatch(loginUser(res));

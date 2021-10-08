@@ -38,6 +38,10 @@
     @media (min-width: 1280px) and (max-width: 1365px) {
       @content;
     }
+  } @else if $point == largeDesktop {
+    @media (min-width: 2000px) and (max-width: 3000px) {
+      @content;
+    }
   } @else if $point == sm-mobileonly {
     @media (min-width: 320px) and (max-width: 480px) {
       @content;

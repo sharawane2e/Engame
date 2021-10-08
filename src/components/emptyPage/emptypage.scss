@@ -1,17 +1,16 @@
 .emptyPage {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: $align-center;
+  align-items: $align-center;
   height: 80vh;
-  background: #fdfdfd;
+  background: $white;
   flex-direction: column;
   &__headding {
-    margin-bottom: 20px;
+    @include space(margin, bottom, $margin-20, 0);
     &__para {
       font-weight: 500;
       color: #6a6464;
       font-size: $font-sm !important;
-      // @include font-size($font-xxl);
     }
   }
   &__button {
@@ -20,7 +19,10 @@
       padding: 10px 25px !important;
     }
   }
-  @include breakpoint(desktop) {
-    height: 70vh;
+  // @include breakpoint(desktop) {
+  //   height: 70vh;
+  // }
+  @include breakpoint(largeDesktop) {
+    min-height: 86vh;
   }
 }

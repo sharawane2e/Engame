@@ -25,6 +25,8 @@ import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
 import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
+import ToolInfo from "../ToolInfo";
+import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -40,6 +42,9 @@ const ToolCards = () => {
   const { loading, error, products } = productList;
   const [productShow, setProductShow] = useState(products);
   const [TypeClick, setTypeClick] = useState("");
+
+  const [isInfoPopup, setIsInfoPopup] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -95,13 +100,6 @@ const ToolCards = () => {
         {loading ? (
           <>
             <LoadingBox />
-            {/* <Box width={210} marginRight={0.5} my={5}>
-              <Skeleton variant="rect" width={210} height={118} />
-              <Box pt={0.5}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box> */}
           </>
         ) : error ? (
           <MessageBox>{error}</MessageBox>
@@ -118,7 +116,7 @@ const ToolCards = () => {
                       key={index}
                       id={tooldata.id}
                     >
-                      <Paper className="toolcard__imageblck ">
+                      <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
                           <img src={BASE_URL + "media/" + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
@@ -129,6 +127,12 @@ const ToolCards = () => {
                             >
                               <RemoveRedEyeIcon className="eyes_icon" /> Preview
                             </CustomButton>
+                          </div>
+                          <div className="toolcard__tooltip">
+                            <HelpCenterRoundedIcon
+                              className="toolcard__tooltip__icon"
+                              onClick={() => setIsInfoPopup(tooldata)}
+                            />
                           </div>
                         </div>
 
@@ -352,6 +356,16 @@ const ToolCards = () => {
             toolId={popupId}
             onClose={() => setSubscriptionPopup(false)}
           />
+        </CustomPopup>
+
+        <CustomPopup
+          open={isInfoPopup}
+          onClose={() => setIsInfoPopup(false)}
+          headerText="How it works?"
+          footerButton={true}
+          className="border-radius popup-container__iner--xxl"
+        >
+          <ToolInfo />
         </CustomPopup>
         {/*End */}
       </Toolbar>

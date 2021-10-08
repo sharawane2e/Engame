@@ -133,7 +133,10 @@ const Cart = () => {
               {/* <Link color="inherit" to="" >
                         Shopping Cart
               </Link> */}
-              <Typography omponent="div" color="textPrimary">
+              <Typography
+                color="textPrimary"
+                className="bredcrum-conatiner__bredcrum-normaltext"
+              >
                 Shopping Cart
               </Typography>
             </Breadcrumbs>

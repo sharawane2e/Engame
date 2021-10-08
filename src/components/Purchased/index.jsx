@@ -14,7 +14,7 @@ import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 // import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
 import TimerIcon from "@material-ui/icons/Timer";
-// import { BASE_URL } from "../../config/ApiUrl";
+// import { BASE_URL, STRIPE } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
 //import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -44,6 +44,7 @@ import CustomButton from "../../components/widgets/Button";
 import warning_icon from "../../assets/images/warning_icon.svg";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { ErrorMessages } from "../../constants/Messages";
+import { removeFromCart } from "../../redux/cart/action";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -129,6 +130,7 @@ function Purchased(props) {
               localStorage.removeItem("ExtendData");
               dispatch(loadingStop());
               Toaster.sucess(result.details, "topCenter");
+              dispatch(removeFromCart());
             }
           });
       } else {
@@ -158,6 +160,7 @@ function Purchased(props) {
               //Toaster.error("Some thing went wrong", "topCenter");
             } else {
               myWwidgets();
+              dispatch(removeFromCart());
               localStorage.removeItem("ExtendData");
               dispatch(loadingStop());
               Toaster.sucess(result.details, "topCenter");
@@ -191,8 +194,9 @@ function Purchased(props) {
           result.forEach((el, index) => {
             isShowArr.push(false);
           });
-          console.log(result);
+          // console.log(result);
           setShow(isShowArr);
+          dispatch(removeFromCart());
           dispatch(loadingStop());
         }
       });
@@ -244,7 +248,11 @@ function Purchased(props) {
               <Link color="inherit" to="/">
                 Home
               </Link>
-              <Typography color="textPrimary" component="div">
+              <Typography
+                color="textPrimary"
+                component="div"
+                className="bredcrum-conatiner__bredcrum-normaltext"
+              >
                 My Widgets
               </Typography>
             </Breadcrumbs>
@@ -348,9 +356,9 @@ function Purchased(props) {
                 </Typography>
               </Grid>
             </Grid>
-
             {/*Card start */}
-            {widgetList.map((item, index) => {
+
+            {widgetList?.map((item, index) => {
               if (
                 filter == "active"
                   ? item.is_active
@@ -381,15 +389,6 @@ function Purchased(props) {
                 const ConsumptionValue =
                   (item.remaining_value * 100) / item.plan.plan_value;
 
-                // const ProductStatusIcon = item.is_paused ? (
-                //   <CheckCircleIcon />
-                // ) : (
-                //   <CheckCircleIcon />
-                // );
-
-                // const ProductStatusIcon = item.is_paused
-                //   ? CheckCircleIcon
-                //   : null;
                 return (
                   <Grid container spacing={3} key={index}>
                     <Grid item xs={12}>
@@ -405,7 +404,7 @@ function Purchased(props) {
                               {/* <img src={checkCircle} /> */}
                               {item?.is_paused ? (
                                 <PauseCircleOutlineIcon className="fill_yellow" />
-                              ) : item.plan_expire_date ? (
+                              ) : item.is_expiring_soon ? (
                                 <TimerIcon className="fill_red" />
                               ) : item.is_active ? (
                                 <CheckCircleIcon />
@@ -561,7 +560,8 @@ function Purchased(props) {
                                   component="div"
                                   className="purchased-tool__tool-type"
                                 >
-                                  {!item.is_paused ? (
+                                  {!item.is_paused ||
+                                  item.plan_type == "days" ? (
                                     <>
                                       <span className="subscription-type-text expiry-type">
                                         Expiry Date:
@@ -725,6 +725,24 @@ function Purchased(props) {
             imgUrl={emptyWidgett}
             buttonName="Continue Shoping"
           />
+
+          // '''
+          // filter == "active"
+          //         ? item.is_active
+          //         : filter == "expiresoon"
+          //         ? item.is_expiring_soon
+          //         : filter == "expired"
+          //         ? !item.is_active
+          //         : filter == "paused"
+          //         ? item.is_paused
+          //         : filter == "days"
+          //         ? item.plan.plan_type == "days"
+          //         : filter == "hits"
+          //         ? item.plan.plan_type == "hits"
+          //         : filter == "all"
+          //         ? item.id
+          //         : item.id
+          // ''''
         )}
         {/*Renew Subscription*/}
         <CustomPopup

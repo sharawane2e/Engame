@@ -1,17 +1,3 @@
-// .login-background {
-//   background: url("../../assets/images/login.png") no-repeat;
-//   min-height: 520px;
-//   background-position: left bottom;
-//   background-size: 70%;
-//   @include breakpoint(mobileonly) {
-//     display: none;
-//   }
-//   @include breakpoint(Ipad) {
-//     background-size: 60%;
-//     opacity: 0.8;
-//     display: none;
-//   }
-// }login-registartion
 .popup-background {
   background: $gray-primary url("../../assets/images/login-registartion.svg")
     no-repeat !important;
@@ -98,9 +84,8 @@
     width: 500px;
     @include breakpoint(Ipad-pro) {
       width: 90%;
-      // height: 90vh;
-      // min-height: 500px;
-      overflow-y: auto;
+
+      min-height: 500px;
     }
   }
   #{&}__iner--xl-md {

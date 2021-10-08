@@ -1,11 +1,11 @@
-.emailActivation{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    .sucess_message{
-        padding: 20px 5px;
-        width: 100%;
-    }
+.emailActivation {
+  align-items: $align-center;
+  justify-content: $align-center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  .sucess_message {
+    padding: 20px 5px;
+    width: 100%;
+  }
 }
