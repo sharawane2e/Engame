@@ -263,7 +263,9 @@ a {
 
 /*For Custom Scroll*/
 body::-webkit-scrollbar,
-.custom-scroll::-webkit-scrollbar {
+.custom-scroll::-webkit-scrollbar,
+.cardInfo::-webkit-scrollbar,
+.popup-container__iner--xxl::-webkit-scrollbar {
   width: 0.35em;
 }
 
@@ -278,7 +280,9 @@ body::-webkit-scrollbar-track,
 }
 
 body::-webkit-scrollbar-thumb,
-.custom-scroll::-webkit-scrollbar-thumb {
+.custom-scroll::-webkit-scrollbar-thumb,
+.cardInfo::-webkit-scrollbar-thumb,
+.popup-container__iner--xxl::-webkit-scrollbar-thumb {
   background-color: $scroll-color;
   outline: 1px solid $scroll-border-color;
 }
