@@ -154,10 +154,10 @@ function Purchased(props) {
               //Toaster.error("Some thing went wrong", "topCenter");
             } else {
               myWwidgets();
+              dispatch(removeFromCart());
               localStorage.removeItem("ExtendData");
               dispatch(loadingStop());
               Toaster.sucess(result.details, "topCenter");
-              dispatch(removeFromCart());
             } // history.push(history.path);
           });
       }
@@ -188,8 +188,9 @@ function Purchased(props) {
           result.forEach((el, index) => {
             isShowArr.push(false);
           });
-          console.log(result);
+          // console.log(result);
           setShow(isShowArr);
+          dispatch(removeFromCart());
           dispatch(loadingStop());
         }
       });

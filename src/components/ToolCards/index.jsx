@@ -185,7 +185,7 @@ const ToolCards = () => {
                     <Grid
                       item
                       xs={12}
-                      lg={3}
+                      lg={2}
                       sm={4}
                       key={index}
                       id={tooldata.id}
