@@ -39,7 +39,7 @@
       @content;
     }
   } @else if $point == largeDesktop {
-    @media (min-width: 2049px) and (max-width: 2560px) {
+    @media (min-width: 2000px) and (max-width: 3000px) {
       @content;
     }
   } @else if $point == sm-mobileonly {
