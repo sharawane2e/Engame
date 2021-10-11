@@ -65,7 +65,7 @@ function Purchased(props) {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
-  const [is_renew, setRenew] = useState("false");
+  const [is_renew, setRenew] = useState(false);
   //const user = useSelector((state) => state.user.token);
   // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
   const [widgetList, setWidgetList] = useState([]);

@@ -6,7 +6,7 @@ import Link from "@material-ui/core/Link";
 import { ForgotValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import CustomButton from "../../components/widgets/Button";
-import { FORGOT } from "../../config/ApiUrl";
+import { FORGOT_PASSWORD } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
 import ApiRequest from "../../util/ApiRequest";
@@ -35,7 +35,7 @@ class ForgotPassword extends Component {
       this.props.dispatch(loadingStart());
       const { email } = this.state;
 
-      ApiRequest.request(FORGOT, "POST", { email: email })
+      ApiRequest.request(FORGOT_PASSWORD, "POST", { email: email })
         .then((res) => {
           console.log("this.state.props", this.state.props);
           Toaster.sucess(res.detail, "topCenter");
