@@ -194,7 +194,7 @@ function Purchased(props) {
           result.forEach((el, index) => {
             isShowArr.push(false);
           });
-          // console.log(result);
+          console.log(result);
           setShow(isShowArr);
           dispatch(removeFromCart());
           dispatch(loadingStop());
@@ -560,8 +560,8 @@ function Purchased(props) {
                                   component="div"
                                   className="purchased-tool__tool-type"
                                 >
-                                  {!item.is_paused ||
-                                  item.plan_type == "days" ? (
+                                  {!item.is_paused &&
+                                  item?.plan?.plan_type == "days" ? (
                                     <>
                                       <span className="subscription-type-text expiry-type">
                                         Expiry Date:
