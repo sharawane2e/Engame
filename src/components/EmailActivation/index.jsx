@@ -6,11 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+import { useLocation } from "react-router";
+import { parse } from "querystring";
 
 const EmailActivation = (EmailActive) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [emailActivationResult, setEmailActivationResult] = useState([]);
+
+  const location = useLocation();
+
+  const queryData = parse(location.search);
 
   const EmailAPI = async () => {
     dispatch(loadingStart());
@@ -21,7 +27,7 @@ const EmailActivation = (EmailActive) => {
         // Authorization: `Bearer ${token.access_token}`,
       },
       body: JSON.stringify({
-        key: "MTI:1mYUxq:Mg9d5nfrH3Qvy9zUPm_OplrEuhoPUCjEpz10kiviIpk",
+        key: "MTA:1mZvFm:a6v_nL9J9uKYquUn_b_SbD19d-sIOqG6k-jqFVl8eEs/",
       }),
     })
       .then((response) => response.json())
@@ -42,11 +48,12 @@ const EmailActivation = (EmailActive) => {
   useEffect(() => {
     // let timeout;
     // timeout = setTimeout(() => history.push("/"), 3000);
+
+    console.log(location);
+
+    // console.log(token);
     EmailAPI();
   }, []);
-  {
-    console.log("hello", emailActivationResult);
-  }
 
   return (
     <Grid container spacing={4} align="center">

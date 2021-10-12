@@ -11,14 +11,19 @@ import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 import { CheckCircleIcon } from "../../assets/images/check-circle.svg";
+import { parse } from "query-string";
+import { useLocation } from "react-router";
 
 const Forgot = () => {
   const dispatch = useDispatch();
   const [newPasswords, setNewPasswords] = useState("");
   const [conformPasswords, setConformPasswords] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [isPasswordReset, setIsPasswordReset] = useState(false);
+  const [isToken, setIsToken] = useState(false);
+  const location = useLocation();
 
-  useEffect(() => {}, []);
+  const queryData = parse(location.search);
 
   const haldelNewPassword = (e) => {
     setNewPasswords(e.target.value);
@@ -33,12 +38,12 @@ const Forgot = () => {
       : setPasswordMatch(false);
   };
 
+  useEffect(() => {
+    // console.log(queryData);
+  }, []);
+
   // handleSubmit
   const handleSubmit = () => {
-    let uuid = window.location.hash.split("forgot/")[1];
-
-    let onlyuuid = uuid.split("/")[0];
-    let token = uuid.split("/")[1];
     console.log("passwoird", newPasswords);
     console.log("conform password", conformPasswords);
 
@@ -49,7 +54,12 @@ const Forgot = () => {
 
     dispatch(loadingStart());
     fetch(
-      BASE_URL + "user/password/reset/confirm/" + onlyuuid + "/" + token + "/",
+      BASE_URL +
+        "user/password/reset/confirm/" +
+        queryData.uid +
+        "/" +
+        queryData.token +
+        "/",
       {
         method: "POST",
         headers: {
@@ -58,18 +68,16 @@ const Forgot = () => {
         body: JSON.stringify({
           new_password1: newPasswords,
           new_password2: conformPasswords,
-          uid: onlyuuid,
-          token: token,
+          uid: queryData.uid,
+          token: queryData.token,
         }),
       }
     )
       .then((result) => result.json())
-      .then((data) => {
-        Toaster.error(
-          data.non_field_errors ? data.non_field_errors.join("") : null,
-          "topCenter"
-        );
-        console.log(data);
+      .then((result) => {
+        console.log(result);
+        Toaster.error("Sucess");
+        setIsPasswordReset(true);
         dispatch(loadingStop());
       })
       .catch((error) => {
@@ -79,58 +87,71 @@ const Forgot = () => {
   return (
     <>
       <Header />
-      <div className="forgot">
-        <form action="">
-          <div className="form-group">
-            <InputLabel
-              htmlFor="standard-adornment-email"
-              className="input-label"
-            >
-              Password
-            </InputLabel>
-            <FormControl className="form-area__control">
-              <TextField
-                id="outlined-email-input"
-                placeholder="Password"
-                type="password"
-                variant="outlined"
-                onChange={haldelNewPassword}
-              />
-              <div className="validated-error"></div>
-            </FormControl>
+      {!isToken ? (
+        <div className="forgot">
+          {!isPasswordReset ? (
+            <form action="">
+              <div className="form-group">
+                <InputLabel
+                  htmlFor="standard-adornment-email"
+                  className="input-label"
+                >
+                  Password
+                </InputLabel>
+                <FormControl className="form-area__control">
+                  <TextField
+                    id="outlined-email-input"
+                    placeholder="Password"
+                    type="password"
+                    variant="outlined"
+                    onChange={haldelNewPassword}
+                  />
+                  <div className="validated-error"></div>
+                </FormControl>
 
-            <InputLabel
-              htmlFor="standard-adornment-email"
-              className="input-label"
-            >
-              Confirm Password
-            </InputLabel>
-            <FormControl className="form-area__control">
-              <TextField
-                id="outlined-email-input"
-                placeholder="Confrim Password"
-                type="password"
-                variant="outlined"
-                onChange={haldelConformPassword}
-                onKeyUp={handelMatchPassword}
-              />
-              <div className="validated-error"></div>
-            </FormControl>
-            <p>
-              {!passwordMatch ? "password you are entered is incurrect" : ""}
-            </p>
-          </div>
-          <div className="form-group">
-            <CustomButton
-              className="forgot__button primary-button"
-              onClick={handleSubmit}
-            >
-              Submit
-            </CustomButton>
-          </div>
-        </form>
-        <div>{/* <img src={CheckCircleIcon} alt="success" /> */}</div>
-      </div>
+                <InputLabel
+                  htmlFor="standard-adornment-email"
+                  className="input-label"
+                >
+                  Confirm Password
+                </InputLabel>
+                <FormControl className="form-area__control">
+                  <TextField
+                    id="outlined-email-input"
+                    placeholder="Confrim Password"
+                    type="password"
+                    variant="outlined"
+                    onChange={haldelConformPassword}
+                    onKeyUp={handelMatchPassword}
+                  />
+                  <div className="validated-error"></div>
+                </FormControl>
+                <p>
+                  {!passwordMatch
+                    ? "password you are entered is incurrect"
+                    : ""}
+                </p>
+              </div>
+              <div className="form-group">
+                <CustomButton
+                  className="forgot__button primary-button"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </CustomButton>
+              </div>
+            </form>
+          ) : (
+            <div>
+              <h2>Password Reset sucessfully</h2>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          <h2>Somthing Went wrong please try again</h2>
+        </div>
+      )}
 
       <Footer />
     </>
