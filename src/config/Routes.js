@@ -4,8 +4,9 @@ import PageNotFoundScreen from "../screens/PageNotFoundScreen";
 import Home from "../components/Home";
 import Purchased from "../components/Purchased";
 import Cart from "../components/cart/Cart";
-import Forgot from "../components/ForgotPassword/Forgot";
+import Forgot from "../components/ForgotPassword/ResetPassword";
 import EmailActivation from "../components/EmailActivation";
+import Faqs from "../components/FAQ/index";
 
 const Routes = [
   {
@@ -14,7 +15,7 @@ const Routes = [
     exact: true,
   },
   {
-    path: ["/user/account-confirm-email", "/forgot"],
+    path: ["/faq", "/user/account-confirm-email", "/forgot"],
     component: PublicScreen,
     //exact: true,
     routes: [
@@ -27,6 +28,11 @@ const Routes = [
         path: "/user/account-confirm-email",
         component: EmailActivation,
         isExact: false,
+      },
+      {
+        path: "/faq",
+        component: Faqs,
+        isExact: true,
       },
     ],
   },

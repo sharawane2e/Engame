@@ -29,10 +29,12 @@ const ToolInfo = (props) => {
             What can you test?
           </Typography>
         </AccordionSummary>
+
         <AccordionDetails>
           <Typography>TBD</Typography>
         </AccordionDetails>
       </Accordion>
+
       <Accordion
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}
@@ -50,6 +52,7 @@ const ToolInfo = (props) => {
           <Typography>TBD</Typography>
         </AccordionDetails>
       </Accordion>
+
       <Accordion
         expanded={expanded === "panel3"}
         onChange={handleChange("panel3")}
@@ -65,6 +68,7 @@ const ToolInfo = (props) => {
           <Typography>TBD</Typography>
         </AccordionDetails>
       </Accordion>
+
       <Accordion
         expanded={expanded === "panel4"}
         onChange={handleChange("panel4")}

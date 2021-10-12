@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Footer from "../Footer";
 import Header from "../Header";
-import CustomButton from "../../components/widgets/Button";
+import CustomButton from "../widgets/Button";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
