@@ -20,6 +20,7 @@ import { loginUser } from "../../redux/user/user-action";
 import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
 import { LOGIN } from "../../config/ApiUrl";
+// import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 class Login extends Component {
   state = {
@@ -63,6 +64,8 @@ class Login extends Component {
               res.non_field_errors ? res.non_field_errors.join("") : null
             );
           } else {
+            //  LocalStorageUtils.setUserIntoLocalStorage(res);
+            // ApiRequest.setAuthToken(LocalStorageUtils.getToken());
             this.props.dispatch(loginUser(res));
           }
         })

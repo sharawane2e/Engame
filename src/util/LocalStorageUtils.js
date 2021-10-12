@@ -1,18 +1,19 @@
 class LocalStorageUtils {
-  static #userToken = "012123asd";
+  // static setUserIntoLocalStorage(user) {
+  //   localStorage.setItem("user", JSON.stringify(user));
+  // }
 
   static getUserFromLocalStorage() {
     return JSON.parse(localStorage.getItem("auth"));
   }
 
-  // static removeUserFromLocalStorage() {
-  //   localStorage.removeItem("auth");
-  // }
+  static removeUserFromLocalStorage() {
+    localStorage.removeItem("auth");
+  }
 
   static getToken() {
     const user = this.getUserFromLocalStorage();
     //console.log("user", user);
-    // console.log(user);
     if (user) {
       return user.token;
     } else {
@@ -20,10 +21,10 @@ class LocalStorageUtils {
     }
   }
 
-  static isUserloggedIn = () => {
-    if (this.getToken()) return true;
-    return false;
-  };
+  // static isUserloggedIn = () => {
+  //   if (this.getToken()) return true;
+  //   return false;
+  // };
 }
 
 export default LocalStorageUtils;

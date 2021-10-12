@@ -26,7 +26,6 @@ export const cartReducers = (state = initialState, action) => {
     case CART_ITEM_GET:
       return { ...state, cartItems: action.payload };
     case CART_REMOVE_ITEM:
-      state.cartItems.pop();
       return {
         ...state,
         cartItems: [...state.cartItems.filter((x) => x.id !== action.payload)],

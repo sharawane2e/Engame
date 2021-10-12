@@ -6,17 +6,15 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_Dev_BaseUrl,
 });
 
-const token = LocalStorageUtils.getToken();
-
-if (token) {
-  instance.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${token.access_token}`;
-}
-
 export default {
   request: async function (url, method, data, parses) {
     let response = null;
+    const token = LocalStorageUtils.getToken();
+    if (token) {
+      instance.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${token.access_token}`;
+    }
     try {
       const apiResponse = await instance(url, {
         method,
@@ -25,7 +23,6 @@ export default {
       });
       response = apiResponse.data;
     } catch (error) {
-      // console.log(error);
       if (error.response) {
         if (error.response.status === 401) {
           LocalStorageUtils.removeUserFromLocalStorage();
@@ -38,7 +35,6 @@ export default {
           response = error.response.data;
           Toaster.error("Something went wrong", "topCenter");
         } else if (error.response.status === 404) {
-          localStorage.removeItem("auth");
           // Toaster.error("Something went wrong");
         } else {
           // Toaster.error("Something went wrong");
@@ -49,14 +45,14 @@ export default {
     return response;
   },
 
-  setAuthToken: function (token) {
-    if (token) {
-      // console.log("token" , token)
-      instance.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token.access_token}`;
-    } else {
-      delete instance.defaults.headers.common["Authorization"];
-    }
-  },
+  // setAuthToken: function (token) {
+  //   if (token) {
+  //     console.log("token", token);
+  //     instance.defaults.headers.common[
+  //       "Authorization"
+  //     ] = `Bearer ${token.access_token}`;
+  //   } else {
+  //     delete instance.defaults.headers.common["Authorization"];
+  //   }
+  // },
 };
