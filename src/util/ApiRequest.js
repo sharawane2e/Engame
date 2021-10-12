@@ -15,7 +15,6 @@ export default {
         "Authorization"
       ] = `Bearer ${token.access_token}`;
     }
-    //console.log("method", method);
     try {
       const apiResponse = await instance(url, {
         method,
@@ -24,21 +23,18 @@ export default {
       });
       response = apiResponse.data;
     } catch (error) {
-      // console.log(error);
       if (error.response) {
         if (error.response.status === 401) {
           LocalStorageUtils.removeUserFromLocalStorage();
           let location = window.location.href.split("#");
           let baseUrl = location[0];
           localStorage.removeItem("auth");
-          localStorage.removeItem("user");
           window.location.href = `${baseUrl}#/`;
           //window.location.reload();
         } else if (error.response.status === 400) {
           response = error.response.data;
           Toaster.error("Something went wrong", "topCenter");
         } else if (error.response.status === 404) {
-          localStorage.removeItem("user");
           // Toaster.error("Something went wrong");
         } else {
           // Toaster.error("Something went wrong");
