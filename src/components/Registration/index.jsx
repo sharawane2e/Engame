@@ -94,33 +94,6 @@ class Registration extends Component {
         .finally(() => {
           this.props.dispatch(loadingStop());
         });
-
-      // api's
-      // fetch(BASE_URL + "user/", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(user),
-      // })
-      //   .then((result) => result.json())
-      //   .then((data) => {
-      //     // console.log("curent data", data);
-      //     Toaster.error(
-      //       data.username ? data.username.join("") : null,
-      //       "topCenter"
-      //     );
-      //     Toaster.error(data.email ? data.email.join("") : null, "topCenter");
-      //     Toaster.error(
-      //       data.non_field_errors ? data.non_field_errors.join("") : null,
-      //       "topCenter"
-      //     );
-      //     this.props.dispatch(loadingStop());
-      //     if (data.detail) {
-      //       Toaster.sucess(data.detail, "topCenter");
-      //       window.location.reload();
-      //     }
-      //   });
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },

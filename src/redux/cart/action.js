@@ -1,6 +1,5 @@
 import * as actionTypes from "./types";
-// import axios from "axios";
-import { ADD_TO_CART, CART_DETAILS } from "../../config/ApiUrl";
+import { ADD_TO_CART, CART_DETAILS, GET_FROM_CART } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import ApiRequest from "../../util/ApiRequest";
 
@@ -12,7 +11,6 @@ export const addToCart = (userData) => (dispatch) => {
       dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res });
     })
     .catch((error) => {
-      // this.setState({ disableSubmit: false });
       console.log(error);
     })
     .finally(() => {
@@ -22,7 +20,7 @@ export const addToCart = (userData) => (dispatch) => {
 
 export const getItemFromCart = () => (dispatch) => {
   dispatch(loadingStart());
-  ApiRequest.request(ADD_TO_CART, "GET")
+  ApiRequest.request(GET_FROM_CART, "GET")
     .then((res) => {
       dispatch({ type: actionTypes.CART_ITEM_GET, payload: res });
     })
@@ -36,7 +34,6 @@ export const getItemFromCart = () => (dispatch) => {
 
 export const updateCartIteam = (updatedid, plans) => (dispatch) => {
   dispatch(loadingStart());
-
   ApiRequest.request(CART_DETAILS`${updatedid}/`, "PUT", plans)
     .then((res) => {
       dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: res });
@@ -50,15 +47,19 @@ export const updateCartIteam = (updatedid, plans) => (dispatch) => {
 };
 
 export const removeFromCart = (productId) => (dispatch) => {
+  console.log(productId);
   dispatch(loadingStart());
-  ApiRequest.request(CART_DETAILS + `${productId}/`, "DELETE")
-    .then((res) => {
-      dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: res });
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {
-      dispatch(loadingStop());
-    });
+  if (productId) {
+    ApiRequest.request(CART_DETAILS + `${productId}/`, "DELETE")
+      .then((res) => {
+        console.log("sucess", res);
+        dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: productId });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(loadingStop());
+      });
+  }
 };

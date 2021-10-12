@@ -85,10 +85,10 @@ const ToolCards = () => {
             dispatch(loadingStop());
             history.push("/");
             // console.log("token expire", response);
-            console.log("fail", response);
+            // console.log("fail", response);
           } else {
             setProductShow(response);
-            console.log("sucess", response);
+            //  console.log("sucess", response);
           }
         });
     }
