@@ -40,13 +40,6 @@ class ForgotPassword extends Component {
           console.log("this.state.props", this.state.props);
           Toaster.sucess(res.detail, "topCenter");
           window.location.reload();
-          // if (res.header.status === 400) {
-          //   console.log("eeroor throw");
-          //   Toaster.error(res.email ? res.email.join("") : null, "topCenter");
-          //   Toaster.error("User not in data base", "topCenter");
-          // } else {
-          //   //window.location.reload();
-          // }
         })
         .catch((error) => {
           // console.log(error);
@@ -122,12 +115,6 @@ class ForgotPassword extends Component {
               Forgot Password
             </div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-              {/* <InputLabel
-                htmlFor="standard-adornment-email"
-                className="input-label"
-              >
-                E-mail address
-              </InputLabel> */}
               <FormControl className="form-area__control">
                 <TextField
                   id="outlined-email-input"

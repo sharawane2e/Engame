@@ -27,6 +27,8 @@ import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 import ToolInfo from "../ToolInfo";
 import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
+import ApiRequest from "../../util/ApiRequest";
+import { CART_DETAILS } from "../../config/ApiUrl";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -66,32 +68,24 @@ const ToolCards = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    dispatch(listProducts());
+  const WidgetList = () => {
     if (user) {
-      let id = token.token.access_token;
-      fetch(BASE_URL + "widget/user/detail/", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${id}`,
-        },
-      })
-        .then((result) => result.json())
-        .then((response) => {
-          if (response.code === "token_not_valid") {
-            dispatch(logOutUser());
-            localStorage.removeItem("auth");
-            dispatch(loadingStop());
-            history.push("/");
-            // console.log("token expire", response);
-            // console.log("fail", response);
-          } else {
-            setProductShow(response);
-            //  console.log("sucess", response);
-          }
+      ApiRequest.request(BASE_URL + `widget/user/detail/`)
+        .then((res) => {
+          setProductShow(res);
+        })
+        .catch((error) => {
+          dispatch(logOutUser());
+          localStorage.removeItem("auth");
+          dispatch(loadingStop());
+          history.push("/");
         });
     }
+  };
+
+  useEffect(() => {
+    dispatch(listProducts());
+    WidgetList();
   }, [token]);
 
   return (

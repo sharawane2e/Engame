@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   Grid,
   Container,
@@ -10,7 +11,6 @@ import {
   Tooltip,
   Paper,
 } from "@mui/material";
-
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -19,12 +19,10 @@ import Header from "../Header";
 import Footer from "../Footer";
 import CustomPopup from "../CustomPopup";
 import CustomButton from "../../components/widgets/Button";
-import { BASE_URL, BASE_URL_1, CHECKOUT, STRIPE } from "../../config/ApiUrl";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { BASE_URL_1, CHECKOUT, STRIPE } from "../../config/ApiUrl";
 import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
-import { logOutUser } from "../../redux/user/user-action";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
@@ -37,44 +35,12 @@ const Cart = () => {
   const [productShow, setProductShow] = useState([]);
 
   useEffect(() => {
-    //dispatch(loadingStart());
     dispatch(getItemFromCart());
   }, []);
 
   const handleRemove = (isProduct) => {
     dispatch(removeFromCart(isProduct));
   };
-
-  // handleCheckout
-  // const handleCheckout = async () => {
-  //   dispatch(loadingStart());
-  //   const stripe = await loadStripe(STRIPE);
-  //   try {
-  //     await fetch(BASE_URL + "payments/checkout-session/", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${user.access_token}`,
-  //       },
-  //       body: JSON.stringify({ user: user.user.pk, is_renew: "false" }),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         if (result.code == "token_not_valid") {
-  //           dispatch(logOutUser());
-  //           localStorage.removeItem("auth");
-  //           dispatch(loadingStop());
-  //           //            history.push("/");
-  //         } else {
-  //           // sessionStorage.setItem("sessionId", result.sessionId);
-  //           stripe.redirectToCheckout({ sessionId: result.sessionId });
-  //           dispatch(loadingStop());
-  //         }
-  //       });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const handleCheckout = async () => {
     let CheckOutValue = {
@@ -101,9 +67,6 @@ const Cart = () => {
               <Link color="inherit" to="/">
                 Home
               </Link>
-              {/* <Link color="inherit" to="" >
-                        Shopping Cart
-              </Link> */}
               <Typography
                 color="textPrimary"
                 className="bredcrum-conatiner__bredcrum-normaltext"
@@ -135,22 +98,6 @@ const Cart = () => {
                 >
                   Shopping Cart
                 </Grid>
-                {/* <Grid
-                  item
-                  xl={4}
-                  lg={4}
-                  md={4}
-                  sm={6}
-                  xs={12}
-                  className="shoping-cart__right-card"
-                >
-                  <Link to="/">
-                    <CustomButton className="secondary-button">
-                      <PlayCircleFilledWhiteIcon className="margin-right" />
-                      Continue Shopping
-                    </CustomButton>
-                  </Link>
-                </Grid> */}
               </Grid>
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
