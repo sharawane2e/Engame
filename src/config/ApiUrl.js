@@ -23,3 +23,5 @@ export const GET_FROM_CART = "/cart/";
 export const CART_DETAILS = "/cart/detail/";
 
 export const CART_STANDARD_PRICE = "/cart/standard_price/";
+
+export const CHECKOUT = "payments/checkout-session/";

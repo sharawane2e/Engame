@@ -9,14 +9,13 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 //import { useHistory } from "react-router-dom";
 // import { addToCart } from "../../redux/cart/action";
 import { getItemFromCart } from "../../redux/cart/action";
+import ApiRequest from "../../util/ApiRequest";
+import { CART_DETAILS } from "../../config/ApiUrl";
 
 const SubscriptionUpdate = ({ updateData, onClose }) => {
-  // console.log(updateData);
-  //const [subscription, setSubscription] = useState("");
   const [istype, setType] = useState(updateData.plan_type);
   const [valuePrice, setValuePrice] = useState(updateData.plan_value);
   const [isCurentPrice, setCurentPrice] = useState(updateData.price);
-  //  const [isUpdatedID, setUpdateID] = useState(updateData.id);
   const [isUpdateResult, setUpdateResult] = useState("");
   const dispatch = useDispatch();
 
@@ -50,21 +49,14 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
     istype === "days"
       ? setCurentPrice(value * 5)
       : setCurentPrice((value * 0.1).toFixed(2));
-    // if (e.target.value <= 0) {
-    //   setCurentPrice(0);
-    // }
-
-    // if (e.target.value >= 2500000) {
-    //   setCurentPrice();
-    // }
   };
 
   useEffect(() => {
     dispatch(getItemFromCart());
   }, [isUpdateResult]);
 
-  const cartUpdate = () => {
-    let plans = {
+  const cartItemUpdate = () => {
+    let ItemPlans = {
       user: res.token.user.pk,
       widget: updateData.widget.id,
       plan_type: istype,
@@ -73,25 +65,14 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       is_renew: "false",
     };
 
-    //dispatch(updateCartIteam(isUpdatedID, plans));
-    //console.log("plans", res.token.user.pk);
-
-    dispatch(loadingStart());
-    fetch(BASE_URL + `cart/detail/${updateData.id}/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${res.token.access_token}`,
-      },
-      body: JSON.stringify(plans),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setUpdateResult(result);
-        // console.log(result);
-        onClose();
-        dispatch(loadingStop());
-      });
+    ApiRequest.request(
+      CART_DETAILS + `${updateData.id}/`,
+      "PUT",
+      ItemPlans
+    ).then((res) => {
+      setUpdateResult(res);
+      onClose();
+    });
   };
 
   return (
@@ -115,7 +96,6 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
               name="hits"
               className="subscription-type__inputbox"
               value={valuePrice > 0 ? valuePrice : 1}
-              // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{istype}</div>
@@ -128,7 +108,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       <div className="popup-container__footer popup--text">
         <CustomButton
           className="primary-button add--card"
-          onClick={cartUpdate}
+          onClick={cartItemUpdate}
           disabled={valuePrice == 0 || valuePrice == "" ? true : false}
         >
           <ShoppingCartIcon className="margin-right-15" /> Update Cart

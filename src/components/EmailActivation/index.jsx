@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 import { useHistory } from "react-router-dom";
 import success_icon from "../../assets/images/success_icon.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,10 +7,15 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
 
+import EmailActivationSucess from "../EmailActivation/emailActivationSucess";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Container, Grid, Paper, Typography } from "@mui/material";
+
 const EmailActivation = (EmailActive) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [emailActivationResult, setEmailActivationResult] = useState([]);
+  const [emailActivationResult, setEmailActivationResult] = useState();
 
   const EmailAPI = async () => {
     dispatch(loadingStart());
@@ -27,14 +32,14 @@ const EmailActivation = (EmailActive) => {
       .then((response) => response.json())
       .then((result) => {
         // console.log(result);
-        if (result.status !== "409") {
-          setEmailActivationResult(result);
-          Toaster.sucess(result.details, "topCenter");
+        if (result.status == "200") {
+          setEmailActivationResult(true);
+          Toaster.sucess("Your email is activated sucessfully", "topCenter");
           dispatch(loadingStop());
         } else {
-          setEmailActivationResult(result);
+          setEmailActivationResult(false);
           dispatch(loadingStop());
-          Toaster.error(result.details, "topCenter");
+          Toaster.error("Somthing went wrong! Please try again", "topCenter");
         }
       });
   };
@@ -44,19 +49,24 @@ const EmailActivation = (EmailActive) => {
     // timeout = setTimeout(() => history.push("/"), 3000);
     EmailAPI();
   }, []);
-  {
-    console.log("hello", emailActivationResult);
-  }
 
   return (
-    <Grid container spacing={4} align="center">
-      <Grid item xs={12}>
-        <div className="emailActivation">
-          <img src={success_icon} alt="Registration Sucessfully" />
-          <p className="sucess_message">Registration has been sucessfully</p>
-        </div>
-      </Grid>
-    </Grid>
+    <>
+      <Header />
+      <div className="emailActivation">
+        <Container maxWidth="sm" className="emailActivation__container">
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius emailActivation__paper">
+                <div className="emailActivation__upperBlock"></div>
+                <div className="emailActivation__lowerBlock"></div>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+      <Footer />
+    </>
   );
 };
 

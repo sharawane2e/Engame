@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Header";
 import { Link } from "react-router-dom";
-//import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
 import { useDispatch, useSelector } from "react-redux";
-import empty from "../../assets/images/empty.gif";
+import {
+  Grid,
+  Container,
+  Typography,
+  ButtonBase,
+  Breadcrumbs,
+  Tooltip,
+  Paper,
+} from "@mui/material";
+
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import { Breadcrumbs } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import CustomButton from "../../components/widgets/Button";
-import Paper from "@material-ui/core/Paper";
-import ButtonBase from "@material-ui/core/ButtonBase";
-// import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import CustomPopup from "../CustomPopup";
-// import { removeFromCart } from "../../redux/cart/action";
+
+import Header from "../Header";
 import Footer from "../Footer";
-import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+import CustomPopup from "../CustomPopup";
+import CustomButton from "../../components/widgets/Button";
+import { BASE_URL, BASE_URL_1, CHECKOUT, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
-import Tooltip from "@material-ui/core/Tooltip";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 import { logOutUser } from "../../redux/user/user-action";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
+import ApiRequest from "../../util/ApiRequest";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -45,34 +46,46 @@ const Cart = () => {
   };
 
   // handleCheckout
+  // const handleCheckout = async () => {
+  //   dispatch(loadingStart());
+  //   const stripe = await loadStripe(STRIPE);
+  //   try {
+  //     await fetch(BASE_URL + "payments/checkout-session/", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${user.access_token}`,
+  //       },
+  //       body: JSON.stringify({ user: user.user.pk, is_renew: "false" }),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         if (result.code == "token_not_valid") {
+  //           dispatch(logOutUser());
+  //           localStorage.removeItem("auth");
+  //           dispatch(loadingStop());
+  //           //            history.push("/");
+  //         } else {
+  //           // sessionStorage.setItem("sessionId", result.sessionId);
+  //           stripe.redirectToCheckout({ sessionId: result.sessionId });
+  //           dispatch(loadingStop());
+  //         }
+  //       });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const handleCheckout = async () => {
-    dispatch(loadingStart());
+    let CheckOutValue = {
+      user: user.user.pk,
+      is_renew: "false",
+    };
     const stripe = await loadStripe(STRIPE);
-    try {
-      await fetch(BASE_URL + "payments/checkout-session/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.access_token}`,
-        },
-        body: JSON.stringify({ user: user.user.pk, is_renew: "false" }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.code == "token_not_valid") {
-            dispatch(logOutUser());
-            localStorage.removeItem("auth");
-            dispatch(loadingStop());
-            //            history.push("/");
-          } else {
-            // sessionStorage.setItem("sessionId", result.sessionId);
-            stripe.redirectToCheckout({ sessionId: result.sessionId });
-            dispatch(loadingStop());
-          }
-        });
-    } catch (error) {
-      console.error(error);
-    }
+
+    ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
+      stripe.redirectToCheckout({ sessionId: res.sessionId });
+    });
   };
 
   return (
@@ -214,64 +227,6 @@ const Cart = () => {
                               </Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} container>
-                              {/* <Grid
-                                item
-                                md={6}
-                                sm={12}
-                                xs={12}
-                                container
-                                direction="column"
-                              >
-                                <Typography
-                                  gutterBottom
-                                  component="div"
-                                  className="shoping-cart__subscription"
-                                >
-                                  <span>Subscription:</span>
-                                  <select className="border-radius">
-                                    <option
-                                      value="days"
-                                      selected={
-                                        item.plan_type === "days"
-                                          ? item.plan_type
-                                          : null
-                                      }
-                                    >
-                                      Number of days
-                                    </option>
-                                    <option
-                                      value="hits"
-                                      selected={
-                                        item.plan_type === "hits"
-                                          ? item.plan_type
-                                          : null
-                                      }
-                                    >
-                                      Number of hits
-                                    </option>
-                                  </select>
-                                </Typography>
-                              </Grid>
-
-                              <Grid item md={4} sm={10} xs={10}>
-                                <Typography
-                                  component="div"
-                                  className="shoping-cart__validity-input"
-                                >
-                                  <span>Validity:</span>
-                                  <TextField
-                                    type="number"
-                                    id={"input-filed" + item.id}
-                                    variant="outlined"
-                                    value={item.plan_value}
-                                    // onChange={item.plan_value}
-                                  />
-                                  <span className="shoping-cart__input-days">
-                                    {item.plan_type}
-                                  </span>
-                                </Typography>
-                              </Grid>
-                              */}
                               <Grid item md={10} sm={10} xs={10}>
                                 <Typography
                                   component="div"

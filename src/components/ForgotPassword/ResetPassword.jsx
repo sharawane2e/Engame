@@ -39,8 +39,8 @@ const Forgot = () => {
 
     let onlyuuid = uuid.split("/")[0];
     let token = uuid.split("/")[1];
-    console.log("passwoird", newPasswords);
-    console.log("conform password", conformPasswords);
+    //console.log("passwoird", newPasswords);
+    //console.log("conform password", conformPasswords);
 
     // const validationResponses = ResetPassword.validateForm({
     //   newPasswords,
@@ -69,11 +69,11 @@ const Forgot = () => {
           data.non_field_errors ? data.non_field_errors.join("") : null,
           "topCenter"
         );
-        console.log(data);
+        //console.log(data);
         dispatch(loadingStop());
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   };
   return (

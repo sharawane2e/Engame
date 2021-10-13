@@ -2,10 +2,21 @@
   align-items: $align-center;
   justify-content: $align-center;
   display: flex;
-  height: 100vh;
+  height: 80vh;
   flex-direction: column;
-  .sucess_message {
-    padding: 20px 5px;
-    width: 100%;
+  &__upperBlock {
+    padding: 10px;
+    height: 200px;
+  }
+  &__lowerBlock {
+    padding: 10px;
+    height: 200px;
+    background-color: $green-color;
+  }
+  &__container {
+    min-height: max-content;
+  }
+  &__paper {
+    // padding: 15px;
   }
 }
