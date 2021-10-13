@@ -10,6 +10,8 @@ import { getItemFromCart } from "../../redux/cart/action";
 import { loadStripe } from "@stripe/stripe-js";
 import { logOutUser } from "../../redux/user/user-action";
 import Typography from "@material-ui/core/Typography";
+import ApiRequest from "../../util/ApiRequest";
+import { CHECKOUT } from "../../config/ApiUrl";
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
   console.log("cart value", updateData);
@@ -66,37 +68,26 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   const ItemRenew = async () => {
     dispatch(loadingStart());
     const stripe = await loadStripe(STRIPE);
-    try {
-      await fetch(BASE_URL + "payments/checkout-session/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.access_token}`,
-        },
-        body: JSON.stringify({
-          user: res.token.user.pk,
-          is_renew: "true",
-          plan_new_value: valuePrice,
-          plan_type: istype,
-        }),
+
+    let CheckoutData = {
+      user: res.token.user.pk,
+      is_renew: "true",
+      plan_new_value: valuePrice,
+      plan_type: istype,
+    };
+
+    ApiRequest.request(CHECKOUT, "POST", CheckoutData)
+      .then((res) => {
+        stripe.redirectToCheckout({ sessionId: res.sessionId });
+        localStorage.setItem("ExtendData", JSON.stringify(updateData));
+        dispatch(loadingStop());
       })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.code == "token_not_valid") {
-            dispatch(logOutUser());
-            localStorage.removeItem("auth");
-            dispatch(loadingStop());
-            history.push("/");
-          } else {
-            //sessionStorage.setItem("sessionId", result.sessionId);
-            stripe.redirectToCheckout({ sessionId: result.sessionId });
-            localStorage.setItem("ExtendData", JSON.stringify(updateData));
-            dispatch(loadingStop());
-          }
-        });
-    } catch (error) {
-      console.error(error);
-    }
+      .catch((error) => {
+        dispatch(logOutUser());
+        localStorage.removeItem("auth");
+        dispatch(loadingStop());
+        history.push("/");
+      });
   };
 
   return (

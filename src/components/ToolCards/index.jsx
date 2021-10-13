@@ -28,7 +28,7 @@ import { ErrorMessages } from "../../constants/Messages";
 import ToolInfo from "../ToolInfo";
 import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
 import ApiRequest from "../../util/ApiRequest";
-import { CART_DETAILS } from "../../config/ApiUrl";
+import { WIDGET_LIST } from "../../config/ApiUrl";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -70,7 +70,7 @@ const ToolCards = () => {
 
   const WidgetList = () => {
     if (user) {
-      ApiRequest.request(BASE_URL + `widget/user/detail/`)
+      ApiRequest.request(WIDGET_LIST)
         .then((res) => {
           setProductShow(res);
         })
