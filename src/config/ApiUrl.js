@@ -27,3 +27,14 @@ export const CART_STANDARD_PRICE = "/cart/standard_price/";
 export const CHECKOUT = "payments/checkout-session/";
 
 export const WIDGET_LIST = "widget/user/detail/";
+
+export const PURCHASED_ITEM = "widget/user/purchased/";
+
+export const PLAY_PAUSE = "subscription/pause_resume/";
+
+export const PAYMENT_SUCESS = "payments/success/";
+
+export const RESET_PASSWORD_TOKEEN_VERIFY =
+  "/user/passoword/reset/verify/token/";
+
+export const RESET_PASSWORD = "/user/password/reset/confirm/";

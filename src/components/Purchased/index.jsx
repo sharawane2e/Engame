@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Header";
 import { Link } from "react-router-dom";
+
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import { Breadcrumbs } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Footer from "../../components/Footer";
-import Paper from "@material-ui/core/Paper";
+import SwitchUnstyled from "@mui/core/SwitchUnstyled";
+import Tooltip from "@material-ui/core/Tooltip";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { Grid, Paper } from "@mui/material";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-import checkCircle from "../../assets/images/check-circle.svg";
-import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
-// import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
-import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
-import TimerIcon from "@material-ui/icons/Timer";
-// import { BASE_URL, STRIPE } from "../../config/ApiUrl";
-import { useDispatch, useSelector } from "react-redux";
-//import PauseIcon from "@material-ui/icons/Pause";
 import GetAppIcon from "@material-ui/icons/GetApp";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import TimerIcon from "@material-ui/icons/Timer";
+import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
+import { useDispatch, useSelector } from "react-redux";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import Toaster from "../../util/Toaster";
-import CustomPopup from "../CustomPopup";
-import SubscriptionRenew from "../../components/SubscriptionType/subscriptRenew";
-// import { useHistory } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import Tooltip from "@material-ui/core/Tooltip";
-// import { loadStripe } from "@stripe/stripe-js";
-// import { styled } from "@mui/system";
-import SwitchUnstyled from "@mui/core/SwitchUnstyled";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+
+import Header from "../Header";
+import CustomPopup from "../CustomPopup";
+import Footer from "../../components/Footer";
+import Toaster from "../../util/Toaster";
+import EmptyPage from "../emptyPage";
+import ApiRequest from "../../util/ApiRequest";
+import warning_icon from "../../assets/images/warning_icon.svg";
+import CustomButton from "../../components/widgets/Button";
+import emptyWidgett from "../../assets/images/empty-widget.gif";
+import SubscriptionRenew from "../../components/SubscriptionType/subscriptRenew";
+import { BASE_URL } from "../../config/ApiUrl";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-// import { getItemFromCart } from "../../redux/cart/action";
-// import { PaymentData } from "../../redux/payment/paymeant-action";
-import EmptyPage from "../emptyPage";
-import emptyWidgett from "../../assets/images/empty-widget.gif";
-import CustomButton from "../../components/widgets/Button";
-import warning_icon from "../../assets/images/warning_icon.svg";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { ErrorMessages } from "../../constants/Messages";
 import { removeFromCart } from "../../redux/cart/action";
+import {
+  PURCHASED_ITEM,
+  PLAY_PAUSE,
+  PAYMENT_SUCESS,
+} from "../../config/ApiUrl";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -57,7 +56,6 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    // backgroundColor: "#8aff8a",
   },
 }))(LinearProgress);
 
@@ -66,13 +64,9 @@ function Purchased(props) {
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState(false);
-  //const user = useSelector((state) => state.user.token);
-  // const [embedCodeDownolad, setCodeDwoanlod] = useState([]);
   const [widgetList, setWidgetList] = useState([]);
-  //   const [is_renew, setRenew] = useState(false);
   const [isextend, setExtend] = useState("false");
   const [productShow, setProductShow] = useState([]);
-  // const user = useSelector((state) => state.user.token);
   const token = useSelector((state) => state.user.token);
   const [isPausePopup, setPausePopup] = useState(false); // Popup on play and Pause
   const [PlayPauseValue, setPlayPauseValue] = useState("");
@@ -97,137 +91,91 @@ function Purchased(props) {
     link.click();
   };
 
-  useEffect(() => {
+  const paymentSuccess = () => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-    dispatch(loadingStart());
     let subscriptionRenew = localStorage.getItem("ExtendData") ? true : false;
-    async function paymentSuccess() {
-      if (!subscriptionRenew) {
-        await fetch(BASE_URL + "payments/success/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token.access_token}`,
-          },
-          body: JSON.stringify({
-            user: token.user.pk,
-            session_id: session_id,
-            is_renew: "false",
-          }),
-        })
-          .then((response) => response.json())
-          .then((result) => {
-            if (
-              result.details == "code CE13204 Internal server error!" ||
-              result.details == "Payment already done !"
-            ) {
-              localStorage.removeItem("ExtendData");
-              dispatch(loadingStop());
-            } else {
-              myWwidgets();
-              localStorage.removeItem("ExtendData");
-              dispatch(loadingStop());
-              Toaster.sucess(result.details, "topCenter");
-              dispatch(removeFromCart());
-            }
-          });
-      } else {
-        await fetch(BASE_URL + "payments/success/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token.access_token}`,
-          },
 
-          body: JSON.stringify({
-            user: token.user.pk,
-            session_id: session_id,
-            is_renew: "true",
-            plan_new_value: curentUpdatePrice,
-            subscription: curentPlanID,
-          }),
-        })
-          .then((response) => response.json())
-          .then((result) => {
-            if (
-              result.details == "code CE13204 Internal server error!" ||
-              result.details == "Payment already done !"
-            ) {
-              localStorage.removeItem("ExtendData");
-              dispatch(loadingStop());
-              //Toaster.error("Some thing went wrong", "topCenter");
-            } else {
-              myWwidgets();
-              dispatch(removeFromCart());
-              localStorage.removeItem("ExtendData");
-              dispatch(loadingStop());
-              Toaster.sucess(result.details, "topCenter");
-            } // history.push(history.path);
-          });
-      }
-    }
+    let NewPaymentSucessData = {
+      user: token.user.pk,
+      session_id: session_id,
+      is_renew: "false",
+    };
+
+    let RenewPaymentSucessData = {
+      user: token.user.pk,
+      session_id: session_id,
+      is_renew: "true",
+      plan_new_value: curentUpdatePrice,
+      subscription: curentPlanID,
+    };
+
+    let PaymentSucessData = subscriptionRenew
+      ? RenewPaymentSucessData
+      : NewPaymentSucessData;
+
+    ApiRequest.request(PAYMENT_SUCESS, "POST")
+      .then((res) => {
+        PurchaseList();
+        dispatch(removeFromCart());
+        localStorage.removeItem("ExtendData");
+        dispatch(loadingStop());
+        Toaster.sucess(res.details, "topCenter");
+      })
+      .catch((error) => {
+        // localStorage.removeItem("ExtendData");
+        dispatch(loadingStop());
+      });
+  };
+
+  useEffect(() => {
+    dispatch(loadingStart());
     paymentSuccess();
-    myWwidgets();
+    PurchaseList();
   }, [token]);
 
   //  my widgets
-  const myWwidgets = async () => {
+  const PurchaseList = async () => {
     dispatch(loadingStart());
-    await fetch(BASE_URL + "widget/user/purchased/", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.access_token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.code == "token_not_valid") {
-          dispatch(logOutUser());
-          localStorage.removeItem("auth");
-          dispatch(loadingStop());
-          history.push("/");
-        } else {
-          setWidgetList(result);
-          const isShowArr = [];
-          result.forEach((el, index) => {
-            isShowArr.push(false);
-          });
-          console.log(result);
-          setShow(isShowArr);
-          dispatch(removeFromCart());
-          dispatch(loadingStop());
-        }
+    ApiRequest.request(PURCHASED_ITEM)
+      .then((res) => {
+        setWidgetList(res);
+        const isShowArr = [];
+        res.forEach((el, index) => {
+          isShowArr.push(false);
+        });
+        setShow(isShowArr);
+        dispatch(removeFromCart());
+        dispatch(loadingStop());
+      })
+      .catch((error) => {
+        dispatch(logOutUser());
+        localStorage.removeItem("auth");
+        dispatch(loadingStop());
+        history.push("/");
       });
   };
 
   const PlayNPause = async (purchaseId, Paused) => {
     let pausedStatus = String(Paused);
+
+    let ItemData = {
+      user: token.user.pk,
+      purchased_id: purchaseId,
+      is_paused: pausedStatus,
+    };
     dispatch(loadingStart());
-    setPausePopup(false);
-    await fetch(BASE_URL + "subscription/pause_resume/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.access_token}`,
-      },
-      body: JSON.stringify({
-        user: token.user.pk,
-        purchased_id: purchaseId,
-        is_paused: pausedStatus,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.code == "token_not_valid") {
-          dispatch(loadingStop());
-          Toaster.error("Somthing went wrong", "topCenter");
-        } else {
-          Toaster.sucess(result.message, "topCenter");
-          myWwidgets();
-          dispatch(loadingStop());
-        }
+
+    ApiRequest.request(PLAY_PAUSE, "POST", ItemData)
+      .then((res) => {
+        Toaster.sucess(res.message, "topCenter");
+        PurchaseList();
+        dispatch(loadingStop());
+      })
+      .catch((error) => {
+        dispatch(loadingStop());
+        Toaster.error("Somthing went wrong", "topCenter");
       });
   };
 

@@ -13,5 +13,6 @@ export const ErrorMessages = {
   EmbededAlert: "Please login before to generate embeded code",
 
   purchaseCart: "I am waiting for your order. You didn't buy anything yet",
-  // emptyPurchase:
+
+  NetworkErrorMessage: "Oops! Something went wrong.",
 };

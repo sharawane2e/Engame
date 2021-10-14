@@ -32,7 +32,8 @@ import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import { getItemFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 import ApiRequest from "../../util/ApiRequest";
-import { LOGOUT } from "../../config/ApiUrl";
+import { BASE_URL, LOGOUT } from "../../config/ApiUrl";
+// import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
@@ -79,6 +80,16 @@ const Header = ({ props }) => {
       dispatch(getItemFromCart());
     }
   }, [user]);
+
+  useEffect(() => {
+    fetch(BASE_URL).then(
+      (response) => {},
+      (err) => {
+        history.push("/error");
+        // alert("error");
+      }
+    );
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {

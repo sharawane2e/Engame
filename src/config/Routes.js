@@ -7,6 +7,7 @@ import Cart from "../components/cart/Cart";
 import Forgot from "../components/ForgotPassword/ResetPassword";
 import EmailActivation from "../components/EmailActivation";
 import Faqs from "../components/FAQ/index";
+import SomthingWentWrong from "../components/Error/somthingWentWrong";
 
 const Routes = [
   {
@@ -15,7 +16,7 @@ const Routes = [
     exact: true,
   },
   {
-    path: ["/faq", "/user/account-confirm-email", "/forgot"],
+    path: ["/error", "/faq", "/user/account-confirm-email", "/forgot"],
     component: PublicScreen,
     //exact: true,
     routes: [
@@ -32,6 +33,11 @@ const Routes = [
       {
         path: "/faq",
         component: Faqs,
+        isExact: true,
+      },
+      {
+        path: "/error",
+        component: SomthingWentWrong,
         isExact: true,
       },
     ],

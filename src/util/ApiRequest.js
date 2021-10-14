@@ -33,12 +33,12 @@ export default {
           //window.location.reload();
         } else if (error.response.status === 400) {
           response = error.response.data;
-          Toaster.error("Something went wrong", "topCenter");
+          // Toaster.error("400");
         } else if (error.response.status === 404) {
-          // Toaster.error("Something went wrong");
+          // Toaster.error("404");
         } else {
           // Toaster.error("Something went wrong");
-          //                  console.log("wrong");
+          // console.log("wrong");
         }
       }
     }
