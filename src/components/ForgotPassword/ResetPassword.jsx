@@ -14,12 +14,13 @@ import {
 } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
-import { CheckCircleIcon } from "../../assets/images/check-circle.svg";
+import emptyImg from "../../assets/images/oops.gif";
 import { parse } from "query-string";
 import { useLocation } from "react-router";
 import { logOutUser } from "../../redux/user/user-action";
 import ApiRequest from "../../util/ApiRequest";
 import { useHistory } from "react-router-dom";
+import EmptyPage from "../emptyPage";
 
 const Forgot = () => {
   const dispatch = useDispatch();
@@ -32,36 +33,6 @@ const Forgot = () => {
   const location = useLocation();
   const history = useHistory();
   const queryData = parse(location.search);
-
-  const CheckToken = () => {
-    let verifyTokenData = {
-      uid: queryData.uid,
-      token: queryData.token,
-    };
-
-    ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
-      .then((res) => {
-        console.log(res);
-        if (res.status !== "false") {
-          setIsToken(true);
-          Toaster.sucess(res.details, "topCenter");
-        } else {
-          Toaster.error(res.details, "topCenter");
-          setIsToken(false);
-        }
-      })
-      .catch((error) => {
-        setIsToken(false);
-        dispatch(logOutUser());
-        localStorage.removeItem("auth");
-        dispatch(loadingStop());
-        history.push("/");
-      });
-  };
-
-  useEffect(() => {
-    CheckToken();
-  }, []);
 
   const haldelNewPassword = (e) => {
     setNewPasswords(e.target.value);
@@ -94,54 +65,45 @@ const Forgot = () => {
     }
   };
 
-  // handleSubmit
-  // const handleSubmit = () => {
-  //   let uuid = window.location.hash.split("forgot/")[1];
+  const CheckToken = () => {
+    let verifyTokenData = {
+      uid: queryData.uid,
+      token: queryData.token,
+    };
 
-  //   let onlyuuid = uuid.split("/")[0];
-  //   let token = uuid.split("/")[1];
-  //console.log("passwoird", newPasswords);
-  //console.log("conform password", conformPasswords);
+    ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
+      .then((res) => {
+        console.log(res);
+        if (res.status !== "False") {
+          setIsToken(true);
+        } else {
+          setIsToken(false);
+        }
+      })
+      .catch((error) => {
+        setIsToken(false);
+        dispatch(logOutUser());
+        localStorage.removeItem("auth");
+        dispatch(loadingStop());
+        history.push("/");
+      });
+  };
 
-  // const validationResponses = ResetPassword.validateForm({
-  //   newPasswords,
-  //   conformPasswords,
-  // });
+  useEffect(() => {
+    CheckToken();
+  }, []);
 
-  // dispatch(loadingStart());
-  // fetch(
-  //   BASE_URL + "user/password/reset/confirm/" + onlyuuid + "/" + token + "/",
-  //   {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       new_password1: newPasswords,
-  //       new_password2: conformPasswords,
-  //       uid: onlyuuid,
-  //       token: token,
-  //     }),
-  //   }
-  // )
-  //   .then((result) => result.json())
-  //   .then((data) => {
-  //     // Toaster.error(
-  //     //   data.non_field_errors ? data.non_field_errors.join("") : null,
-  //     //   "topCenter"
-  //     // );
-  //     //console.log(data);
-  //     dispatch(loadingStop());
-  //   })
-  //   .catch((error) => {
-  //     //console.log(error);
-  //   });
-  // };
   return (
     <>
       <Header />
       <div className="forgot">
-        {isToken ? (
+        {!isToken && !isPasswordResetSucessfully ? (
+          <EmptyPage
+            heading="Somthing went wrong! Please try again"
+            buttonName="Back to home"
+            imgUrl={emptyImg}
+          />
+        ) : isToken && !isPasswordResetSucessfully ? (
           <form action="">
             <div className="form-group">
               <InputLabel
@@ -191,11 +153,15 @@ const Forgot = () => {
               </CustomButton>
             </div>
           </form>
+        ) : isPasswordResetSucessfully ? (
+          <EmptyPage
+            heading="Password has been changed sucessfully!"
+            buttonName="Back to home"
+            imgUrl={emptyImg}
+          />
         ) : (
-          <p>Somthing went wrong</p>
+          ""
         )}
-        <div>{/* <img src={CheckCircleIcon} alt="success" /> */}</div>
-        {isPasswordResetSucessfully ? <p>Sucess</p> : ""}
       </div>
 
       <Footer />

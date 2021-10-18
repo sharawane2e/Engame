@@ -8,16 +8,16 @@ import { useHistory } from "react-router-dom";
 const SomthingWentWrong = () => {
   const history = useHistory();
 
-  useEffect(() => {
-    fetch(BASE_URL).then(
-      (response) => {
-        history.push("/");
-      },
-      (err) => {
-        history.push("/error");
-      }
-    );
-  }, []);
+  //   useEffect(() => {
+  //     fetch(BASE_URL).then(
+  //       (response) => {
+  //         history.push("/");
+  //       },
+  //       (err) => {
+  //         history.push("/error");
+  //       }
+  //     );
+  //   }, []);
 
   return (
     <>

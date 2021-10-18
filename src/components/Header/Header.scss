@@ -19,7 +19,7 @@
 .header-box {
   z-index: 99;
   .header-padding {
-    @include space(padding, top-bottom, $padding-20, $padding-20);
+    @include space(padding, top-bottom, $padding-15, $padding-15);
     a {
       display: flex;
     }
@@ -80,7 +80,6 @@
       &:hover {
         background-color: transparent !important;
       }
-      
     }
     .user-btn {
       width: auto !important;
@@ -90,7 +89,7 @@
       color: $black-primary;
       // font-family: Barlow;
       @include breakpoint(mobileonly) {
-          display: none;
+        display: none;
       }
     }
     .custom-avtar {
@@ -107,15 +106,16 @@
       }
     }
   }
- 
 }
 
-.makeStyles-sectionMobile-4,.makeStyles-sectionMobile-2,.makeStyles-sectionMobile-3{
-  >.MuiIconButton-colorInherit{
+.makeStyles-sectionMobile-4,
+.makeStyles-sectionMobile-2,
+.makeStyles-sectionMobile-3 {
+  > .MuiIconButton-colorInherit {
     padding: 4px !important;
   }
 }
-// .MuiListItem-button{  
+// .MuiListItem-button{
 //   @include breakpoint(mobileonly) {
 //     display: none;
 //   }

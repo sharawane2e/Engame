@@ -37,29 +37,13 @@ class ForgotPassword extends Component {
 
       ApiRequest.request(FORGOT_PASSWORD, "POST", { email: email })
         .then((res) => {
-          console.log("this.state.props", this.state.props);
+          // console.log("this.state.props", this.state.props);
           Toaster.sucess(res.detail, "topCenter");
-          window.location.reload();
-        })
-        .catch((error) => {
-          // console.log(error);
+          // window.location.reload();
         })
         .finally(() => {
           this.props.dispatch(loadingStop());
         });
-
-      // fetch(BASE_URL + "user/password/reset/", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ email: email }),
-      // })
-      //   .then((result) => result.json())
-      //   .then((res) => {
-      //     this.props.dispatch(loadingStop());
-      //     Toaster.sucess(res.detail, "topCenter");
-      //   });
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },
