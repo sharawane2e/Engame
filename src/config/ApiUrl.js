@@ -38,3 +38,5 @@ export const RESET_PASSWORD_TOKEEN_VERIFY =
   "/user/passoword/reset/verify/token/";
 
 export const RESET_PASSWORD = "/user/password/reset/confirm/";
+
+export const EMAIL_ALLOWED = "/user/validate_corportate_email/";

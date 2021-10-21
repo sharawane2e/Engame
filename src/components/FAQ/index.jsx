@@ -42,12 +42,98 @@ const Faqs = () => {
                       id="panel1bh-header"
                     >
                       <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                        What can you test?
+                        Process 1
                       </Typography>
                     </AccordionSummary>
 
                     <AccordionDetails>
-                      <Typography>TBD</Typography>
+                      <Typography>
+                        In publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. <br /> In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available.
+                      </Typography>
                     </AccordionDetails>
                   </Accordion>
 
@@ -63,11 +149,27 @@ const Faqs = () => {
                       id="panel2bh-header"
                     >
                       <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                        Customize
+                        Process 2
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography>TBD</Typography>
+                      <Typography>
+                        In publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available.
+                      </Typography>
                     </AccordionDetails>
                   </Accordion>
 
@@ -83,11 +185,27 @@ const Faqs = () => {
                       id="panel3bh-header"
                     >
                       <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                        Output
+                        Process 3
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography>TBD</Typography>
+                      <Typography>
+                        In publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available. In
+                        publishing and graphic design, Lorem ipsum is a
+                        placeholder text commonly used to demonstrate the visual
+                        form of a document or a typeface without relying on
+                        meaningful content. Lorem ipsum may be used as a
+                        placeholder before final copy is available.
+                      </Typography>
                     </AccordionDetails>
                   </Accordion>
 
@@ -103,7 +221,7 @@ const Faqs = () => {
                       id="panel4bh-header"
                     >
                       <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                        Step for implementation
+                        Process 4
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>

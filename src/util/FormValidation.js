@@ -1,6 +1,11 @@
 import ValidationRegex from "../constants/ValidationRegex";
 import { ErrorMessages } from "../constants/Messages";
 import { PASSWORD_MIN_LENGTH } from "../constants/ConstantValues";
+import { useDispatch, useSelector } from "react-redux";
+import { EMAIL_ALLOWED } from "../config/ApiUrl";
+import { loadingStart, loadingStop } from "../redux/loader/loader-actions";
+import ApiRequest from "../util/ApiRequest";
+import React, { useState } from "react";
 
 const validateEmailPattern = (email) => ValidationRegex.EMAIL.test(email);
 const namePattern = (name) => ValidationRegex.ONLY_ALPHA.test(name);
@@ -10,6 +15,16 @@ class ValidationResponse {
   isValid = true;
   message = "";
 }
+
+const handleCMail = (value) => {
+  let EmailData = {
+    email: value,
+  };
+  ApiRequest.request(EMAIL_ALLOWED, "POST", EmailData).then((res) => {
+    return res;
+    console.log(res);
+  });
+};
 
 class Validation {
   validateForm = (fields, context) => {
@@ -61,6 +76,12 @@ export class LoginValidation extends Validation {
 }
 
 export class UserValidation extends Validation {
+  constructor(props) {
+    super(props);
+    this.state = {
+      legalEmail: true,
+    };
+  }
   validateField = (field, value, context) => {
     const validationResponse = new ValidationResponse();
 
@@ -73,6 +94,24 @@ export class UserValidation extends Validation {
           if (!validateEmailPattern(value)) {
             validationResponse.isValid = false;
             validationResponse.message = ErrorMessages.EMAIL_INVALID;
+          } else {
+            let EmailData = {
+              email: value,
+            };
+            ApiRequest.request(EMAIL_ALLOWED, "POST", EmailData).then((res) => {
+              // debugger;
+              console.log("res.status", res);
+              if (res.status) {
+                this.state.legalEmail = true;
+              } else {
+                this.state.legalEmail = false;
+              }
+            });
+
+            if (!this.state.legalEmail) {
+              validationResponse.isValid = false;
+              validationResponse.message = ErrorMessages.EMAIL_NOT_ACCEPT;
+            }
           }
         }
         break;

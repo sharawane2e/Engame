@@ -36,6 +36,8 @@ export default {
           // Toaster.error("400");
         } else if (error.response.status === 404) {
           // Toaster.error("404");
+        } else if (error.response.status === 500) {
+          Toaster.error("500");
         } else {
           // Toaster.error("Something went wrong");
           // console.log("wrong");

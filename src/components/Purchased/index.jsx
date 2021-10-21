@@ -117,11 +117,14 @@ function Purchased(props) {
 
     ApiRequest.request(PAYMENT_SUCESS, "POST")
       .then((res) => {
-        PurchaseList();
-        dispatch(removeFromCart());
-        localStorage.removeItem("ExtendData");
-        dispatch(loadingStop());
-        Toaster.sucess(res.details, "topCenter");
+        console.log(res, "res");
+        if (!res.status == 500) {
+          PurchaseList();
+          dispatch(removeFromCart());
+          localStorage.removeItem("ExtendData");
+          dispatch(loadingStop());
+          Toaster.sucess(res.details, "topCenter");
+        }
       })
       .catch((error) => {
         // localStorage.removeItem("ExtendData");
@@ -166,6 +169,7 @@ function Purchased(props) {
       is_paused: pausedStatus,
     };
     dispatch(loadingStart());
+    setPausePopup(false);
 
     ApiRequest.request(PLAY_PAUSE, "POST", ItemData)
       .then((res) => {
@@ -305,7 +309,7 @@ function Purchased(props) {
               </Grid>
             </Grid>
             {/*Card start */}
-
+            {/* {console.log(widgetList)} */}
             {widgetList?.map((item, index) => {
               if (
                 filter == "active"
@@ -600,7 +604,7 @@ function Purchased(props) {
                                       Payment Method:
                                     </span>
                                     <span className="purchased-tool__date-type-text">
-                                      {item.payment_method.replace(/'/g, "")}
+                                      {item.payment_method}
                                     </span>
                                   </div>
                                 </Typography>

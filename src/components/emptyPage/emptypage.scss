@@ -4,7 +4,7 @@
   align-items: $align-center;
   min-height: 90vh;
   width: 100%;
-  background: $white;
+  background: $light-white;
   flex-direction: column;
   &__headding {
     @include space(margin, bottom, $margin-20, 0);

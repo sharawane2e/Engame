@@ -19,6 +19,8 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { v4 as uuidv4 } from "uuid";
 import ApiRequest from "../../util/ApiRequest";
 import { REGISTRATION } from "../../config/ApiUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { EMAIL_ALLOWED } from "../../config/ApiUrl";
 
 class Registration extends Component {
   state = {
@@ -194,8 +196,10 @@ class Registration extends Component {
                   value={this.state.email}
                   onChange={(e) => this.handleChange(e, "email")}
                   onBlur={(e) => this.handleBlur(e, "email")}
+                  // onBlur={(e) => this.handleCMail(e)}
                   message={this.state.formErrors.email}
                   onKeyDown={this._handleKeyDown}
+                  // onKeyUpCapture={(e) => this.handleCMail(e)}
                 />
                 <div className="validated-error">
                   {this.state.formErrors.email}

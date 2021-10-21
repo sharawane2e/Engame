@@ -5,22 +5,22 @@ import CustomButton from "../widgets/Button";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import { ResetPassword } from "../../util/FormValidation";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  BASE_URL,
   RESET_PASSWORD,
   RESET_PASSWORD_TOKEEN_VERIFY,
 } from "../../config/ApiUrl";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import { loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 import emptyImg from "../../assets/images/oops.gif";
+import sucessfullImg from "../../assets/images/sucessfull.svg";
 import { parse } from "query-string";
 import { useLocation } from "react-router";
 import { logOutUser } from "../../redux/user/user-action";
 import ApiRequest from "../../util/ApiRequest";
 import { useHistory } from "react-router-dom";
 import EmptyPage from "../emptyPage";
+import { ErrorMessages } from "../../constants/Messages";
 
 const Forgot = () => {
   const dispatch = useDispatch();
@@ -74,10 +74,10 @@ const Forgot = () => {
     ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
       .then((res) => {
         console.log(res);
-        if (res.status !== "False") {
-          setIsToken(true);
-        } else {
+        if (res.status == "False") {
           setIsToken(false);
+        } else {
+          setIsToken(true);
         }
       })
       .catch((error) => {
@@ -99,7 +99,7 @@ const Forgot = () => {
       <div className="forgot">
         {!isToken && !isPasswordResetSucessfully ? (
           <EmptyPage
-            heading="Somthing went wrong! Please try again"
+            heading={ErrorMessages.PASSWORD_CANNOT_CHANGE}
             buttonName="Back to home"
             imgUrl={emptyImg}
           />
@@ -155,9 +155,9 @@ const Forgot = () => {
           </form>
         ) : isPasswordResetSucessfully ? (
           <EmptyPage
-            heading="Password has been changed sucessfully!"
+            heading={ErrorMessages.PASSWORD_CHANGE_SUCESSFULLY}
             buttonName="Back to home"
-            imgUrl={emptyImg}
+            imgUrl={sucessfullImg}
           />
         ) : (
           ""

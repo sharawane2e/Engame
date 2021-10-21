@@ -1,16 +1,20 @@
-import React from "react";
-import {
-  Toolbar,
-  Paper,
-  Grid,
-  InputBase,
-  Divider,
-  IconButton,
-} from "@mui/material";
+// import React from "react";
+import { Toolbar, Paper, Grid, IconButton } from "@mui/material";
 // import librarycards from "../../assets/images/library-cards.svg";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import SearchIcon from "@material-ui/icons/Search";
 import Carousel from "../../util/Carousel";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+
+import * as React from "react";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const Home = () => {
   return (
@@ -48,20 +52,50 @@ const Home = () => {
             <IconButton className="iconButton search-icon" aria-label="menu">
               <SearchIcon fontSize="inherit" />
             </IconButton>
-            <InputBase className="input" />
-            <Divider className="divider" orientation="vertical" />
-            <IconButton
-              className="iconButton filter-inputsection__icon"
-              aria-label="directions"
-            >
-              <FilterListIcon fontSize="large" />
-              Filters
-            </IconButton>
+            {/* <InputBase className="input" /> */}
+
+            {/* <Divider className="divider" orientation="vertical" /> */}
+
+            <Autocomplete
+              multiple
+              id="tags-filled"
+              options={top100Films.map((option) => option.title)}
+              className="filter_box"
+              // defaultValue={[top100Films[2].title]}
+              // freeSolo
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    variant="outlined"
+                    label={option}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="filled"
+                  // label="Select here"
+                  placeholder="Add to click"
+                />
+              )}
+            />
           </Paper>
         </Grid>
       </Toolbar>
     </div>
   );
 };
+
+const top100Films = [
+  { title: "The Shawshank Redemption", year: 1994 },
+  { title: "The Godfather", year: 1972 },
+  { title: "The Godfather: Part II", year: 1974 },
+  { title: "The Dark Knight", year: 2008 },
+  { title: "12 Angry Men", year: 1957 },
+  { title: "Schindler's List", year: 1993 },
+  { title: "Pulp Fiction", year: 1994 },
+];
 
 export default Home;
