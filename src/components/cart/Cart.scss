@@ -1,7 +1,10 @@
 .shopping-cart-data {
   min-height: 740px;
   @include breakpoint(largeDesktop) {
-    min-height: 87vh;
+    min-height: 85.5vh;
+  }
+  @include breakpoint(lg-desktop) {
+    min-height: 85.5vh;
   }
 }
 .shoping-cart {

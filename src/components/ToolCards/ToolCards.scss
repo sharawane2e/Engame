@@ -5,9 +5,11 @@
   min-height: 52vh !important;
   align-items: inherit !important;
   @include breakpoint(largeDesktop) {
-    min-height: 69vh !important;
+    min-height: 66vh !important;
   }
-
+  @include breakpoint(lg-desktop) {
+    min-height: 66.5vh !important;
+  }
   #{&}__tooltip {
     position: absolute;
     right: 5px;

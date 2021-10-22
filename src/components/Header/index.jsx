@@ -35,6 +35,14 @@ import ApiRequest from "../../util/ApiRequest";
 import { BASE_URL, LOGOUT } from "../../config/ApiUrl";
 // import axios from "axios";
 
+// import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
   //   display: "none",
@@ -150,76 +158,76 @@ const Header = ({ props }) => {
       onClose={handleMenuClose}
       className={classes.sectionDesktop}
     >
-      {/* <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
           My Widgets
         </Link>
-      </MenuItem> */}
+      </MenuItem>
       <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
     </Menu>
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <>
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
-        className="mobile-view-menu"
-      >
-        {!user.isLoggedIn ? (
-          <>
-            <MenuItem onClick={handleProfileMenuOpen}>
-              <div className="menu-button" onClick={() => setLoginIsOpen(true)}>
-                Login
-              </div>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-              <div className="menu-button" onClick={() => setReginIsOpen(true)}>
-                Register
-              </div>
-            </MenuItem>
-          </>
-        ) : (
-          <>
-            {/* <MenuItem onClick={handleProfileMenuOpen}> */}
-            {/* <IconButton
-            // aria-label="account of current user"
-            // aria-controls="primary-search-account-menu"
-            // aria-haspopup="true"
-            // color="inherit"
-            ></IconButton> */}
-            {/* <div className="user-after-login">
-              <CustomButton onClick={handleProfileMenuOpen}>
-                {user.token.user.first_name}
-              </CustomButton>
-            </div> */}
-            {/* </MenuItem> */}
+  // const renderMobileMenu = (
+  //   <>
+  //     <Menu
+  //       anchorEl={mobileMoreAnchorEl}
+  //       anchorOrigin={{ vertical: "top", horizontal: "right" }}
+  //       id={mobileMenuId}
+  //       keepMounted
+  //       transformOrigin={{ vertical: "top", horizontal: "right" }}
+  //       open={isMobileMenuOpen}
+  //       onClose={handleMobileMenuClose}
+  //       className="mobile-view-menu"
+  //     >
+  //       {!user.isLoggedIn ? (
+  //         <>
+  //           <MenuItem onClick={handleProfileMenuOpen}>
+  //             <div className="menu-button" onClick={() => setLoginIsOpen(true)}>
+  //               Login
+  //             </div>
+  //           </MenuItem>
+  //           <MenuItem onClick={handleProfileMenuOpen}>
+  //             <div className="menu-button" onClick={() => setReginIsOpen(true)}>
+  //               Register
+  //             </div>
+  //           </MenuItem>
+  //         </>
+  //       ) : (
+  //         <>
+  //           {/* <MenuItem onClick={handleProfileMenuOpen}> */}
+  //           {/* <IconButton
+  //           // aria-label="account of current user"
+  //           // aria-controls="primary-search-account-menu"
+  //           // aria-haspopup="true"
+  //           // color="inherit"
+  //           ></IconButton> */}
+  //           {/* <div className="user-after-login">
+  //             <CustomButton onClick={handleProfileMenuOpen}>
+  //               {user.token.user.first_name}
+  //             </CustomButton>
+  //           </div> */}
+  //           {/* </MenuItem> */}
 
-            <MenuItem onClick={handleProfileMenuOpen}>
-              {/* <IconButton
-            // aria-label="account of current user"
-            // aria-controls="primary-search-account-menu"
-            // aria-haspopup="true"
-            // color="inherit"
-            ></IconButton> */}
-              <Link color="inherit" to="/Purchased" className="my-widgets">
-                My Widgets
-              </Link>
-              {/* <div className="menu-button" onClick={() => handleLogout()}>
-              Logout
-            </div> */}
-            </MenuItem>
-          </>
-        )}
-      </Menu>
-    </>
-  );
+  //           <MenuItem onClick={handleProfileMenuOpen}>
+  //             {/* <IconButton
+  //           // aria-label="account of current user"
+  //           // aria-controls="primary-search-account-menu"
+  //           // aria-haspopup="true"
+  //           // color="inherit"
+  //           ></IconButton> */}
+  //             <Link color="inherit" to="/Purchased" className="my-widgets">
+  //               My Widgets
+  //             </Link>
+  //             {/* <div className="menu-button" onClick={() => handleLogout()}>
+  //             Logout
+  //           </div> */}
+  //           </MenuItem>
+  //         </>
+  //       )}
+  //     </Menu>
+  //   </>
+  // );
 
   return (
     <>
@@ -288,11 +296,6 @@ const Header = ({ props }) => {
                               .split(/(\s+)/)[2][0]
                               .toUpperCase()
                           : ""}
-                        {/* {user.token.user.first_name[0]} */}
-                        {/* {user.token.user.first_name[1]} */}
-                        {/* {`${user.token.user.first_name[0][0]}${
-                          user.token.user.first_name.split(" ")[1][0]
-                        }`} */}
                       </Avatar>
                       <KeyboardArrowDown />
                     </CustomButton>
@@ -315,7 +318,7 @@ const Header = ({ props }) => {
                 </Link>
               </div>
             ) : null} */}
-            <div className={classes.sectionMobile}>
+            {/* <div className={classes.sectionMobile}>
               <IconButton
                 aria-label="show more"
                 aria-controls={mobileMenuId}
@@ -325,11 +328,11 @@ const Header = ({ props }) => {
               >
                 <MoreIcon />
               </IconButton>
-            </div>
+            </div> */}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
 
       <CustomPopup

@@ -363,7 +363,6 @@ const ToolCards = () => {
         </CustomPopup>
         {/*End */}
       </Toolbar>
-      <Footer />
     </>
   );
 };
