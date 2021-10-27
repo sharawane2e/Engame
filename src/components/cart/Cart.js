@@ -2,15 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  Grid,
-  Container,
-  Typography,
-  ButtonBase,
-  Breadcrumbs,
-  Tooltip,
-  Paper,
-} from "@mui/material";
+// import {
+//   Grid,
+//   Container,
+//   Typography,
+//   ButtonBase,
+//   Breadcrumbs,
+//   Tooltip,
+//   Paper,
+// } from "@mui/material";
+import { Breadcrumbs } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Paper from "@material-ui/core/Paper";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -19,7 +27,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import CustomPopup from "../CustomPopup";
 import CustomButton from "../../components/widgets/Button";
-import { BASE_URL_1, CHECKOUT, STRIPE } from "../../config/ApiUrl";
+import { BASE_URL, CHECKOUT, STRIPE } from "../../config/ApiUrl";
 import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
@@ -122,7 +130,7 @@ const Cart = () => {
                               <img
                                 alt={item.widget.name}
                                 title={item.widget.name}
-                                src={BASE_URL_1 + item.widget.imgUrl}
+                                src={BASE_URL + item.widget.imgUrl}
                               />
                             </ButtonBase>
                           </Grid>

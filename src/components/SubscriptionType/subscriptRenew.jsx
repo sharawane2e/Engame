@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import CustomButton from "../widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
+import { BASE_URL, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { useHistory } from "react-router-dom";
 import { getItemFromCart } from "../../redux/cart/action";

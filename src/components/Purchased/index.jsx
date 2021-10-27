@@ -9,7 +9,9 @@ import Container from "@material-ui/core/Container";
 import SwitchUnstyled from "@mui/core/SwitchUnstyled";
 import Tooltip from "@material-ui/core/Tooltip";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { Grid, Paper } from "@mui/material";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -22,6 +24,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { ExportToCsv } from "export-to-csv";
 
 import Header from "../Header";
 import CustomPopup from "../CustomPopup";
@@ -43,6 +46,7 @@ import {
   PURCHASED_ITEM,
   PLAY_PAUSE,
   PAYMENT_SUCESS,
+  CONSUMPTION_STATEMENT,
 } from "../../config/ApiUrl";
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -74,6 +78,7 @@ function Purchased(props) {
 
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
+  const [consumtionReportData, setConsumtionReportData] = useState([]);
 
   var curentPlanID = localStorage.getItem("productShow");
   var curentUpdatePrice = localStorage.getItem("valuePrice");
@@ -91,11 +96,67 @@ function Purchased(props) {
     link.click();
   };
 
-  const paymentSuccess = () => {
+  const downloadConsumptionStatement = async (purchased_id) => {
+    let PurchasedData = {
+      user: token.user.pk,
+      purchased_id: purchased_id,
+    };
+
+    await ApiRequest.request(CONSUMPTION_STATEMENT, "POST", PurchasedData).then(
+      (res) => {
+        if (!res.status) {
+          dispatch(loadingStop());
+          Toaster.sucess(res.details, "topCenter");
+          setConsumtionReportData(res);
+
+          const csvJSON = () => {
+            const lines = res.split("\n");
+            const result = [];
+            const headers = lines[0].split(",");
+
+            for (let i = 1; i < lines.length; i++) {
+              if (!lines[i]) continue;
+              const obj = {};
+              const currentline = lines[i].split(",");
+
+              for (let j = 0; j < headers.length; j++) {
+                obj[headers[j]] = currentline[j];
+              }
+              result.push(obj);
+            }
+            return result;
+          };
+
+          const options = {
+            fieldSeparator: ",",
+            quoteStrings: '"',
+            decimalSeparator: ".",
+            showLabels: true,
+            showTitle: true,
+            title: "My Awesome CSV",
+            useTextFile: false,
+            useBom: true,
+            useKeysAsHeaders: true,
+            // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+          };
+
+          const csvExporter = new ExportToCsv(options);
+
+          csvExporter.generateCsv(csvJSON());
+        } else {
+          Toaster.sucess(res.details, "topCenter");
+        }
+      }
+    );
+  };
+
+  const paymentSuccess = async () => {
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
-    let subscriptionRenew = localStorage.getItem("ExtendData") ? true : false;
+    let subscriptionRenew = (await localStorage.getItem("ExtendData"))
+      ? true
+      : false;
 
     let NewPaymentSucessData = {
       user: token.user.pk,
@@ -115,7 +176,7 @@ function Purchased(props) {
       ? RenewPaymentSucessData
       : NewPaymentSucessData;
 
-    ApiRequest.request(PAYMENT_SUCESS, "POST")
+    ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
       .then((res) => {
         console.log(res, "res");
         if (!res.status == 500) {
@@ -151,6 +212,7 @@ function Purchased(props) {
         setShow(isShowArr);
         dispatch(removeFromCart());
         dispatch(loadingStop());
+        console.log(res, "Purchased list");
       })
       .catch((error) => {
         dispatch(logOutUser());
@@ -633,7 +695,12 @@ function Purchased(props) {
                                     component="div"
                                     className="cursor--pointer"
                                   >
-                                    <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                    <div
+                                      className="purchased-tool__purchased-date purchased-tool__hover"
+                                      onClick={() =>
+                                        downloadConsumptionStatement(item.id)
+                                      }
+                                    >
                                       <span className="purchased-tool__date-type-text purchased-curent-text"></span>
                                       <span className="purchased-tool__date-type-text purchased-types">
                                         <ReceiptIcon /> Consumption statement

@@ -1,7 +1,7 @@
 {
   "name": "html5-widget",
   "version": "0.1.0",
-  "homepage": "/engame-dev",
+  "homepage": "/engame/",
   "private": true,
   "dependencies": {
     "3d-react-carousal": "^4.0.2",
@@ -20,11 +20,13 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "copy-to-clipboard": "^3.3.1",
+    "export-to-csv": "^0.2.1",
     "i": "^0.3.7",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-bootstrap": "^1.6.1",
     "react-copy-to-clipboard": "^5.0.3",
+    "react-csv": "^2.0.3",
     "react-custom-scroll": "^4.3.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",

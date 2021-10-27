@@ -56,6 +56,9 @@
       width: 100%;
       .custom-button {
         min-width: 100% !important;
+        @include breakpoint(mobileonly) {
+          // @include space(padding, all, $padding-20, 0);
+        }
       }
     }
   }
@@ -70,10 +73,16 @@
   }
   #{&}__tool-title {
     @include font-size($font-xl-reg);
+    @include breakpoint(mobileonly) {
+      text-align: center;
+    }
   }
   #{&}__tool-discription {
     @include font-size($font-xmd-reg);
     word-break: break-all;
+    @include breakpoint(mobileonly) {
+      text-align: center;
+    }
   }
   #{&}__total-amount {
     text-align: $align-right;
@@ -81,11 +90,15 @@
     @include font-size($font-sm);
     word-break: break-all;
     line-height: 24px;
+    @include breakpoint(mobileonly) {
+      text-align: center;
+    }
   }
   #{&}__subscription {
     display: flex;
     width: min-content;
     width: fit-content;
+
     > span {
       display: flex;
       align-items: center;
@@ -117,6 +130,11 @@
 
   #{&}__validity-input {
     display: flex;
+    @include breakpoint(mobileonly) {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
     > span {
       display: flex;
       align-items: $align-center;
@@ -154,6 +172,13 @@
     cursor: pointer;
     .MuiTypography-body1 {
       display: flex;
+    }
+    @include breakpoint(mobileonly) {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      justify-content: center;
+      margin-top: 10px;
     }
   }
   #{&}__tool-tick {

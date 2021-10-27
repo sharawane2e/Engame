@@ -6,13 +6,20 @@
   width: 100%;
   background: $light-white;
   flex-direction: column;
+  @include breakpoint(mobileonly) {
+    padding: 15px;
+  }
   &__headding {
     @include space(margin, bottom, $margin-20, 0);
     &__para {
       font-weight: 500;
       color: #6a6464;
       font-size: $font-sm !important;
+      text-align: center;
     }
+  }
+  &__img {
+    max-width: 100% !important;
   }
   &__button {
     margin-top: 20px;

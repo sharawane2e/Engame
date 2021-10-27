@@ -162,7 +162,7 @@
   }
   #{&}__tool-card {
     @include space(padding, top-bottom, $padding-20, $padding-30);
-    @include space(padding, left-right, $padding-40, $padding-20);
+    @include space(padding, left-right, $padding-40, $padding-40);
   }
   #{&}__tool-title {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");

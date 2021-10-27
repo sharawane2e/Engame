@@ -14,7 +14,7 @@ import Subscription from "../../components/SubscriptionType";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
-import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+import { BASE_URL } from "../../config/ApiUrl";
 import Footer from "../Footer";
 import Tooltip from "@material-ui/core/Tooltip";
 import { logOutUser } from "../../redux/user/user-action";
@@ -60,8 +60,6 @@ const ToolCards = () => {
   };
 
   useEffect(() => {
-    // document.body.classList.toggle("modal-open", ispopup);
-    //document.body.classList.toggle("modal-open", isSubscription);
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
@@ -73,6 +71,8 @@ const ToolCards = () => {
       ApiRequest.request(WIDGET_LIST)
         .then((res) => {
           setProductShow(res);
+          console.log(res, "Widget List");
+          console.log(productShow, "Widget List from state");
         })
         .catch((error) => {
           dispatch(logOutUser());
@@ -98,21 +98,21 @@ const ToolCards = () => {
         ) : error ? (
           <MessageBox>{error}</MessageBox>
         ) : (
-          <Grid container spacing={4}>
+          <Grid container spacing={4} className="toolcard__inner">
             {user
               ? productShow.map((tooldata, index) => {
                   return (
                     <Grid
                       item
                       xs={12}
-                      lg={2}
+                      lg={3}
                       sm={4}
                       key={index}
                       id={tooldata.id}
                     >
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
-                          <img src={BASE_URL + "media/" + tooldata.imgUrl} />
+                          <img src={BASE_URL + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton
@@ -179,14 +179,14 @@ const ToolCards = () => {
                     <Grid
                       item
                       xs={12}
-                      lg={2}
+                      lg={3}
                       sm={4}
                       key={index}
                       id={tooldata.id}
                     >
                       <Paper className="toolcard__imageblck">
                         <div className="toolcard__image">
-                          <img src={BASE_URL_1 + tooldata.imgUrl} />
+                          <img src={BASE_URL + tooldata.imgUrl} />
                           {/* <span>{tooldata.imgUrl}</span> */}
                           <div className="toolcard__preview">
                             <CustomButton
@@ -363,6 +363,7 @@ const ToolCards = () => {
         </CustomPopup>
         {/*End */}
       </Toolbar>
+      <Footer />
     </>
   );
 };

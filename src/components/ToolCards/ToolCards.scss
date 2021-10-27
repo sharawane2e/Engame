@@ -10,6 +10,11 @@
   @include breakpoint(lg-desktop) {
     min-height: 66.5vh !important;
   }
+  #{&}__inner {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   #{&}__tooltip {
     position: absolute;
     right: 5px;

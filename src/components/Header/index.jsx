@@ -86,6 +86,7 @@ const Header = ({ props }) => {
       setLoginIsOpen(false);
       setReginIsOpen(false);
       dispatch(getItemFromCart());
+      console.log(user, "user");
     }
   }, [user]);
 
@@ -142,96 +143,39 @@ const Header = ({ props }) => {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
   const menuId = "primary-search-account-menu";
+
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      className={classes.sectionDesktop}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <Link color="inherit" to="/Purchased">
-          My Widgets
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
-    </Menu>
+    <>
+      {user?.isLoggedIn && (
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={handleMenuClose} className="user_name">
+            {user.token.user.first_name}
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className="mobile__only">
+            <Link color="inherit" to="/Purchased">
+              My Widgets
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
+      )}
+    </>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  // const renderMobileMenu = (
-  //   <>
-  //     <Menu
-  //       anchorEl={mobileMoreAnchorEl}
-  //       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-  //       id={mobileMenuId}
-  //       keepMounted
-  //       transformOrigin={{ vertical: "top", horizontal: "right" }}
-  //       open={isMobileMenuOpen}
-  //       onClose={handleMobileMenuClose}
-  //       className="mobile-view-menu"
-  //     >
-  //       {!user.isLoggedIn ? (
-  //         <>
-  //           <MenuItem onClick={handleProfileMenuOpen}>
-  //             <div className="menu-button" onClick={() => setLoginIsOpen(true)}>
-  //               Login
-  //             </div>
-  //           </MenuItem>
-  //           <MenuItem onClick={handleProfileMenuOpen}>
-  //             <div className="menu-button" onClick={() => setReginIsOpen(true)}>
-  //               Register
-  //             </div>
-  //           </MenuItem>
-  //         </>
-  //       ) : (
-  //         <>
-  //           {/* <MenuItem onClick={handleProfileMenuOpen}> */}
-  //           {/* <IconButton
-  //           // aria-label="account of current user"
-  //           // aria-controls="primary-search-account-menu"
-  //           // aria-haspopup="true"
-  //           // color="inherit"
-  //           ></IconButton> */}
-  //           {/* <div className="user-after-login">
-  //             <CustomButton onClick={handleProfileMenuOpen}>
-  //               {user.token.user.first_name}
-  //             </CustomButton>
-  //           </div> */}
-  //           {/* </MenuItem> */}
-
-  //           <MenuItem onClick={handleProfileMenuOpen}>
-  //             {/* <IconButton
-  //           // aria-label="account of current user"
-  //           // aria-controls="primary-search-account-menu"
-  //           // aria-haspopup="true"
-  //           // color="inherit"
-  //           ></IconButton> */}
-  //             <Link color="inherit" to="/Purchased" className="my-widgets">
-  //               My Widgets
-  //             </Link>
-  //             {/* <div className="menu-button" onClick={() => handleLogout()}>
-  //             Logout
-  //           </div> */}
-  //           </MenuItem>
-  //         </>
-  //       )}
-  //     </Menu>
-  //   </>
-  // );
+  // const mobileMenuId = "primary-search-account-menu-mobile";
 
   return (
     <>
-      <ElevationScroll {...props}>
+      <ElevationScroll>
         <AppBar className="flexGrow header-box " position={"sticky"}>
           <Toolbar className="header-padding header-text-color">
             <Typography variant="body1" className="flexGrow">
@@ -239,7 +183,8 @@ const Header = ({ props }) => {
                 <img src={Engame_logo} />
               </Link>
             </Typography>
-            {!user.isLoggedIn ? (
+
+            {!user?.isLoggedIn ? (
               <>
                 <div
                   className="menu-button"
@@ -255,84 +200,50 @@ const Header = ({ props }) => {
                   Register
                 </div>
               </>
-            ) : null}
-
-            {user.isLoggedIn ? (
-              <>
-                <div className={classes.sectionDesktop}>
-                  <div className="user-after-login">
-                    <Link
-                      color="inherit"
-                      to="/Purchased"
-                      className="my-widgets"
-                    >
-                      My widgets
+            ) : (
+              <div className={classes.sectionDesktop}>
+                <div className="user-after-login">
+                  <Link color="inherit" to="/Purchased" className="my-widgets">
+                    My widgets
+                  </Link>
+                  <div className="shoping__card">
+                    <Link to="cart">
+                      {/* <Badge color="secondary"> */}
+                      <Badge
+                        badgeContent={carts?.length ? carts.length : 0}
+                        color="secondary"
+                      >
+                        <Tooltip title="Cart Items" placement="top">
+                          <ShoppingCartIcon />
+                        </Tooltip>
+                      </Badge>
                     </Link>
-                    <div className="shoping__card">
-                      <Link to="cart">
-                        {/* <Badge color="secondary"> */}
-                        <Badge
-                          badgeContent={carts.length ? carts.length : 0}
-                          color="secondary"
-                        >
-                          <Tooltip title="Cart Items" placement="top">
-                            <ShoppingCartIcon />
-                          </Tooltip>
-                        </Badge>
-                      </Link>
-                    </div>
-                    <CustomButton
-                      onClick={handleProfileMenuOpen}
-                      className="custom-avtar"
-                    >
-                      <Avatar sx="">
-                        {user.token.user.first_name.split(/(\s+)/)[0]
-                          ? user.token.user.first_name
-                              .split(/(\s+)/)[0][0]
-                              .toUpperCase()
-                          : ""}
-                        {user.token.user.first_name.split(/(\s+)/)[2]
-                          ? user.token.user.first_name
-                              .split(/(\s+)/)[2][0]
-                              .toUpperCase()
-                          : ""}
-                      </Avatar>
-                      <KeyboardArrowDown />
-                    </CustomButton>
                   </div>
-                </div>
-              </>
-            ) : null}
-            {/* {user.isLoggedIn ? (
-              <div className="shoping__card">
-                <Link to="cart">
-         
-                  <Badge
-                    badgeContent={carts.length ? carts.length : 0}
-                    color="secondary"
+                  <CustomButton
+                    onClick={handleProfileMenuOpen}
+                    className="custom-avtar"
                   >
-                    <Tooltip title="Cart Items" placement="top">
-                      <ShoppingCartIcon />
-                    </Tooltip>
-                  </Badge>
-                </Link>
+                    <Avatar sx="">
+                      {user.token.user.first_name.split(/(\s+)/)[0]
+                        ? user.token.user.first_name
+                            .split(/(\s+)/)[0][0]
+                            .toUpperCase()
+                        : ""}
+                      {user.token.user.first_name.split(/(\s+)/)[2]
+                        ? user.token.user.first_name
+                            .split(/(\s+)/)[2][0]
+                            .toUpperCase()
+                        : ""}
+                    </Avatar>
+
+                    <KeyboardArrowDown />
+                  </CustomButton>
+                </div>
               </div>
-            ) : null} */}
-            {/* <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </div> */}
+            )}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      {/* {renderMobileMenu} */}
       {renderMenu}
 
       <CustomPopup

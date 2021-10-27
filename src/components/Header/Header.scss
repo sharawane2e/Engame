@@ -12,6 +12,10 @@
   }
 }
 
+.user_name {
+  color: $primary !important;
+}
+
 .MuiPaper-elevation4 {
   // box-shadow: none !important;
   background: #fff !important;
@@ -29,10 +33,10 @@
     align-items: $align-center;
     @include color($black-primary);
     @include breakpoint(sm-mobileonly) {
-      .menu-button,
-      .vertical-line {
-        display: none;
-      }
+      // .menu-button,
+      // .vertical-line {
+      //   display: none;
+      // }
     }
     .toggle-icon {
       display: none;
@@ -61,8 +65,11 @@
   .menu-button {
     font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     @include font-size($font-xx-reg);
-    @include space(padding, all, $padding-15, 0);
+    @include space(padding, all, $padding-10, 0);
     cursor: pointer;
+    // color: $primary;
+    // border: 2px solid $primary;
+    // border-radius: 6px;
   }
   .user-after-login {
     min-width: 300px;

@@ -23,7 +23,7 @@ const EmptyPage = (props) => {
           </Typography>
         </div>
         <div>
-          <img src={props.imgUrl} alt="Empty cart" />
+          <img src={props.imgUrl} className="emptyPage__img" alt="Empty cart" />
         </div>
         <div className="emptyPage__button">
           <CustomButton
