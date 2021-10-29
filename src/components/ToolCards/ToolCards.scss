@@ -1,15 +1,21 @@
+.toolcardDiv {
+}
 .toolcard {
-  @include space(padding, top-bottom, $padding-40, $padding-40);
-  padding-left: 0;
+  padding: $padding-40 6vw;
+  // @include space(padding, top-bottom, $padding-40, $padding-40);
   background: $white;
-  min-height: 52vh !important;
-  align-items: inherit !important;
-  @include breakpoint(largeDesktop) {
-    min-height: 66vh !important;
+
+  #{&}__toolbar {
+    padding-left: 0;
+    align-items: inherit !important;
+    @include breakpoint(largeDesktop) {
+      min-height: 66vh !important;
+    }
+    @include breakpoint(lg-desktop) {
+      min-height: 66.5vh !important;
+    }
   }
-  @include breakpoint(lg-desktop) {
-    min-height: 66.5vh !important;
-  }
+
   #{&}__inner {
     width: 90%;
     margin-left: auto;

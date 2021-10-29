@@ -19,4 +19,6 @@ export const ErrorMessages = {
   purchaseCart: "I am waiting for your order. You didn't buy anything yet",
 
   NetworkErrorMessage: "Oops! Something went wrong.",
+
+  NoSearchResultMessage: "No search result found! Please search somthing else",
 };

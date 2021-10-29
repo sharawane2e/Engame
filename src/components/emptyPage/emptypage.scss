@@ -12,14 +12,16 @@
   &__headding {
     @include space(margin, bottom, $margin-20, 0);
     &__para {
-      font-weight: 500;
-      color: #6a6464;
+      font-weight: 600 !important;
+      color: $black-secondary;
       font-size: $font-sm !important;
       text-align: center;
+      padding-bottom: $padding-50;
     }
   }
   &__img {
     max-width: 100% !important;
+    padding-bottom: $padding-40;
   }
   &__button {
     margin-top: 20px;

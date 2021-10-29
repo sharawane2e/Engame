@@ -1,0 +1,15 @@
+.noSearchFound {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 0%;
+  img {
+    width: 200px;
+  }
+  #{&}__headding {
+    color: $black;
+    font-size: $font-xx-reg18;
+    padding-top: $padding-30;
+  }
+}

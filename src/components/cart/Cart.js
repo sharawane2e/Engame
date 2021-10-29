@@ -271,7 +271,8 @@ const Cart = () => {
                       $
                       {cart
                         .map((item) => item.price)
-                        .reduce((acc, value) => +acc + +value)}
+                        .reduce((acc, value) => +acc + +value)
+                        .toFixed(2)}
                     </div>
                     <div className="shoping-cart__coupon-code">
                       {/* <span align="center">Promotion code</span> */}

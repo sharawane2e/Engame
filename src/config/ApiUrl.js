@@ -38,3 +38,5 @@ export const RESET_PASSWORD = "/user/password/reset/confirm/";
 export const EMAIL_ALLOWED = "/user/validate_corportate_email/";
 
 export const CONSUMPTION_STATEMENT = "/subscription/download_consumption/";
+
+export const FILTER_WIDGET_LIST = "/widget/filters/";

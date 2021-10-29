@@ -22,7 +22,7 @@
   }
   #{&}__amount {
     display: flex;
-    flex: 0 0 60%;
+    flex: 0 0 58%;
     justify-content: flex-end;
     align-items: $align-center;
     word-break: break-all;
@@ -30,7 +30,7 @@
   }
   #{&}__amount-text {
     font-family: map-get($map: $font-family, $key: "font-barlowbold");
-    @include font-size($font-xx-reg);
+    @include font-size($font-sm);
   }
   #{&}__inputbox {
     width: 100px;

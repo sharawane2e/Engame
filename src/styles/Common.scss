@@ -11,10 +11,6 @@ body {
   position: relative;
   @include bgcolor($gray-primary);
   height: 100%;
-  min-height: 100vh;
-  @include breakpoint(Ipad-pro) {
-    min-height: auto;
-  }
 }
 .MuiButton-label {
   text-transform: none;
@@ -201,6 +197,7 @@ a {
   }
   #{&}__bredcrum-normaltext {
     font-size: 0.85rem;
+    font-weight: 600;
   }
 }
 /*END*/
@@ -377,6 +374,16 @@ select:disabled {
 }
 .Mui-checked .MuiSwitch-track {
   background: $primary;
+}
+
+.MuiFilledInput-underline:before {
+  border: none !important;
+}
+.MuiFilledInput-underline::after {
+  border: none !important;
+}
+.MuiFilledInput-input:-webkit-autofill {
+  border-radius: inherit !important;
 }
 
 input:-internal-autofill-selected {

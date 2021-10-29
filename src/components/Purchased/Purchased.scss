@@ -79,7 +79,8 @@
   .extend-validity {
     cursor: pointer;
     text-decoration: underline;
-    padding-top: 5px;
+    @include space(padding, top, $padding-5, 0);
+    font-family: map-get($map: $font-family, $key: "font-barlowbold");
   }
   .timer-svg {
     > svg {
@@ -111,8 +112,9 @@
       font-weight: $font-700;
     }
     .purchased-tool__date-type-text {
-      @include font-size($font-reg);
+      @include font-size($font-xmd-reg);
       @include space(padding, left, $padding-5, 0);
+      text-decoration: none;
     }
     .purchased-tool__date-type-time {
       @include font-size($font-reg);
@@ -261,10 +263,18 @@
       cursor: pointer;
     }
   }
+  #{&}__Indicator {
+    height: 43px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 600;
+  }
   #{&}__embeded-icon {
     display: flex;
     @include border("", $border-width, $bsolid, $black-gray);
     @include space(padding, all, $padding-8, 0);
+    background-color: $white;
     cursor: pointer;
     width: 45px;
     height: 43px;

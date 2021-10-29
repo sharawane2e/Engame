@@ -19,7 +19,7 @@
     // @include space(padding, top, $padding-20, 0);
     @include space(padding, bottom, $padding-50, 0);
     @include breakpoint(desktop) {
-      @include space(padding, top-bottom, $padding-20, $padding-40);
+      @include space(padding, top-bottom, $padding-5, $padding-50);
     }
 
     @include breakpoint(desktop150) {
@@ -64,8 +64,8 @@
       //   padding: 18px 12px 10px;
       // }
       @include breakpoint(mobileonly) {
-       // padding: 15px 10px 10px;
-       font-size: 12px;
+        // padding: 15px 10px 10px;
+        font-size: 12px;
       }
     }
 
@@ -81,7 +81,9 @@
   .forgot-link {
     @include font-weight($font-600);
     text-align: $align-right;
-    @include space(padding, bottom, $padding-25, 0);
+    @include space(padding, top, $padding-15, 0);
+    @include space(padding, bottom, $padding-10, 0);
+
     & > a {
       @include color($secondary);
       @include font-weight($font-normal);

@@ -15,7 +15,6 @@ import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
 import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL } from "../../config/ApiUrl";
-import Footer from "../Footer";
 import Tooltip from "@material-ui/core/Tooltip";
 import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
@@ -29,6 +28,9 @@ import ToolInfo from "../ToolInfo";
 import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
 import ApiRequest from "../../util/ApiRequest";
 import { WIDGET_LIST } from "../../config/ApiUrl";
+import { ConstructionOutlined } from "@mui/icons-material";
+import NoSearchFound from "../NoSearchFound";
+import NotFoundImg from "../../assets/images/empty.gif";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -42,7 +44,7 @@ const ToolCards = () => {
   const user = useSelector((state) => state.user.isLoggedIn);
   const token = useSelector((state) => state.user);
   const { loading, error, products } = productList;
-  const [productShow, setProductShow] = useState(products);
+  // const [productShow, setProductShow] = useState(products);
   const [TypeClick, setTypeClick] = useState("");
 
   const [isInfoPopup, setIsInfoPopup] = useState(false);
@@ -60,310 +62,330 @@ const ToolCards = () => {
   };
 
   useEffect(() => {
+    // debugger;
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
     }
   }, [user]);
 
-  const WidgetList = () => {
-    if (user) {
-      ApiRequest.request(WIDGET_LIST)
-        .then((res) => {
-          setProductShow(res);
-          console.log(res, "Widget List");
-          console.log(productShow, "Widget List from state");
-        })
-        .catch((error) => {
-          dispatch(logOutUser());
-          localStorage.removeItem("auth");
-          dispatch(loadingStop());
-          history.push("/");
-        });
-    }
-  };
+  // const WidgetList = () => {
+  //   if (user) {
+  //     ApiRequest.request(WIDGET_LIST)
+  //       .then((res) => {
+  //         setProductShow(res);
+  //         console.log(res, "Widget List");
+  //         console.log(productShow, "Widget List from state");
+  //       })
+  //       .catch((error) => {
+  //         dispatch(logOutUser());
+  //         localStorage.removeItem("auth");
+  //         dispatch(loadingStop());
+  //         history.push("/");
+  //       });
+  //   }
+  // };
 
-  useEffect(() => {
-    dispatch(listProducts());
-    WidgetList();
-  }, [token]);
+  // useEffect(() => {
+  //   dispatch(listProducts());
+  //   WidgetList();
+  // }, [token]);
+
+  const keshav = true;
 
   return (
     <>
-      <Toolbar className="toolcard">
-        {loading ? (
-          <>
-            <LoadingBox />
-          </>
-        ) : error ? (
-          <MessageBox>{error}</MessageBox>
-        ) : (
-          <Grid container spacing={4} className="toolcard__inner">
-            {user
-              ? productShow.map((tooldata, index) => {
-                  return (
-                    <Grid
-                      item
-                      xs={12}
-                      lg={3}
-                      sm={4}
-                      key={index}
-                      id={tooldata.id}
-                    >
-                      <Paper className="toolcard__imageblck">
-                        <div className="toolcard__image">
-                          <img src={BASE_URL + tooldata.imgUrl} />
-                          {/* <span>{tooldata.imgUrl}</span> */}
-                          <div className="toolcard__preview">
-                            <CustomButton
-                              className="toolcard__perview-button"
-                              onClick={() => handleToolClick(tooldata)}
-                            >
-                              <RemoveRedEyeIcon className="eyes_icon" /> Preview
-                            </CustomButton>
-                          </div>
-                          <div className="toolcard__tooltip">
-                            <HelpCenterRoundedIcon
-                              className="toolcard__tooltip__icon"
-                              onClick={() => setIsInfoPopup(tooldata)}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="toolcard__align toolcard__toolicons">
-                          <div className="toolcard__items toolcard__download">
-                            {user ? (
-                              <div
-                                className="toolcard__sub-icons"
-                                onClick={() => {
-                                  setPopup(true);
-                                  setPopupId(tooldata.id);
-                                }}
-                              >
-                                <Tooltip title="Embeded Code" placement="top">
-                                  <SystemUpdateAltIcon />
-                                </Tooltip>
-                              </div>
-                            ) : null}
-                          </div>
-                          <div className="toolcard__items toolcard__shopping">
-                            {user ? (
-                              <div
-                                className="toolcard__sub-icons"
-                                onClick={(id) => {
-                                  setSubscriptionPopup(true);
-                                  setPopupId(tooldata.id);
-                                }}
-                              >
-                                <Tooltip title="Add To Cart" placement="top">
-                                  <ShoppingCartIcon />
-                                </Tooltip>
-                              </div>
-                            ) : null}
-                          </div>
-                        </div>
-                      </Paper>
-                      <div className="toolcard__align toolcard__toolname">
-                        <div className="toolcard__aligninr1 toolcard__font-family">
-                          {tooldata.toolname}
-                        </div>
-                        {/* <div className="toolcard__aligninr toolcard__font-family">
-                          ${tooldata.price}
-                        </div> */}
-                      </div>
-                    </Grid>
-                  );
-                })
-              : products.map((tooldata, index) => {
-                  return (
-                    <Grid
-                      item
-                      xs={12}
-                      lg={3}
-                      sm={4}
-                      key={index}
-                      id={tooldata.id}
-                    >
-                      <Paper className="toolcard__imageblck">
-                        <div className="toolcard__image">
-                          <img src={BASE_URL + tooldata.imgUrl} />
-                          {/* <span>{tooldata.imgUrl}</span> */}
-                          <div className="toolcard__preview">
-                            <CustomButton
-                              className="toolcard__perview-button"
-                              onClick={() => handleToolClick(tooldata)}
-                            >
-                              <RemoveRedEyeIcon className="eyes_icon" /> Preview
-                            </CustomButton>
-                          </div>
-                        </div>
-
-                        <div className="toolcard__align toolcard__toolicons">
-                          <div className="toolcard__items toolcard__download">
-                            {user ? (
-                              <div
-                                className="toolcard__sub-icons"
-                                onClick={() => {
-                                  setPopup(true);
-                                  setPopupId(tooldata.id);
-                                }}
-                              >
-                                <SystemUpdateAltIcon />
-                              </div>
-                            ) : (
-                              <div
-                                className="toolcard__sub-icons"
-                                onClick={() => {
-                                  setisLoginrequire(true);
-                                  setTypeClick(ErrorMessages.EmbededAlert);
-                                }}
-                              >
-                                {/* <Tooltip title="Embeded Code" placement="top"> */}
-                                <SystemUpdateAltIcon />
-                                {/* </Tooltip> */}
-                              </div>
-                            )}
-                          </div>
-                          <div className="toolcard__items toolcard__shopping">
-                            {user ? (
-                              <div className="toolcard__sub-icons">
-                                {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
-                                <ShoppingCartIcon />
-                              </div>
-                            ) : (
-                              <div
-                                className="toolcard__sub-icons"
-                                onClick={() => {
-                                  setisLoginrequire(true);
-                                  setTypeClick(ErrorMessages.loginAlert);
-                                }}
-                              >
-                                {/* <Tooltip title="Add To Cart" placement="top"> */}
-                                <ShoppingCartIcon />
-                                {/* </Tooltip> */}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </Paper>
-                      <div className="toolcard__align toolcard__toolname">
-                        <div className="toolcard__aligninr1 toolcard__font-family">
-                          {tooldata.toolname}
-                        </div>
-                        {/* <div className="toolcard__aligninr toolcard__font-family">
-                          ${tooldata.price}
-                        </div> */}
-                      </div>
-                    </Grid>
-                  );
-                })}
-          </Grid>
-        )}
-
-        <CustomPopup
-          open={isLoginOpen || isReginOpen}
-          onClose={() => setLoginIsOpen(false)}
-          className="popup-container__iner--xl border-radius popup-background"
-        >
-          {isLoginOpen ? (
-            <Grid container spacing={3} className="popup-padding">
-              {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
-              <Grid item xs={12} sm={12} lg={12}>
-                <Login />
-              </Grid>
-            </Grid>
-          ) : isReginOpen ? (
-            <Grid container spacing={3} className="popup-padding">
-              {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
-              <Grid item xs={12} sm={12} lg={12}>
-                <Registration />
-              </Grid>
-            </Grid>
+      <div className="toolcard">
+        <Toolbar className="toolcard__toolbar">
+          {loading ? (
+            <>
+              <LoadingBox />
+            </>
+          ) : error ? (
+            <MessageBox>{error}</MessageBox>
           ) : (
-            ""
-          )}
-        </CustomPopup>
+            <Grid container spacing={4}>
+              {products.length == 0 ? (
+                <NoSearchFound
+                  img={NotFoundImg}
+                  heading={ErrorMessages.NoSearchResultMessage}
+                />
+              ) : (
+                ""
+              )}
+              {user
+                ? products.map((tooldata, index) => {
+                    return (
+                      <Grid
+                        item
+                        xl={2}
+                        lg={2}
+                        md={3}
+                        sm={4}
+                        xs={12}
+                        key={index}
+                        id={tooldata.id}
+                      >
+                        <Paper className="toolcard__imageblck">
+                          <div className="toolcard__image">
+                            <img src={BASE_URL + "/media/" + tooldata.imgUrl} />
+                            {/* <span>{tooldata.imgUrl}</span> */}
+                            <div className="toolcard__preview">
+                              <CustomButton
+                                className="toolcard__perview-button"
+                                onClick={() => handleToolClick(tooldata)}
+                              >
+                                <RemoveRedEyeIcon className="eyes_icon" />{" "}
+                                Preview
+                              </CustomButton>
+                            </div>
+                          </div>
 
-        <CustomPopup
-          open={isLoginrequire}
-          className="popup-container__iner--sm border-radius loginAlert "
-        >
-          <Grid container spacing={4} align="center">
-            <Grid item xs={12}>
-              <img
-                className="message__img"
-                src={warning_icon}
-                alt="Registration Sucessfully"
-              />
-              <Typography component="p" className="sucess_message">
-                {ErrorMessages.loginAlert}
-              </Typography>
-              {/* <p className="sucess_message"></p> */}
-              <CustomButton
-                className="primary-button"
-                style={{ marginRight: "20px" }}
-                onClick={setLoginAlert}
-              >
-                Login Here
-              </CustomButton>
-              <CustomButton
-                className="secondary-button"
-                onClick={() => setisLoginrequire(false)}
-              >
-                Cancel
-              </CustomButton>
+                          <div className="toolcard__align toolcard__toolicons">
+                            <div className="toolcard__items toolcard__download">
+                              {user ? (
+                                <div
+                                  className="toolcard__sub-icons"
+                                  onClick={() => {
+                                    setPopup(true);
+                                    setPopupId(tooldata.id);
+                                  }}
+                                >
+                                  <SystemUpdateAltIcon />
+                                </div>
+                              ) : (
+                                <div
+                                  className="toolcard__sub-icons"
+                                  onClick={() => {
+                                    setisLoginrequire(true);
+                                    setTypeClick(ErrorMessages.EmbededAlert);
+                                  }}
+                                >
+                                  {/* <Tooltip title="Embeded Code" placement="top"> */}
+                                  <SystemUpdateAltIcon />
+                                  {/* </Tooltip> */}
+                                </div>
+                              )}
+                            </div>
+                            <div className="toolcard__items toolcard__shopping">
+                              {user ? (
+                                <div
+                                  className="toolcard__sub-icons"
+                                  onClick={(id) => {
+                                    setSubscriptionPopup(true);
+                                    setPopupId(tooldata.id);
+                                  }}
+                                >
+                                  <ShoppingCartIcon />
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+                        </Paper>
+                        <div className="toolcard__align toolcard__toolname">
+                          <div className="toolcard__aligninr1 toolcard__font-family">
+                            {tooldata.toolname}
+                          </div>
+                          {/* <div className="toolcard__aligninr toolcard__font-family">
+                        ${tooldata.price}
+                      </div> */}
+                        </div>
+                      </Grid>
+                    );
+                  })
+                : products.map((tooldata, index) => {
+                    return (
+                      <Grid
+                        item
+                        xl={2}
+                        lg={2}
+                        md={3}
+                        sm={4}
+                        xs={12}
+                        key={index}
+                        id={tooldata.id}
+                      >
+                        <Paper className="toolcard__imageblck">
+                          <div className="toolcard__image">
+                            <img src={BASE_URL + "/media/" + tooldata.imgUrl} />
+                            {/* <span>{tooldata.imgUrl}</span> */}
+                            <div className="toolcard__preview">
+                              <CustomButton
+                                className="toolcard__perview-button"
+                                onClick={() => handleToolClick(tooldata)}
+                              >
+                                <RemoveRedEyeIcon className="eyes_icon" />{" "}
+                                Preview
+                              </CustomButton>
+                            </div>
+                          </div>
+
+                          <div className="toolcard__align toolcard__toolicons">
+                            <div className="toolcard__items toolcard__download">
+                              {user ? (
+                                <div
+                                  className="toolcard__sub-icons"
+                                  onClick={() => {
+                                    setPopup(true);
+                                    setPopupId(tooldata.id);
+                                  }}
+                                >
+                                  <SystemUpdateAltIcon />
+                                </div>
+                              ) : (
+                                <div
+                                  className="toolcard__sub-icons"
+                                  onClick={() => {
+                                    setisLoginrequire(true);
+                                    setTypeClick(ErrorMessages.EmbededAlert);
+                                  }}
+                                >
+                                  {/* <Tooltip title="Embeded Code" placement="top"> */}
+                                  <SystemUpdateAltIcon />
+                                  {/* </Tooltip> */}
+                                </div>
+                              )}
+                            </div>
+                            <div className="toolcard__items toolcard__shopping">
+                              {user ? (
+                                <div className="toolcard__sub-icons">
+                                  {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
+                                  <ShoppingCartIcon />
+                                </div>
+                              ) : (
+                                <div
+                                  className="toolcard__sub-icons"
+                                  onClick={() => {
+                                    setisLoginrequire(true);
+                                    setTypeClick(ErrorMessages.loginAlert);
+                                  }}
+                                >
+                                  {/* <Tooltip title="Add To Cart" placement="top"> */}
+                                  <ShoppingCartIcon />
+                                  {/* </Tooltip> */}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </Paper>
+                        <div className="toolcard__align toolcard__toolname">
+                          <div className="toolcard__aligninr1 toolcard__font-family">
+                            {tooldata.toolname}
+                          </div>
+                          {/* <div className="toolcard__aligninr toolcard__font-family">
+                          ${tooldata.price}
+                        </div> */}
+                        </div>
+                      </Grid>
+                    );
+                  })}
             </Grid>
-          </Grid>
-        </CustomPopup>
+          )}
 
-        {/*Perview tools code popup */}
-        <CustomPopup
-          open={selectedTool}
-          onClose={() => setSelectedTool(null)}
-          className="popup-container__iner--xxl border-radius tool-perview-data"
-        >
-          <ToolPerview tool={selectedTool}></ToolPerview>
-        </CustomPopup>
-        {/*End */}
+          <CustomPopup
+            open={isLoginOpen || isReginOpen}
+            onClose={() => setLoginIsOpen(false)}
+            className="popup-container__iner--xl border-radius popup-background"
+          >
+            {isLoginOpen ? (
+              <Grid container spacing={3} className="popup-padding">
+                {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+                <Grid item xs={12} sm={12} lg={12}>
+                  <Login />
+                </Grid>
+              </Grid>
+            ) : isReginOpen ? (
+              <Grid container spacing={3} className="popup-padding">
+                {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
+                <Grid item xs={12} sm={12} lg={12}>
+                  <Registration />
+                </Grid>
+              </Grid>
+            ) : (
+              ""
+            )}
+          </CustomPopup>
 
-        {/*Embeded code popup */}
-        <CustomPopup
-          open={ispopup}
-          onClose={() => setPopup(false)}
-          headerText="Embed code"
-          className="border-radius popup-container__iner--xl-md"
-        >
-          <Embedcode data={productShow} toolId={popupId} />
-        </CustomPopup>
-        {/*End*/}
+          <CustomPopup
+            open={isLoginrequire}
+            className="popup-container__iner--sm border-radius loginAlert "
+          >
+            <Grid container spacing={4} align="center">
+              <Grid item xs={12}>
+                <img
+                  className="message__img"
+                  src={warning_icon}
+                  alt="Registration Sucessfully"
+                />
+                <Typography component="p" className="sucess_message">
+                  {TypeClick}
+                </Typography>
+                {/* <p className="sucess_message"></p> */}
+                <CustomButton
+                  className="primary-button"
+                  style={{ marginRight: "20px" }}
+                  onClick={setLoginAlert}
+                >
+                  Login Here
+                </CustomButton>
+                <CustomButton
+                  className="secondary-button"
+                  onClick={() => setisLoginrequire(false)}
+                >
+                  Cancel
+                </CustomButton>
+              </Grid>
+            </Grid>
+          </CustomPopup>
 
-        {/*Add to cart */}
-        <CustomPopup
-          open={isSubscription}
-          onClose={() => setSubscriptionPopup(false)}
-          headerText="Subscription Type"
-          footerButton={true}
-          className="border-radius popup-container__iner--sm"
-        >
-          <Subscription
-            data={products}
-            toolId={popupId}
+          {/*Perview tools code popup */}
+          <CustomPopup
+            open={selectedTool}
+            onClose={() => setSelectedTool(null)}
+            className="popup-container__iner--xxl border-radius tool-perview-data"
+          >
+            <ToolPerview tool={selectedTool}></ToolPerview>
+          </CustomPopup>
+          {/*End */}
+
+          {/*Embeded code popup */}
+          <CustomPopup
+            open={ispopup}
+            onClose={() => setPopup(false)}
+            headerText="Embed code"
+            className="border-radius popup-container__iner--xl-md"
+          >
+            <Embedcode data={products} toolId={popupId} />
+          </CustomPopup>
+          {/*End*/}
+
+          {/*Add to cart */}
+          <CustomPopup
+            open={isSubscription}
             onClose={() => setSubscriptionPopup(false)}
-          />
-        </CustomPopup>
+            headerText="Subscription Type"
+            footerButton={true}
+            className="border-radius popup-container__iner--sm"
+          >
+            <Subscription
+              data={products}
+              toolId={popupId}
+              onClose={() => setSubscriptionPopup(false)}
+            />
+          </CustomPopup>
 
-        <CustomPopup
-          open={isInfoPopup}
-          onClose={() => setIsInfoPopup(false)}
-          headerText="How it works?"
-          footerButton={true}
-          className="border-radius popup-container__iner--xxl"
-        >
-          <ToolInfo />
-        </CustomPopup>
-        {/*End */}
-      </Toolbar>
-      <Footer />
+          <CustomPopup
+            open={isInfoPopup}
+            onClose={() => setIsInfoPopup(false)}
+            headerText="How it works?"
+            footerButton={true}
+            className="border-radius popup-container__iner--xxl"
+          >
+            <ToolInfo />
+          </CustomPopup>
+          {/*End */}
+        </Toolbar>
+      </div>
     </>
   );
 };

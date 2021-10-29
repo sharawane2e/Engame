@@ -12,7 +12,10 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
+import { ReactComponent as EmbdedCodeImg } from "../../assets/images/embed-code.svg";
+import { ReactComponent as ConsumptionReportImg } from "../../assets/images/consumption-report.svg";
+import { ReactComponent as DownloadInvoiceImg } from "../../assets/images/Invoice.svg";
+
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import TimerIcon from "@material-ui/icons/Timer";
@@ -449,7 +452,7 @@ function Purchased(props) {
                             <img
                               alt={item.widget.name}
                               title={item.widget.name}
-                              src={BASE_URL + "media/" + item.widget.imgUrl}
+                              src={BASE_URL + "/media/" + item.widget.imgUrl}
                             />
                           </Grid>
                           <Grid
@@ -680,30 +683,12 @@ function Purchased(props) {
                                 <div>
                                   <Typography
                                     component="div"
-                                    className="cursor--pointer"
+                                    className="cursor--pointer purchased-tool__Indicator"
                                   >
                                     <div className="purchased-tool__purchased-date purchased-tool__hover">
                                       <span className="purchased-tool__date-type-text purchased-curent-text"></span>
                                       <span className="purchased-tool__date-type-text purchased-types">
-                                        <GetAppIcon />
-                                        Download Invoice
-                                      </span>
-                                    </div>
-                                  </Typography>
-
-                                  <Typography
-                                    component="div"
-                                    className="cursor--pointer"
-                                  >
-                                    <div
-                                      className="purchased-tool__purchased-date purchased-tool__hover"
-                                      onClick={() =>
-                                        downloadConsumptionStatement(item.id)
-                                      }
-                                    >
-                                      <span className="purchased-tool__date-type-text purchased-curent-text"></span>
-                                      <span className="purchased-tool__date-type-text purchased-types">
-                                        <ReceiptIcon /> Consumption statement
+                                        DOWNLOAD
                                       </span>
                                     </div>
                                   </Typography>
@@ -723,7 +708,33 @@ function Purchased(props) {
                                       title="Embeded Code"
                                       placement="top"
                                     >
-                                      <SystemUpdateAltIcon />
+                                      <DownloadInvoiceImg />
+                                    </Tooltip>
+                                  </Typography>
+                                </div>
+                                <div className="pdl-2">
+                                  <Typography
+                                    component="div"
+                                    className="purchased-tool__embeded-icon border-radius"
+                                    onClick={() =>
+                                      downloadConsumptionStatement(item.id)
+                                    }
+                                  >
+                                    <Tooltip
+                                      title="Consumption statement"
+                                      placement="top"
+                                    >
+                                      <ConsumptionReportImg />
+                                    </Tooltip>
+                                  </Typography>
+                                </div>
+                                <div className="pdl-2">
+                                  <Typography
+                                    component="div"
+                                    className="purchased-tool__embeded-icon border-radius"
+                                  >
+                                    <Tooltip title="Embeded" placement="top">
+                                      <EmbdedCodeImg />
                                     </Tooltip>
                                   </Typography>
                                 </div>
