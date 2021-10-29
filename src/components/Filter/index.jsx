@@ -211,41 +211,24 @@ const Home = () => {
   };
 
   const SaerchValue = (e) => {
-    // if (e.target.value.length > 2) {
     setSearchText(e.target.value);
-    console.log(e.target.value.length, "search data lenght");
-    // }
-    // if (e.target.value.length == 0) {
-    //   FilterAction(value, e.target.value);
-    // }
+
+    if (e.target.value.length == 0) {
+      FilterAction(value, searchText);
+    }
   };
 
   const handelSearchValueFilterClick = () => {
-    setFinalsearchValue(searchText);
+    FilterAction(value, searchText);
   };
 
   useEffect(() => {
-    FilterAction(value, finalsearchValue);
+    FilterAction(value, searchText);
     // console.log(productList);
-  }, [value, finalsearchValue]);
+  }, [value]);
 
   return (
     <>
-      {/* <Root>
-        <div {...getRootProps()}>
-          <Label {...getInputLabelProps()}>Customized hook</Label>
-        </div>
-        {groupedOptions.length > 0 ? (
-          <Listbox {...getListboxProps()}>
-            {groupedOptions.map((option, index) => (
-              <li {...getOptionProps({ option, index })}>
-                <span>{option.title}</span>
-                <CheckIcon fontSize="small" />
-              </li>
-            ))}
-          </Listbox>
-        ) : null}
-      </Root> */}
       <div className="header-bg filter-tool-shadow filter--fixed">
         <Toolbar className="filter-section">
           <div className="flexGrow">
