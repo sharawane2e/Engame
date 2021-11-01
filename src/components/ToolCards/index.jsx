@@ -119,7 +119,7 @@ const ToolCards = () => {
                       <Grid
                         item
                         xl={2}
-                        lg={2}
+                        lg={3}
                         md={3}
                         sm={4}
                         xs={12}
@@ -198,7 +198,7 @@ const ToolCards = () => {
                       <Grid
                         item
                         xl={2}
-                        lg={2}
+                        lg={3}
                         md={3}
                         sm={4}
                         xs={12}

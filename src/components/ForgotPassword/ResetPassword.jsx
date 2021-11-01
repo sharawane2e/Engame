@@ -48,6 +48,7 @@ const Forgot = () => {
   };
 
   const ResetPassword = () => {
+    console.log(passwordMatch, "Password match");
     if (passwordMatch) {
       let resetPasswordVal = {
         new_password1: newPasswords,
@@ -71,6 +72,8 @@ const Forgot = () => {
       token: queryData.token,
     };
 
+    console.log("Check token");
+
     ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
       .then((res) => {
         console.log(res);
@@ -91,7 +94,7 @@ const Forgot = () => {
 
   useEffect(() => {
     CheckToken();
-  }, []);
+  }, [isToken]);
 
   return (
     <>
