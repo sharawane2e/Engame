@@ -7,13 +7,15 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { addToCart } from "../../redux/cart/action";
 import ApiRequest from "../../util/ApiRequest";
 import { CART_STANDARD_PRICE } from "../../config/ApiUrl";
+import Toaster from "../../util/Toaster";
+import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionType = ({ toolId, onClose }) => {
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
-  const [valuePrice, setValuePrice] = useState(1000);
-  const [price, setPrice] = useState(0);
+  const [itemCount, setItemCount] = useState(1000);
+  const [itemPrice, setItemPrice] = useState(0);
   const dispatch = useDispatch();
 
   let auth = localStorage.getItem("auth");
@@ -32,9 +34,9 @@ const SubscriptionType = ({ toolId, onClose }) => {
     }
 
     if (e.target.value == "days") {
-      setValuePrice(7);
+      setItemCount(7);
     } else {
-      setValuePrice(1000);
+      setItemCount(1000);
     }
 
     dispatch(loadingStart());
@@ -69,8 +71,8 @@ const SubscriptionType = ({ toolId, onClose }) => {
     user: res.token.user.pk,
     widget: toolId,
     plan_type: type,
-    plan_value: valuePrice,
-    price: price,
+    plan_value: itemCount,
+    price: itemPrice,
     currency: "$",
   };
   console.log("user", user);
@@ -81,29 +83,41 @@ const SubscriptionType = ({ toolId, onClose }) => {
   };
 
   const handleCalculatePrice = (e) => {
-    let value = e.target.value * base;
-    setPrice(value);
-    setValuePrice(e.target.value);
     if (e.target.value <= 0) {
-      setValuePrice(0);
+      var ItemCount = 1;
+    } else if (e.target.value > 999 && subscription === "days") {
+      var ItemCount = 999;
+      Toaster.error(ErrorMessages.Maxium_days_addToCart, "topCenter");
+    } else if (e.target.value > 100000 && subscription === "hits") {
+      var ItemCount = 100000;
+      Toaster.error(ErrorMessages.Maxium_hits_addToCart, "topCenter");
+    } else {
+      var ItemCount = e.target.value;
     }
-    if (e.target.value >= 2500000) {
-      setValuePrice("");
-    }
+
+    let value = ItemCount * base;
+    setItemPrice(value);
+    setItemCount(ItemCount);
+    // if (e.target.value <= 0) {
+    //   setItemCount(0);
+    // }
+    // if (e.target.value >= 2500000) {
+    //   setItemCount("");
+    // }
   };
 
   useEffect(() => {
     if (subscription === "days") {
       setType("days");
-      setPrice(valuePrice * base);
-      setValuePrice(valuePrice);
+      setItemPrice(itemCount * base);
+      setItemCount(itemCount);
     } else {
       setType("hits");
       setBase(0.1);
-      setPrice(valuePrice * base);
-      setValuePrice(valuePrice);
+      setItemPrice(itemCount * base);
+      setItemCount(itemCount);
     }
-  }, [handleChange, subscription, type, price, base]);
+  }, [handleChange, subscription, type, itemPrice, base]);
 
   return (
     <>
@@ -123,14 +137,14 @@ const SubscriptionType = ({ toolId, onClose }) => {
               variant="outlined"
               name="hits"
               className="subscription-type__inputbox"
-              value={valuePrice}
+              value={itemCount}
               // onBlur={(e) => handleBlur(e, "email")}
               onChange={handleCalculatePrice}
             />
             <div className="subscription-type__text">{type}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-            ${price.toFixed(2)}
+            ${itemPrice.toFixed(2)}
           </div>
         </div>
       </div>
@@ -138,7 +152,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
         <CustomButton
           className="primary-button add--card"
           onClick={handleAddCart}
-          disabled={valuePrice === 0 || valuePrice === "" ? true : false}
+          disabled={itemCount === 0 || itemCount === "" ? true : false}
         >
           <ShoppingCartIcon /> Add to Cart
         </CustomButton>

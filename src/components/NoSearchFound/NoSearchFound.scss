@@ -4,9 +4,6 @@
   flex-direction: column;
   align-items: center;
   padding: 5% 0%;
-  img {
-    width: 200px;
-  }
   #{&}__headding {
     color: $black;
     font-size: $font-xx-reg18;

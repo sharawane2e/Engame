@@ -87,7 +87,7 @@ body {
 }
 /*Use these classes for borders*/
 .border-bottom {
-  @include border("-bottom", $border-width, $bsolid, $black-gray);
+  @include border("-bottom", $border-width, $bsolid, $back-color);
 }
 
 .border-allside {

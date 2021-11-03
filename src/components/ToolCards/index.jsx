@@ -30,7 +30,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { WIDGET_LIST } from "../../config/ApiUrl";
 import { ConstructionOutlined } from "@mui/icons-material";
 import NoSearchFound from "../NoSearchFound";
-import NotFoundImg from "../../assets/images/empty.gif";
+import NoresultImg from "../../assets/images/not-found.svg";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -107,7 +107,7 @@ const ToolCards = () => {
             <Grid container spacing={4}>
               {products.length == 0 ? (
                 <NoSearchFound
-                  img={NotFoundImg}
+                  img={NoresultImg}
                   heading={ErrorMessages.NoSearchResultMessage}
                 />
               ) : (

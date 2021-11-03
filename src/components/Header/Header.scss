@@ -13,7 +13,9 @@
 }
 
 .user_name {
-  color: $primary !important;
+  color: $black !important;
+  background-color: $gray-primary !important;
+  text-align: left;
 }
 
 .MuiPaper-elevation4 {
@@ -115,12 +117,52 @@
   }
 }
 
+.profile_menu {
+  .css-cveggr-MuiListItemIcon-root {
+    min-width: 20px !important;
+
+    .css-ptiqhd-MuiSvgIcon-root {
+      font-size: $font-reg;
+    }
+  }
+  a {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+  }
+  .MuiListItem-gutters {
+    padding-left: 12px;
+    padding-right: 12px;
+    border-bottom: 1px solid $gray-primary;
+    font-size: $font-reg;
+  }
+  .MuiTypography-noWrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-family: map-get($map: $font-family, $key: "font-barlowregular");
+    padding-left: 6px;
+    color: $black;
+  }
+}
+.MuiPaper-elevation8 {
+  top: 65px !important;
+  right: 30px !important;
+  left: auto !important;
+}
+
 .makeStyles-sectionMobile-4,
 .makeStyles-sectionMobile-2,
 .makeStyles-sectionMobile-3 {
   > .MuiIconButton-colorInherit {
     padding: 4px !important;
   }
+}
+.MuiList-padding {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
 }
 // .MuiListItem-button{
 //   @include breakpoint(mobileonly) {

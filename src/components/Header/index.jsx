@@ -42,6 +42,12 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
+import { Pending, PersonPinCircle } from "@mui/icons-material";
+import { ListItemIcon } from "@mui/material";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
@@ -149,13 +155,15 @@ const Header = ({ props }) => {
     <>
       {user?.isLoggedIn && (
         <Menu
+          id="lock-menu"
           anchorEl={anchorEl}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          id={menuId}
-          keepMounted
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
           open={isMenuOpen}
           onClose={handleMenuClose}
+          className="profile_menu"
+          MenuListProps={{
+            "aria-labelledby": "lock-button",
+            role: "listbox",
+          }}
         >
           <MenuItem onClick={handleMenuClose} className="user_name">
             {user.token.user.first_name}
@@ -165,7 +173,46 @@ const Header = ({ props }) => {
               My Widgets
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
+            <Link color="inherit" to="/" className="">
+              <ListItemIcon>
+                <BorderColorIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit" noWrap>
+                Edit profile
+              </Typography>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
+            <Link color="inherit" to="/Purchased" className="">
+              <ListItemIcon>
+                <WidgetsOutlinedIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit" noWrap>
+                My Widgets
+              </Typography>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
+            <Link color="inherit" to="/" className="">
+              <ListItemIcon>
+                <VpnKeyOutlinedIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit" noWrap>
+                Change Password
+              </Typography>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleLogout} className="profile_menu__Link">
+            <Link color="inherit" className="">
+              <ListItemIcon>
+                <LoginOutlinedIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit" noWrap>
+                Logout
+              </Typography>
+            </Link>
+          </MenuItem>
         </Menu>
       )}
     </>

@@ -21,4 +21,8 @@ export const ErrorMessages = {
   NetworkErrorMessage: "Oops! Something went wrong.",
 
   NoSearchResultMessage: "No search result found! Please search somthing else",
+
+  Maxium_days_addToCart: "Maxium 999 are allowed",
+
+  Maxium_hits_addToCart: "Maxium 100000 hits are allowed",
 };

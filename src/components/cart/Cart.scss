@@ -9,9 +9,9 @@
 }
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  @include space(padding, top, $padding-30, 0);
+  @include space(padding, top, $padding-15, 0);
   #{&}__container-inr {
-    @include space(padding, bottom, $padding-15, 0);
+    @include space(padding, bottom, $padding-0, 0);
   }
   #{&}__left-card {
     display: flex;

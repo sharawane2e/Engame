@@ -51,6 +51,10 @@ import {
   PAYMENT_SUCESS,
   CONSUMPTION_STATEMENT,
 } from "../../config/ApiUrl";
+import exportFromJSON from "export-from-json";
+import NoSearchFound from "../NoSearchFound";
+import NoresultImg from "../../assets/images/not-found.svg";
+import { getItemFromCart } from "../../redux/cart/action";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -112,7 +116,7 @@ function Purchased(props) {
           Toaster.sucess(res.details, "topCenter");
           setConsumtionReportData(res);
 
-          const csvJSON = () => {
+          const convertTOJson = () => {
             const lines = res.split("\n");
             const result = [];
             const headers = lines[0].split(",");
@@ -130,30 +134,20 @@ function Purchased(props) {
             return result;
           };
 
-          const options = {
-            fieldSeparator: ",",
-            quoteStrings: '"',
-            decimalSeparator: ".",
-            showLabels: true,
-            showTitle: true,
-            title: "My Awesome CSV",
-            useTextFile: false,
-            useBom: true,
-            useKeysAsHeaders: true,
-            // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
-          };
-
-          const csvExporter = new ExportToCsv(options);
-
-          csvExporter.generateCsv(csvJSON());
+          let data = convertTOJson();
+          const fileName = "consumption-report";
+          const exportType = exportFromJSON.types.xls;
+          exportFromJSON({ data, fileName, exportType });
         } else {
-          Toaster.sucess(res.details, "topCenter");
+          Toaster.error(res.details, "topCenter");
         }
       }
     );
   };
 
   const paymentSuccess = async () => {
+    dispatch(loadingStart());
+
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
@@ -174,35 +168,33 @@ function Purchased(props) {
       plan_new_value: curentUpdatePrice,
       subscription: curentPlanID,
     };
-
     let PaymentSucessData = subscriptionRenew
       ? RenewPaymentSucessData
       : NewPaymentSucessData;
 
     ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
       .then((res) => {
-        console.log(res, "res");
-        if (!res.status == 500) {
-          PurchaseList();
+        PurchaseList();
+        if (!res.status == "False") {
           dispatch(removeFromCart());
           localStorage.removeItem("ExtendData");
           dispatch(loadingStop());
           Toaster.sucess(res.details, "topCenter");
         }
+        dispatch(getItemFromCart());
       })
       .catch((error) => {
-        // localStorage.removeItem("ExtendData");
+        localStorage.removeItem("ExtendData");
         dispatch(loadingStop());
       });
   };
 
   useEffect(() => {
-    dispatch(loadingStart());
     paymentSuccess();
     PurchaseList();
   }, [token]);
 
-  //  my widgets
+  //  Purchase list
   const PurchaseList = async () => {
     dispatch(loadingStart());
     ApiRequest.request(PURCHASED_ITEM)
@@ -251,6 +243,30 @@ function Purchased(props) {
   const handleExtendLocal = (widgetId) => {
     localStorage.setItem("productShow", widgetId.plan.id);
   };
+
+  const FilterData = widgetList?.filter((item, index) => {
+    if (
+      filter == "active"
+        ? item.is_active
+        : filter == "expiresoon"
+        ? item.is_expiring_soon
+        : filter == "expired"
+        ? !item.is_active
+        : filter == "paused"
+        ? item.is_paused
+        : filter == "days"
+        ? item.plan.plan_type == "days"
+        : filter == "hits"
+        ? item.plan.plan_type == "hits"
+        : filter == "all"
+        ? item.id
+        : item.id
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   return (
     <>
@@ -375,24 +391,8 @@ function Purchased(props) {
             </Grid>
             {/*Card start */}
             {/* {console.log(widgetList)} */}
-            {widgetList?.map((item, index) => {
-              if (
-                filter == "active"
-                  ? item.is_active
-                  : filter == "expiresoon"
-                  ? item.is_expiring_soon
-                  : filter == "expired"
-                  ? !item.is_active
-                  : filter == "paused"
-                  ? item.is_paused
-                  : filter == "days"
-                  ? item.plan.plan_type == "days"
-                  : filter == "hits"
-                  ? item.plan.plan_type == "hits"
-                  : filter == "all"
-                  ? item.id
-                  : item.id
-              ) {
+            {FilterData.length > 0 ? (
+              FilterData?.map((item, index) => {
                 let purchasedDateTime = new Date(item.purchase_date);
                 purchasedDateTime = purchasedDateTime.toLocaleString("en-US");
                 const purchase_date = purchasedDateTime.split(",")[0];
@@ -697,12 +697,6 @@ function Purchased(props) {
                                   <Typography
                                     component="div"
                                     className="purchased-tool__embeded-icon border-radius"
-                                    onClick={() =>
-                                      downloadfile(
-                                        item.widget.name,
-                                        item.widget.widget_embed_code
-                                      )
-                                    }
                                   >
                                     <Tooltip
                                       title="Embeded Code"
@@ -732,6 +726,12 @@ function Purchased(props) {
                                   <Typography
                                     component="div"
                                     className="purchased-tool__embeded-icon border-radius"
+                                    onClick={() =>
+                                      downloadfile(
+                                        item.widget.name,
+                                        item.widget.widget_embed_code
+                                      )
+                                    }
                                   >
                                     <Tooltip title="Embeded" placement="top">
                                       <EmbdedCodeImg />
@@ -746,8 +746,10 @@ function Purchased(props) {
                     </Grid>
                   </Grid>
                 );
-              }
-            })}
+              })
+            ) : (
+              <NoSearchFound img={NoresultImg} heading="No result found" />
+            )}
           </Container>
         ) : (
           <EmptyPage

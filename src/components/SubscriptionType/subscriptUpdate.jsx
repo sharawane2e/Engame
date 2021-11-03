@@ -11,6 +11,8 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { getItemFromCart } from "../../redux/cart/action";
 import ApiRequest from "../../util/ApiRequest";
 import { CART_DETAILS } from "../../config/ApiUrl";
+import Toaster from "../../util/Toaster";
+import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionUpdate = ({ updateData, onClose }) => {
   const [istype, setType] = useState(updateData.plan_type);
@@ -25,6 +27,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   const handleChange = (e) => {
     if (e.target.value === "days") {
       setType("days");
+
       updateData.plan_type === "days"
         ? setValuePrice(updateData.plan_value)
         : setValuePrice(7);
@@ -45,10 +48,22 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   const handleCalculatePrice = (e) => {
     let value = e.target.value > 0 ? e.target.value : 1;
 
-    setValuePrice(value);
+    if (e.target.value <= 0) {
+      var ItemCount = 1;
+    } else if (e.target.value > 999 && istype === "days") {
+      var ItemCount = 999;
+      Toaster.error(ErrorMessages.Maxium_days_addToCart, "topCenter");
+    } else if (e.target.value > 100000 && istype === "hits") {
+      var ItemCount = 100000;
+      Toaster.error(ErrorMessages.Maxium_hits_addToCart, "topCenter");
+    } else {
+      var ItemCount = e.target.value;
+    }
+
+    setValuePrice(ItemCount);
     istype === "days"
-      ? setCurentPrice(value * 5)
-      : setCurentPrice((value * 0.1).toFixed(2));
+      ? setCurentPrice(ItemCount * 5)
+      : setCurentPrice((ItemCount * 0.1).toFixed(2));
   };
 
   useEffect(() => {

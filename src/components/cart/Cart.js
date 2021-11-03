@@ -44,6 +44,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getItemFromCart());
+    localStorage.removeItem("ExtendData");
   }, []);
 
   const handleRemove = (isProduct) => {

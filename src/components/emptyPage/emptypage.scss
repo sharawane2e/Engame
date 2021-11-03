@@ -12,7 +12,8 @@
   &__headding {
     @include space(margin, bottom, $margin-20, 0);
     &__para {
-      font-weight: 600 !important;
+      // font-weight: 600 !important;
+      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       color: $black-secondary;
       font-size: $font-sm !important;
       text-align: center;

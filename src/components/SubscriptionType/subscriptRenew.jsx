@@ -12,6 +12,8 @@ import { logOutUser } from "../../redux/user/user-action";
 import Typography from "@material-ui/core/Typography";
 import ApiRequest from "../../util/ApiRequest";
 import { CHECKOUT } from "../../config/ApiUrl";
+import Toaster from "../../util/Toaster";
+import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
   console.log("cart value", updateData);
@@ -34,19 +36,31 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   // console.log("valuePrice", valuePrice);
 
   const handleCalculatePrice = (e) => {
-    let value = e.target.value;
-    setValuePrice(value);
-    istype === "days"
-      ? setCurentPrice(value * 5)
-      : setCurentPrice((value * 0.1).toFixed(2));
-
     if (e.target.value <= 0) {
-      setCurentPrice(0);
+      var ItemCount = 1;
+    } else if (e.target.value >= 999 && istype === "days") {
+      var ItemCount = 999;
+      Toaster.error(ErrorMessages.Maxium_days_addToCart, "topCenter");
+    } else if (e.target.value >= 100000 && istype === "hits") {
+      var ItemCount = 100000;
+      Toaster.error(ErrorMessages.Maxium_hits_addToCart, "topCenter");
+    } else {
+      var ItemCount = e.target.value;
     }
 
-    if (e.target.value >= 2500000) {
-      setCurentPrice("");
-    }
+    // let ItemCount = e.target.value;
+    setValuePrice(ItemCount);
+    istype === "days"
+      ? setCurentPrice(ItemCount * 5)
+      : setCurentPrice((ItemCount * 0.1).toFixed(2));
+
+    // if (e.target.value <= 0) {
+    //   setCurentPrice(0);
+    // }
+
+    // if (e.target.value >= 2500000) {
+    //   setCurentPrice("");
+    // }
   };
 
   useEffect(() => {
