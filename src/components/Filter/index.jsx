@@ -10,7 +10,6 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import SearchIcon from "@material-ui/icons/Search";
 import Carousel from "../../util/Carousel";
 import { useDispatch, useSelector } from "react-redux";
-
 import PropTypes from "prop-types";
 import { useAutocomplete } from "@mui/core/AutocompleteUnstyled";
 import CheckIcon from "@mui/icons-material/Check";
@@ -18,6 +17,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import { useStore } from "react-redux";
 import { listProducts } from "../../redux/product/product-action";
+import { CATEGORIES_LIST } from "../../config/ApiUrl";
+import ApiRequest from "../../util/ApiRequest";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -171,9 +172,8 @@ const Listbox = styled("ul")(
 );
 
 const Home = () => {
-  const [searchText, setSearchText] = useState(null);
-  const [finalsearchValue, setFinalsearchValue] = useState(null);
-  const productList = useSelector((state) => state.productList);
+  const [searchText, setSearchText] = useState("");
+  const [categoriesList, setCategoriesList] = useState([""]);
   const dispatch = useDispatch();
   const {
     getRootProps,
@@ -190,7 +190,7 @@ const Home = () => {
     id: "customized-hook-demo",
     // defaultValue: [top100Films[1]],
     multiple: true,
-    options: categoriesList,
+    options: OldCategoriesList,
     getOptionLabel: (option) => option.title,
   });
 
@@ -199,7 +199,7 @@ const Home = () => {
     console.log(searchText, "Search Data");
 
     let selectedCategoriesId = SelectedCategoriesList.map((item) => {
-      return item.widgetTypeId;
+      return item.id;
     });
     console.log(selectedCategoriesId, "Selected Categories list");
     let ApiData = {
@@ -208,6 +208,14 @@ const Home = () => {
     };
 
     dispatch(listProducts(ApiData));
+  };
+
+  const GetCategoriesList = () => {
+    ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
+      setCategoriesList(res);
+      console.log(res, "Categories list");
+      console.log(categoriesList, "Categories list render");
+    });
   };
 
   const SaerchValue = (e) => {
@@ -223,6 +231,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    GetCategoriesList();
     FilterAction(value, searchText);
     // console.log(productList);
   }, [value]);
@@ -315,7 +324,7 @@ const Home = () => {
                         >
                           {groupedOptions.map((option, index) => (
                             <li {...getOptionProps({ option, index })}>
-                              <span>{option.wigetTypeName}</span>
+                              <span>{option.widget_type}</span>
                               <CheckIcon fontSize="small" />
                             </li>
                           ))}
@@ -333,7 +342,7 @@ const Home = () => {
           >
             {value.map((option, index) => (
               <StyledTag
-                label={option.wigetTypeName}
+                label={option.widget_type}
                 {...getTagProps({ index })}
               />
             ))}
@@ -344,13 +353,13 @@ const Home = () => {
   );
 };
 
-const categoriesList = [
-  { wigetTypeName: "Heatmaps and Highlighters", widgetTypeId: 1 },
-  { wigetTypeName: "Rating", widgetTypeId: 2 },
-  { wigetTypeName: "Single and Multi selects", widgetTypeId: 3 },
-  { wigetTypeName: "	Maps", widgetTypeId: 4 },
-  { wigetTypeName: "	Ranking", widgetTypeId: 5 },
-  { wigetTypeName: "	collection", widgetTypeId: 6 },
+const OldCategoriesList = [
+  { widget_type: "Heatmaps and Highlighters", id: 1 },
+  { widget_type: "Rating", id: 2 },
+  { widget_type: "Single and Multi selects", id: 3 },
+  { widget_type: "	Maps", id: 4 },
+  { widget_type: "	Ranking", id: 5 },
+  { widget_type: "	collection", id: 6 },
 ];
 
 export default Home;
