@@ -250,9 +250,9 @@ const Header = ({ props }) => {
             ) : (
               <div className={classes.sectionDesktop}>
                 <div className="user-after-login">
-                  <Link color="inherit" to="/Purchased" className="my-widgets">
+                  {/* <Link color="inherit" to="/Purchased" className="my-widgets">
                     My widgets
-                  </Link>
+                  </Link> */}
                   <div className="shoping__card">
                     <Link to="cart">
                       {/* <Badge color="secondary"> */}

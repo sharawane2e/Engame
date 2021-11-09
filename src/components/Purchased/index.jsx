@@ -111,7 +111,9 @@ function Purchased(props) {
 
     await ApiRequest.request(CONSUMPTION_STATEMENT, "POST", PurchasedData).then(
       (res) => {
-        if (!res.status) {
+        if (res?.status) {
+          Toaster.error("No record found", "topCenter");
+        } else if (res) {
           dispatch(loadingStop());
           Toaster.sucess(res.details, "topCenter");
           setConsumtionReportData(res);
@@ -139,7 +141,7 @@ function Purchased(props) {
           const exportType = exportFromJSON.types.xls;
           exportFromJSON({ data, fileName, exportType });
         } else {
-          Toaster.error(res.details, "topCenter");
+          Toaster.error("No record found", "topCenter");
         }
       }
     );
@@ -699,7 +701,7 @@ function Purchased(props) {
                                     className="purchased-tool__embeded-icon border-radius"
                                   >
                                     <Tooltip
-                                      title="Embeded Code"
+                                      title="Download Invoice"
                                       placement="top"
                                     >
                                       <DownloadInvoiceImg />
@@ -733,7 +735,10 @@ function Purchased(props) {
                                       )
                                     }
                                   >
-                                    <Tooltip title="Embeded" placement="top">
+                                    <Tooltip
+                                      title="Embeded Code"
+                                      placement="top"
+                                    >
                                       <EmbdedCodeImg />
                                     </Tooltip>
                                   </Typography>
