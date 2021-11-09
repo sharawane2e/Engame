@@ -279,12 +279,12 @@ const Home = () => {
                   <IconButton
                     className="iconButton filter-inputsection__icon"
                     aria-label="directions"
+                    onClick={handelSearchValueFilterClick}
+                    type="submit"
                   >
                     <IconButton
                       className="iconButton search-icon"
                       aria-label="menu"
-                      onClick={handelSearchValueFilterClick}
-                      type="submit"
                     >
                       <SearchIcon fontSize="inherit" />
                     </IconButton>
@@ -307,6 +307,7 @@ const Home = () => {
                     <input
                       {...getInputProps()}
                       className="filter-inputsection__filterBtn"
+                      type="submit"
                     />
                     <FilterListIcon
                       fontSize="large"
