@@ -8,7 +8,9 @@ export const addToCart = (userData) => (dispatch) => {
 
   ApiRequest.request(ADD_TO_CART, "POST", userData)
     .then((res) => {
-      dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res });
+      console.log(res, "add to cart");
+      dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res.data });
+      dispatch(getItemFromCart());
     })
     .catch((error) => {
       console.log(error);
@@ -22,7 +24,8 @@ export const getItemFromCart = () => (dispatch) => {
   dispatch(loadingStart());
   ApiRequest.request(GET_FROM_CART, "GET")
     .then((res) => {
-      dispatch({ type: actionTypes.CART_ITEM_GET, payload: res });
+      dispatch({ type: actionTypes.CART_ITEM_GET, payload: res.data });
+      console.log(res, "Cart data list");
     })
     .catch((error) => {
       console.log(error);
@@ -36,7 +39,7 @@ export const updateCartIteam = (updatedid, plans) => (dispatch) => {
   dispatch(loadingStart());
   ApiRequest.request(CART_DETAILS`${updatedid}/`, "PUT", plans)
     .then((res) => {
-      dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: res });
+      dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: res.data });
     })
     .catch((error) => {
       console.log(error);

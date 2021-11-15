@@ -61,7 +61,12 @@ const Forgot = () => {
         "POST",
         resetPasswordVal
       ).then((res) => {
-        setIsPasswordResetSucessfully(true);
+        if (!res.status) {
+          setIsPasswordResetSucessfully(true);
+        } else {
+          setIsPasswordResetSucessfully(false);
+          setIsToken(false);
+        }
       });
     }
   };
@@ -76,11 +81,12 @@ const Forgot = () => {
 
     ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
       .then((res) => {
-        console.log(res);
-        if (res.status == "False") {
-          setIsToken(false);
-        } else {
+        console.log(res, "token verify");
+        if (res.status) {
           setIsToken(true);
+          setIsPasswordResetSucessfully(false);
+        } else {
+          setIsToken(false);
         }
       })
       .catch((error) => {
@@ -94,19 +100,13 @@ const Forgot = () => {
 
   useEffect(() => {
     CheckToken();
-  }, [isToken]);
+  }, [queryData.token]);
 
   return (
     <>
       <Header />
       <div className="forgot">
-        {!isToken && !isPasswordResetSucessfully ? (
-          <EmptyPage
-            heading={ErrorMessages.PASSWORD_CANNOT_CHANGE}
-            buttonName="Back to home"
-            imgUrl={emptyImg}
-          />
-        ) : isToken && !isPasswordResetSucessfully ? (
+        {isToken && !isPasswordResetSucessfully ? (
           <form action="">
             <div className="form-group">
               <InputLabel
@@ -156,6 +156,12 @@ const Forgot = () => {
               </CustomButton>
             </div>
           </form>
+        ) : !isToken && !isPasswordResetSucessfully ? (
+          <EmptyPage
+            heading={ErrorMessages.PASSWORD_CANNOT_CHANGE}
+            buttonName="Back to home"
+            imgUrl={emptyImg}
+          />
         ) : isPasswordResetSucessfully ? (
           <EmptyPage
             heading={ErrorMessages.PASSWORD_CHANGE_SUCESSFULLY}

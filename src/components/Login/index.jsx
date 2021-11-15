@@ -20,17 +20,19 @@ import { loginUser } from "../../redux/user/user-action";
 import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
 import { LOGIN } from "../../config/ApiUrl";
+import UserVerification from "../userVerify";
 // import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    data: "",
-    forgot: "",
+    data: false,
+    forgotPasswordPopup: false,
     buttonClass: 0,
     login: false,
     store: null,
+    isVerifyPopup: false,
     formErrors: {
       email: "",
       password: "",
@@ -41,10 +43,12 @@ class Login extends Component {
   loginValidation = new LoginValidation();
 
   createAccount = (e) => {
-    this.setState({ data: `string` });
+    this.setState({
+      data: true,
+    });
   };
   forgotPassword = (e) => {
-    this.setState({ forgot: `string` });
+    this.setState({ forgotPasswordPopup: true, data: false });
   };
 
   handelLogin = (e) => {
@@ -57,24 +61,18 @@ class Login extends Component {
 
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
-      ApiRequest.request(LOGIN, "POST", user)
-        .then((res) => {
-          if (res.non_field_errors) {
-            Toaster.error(
-              res.non_field_errors ? res.non_field_errors.join("") : null
-            );
-          } else {
-            //  LocalStorageUtils.setUserIntoLocalStorage(res);
-            // ApiRequest.setAuthToken(LocalStorageUtils.getToken());
-            this.props.dispatch(loginUser(res));
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          this.props.dispatch(loadingStop());
-        });
+      ApiRequest.request(LOGIN, "POST", user).then((res) => {
+        if (res.status) {
+          this.props.dispatch(loginUser(res.data[0]));
+        } else if (!res.status && !res.data[0].is_verified) {
+          this.setState({
+            isVerifyPopup: true,
+            data: false,
+          });
+        } else {
+          Toaster.error(res.detail.message, "topCenter");
+        }
+      });
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },
@@ -120,20 +118,16 @@ class Login extends Component {
   render() {
     return (
       <>
-        {this.state.forgot ? (
+        {this.state.forgotPasswordPopup ? (
           <ForgotPassword />
         ) : this.state.data ? (
           <Registration />
+        ) : this.state.isVerifyPopup ? (
+          <UserVerification />
         ) : (
           <div className="form-area login--form">
             <div className="form-area__login  large-hedding">Login</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
-              {/* <InputLabel
-                htmlFor="standard-adornment-email"
-                className="input-label"
-              >
-                E-mail address
-              </InputLabel> */}
               <FormControl className="form-area__control">
                 <TextField
                   id="outlined-email-input"
@@ -151,13 +145,6 @@ class Login extends Component {
                   {this.state.formErrors.email}
                 </div>
               </FormControl>
-
-              {/* <InputLabel
-                htmlFor="standard-adornment-password"
-                className="input-label"
-              >
-                Password
-              </InputLabel> */}
               <FormControl className="form-area__control" variant="filled">
                 <InputLabel htmlFor="standard-adornment-password">
                   Password
@@ -204,7 +191,6 @@ class Login extends Component {
                 onClick={this.handelLogin}
                 className="login__button primary-button"
               >
-                {/* {isLoaded ? "Loading..." : "Log In" } */}
                 Log In
               </CustomButton>
             </div>

@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-// import {
-//   Grid,
-//   Container,
-//   Typography,
-//   ButtonBase,
-//   Breadcrumbs,
-//   Tooltip,
-//   Paper,
-// } from "@mui/material";
 import { Breadcrumbs } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -59,7 +49,7 @@ const Cart = () => {
     const stripe = await loadStripe(STRIPE);
 
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
-      stripe.redirectToCheckout({ sessionId: res.sessionId });
+      stripe.redirectToCheckout({ sessionId: res.data.sessionId });
     });
   };
 
@@ -111,10 +101,6 @@ const Cart = () => {
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
                   {cart.map((item, index) => {
-                    {
-                      console.log(index);
-                    }
-
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border--colordata border-radius"
@@ -133,9 +119,9 @@ const Cart = () => {
                           >
                             <ButtonBase className="curent-tool-img">
                               <img
-                                alt={item.widget?.name}
-                                title={item.widget?.name}
-                                src={BASE_URL + item.widget?.imgUrl}
+                                alt={item.widget.name}
+                                title={item.widget.name}
+                                src={BASE_URL + item.widget.imgUrl}
                               />
                             </ButtonBase>
                           </Grid>

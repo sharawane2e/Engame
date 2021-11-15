@@ -19,20 +19,20 @@ const EmailActivation = (EmailActive) => {
 
   const EmailAPI = async () => {
     dispatch(loadingStart());
-    await fetch(BASE_URL + "user/account-confirm-email/", {
+    await fetch(BASE_URL + "/user/account-confirm-email/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // Authorization: `Bearer ${token.access_token}`,
       },
       body: JSON.stringify({
-        key: "MTI:1mYUxq:Mg9d5nfrH3Qvy9zUPm_OplrEuhoPUCjEpz10kiviIpk",
+        key: "Ng:1mkri1:jL_-4dw8RVCHO_eCszUMoud-BSiNP7EdBKi70NksHvY",
       }),
     })
       .then((response) => response.json())
       .then((result) => {
         // console.log(result);
-        if (result.status == "200") {
+        if (result.status) {
           setEmailActivationResult(true);
           Toaster.sucess("Your email is activated sucessfully", "topCenter");
           dispatch(loadingStop());

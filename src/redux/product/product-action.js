@@ -14,7 +14,9 @@ export const listProducts = (filterData) => (dispatch) => {
 
   ApiRequest.request(FILTER_WIDGET_LIST, "POST", filterData)
     .then((res) => {
-      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: res.data });
+      if (res.status) {
+        dispatch({ type: PRODUCT_LIST_SUCCESS, payload: res.data });
+      }
     })
     .catch((error) => {
       dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });

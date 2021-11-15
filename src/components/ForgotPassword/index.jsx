@@ -11,11 +11,15 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { connect } from "react-redux";
 import ApiRequest from "../../util/ApiRequest";
 import Toaster from "../../util/Toaster";
+import UserVerification from "../userVerify";
 
 class ForgotPassword extends Component {
   state = {
     email: "",
-    data: "",
+    isLogin: false,
+    isForgot: true,
+    isEmailVerify: false,
+    isPasswordEmailSent: false,
     formErrors: {
       email: "",
     },
@@ -23,7 +27,7 @@ class ForgotPassword extends Component {
   ForgotPasswordVali = new ForgotValidation();
 
   backLogin = (e) => {
-    this.setState({ data: `string` });
+    this.setState({ isLogin: true });
   };
   forgotSubmit = (e) => {
     // e.preventDefault();
@@ -38,8 +42,31 @@ class ForgotPassword extends Component {
       ApiRequest.request(FORGOT_PASSWORD, "POST", { email: email })
         .then((res) => {
           // console.log("this.state.props", this.state.props);
-          Toaster.sucess(res.detail, "topCenter");
           // window.location.reload();
+          if (res.status) {
+            Toaster.sucess(res.detail.message, "topCenter");
+            // this.status({
+            //   isEmailVerify: false,
+            //   isForgot: false,
+            //   isLogin: false,
+            //   isPasswordEmailSent: true,
+            // });
+          } else if (!res.status && !res.data[0]?.is_verified) {
+            // this.status({
+            //   isEmailVerify: true,
+            //   isForgot: false,
+            //   isLogin: false,
+            //   isPasswordEmailSent: false,
+            // });
+          } else {
+            Toaster.error(res.detail.message, "topCenter");
+            // this.status({
+            //   isEmailVerify: false,
+            //   isForgot: false,
+            //   isLogin: false,
+            //   isPasswordEmailSent: false,
+            // });
+          }
         })
         .finally(() => {
           this.props.dispatch(loadingStop());
@@ -91,9 +118,9 @@ class ForgotPassword extends Component {
   render() {
     return (
       <>
-        {this.state.data ? (
+        {this.state.isLogin ? (
           <Login />
-        ) : (
+        ) : this.state.isForgot ? (
           <div className="form-area forgot--password">
             <div className="form-area__login  large-hedding">
               Forgot Password
@@ -133,6 +160,12 @@ class ForgotPassword extends Component {
               </Link>
             </div>
           </div>
+        ) : this.state.isEmailVerify ? (
+          <UserVerification />
+        ) : this.status.isPasswordEmailSent ? (
+          <h3>Email has been sent on your email</h3>
+        ) : (
+          <h3>Somthing went wrong</h3>
         )}
       </>
     );

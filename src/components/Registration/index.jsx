@@ -21,6 +21,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { REGISTRATION } from "../../config/ApiUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { EMAIL_ALLOWED } from "../../config/ApiUrl";
+import UserVerification from "../userVerify";
 
 class Registration extends Component {
   state = {
@@ -28,10 +29,11 @@ class Registration extends Component {
     email: "",
     setpassword: "",
     confirmpassword: "",
-    data: "",
+    isLoginPopup: "",
     showPassword: false,
     showPasswordConfirm: false,
     isReginOpen: false,
+    isVerifyPopup: false,
     formErrors: {
       name: "",
       email: "",
@@ -43,7 +45,7 @@ class Registration extends Component {
   UserValidation = new UserValidation();
 
   backLogin = (e) => {
-    this.setState({ data: `string` });
+    this.setState({ isLoginPopup: true });
   };
 
   handleRegister = (e) => {
@@ -77,17 +79,25 @@ class Registration extends Component {
       setpassword,
       confirmpassword,
     });
+    // const PopupVal = true;
 
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
       ApiRequest.request(REGISTRATION, "POST", user)
         .then((res) => {
-          console.log(res.email);
-          if (res.email) {
-            Toaster.error(res.email ? res.email.join("") : null, "topCenter");
-          } else {
+          var isVerified = res.data[0];
+          console.log(res.data[0].is_verified, "is verified direct");
+          console.log(isVerified.is_verified, "is verified");
+          if (res.status) {
             Toaster.sucess(res.detail, "topCenter");
             window.location.reload();
+          } else if (!res.status && !res.data[0].is_verified) {
+            this.setState({
+              isVerifyPopup: true,
+              data: false,
+            });
+          } else {
+            Toaster.error(res.detail.message, "topCenter");
           }
         })
         .catch((error) => {
@@ -132,6 +142,13 @@ class Registration extends Component {
     });
   };
 
+  backVerify = () => {
+    this.setState({
+      isVerifyPopup: true,
+      isLoginPopup: false,
+    });
+  };
+
   handleBlur = (e, key) => {
     let value = e.target.value;
     if (typeof value === "string") {
@@ -148,8 +165,10 @@ class Registration extends Component {
   render() {
     return (
       <>
-        {this.state.data ? (
+        {this.state.isLoginPopup && !this.state.isVerifyPopup ? (
           <Login />
+        ) : !this.state.isLoginPopup && this.state.isVerifyPopup ? (
+          <UserVerification />
         ) : (
           <div className="form-area registration--form">
             <div className="form-area__login  large-hedding">Register</div>
@@ -311,12 +330,12 @@ class Registration extends Component {
                 Login
               </Link>
             </div>
-            {/* <div className="back-button">
-              <span>Already a member?</span>
-              <Link href="#" onClick={this.backLogin} className="">
-                Login
+            <div className="form-newaccont">
+              <span>User verify</span>
+              <Link href="#" onClick={this.backVerify} className="">
+                Email Verify
               </Link>
-            </div> */}
+            </div>
           </div>
         )}
       </>

@@ -48,6 +48,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
+import UserVerification from "../userVerify";
 
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
@@ -168,11 +169,11 @@ const Header = ({ props }) => {
           <MenuItem onClick={handleMenuClose} className="user_name">
             {user.token.user.first_name}
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} className="mobile__only">
+          {/* <MenuItem onClick={handleMenuClose} className="mobile__only">
             <Link color="inherit" to="/Purchased">
               My Widgets
             </Link>
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
             <Link color="inherit" to="/" className="">
               <ListItemIcon>

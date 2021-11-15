@@ -111,11 +111,11 @@ function Purchased(props) {
 
     await ApiRequest.request(CONSUMPTION_STATEMENT, "POST", PurchasedData).then(
       (res) => {
-        if (res?.status) {
-          Toaster.error("No record found", "topCenter");
-        } else if (res) {
+        if (!res?.status) {
+          Toaster.error(res.detail.message, "topCenter");
+        } else {
           dispatch(loadingStop());
-          Toaster.sucess(res.details, "topCenter");
+          Toaster.sucess(res.details.message, "topCenter");
           setConsumtionReportData(res);
 
           const convertTOJson = () => {
@@ -140,8 +140,6 @@ function Purchased(props) {
           const fileName = "consumption-report";
           const exportType = exportFromJSON.types.xls;
           exportFromJSON({ data, fileName, exportType });
-        } else {
-          Toaster.error("No record found", "topCenter");
         }
       }
     );
@@ -177,11 +175,11 @@ function Purchased(props) {
     ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
       .then((res) => {
         PurchaseList();
-        if (!res.status == "False") {
+        if (res.status) {
           dispatch(removeFromCart());
           localStorage.removeItem("ExtendData");
           dispatch(loadingStop());
-          Toaster.sucess(res.details, "topCenter");
+          Toaster.sucess(res.details.message, "topCenter");
         }
         dispatch(getItemFromCart());
       })
@@ -199,24 +197,17 @@ function Purchased(props) {
   //  Purchase list
   const PurchaseList = async () => {
     dispatch(loadingStart());
-    ApiRequest.request(PURCHASED_ITEM)
-      .then((res) => {
-        setWidgetList(res);
-        const isShowArr = [];
-        res.forEach((el, index) => {
-          isShowArr.push(false);
-        });
-        setShow(isShowArr);
-        dispatch(removeFromCart());
-        dispatch(loadingStop());
-        console.log(res, "Purchased list");
-      })
-      .catch((error) => {
-        dispatch(logOutUser());
-        localStorage.removeItem("auth");
-        dispatch(loadingStop());
-        history.push("/");
+    ApiRequest.request(PURCHASED_ITEM).then((res) => {
+      setWidgetList(res.data);
+      const isShowArr = [];
+      res.data.forEach((el, index) => {
+        isShowArr.push(false);
       });
+      setShow(isShowArr);
+      dispatch(removeFromCart());
+      dispatch(loadingStop());
+      console.log(res, "Purchased list");
+    });
   };
 
   const PlayNPause = async (purchaseId, Paused) => {
@@ -230,16 +221,15 @@ function Purchased(props) {
     dispatch(loadingStart());
     setPausePopup(false);
 
-    ApiRequest.request(PLAY_PAUSE, "POST", ItemData)
-      .then((res) => {
-        Toaster.sucess(res.message, "topCenter");
+    ApiRequest.request(PLAY_PAUSE, "POST", ItemData).then((res) => {
+      if (res.status) {
+        Toaster.sucess(res.detail.message, "topCenter");
         PurchaseList();
         dispatch(loadingStop());
-      })
-      .catch((error) => {
-        dispatch(loadingStop());
-        Toaster.error("Somthing went wrong", "topCenter");
-      });
+      } else {
+        Toaster.error(res.detail.message, "topCenter");
+      }
+    });
   };
 
   const handleExtendLocal = (widgetId) => {
@@ -247,6 +237,7 @@ function Purchased(props) {
   };
 
   const FilterData = widgetList?.filter((item, index) => {
+    console.log(filter);
     if (
       filter == "active"
         ? item.is_active

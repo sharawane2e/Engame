@@ -212,7 +212,7 @@ const Home = () => {
 
   const GetCategoriesList = () => {
     ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
-      setCategoriesList(res);
+      setCategoriesList(res.data);
       console.log(res, "Categories list");
       console.log(categoriesList, "Categories list render");
     });

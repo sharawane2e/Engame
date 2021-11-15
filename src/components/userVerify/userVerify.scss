@@ -1,0 +1,13 @@
+.emailVerify {
+  #{&}__messageSection {
+    padding: 75px 10px;
+  }
+  // #{&}__verificationSection{
+
+  // }
+  #{&}__SucessmessageSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

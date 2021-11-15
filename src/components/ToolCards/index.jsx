@@ -139,6 +139,12 @@ const ToolCards = () => {
                                 Preview
                               </CustomButton>
                             </div>
+                            <div className="toolcard__tooltip">
+                              <HelpCenterRoundedIcon
+                                className="toolcard__tooltip__icon"
+                                onClick={() => setIsInfoPopup(tooldata)}
+                              />
+                            </div>
                           </div>
 
                           <div className="toolcard__align toolcard__toolicons">
@@ -217,6 +223,12 @@ const ToolCards = () => {
                                 <RemoveRedEyeIcon className="eyes_icon" />{" "}
                                 Preview
                               </CustomButton>
+                            </div>
+                            <div className="toolcard__tooltip">
+                              <HelpCenterRoundedIcon
+                                className="toolcard__tooltip__icon"
+                                onClick={() => setIsInfoPopup(tooldata)}
+                              />
                             </div>
                           </div>
 
