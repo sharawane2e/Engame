@@ -95,14 +95,16 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   return (
     <>
       <div className="subscription-type">
-        <select onChange={handleChange}>
-          <option value="days" selected={istype == "days"}>
-            Number of days
-          </option>
-          <option value="hits" selected={istype == "hits"}>
-            Number of hits
-          </option>
-        </select>
+        <div className="select-box">
+          <select onChange={handleChange}>
+            <option value="days" selected={istype == "days"}>
+              Number of days
+            </option>
+            <option value="hits" selected={istype == "hits"}>
+              Number of hits
+            </option>
+          </select>
+        </div>
 
         <div className="subscription-type__iner">
           <div className="subscription-type__days">

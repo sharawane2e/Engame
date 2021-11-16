@@ -107,13 +107,18 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   return (
     <>
       <div className="subscription-type">
-        <select disabled>
-          <option value={updateData.plan.plan_type} selected={istype == "days"}>
-            {updateData.plan.plan_type == "days"
-              ? "Number of days"
-              : "Number of hits"}
-          </option>
-        </select>
+        <div className="select-box select-box-disable">
+          <select disabled>
+            <option
+              value={updateData.plan.plan_type}
+              selected={istype == "days"}
+            >
+              {updateData.plan.plan_type == "days"
+                ? "Number of days"
+                : "Number of hits"}
+            </option>
+          </select>
+        </div>
 
         <div className="subscription-type__iner">
           <div className="subscription-type__days">

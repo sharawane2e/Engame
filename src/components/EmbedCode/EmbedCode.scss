@@ -3,13 +3,13 @@
     // @media all and (max-width: map-get($map: $grid-breakpoints, $key: mobile)) {
     //   min-height: 130px;
     // }
-    min-height: 438px;
+    min-height: 400px;
     width: 100%;
     resize: none;
     outline: 0;
     // padding: map-get($map: $padding, $key: "padding-12");
     @include space(padding, all, $padding-12, 0);
-    height: 491px !important;
+    height: 390px !important;
     overflow-y: scroll !important;
     @include breakpoint(desktop) {
       height: 407px !important;

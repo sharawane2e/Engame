@@ -172,9 +172,9 @@ class Login extends Component {
                         tabindex="-1"
                       >
                         {this.state.showPassword ? (
-                          <Visibility />
+                          <Visibility  className="fill-eyecolor"/>
                         ) : (
-                          <VisibilityOff />
+                          <VisibilityOff className="fill-eyecolor"/>
                         )}
                       </IconButton>
                     </InputAdornment>

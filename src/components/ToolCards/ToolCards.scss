@@ -1,18 +1,21 @@
-.toolcardDiv {
-}
 .toolcard {
   padding: $padding-40 6vw;
   // @include space(padding, top-bottom, $padding-40, $padding-40);
   background: $white;
+  min-height: 150px;
+  @include breakpoint(desktop) {
+    padding: 39px 7vw;
+    //min-height: 66vh !important;
+  }
 
   #{&}__toolbar {
     padding-left: 0;
+    padding-right: 0;
     align-items: inherit !important;
-    @include breakpoint(largeDesktop) {
-      min-height: 66vh !important;
-    }
+
     @include breakpoint(lg-desktop) {
-      min-height: 66.5vh !important;
+      // min-height: 66.5vh !important;
+      padding-right: 0;
     }
   }
 
@@ -63,8 +66,15 @@
   }
 
   #{&}__image {
+    display: flex;
+    min-height: 130px;
+    justify-content: $align-center;
+    align-items: $align-center;
     text-align: $align-center;
     @include space(padding, top-bottom, $padding-16, $padding-16);
+    @include space(padding, left-right, $padding-20, $padding-20);
+    width: 100%;
+    max-width: 100%;
     position: relative;
     > img {
       max-width: 100%;
@@ -159,9 +169,12 @@
 
   .popup-container__footer {
     display: flex;
+    @include space(margin, top-bottom, $margin-10, $margin-10);
     .add--card {
-      width: 178px !important;
+      width: 170px !important;
       margin: 0 auto;
+
+      // padding: $padding-15 !important;
       &:disabled {
         background-color: $dark-gray-color;
       }

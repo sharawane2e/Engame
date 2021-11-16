@@ -13,12 +13,12 @@ import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
 import LoadingBox from "../FullPageLoader/LoadingBox";
 import MessageBox from "../FullPageLoader/MessageBox";
-import { listProducts } from "../../redux/product/product-action";
+// import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL } from "../../config/ApiUrl";
-import Tooltip from "@material-ui/core/Tooltip";
-import { logOutUser } from "../../redux/user/user-action";
+// import Tooltip from "@material-ui/core/Tooltip";
+// import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
-import { loadingStop } from "../../redux/loader/loader-actions";
+// import { loadingStop } from "../../redux/loader/loader-actions";
 import Login from "../Login";
 import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
@@ -26,9 +26,9 @@ import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 import ToolInfo from "../ToolInfo";
 import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
-import ApiRequest from "../../util/ApiRequest";
-import { WIDGET_LIST } from "../../config/ApiUrl";
-import { ConstructionOutlined } from "@mui/icons-material";
+// import ApiRequest from "../../util/ApiRequest";
+// import { WIDGET_LIST } from "../../config/ApiUrl";
+// import { ConstructionOutlined } from "@mui/icons-material";
 import NoSearchFound from "../NoSearchFound";
 import NoresultImg from "../../assets/images/not-found.svg";
 
@@ -68,28 +68,6 @@ const ToolCards = () => {
       setReginIsOpen(false);
     }
   }, [user]);
-
-  // const WidgetList = () => {
-  //   if (user) {
-  //     ApiRequest.request(WIDGET_LIST)
-  //       .then((res) => {
-  //         setProductShow(res);
-  //         console.log(res, "Widget List");
-  //         console.log(productShow, "Widget List from state");
-  //       })
-  //       .catch((error) => {
-  //         dispatch(logOutUser());
-  //         localStorage.removeItem("auth");
-  //         dispatch(loadingStop());
-  //         history.push("/");
-  //       });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   dispatch(listProducts());
-  //   WidgetList();
-  // }, [token]);
 
   const keshav = true;
 

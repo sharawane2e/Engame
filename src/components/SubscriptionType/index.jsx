@@ -122,12 +122,14 @@ const SubscriptionType = ({ toolId, onClose }) => {
   return (
     <>
       <div className="subscription-type">
-        <select onChange={handleChange} defaultValue="hits">
-          <option value="days">Number of days</option>
-          <option value="hits" selected>
-            Number of hits
-          </option>
-        </select>
+        <div className="select-box">
+          <select onChange={handleChange} defaultValue="hits">
+            <option value="days">Number of days</option>
+            <option value="hits" selected>
+              Number of hits
+            </option>
+          </select>
+        </div>
 
         <div className="subscription-type__iner">
           <div className="subscription-type__days">
@@ -154,7 +156,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
           onClick={handleAddCart}
           disabled={itemCount === 0 || itemCount === "" ? true : false}
         >
-          <ShoppingCartIcon /> Add to Cart
+          <ShoppingCartIcon className="hover-effect" /> Add to Cart
         </CustomButton>
       </div>
     </>

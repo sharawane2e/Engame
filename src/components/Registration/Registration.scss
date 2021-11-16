@@ -29,9 +29,11 @@
   .register__button {
     // min-width: 292px !important;
     width: 100%;
-    @include space(padding, all, $padding-12 !important, 0);
+    @include space(padding, all, $padding-15 !important, 0);
+    @include font-sizeImp($font-xx-reg);
     @include breakpoint(desktop150) {
       @include font-size($font-xmd-reg);
+      @include space(padding, top-bottom, $padding-15, $padding-10);
     }
   }
 }

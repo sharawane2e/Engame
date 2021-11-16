@@ -29,7 +29,7 @@
   }
 }
 .popup-padding {
-  @include space(padding, all, $padding-50, 0);
+  @include space(padding, all, $padding-30, 0);
   // padding-right: 50px;
   @include breakpoint(desktop) {
     @include space(padding, all, $padding-8, 0);
@@ -114,6 +114,7 @@
     align-items: $align-center;
   }
   #{&}__body {
+    // height: 560px;
     @include space(padding, all, $padding-30, 0);
     @include breakpoint(mobileonly) {
       @include space(padding, all, $padding-15, 0);
@@ -131,9 +132,9 @@
     justify-content: flex-end;
     cursor: pointer;
     & > svg {
-      width: 2rem !important;
-      height: 2rem !important;
-      fill: $black-dark;
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+      fill: $dark-gray;
     }
   }
   #{&}__close-withoutheader {

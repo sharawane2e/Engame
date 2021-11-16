@@ -17,7 +17,7 @@
     @include font-size($font-lg);
     text-align: $align-left;
     // @include space(padding, top, $padding-20, 0);
-    @include space(padding, bottom, $padding-50, 0);
+    @include space(padding, bottom, $padding-55, 0);
     @include breakpoint(desktop) {
       @include space(padding, top-bottom, $padding-5, $padding-50);
     }
@@ -55,10 +55,18 @@
     }
   }
   #{&}__control {
-    @include space(margin, bottom, $margin-5, 0);
+    @include space(margin, bottom, $margin-8, 0);
     // @include breakpoint(desktop) {
     //   @include space(margin, bottom, $margin-10, 0);
     // }
+    .MuiFormLabel-filled{
+      @include font-size($font-xmd-reg);
+      color: $black-gray
+    }
+    .Mui-focused{
+      @include font-size($font-xmd-reg);
+      color:$black-gray;
+    }
     .MuiFilledInput-input {
       // @include breakpoint(desktop) {
       //   padding: 18px 12px 10px;
@@ -77,6 +85,10 @@
         }
       }
     }
+    input{
+      color: $input-box-color !important;
+      @include font-size($font-xl-reg);
+    }
   }
   .forgot-link {
     @include font-weight($font-600);
@@ -86,7 +98,8 @@
 
     & > a {
       @include color($secondary);
-      @include font-weight($font-normal);
+      font-family: map-get($map: $font-family, $key: "font-barlowmedium");
+      @include font-weight($font-500);
     }
     @include breakpoint(desktop150) {
       @include font-size($font-xmd-reg);
@@ -100,6 +113,7 @@
     & > a {
       @include space(padding, left, $padding-5, 0);
       @include color($secondary);
+      @include font-weight($font-500);
     }
   }
   .MuiFilledInput-root {
@@ -108,14 +122,15 @@
 }
 .form-button-grop {
   text-align: $align-center;
-  @include space(padding, top-bottom, $padding-15, $padding-25);
+  @include space(padding, top-bottom, $padding-20, $padding-25);
   @include breakpoint(desktop) {
     @include space(padding, top-bottom, $padding-15, $padding-15);
   }
   .login__button {
-    min-width: 292px !important;
+    // min-width: 292px !important;
     width: 100%;
-    @include space(padding, all, $padding-12 !important, 0);
+    @include space(padding, all, $padding-15 !important, 0);
+    @include font-sizeImp($font-xx-reg);
     @include breakpoint(desktop150) {
       @include font-size($font-xmd-reg);
       @include space(padding, top-bottom, $padding-15, $padding-10);

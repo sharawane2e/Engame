@@ -1,12 +1,33 @@
 .subscription-type {
   @include space(padding, bottom, $padding-40, 0);
-  > select {
+  position: relative;
+  > .select-box > select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-word-break: normal;
+    word-break: normal;
     width: 100%;
     outline: 0;
-    @include border("-bottom", $border-width, $bsolid, $black-smooth);
-    @include space(padding, all, $padding-10, 0);
+    @include border("", $border-width, $bsolid, $dark-gray);
+    @include space(padding, all, $padding-14, 0);
     @include border-radius($boder-radius);
     @include space(margin, bottom, $margin-30, 0);
+    cursor: pointer;
+  }
+
+  .select-box:after {
+    content: "";
+    top: 18px;
+    right: 14px;
+    padding: 12px 0px 0px 8px;
+    position: absolute;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAHCAYAAAA8sqwkAAAABHNCSVQICAgIfAhkiAAAAIpJREFUGFdj1NLSMvjPyBj//evXxgcPHnxgwAKQ1TBqamtPYGRkyGf4///Ct6/fHNE1gRQzMDHuB5oj8P//v0JGBQUFAS5u7gMMjAz66JpQFTMsvH71agIjyAXYNHFxcSkgTIYoBqkFa8CmiYGRUQHiDIRiFA0YmoAC6IoxNCBr+s/AcAHmDOSAAwB0qVVlemhC6AAAAABJRU5ErkJggg==);
+    background-repeat: no-repeat;
+    width: 4px;
+  }
+  .select-box-disable:after {
+    display: none;
   }
   #{&}__iner {
     display: flex;
@@ -37,6 +58,7 @@
     .MuiInputBase-root {
       .MuiOutlinedInput-input {
         @include space(padding, all, $padding-12, 0);
+        // @include border("", $border-width, $bsolid, $dark-gray);
       }
     }
   }

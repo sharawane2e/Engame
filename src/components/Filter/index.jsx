@@ -211,13 +211,13 @@ const Home = () => {
     dispatch(listProducts(ApiData));
   };
 
-  const GetCategoriesList = () => {
-    ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
-      setCategoriesList(res.data);
-      console.log(res, "Categories list");
-      console.log(categoriesList, "Categories list render");
-    });
-  };
+  // const GetCategoriesList = () => {
+  //   ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
+  //     setCategoriesList(res.data);
+  //     console.log(res, "Categories list");
+  //     console.log(categoriesList, "Categories list render");
+  //   });
+  // };
 
   const SaerchValue = (e) => {
     setSearchText(e.target.value);
@@ -232,11 +232,13 @@ const Home = () => {
   };
 
   useEffect(() => {
-    GetCategoriesList();
+    // GetCategoriesList();
     FilterAction(value, searchText);
     // console.log(productList);
   }, [value]);
 
+
+  
   return (
     <>
       <div className="header-bg filter-tool-shadow filter--fixed">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
+// import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FilledInput from "@material-ui/core/FilledInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -19,8 +19,8 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 // import { v4 as uuidv4 } from "uuid";
 import ApiRequest from "../../util/ApiRequest";
 import { REGISTRATION } from "../../config/ApiUrl";
-import { useDispatch, useSelector } from "react-redux";
-import { EMAIL_ALLOWED } from "../../config/ApiUrl";
+// import { useDispatch, useSelector } from "react-redux";
+// import { EMAIL_ALLOWED } from "../../config/ApiUrl";
 import UserVerification from "../userVerify";
 
 class Registration extends Component {
@@ -68,8 +68,8 @@ class Registration extends Component {
       password1: setpassword,
       password2: confirmpassword,
       first_name: name,
-      last_name: "s",
-      mobile: "91",
+      last_name: "",
+      mobile: "",
     };
 
     // console.log("name", user);
@@ -255,9 +255,9 @@ class Registration extends Component {
                         tabindex="-1"
                       >
                         {this.state.showPassword ? (
-                          <Visibility />
+                          <Visibility className="fill-eyecolor" />
                         ) : (
-                          <VisibilityOff />
+                          <VisibilityOff className="fill-eyecolor"/>
                         )}
                       </IconButton>
                     </InputAdornment>
@@ -300,9 +300,9 @@ class Registration extends Component {
                         tabindex="-1"
                       >
                         {this.state.showPasswordConfirm ? (
-                          <Visibility />
+                          <Visibility className="fill-eyecolor"/>
                         ) : (
-                          <VisibilityOff />
+                          <VisibilityOff className="fill-eyecolor"/>
                         )}
                       </IconButton>
                     </InputAdornment>

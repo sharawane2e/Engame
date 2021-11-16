@@ -257,7 +257,7 @@ const Purchased = (props) => {
     <>
       <div className="purchased-tool bredcrum-conatiner">
         <Header />
-        <div className="bredcrum-conatiner__bredcrum_inr sticky-position">
+        <div className="bredcrum-conatiner__bredcrum_inr ">
           <Container maxWidth="lg">
             <Breadcrumbs
               aria-label="breadcrumb"
@@ -519,7 +519,7 @@ const Purchased = (props) => {
                             <Grid item xs={2} className="grid-flex">
                               <Typography
                                 component="div"
-                                className=" border-radius icon-margin"
+                                className=" border-radius "
                               >
                                 <Tooltip title="Play / Pause" placement="top">
                                   <SwitchUnstyled
@@ -567,7 +567,7 @@ const Purchased = (props) => {
                                       <span className="subscription-type-text expiry-type">
                                         Expiry Date:
                                       </span>
-                                      <span className="subscription-day expiry-type margin-rightdata">
+                                      <span className=" expiry-type margin-rightdata">
                                         {planExpiry_date}
                                       </span>
                                     </>
@@ -579,7 +579,7 @@ const Purchased = (props) => {
                               <Grid item xs={2}>
                                 <Typography
                                   component="div"
-                                  className="purchased-tool__tool-type align-center"
+                                  className="purchased-tool__tool-type align-center progress-bar"
                                 >
                                   <span className="subscription-type-text ">
                                     {item.remaining_value}&nbsp;&nbsp;
@@ -641,7 +641,7 @@ const Purchased = (props) => {
                                     <span className="purchased-tool__date-type-text purchased-curent-text">
                                       Total Amount:
                                     </span>
-                                    <span className="purchased-tool__date-type-text ">
+                                    <span className="purchased-tool__date-type-text bold-style">
                                       ${item.plan.price}
                                     </span>
                                   </div>
@@ -669,7 +669,7 @@ const Purchased = (props) => {
                                     component="div"
                                     className="cursor--pointer purchased-tool__Indicator"
                                   >
-                                    <div className="purchased-tool__purchased-date purchased-tool__hover">
+                                    <div className="purchased-tool__purchased-date ">
                                       <span className="purchased-tool__date-type-text purchased-curent-text"></span>
                                       <span className="purchased-tool__date-type-text purchased-types">
                                         DOWNLOAD

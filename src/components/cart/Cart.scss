@@ -1,11 +1,11 @@
 .shopping-cart-data {
-  min-height: 740px;
-  @include breakpoint(largeDesktop) {
-    min-height: 85.5vh;
+  min-height: 749px;
+  @include breakpoint(desktop) {
+    min-height: 580px;
   }
-  @include breakpoint(lg-desktop) {
-    min-height: 85.5vh;
-  }
+  // @include breakpoint(lg-desktop) {
+  //   min-height: 85.5vh;
+  // }
 }
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
@@ -31,7 +31,7 @@
     @include space(padding, left-right, $padding-20, $padding-20);
     @include space(margin, bottom, $margin-10, 0);
     .curent-tool-img {
-      width: 85px;
+      // width: 85px;
       > img {
         max-width: 100%;
       }
@@ -56,6 +56,12 @@
       width: 100%;
       .custom-button {
         min-width: 100% !important;
+        padding: 15px !important;
+        font-size: 1.25rem !important;
+        @include breakpoint(desktop) {
+          padding: 10px !important;
+          font-size: 1rem !important;
+        }
         @include breakpoint(mobileonly) {
           // @include space(padding, all, $padding-20, 0);
         }
@@ -260,8 +266,10 @@
   }
 
   .checkout-button {
-    @include space(margin, bottom, $padding-50, 0);
+    @include space(margin, bottom, $padding-10, 0);
     width: 100% !important;
+    padding: 15px !important;
+    font-size: 1.25rem !important;
 
     a {
       color: inherit;
