@@ -23,12 +23,16 @@ import { LOGIN, SEND_VERIFICATION_EMAIL } from "../../config/ApiUrl";
 import { Typography } from "@material-ui/core";
 // import LocalStorageUtils from "../../util/LocalStorageUtils";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
+import errorImg from "../../assets/images/error.svg";
 import Login from "../Login";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserVerification = () => {
   const [isWantVerificationEmail, setIsWantVerificationEmail] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [emailValue, setEmailValue] = useState("");
+
+  const dispatch = useDispatch();
 
   const getEmail = (e) => {
     // console.log(e.target.value);
@@ -39,6 +43,7 @@ const UserVerification = () => {
     let data = {
       email: emailValue,
     };
+    dispatch(loadingStart());
     ApiRequest.request(SEND_VERIFICATION_EMAIL, "POST", data).then((res) => {
       console.log(res, "resend email");
 
@@ -46,8 +51,9 @@ const UserVerification = () => {
         setIsWantVerificationEmail(false);
         setIsEmailSent(true);
       } else {
-        Toaster.error(res.details, "topCenter");
+        Toaster.error(res.detail.message, "topCenter");
       }
+      dispatch(loadingStop());
     });
   };
   return (
@@ -104,7 +110,7 @@ const UserVerification = () => {
           </div>
         </div>
       ) : !isWantVerificationEmail && isEmailSent ? (
-        <div className="emailVerify__SucessmessageSection">
+        <div className="emptySection">
           <img src={sucessfullImg} />
           <Typography component="p">
             Email is sent to your registerd email. Please check and verify your
@@ -112,9 +118,10 @@ const UserVerification = () => {
           </Typography>
         </div>
       ) : (
-        <div className="emailVerify__messageSection">
+        <div className="emptySection">
+          <img src={errorImg} />
           <Typography component="p">
-            Somthing Went Wrong. Please try again!
+            Somthing went wrong. Please try again!
           </Typography>
         </div>
       )}

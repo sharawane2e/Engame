@@ -34,6 +34,7 @@ import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdat
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -41,10 +42,11 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.cartItems);
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
+  const [isCartEmpty, setIsCartEmpty] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     dispatch(getItemFromCart());
-    localStorage.removeItem("ExtendData");
+    dispatch(loadingStop());
   }, []);
 
   const handleRemove = (isProduct) => {
@@ -57,7 +59,7 @@ const Cart = () => {
       is_renew: "false",
     };
     const stripe = await loadStripe(STRIPE);
-
+    dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       stripe.redirectToCheckout({ sessionId: res.sessionId });
     });
@@ -85,7 +87,7 @@ const Cart = () => {
             </Breadcrumbs>
           </Container>
         </div>
-        {cart.length !== 0 ? (
+        {cart && cart[0] ? (
           <div className="shoping-cart shopping-cart-data">
             <Container
               maxWidth="lg"
@@ -111,10 +113,6 @@ const Cart = () => {
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} sm={9} xs={12}>
                   {cart.map((item, index) => {
-                    {
-                      console.log(index);
-                    }
-
                     return (
                       <Paper
                         className="shoping-cart__tool-card card-box-shadow border--colordata border-radius"

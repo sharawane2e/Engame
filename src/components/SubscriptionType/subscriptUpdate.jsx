@@ -66,11 +66,12 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       : setCurentPrice((ItemCount * 0.1).toFixed(2));
   };
 
-  useEffect(() => {
-    dispatch(getItemFromCart());
+  useEffect(async () => {
+    await dispatch(getItemFromCart());
+    await dispatch(loadingStop());
   }, [isUpdateResult]);
 
-  const cartItemUpdate = () => {
+  const cartItemUpdate = async () => {
     let ItemPlans = {
       user: res.token.user.pk,
       widget: updateData.widget.id,
@@ -79,8 +80,9 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
       currency: updateData.currency,
       is_renew: "false",
     };
+    await dispatch(loadingStart());
 
-    ApiRequest.request(
+    await ApiRequest.request(
       CART_DETAILS + `${updateData.id}/`,
       "PUT",
       ItemPlans

@@ -94,11 +94,12 @@ const Header = ({ props }) => {
       setReginIsOpen(false);
       dispatch(getItemFromCart());
       console.log(user, "user");
+      // dispatch(loadingStop());
     }
   }, [user]);
 
   useEffect(() => {
-    fetch(BASE_URL).then(
+    fetch(BASE_URL + "/widget/filters/").then(
       (response) => {},
       (err) => {
         history.push("/error");
@@ -166,7 +167,7 @@ const Header = ({ props }) => {
             role: "listbox",
           }}
         >
-          <MenuItem onClick={handleMenuClose} className="user_name">
+          <MenuItem className="user_name">
             {user.token.user.first_name}
           </MenuItem>
           {/* <MenuItem onClick={handleMenuClose} className="mobile__only">
@@ -174,7 +175,7 @@ const Header = ({ props }) => {
               My Widgets
             </Link>
           </MenuItem> */}
-          <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
+          {/* <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
             <Link color="inherit" to="/" className="">
               <ListItemIcon>
                 <BorderColorIcon fontSize="small" />
@@ -183,7 +184,7 @@ const Header = ({ props }) => {
                 Edit profile
               </Typography>
             </Link>
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
             <Link color="inherit" to="/Purchased" className="">
               <ListItemIcon>
@@ -194,7 +195,7 @@ const Header = ({ props }) => {
               </Typography>
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
+          {/* <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
             <Link color="inherit" to="/" className="">
               <ListItemIcon>
                 <VpnKeyOutlinedIcon fontSize="small" />
@@ -203,7 +204,7 @@ const Header = ({ props }) => {
                 Change Password
               </Typography>
             </Link>
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={handleLogout} className="profile_menu__Link">
             <Link color="inherit" className="">
               <ListItemIcon>

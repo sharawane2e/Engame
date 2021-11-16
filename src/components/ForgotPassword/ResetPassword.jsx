@@ -61,8 +61,9 @@ const Forgot = () => {
         "POST",
         resetPasswordVal
       ).then((res) => {
-        if (!res.status) {
+        if (res.status) {
           setIsPasswordResetSucessfully(true);
+          setIsToken(false);
         } else {
           setIsPasswordResetSucessfully(false);
           setIsToken(false);
@@ -79,23 +80,20 @@ const Forgot = () => {
 
     console.log("Check token");
 
-    ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
-      .then((res) => {
-        console.log(res, "token verify");
-        if (res.status) {
-          setIsToken(true);
-          setIsPasswordResetSucessfully(false);
-        } else {
-          setIsToken(false);
-        }
-      })
-      .catch((error) => {
+    ApiRequest.request(
+      RESET_PASSWORD_TOKEEN_VERIFY,
+      "POST",
+      verifyTokenData
+    ).then((res) => {
+      console.log(res, "token verify");
+      if (res.status) {
+        setIsToken(true);
+        setIsPasswordResetSucessfully(false);
+      } else {
         setIsToken(false);
-        dispatch(logOutUser());
-        localStorage.removeItem("auth");
-        dispatch(loadingStop());
-        history.push("/");
-      });
+        setIsPasswordResetSucessfully(false);
+      }
+    });
   };
 
   useEffect(() => {

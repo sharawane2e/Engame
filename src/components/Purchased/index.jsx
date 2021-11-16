@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
 import { Breadcrumbs } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -11,11 +9,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-
 import { ReactComponent as EmbdedCodeImg } from "../../assets/images/embed-code.svg";
 import { ReactComponent as ConsumptionReportImg } from "../../assets/images/consumption-report.svg";
 import { ReactComponent as DownloadInvoiceImg } from "../../assets/images/Invoice.svg";
-
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import TimerIcon from "@material-ui/icons/Timer";
@@ -28,7 +24,6 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { ExportToCsv } from "export-to-csv";
-
 import Header from "../Header";
 import CustomPopup from "../CustomPopup";
 import Footer from "../../components/Footer";
@@ -70,7 +65,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-function Purchased(props) {
+const Purchased = (props) => {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
   const [widgets, setWidgets] = useState([]);
@@ -82,16 +77,21 @@ function Purchased(props) {
   const [isPausePopup, setPausePopup] = useState(false); // Popup on play and Pause
   const [PlayPauseValue, setPlayPauseValue] = useState("");
   const [filter, setFilter] = useState("all");
+  const [isPurchaseEmpty, setIsPurchaseEmpty] = useState();
 
   const [sucess, setSucess] = useState("Copy");
   const history = useHistory();
-  const [consumtionReportData, setConsumtionReportData] = useState([]);
 
   var curentPlanID = localStorage.getItem("productShow");
   var curentUpdatePrice = localStorage.getItem("valuePrice");
 
+  useEffect(() => {
+    dispatch(loadingStart());
+    paymentSuccess();
+  }, [token]);
+
+  // Download embded code
   const downloadfile = (fileName, embedcode) => {
-    // console.log(embedcode);
     var link = document.createElement("a");
     link.href = window.URL.createObjectURL(
       new Blob([embedcode], {
@@ -103,6 +103,7 @@ function Purchased(props) {
     link.click();
   };
 
+  // Consumption report
   const downloadConsumptionStatement = async (purchased_id) => {
     let PurchasedData = {
       user: token.user.pk,
@@ -116,7 +117,6 @@ function Purchased(props) {
         } else {
           dispatch(loadingStop());
           Toaster.sucess(res.details.message, "topCenter");
-          setConsumtionReportData(res);
 
           const convertTOJson = () => {
             const lines = res.split("\n");
@@ -147,7 +147,6 @@ function Purchased(props) {
 
   const paymentSuccess = async () => {
     dispatch(loadingStart());
-
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id");
@@ -168,45 +167,38 @@ function Purchased(props) {
       plan_new_value: curentUpdatePrice,
       subscription: curentPlanID,
     };
+
     let PaymentSucessData = subscriptionRenew
       ? RenewPaymentSucessData
       : NewPaymentSucessData;
 
-    ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
-      .then((res) => {
-        PurchaseList();
+    await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData).then(
+      (res) => {
         if (res.status) {
           dispatch(removeFromCart());
           localStorage.removeItem("ExtendData");
-          dispatch(loadingStop());
-          Toaster.sucess(res.details.message, "topCenter");
+          Toaster.sucess(res.detail.message, "topCenter");
         }
+        PurchaseList();
         dispatch(getItemFromCart());
-      })
-      .catch((error) => {
-        localStorage.removeItem("ExtendData");
-        dispatch(loadingStop());
-      });
+      }
+    );
   };
-
-  useEffect(() => {
-    paymentSuccess();
-    PurchaseList();
-  }, [token]);
 
   //  Purchase list
   const PurchaseList = async () => {
-    dispatch(loadingStart());
-    ApiRequest.request(PURCHASED_ITEM).then((res) => {
-      setWidgetList(res.data);
+    ApiRequest.request(PURCHASED_ITEM).then(async (res) => {
+      await setWidgetList(res.data);
       const isShowArr = [];
       res.data.forEach((el, index) => {
         isShowArr.push(false);
       });
-      setShow(isShowArr);
-      dispatch(removeFromCart());
+      if (res.data.length == 0) {
+        setIsPurchaseEmpty(true);
+      } else {
+        setIsPurchaseEmpty(false);
+      }
       dispatch(loadingStop());
-      console.log(res, "Purchased list");
     });
   };
 
@@ -225,10 +217,10 @@ function Purchased(props) {
       if (res.status) {
         Toaster.sucess(res.detail.message, "topCenter");
         PurchaseList();
-        dispatch(loadingStop());
       } else {
         Toaster.error(res.detail.message, "topCenter");
       }
+      dispatch(loadingStop());
     });
   };
 
@@ -237,7 +229,6 @@ function Purchased(props) {
   };
 
   const FilterData = widgetList?.filter((item, index) => {
-    console.log(filter);
     if (
       filter == "active"
         ? item.is_active
@@ -259,6 +250,7 @@ function Purchased(props) {
     } else {
       return false;
     }
+    console.log(FilterData, "Data after filter");
   });
 
   return (
@@ -284,7 +276,7 @@ function Purchased(props) {
             </Breadcrumbs>
           </Container>
         </div>
-        {widgetList.length !== 0 ? (
+        {!widgetList.length == 0 && (
           <Container
             maxWidth="lg"
             className="purchased-tool__container  margin-top-174 shopping-cart-data"
@@ -382,8 +374,7 @@ function Purchased(props) {
                 </Typography>
               </Grid>
             </Grid>
-            {/*Card start */}
-            {/* {console.log(widgetList)} */}
+
             {FilterData.length > 0 ? (
               FilterData?.map((item, index) => {
                 let purchasedDateTime = new Date(item.purchase_date);
@@ -747,30 +738,13 @@ function Purchased(props) {
               <NoSearchFound img={NoresultImg} heading="No result found" />
             )}
           </Container>
-        ) : (
+        )}
+        {isPurchaseEmpty && (
           <EmptyPage
             heading={ErrorMessages.purchaseCart}
             imgUrl={emptyWidgett}
             buttonName="Continue Shoping"
           />
-
-          // '''
-          // filter == "active"
-          //         ? item.is_active
-          //         : filter == "expiresoon"
-          //         ? item.is_expiring_soon
-          //         : filter == "expired"
-          //         ? !item.is_active
-          //         : filter == "paused"
-          //         ? item.is_paused
-          //         : filter == "days"
-          //         ? item.plan.plan_type == "days"
-          //         : filter == "hits"
-          //         ? item.plan.plan_type == "hits"
-          //         : filter == "all"
-          //         ? item.id
-          //         : item.id
-          // ''''
         )}
         {/*Renew Subscription*/}
         <CustomPopup
@@ -785,7 +759,6 @@ function Purchased(props) {
             onClose={() => setRenew(false)}
           />
         </CustomPopup>
-
         <CustomPopup
           open={isPausePopup}
           className="popup-container__iner--sm border-radius loginAlert "
@@ -826,11 +799,10 @@ function Purchased(props) {
             </Grid>
           </Grid>
         </CustomPopup>
-
         <Footer />
       </div>
     </>
   );
-}
+};
 
 export default Purchased;

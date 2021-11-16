@@ -21,7 +21,7 @@ export const addToCart = (userData) => (dispatch) => {
 };
 
 export const getItemFromCart = () => (dispatch) => {
-  dispatch(loadingStart());
+  // dispatch(loadingStart());
   ApiRequest.request(GET_FROM_CART, "GET")
     .then((res) => {
       dispatch({ type: actionTypes.CART_ITEM_GET, payload: res.data });
@@ -30,9 +30,7 @@ export const getItemFromCart = () => (dispatch) => {
     .catch((error) => {
       console.log(error);
     })
-    .finally(() => {
-      dispatch(loadingStop());
-    });
+    .finally(() => {});
 };
 
 export const updateCartIteam = (updatedid, plans) => (dispatch) => {

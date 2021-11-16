@@ -203,7 +203,8 @@ const Home = () => {
     });
     console.log(selectedCategoriesId, "Selected Categories list");
     let ApiData = {
-      widget_type_id: selectedCategoriesId,
+      widget_type_id:
+        selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
       search_string: searchText,
     };
 
@@ -222,7 +223,7 @@ const Home = () => {
     setSearchText(e.target.value);
 
     if (e.target.value.length == 0) {
-      FilterAction(value, searchText);
+      FilterAction(value, null);
     }
   };
 

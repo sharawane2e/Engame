@@ -62,9 +62,13 @@ class Login extends Component {
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
       ApiRequest.request(LOGIN, "POST", user).then((res) => {
-        if (res.status) {
+        if (res.status && res.data[0].is_verified) {
           this.props.dispatch(loginUser(res.data[0]));
-        } else if (!res.status && !res.data[0].is_verified) {
+        } else if (
+          !res.status &&
+          !res.data[0]?.is_verified &&
+          res.data.length > 0
+        ) {
           this.setState({
             isVerifyPopup: true,
             data: false,
@@ -72,6 +76,7 @@ class Login extends Component {
         } else {
           Toaster.error(res.detail.message, "topCenter");
         }
+        this.props.dispatch(loadingStop());
       });
     } else {
       this.setState({

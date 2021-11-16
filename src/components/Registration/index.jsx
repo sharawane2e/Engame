@@ -85,13 +85,10 @@ class Registration extends Component {
       this.props.dispatch(loadingStart());
       ApiRequest.request(REGISTRATION, "POST", user)
         .then((res) => {
-          var isVerified = res.data[0];
-          console.log(res.data[0].is_verified, "is verified direct");
-          console.log(isVerified.is_verified, "is verified");
           if (res.status) {
-            Toaster.sucess(res.detail, "topCenter");
+            Toaster.sucess(res.detail.message, "topCenter");
             window.location.reload();
-          } else if (!res.status && !res.data[0].is_verified) {
+          } else if (!res.status && !res.data[0]?.is_verified) {
             this.setState({
               isVerifyPopup: true,
               data: false,
@@ -328,12 +325,6 @@ class Registration extends Component {
               <span>Already a member?</span>
               <Link href="#" onClick={this.backLogin} className="">
                 Login
-              </Link>
-            </div>
-            <div className="form-newaccont">
-              <span>User verify</span>
-              <Link href="#" onClick={this.backVerify} className="">
-                Email Verify
               </Link>
             </div>
           </div>

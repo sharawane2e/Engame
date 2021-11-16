@@ -12,6 +12,9 @@ import { connect } from "react-redux";
 import ApiRequest from "../../util/ApiRequest";
 import Toaster from "../../util/Toaster";
 import UserVerification from "../userVerify";
+import { Typography } from "@material-ui/core";
+import sucessfullImg from "../../assets/images/sucessfull.svg";
+import errorImg from "../../assets/images/error.svg";
 
 class ForgotPassword extends Component {
   state = {
@@ -19,7 +22,7 @@ class ForgotPassword extends Component {
     isLogin: false,
     isForgot: true,
     isEmailVerify: false,
-    isPasswordEmailSent: false,
+    isPasswordSent: false,
     formErrors: {
       email: "",
     },
@@ -29,6 +32,8 @@ class ForgotPassword extends Component {
   backLogin = (e) => {
     this.setState({ isLogin: true });
   };
+
+  handelState = () => {};
   forgotSubmit = (e) => {
     // e.preventDefault();
     const { email } = this.state;
@@ -43,29 +48,30 @@ class ForgotPassword extends Component {
         .then((res) => {
           // console.log("this.state.props", this.state.props);
           // window.location.reload();
-          if (res.status) {
+          if (res.status && res.data[0]?.is_verified) {
             Toaster.sucess(res.detail.message, "topCenter");
-            // this.status({
-            //   isEmailVerify: false,
-            //   isForgot: false,
-            //   isLogin: false,
-            //   isPasswordEmailSent: true,
-            // });
-          } else if (!res.status && !res.data[0]?.is_verified) {
-            // this.status({
-            //   isEmailVerify: true,
-            //   isForgot: false,
-            //   isLogin: false,
-            //   isPasswordEmailSent: false,
-            // });
+            this.setState({
+              isEmailVerify: false,
+              isForgot: false,
+              isLogin: false,
+              isPasswordSent: true,
+            });
+            console.log(res, "forgot data");
+          } else if (res.status && !res.data[0]?.is_verified) {
+            this.setState({
+              isEmailVerify: true,
+              isForgot: false,
+              isLogin: false,
+              isPasswordSent: false,
+            });
           } else {
             Toaster.error(res.detail.message, "topCenter");
-            // this.status({
-            //   isEmailVerify: false,
-            //   isForgot: false,
-            //   isLogin: false,
-            //   isPasswordEmailSent: false,
-            // });
+            this.setState({
+              isEmailVerify: false,
+              isForgot: false,
+              isLogin: false,
+              isPasswordSent: false,
+            });
           }
         })
         .finally(() => {
@@ -162,10 +168,22 @@ class ForgotPassword extends Component {
           </div>
         ) : this.state.isEmailVerify ? (
           <UserVerification />
-        ) : this.status.isPasswordEmailSent ? (
-          <h3>Email has been sent on your email</h3>
+        ) : this.state.isPasswordSent ? (
+          <div className="emptySection">
+            <img src={sucessfullImg} />
+            <Typography component="p">
+              Email is sent to your registerd email. Please check and verify
+              your email to login.
+            </Typography>
+          </div>
         ) : (
-          <h3>Somthing went wrong</h3>
+          <div className="emptySection">
+            <img src={errorImg} />
+            <Typography component="p">
+              Email is sent to your registerd email. Please check and verify
+              your email to login.
+            </Typography>
+          </div>
         )}
       </>
     );
