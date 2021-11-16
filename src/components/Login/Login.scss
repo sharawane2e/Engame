@@ -59,13 +59,13 @@
     // @include breakpoint(desktop) {
     //   @include space(margin, bottom, $margin-10, 0);
     // }
-    .MuiFormLabel-filled{
-      @include font-size($font-xmd-reg);
-      color: $black-gray
+    .MuiFormLabel-filled {
+      @include font-size($font-reg);
+      color: $black-gray;
     }
-    .Mui-focused{
-      @include font-size($font-xmd-reg);
-      color:$black-gray;
+    .Mui-focused {
+      @include font-size($font-reg);
+      color: $black-gray;
     }
     .MuiFilledInput-input {
       // @include breakpoint(desktop) {
@@ -85,7 +85,7 @@
         }
       }
     }
-    input{
+    input {
       color: $input-box-color !important;
       @include font-size($font-xl-reg);
     }

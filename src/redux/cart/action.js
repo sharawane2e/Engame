@@ -20,18 +20,24 @@ export const addToCart = (userData) => (dispatch) => {
     });
 };
 
-export const getItemFromCart = () => (dispatch) => {
-  // dispatch(loadingStart());
-  ApiRequest.request(GET_FROM_CART, "GET")
-    .then((res) => {
-      dispatch({ type: actionTypes.CART_ITEM_GET, payload: res.data });
-      console.log(res, "Cart data list");
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {});
-};
+export const getItemFromCart =
+  (cbFinally = undefined) =>
+  (dispatch) => {
+    // dispatch(loadingStart());
+    ApiRequest.request(GET_FROM_CART, "GET")
+      .then((res) => {
+        dispatch({ type: actionTypes.CART_ITEM_GET, payload: res.data });
+        console.log(res, "Cart data list");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        if (cbFinally && typeof cbFinally === "function") {
+          cbFinally();
+        }
+      });
+  };
 
 export const updateCartIteam = (updatedid, plans) => (dispatch) => {
   dispatch(loadingStart());

@@ -1,73 +1,87 @@
 import React, { useState, useEffect } from "react";
-// import Grid from "@material-ui/core/Grid";
-import { useHistory } from "react-router-dom";
-import success_icon from "../../assets/images/success_icon.svg";
+import Footer from "../Footer";
+import Header from "../Header";
+import CustomButton from "../widgets/Button";
+import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  GET_FROM_CART,
+  RESET_PASSWORD,
+  RESET_PASSWORD_TOKEEN_VERIFY,
+  VERIFICATION_EMAIL_TOKEN,
+} from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
-import { BASE_URL, BASE_URL_1 } from "../../config/ApiUrl";
+import emptyImg from "../../assets/images/oops.gif";
+import sucessfullImg from "../../assets/images/sucessfull.svg";
+import { parse } from "query-string";
+import { useLocation } from "react-router";
+import { logOutUser } from "../../redux/user/user-action";
+import ApiRequest from "../../util/ApiRequest";
+import { useHistory } from "react-router-dom";
+import EmptyPage from "../emptyPage";
+import { ErrorMessages } from "../../constants/Messages";
+import SucessfullImg from "../../assets/images/sucessfull.svg";
+import ErrorImg from "../../assets/images/error.svg";
 
-import EmailActivationSucess from "../EmailActivation/emailActivationSucess";
-import Header from "../Header";
-import Footer from "../Footer";
-import { Container, Grid, Paper, Typography } from "@mui/material";
-
-const EmailActivation = (EmailActive) => {
-  const history = useHistory();
+const EmailVerification = () => {
+  const [isValidToken, setIsValidToken] = useState(false);
+  const [isNotValidToken, setIsNotValidToken] = useState(false);
+  const location = useLocation();
   const dispatch = useDispatch();
-  const [emailActivationResult, setEmailActivationResult] = useState();
+  const queryData = parse(location.search);
 
-  const EmailAPI = async () => {
-    dispatch(loadingStart());
-    await fetch(BASE_URL + "/user/account-confirm-email/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Bearer ${token.access_token}`,
-      },
-      body: JSON.stringify({
-        key: "Ng:1mkri1:jL_-4dw8RVCHO_eCszUMoud-BSiNP7EdBKi70NksHvY",
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        // console.log(result);
-        if (result.status) {
-          setEmailActivationResult(true);
-          Toaster.sucess("Your email is activated sucessfully", "topCenter");
-          dispatch(loadingStop());
+  const handelCheckToken = () => {
+    let tokenData = {
+      token: queryData.token,
+    };
+
+    ApiRequest.request(VERIFICATION_EMAIL_TOKEN, "POST", tokenData)
+      .then((res) => {
+        if (res.status) {
+          setIsNotValidToken(false);
+          setIsValidToken(true);
         } else {
-          setEmailActivationResult(false);
-          dispatch(loadingStop());
-          Toaster.error("Somthing went wrong! Please try again", "topCenter");
+          setIsNotValidToken(true);
+          setIsValidToken(false);
         }
+      })
+      .finally(() => {
+        dispatch(loadingStop());
       });
   };
 
   useEffect(() => {
-    // let timeout;
-    // timeout = setTimeout(() => history.push("/"), 3000);
-    EmailAPI();
-  }, []);
+    dispatch(loadingStart());
+    handelCheckToken();
+  }, [queryData.token]);
 
   return (
     <>
       <Header />
-      <div className="emailActivation">
-        <Container maxWidth="sm" className="emailActivation__container">
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius emailActivation__paper">
-                <div className="emailActivation__upperBlock"></div>
-                <div className="emailActivation__lowerBlock"></div>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
+      <div className="forgot">
+        {isValidToken && !isNotValidToken ? (
+          <EmptyPage
+            heading={ErrorMessages.VERIFICATION_EMAIL_TOKEN_VALID}
+            buttonName="Back to home"
+            imgUrl={SucessfullImg}
+          />
+        ) : isNotValidToken && !isValidToken ? (
+          <EmptyPage
+            heading={ErrorMessages.VERIFICATION_EMAIL_TOKEN_NOT_VALID}
+            buttonName="Back to home"
+            imgUrl={ErrorImg}
+          />
+        ) : (
+          ""
+        )}
       </div>
+
       <Footer />
     </>
   );
 };
 
-export default EmailActivation;
+export default EmailVerification;

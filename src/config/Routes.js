@@ -16,7 +16,7 @@ const Routes = [
     exact: true,
   },
   {
-    path: ["/error", "/faq", "/user/account-confirm-email", "/forgot"],
+    path: ["/error", "/faq", "/user-email-verification", "/forgot"],
     component: PublicScreen,
     //exact: true,
     routes: [
@@ -26,7 +26,7 @@ const Routes = [
         exact: false,
       },
       {
-        path: "/user/account-confirm-email",
+        path: "/user-email-verification",
         component: EmailActivation,
         isExact: false,
       },

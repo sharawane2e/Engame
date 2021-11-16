@@ -25,4 +25,8 @@ export const ErrorMessages = {
   Maxium_days_addToCart: "Maxium 999 are allowed",
 
   Maxium_hits_addToCart: "Maxium 100000 hits are allowed",
+
+  VERIFICATION_EMAIL_TOKEN_NOT_VALID:
+    "You have enter incurrect url! Please try with valid url",
+  VERIFICATION_EMAIL_TOKEN_VALID: "Your account has been verify sucessfully",
 };

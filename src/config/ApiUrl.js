@@ -44,3 +44,5 @@ export const FILTER_WIDGET_LIST = "/widget/filters/";
 export const CATEGORIES_LIST = "/widget_type/";
 
 export const SEND_VERIFICATION_EMAIL = "/user/re-sendemail/";
+
+export const VERIFICATION_EMAIL_TOKEN = "/user/verify-email/";

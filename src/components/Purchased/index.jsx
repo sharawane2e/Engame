@@ -13,7 +13,7 @@ import { ReactComponent as EmbdedCodeImg } from "../../assets/images/embed-code.
 import { ReactComponent as ConsumptionReportImg } from "../../assets/images/consumption-report.svg";
 import { ReactComponent as DownloadInvoiceImg } from "../../assets/images/Invoice.svg";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-import GetAppIcon from "@material-ui/icons/GetApp";
+// import GetAppIcon from "@material-ui/icons/GetApp";
 import TimerIcon from "@material-ui/icons/Timer";
 import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +21,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import ReceiptIcon from "@material-ui/icons/Receipt";
+// import ReceiptIcon from "@material-ui/icons/Receipt";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { ExportToCsv } from "export-to-csv";
 import Header from "../Header";
@@ -172,17 +172,18 @@ const Purchased = (props) => {
       ? RenewPaymentSucessData
       : NewPaymentSucessData;
 
-    await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData).then(
-      (res) => {
+    await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
+      .then((res) => {
         if (res.status) {
           dispatch(removeFromCart());
           localStorage.removeItem("ExtendData");
-          Toaster.sucess(res.detail.message, "topCenter");
+          // Toaster.sucess(res.detail.message, "topCenter");
         }
+      })
+      .finally(() => {
         PurchaseList();
         dispatch(getItemFromCart());
-      }
-    );
+      });
   };
 
   //  Purchase list
@@ -250,8 +251,8 @@ const Purchased = (props) => {
     } else {
       return false;
     }
-    console.log(FilterData, "Data after filter");
   });
+  console.log(FilterData, "Data after filter");
 
   return (
     <>

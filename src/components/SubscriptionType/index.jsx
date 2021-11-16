@@ -41,8 +41,8 @@ const SubscriptionType = ({ toolId, onClose }) => {
 
     dispatch(loadingStart());
     ApiRequest.request(CART_STANDARD_PRICE, "POST", plans)
-      .then((result) => {
-        setBase(result.data.base_price);
+      .then((res) => {
+        setBase(res.data[0].base_price);
       })
       .catch((error) => {
         console.log(error);
