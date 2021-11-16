@@ -171,7 +171,7 @@ const Listbox = styled("ul")(
 `
 );
 
-const Home = () => {
+const Filter = () => {
   const [searchText, setSearchText] = useState("");
   const [categoriesList, setCategoriesList] = useState([""]);
   const dispatch = useDispatch();
@@ -211,12 +211,12 @@ const Home = () => {
     dispatch(listProducts(ApiData));
   };
 
-  const GetCategoriesList = () => {
-    ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
+  const GetCategoriesList = async () => {
+    await ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
       setCategoriesList(res.data);
       console.log(res, "Categories list");
-      console.log(categoriesList, "Categories list render");
     });
+    console.log(categoriesList, "Categories list render");
   };
 
   const SaerchValue = (e) => {
@@ -364,4 +364,4 @@ const OldCategoriesList = [
   { widget_type: "	collection", id: 6 },
 ];
 
-export default Home;
+export default Filter;

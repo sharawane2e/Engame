@@ -42,11 +42,17 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.cartItems);
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
-  const [isCartEmpty, setIsCartEmpty] = useState(false);
+  const [isPageRendring, setIsPageRendring] = useState(true);
 
   useEffect(async () => {
-    dispatch(getItemFromCart());
-    dispatch(loadingStop());
+    // debugger;
+    dispatch(loadingStart());
+    dispatch(
+      getItemFromCart(() => {
+        setIsPageRendring(false);
+        dispatch(loadingStop());
+      })
+    );
   }, []);
 
   const handleRemove = (isProduct) => {
@@ -87,7 +93,9 @@ const Cart = () => {
             </Breadcrumbs>
           </Container>
         </div>
-        {cart && cart[0] ? (
+        {isPageRendring ? (
+          " "
+        ) : !isPageRendring && cart && cart.length ? (
           <div className="shoping-cart shopping-cart-data">
             <Container
               maxWidth="lg"

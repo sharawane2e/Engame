@@ -90,18 +90,11 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
       plan_type: istype,
     };
 
-    ApiRequest.request(CHECKOUT, "POST", CheckoutData)
-      .then((res) => {
-        stripe.redirectToCheckout({ sessionId: res.sessionId });
-        localStorage.setItem("ExtendData", JSON.stringify(updateData));
-        dispatch(loadingStop());
-      })
-      .catch((error) => {
-        dispatch(logOutUser());
-        localStorage.removeItem("auth");
-        dispatch(loadingStop());
-        history.push("/");
-      });
+    ApiRequest.request(CHECKOUT, "POST", CheckoutData).then((res) => {
+      stripe.redirectToCheckout({ sessionId: res.sessionId });
+      localStorage.setItem("ExtendData", JSON.stringify(updateData));
+      // dispatch(loadingStop());
+    });
   };
 
   return (

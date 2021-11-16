@@ -172,17 +172,18 @@ const Purchased = (props) => {
       ? RenewPaymentSucessData
       : NewPaymentSucessData;
 
-    await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData).then(
-      (res) => {
+    await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
+      .then((res) => {
         if (res.status) {
           dispatch(removeFromCart());
           localStorage.removeItem("ExtendData");
-          Toaster.sucess(res.detail.message, "topCenter");
+          // Toaster.sucess(res.detail.message, "topCenter");
         }
+      })
+      .finally(() => {
         PurchaseList();
         dispatch(getItemFromCart());
-      }
-    );
+      });
   };
 
   //  Purchase list
@@ -250,8 +251,8 @@ const Purchased = (props) => {
     } else {
       return false;
     }
-    console.log(FilterData, "Data after filter");
   });
+  console.log(FilterData, "Data after filter");
 
   return (
     <>
