@@ -150,7 +150,9 @@ const Purchased = (props) => {
     dispatch(loadingStart());
     const search = props.location.search;
     const params = new URLSearchParams(search);
-    const session_id = params.get("session_id");
+    const session_id = params.get("session_id")
+      ? params.get("session_id")
+      : null;
     let subscriptionRenew = (await localStorage.getItem("ExtendData"))
       ? true
       : false;
@@ -173,18 +175,25 @@ const Purchased = (props) => {
       ? RenewPaymentSucessData
       : NewPaymentSucessData;
 
-    await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
-      .then((res) => {
-        if (res.status) {
-          dispatch(removeFromCart());
-          localStorage.removeItem("ExtendData");
-          // Toaster.sucess(res.detail.message, "topCenter");
-        }
-      })
-      .finally(() => {
-        PurchaseList();
-        dispatch(getItemFromCart());
-      });
+    if (session_id) {
+      await localStorage.setItem("isPayment", true);
+      await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
+        .then((res) => {
+          if (res.status) {
+            dispatch(removeFromCart());
+            localStorage.removeItem("ExtendData");
+            // Toaster.sucess(res.detail.message, "topCenter");
+          }
+        })
+        .finally(() => {
+          PurchaseList();
+          dispatch(getItemFromCart());
+          localStorage.removeItem("isPayment");
+        });
+    } else {
+      PurchaseList();
+      // dispatch(getItemFromCart());
+    }
   };
 
   //  Purchase list

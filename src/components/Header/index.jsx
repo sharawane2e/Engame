@@ -259,8 +259,15 @@ const Header = ({ props }) => {
                   <div className="shoping__card">
                     <Link to="cart">
                       {/* <Badge color="secondary"> */}
+
                       <Badge
-                        badgeContent={carts?.length ? carts.length : 0}
+                        badgeContent={
+                          localStorage.getItem("isPayment")
+                            ? 0
+                            : carts.length
+                            ? carts.length
+                            : 0
+                        }
                         color="secondary"
                       >
                         <Tooltip title="Cart Items" placement="top">
