@@ -9,6 +9,7 @@
   @include breakpoint(mobileonly) {
     padding: 15px;
   }
+
   &__headding {
     @include space(margin, bottom, $margin-20, 0);
     &__para {

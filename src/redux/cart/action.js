@@ -8,12 +8,12 @@ export const addToCart = (userData) => (dispatch) => {
 
   ApiRequest.request(ADD_TO_CART, "POST", userData)
     .then((res) => {
-      console.log(res, "add to cart");
+      // console.log(res, "add to cart");
       dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res.data });
       dispatch(getItemFromCart());
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
     })
     .finally(() => {
       dispatch(loadingStop());
@@ -27,10 +27,10 @@ export const getItemFromCart =
     ApiRequest.request(GET_FROM_CART, "GET")
       .then((res) => {
         dispatch({ type: actionTypes.CART_ITEM_GET, payload: res.data });
-        console.log(res, "Cart data list");
+        // console.log(res, "Cart data list");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       })
       .finally(() => {
         if (cbFinally && typeof cbFinally === "function") {
@@ -46,7 +46,7 @@ export const updateCartIteam = (updatedid, plans) => (dispatch) => {
       dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: res.data });
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
     })
     .finally(() => {
       dispatch(loadingStop());
@@ -54,16 +54,16 @@ export const updateCartIteam = (updatedid, plans) => (dispatch) => {
 };
 
 export const removeFromCart = (productId) => (dispatch) => {
-  console.log(productId);
+  // console.log(productId);
   dispatch(loadingStart());
   if (productId) {
     ApiRequest.request(CART_DETAILS + `${productId}/`, "DELETE")
       .then((res) => {
-        console.log("sucess", res);
+        // console.log("sucess", res);
         dispatch({ type: actionTypes.CART_REMOVE_ITEM, payload: productId });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       })
       .finally(() => {
         dispatch(loadingStop());

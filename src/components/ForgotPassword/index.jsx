@@ -23,6 +23,7 @@ class ForgotPassword extends Component {
     isForgot: true,
     isEmailVerify: false,
     isPasswordSent: false,
+    PasswordResetRes: "",
     formErrors: {
       email: "",
     },
@@ -56,7 +57,7 @@ class ForgotPassword extends Component {
               isLogin: false,
               isPasswordSent: true,
             });
-            console.log(res, "forgot data");
+            // console.log(res, "forgot data");
           } else if (res.status && !res.data[0]?.is_verified) {
             this.setState({
               isEmailVerify: true,
@@ -64,6 +65,7 @@ class ForgotPassword extends Component {
               isLogin: false,
               isPasswordSent: false,
             });
+            localStorage.setItem("verificationEmail", email);
           } else {
             Toaster.error(res.detail.message, "topCenter");
             this.setState({
@@ -73,6 +75,7 @@ class ForgotPassword extends Component {
               isPasswordSent: false,
             });
           }
+          this.setState({ PasswordResetRes: res.detail.message });
         })
         .finally(() => {
           this.props.dispatch(loadingStop());
@@ -171,18 +174,12 @@ class ForgotPassword extends Component {
         ) : this.state.isPasswordSent ? (
           <div className="emptySection">
             <img src={sucessfullImg} />
-            <Typography component="p">
-              Email is sent to your registerd email. Please check and verify
-              your email to login.
-            </Typography>
+            <Typography component="p">{this.state.PasswordResetRes}</Typography>
           </div>
         ) : (
           <div className="emptySection">
             <img src={errorImg} />
-            <Typography component="p">
-              Email is sent to your registerd email. Please check and verify
-              your email to login.
-            </Typography>
+            <Typography component="p">{this.state.PasswordResetRes}</Typography>
           </div>
         )}
       </>

@@ -17,6 +17,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
   const [itemCount, setItemCount] = useState(1000);
   const [itemPrice, setItemPrice] = useState(0);
   const dispatch = useDispatch();
+  const [isCountLimit, setIsCountLimit] = useState("");
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
@@ -45,7 +46,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
         setBase(res.data[0].base_price);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       })
       .finally(() => {
         dispatch(loadingStop());
@@ -75,7 +76,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
     price: itemPrice,
     currency: "$",
   };
-  console.log("user", productInfo);
+  // console.log("user", productInfo);
   const handleAddCart = async () => {
     dispatch(addToCart(productInfo));
     // Toaster.sucess("You have item add successfully!", "topCenter");
@@ -83,16 +84,19 @@ const SubscriptionType = ({ toolId, onClose }) => {
   };
 
   const handleCalculatePrice = (e) => {
+    // debugger;
     if (e.target.value <= 0) {
       var ItemCount = 1;
-    } else if (e.target.value > 999 && subscription === "days") {
+      setIsCountLimit(ErrorMessages.MINIMUM_COUNT);
+    } else if (e.target.value > 999 && type === "days") {
       var ItemCount = 999;
-      Toaster.error(ErrorMessages.Maxium_days_addToCart, "topCenter");
-    } else if (e.target.value > 100000 && subscription === "hits") {
+      setIsCountLimit(ErrorMessages.Maxium_days_addToCart);
+    } else if (e.target.value > 100000 && type === "hits") {
       var ItemCount = 100000;
-      Toaster.error(ErrorMessages.Maxium_hits_addToCart, "topCenter");
+      setIsCountLimit(ErrorMessages.Maxium_hits_addToCart);
     } else {
       var ItemCount = e.target.value;
+      setIsCountLimit("");
     }
 
     let value = ItemCount * base;
@@ -149,6 +153,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
             ${itemPrice.toFixed(2)}
           </div>
         </div>
+        <div className="validated-error">{isCountLimit}</div>
       </div>
       <div className="popup-container__footer">
         <CustomButton

@@ -16,7 +16,7 @@ import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
-  console.log("cart value", updateData);
+  // console.log("cart value", updateData);
   const user = useSelector((state) => state.user.token);
   //const [subscription, setSubscription] = useState("");
   const [istype, setType] = useState(updateData.plan.plan_type);
@@ -26,6 +26,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   );
   const [isCurentPrice, setCurentPrice] = useState(updateData.plan.price);
   const [isUpdateResult, setUpdateResult] = useState("");
+  const [isCountLimit, setIsCountLimit] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,14 +39,16 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   const handleCalculatePrice = (e) => {
     if (e.target.value <= 0) {
       var ItemCount = 1;
+      setIsCountLimit(ErrorMessages.MINIMUM_COUNT);
     } else if (e.target.value >= 999 && istype === "days") {
       var ItemCount = 999;
-      Toaster.error(ErrorMessages.Maxium_days_addToCart, "topCenter");
+      setIsCountLimit(ErrorMessages.Maxium_days_addToCart);
     } else if (e.target.value >= 100000 && istype === "hits") {
       var ItemCount = 100000;
-      Toaster.error(ErrorMessages.Maxium_hits_addToCart, "topCenter");
+      setIsCountLimit(ErrorMessages.Maxium_hits_addToCart);
     } else {
       var ItemCount = e.target.value;
+      setIsCountLimit("");
     }
 
     // let ItemCount = e.target.value;
@@ -131,6 +134,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
             ${updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
           </div>
         </div>
+        <div className="validated-error">{isCountLimit}</div>
       </div>
       <div className="popup-container__footer popup--text">
         <CustomButton

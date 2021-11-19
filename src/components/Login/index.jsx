@@ -73,6 +73,7 @@ class Login extends Component {
             isVerifyPopup: true,
             data: false,
           });
+          localStorage.setItem("verificationEmail", email);
         } else {
           Toaster.error(res.detail.message, "topCenter");
         }
@@ -172,9 +173,9 @@ class Login extends Component {
                         tabindex="-1"
                       >
                         {this.state.showPassword ? (
-                          <Visibility  className="fill-eyecolor"/>
+                          <Visibility className="fill-eyecolor" />
                         ) : (
-                          <VisibilityOff className="fill-eyecolor"/>
+                          <VisibilityOff className="fill-eyecolor" />
                         )}
                       </IconButton>
                     </InputAdornment>

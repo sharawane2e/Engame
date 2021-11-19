@@ -25,6 +25,7 @@ import EmptyPage from "../emptyPage";
 import { ErrorMessages } from "../../constants/Messages";
 import SucessfullImg from "../../assets/images/sucessfull.svg";
 import ErrorImg from "../../assets/images/error.svg";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 const EmailVerification = () => {
   const [isValidToken, setIsValidToken] = useState(false);
@@ -35,7 +36,7 @@ const EmailVerification = () => {
 
   const handelCheckToken = () => {
     let tokenData = {
-      token: queryData.token,
+      key: queryData.key,
     };
 
     ApiRequest.request(VERIFICATION_EMAIL_TOKEN, "POST", tokenData)
@@ -56,7 +57,7 @@ const EmailVerification = () => {
   useEffect(() => {
     dispatch(loadingStart());
     handelCheckToken();
-  }, [queryData.token]);
+  }, []);
 
   return (
     <>

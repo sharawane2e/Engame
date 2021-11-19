@@ -19,46 +19,49 @@ import { connect } from "react-redux";
 import { loginUser } from "../../redux/user/user-action";
 import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
-import { LOGIN, SEND_VERIFICATION_EMAIL } from "../../config/ApiUrl";
+import { SEND_VERIFICATION_EMAIL } from "../../config/ApiUrl";
 import { Typography } from "@material-ui/core";
 // import LocalStorageUtils from "../../util/LocalStorageUtils";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import errorImg from "../../assets/images/error.svg";
-import Login from "../Login";
+import Login from "../Login/index";
 import { useDispatch, useSelector } from "react-redux";
+import { ErrorMessages } from "../../constants/Messages";
 
 const UserVerification = () => {
-  const [isWantVerificationEmail, setIsWantVerificationEmail] = useState(false);
+  const [isWantVerificationEmail, setIsWantVerificationEmail] = useState(true);
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const [emailValue, setEmailValue] = useState("");
-
+  const [isWantLogin, setIsWantLogin] = useState(false);
+  const [
+    emailverificationMailSentMessage,
+    setEmailverificationMailSentMessage,
+  ] = useState("");
   const dispatch = useDispatch();
-
-  const getEmail = (e) => {
-    // console.log(e.target.value);
-    setEmailValue(e.target.value);
-  };
 
   const handelSendverificationEmail = () => {
     let data = {
-      email: emailValue,
+      email: localStorage.getItem("verificationEmail"),
     };
     dispatch(loadingStart());
-    ApiRequest.request(SEND_VERIFICATION_EMAIL, "POST", data).then((res) => {
-      console.log(res, "resend email");
-
-      if (res.status) {
-        setIsWantVerificationEmail(false);
-        setIsEmailSent(true);
-      } else {
-        Toaster.error(res.detail.message, "topCenter");
-      }
-      dispatch(loadingStop());
-    });
+    ApiRequest.request(SEND_VERIFICATION_EMAIL, "POST", data)
+      .then((res) => {
+        if (res.status) {
+          setIsWantVerificationEmail(true);
+          setIsEmailSent(true);
+        } else {
+          setIsWantVerificationEmail(false);
+          setIsEmailSent(false);
+        }
+        setEmailverificationMailSentMessage(res.detail.message);
+        dispatch(loadingStop());
+      })
+      .finally(() => {
+        localStorage.removeItem("verificationEmail");
+      });
   };
   return (
     <div className="form-area login--form emailVerify">
-      {!isWantVerificationEmail && !isEmailSent ? (
+      {isWantVerificationEmail && !isEmailSent ? (
         <div className="emailVerify__messageSection">
           <Typography component="p">
             Your email is not verified so please verify your email to login in
@@ -67,62 +70,44 @@ const UserVerification = () => {
           <div className="form-button-grop">
             <CustomButton
               className="login__button primary-button"
-              onClick={() => setIsWantVerificationEmail(true)}
+              // onClick={() => setIsWantVerificationEmail(true)}
+              onClick={handelSendverificationEmail}
             >
               Send verification email
             </CustomButton>
           </div>
         </div>
-      ) : isWantVerificationEmail && !isEmailSent ? (
-        <div className="emailverify__verificationSection">
-          <div className="form-area__login  large-hedding">
-            Verify Your Email
-          </div>
-          <form className="form-area__fileds" noValidate autoComplete="off">
-            {/* <InputLabel
-                htmlFor="standard-adornment-email"
-                className="input-label"
-              >
-                E-mail address
-              </InputLabel> */}
-            <FormControl className="form-area__control">
-              <TextField
-                id="outlined-email-input"
-                placeholder="E-mail address"
-                // message={this.state.formErrors.email}
-                type="Email"
-                variant="filled"
-                label="Email"
-                value={emailValue}
-                onChange={(e) => getEmail(e)}
-              />
-              {/* <div className="validated-error">{this.state.formErrors.email}</div> */}
-            </FormControl>
-          </form>
-          <div className="form-button-grop">
-            <CustomButton
-              className="login__button primary-button"
-              onClick={handelSendverificationEmail}
-            >
-              {/* {isLoaded ? "Loading..." : "Log In" } */}
-              Send Email
-            </CustomButton>
-          </div>
-        </div>
-      ) : !isWantVerificationEmail && isEmailSent ? (
+      ) : isWantVerificationEmail && isEmailSent && !isWantLogin ? (
         <div className="emptySection">
           <img src={sucessfullImg} />
           <Typography component="p">
-            Email is sent to your registerd email. Please check and verify your
-            email to login.
+            {emailverificationMailSentMessage}
           </Typography>
+          <div className="form-button-grop emptySection__button-grop">
+            <CustomButton
+              className="login__button primary-button"
+              onClick={() => setIsWantLogin(true)}
+            >
+              Back to Login
+            </CustomButton>
+          </div>
         </div>
+      ) : isWantLogin ? (
+        <Login />
       ) : (
         <div className="emptySection">
           <img src={errorImg} />
           <Typography component="p">
-            Somthing went wrong. Please try again!
+            {ErrorMessages.SOMETHING_WENT_WRONG}
           </Typography>
+          <div className="form-button-grop">
+            <CustomButton
+              className="login__button primary-button"
+              onClick={() => setIsWantLogin(true)}
+            >
+              Back to Login
+            </CustomButton>
+          </div>
         </div>
       )}
     </div>

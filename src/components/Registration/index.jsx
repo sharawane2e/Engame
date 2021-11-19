@@ -22,6 +22,9 @@ import { REGISTRATION } from "../../config/ApiUrl";
 // import { useDispatch, useSelector } from "react-redux";
 // import { EMAIL_ALLOWED } from "../../config/ApiUrl";
 import UserVerification from "../userVerify";
+import sucessfullImg from "../../assets/images/sucessfull.svg";
+import errorImg from "../../assets/images/error.svg";
+import { Typography } from "@material-ui/core";
 
 class Registration extends Component {
   state = {
@@ -34,6 +37,9 @@ class Registration extends Component {
     showPasswordConfirm: false,
     isReginOpen: false,
     isVerifyPopup: false,
+    isRegistrationWant: true,
+    isRegistrationComplete: false,
+    registrationMessage: "",
     formErrors: {
       name: "",
       email: "",
@@ -68,8 +74,8 @@ class Registration extends Component {
       password1: setpassword,
       password2: confirmpassword,
       first_name: name,
-      last_name: "",
-      mobile: "",
+      last_name: "s",
+      mobile: "91",
     };
 
     // console.log("name", user);
@@ -87,21 +93,27 @@ class Registration extends Component {
         .then((res) => {
           if (res.status) {
             Toaster.sucess(res.detail.message, "topCenter");
-            window.location.reload();
+            this.setState({ isRegistrationComplete: true });
+            // window.location.reload();
           } else if (!res.status && !res.data[0]?.is_verified) {
             this.setState({
               isVerifyPopup: true,
               data: false,
             });
+            localStorage.setItem("verificationEmail", email);
+            this.setState({ isRegistrationComplete: false });
           } else {
-            Toaster.error(res.detail.message, "topCenter");
+            // Toaster.error(res.detail.message, "topCenter");
+            this.setState({ isRegistrationComplete: false });
           }
+          this.setState({ registrationMessage: res.detail.message });
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         })
         .finally(() => {
           this.props.dispatch(loadingStop());
+          this.setState({ isRegistrationWant: false });
         });
     } else {
       this.setState({
@@ -162,11 +174,11 @@ class Registration extends Component {
   render() {
     return (
       <>
-        {this.state.isLoginPopup && !this.state.isVerifyPopup ? (
+        {this.state.isLoginPopup ? (
           <Login />
-        ) : !this.state.isLoginPopup && this.state.isVerifyPopup ? (
+        ) : this.state.isVerifyPopup ? (
           <UserVerification />
-        ) : (
+        ) : this.state.isRegistrationWant ? (
           <div className="form-area registration--form">
             <div className="form-area__login  large-hedding">Register</div>
             <form className="form-area__fileds" noValidate autoComplete="off">
@@ -257,7 +269,7 @@ class Registration extends Component {
                         {this.state.showPassword ? (
                           <Visibility className="fill-eyecolor" />
                         ) : (
-                          <VisibilityOff className="fill-eyecolor"/>
+                          <VisibilityOff className="fill-eyecolor" />
                         )}
                       </IconButton>
                     </InputAdornment>
@@ -300,9 +312,9 @@ class Registration extends Component {
                         tabindex="-1"
                       >
                         {this.state.showPasswordConfirm ? (
-                          <Visibility className="fill-eyecolor"/>
+                          <Visibility className="fill-eyecolor" />
                         ) : (
-                          <VisibilityOff className="fill-eyecolor"/>
+                          <VisibilityOff className="fill-eyecolor" />
                         )}
                       </IconButton>
                     </InputAdornment>
@@ -326,6 +338,36 @@ class Registration extends Component {
               <Link href="#" onClick={this.backLogin} className="">
                 Login
               </Link>
+            </div>
+          </div>
+        ) : this.state.isRegistrationComplete ? (
+          <div className="emptySection">
+            <img src={sucessfullImg} />
+            <Typography component="p">
+              {this.state.registrationMessage}
+            </Typography>
+            <div className="form-button-grop emptySection__button-grop">
+              <CustomButton
+                className="login__button primary-button"
+                onClick={this.backLogin}
+              >
+                Back to Login
+              </CustomButton>
+            </div>
+          </div>
+        ) : (
+          <div className="emptySection">
+            <img src={sucessfullImg} />
+            <Typography component="p">
+              {this.state.registrationMessage}
+            </Typography>
+            <div className="form-button-grop emptySection__button-grop">
+              <CustomButton
+                className="login__button primary-button"
+                onClick={this.backLogin}
+              >
+                Back to Login
+              </CustomButton>
             </div>
           </div>
         )}

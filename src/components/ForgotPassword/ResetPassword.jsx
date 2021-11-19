@@ -21,15 +21,21 @@ import ApiRequest from "../../util/ApiRequest";
 import { useHistory } from "react-router-dom";
 import EmptyPage from "../emptyPage";
 import { ErrorMessages } from "../../constants/Messages";
+import BlankSection from "../emptyPage/blankSection";
+import { Message } from "@mui/icons-material";
 
 const Forgot = () => {
   const dispatch = useDispatch();
   const [newPasswords, setNewPasswords] = useState("");
   const [conformPasswords, setConformPasswords] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [passwordValidationMessage, setPasswordValidationMessage] =
+    useState("");
   const [isToken, setIsToken] = useState(false);
   const [isPasswordResetSucessfully, setIsPasswordResetSucessfully] =
     useState(false);
+  const [isPageRendring, setIsPageRendring] = useState(true);
+
   const location = useLocation();
   const history = useHistory();
   const queryData = parse(location.search);
@@ -48,7 +54,7 @@ const Forgot = () => {
   };
 
   const ResetPassword = () => {
-    console.log(passwordMatch, "Password match");
+    // console.log(passwordMatch, "Password match");
     if (passwordMatch) {
       let resetPasswordVal = {
         new_password1: newPasswords,
@@ -78,22 +84,22 @@ const Forgot = () => {
       token: queryData.token,
     };
 
-    console.log("Check token");
+    // console.log("Check token");
 
-    ApiRequest.request(
-      RESET_PASSWORD_TOKEEN_VERIFY,
-      "POST",
-      verifyTokenData
-    ).then((res) => {
-      console.log(res, "token verify");
-      if (res.status) {
-        setIsToken(true);
-        setIsPasswordResetSucessfully(false);
-      } else {
-        setIsToken(false);
-        setIsPasswordResetSucessfully(false);
-      }
-    });
+    ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
+      .then((res) => {
+        // console.log(res, "token verify");
+        if (res.status) {
+          setIsToken(true);
+          setIsPasswordResetSucessfully(false);
+        } else {
+          setIsToken(false);
+          setIsPasswordResetSucessfully(false);
+        }
+      })
+      .finally(() => {
+        setIsPageRendring(false);
+      });
   };
 
   useEffect(() => {
@@ -104,56 +110,51 @@ const Forgot = () => {
     <>
       <Header />
       <div className="forgot">
-        {isToken && !isPasswordResetSucessfully ? (
-          <form action="">
-            <div className="form-group">
-              <InputLabel
-                htmlFor="standard-adornment-email"
-                className="input-label"
-              >
-                Password
-              </InputLabel>
-              <FormControl className="form-area__control">
-                <TextField
-                  id="outlined-email-input"
-                  placeholder="Password"
-                  type="password"
-                  variant="outlined"
-                  onChange={haldelNewPassword}
-                />
-                <div className="validated-error"></div>
-              </FormControl>
-
-              <InputLabel
-                htmlFor="standard-adornment-email"
-                className="input-label"
-              >
-                Confirm Password
-              </InputLabel>
-              <FormControl className="form-area__control">
-                <TextField
-                  id="outlined-email-input"
-                  placeholder="Confrim Password"
-                  type="password"
-                  variant="outlined"
-                  onChange={haldelConformPassword}
-                  onKeyUp={handelMatchPassword}
-                />
-                <div className="validated-error"></div>
-              </FormControl>
-              <p>
-                {!passwordMatch ? "password you are entered is incurrect" : ""}
-              </p>
+        {isPageRendring ? (
+          <BlankSection />
+        ) : isToken && !isPasswordResetSucessfully ? (
+          <div className="form-area forgot__section">
+            <div className="form-area__login  large-hedding">
+              Reset Password
             </div>
-            <div className="form-group">
-              <CustomButton
-                className="forgot__button primary-button"
-                onClick={ResetPassword}
-              >
-                Submit
-              </CustomButton>
-            </div>
-          </form>
+            <form action="">
+              <div className="form-group">
+                <FormControl className="form-area__control">
+                  <TextField
+                    id="outlined-email-input"
+                    placeholder="Password"
+                    type="password"
+                    variant="outlined"
+                    onChange={haldelNewPassword}
+                    label="Password"
+                  />
+                  <div className="validated-error"></div>
+                </FormControl>
+                <FormControl className="form-area__control">
+                  <TextField
+                    id="outlined-email-input"
+                    placeholder="Confrim Password"
+                    type="password"
+                    onChange={haldelConformPassword}
+                    onKeyUp={handelMatchPassword}
+                    variant="outlined"
+                    label="Confirm Password"
+                  />
+                  <div className="validated-error">
+                    {!passwordMatch ? ErrorMessages.PASSWORD_MATCH : ""}
+                  </div>
+                </FormControl>
+              </div>
+              <div className="form-button-grop">
+                <CustomButton
+                  className="custom-button login__button primary-button"
+                  onClick={ResetPassword}
+                >
+                  Submit
+                </CustomButton>
+              </div>
+            </form>
+          </div>
         ) : !isToken && !isPasswordResetSucessfully ? (
           <EmptyPage
             heading={ErrorMessages.PASSWORD_CANNOT_CHANGE}

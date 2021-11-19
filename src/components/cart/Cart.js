@@ -35,6 +35,7 @@ import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
+import BlankSection from "../emptyPage/blankSection";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ const Cart = () => {
       is_renew: "false",
     };
     const stripe = await loadStripe(STRIPE);
+
     dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       stripe.redirectToCheckout({ sessionId: res.sessionId });
@@ -94,7 +96,7 @@ const Cart = () => {
           </Container>
         </div>
         {isPageRendring ? (
-          " "
+          <BlankSection height="100vh" />
         ) : !isPageRendring && cart && cart.length ? (
           <div className="shoping-cart shopping-cart-data">
             <Container
@@ -119,7 +121,7 @@ const Cart = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={3}>
-                <Grid item xl={9} lg={9} sm={9} xs={12}>
+                <Grid item xl={9} lg={9} md={12} sm={12} xs={12}>
                   {cart.map((item, index) => {
                     return (
                       <Paper
@@ -270,7 +272,8 @@ const Cart = () => {
                   item
                   xl={3}
                   lg={3}
-                  sm={3}
+                  md={12}
+                  sm={12}
                   xs={12}
                   className="border-radius sticky-card-position"
                 >

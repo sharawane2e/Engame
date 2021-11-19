@@ -20,6 +20,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   const [isCurentPrice, setCurentPrice] = useState(updateData.price);
   const [isUpdateResult, setUpdateResult] = useState("");
   const dispatch = useDispatch();
+  const [isCountLimit, setIsCountLimit] = useState("");
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
@@ -50,14 +51,16 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
 
     if (e.target.value <= 0) {
       var ItemCount = 1;
+      setIsCountLimit(ErrorMessages.MINIMUM_COUNT);
     } else if (e.target.value > 999 && istype === "days") {
       var ItemCount = 999;
-      Toaster.error(ErrorMessages.Maxium_days_addToCart, "topCenter");
+      setIsCountLimit(ErrorMessages.Maxium_days_addToCart);
     } else if (e.target.value > 100000 && istype === "hits") {
       var ItemCount = 100000;
-      Toaster.error(ErrorMessages.Maxium_hits_addToCart, "topCenter");
+      setIsCountLimit(ErrorMessages.Maxium_hits_addToCart);
     } else {
       var ItemCount = e.target.value;
+      setIsCountLimit("");
     }
 
     setValuePrice(ItemCount);
@@ -123,6 +126,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
             ${updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
           </div>
         </div>
+        <div className="validated-error">{isCountLimit}</div>
       </div>
       <div className="popup-container__footer popup--text">
         <CustomButton

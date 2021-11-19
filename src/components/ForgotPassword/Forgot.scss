@@ -15,6 +15,22 @@
 }
 
 .forgot {
+  &__section {
+    padding: 30px;
+    @include border-radius($boder-radius);
+    @include bgcolor(transparent);
+    border: 2px solid $white;
+    margin: auto;
+    .MuiOutlinedInput-root {
+      @include bgcolor($white!important);
+
+      .MuiOutlinedInput-notchedOutline {
+        border-color: transparent !important;
+        @include font-size($font-reg);
+        color: $black-gray;
+      }
+    }
+  }
   .form-area__control {
     width: 100%;
   }
@@ -25,23 +41,10 @@
   display: flex;
   align-items: $align-center;
   @include breakpoint(mobileonly) {
-   // min-height: 76vh;
+    // min-height: 76vh;
   }
   form {
-    width: 30%;
-    padding: 30px;
-    @include border-radius($boder-radius);
-    @include bgcolor($white);
-    margin: 0 auto;
-    @include breakpoint(Ipad) {
-     width: 50%;
-    }
-    @include breakpoint(mobileonly) {
-     width: 90%;
-    }
-
     .form-group {
-      margin-bottom: 25px;
       &:last-child {
         margin: 0;
       }
@@ -53,9 +56,7 @@
     input {
       display: block;
       width: 100%;
-      height: 40px;
       outline: none;
-      padding: 0 0 0 10px;
     }
     button {
       display: block;

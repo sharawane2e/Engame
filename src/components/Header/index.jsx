@@ -93,7 +93,7 @@ const Header = ({ props }) => {
       setLoginIsOpen(false);
       setReginIsOpen(false);
       dispatch(getItemFromCart());
-      console.log(user, "user");
+      // console.log(user, "user");
       // dispatch(loadingStop());
     }
   }, [user]);
@@ -106,6 +106,7 @@ const Header = ({ props }) => {
     //     // alert("error");
     //   }
     // );
+    localStorage.removeItem("verificationEmail");
   }, []);
 
   useEffect(() => {
@@ -127,7 +128,7 @@ const Header = ({ props }) => {
         Toaster.sucess(res.detail, "topCenter");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       })
       .finally(() => {
         dispatch(loadingStop());

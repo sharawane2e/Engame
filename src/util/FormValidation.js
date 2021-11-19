@@ -22,7 +22,7 @@ const handleCMail = (value) => {
   };
   ApiRequest.request(EMAIL_ALLOWED, "POST", EmailData).then((res) => {
     return res;
-    console.log(res);
+    // console.log(res);
   });
 };
 
@@ -100,7 +100,7 @@ export class UserValidation extends Validation {
             };
             ApiRequest.request(EMAIL_ALLOWED, "POST", EmailData).then((res) => {
               // debugger;
-              console.log("res.status", res);
+              // console.log("res.status", res);
               if (res.status) {
                 this.state.legalEmail = true;
               } else {

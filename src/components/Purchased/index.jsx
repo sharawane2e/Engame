@@ -50,6 +50,7 @@ import exportFromJSON from "export-from-json";
 import NoSearchFound from "../NoSearchFound";
 import NoresultImg from "../../assets/images/not-found.svg";
 import { getItemFromCart } from "../../redux/cart/action";
+import BlankSection from "../emptyPage/blankSection";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -216,7 +217,6 @@ const Purchased = (props) => {
 
     ApiRequest.request(PLAY_PAUSE, "POST", ItemData).then((res) => {
       if (res.status) {
-        Toaster.sucess(res.detail.message, "topCenter");
         PurchaseList();
       } else {
         Toaster.error(res.detail.message, "topCenter");
@@ -247,12 +247,11 @@ const Purchased = (props) => {
         ? item.id
         : item.id
     ) {
-      return true;
-    } else {
-      return false;
+      return item;
     }
   });
-  console.log(FilterData, "Data after filter");
+
+  // console.log(FilterData, "Data after filter");
 
   return (
     <>
@@ -277,7 +276,7 @@ const Purchased = (props) => {
             </Breadcrumbs>
           </Container>
         </div>
-        {!widgetList.length == 0 && (
+        {!widgetList.length == 0 ? (
           <Container
             maxWidth="lg"
             className="purchased-tool__container  margin-top-174 shopping-cart-data"
@@ -524,9 +523,7 @@ const Purchased = (props) => {
                               >
                                 <Tooltip title="Play / Pause" placement="top">
                                   <SwitchUnstyled
-                                    defaultChecked={
-                                      item.is_paused ? false : true
-                                    }
+                                    checked={item.is_paused ? false : true}
                                     onClick={() => {
                                       setPausePopup(true);
                                       setPlayPauseValue(item);
@@ -534,7 +531,7 @@ const Purchased = (props) => {
                                   />
                                 </Tooltip>
                               </Typography>
-                              <Tooltip title="Embeded Code" placement="top">
+                              <Tooltip title="Extend validity" placement="top">
                                 <Typography
                                   component="div"
                                   className="extend-validity"
@@ -739,13 +736,14 @@ const Purchased = (props) => {
               <NoSearchFound img={NoresultImg} heading="No result found" />
             )}
           </Container>
-        )}
-        {isPurchaseEmpty && (
+        ) : isPurchaseEmpty && FilterData.length == 0 ? (
           <EmptyPage
             heading={ErrorMessages.purchaseCart}
             imgUrl={emptyWidgett}
             buttonName="Continue Shoping"
           />
+        ) : (
+          <BlankSection height="100vh" />
         )}
         {/*Renew Subscription*/}
         <CustomPopup

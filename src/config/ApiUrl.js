@@ -4,6 +4,9 @@ export const BASE_URL = process.env.REACT_APP_Dev_BaseUrl;
 export const STRIPE =
   "pk_test_51JSNziSHJkLYEZvP97ZGOGkp5iaXWVRPxSpKZnnr2nLKkLjsz8VgsDrhC3pT1IhF3uy66ABdzYRZzVycv5qA2fsn00rERg0lxL";
 
+// export const STRIPE =
+//   "pk_live_51JSNziSHJkLYEZvPog2ob4raNi2ceEotoMzcpAclppqvgJ4ZFLUn0Olhqv9mgaOhVvJmvhmtjaFaKq0DLq4ZcSjC00fASCvq09";
+
 export const LOGIN = "/user/login/";
 
 export const REGISTRATION = "/user/";

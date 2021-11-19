@@ -433,6 +433,17 @@ input:-webkit-autofill:active {
   p {
     margin-top: 20px;
   }
+  &__button-grop {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    width: 100% !important;
+    &__login_button {
+      width: 100%;
+      padding: 15px !important;
+      font-size: 1.25rem !important;
+    }
+  }
 }
 
 ::placeholder {

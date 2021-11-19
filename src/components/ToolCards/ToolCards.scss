@@ -2,10 +2,9 @@
   padding: $padding-40 6vw;
   // @include space(padding, top-bottom, $padding-40, $padding-40);
   background: $white;
-  min-height: 150px;
-  @include breakpoint(desktop) {
-    padding: 39px 7vw;
-    //min-height: 66vh !important;
+  min-height: 68vh;
+  @include breakpoint(mobileonly) {
+    min-height: 30vh !important;
   }
 
   #{&}__toolbar {

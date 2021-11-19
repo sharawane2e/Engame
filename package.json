@@ -1,7 +1,6 @@
 {
   "name": "engame",
   "version": "0.1.0",
-  "homepage": "/home/",
   "private": true,
   "dependencies": {
     "3d-react-carousal": "^4.0.2",

@@ -1,10 +1,7 @@
 .shopping-cart-data {
-  min-height: 749px;
-  @include breakpoint(desktop) {
-    min-height: 580px;
-  }
-  // @include breakpoint(lg-desktop) {
-  //   min-height: 85.5vh;
+  min-height: 90vh;
+  // @include breakpoint(Ipad-pro) {
+  //   min-height: 900px;
   // }
 }
 .shoping-cart {

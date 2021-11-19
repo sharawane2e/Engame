@@ -19,6 +19,7 @@ import { useStore } from "react-redux";
 import { listProducts } from "../../redux/product/product-action";
 import { CATEGORIES_LIST } from "../../config/ApiUrl";
 import ApiRequest from "../../util/ApiRequest";
+import { loadingStop } from "../../redux/loader/loader-actions";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -195,13 +196,13 @@ const Filter = () => {
   });
 
   const FilterAction = (SelectedCategoriesList, searchText) => {
-    console.log(SelectedCategoriesList, "filter Data");
-    console.log(searchText, "Search Data");
+    // console.log(SelectedCategoriesList, "filter Data");
+    // console.log(searchText, "Search Data");
 
     let selectedCategoriesId = SelectedCategoriesList.map((item) => {
       return item.id;
     });
-    console.log(selectedCategoriesId, "Selected Categories list");
+    // console.log(selectedCategoriesId, "Selected Categories list");
     let ApiData = {
       widget_type_id:
         selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
@@ -227,12 +228,14 @@ const Filter = () => {
     }
   };
 
-  const handelSearchValueFilterClick = () => {
+  const handelSearchValueFilterClick = (e) => {
+    e.preventDefault();
     FilterAction(value, searchText);
   };
 
   useEffect(() => {
     // GetCategoriesList();
+
     FilterAction(value, searchText);
     // console.log(productList);
   }, [value]);
@@ -308,7 +311,6 @@ const Filter = () => {
                     <input
                       {...getInputProps()}
                       className="filter-inputsection__filterBtn"
-                      type="submit"
                     />
                     <FilterListIcon
                       fontSize="large"
