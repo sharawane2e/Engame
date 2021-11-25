@@ -3,6 +3,19 @@ import { React } from "react";
 
 const ToolDemo = (props) => {
   const { tool } = props;
+  const writeHTML = (frame) => {
+    let iframe_ref = null;
+    if (!frame) {
+      return;
+    }
+    iframe_ref = frame;
+    let doc = frame.contentDocument;
+    doc.open();
+    doc.write(tool.widget_embed_code);
+    doc.close();
+    frame.style.width = '100%';
+   // frame.style.height =     `${frame.contentWindow.document.body.scrollHeight}px`;
+  };
 
   return (
     <>
@@ -17,7 +30,8 @@ const ToolDemo = (props) => {
         // scrolling="yes"
         // /frameborder="no"
         // allow="autoplay"
-        src={tool.toolLink}
+        src=""
+        ref={writeHTML}
         frameBorder="0"
       ></iframe>
       {/* </div> */}
