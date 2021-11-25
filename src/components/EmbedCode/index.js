@@ -25,7 +25,7 @@ const EmbedCode = ({ data, toolId }) => {
         type: "application/octet-stream",
       })
     );
-    link.download = "embeded.text";
+    link.download = "embeded.html";
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {

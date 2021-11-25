@@ -22,9 +22,9 @@ export const ErrorMessages = {
 
   NoSearchResultMessage: "No search result found! Please search something else",
 
-  Maxium_days_addToCart: "Maxium 999 are allowed",
+  Maxium_days_addToCart: "Maximum 999 day's are allowed",
 
-  Maxium_hits_addToCart: "Maxium 100000 hits are allowed",
+  Maxium_hits_addToCart: "Maximum 100000 hits are allowed",
 
   MINIMUM_COUNT: "Minimum count should be at least 1",
 

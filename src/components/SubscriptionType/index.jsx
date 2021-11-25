@@ -25,6 +25,8 @@ const SubscriptionType = ({ toolId, onClose }) => {
   const handleChange = (e) => {
     let plans = { user: res.token.user.pk, plan_type: e.target.value };
 
+    setIsCountLimit("");
+
     setSubscription(e.target.value);
     setType(e.target.value);
 

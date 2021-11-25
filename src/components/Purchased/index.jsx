@@ -99,7 +99,7 @@ const Purchased = (props) => {
         type: "application/octet-stream",
       })
     );
-    link.download = fileName + ".text";
+    link.download = fileName + ".html";
     document.body.appendChild(link);
     link.click();
   };
@@ -176,7 +176,6 @@ const Purchased = (props) => {
       : NewPaymentSucessData;
 
     if (session_id) {
-      await localStorage.setItem("isPayment", true);
       await ApiRequest.request(PAYMENT_SUCESS, "POST", PaymentSucessData)
         .then((res) => {
           if (res.status) {
@@ -188,7 +187,7 @@ const Purchased = (props) => {
         .finally(() => {
           PurchaseList();
           dispatch(getItemFromCart());
-          localStorage.removeItem("isPayment");
+          localStorage.removeItem("isNewPayment");
         });
     } else {
       PurchaseList();
@@ -305,7 +304,7 @@ const Purchased = (props) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} className="purchased-tool__filterTabs">
               <Grid
                 item
                 xs={12}
@@ -485,8 +484,8 @@ const Purchased = (props) => {
                                           );
                                         }}
                                       >
-                                        {item.secrate_key.substr(0, 10)}
-                                        ************
+                                        {item.secrate_key.substr(0, 5)}
+                                        ********
                                         <FileCopyIcon className="subscription-day__icon" />
                                       </span>
                                     </CopyToClipboard>
@@ -515,8 +514,8 @@ const Purchased = (props) => {
                                         }}
                                       >
                                         <span className="display-flex">
-                                          {item.trial_key.substr(0, 10)}
-                                          ************
+                                          {item.trial_key.substr(0, 5)}
+                                          ********
                                         </span>
                                         <FileCopyIcon className="subscription-day__icon" />
                                       </span>
@@ -642,7 +641,7 @@ const Purchased = (props) => {
                               container
                               className="purchased-tool__tool-data accordion-margin show--accordion"
                             >
-                              <Grid item xs={6}>
+                              <Grid item xs={12} sm={6}>
                                 <Typography component="div">
                                   <div className="purchased-tool__purchased-date">
                                     <span className="purchased-tool__date-type-text purchased-curent-text">
@@ -665,13 +664,21 @@ const Purchased = (props) => {
                                   </div>
                                 </Typography>
                               </Grid>
+                              <Grid item xs={12} sm={6} className="mobile__only">
+                                  <Typography
+                                    component="div"
+                                    className="cursor--pointer purchased-tool__doenloadP"
+                                  >
+                                        DOWNLOAD
+                                  </Typography>
+                              </Grid>
 
                               <Grid
                                 item
-                                xs={6}
+                                xs={12} sm={6}
                                 className="purchased-tool__expiry-date"
                               >
-                                <div>
+                                <div className="desktop__only">
                                   <Typography
                                     component="div"
                                     className="cursor--pointer purchased-tool__Indicator"
@@ -684,7 +691,7 @@ const Purchased = (props) => {
                                     </div>
                                   </Typography>
                                 </div>
-                                <div className="pdl-2">
+                                <div className="purchased-tool__embeded-Fdiv">
                                   <Typography
                                     component="div"
                                     className="purchased-tool__embeded-icon border-radius"
@@ -697,7 +704,7 @@ const Purchased = (props) => {
                                     </Tooltip>
                                   </Typography>
                                 </div>
-                                <div className="pdl-2">
+                                <div className="purchased-tool__embeded-div">
                                   <Typography
                                     component="div"
                                     className="purchased-tool__embeded-icon border-radius"
@@ -713,7 +720,7 @@ const Purchased = (props) => {
                                     </Tooltip>
                                   </Typography>
                                 </div>
-                                <div className="pdl-2">
+                                <div className="purchased-tool__embeded-div">
                                   <Typography
                                     component="div"
                                     className="purchased-tool__embeded-icon border-radius"

@@ -9,6 +9,12 @@
     .css-zow5z4-MuiGrid-root > .MuiGrid-item {
       @include space(padding, right, $padding-24, 0);
     }
+    .MuiGrid-item{
+      @include breakpoint(mobileonly){
+        padding: 5px;
+        min-width: 100%;
+      }
+    }
   }
   .textbox-hide {
     outline: 0;
@@ -31,9 +37,19 @@
     display: flex;
     justify-content: flex-end;
   }
-
+  #{&}__filterTabs{
+    width: 100%;
+    margin: 0px;
+    overflow: auto;
+    /* width: 100%; */
+    margin-bottom: 15px;
+  }
   #{&}__hedding {
     @include space(margin, bottom, $margin-20, 0);
+    @include breakpoint(mobileonly){
+      min-width: min-content!important;
+    @include space(margin, bottom, $margin-15, 0);
+    }
     .hedding-text {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-xx-reg);
@@ -77,6 +93,9 @@
   }
   .progress-bar {
     width: 100px;
+    @include breakpoint(mobileonly){
+      min-width: 100%;
+    }
   }
   .extend-validity {
     width: 100%;
@@ -123,6 +142,10 @@
       @include font-size($font-reg);
       @include space(padding, left, $padding-5, 0);
       text-decoration: none;
+      @include breakpoint(mobileonly){
+      @include space(padding, left, 0, 0);
+
+      }
     }
     .bold-style {
       font-weight: bold;
@@ -164,10 +187,9 @@
     padding: 0px !important;
     justify-content: center;
     align-items: center;
-    // img {
-    //   width: 206px;
-    //   height: 90px;
-    // }
+    @include breakpoint(mobileonly){
+      min-width: 100%;
+    }
   }
   .tool-hits-days {
     text-align: $align-center;
@@ -175,13 +197,32 @@
   #{&}__tool-image {
     background: $dark-bg;
     @include space(margin, right, $margin-3, 0);
+    img{
+      @include breakpoint(mobileonly){
+        padding: 15px;
+      }
+    }
   }
   #{&}__tool-data {
     background: $dark-bg;
+    @include breakpoint(mobileonly){
+      min-width: 100%
+      
+    }
+    .MuiTypography-root{
+      @include breakpoint(mobileonly){
+        min-width: 100%
+      } 
+    }
   }
   #{&}__tool-card {
     @include space(padding, top-bottom, $padding-20, $padding-30);
     @include space(padding, left-right, $padding-40, $padding-40);
+    @include breakpoint (mobileonly){
+      @include space(padding, top-bottom, $padding-15, $padding-15);
+    @include space(padding, left-right, $padding-15, $padding-15);
+    margin-bottom: 15px;
+    }
   }
   #{&}__tool-title {
     color: $black-secondary;
@@ -295,6 +336,15 @@
     text-decoration: none;
     font-weight: 600;
   }
+  #{&}__embeded-div{
+    padding-left: 15px;
+  }
+  #{&}__embeded-Fdiv{
+    padding-left: 15px;
+    @include breakpoint(mobileonly){
+      padding-left: 0px;
+    }
+  }
   #{&}__embeded-icon {
     display: flex;
     @include border("", $border-width, $bsolid, $black-gray);
@@ -335,10 +385,23 @@
       @include color($black-gray);
     }
   }
+  #{&}__doenloadP{
+    display: none;
+    @include breakpoint(mobileonly){
+      display: block;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: $font-xmd-reg;
+    }
+  }
   #{&}__expiry-date {
     display: flex;
     justify-content: flex-end;
     @include color($black-gray);
+    @include breakpoint(mobileonly){
+      
+      justify-content: flex-start;
+    }
   }
 }
 .blankPage {

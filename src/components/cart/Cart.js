@@ -66,10 +66,13 @@ const Cart = () => {
       is_renew: "false",
     };
     const stripe = await loadStripe(STRIPE);
+    await localStorage.setItem("isNewPayment", true);
 
     dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
-      stripe.redirectToCheckout({ sessionId: res.sessionId });
+      if(res.status){
+      stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
+      }
     });
   };
 

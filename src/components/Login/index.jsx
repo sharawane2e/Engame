@@ -21,6 +21,9 @@ import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
 import { LOGIN } from "../../config/ApiUrl";
 import UserVerification from "../userVerify";
+import { getItemFromCart } from "../../redux/cart/action";
+import { listProducts } from "../../redux/product/product-action";
+
 // import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 class Login extends Component {
@@ -58,6 +61,11 @@ class Login extends Component {
       email,
       password,
     });
+    let ApiData = {
+      widget_type_id:"",
+      search_string: "",
+    };
+
 
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
@@ -78,7 +86,10 @@ class Login extends Component {
           Toaster.error(res.detail.message, "topCenter");
         }
         this.props.dispatch(loadingStop());
-      });
+      })
+      .finally(()=>{
+        this.props.dispatch(listProducts(ApiData));
+      })
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },

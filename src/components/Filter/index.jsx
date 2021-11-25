@@ -212,13 +212,14 @@ const Filter = () => {
     dispatch(listProducts(ApiData));
   };
 
-  // const GetCategoriesList = async () => {
-  //   await ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
-  //     setCategoriesList(res.data);
-  //     //console.log(res, "Categories list");
-  //   });
-  //   // console.log(categoriesList, "Categories list render");
-  // };
+  const GetCategoriesList = () => {
+    ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
+      
+      setCategoriesList(res?.data[0]  || []);
+      console.log(res, "Categories list");
+      console.log(categoriesList, "Categories list render");
+    });
+  };
 
   const SaerchValue = (e) => {
     setSearchText(e.target.value);
@@ -234,7 +235,7 @@ const Filter = () => {
   };
 
   useEffect(() => {
-    // GetCategoriesList();
+    GetCategoriesList();
 
     FilterAction(value, searchText);
     // console.log(productList);
@@ -246,7 +247,7 @@ const Filter = () => {
         <Toolbar className="filter-section">
           <div className="flexGrow">
             <Grid container spacing={3} className="align-item">
-              <Grid item xs={12} sm={8}>
+              <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
                 <Paper className="paperstyel filter-font-family">
                   <span className="review-text">Review 100+ &nbsp;</span>
                   <span className="filter-text">
@@ -258,7 +259,7 @@ const Filter = () => {
                   </div>
                 </Paper>
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                 <Paper className="paperstyel grid-paper-style">
                   {/* <img src={librarycards} /> */}
                   <Carousel />
@@ -361,9 +362,10 @@ const OldCategoriesList = [
   { widget_type: "Heatmaps and Highlighters", id: 1 },
   { widget_type: "Rating", id: 2 },
   { widget_type: "Single and Multi selects", id: 3 },
-  { widget_type: "	Maps", id: 4 },
-  { widget_type: "	Ranking", id: 5 },
-  { widget_type: "	collection", id: 6 },
+  { widget_type: "Maps", id: 4 },
+  { widget_type: "Ranking", id: 5 },
+  { widget_type: "collection", id: 6 },
+  { widget_type: "Numeric", id:7},
 ];
 
 export default Filter;

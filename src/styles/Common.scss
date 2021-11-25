@@ -14,9 +14,9 @@ body {
 }
 .MuiButton-label {
   text-transform: none;
-  @include breakpoint(mobileonly) {
-    font-size: 12px;
-  }
+  // @include breakpoint(mobileonly) {
+  //   font-size: 12px;
+  // }
 }
 .progress-yellow .MuiLinearProgress-barColorPrimary {
   background-color: $yelow !important;
@@ -144,9 +144,6 @@ a {
     map-get($map: $boxshadow, $key: "black-smooth")
   );
   @include breakpoint(desktop150) {
-  }
-  @include breakpoint(Ipad-pro) {
-    @include space(padding, all, $padding-5 !important, 0);
   }
   @include breakpoint(mobileonly) {
     @include space(padding, all, $padding-10 !important, 0);

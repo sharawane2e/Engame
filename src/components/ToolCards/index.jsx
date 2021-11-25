@@ -31,6 +31,8 @@ import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
 // import { ConstructionOutlined } from "@mui/icons-material";
 import NoSearchFound from "../NoSearchFound";
 import NoresultImg from "../../assets/images/not-found.svg";
+import EmptyPage from "../emptyPage";
+import emptyImg from "../../assets/images/oops.gif";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -80,7 +82,11 @@ const ToolCards = () => {
               <LoadingBox />
             </>
           ) : error ? (
-            <MessageBox>{error}</MessageBox>
+            <EmptyPage
+            heading={ErrorMessages.SOMETHING_WENT_WRONG}
+            imgUrl={emptyImg}
+            buttonName="Continue Shoping"
+          />
           ) : (
             <Grid container spacing={4}>
               {products.length == 0 ? (
@@ -334,7 +340,9 @@ const ToolCards = () => {
             onClose={() => setSelectedTool(null)}
             className="popup-container__iner--xxl border-radius tool-perview-data"
           >
+            <div>
             <ToolPerview tool={selectedTool}></ToolPerview>
+            </div>
           </CustomPopup>
           {/*End */}
 

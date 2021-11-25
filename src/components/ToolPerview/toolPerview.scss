@@ -4,12 +4,24 @@
   font-family: "barlowbold";
   position: absolute;
   top: 3px;
-  width: 50%;
+  width: 90%;
   @include font-size($font-xx-reg18);
+  @include breakpoint (mobileonly){
+    padding: 10px 0px 20px 0px;
+    width: 50%;
+  }
 }
 
 #tool-perview {
   @include space("margin", top, $padding-40, 0);
-  height: 500px;
+  min-height: 75vh;
+  max-height: 75vh;
+  height: 75vh;
   overflow-y: scroll;
+  @include breakpoint(mobileonly){
+    margin-top: 40px;
+    min-height: 40vh;
+    max-height: 75vh;
+    height: 40vh;
+  }
 }

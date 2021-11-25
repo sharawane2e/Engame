@@ -93,10 +93,21 @@ const Header = ({ props }) => {
       setLoginIsOpen(false);
       setReginIsOpen(false);
       dispatch(getItemFromCart());
+      // cartCountManagement();
       // console.log(user, "user");
       // dispatch(loadingStop());
     }
   }, [user]);
+
+  // const cartCountManagement = () => {
+  //   var search = props.location.search;
+  //   var params = new URLSearchParams(search);
+  //   var session_id = params.get("session_id");
+
+  //   if (!session_id && !localStorage.getItem("isPayment")) {
+  //     dispatch(getItemFromCart());
+  //   }
+  // };
 
   useEffect(() => {
     // fetch(BASE_URL + "/widget/filters/").then(

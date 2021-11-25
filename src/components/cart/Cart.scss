@@ -282,13 +282,6 @@
         }
       }
     }
-    @include breakpoint(Ipad) {
-      width: 110px !important;
-      padding: 5px !important;
-      .MuiButton-label {
-        @include font-size($font-xmd-reg);
-      }
-    }
 
     @media all and (min-width: 1024px) and (max-width: 1366px) {
       // width: 178px !important;
