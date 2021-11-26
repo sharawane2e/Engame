@@ -32,4 +32,6 @@ export const ErrorMessages = {
     "You have enter incurrect url! Please try with valid url",
   VERIFICATION_EMAIL_TOKEN_VALID: "Your account has been verify successfully",
   SOMETHING_WENT_WRONG: "Somthing went wrong! Please try again",
+
+  ToolPreviewBeforeLogin: "Please login before view the tool instruction",
 };

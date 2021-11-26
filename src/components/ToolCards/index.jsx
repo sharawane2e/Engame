@@ -83,10 +83,10 @@ const ToolCards = () => {
             </>
           ) : error ? (
             <EmptyPage
-            heading={ErrorMessages.SOMETHING_WENT_WRONG}
-            imgUrl={emptyImg}
-            buttonName="Continue Shoping"
-          />
+              heading={ErrorMessages.SOMETHING_WENT_WRONG}
+              imgUrl={emptyImg}
+              buttonName="Continue Shoping"
+            />
           ) : (
             <Grid container spacing={4}>
               {products.length == 0 ? (
@@ -124,10 +124,20 @@ const ToolCards = () => {
                               </CustomButton>
                             </div>
                             <div className="toolcard__tooltip">
-                              <HelpCenterRoundedIcon
-                                className="toolcard__tooltip__icon"
-                                onClick={() => setIsInfoPopup(tooldata)}
-                              />
+                              {user ? (
+                                <HelpCenterRoundedIcon
+                                  className="toolcard__tooltip__icon"
+                                  onClick={() => setIsInfoPopup(tooldata)}
+                                />
+                              ) : (
+                                <HelpCenterRoundedIcon
+                                  className="toolcard__tooltip__icon"
+                                  onClick={() => {
+                                    setisLoginrequire(true);
+                                    setTypeClick(ErrorMessages.loginAlert);
+                                  }}
+                                />
+                              )}
                             </div>
                           </div>
 
@@ -209,10 +219,22 @@ const ToolCards = () => {
                               </CustomButton>
                             </div>
                             <div className="toolcard__tooltip">
-                              <HelpCenterRoundedIcon
-                                className="toolcard__tooltip__icon"
-                                onClick={() => setIsInfoPopup(tooldata)}
-                              />
+                              {user ? (
+                                <HelpCenterRoundedIcon
+                                  className="toolcard__tooltip__icon"
+                                  onClick={() => setIsInfoPopup(tooldata)}
+                                />
+                              ) : (
+                                <HelpCenterRoundedIcon
+                                  className="toolcard__tooltip__icon"
+                                  onClick={() => {
+                                    setisLoginrequire(true);
+                                    setTypeClick(
+                                      ErrorMessages.ToolPreviewBeforeLogin
+                                    );
+                                  }}
+                                />
+                              )}
                             </div>
                           </div>
 
@@ -341,7 +363,7 @@ const ToolCards = () => {
             className="popup-container__iner--xxl border-radius tool-perview-data"
           >
             <div>
-            <ToolPerview tool={selectedTool}></ToolPerview>
+              <ToolPerview tool={selectedTool}></ToolPerview>
             </div>
           </CustomPopup>
           {/*End */}

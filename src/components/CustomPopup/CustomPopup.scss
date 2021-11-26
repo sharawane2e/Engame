@@ -14,16 +14,15 @@
 }
 .popup-close {
   position: absolute;
-  right: 15px;
-  top: 20px;
-  cursor: pointer;
-  @include breakpoint(mobileonly){
+  right: 10px;
   top: 10px;
+  cursor: pointer;
+  @include breakpoint(mobileonly) {
+    top: 10px;
   }
   > svg {
     fill: $white;
   }
-
 }
 .tool-perview-data {
   .popup-close {
@@ -94,7 +93,7 @@
   }
   #{&}__iner--xl-md {
     width: 600px;
-    @include breakpoint(mobileonly){
+    @include breakpoint(mobileonly) {
       width: 95vw;
     }
   }
