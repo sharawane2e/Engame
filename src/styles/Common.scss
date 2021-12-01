@@ -250,7 +250,7 @@ a {
 }
 
 .MuiAppBar-colorPrimary {
-  background-color: $gray-primary !important;
+  background-color: $white !important;
 }
 .modal-open {
   overflow: hidden;
@@ -512,3 +512,88 @@ select {
 //   visibility: visible !important;
 //   transition: all 0.3s ease-in;
 // }
+
+.homeBanner {
+  width: fit-content;
+  margin: auto;
+  @include breakpoint(Ipad-pro) {
+    margin-left: 0px;
+  }
+  .carousel {
+    .slide {
+      @include breakpoint(mobileonly) {
+        text-align: left;
+      }
+      img {
+        @include breakpoint(mobileonly) {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+.homeFullBanner {
+  width: 100%;
+  .carousel {
+    .thumbs-wrapper {
+      display: none;
+    }
+    .carousel-status {
+      display: none;
+    }
+    .carousel-slider {
+      padding: 15px;
+      padding-right: 100px;
+    }
+    .textArea {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      display: flex;
+      align-content: center;
+      height: 100%;
+      align-items: center;
+      @include breakpoint(Ipad-pro) {
+        position: unset;
+        top: 10px;
+        width: 100%;
+        display: flex;
+        align-content: center;
+        height: 100%;
+        align-items: center;
+      }
+      &__filter-text {
+        padding-right: 6%;
+        // @include font-weight($font-600);
+        @include color($black-secondary);
+        @include font-size($font-xsm);
+        line-height: 42px;
+        margin-left: auto;
+        text-align: left;
+        font-weight: 600;
+        width: 45%;
+        @include breakpoint(Ipad-pro) {
+          @include font-size($font-xx-reg);
+          line-height: 24px;
+          width: 90%;
+          margin: auto;
+          padding: 15px;
+          padding-right: 15px;
+          margin-bottom: 15px;
+          text-align: center;
+        }
+        &__review-text {
+          // @include font-weight($font-600);
+          @include color($secondary);
+          @include font-size($font-xsm);
+          font-weight: 600;
+
+          @include breakpoint(Ipad-pro) {
+            @include font-size($font-xx-reg);
+          }
+        }
+      }
+    }
+  }
+}

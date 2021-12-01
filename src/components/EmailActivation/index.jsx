@@ -32,6 +32,7 @@ const EmailVerification = () => {
   const [isNotValidToken, setIsNotValidToken] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const history = useHistory();
   const queryData = parse(location.search);
 
   const handelCheckToken = () => {
@@ -45,8 +46,10 @@ const EmailVerification = () => {
           setIsNotValidToken(false);
           setIsValidToken(true);
         } else {
-          setIsNotValidToken(true);
-          setIsValidToken(false);
+          // setIsNotValidToken(true);
+          // setIsValidToken(false);
+          history.push("./");
+          Toaster.error(res.detail.message, "topCenter");
         }
       })
       .finally(() => {

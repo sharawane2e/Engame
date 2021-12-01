@@ -14,9 +14,10 @@ const customCarousel = () => {
         showIndicators={false}
         showStatus={false}
         width={250}
+        className="homeBanner"
       >
-        <img src={librarycards} />
         <img src={BrandTargetdnd} />
+        <img src={librarycards} />
         <img src={ExclusiveDnd} />
       </Carousel>
     </>

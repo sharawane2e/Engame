@@ -1,6 +1,15 @@
 .toolcard {
+  &__allTools {
+    display: block;
+    width: 100%;
+    padding: $padding-5 $padding-15 !important;
+    &__heading {
+      font-weight: $font-600 !important;
+      font-size: $font-xx-reg18 !important;
+      color: $black-secondary;
+    }
+  }
   padding: $padding-40 6vw;
-  // @include space(padding, top-bottom, $padding-40, $padding-40);
   background: $white;
   min-height: 68vh;
   @include breakpoint(mobileonly) {
@@ -52,6 +61,32 @@
       + .toolcard__align {
         // @include color($secondary);
         @include font-weight($font-500);
+      }
+    }
+    &__dummy {
+      &__cart_code {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        margin-top: 0px;
+        span {
+          border-radius: 5px !important;
+        }
+      }
+      &__WName {
+        width: 75%;
+        margin: auto;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        span {
+          border-radius: 5px !important;
+        }
+      }
+      &__productImg {
+        padding: 10px;
+        span {
+          border-radius: 5px !important;
+        }
       }
     }
     @include border("", $border-width, $bsolid, $black-1);
