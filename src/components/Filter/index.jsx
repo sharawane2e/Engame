@@ -20,6 +20,7 @@ import { listProducts } from "../../redux/product/product-action";
 import { CATEGORIES_LIST } from "../../config/ApiUrl";
 import ApiRequest from "../../util/ApiRequest";
 import { loadingStop } from "../../redux/loader/loader-actions";
+import HomePageBanner from "../../util/HomePageBanner";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -176,6 +177,8 @@ const Filter = () => {
   const [searchText, setSearchText] = useState("");
   const [categoriesList, setCategoriesList] = useState([""]);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const [isFilter, setIsFilter] = useState(false);
   const {
     getRootProps,
     getInputLabelProps,
@@ -192,10 +195,12 @@ const Filter = () => {
     // defaultValue: [top100Films[1]],
     multiple: true,
     options: OldCategoriesList,
-    getOptionLabel: (option) => option.title,
+    // getOptionLabel: (option) => option.title,
   });
 
-  const FilterAction = (SelectedCategoriesList, searchText) => {
+  const FilterAction = async (SelectedCategoriesList, searchText) => {
+    // debugger;
+    // debugger;
     // console.log(SelectedCategoriesList, "filter Data");
     // console.log(searchText, "Search Data");
 
@@ -207,6 +212,7 @@ const Filter = () => {
       widget_type_id:
         selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
       search_string: searchText,
+      isFilter: user.isLoggedIn ? isFilter : false,
     };
 
     dispatch(listProducts(ApiData));
@@ -214,15 +220,14 @@ const Filter = () => {
 
   const GetCategoriesList = () => {
     ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
-      
-      setCategoriesList(res?.data[0]  || []);
-      console.log(res, "Categories list");
-      console.log(categoriesList, "Categories list render");
+      setCategoriesList(res?.data[0] || []);
     });
   };
 
   const SaerchValue = (e) => {
     setSearchText(e.target.value);
+
+    user.isLoggedIn ? setIsFilter(true) : setIsFilter(false);
 
     if (e.target.value.length == 0) {
       FilterAction(value, null);
@@ -230,6 +235,8 @@ const Filter = () => {
   };
 
   const handelSearchValueFilterClick = (e) => {
+    user.isLoggedIn ? setIsFilter(true) : setIsFilter(false);
+
     e.preventDefault();
     FilterAction(value, searchText);
   };
@@ -239,121 +246,134 @@ const Filter = () => {
 
     FilterAction(value, searchText);
     // console.log(productList);
-  }, [value]);
+  }, [value, user]);
 
   return (
     <>
-      <div className="header-bg filter-tool-shadow filter--fixed">
-        <Toolbar className="filter-section">
-          <div className="flexGrow">
-            <Grid container spacing={3} className="align-item">
-              <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-                <Paper className="paperstyel filter-font-family">
-                  <span className="review-text">Review 100+ &nbsp;</span>
-                  <span className="filter-text">
-                    tools, select the best for you.
-                  </span>
-                  <div className="filter-normal-text">
-                    All the tools are well developed and tested, created by our
-                    best developers
-                  </div>
-                </Paper>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <Paper className="paperstyel grid-paper-style">
-                  {/* <img src={librarycards} /> */}
-                  <Carousel />
-                </Paper>
-              </Grid>
-            </Grid>
-          </div>
-        </Toolbar>
-        <div className="searchNFilter">
-          <Toolbar className="filter-inputsection">
-            <Grid item xs={12} sm={12}>
-              <div className="filter-inputsection__filter_search">
-                <Paper
-                  component="form"
-                  className="flexGrow filter-inputsection__form"
-                >
-                  <InputBase
-                    className="input"
-                    onChange={(e) => SaerchValue(e)}
-                  />
-                  <Divider className="divider" orientation="vertical" />
-                  <IconButton
-                    className="iconButton filter-inputsection__icon"
-                    aria-label="directions"
-                    onClick={handelSearchValueFilterClick}
-                    type="submit"
-                  >
-                    <IconButton
-                      className="iconButton search-icon"
-                      aria-label="menu"
-                    >
-                      <SearchIcon fontSize="inherit" />
-                    </IconButton>
-                  </IconButton>
-                </Paper>
-                <Paper
-                  component="form"
-                  className="flexGrow filter-inputsection__form filter-inputsection__form1"
-                >
-                  {value.length && value.length ? (
-                    <p className="filter-inputsection__form__filterOn"></p>
-                  ) : (
-                    ""
-                  )}
-
-                  <IconButton
-                    className="iconButton filter-inputsection__icon filter-inputsection__icon1"
-                    aria-label="directions"
-                  >
-                    <input
-                      {...getInputProps()}
-                      className="filter-inputsection__filterBtn"
-                    />
-                    <FilterListIcon
-                      fontSize="large"
-                      className="filter-inputsection__filterIcon"
-                    />
-                    <Root>
-                      <div {...getRootProps()}>
-                        {/* <Label {...getInputLabelProps()}>Customized hook</Label> */}
-                      </div>
-                      {groupedOptions.length > 0 ? (
-                        <Listbox
-                          {...getListboxProps()}
-                          className="filterListUl"
-                          // onClick={() => FilterAction(value)}
-                        >
-                          {groupedOptions.map((option, index) => (
-                            <li {...getOptionProps({ option, index })}>
-                              <span>{option.widget_type}</span>
-                              <CheckIcon fontSize="small" />
-                            </li>
-                          ))}
-                        </Listbox>
-                      ) : null}
-                    </Root>
-                  </IconButton>
-                </Paper>
-              </div>
-            </Grid>
+      {user.isLoggedIn ? (
+        <div className="header-bg filter-tool-shadow filter--fixed">
+          <Toolbar className="filter-section">
+            <div className="flexGrow">
+              <HomePageBanner />
+            </div>
           </Toolbar>
-          <InputWrapper
-            ref={setAnchorEl}
-            className={focused ? "focused filterInput" : "filterInput"}
-          >
-            {value.map((option, index) => (
-              <StyledTag
-                label={option.widget_type}
-                {...getTagProps({ index })}
-              />
-            ))}
-          </InputWrapper>
+          <div className="searchNFilter">
+            <Toolbar className="filter-inputsection">
+              <Grid item xs={12} sm={12}>
+                <div className="filter-inputsection__filter_search">
+                  <Paper
+                    component="form"
+                    className="flexGrow filter-inputsection__form"
+                  >
+                    <InputBase
+                      className="input"
+                      onChange={(e) => SaerchValue(e)}
+                    />
+                    <Divider className="divider" orientation="vertical" />
+                    <IconButton
+                      className="iconButton filter-inputsection__icon"
+                      aria-label="directions"
+                      onClick={handelSearchValueFilterClick}
+                      type="submit"
+                    >
+                      <IconButton
+                        className="iconButton search-icon"
+                        aria-label="menu"
+                      >
+                        <SearchIcon fontSize="inherit" />
+                      </IconButton>
+                    </IconButton>
+                  </Paper>
+                  <Paper
+                    component="form"
+                    className="flexGrow filter-inputsection__form filter-inputsection__form1"
+                  >
+                    {value.length && value.length ? (
+                      <p className="filter-inputsection__form__filterOn"></p>
+                    ) : (
+                      ""
+                    )}
+
+                    <IconButton
+                      className="iconButton filter-inputsection__icon filter-inputsection__icon1"
+                      aria-label="directions"
+                    >
+                      <input
+                        {...getInputProps()}
+                        className="filter-inputsection__filterBtn"
+                      />
+                      <FilterListIcon
+                        fontSize="large"
+                        className="filter-inputsection__filterIcon"
+                      />
+
+                      <Root>
+                        <div {...getRootProps()}>
+                          {/* <Label {...getInputLabelProps()}>Customized hook</Label> */}
+                        </div>
+                        {groupedOptions.length > 0 ? (
+                          <Listbox
+                            {...getListboxProps()}
+                            className="filterListUl"
+                            // onClick={() => FilterAction(value)}
+                          >
+                            {groupedOptions.map((option, index) => (
+                              <li {...getOptionProps({ option, index })}>
+                                <span>{option.widget_type}</span>
+                                <CheckIcon fontSize="small" />
+                              </li>
+                            ))}
+                          </Listbox>
+                        ) : null}
+                      </Root>
+                    </IconButton>
+                  </Paper>
+                </div>
+              </Grid>
+            </Toolbar>
+            <InputWrapper
+              ref={setAnchorEl}
+              className={focused ? "focused filterInput" : "filterInput"}
+            >
+              {value.map((option, index) => (
+                <StyledTag
+                  label={option.widget_type}
+                  {...getTagProps({ index })}
+                />
+              ))}
+            </InputWrapper>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="header-bg filter-tool-shadow filter--fixed">
+          <Toolbar className="filter-section nonFilter-section">
+            <div className="flexGrow">
+              <Grid container spacing={3} className="align-item">
+                <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
+                  <Paper className="paperstyel filter-font-family">
+                    <span className="review-text">Review 100+ &nbsp;</span>
+                    <span className="filter-text">
+                      tools, select the
+                      <br />
+                      best for you.
+                    </span>
+                    <div className="filter-normal-text">
+                      All the tools are well developed and tested, created by
+                      our best developers
+                    </div>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={7} md={5} lg={5} xl={5}>
+                  <Paper className="paperstyel grid-paper-style">
+                    {/* <img src={librarycards} /> */}
+                    <Carousel />
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </Toolbar>
+        </div>
+      )}
     </>
   );
 };
@@ -365,7 +385,7 @@ const OldCategoriesList = [
   { widget_type: "Maps", id: 4 },
   { widget_type: "Ranking", id: 5 },
   { widget_type: "collection", id: 6 },
-  { widget_type: "Numeric", id:7},
+  { widget_type: "Numeric", id: 7 },
 ];
 
 export default Filter;

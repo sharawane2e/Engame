@@ -12,15 +12,27 @@ export const listProducts = (filterData) => (dispatch) => {
     type: PRODUCT_LIST_REQUEST,
   });
 
-  ApiRequest.request(FILTER_WIDGET_LIST, "POST", filterData)
-    .then((res) => {
-      if (res.status) {
-        dispatch({ type: PRODUCT_LIST_SUCCESS, payload: res.data });
-      }
-    })
-    .catch((error) => {
-      dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
-    });
+  if (filterData?.isFilter) {
+    ApiRequest.request(FILTER_WIDGET_LIST, "POST", filterData)
+      .then((res) => {
+        if (res.status) {
+          dispatch({ type: PRODUCT_LIST_SUCCESS, payload: res.data });
+        }
+      })
+      .catch((error) => {
+        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+      });
+  } else {
+    ApiRequest.request(WIDGET_LIST, "GET", filterData)
+      .then((res) => {
+        if (res.status) {
+          dispatch({ type: PRODUCT_LIST_SUCCESS, payload: res.data });
+        }
+      })
+      .catch((error) => {
+        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+      });
+  }
 
   // try {
   //   const { data } = await axios.get(BASE_URL + WIDGET_LIST);

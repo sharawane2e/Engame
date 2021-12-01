@@ -187,7 +187,6 @@ const Purchased = (props) => {
         .finally(() => {
           PurchaseList();
           dispatch(getItemFromCart());
-          localStorage.removeItem("isNewPayment");
         });
     } else {
       PurchaseList();
@@ -664,18 +663,24 @@ const Purchased = (props) => {
                                   </div>
                                 </Typography>
                               </Grid>
-                              <Grid item xs={12} sm={6} className="mobile__only">
-                                  <Typography
-                                    component="div"
-                                    className="cursor--pointer purchased-tool__doenloadP"
-                                  >
-                                        DOWNLOAD
-                                  </Typography>
+                              <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                className="mobile__only"
+                              >
+                                <Typography
+                                  component="div"
+                                  className="cursor--pointer purchased-tool__doenloadP"
+                                >
+                                  DOWNLOAD
+                                </Typography>
                               </Grid>
 
                               <Grid
                                 item
-                                xs={12} sm={6}
+                                xs={12}
+                                sm={6}
                                 className="purchased-tool__expiry-date"
                               >
                                 <div className="desktop__only">

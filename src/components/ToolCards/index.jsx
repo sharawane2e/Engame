@@ -34,6 +34,10 @@ import NoresultImg from "../../assets/images/not-found.svg";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/oops.gif";
 
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import HomePageLoader from "./ToolCardLoader";
+
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
   const [isLoginOpen, setLoginIsOpen] = useState(false);
@@ -71,15 +75,14 @@ const ToolCards = () => {
     }
   }, [user]);
 
-  const keshav = true;
-
   return (
     <>
       <div className="toolcard">
         <Toolbar className="toolcard__toolbar">
           {loading ? (
             <>
-              <LoadingBox />
+              {/* <LoadingBox /> */}
+              <HomePageLoader />
             </>
           ) : error ? (
             <EmptyPage
@@ -97,8 +100,14 @@ const ToolCards = () => {
               ) : (
                 ""
               )}
-              {user
-                ? products.map((tooldata, index) => {
+              {user ? (
+                <>
+                  <div className="toolcard__allTools">
+                    <Typography className="toolcard__allTools__heading">
+                      All Tools
+                    </Typography>
+                  </div>
+                  {products.map((tooldata, index) => {
                     return (
                       <Grid
                         item
@@ -112,7 +121,7 @@ const ToolCards = () => {
                       >
                         <Paper className="toolcard__imageblck">
                           <div className="toolcard__image">
-                            <img src={BASE_URL + "/media/" + tooldata.imgUrl} />
+                            <img src={BASE_URL + tooldata.imgUrl} />
                             {/* <span>{tooldata.imgUrl}</span> */}
                             <div className="toolcard__preview">
                               <CustomButton
@@ -192,8 +201,16 @@ const ToolCards = () => {
                         </div>
                       </Grid>
                     );
-                  })
-                : products.map((tooldata, index) => {
+                  })}
+                </>
+              ) : (
+                <>
+                  <div className="toolcard__allTools">
+                    <Typography className="toolcard__allTools__heading">
+                      All Tools
+                    </Typography>
+                  </div>
+                  {products.map((tooldata, index) => {
                     return (
                       <Grid
                         item
@@ -207,7 +224,7 @@ const ToolCards = () => {
                       >
                         <Paper className="toolcard__imageblck">
                           <div className="toolcard__image">
-                            <img src={BASE_URL + "/media/" + tooldata.imgUrl} />
+                            <img src={BASE_URL + tooldata.imgUrl} />
                             {/* <span>{tooldata.imgUrl}</span> */}
                             <div className="toolcard__preview">
                               <CustomButton
@@ -297,6 +314,8 @@ const ToolCards = () => {
                       </Grid>
                     );
                   })}
+                </>
+              )}
             </Grid>
           )}
 

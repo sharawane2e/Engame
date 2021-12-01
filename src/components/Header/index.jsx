@@ -49,6 +49,7 @@ import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import UserVerification from "../userVerify";
+import { listProducts } from "../../redux/product/product-action";
 
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
@@ -87,6 +88,7 @@ const Header = ({ props }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
   const user = useSelector((state) => state.user);
+  const [isPayment, setIsPayment] = useState();
 
   useEffect(() => {
     if (user.isLoggedIn) {
@@ -120,7 +122,13 @@ const Header = ({ props }) => {
     localStorage.removeItem("verificationEmail");
   }, []);
 
+  const cartCountManagement = async () => {
+    setIsPayment(localStorage.getItem("isPayment") ? true : false);
+    localStorage.removeItem("isPayment");
+  };
+
   useEffect(() => {
+    cartCountManagement();
     const timer = setTimeout(() => {
       localStorage.removeItem("auth");
       window.location.reload();
@@ -137,11 +145,13 @@ const Header = ({ props }) => {
         localStorage.removeItem("auth");
         history.push("/");
         Toaster.sucess(res.detail, "topCenter");
+        ApiRequest.setAuthToken();
       })
       .catch((error) => {
         // console.log(error);
       })
       .finally(() => {
+        // window.location.reload();
         dispatch(loadingStop());
       });
     handleMenuClose();
@@ -273,11 +283,7 @@ const Header = ({ props }) => {
 
                       <Badge
                         badgeContent={
-                          localStorage.getItem("isPayment")
-                            ? 0
-                            : carts.length
-                            ? carts.length
-                            : 0
+                          isPayment ? 0 : carts.length ? carts.length : 0
                         }
                         color="secondary"
                       >
