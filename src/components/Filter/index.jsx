@@ -195,27 +195,29 @@ const Filter = () => {
     // defaultValue: [top100Films[1]],
     multiple: true,
     options: OldCategoriesList,
-    // getOptionLabel: (option) => option.title,
+    getOptionLabel: (option) => option.title,
   });
 
   const FilterAction = async (SelectedCategoriesList, searchText) => {
-    // debugger;
-    // debugger;
-    // console.log(SelectedCategoriesList, "filter Data");
-    // console.log(searchText, "Search Data");
+    console.log("Selected data", SelectedCategoriesList);
+    console.log("Selected val", value);
 
     let selectedCategoriesId = SelectedCategoriesList.map((item) => {
       return item.id;
     });
-    // console.log(selectedCategoriesId, "Selected Categories list");
+
     let ApiData = {
       widget_type_id:
         selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
       search_string: searchText,
-      isFilter: user.isLoggedIn ? isFilter : false,
+      isFilter: isFilter,
     };
 
-    dispatch(listProducts(ApiData));
+    let getWidgetList = {
+      isFilter: isFilter,
+    };
+
+    dispatch(listProducts(isFilter ? ApiData : getWidgetList));
   };
 
   const GetCategoriesList = () => {
@@ -226,8 +228,7 @@ const Filter = () => {
 
   const SaerchValue = (e) => {
     setSearchText(e.target.value);
-
-    user.isLoggedIn ? setIsFilter(true) : setIsFilter(false);
+    setIsFilter(true);
 
     if (e.target.value.length == 0) {
       FilterAction(value, null);
@@ -235,18 +236,24 @@ const Filter = () => {
   };
 
   const handelSearchValueFilterClick = (e) => {
-    user.isLoggedIn ? setIsFilter(true) : setIsFilter(false);
+    setIsFilter(true);
 
     e.preventDefault();
     FilterAction(value, searchText);
   };
 
+  const handelFilterClick = () => {
+    setIsFilter(true);
+  };
+
   useEffect(() => {
     GetCategoriesList();
-
     FilterAction(value, searchText);
-    // console.log(productList);
   }, [value, user]);
+
+  useEffect(() => {
+    setIsFilter(false);
+  }, [user]);
 
   return (
     <>
@@ -297,6 +304,7 @@ const Filter = () => {
                     <IconButton
                       className="iconButton filter-inputsection__icon filter-inputsection__icon1"
                       aria-label="directions"
+                      onClick={() => handelFilterClick()}
                     >
                       <input
                         {...getInputProps()}
@@ -315,7 +323,6 @@ const Filter = () => {
                           <Listbox
                             {...getListboxProps()}
                             className="filterListUl"
-                            // onClick={() => FilterAction(value)}
                           >
                             {groupedOptions.map((option, index) => (
                               <li {...getOptionProps({ option, index })}>

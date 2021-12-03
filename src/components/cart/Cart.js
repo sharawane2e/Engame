@@ -36,6 +36,7 @@ import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import BlankSection from "../emptyPage/blankSection";
+import CartLoader from "./cartLoader";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -47,11 +48,11 @@ const Cart = () => {
 
   useEffect(async () => {
     // debugger;
-    dispatch(loadingStart());
+    // dispatch(loadingStart());
     dispatch(
       getItemFromCart(() => {
         setIsPageRendring(false);
-        dispatch(loadingStop());
+        // dispatch(loadingStop());
       })
     );
   }, []);
@@ -99,7 +100,7 @@ const Cart = () => {
           </Container>
         </div>
         {isPageRendring ? (
-          <BlankSection height="100vh" />
+          <CartLoader />
         ) : !isPageRendring && cart && cart.length ? (
           <div className="shoping-cart shopping-cart-data">
             <Container
@@ -123,6 +124,7 @@ const Cart = () => {
                   Shopping Cart
                 </Grid>
               </Grid>
+
               <Grid container spacing={3}>
                 <Grid item xl={9} lg={9} md={12} sm={12} xs={12}>
                   {cart.map((item, index) => {

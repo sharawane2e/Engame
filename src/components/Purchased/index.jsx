@@ -51,6 +51,7 @@ import NoSearchFound from "../NoSearchFound";
 import NoresultImg from "../../assets/images/not-found.svg";
 import { getItemFromCart } from "../../redux/cart/action";
 import BlankSection from "../emptyPage/blankSection";
+import PurchasedLoader from "./purchaseLoader";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -87,7 +88,7 @@ const Purchased = (props) => {
   var curentUpdatePrice = localStorage.getItem("valuePrice");
 
   useEffect(() => {
-    dispatch(loadingStart());
+    // dispatch(loadingStart());
     paymentSuccess();
   }, [token]);
 
@@ -116,7 +117,7 @@ const Purchased = (props) => {
         if (!res?.status) {
           Toaster.error(res.detail.message, "topCenter");
         } else {
-          dispatch(loadingStop());
+          // dispatch(loadingStop());
           Toaster.sucess(res.details.message, "topCenter");
 
           const convertTOJson = () => {
@@ -147,7 +148,7 @@ const Purchased = (props) => {
   };
 
   const paymentSuccess = async () => {
-    dispatch(loadingStart());
+    // dispatch(loadingStart());
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id")
@@ -764,7 +765,7 @@ const Purchased = (props) => {
             buttonName="Continue Shoping"
           />
         ) : (
-          <BlankSection height="100vh" />
+          <PurchasedLoader />
         )}
         {/*Renew Subscription*/}
         <CustomPopup

@@ -111,7 +111,8 @@
     @include space(padding, top-bottom, $padding-20, $padding-20);
     @include space(padding, left-right, $padding-30, $padding-30);
     display: flex;
-    font-family: map-get($map: $font-family, $key: "font-barlowbold");
+    font-family: map-get($map: $font-family, $key: "font-barlowregular");
+    font-weight: 600;
   }
   #{&}__text {
     display: flex;

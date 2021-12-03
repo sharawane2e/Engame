@@ -1,18 +1,19 @@
 export const ErrorMessages = {
-  EMAIL_INVALID: "Email is invalid.",
-  EMAIL_NOT_ACCEPT: "Only business email are allowed",
-  EMAIL_REQUIRED: "Email is required.",
-  PASSWORD_REQUIRED: "Password is required.",
+  EMAIL_INVALID: "This email is invalid. Please try again.",
+  EMAIL_NOT_ACCEPT: "Please use a business email address.",
+  EMAIL_REQUIRED: "Please enter your email address.",
+  PASSWORD_REQUIRED: "Password is required. Please try again.",
   PASSWORD_PATTERN:
-    "Password must contain atleast one capital letter and special characters",
-  PASSWORD_MATCH: "Password did not match.",
+    "Please create a password of at least 8 characters including at least one capital letter and one special character.",
+  PASSWORD_MATCH: "Passwords do not match. Please try again.",
   PASSWORD_MIN:
-    "This password is too short. It must contain at least 8 characters.",
+    "Passwords must contain at least 8 characters. Please try again.",
   PASSWORD_CHANGE_SUCESSFULLY:
     "Your Password has been changed successful! Please login",
   PASSWORD_CANNOT_CHANGE: "something went wrong please try again",
-  NAME_REQURIED: "Name is required.",
-  NAME_PATTERN: "Number and special characters are not allowed",
+  NAME_REQURIED: "Please enter your name.",
+  NAME_PATTERN:
+    "Numbers and special characters are not allowed. Please try again.",
   loginAlert: "Please login before adding to cart",
   EmbededAlert: "Please login before to generate embeded code",
 

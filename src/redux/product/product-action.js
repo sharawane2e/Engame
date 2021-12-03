@@ -23,7 +23,7 @@ export const listProducts = (filterData) => (dispatch) => {
         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
       });
   } else {
-    ApiRequest.request(WIDGET_LIST, "GET", filterData)
+    ApiRequest.request(WIDGET_LIST, "GET")
       .then((res) => {
         if (res.status) {
           dispatch({ type: PRODUCT_LIST_SUCCESS, payload: res.data });

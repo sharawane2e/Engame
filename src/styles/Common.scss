@@ -172,7 +172,7 @@ a {
     ol {
       .MuiBreadcrumbs-separator {
         @include color($black-secondary);
-        font-family: map-get($map: $font-family, $key: "font-barlowbold");
+        font-family: map-get($map: $font-family, $key: "font-barlowregular");
         @include font-weight($font-700);
         @include font-size($font-xl-reg);
       }
@@ -232,7 +232,7 @@ a {
 
 .sticky-card-position {
   position: sticky;
-  top: 175px;
+  top: 100px;
   height: 100%;
 }
 .sticky-position {
@@ -596,4 +596,8 @@ select {
       }
     }
   }
+}
+
+.MuiSkeleton-rectangular {
+  border-radius: 5px !important;
 }

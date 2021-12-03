@@ -11,14 +11,8 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
-import LoadingBox from "../FullPageLoader/LoadingBox";
-import MessageBox from "../FullPageLoader/MessageBox";
-// import { listProducts } from "../../redux/product/product-action";
 import { BASE_URL } from "../../config/ApiUrl";
-// import Tooltip from "@material-ui/core/Tooltip";
-// import { logOutUser } from "../../redux/user/user-action";
 import { useHistory } from "react-router-dom";
-// import { loadingStop } from "../../redux/loader/loader-actions";
 import Login from "../Login";
 import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
@@ -26,16 +20,10 @@ import Typography from "@material-ui/core/Typography";
 import { ErrorMessages } from "../../constants/Messages";
 import ToolInfo from "../ToolInfo";
 import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
-// import ApiRequest from "../../util/ApiRequest";
-// import { WIDGET_LIST } from "../../config/ApiUrl";
-// import { ConstructionOutlined } from "@mui/icons-material";
 import NoSearchFound from "../NoSearchFound";
 import NoresultImg from "../../assets/images/not-found.svg";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/oops.gif";
-
-import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
 import HomePageLoader from "./ToolCardLoader";
 
 const ToolCards = () => {
@@ -48,11 +36,8 @@ const ToolCards = () => {
   const [isSubscription, setSubscriptionPopup] = useState(false);
   const productList = useSelector((state) => state.productList);
   const user = useSelector((state) => state.user.isLoggedIn);
-  const token = useSelector((state) => state.user);
   const { loading, error, products } = productList;
-  // const [productShow, setProductShow] = useState(products);
   const [TypeClick, setTypeClick] = useState("");
-
   const [isInfoPopup, setIsInfoPopup] = useState(false);
 
   const dispatch = useDispatch();
@@ -92,6 +77,14 @@ const ToolCards = () => {
             />
           ) : (
             <Grid container spacing={4}>
+              {products.length > 0 && (
+                <div className="toolcard__allTools">
+                  <Typography className="toolcard__allTools__heading">
+                    All Tools
+                  </Typography>
+                </div>
+              )}
+
               {products.length == 0 ? (
                 <NoSearchFound
                   img={NoresultImg}
@@ -100,13 +93,9 @@ const ToolCards = () => {
               ) : (
                 ""
               )}
+
               {user ? (
                 <>
-                  <div className="toolcard__allTools">
-                    <Typography className="toolcard__allTools__heading">
-                      All Tools
-                    </Typography>
-                  </div>
                   {products.map((tooldata, index) => {
                     return (
                       <Grid
@@ -122,7 +111,6 @@ const ToolCards = () => {
                         <Paper className="toolcard__imageblck">
                           <div className="toolcard__image">
                             <img src={BASE_URL + tooldata.imgUrl} />
-                            {/* <span>{tooldata.imgUrl}</span> */}
                             <div className="toolcard__preview">
                               <CustomButton
                                 className="toolcard__perview-button"
@@ -205,11 +193,6 @@ const ToolCards = () => {
                 </>
               ) : (
                 <>
-                  <div className="toolcard__allTools">
-                    <Typography className="toolcard__allTools__heading">
-                      All Tools
-                    </Typography>
-                  </div>
                   {products.map((tooldata, index) => {
                     return (
                       <Grid

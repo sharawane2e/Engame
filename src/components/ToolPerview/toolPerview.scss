@@ -1,12 +1,13 @@
 .curent-tool-name {
   padding: 20px 0px 20px 0px;
   display: flex;
-  font-family: "barlowbold";
+  font-family: "barlowregular";
+  font-weight: 600;
   position: absolute;
   top: 3px;
   width: 90%;
   @include font-size($font-xx-reg18);
-  @include breakpoint (mobileonly){
+  @include breakpoint(mobileonly) {
     padding: 10px 0px 20px 0px;
     width: 50%;
   }
@@ -18,7 +19,7 @@
   max-height: 75vh;
   height: 75vh;
   overflow-y: scroll;
-  @include breakpoint(mobileonly){
+  @include breakpoint(mobileonly) {
     margin-top: 40px;
     min-height: 40vh;
     max-height: 75vh;
