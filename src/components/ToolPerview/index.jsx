@@ -43,7 +43,6 @@
 // export default ToolDemo;
 
 import { React } from "react";
-//import Scrollbars from "react-custom-scrollbars";
 
 const ToolDemo = (props) => {
   const { tool } = props;

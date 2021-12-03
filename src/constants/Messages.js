@@ -9,7 +9,7 @@ export const ErrorMessages = {
   PASSWORD_MIN:
     "Passwords must contain at least 8 characters. Please try again.",
   PASSWORD_CHANGE_SUCESSFULLY:
-    "Your Password has been changed successful! Please login",
+    "Your password has been changed successfully! You may now login.",
   PASSWORD_CANNOT_CHANGE: "something went wrong please try again",
   NAME_REQURIED: "Please enter your name.",
   NAME_PATTERN:
@@ -21,11 +21,13 @@ export const ErrorMessages = {
 
   NetworkErrorMessage: "Oops! Something went wrong.",
 
-  NoSearchResultMessage: "No search result found! Please search something else",
+  NoSearchResultMessage: "No results found. Please try another search.",
 
-  Maxium_days_addToCart: "Maximum 999 day's are allowed",
+  Maxium_days_addToCart:
+    "Widgets are only valid for fewer than 1000 days. Please try a smaller number of days.",
 
-  Maxium_hits_addToCart: "Maximum 100000 hits are allowed",
+  Maxium_hits_addToCart:
+    "Widgets are only valid for fewer than 100000 hits. Please try a smaller number of hits or email us for help at support-engame@e2eresearch.com..",
 
   MINIMUM_COUNT: "Minimum count should be at least 1",
 
@@ -35,4 +37,6 @@ export const ErrorMessages = {
   SOMETHING_WENT_WRONG: "Somthing went wrong! Please try again",
 
   ToolPreviewBeforeLogin: "Please login before view the tool instruction",
+
+  CartCount: "Your cart is empty, Need to shop",
 };

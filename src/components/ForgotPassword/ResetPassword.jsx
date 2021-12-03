@@ -72,7 +72,8 @@ const Forgot = () => {
           setIsToken(false);
         } else {
           setIsPasswordResetSucessfully(false);
-          setIsToken(false);
+          setIsToken(true);
+          Toaster.error(res.detail.message, "top-center");
         }
       });
     }

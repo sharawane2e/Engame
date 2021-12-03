@@ -37,6 +37,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import BlankSection from "../emptyPage/blankSection";
 import CartLoader from "./cartLoader";
+import { ErrorMessages } from "../../constants/Messages";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -328,7 +329,7 @@ const Cart = () => {
           </div>
         ) : (
           <EmptyPage
-            heading="Your cart is empty, Need to shop"
+            heading={ErrorMessages.cartEmpty}
             imgUrl={emptyImg}
             buttonName="Continue Shoping"
           />

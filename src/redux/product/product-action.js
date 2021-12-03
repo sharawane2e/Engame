@@ -43,11 +43,4 @@ export const listProducts = (filterData) => (dispatch) => {
     .catch((error) => {
       dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
     });
-
-  // try {
-  //   const { data } = await axios.get(BASE_URL + WIDGET_LIST);
-  //   dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-  // } catch (error) {
-  //   dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
-  // }
 };
