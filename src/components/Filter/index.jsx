@@ -217,7 +217,7 @@ const Filter = () => {
       isFilter: isFilter,
     };
 
-    dispatch(listProducts(isFilter ? ApiData : getWidgetList));
+    dispatch(listProducts(isFilter ? ApiData : ApiData));
   };
 
   const GetCategoriesList = () => {
