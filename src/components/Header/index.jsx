@@ -141,7 +141,7 @@ const Header = ({ props }) => {
     // alert("logout");
     dispatch(loadingStart());
     ApiRequest.request(LOGOUT, "POST", "")
-      .then((res) => {
+      .then(async (res) => {
         dispatch(logOutUser());
         localStorage.removeItem("auth");
         history.push("/");

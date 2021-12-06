@@ -25,6 +25,7 @@ import NoresultImg from "../../assets/images/not-found.svg";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/oops.gif";
 import HomePageLoader from "./ToolCardLoader";
+import { Tooltip } from "@mui/material";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -121,28 +122,20 @@ const ToolCards = () => {
                               </CustomButton>
                             </div>
                             <div className="toolcard__tooltip">
-                              {user ? (
+                              <Tooltip title="Embeded Code" placement="top">
                                 <HelpCenterRoundedIcon
                                   className="toolcard__tooltip__icon"
                                   onClick={() =>
                                     setIsInfoPopup(tooldata.howtowork)
                                   }
                                 />
-                              ) : (
-                                <HelpCenterRoundedIcon
-                                  className="toolcard__tooltip__icon"
-                                  onClick={() => {
-                                    setisLoginrequire(true);
-                                    setTypeClick(ErrorMessages.loginAlert);
-                                  }}
-                                />
-                              )}
+                              </Tooltip>
                             </div>
                           </div>
 
                           <div className="toolcard__align toolcard__toolicons">
                             <div className="toolcard__items toolcard__download">
-                              {user ? (
+                              <Tooltip title="Embeded Code" placement="top">
                                 <div
                                   className="toolcard__sub-icons"
                                   onClick={() => {
@@ -152,22 +145,10 @@ const ToolCards = () => {
                                 >
                                   <SystemUpdateAltIcon />
                                 </div>
-                              ) : (
-                                <div
-                                  className="toolcard__sub-icons"
-                                  onClick={() => {
-                                    setisLoginrequire(true);
-                                    setTypeClick(ErrorMessages.EmbededAlert);
-                                  }}
-                                >
-                                  {/* <Tooltip title="Embeded Code" placement="top"> */}
-                                  <SystemUpdateAltIcon />
-                                  {/* </Tooltip> */}
-                                </div>
-                              )}
+                              </Tooltip>
                             </div>
                             <div className="toolcard__items toolcard__shopping">
-                              {user ? (
+                              <Tooltip title="Add to cart" placement="top">
                                 <div
                                   className="toolcard__sub-icons"
                                   onClick={(id) => {
@@ -177,7 +158,7 @@ const ToolCards = () => {
                                 >
                                   <ShoppingCartIcon />
                                 </div>
-                              ) : null}
+                              </Tooltip>
                             </div>
                           </div>
                         </Paper>
@@ -185,9 +166,6 @@ const ToolCards = () => {
                           <div className="toolcard__aligninr1 toolcard__font-family">
                             {tooldata.toolname}
                           </div>
-                          {/* <div className="toolcard__aligninr toolcard__font-family">
-                        ${tooldata.price}
-                      </div> */}
                         </div>
                       </Grid>
                     );
@@ -210,7 +188,6 @@ const ToolCards = () => {
                         <Paper className="toolcard__imageblck">
                           <div className="toolcard__image">
                             <img src={BASE_URL + tooldata.imgUrl} />
-                            {/* <span>{tooldata.imgUrl}</span> */}
                             <div className="toolcard__preview">
                               <CustomButton
                                 className="toolcard__perview-button"
@@ -221,12 +198,7 @@ const ToolCards = () => {
                               </CustomButton>
                             </div>
                             <div className="toolcard__tooltip">
-                              {user ? (
-                                <HelpCenterRoundedIcon
-                                  className="toolcard__tooltip__icon"
-                                  onClick={() => setIsInfoPopup(tooldata)}
-                                />
-                              ) : (
+                              <Tooltip title="How tool work" placement="top">
                                 <HelpCenterRoundedIcon
                                   className="toolcard__tooltip__icon"
                                   onClick={() => {
@@ -236,23 +208,13 @@ const ToolCards = () => {
                                     );
                                   }}
                                 />
-                              )}
+                              </Tooltip>
                             </div>
                           </div>
 
                           <div className="toolcard__align toolcard__toolicons">
                             <div className="toolcard__items toolcard__download">
-                              {user ? (
-                                <div
-                                  className="toolcard__sub-icons"
-                                  onClick={() => {
-                                    setPopup(true);
-                                    setPopupId(tooldata.id);
-                                  }}
-                                >
-                                  <SystemUpdateAltIcon />
-                                </div>
-                              ) : (
+                              <Tooltip title="Embeded Code" placement="top">
                                 <div
                                   className="toolcard__sub-icons"
                                   onClick={() => {
@@ -260,19 +222,12 @@ const ToolCards = () => {
                                     setTypeClick(ErrorMessages.EmbededAlert);
                                   }}
                                 >
-                                  {/* <Tooltip title="Embeded Code" placement="top"> */}
                                   <SystemUpdateAltIcon />
-                                  {/* </Tooltip> */}
                                 </div>
-                              )}
+                              </Tooltip>
                             </div>
                             <div className="toolcard__items toolcard__shopping">
-                              {user ? (
-                                <div className="toolcard__sub-icons">
-                                  {/* <ShoppingCartIcon  onClick= {(id) => {setSubscriptionPopup(true); setPopupId(tooldata.id)}}/>  */}
-                                  <ShoppingCartIcon />
-                                </div>
-                              ) : (
+                              <Tooltip title="Add To Cart" placement="top">
                                 <div
                                   className="toolcard__sub-icons"
                                   onClick={() => {
@@ -280,11 +235,9 @@ const ToolCards = () => {
                                     setTypeClick(ErrorMessages.loginAlert);
                                   }}
                                 >
-                                  {/* <Tooltip title="Add To Cart" placement="top"> */}
                                   <ShoppingCartIcon />
-                                  {/* </Tooltip> */}
                                 </div>
-                              )}
+                              </Tooltip>
                             </div>
                           </div>
                         </Paper>
@@ -292,9 +245,6 @@ const ToolCards = () => {
                           <div className="toolcard__aligninr1 toolcard__font-family">
                             {tooldata.toolname}
                           </div>
-                          {/* <div className="toolcard__aligninr toolcard__font-family">
-                          ${tooldata.price}
-                        </div> */}
                         </div>
                       </Grid>
                     );

@@ -210,14 +210,16 @@ const Filter = () => {
       widget_type_id:
         selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
       search_string: searchText,
-      isFilter: isFilter,
+      isFilter: true,
     };
 
     let getWidgetList = {
-      isFilter: isFilter,
+      isFilter: false,
     };
 
-    dispatch(listProducts(isFilter ? ApiData : getWidgetList));
+    dispatch(
+      listProducts(isFilter && user.isLoggedIn ? ApiData : getWidgetList)
+    );
     // alert("Categories List render");
   };
 

@@ -525,11 +525,11 @@ const Purchased = (props) => {
                               </Grid>
                             </Grid>
                             <Grid item xs={2} className="grid-flex">
-                              <Typography
-                                component="div"
-                                className=" border-radius "
-                              >
-                                <Tooltip title="Play / Pause" placement="top">
+                              <Tooltip title="Play / Pause" placement="top">
+                                <Typography
+                                  component="div"
+                                  className=" border-radius "
+                                >
                                   <SwitchUnstyled
                                     checked={item.is_paused ? false : true}
                                     onClick={() => {
@@ -537,8 +537,8 @@ const Purchased = (props) => {
                                       setPlayPauseValue(item);
                                     }}
                                   />
-                                </Tooltip>
-                              </Typography>
+                                </Typography>
+                              </Tooltip>
                               <Tooltip title="Extend validity" placement="top">
                                 <Typography
                                   component="div"
@@ -698,52 +698,49 @@ const Purchased = (props) => {
                                   </Typography>
                                 </div>
                                 <div className="purchased-tool__embeded-Fdiv">
-                                  <Typography
-                                    component="div"
-                                    className="purchased-tool__embeded-icon border-radius"
+                                  <Tooltip
+                                    title="Download Invoice"
+                                    placement="top"
                                   >
-                                    <Tooltip
-                                      title="Download Invoice"
-                                      placement="top"
+                                    <Typography
+                                      component="div"
+                                      className="purchased-tool__embeded-icon border-radius"
                                     >
                                       <DownloadInvoiceImg />
-                                    </Tooltip>
-                                  </Typography>
+                                    </Typography>
+                                  </Tooltip>
                                 </div>
                                 <div className="purchased-tool__embeded-div">
-                                  <Typography
-                                    component="div"
-                                    className="purchased-tool__embeded-icon border-radius"
-                                    onClick={() =>
-                                      downloadConsumptionStatement(item.id)
-                                    }
+                                  <Tooltip
+                                    title="Consumption statement"
+                                    placement="top"
                                   >
-                                    <Tooltip
-                                      title="Consumption statement"
-                                      placement="top"
+                                    <Typography
+                                      component="div"
+                                      className="purchased-tool__embeded-icon border-radius"
+                                      onClick={() =>
+                                        downloadConsumptionStatement(item.id)
+                                      }
                                     >
                                       <ConsumptionReportImg />
-                                    </Tooltip>
-                                  </Typography>
+                                    </Typography>
+                                  </Tooltip>
                                 </div>
                                 <div className="purchased-tool__embeded-div">
-                                  <Typography
-                                    component="div"
-                                    className="purchased-tool__embeded-icon border-radius"
-                                    onClick={() =>
-                                      downloadfile(
-                                        item.widget.name,
-                                        item.widget.widget_embed_code
-                                      )
-                                    }
-                                  >
-                                    <Tooltip
-                                      title="Embeded Code"
-                                      placement="top"
+                                  <Tooltip title="Embeded Code" placement="top">
+                                    <Typography
+                                      component="div"
+                                      className="purchased-tool__embeded-icon border-radius"
+                                      onClick={() =>
+                                        downloadfile(
+                                          item.widget.name,
+                                          item.widget.widget_embed_code
+                                        )
+                                      }
                                     >
                                       <EmbdedCodeImg />
-                                    </Tooltip>
-                                  </Typography>
+                                    </Typography>
+                                  </Tooltip>
                                 </div>
                               </Grid>
                             </Grid>
@@ -794,8 +791,8 @@ const Purchased = (props) => {
               <Typography component="p" className="sucess_message">
                 {`Your are ${
                   PlayPauseValue.is_paused
-                    ? "Once you play subscription, it will cost 1 day for the minimum. Are you sure you want to start playing it?"
-                    : "Integrated widget will stop running once paused. Are you sure you want to stop playing it?"
+                    ? ErrorMessages.onPlay
+                    : ErrorMessages.onPause
                 }`}
               </Typography>
               {/* <p className="sucess_message"></p> */}

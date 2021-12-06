@@ -22,8 +22,6 @@ const ToolInfo = (props) => {
     setGetHowToWorkData(props.howItWorkData);
   }, []);
 
-  console.log("how it works data after popup", props.howItWorkData.content);
-
   return (
     <div className="cardInfo custom-scroll">
       {props?.howItWorkData?.content?.length > 0 ? (
@@ -57,73 +55,6 @@ const ToolInfo = (props) => {
           heading={ErrorMessages.howToWorkNotFound}
         />
       )}
-      {/* <Accordion expanded={expanded === 1} onChange={handleChange(1)}>
-        <AccordionSummary
-          expandIcon={expanded === 1 ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            What can you test?
-          </Typography>
-        </AccordionSummary>
-
-        <AccordionDetails>
-          <Typography>TBD</Typography>
-        </AccordionDetails>
-      </Accordion> */}
-
-      {/* <Accordion
-        expanded={expanded === "panel2"}
-        onChange={handleChange("panel2")}
-      >
-        <AccordionSummary
-          expandIcon={expanded === "panel2" ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            Customize
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>TBD</Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-      >
-        <AccordionSummary
-          expandIcon={expanded === "panel3" ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>Output</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>TBD</Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={expanded === "panel4"}
-        onChange={handleChange("panel4")}
-      >
-        <AccordionSummary
-          expandIcon={expanded === "panel4" ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            Step for implementation
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>TBD</Typography>
-        </AccordionDetails>
-      </Accordion> */}
     </div>
   );
 };

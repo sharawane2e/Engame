@@ -6,6 +6,7 @@ import {
 import axios from "axios";
 import { BASE_URL, FILTER_WIDGET_LIST, WIDGET_LIST } from "../../config/ApiUrl";
 import ApiRequest from "../../util/ApiRequest";
+import { useDispatch, useSelector } from "react-redux";
 
 export const listProducts = (filterData) => (dispatch) => {
   dispatch({
