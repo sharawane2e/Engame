@@ -138,6 +138,7 @@ const Header = ({ props }) => {
   }, []);
 
   const handleLogout = () => {
+    // alert("logout");
     dispatch(loadingStart());
     ApiRequest.request(LOGOUT, "POST", "")
       .then((res) => {

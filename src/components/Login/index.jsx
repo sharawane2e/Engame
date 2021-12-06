@@ -62,34 +62,34 @@ class Login extends Component {
       password,
     });
     let ApiData = {
-      widget_type_id:"",
+      widget_type_id: "",
       search_string: "",
     };
 
-
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
-      ApiRequest.request(LOGIN, "POST", user).then((res) => {
-        if (res.status && res.data[0].is_verified) {
-          this.props.dispatch(loginUser(res.data[0]));
-        } else if (
-          !res.status &&
-          !res.data[0]?.is_verified &&
-          res.data.length > 0
-        ) {
-          this.setState({
-            isVerifyPopup: true,
-            data: false,
-          });
-          localStorage.setItem("verificationEmail", email);
-        } else {
-          Toaster.error(res.detail.message, "topCenter");
-        }
-        this.props.dispatch(loadingStop());
-      })
-      .finally(()=>{
-        this.props.dispatch(listProducts(ApiData));
-      })
+      ApiRequest.request(LOGIN, "POST", user)
+        .then((res) => {
+          if (res.status && res.data[0].is_verified) {
+            this.props.dispatch(loginUser(res.data[0]));
+          } else if (
+            !res.status &&
+            !res.data[0]?.is_verified &&
+            res.data.length > 0
+          ) {
+            this.setState({
+              isVerifyPopup: true,
+              data: false,
+            });
+            localStorage.setItem("verificationEmail", email);
+          } else {
+            Toaster.error(res.detail.message, "topCenter");
+          }
+          this.props.dispatch(loadingStop());
+        })
+        .finally(() => {
+          // this.props.dispatch(listProducts(ApiData));
+        });
     } else {
       this.setState({
         formErrors: { ...this.state.formErrors, ...validationResponse.errors },

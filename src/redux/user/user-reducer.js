@@ -1,4 +1,5 @@
 import * as actionTypes from "./user-types";
+import ApiRequest from "../../util/ApiRequest";
 const initialState = {
   isLoggedIn: false,
 };
@@ -24,7 +25,10 @@ const userReducer = (state = newAuth, action) => {
         isLoggedIn: true,
         token: action.payload,
       };
+
       localStorage.setItem("auth", JSON.stringify(newState));
+      ApiRequest.setAuthToken(action.payload);
+
       return newState;
 
     case actionTypes.LOGOUT:
