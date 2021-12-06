@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -6,22 +6,60 @@ import Typography from "@mui/material/Typography";
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import NoSearchFound from "../NoSearchFound";
+import NoresultImg from "../../assets/images/not-found.svg";
+import { ErrorMessages } from "../../constants/Messages";
 
 const ToolInfo = (props) => {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState(1);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : "");
   };
+  const [getHowToWorkData, setGetHowToWorkData] = useState([]);
+
+  useEffect(() => {
+    setGetHowToWorkData(props.howItWorkData);
+  }, []);
+
+  console.log("how it works data after popup", props.howItWorkData.content);
 
   return (
     <div className="cardInfo custom-scroll">
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
+      {props?.howItWorkData?.content?.length > 0 ? (
+        props.howItWorkData.content.map((toolInstruction, index) => {
+          return (
+            <Accordion
+              expanded={expanded === toolInstruction.id}
+              onChange={handleChange(toolInstruction.id)}
+            >
+              <AccordionSummary
+                expandIcon={
+                  expanded === toolInstruction.id ? <RemoveIcon /> : <AddIcon />
+                }
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  {toolInstruction.title}
+                </Typography>
+              </AccordionSummary>
+
+              <AccordionDetails>
+                <Typography>{toolInstruction.description}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          );
+        })
+      ) : (
+        <NoSearchFound
+          img={NoresultImg}
+          heading={ErrorMessages.howToWorkNotFound}
+        />
+      )}
+      {/* <Accordion expanded={expanded === 1} onChange={handleChange(1)}>
         <AccordionSummary
-          expandIcon={expanded === "panel1" ? <RemoveIcon /> : <AddIcon />}
+          expandIcon={expanded === 1 ? <RemoveIcon /> : <AddIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
@@ -33,9 +71,9 @@ const ToolInfo = (props) => {
         <AccordionDetails>
           <Typography>TBD</Typography>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
-      <Accordion
+      {/* <Accordion
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}
       >
@@ -85,7 +123,7 @@ const ToolInfo = (props) => {
         <AccordionDetails>
           <Typography>TBD</Typography>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </div>
   );
 };

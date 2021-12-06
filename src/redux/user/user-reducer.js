@@ -32,6 +32,7 @@ const userReducer = (state = newAuth, action) => {
       return newState;
 
     case actionTypes.LOGOUT:
+      ApiRequest.setAuthToken();
       return initialState;
     default:
       return state;

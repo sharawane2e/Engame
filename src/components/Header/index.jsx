@@ -152,7 +152,7 @@ const Header = ({ props }) => {
         // console.log(error);
       })
       .finally(() => {
-        window.location.reload();
+        // window.location.reload();
         dispatch(loadingStop());
       });
     handleMenuClose();

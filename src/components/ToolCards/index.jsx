@@ -124,7 +124,9 @@ const ToolCards = () => {
                               {user ? (
                                 <HelpCenterRoundedIcon
                                   className="toolcard__tooltip__icon"
-                                  onClick={() => setIsInfoPopup(tooldata)}
+                                  onClick={() =>
+                                    setIsInfoPopup(tooldata.howtowork)
+                                  }
                                 />
                               ) : (
                                 <HelpCenterRoundedIcon
@@ -399,11 +401,14 @@ const ToolCards = () => {
           <CustomPopup
             open={isInfoPopup}
             onClose={() => setIsInfoPopup(false)}
-            headerText="How it works?"
+            // headerText="How it works?"
+            headerText={
+              isInfoPopup?.heading ? isInfoPopup.heading : "How it works?"
+            }
             footerButton={true}
             className="border-radius popup-container__iner--xxl"
           >
-            <ToolInfo />
+            <ToolInfo howItWorkData={isInfoPopup} />
           </CustomPopup>
           {/*End */}
         </Toolbar>

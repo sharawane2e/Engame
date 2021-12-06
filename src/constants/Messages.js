@@ -39,4 +39,6 @@ export const ErrorMessages = {
   ToolPreviewBeforeLogin: "Please login before view the tool instruction",
 
   CartCount: "Your cart is empty, Need to shop",
+
+  howToWorkNotFound: "Instruction not found!",
 };
