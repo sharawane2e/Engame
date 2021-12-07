@@ -23,6 +23,11 @@ import EmptyPage from "../emptyPage";
 import { ErrorMessages } from "../../constants/Messages";
 import BlankSection from "../emptyPage/blankSection";
 import { Message } from "@mui/icons-material";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FilledInput from "@material-ui/core/FilledInput";
 
 const Forgot = () => {
   const dispatch = useDispatch();
@@ -94,8 +99,10 @@ const Forgot = () => {
           setIsToken(true);
           setIsPasswordResetSucessfully(false);
         } else {
-          setIsToken(false);
-          setIsPasswordResetSucessfully(false);
+          // setIsToken(false);
+          // setIsPasswordResetSucessfully(false);
+          history.push("/");
+          Toaster.error(res.detail.message, "top-center");
         }
       })
       .finally(() => {
@@ -128,6 +135,22 @@ const Forgot = () => {
                     variant="outlined"
                     onChange={haldelNewPassword}
                     label="Password"
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          // onClick={this.handleClickShowPassword}
+                          edge="end"
+                          tabindex="-1"
+                        >
+                          {isToken ? (
+                            <Visibility className="fill-eyecolor" />
+                          ) : (
+                            <VisibilityOff className="fill-eyecolor" />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
                   />
                   <div className="validated-error"></div>
                 </FormControl>

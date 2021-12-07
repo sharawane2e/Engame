@@ -15,6 +15,13 @@
 }
 
 .forgot {
+  .MuiInputLabel-shrink {
+    transform: translate(14px, 4px) scale(0.75) !important;
+    margin-top: 5px;
+  }
+  .MuiOutlinedInput-input {
+    padding: 27px 12px 10px !important;
+  }
   &__section {
     padding: 30px;
     @include border-radius($boder-radius);

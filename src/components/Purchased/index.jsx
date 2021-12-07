@@ -192,18 +192,22 @@ const Purchased = (props) => {
 
   //  Purchase list
   const PurchaseList = async () => {
-    ApiRequest.request(PURCHASED_ITEM).then(async (res) => {
-      await setWidgetList(res.data);
-      const isShowArr = [];
-      res.data.forEach((el, index) => {
-        isShowArr.push(false);
+    ApiRequest.request(PURCHASED_ITEM)
+      .then(async (res) => {
+        await setWidgetList(res.data);
+        const isShowArr = [];
+        res.data.forEach((el, index) => {
+          isShowArr.push(false);
+        });
+        if (res.data.length == 0) {
+          setIsPurchaseEmpty(true);
+        } else {
+          setIsPurchaseEmpty(false);
+        }
+      })
+      .finally(() => {
+        dispatch(loadingStop());
       });
-      if (res.data.length == 0) {
-        setIsPurchaseEmpty(true);
-      } else {
-        setIsPurchaseEmpty(false);
-      }
-    });
   };
 
   const PlayNPause = async (purchaseId, Paused) => {
@@ -217,17 +221,13 @@ const Purchased = (props) => {
     dispatch(loadingStart());
     setPausePopup(false);
 
-    ApiRequest.request(PLAY_PAUSE, "POST", ItemData)
-      .then((res) => {
-        if (res.status) {
-          PurchaseList();
-        } else {
-          Toaster.error(res.detail.message, "topCenter");
-        }
-      })
-      .finally(() => {
-        dispatch(loadingStop());
-      });
+    ApiRequest.request(PLAY_PAUSE, "POST", ItemData).then((res) => {
+      if (res.status) {
+        PurchaseList();
+      } else {
+        Toaster.error(res.detail.message, "topCenter");
+      }
+    });
   };
 
   const handleExtendLocal = (widgetId) => {
