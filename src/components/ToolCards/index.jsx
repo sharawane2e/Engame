@@ -33,6 +33,7 @@ const ToolCards = () => {
   const [isReginOpen, setReginIsOpen] = useState(false);
   const [isLoginrequire, setisLoginrequire] = useState(false);
   const [popupId, setPopupId] = useState();
+  const [isSelectedItemForEmbeded, setIsSelectedItemForEmbeded] = useState();
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
   const productList = useSelector((state) => state.productList);
@@ -141,6 +142,7 @@ const ToolCards = () => {
                                   onClick={() => {
                                     setPopup(true);
                                     setPopupId(tooldata.id);
+                                    setIsSelectedItemForEmbeded(tooldata.name);
                                   }}
                                 >
                                   <SystemUpdateAltIcon />
@@ -329,7 +331,11 @@ const ToolCards = () => {
             headerText="Embed code"
             className="border-radius popup-container__iner--xl-md"
           >
-            <Embedcode data={products} toolId={popupId} />
+            <Embedcode
+              data={products}
+              toolId={popupId}
+              toolName={isSelectedItemForEmbeded}
+            />
           </CustomPopup>
           {/*End*/}
 

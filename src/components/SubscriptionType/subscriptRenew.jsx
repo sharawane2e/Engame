@@ -67,6 +67,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   };
 
   useEffect(() => {
+    dispatch(loadingStop());
     dispatch(getItemFromCart());
   }, [isUpdateResult]);
 
@@ -94,8 +95,12 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
     };
 
     ApiRequest.request(CHECKOUT, "POST", CheckoutData).then((res) => {
-      stripe.redirectToCheckout({ sessionId: res.sessionId });
-      localStorage.setItem("ExtendData", JSON.stringify(updateData));
+      if (res.status) {
+        stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
+        localStorage.setItem("ExtendData", JSON.stringify(updateData));
+      } else {
+        Toaster.error(res?.detail?.message, "topCenter");
+      }
       // dispatch(loadingStop());
     });
   };
@@ -104,7 +109,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
     <>
       <div className="subscription-type">
         <div className="select-box select-box-disable">
-          <select disabled>
+          <select disabled className="subscription-type__subscriptionRenew">
             <option
               value={updateData.plan.plan_type}
               selected={istype == "days"}

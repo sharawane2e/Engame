@@ -5,7 +5,7 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Toaster from "../../util/Toaster";
 
-const EmbedCode = ({ data, toolId }) => {
+const EmbedCode = ({ data, toolId, toolName }) => {
   const [state] = useState(data);
   const [copySuccess, setCopySuccess] = useState("");
   const textAreaRef = useRef(null);
@@ -25,7 +25,7 @@ const EmbedCode = ({ data, toolId }) => {
         type: "application/octet-stream",
       })
     );
-    link.download = "embeded.html";
+    link.download = `${toolName}.html`;
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {

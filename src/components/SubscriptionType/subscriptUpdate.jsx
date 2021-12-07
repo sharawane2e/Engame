@@ -70,8 +70,9 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   };
 
   useEffect(async () => {
+    // dispatch(loadingStart());
     await dispatch(getItemFromCart());
-    await dispatch(loadingStop());
+    dispatch(loadingStop());
   }, [isUpdateResult]);
 
   const cartItemUpdate = async () => {

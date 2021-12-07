@@ -38,6 +38,7 @@ import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import BlankSection from "../emptyPage/blankSection";
 import CartLoader from "./cartLoader";
 import { ErrorMessages } from "../../constants/Messages";
+import Toaster from "../../util/Toaster";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -58,8 +59,10 @@ const Cart = () => {
     );
   }, []);
 
-  const handleRemove = (isProduct) => {
-    dispatch(removeFromCart(isProduct));
+  const handleRemove = async (isProduct) => {
+    await dispatch(loadingStart());
+    await dispatch(removeFromCart(isProduct));
+    // dispatch(loadingStop());
   };
 
   const handleCheckout = async () => {
@@ -68,12 +71,14 @@ const Cart = () => {
       is_renew: "false",
     };
     const stripe = await loadStripe(STRIPE);
-    await localStorage.setItem("isPayment", true);
 
     dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       if (res.status) {
         stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
+        localStorage.setItem("isPayment", true);
+      } else {
+        Toaster.error(res?.detail?.message, "topCenter");
       }
     });
   };

@@ -27,12 +27,12 @@ const userReducer = (state = newAuth, action) => {
       };
 
       localStorage.setItem("auth", JSON.stringify(newState));
-      ApiRequest.setAuthToken(action.payload);
+      // ApiRequest.setAuthToken(action.payload);
 
       return newState;
 
     case actionTypes.LOGOUT:
-      ApiRequest.setAuthToken();
+      //ApiRequest.setAuthToken();
       return initialState;
     default:
       return state;

@@ -9,11 +9,14 @@ const instance = axios.create({
 const ApiRequest = {
   request: async function (url, method, data, parses) {
     let response = null;
-    // if (token) {
-    //   instance.defaults.headers.common[
-    //     "Authorization"
-    //   ] = `Bearer ${token.access_token}`;
-    // }
+    const token = LocalStorageUtils.getToken();
+    if (token) {
+      instance.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${token.access_token}`;
+    } else {
+      delete instance.defaults.headers.common["Authorization"];
+    }
     try {
       const apiResponse = await instance(url, {
         method,
@@ -46,19 +49,19 @@ const ApiRequest = {
     return response;
   },
 
-  setAuthToken: function (token) {
-    if (token) {
-      // console.log("token", token);
-      instance.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token.access_token}`;
-    } else {
-      delete instance.defaults.headers.common["Authorization"];
-    }
-  },
+  // setAuthToken: function (token) {
+  //   if (token) {
+  //     // console.log("token", token);
+  //     instance.defaults.headers.common[
+  //       "Authorization"
+  //     ] = `Bearer ${token.access_token}`;
+  //   } else {
+  //     delete instance.defaults.headers.common["Authorization"];
+  //   }
+  // },
 };
 
-const token = LocalStorageUtils.getToken();
-ApiRequest.setAuthToken(token);
+// const token = LocalStorageUtils.getToken();
+// ApiRequest.setAuthToken(token);
 
 export default ApiRequest;

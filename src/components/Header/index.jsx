@@ -141,12 +141,12 @@ const Header = ({ props }) => {
     // alert("logout");
     dispatch(loadingStart());
     ApiRequest.request(LOGOUT, "POST", "")
-      .then(async (res) => {
-        dispatch(logOutUser());
+      .then((res) => {
         localStorage.removeItem("auth");
+        dispatch(logOutUser());
         history.push("/");
-        Toaster.sucess(res.detail, "topCenter");
-        ApiRequest.setAuthToken();
+        Toaster.sucess(res.detail.message, "topCenter");
+        //ApiRequest.setAuthToken();
       })
       .catch((error) => {
         // console.log(error);

@@ -15,6 +15,9 @@
     @include space(margin, bottom, $margin-30, 0);
     cursor: pointer;
   }
+  &__subscriptionRenew {
+    cursor: no-drop !important;
+  }
 
   .select-box:after {
     content: "";

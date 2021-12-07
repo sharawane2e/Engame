@@ -8,7 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import SearchIcon from "@material-ui/icons/Search";
-import Carousel from "../../util/Carousel";
+import CarouselBeforeLogin from "../Carousel/CarouselBeforeLogin";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useAutocomplete } from "@mui/core/AutocompleteUnstyled";
@@ -20,7 +20,7 @@ import { listProducts } from "../../redux/product/product-action";
 import { CATEGORIES_LIST } from "../../config/ApiUrl";
 import ApiRequest from "../../util/ApiRequest";
 import { loadingStop } from "../../redux/loader/loader-actions";
-import HomePageBanner from "../../util/HomePageBanner";
+import CarouselAfterLogin from "../Carousel/CarouselAfterLogin";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -179,6 +179,7 @@ const Filter = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [isFilter, setIsFilter] = useState(false);
+  const [isSearchNotActive, setIsSearchNotActive] = useState(true);
   const {
     getRootProps,
     getInputLabelProps,
@@ -224,9 +225,12 @@ const Filter = () => {
   };
 
   const GetCategoriesList = () => {
-    ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
-      setCategoriesList(res?.data[0] || []);
-    });
+    console.log("user data", user.isLoggedIn);
+    if (user.isLoggedIn && categoriesList.length > 0) {
+      ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
+        setCategoriesList(res?.data[0] || []);
+      });
+    }
   };
 
   const SaerchValue = (e) => {
@@ -235,14 +239,18 @@ const Filter = () => {
 
     if (e.target.value.length == 0) {
       FilterAction(value, null);
+      setIsSearchNotActive(true);
+    } else {
+      setIsSearchNotActive(false);
     }
   };
 
-  const handelSearchValueFilterClick = (e) => {
+  const handelSearchValueFilterClick = async (e) => {
     setIsFilter(true);
 
     e.preventDefault();
-    FilterAction(value, searchText);
+    await FilterAction(value, searchText);
+    setIsSearchNotActive(true);
   };
 
   const handelFilterClick = () => {
@@ -251,6 +259,9 @@ const Filter = () => {
 
   useEffect(() => {
     GetCategoriesList();
+  }, [user]);
+
+  useEffect(() => {
     FilterAction(value, searchText);
   }, [value, user]);
 
@@ -264,7 +275,7 @@ const Filter = () => {
         <div className="header-bg filter-tool-shadow filter--fixed">
           <Toolbar className="filter-section">
             <div className="flexGrow">
-              <HomePageBanner />
+              <CarouselAfterLogin />
             </div>
           </Toolbar>
           <div className="searchNFilter">
@@ -285,6 +296,7 @@ const Filter = () => {
                       aria-label="directions"
                       onClick={handelSearchValueFilterClick}
                       type="submit"
+                      disabled={isSearchNotActive ? true : false}
                     >
                       <IconButton
                         className="iconButton search-icon"
@@ -376,7 +388,7 @@ const Filter = () => {
                 <Grid item xs={12} sm={7} md={5} lg={5} xl={5}>
                   <Paper className="paperstyel grid-paper-style">
                     {/* <img src={librarycards} /> */}
-                    <Carousel />
+                    <CarouselBeforeLogin />
                   </Paper>
                 </Grid>
               </Grid>

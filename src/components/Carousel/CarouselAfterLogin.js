@@ -1,11 +1,11 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import HomeBanner1 from "../assets/images/home-banner-1.png";
-import BrandTargetdnd from "../assets/images/BrandTarget-dnd.svg";
-import ExclusiveDnd from "../assets/images/Container_exclusive_dnd.svg";
+import HomeBanner1 from "../../assets/images/home-banner-1.png";
+import BrandTargetdnd from "../../assets/images/BrandTarget-dnd.svg";
+import ExclusiveDnd from "../../assets/images/Container_exclusive_dnd.svg";
 
-const HomePageBanner = () => {
+const CarouselAfterLogin = () => {
   var Carousel = require("react-responsive-carousel").Carousel;
   return (
     <div className="homeFullBanner">
@@ -56,4 +56,4 @@ const HomePageBanner = () => {
   );
 };
 
-export default HomePageBanner;
+export default CarouselAfterLogin;

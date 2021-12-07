@@ -106,7 +106,7 @@ const Purchased = (props) => {
   };
 
   // Consumption report
-  const downloadConsumptionStatement = async (purchased_id) => {
+  const downloadConsumptionStatement = async (purchased_id, widgetName) => {
     let PurchasedData = {
       user: token.user.pk,
       purchased_id: purchased_id,
@@ -114,12 +114,9 @@ const Purchased = (props) => {
 
     await ApiRequest.request(CONSUMPTION_STATEMENT, "POST", PurchasedData).then(
       (res) => {
-        if (!res?.status) {
+        if (res.hasOwnProperty("status") && !res?.state) {
           Toaster.error(res.detail.message, "topCenter");
         } else {
-          // dispatch(loadingStop());
-          Toaster.sucess(res.details.message, "topCenter");
-
           const convertTOJson = () => {
             const lines = res.split("\n");
             const result = [];
@@ -139,7 +136,7 @@ const Purchased = (props) => {
           };
 
           let data = convertTOJson();
-          const fileName = "consumption-report";
+          const fileName = `${widgetName}-consumption-report`;
           const exportType = exportFromJSON.types.xls;
           exportFromJSON({ data, fileName, exportType });
         }
@@ -148,7 +145,6 @@ const Purchased = (props) => {
   };
 
   const paymentSuccess = async () => {
-    // dispatch(loadingStart());
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const session_id = params.get("session_id")
@@ -182,7 +178,6 @@ const Purchased = (props) => {
           if (res.status) {
             dispatch(removeFromCart());
             localStorage.removeItem("ExtendData");
-            // Toaster.sucess(res.detail.message, "topCenter");
           }
         })
         .finally(() => {
@@ -208,7 +203,6 @@ const Purchased = (props) => {
       } else {
         setIsPurchaseEmpty(false);
       }
-      dispatch(loadingStop());
     });
   };
 
@@ -223,14 +217,17 @@ const Purchased = (props) => {
     dispatch(loadingStart());
     setPausePopup(false);
 
-    ApiRequest.request(PLAY_PAUSE, "POST", ItemData).then((res) => {
-      if (res.status) {
-        PurchaseList();
-      } else {
-        Toaster.error(res.detail.message, "topCenter");
-      }
-      dispatch(loadingStop());
-    });
+    ApiRequest.request(PLAY_PAUSE, "POST", ItemData)
+      .then((res) => {
+        if (res.status) {
+          PurchaseList();
+        } else {
+          Toaster.error(res.detail.message, "topCenter");
+        }
+      })
+      .finally(() => {
+        dispatch(loadingStop());
+      });
   };
 
   const handleExtendLocal = (widgetId) => {
@@ -719,7 +716,10 @@ const Purchased = (props) => {
                                       component="div"
                                       className="purchased-tool__embeded-icon border-radius"
                                       onClick={() =>
-                                        downloadConsumptionStatement(item.id)
+                                        downloadConsumptionStatement(
+                                          item.id,
+                                          item.widget.name
+                                        )
                                       }
                                     >
                                       <ConsumptionReportImg />
@@ -809,7 +809,6 @@ const Purchased = (props) => {
                 className="secondary-button"
                 onClick={() => {
                   setPausePopup(false);
-                  window.location.reload(true);
                 }}
               >
                 Cancel
