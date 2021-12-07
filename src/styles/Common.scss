@@ -564,15 +564,15 @@ select {
         align-items: center;
       }
       &__filter-text {
-        padding-right: 6%;
+        // padding-right: 6%;
         // @include font-weight($font-600);
         @include color($black-secondary);
         @include font-size($font-xsm);
         line-height: 42px;
         margin-left: auto;
-        text-align: left;
+        text-align: center;
         font-weight: 600;
-        width: 45%;
+        width: 100%;
         @include breakpoint(Ipad-pro) {
           @include font-size($font-xx-reg);
           line-height: 24px;

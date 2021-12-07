@@ -58,6 +58,9 @@
     .filter-font-family {
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
     }
+    .carousel .slide img {
+      height: 15vh;
+    }
   }
   // .grid-paper-style{
   //   padding-bottom: 40px
