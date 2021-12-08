@@ -789,11 +789,16 @@ const Purchased = (props) => {
                 alt="Registration Sucessfully"
               />
               <Typography component="p" className="sucess_message">
-                {`Your are ${
-                  PlayPauseValue.is_paused
-                    ? ErrorMessages.onPlay
-                    : ErrorMessages.onPause
-                }`}
+                {PlayPauseValue.is_paused &&
+                PlayPauseValue.plan?.plan_type == "days"
+                  ? ErrorMessages.DAYS_WIDGET_ON_PLAY
+                  : !PlayPauseValue.is_paused &&
+                    PlayPauseValue.plan?.plan_type == "days"
+                  ? ErrorMessages.DAYS_WIDGET_ON_PAUSE
+                  : PlayPauseValue.is_paused &&
+                    PlayPauseValue.plan?.plan_type == "hits"
+                  ? ErrorMessages.HITS_WIDGET_ON_PLAY
+                  : ErrorMessages.HITS_WIDGET_ON_PAUSE}
               </Typography>
               {/* <p className="sucess_message"></p> */}
               <CustomButton

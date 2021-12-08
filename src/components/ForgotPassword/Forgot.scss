@@ -28,6 +28,13 @@
     @include bgcolor(transparent);
     border: 2px solid $white;
     margin: auto;
+    width: 500px;
+    @include breakpoint(Ipad-pro) {
+      width: 500px;
+    }
+    @include breakpoint(mobileonly) {
+      width: 95%;
+    }
     .MuiOutlinedInput-root {
       @include bgcolor($white!important);
 

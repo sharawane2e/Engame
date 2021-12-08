@@ -28,6 +28,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FilledInput from "@material-ui/core/FilledInput";
+import { resetPasswordValidate } from "../../util/FormValidation";
 
 const Forgot = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Forgot = () => {
   const [isPasswordResetSucessfully, setIsPasswordResetSucessfully] =
     useState(false);
   const [isPageRendring, setIsPageRendring] = useState(true);
+  const [isPasswordPattern, setIsPasswordPattern] = useState([]);
 
   const location = useLocation();
   const history = useHistory();
@@ -47,6 +49,9 @@ const Forgot = () => {
 
   const haldelNewPassword = (e) => {
     setNewPasswords(e.target.value);
+    const validatePasswordPattern = resetPasswordValidate(e.target.value);
+
+    setIsPasswordPattern(validatePasswordPattern);
   };
 
   const haldelConformPassword = (e) => {
@@ -60,7 +65,7 @@ const Forgot = () => {
 
   const ResetPassword = () => {
     // console.log(passwordMatch, "Password match");
-    if (passwordMatch) {
+    if (passwordMatch && isPasswordPattern.isValid) {
       let resetPasswordVal = {
         new_password1: newPasswords,
         new_password2: conformPasswords,
@@ -152,7 +157,9 @@ const Forgot = () => {
                       </InputAdornment>
                     }
                   />
-                  <div className="validated-error"></div>
+                  <div className="validated-error">
+                    {isPasswordPattern.message}
+                  </div>
                 </FormControl>
                 <FormControl className="form-area__control">
                   <TextField

@@ -11,10 +11,12 @@ import NoresultImg from "../../assets/images/not-found.svg";
 import { ErrorMessages } from "../../constants/Messages";
 
 const ToolInfo = (props) => {
-  const [expanded, setExpanded] = React.useState(1);
+  let initialOpenTabs = props.howItWorkData.content[0].id;
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : "");
+  const [expanded, setExpanded] = React.useState(initialOpenTabs);
+
+  const handleChange = (initialOpenTabs) => (event, isExpanded) => {
+    setExpanded(isExpanded ? initialOpenTabs : "");
   };
   const [getHowToWorkData, setGetHowToWorkData] = useState([]);
 

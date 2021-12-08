@@ -42,8 +42,10 @@ export const ErrorMessages = {
 
   howToWorkNotFound: "implementation instructions not found!",
 
-  onPlay:
+  DAYS_WIDGET_ON_PLAY:
     "Today will count as the first day of the paid subscription. Are you sure you want to turn it on now?",
-  onPause:
+  DAYS_WIDGET_ON_PAUSE:
     "The widget will stop running in any active surveys if paused. Are you sure you want to stop it?",
+  HITS_WIDGET_ON_PLAY: "Are you sure you want to turn it on?",
+  HITS_WIDGET_ON_PAUSE: "Are you sure you want to stop it?",
 };

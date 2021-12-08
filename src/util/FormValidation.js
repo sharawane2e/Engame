@@ -26,6 +26,21 @@ const handleCMail = (value) => {
   });
 };
 
+export const resetPasswordValidate = (value) => {
+  const validationResponse = new ValidationResponse();
+  if (!value) {
+    validationResponse.isValid = false;
+    validationResponse.message = ErrorMessages.PASSWORD_REQUIRED;
+  } else if (value.length < PASSWORD_MIN_LENGTH) {
+    validationResponse.isValid = false;
+    validationResponse.message = ErrorMessages.PASSWORD_MIN;
+  } else if (passwordPattern(value)) {
+    validationResponse.isValid = false;
+    validationResponse.message = ErrorMessages.PASSWORD_PATTERN;
+  }
+  return validationResponse;
+};
+
 class Validation {
   validateForm = (fields, context) => {
     const response = {

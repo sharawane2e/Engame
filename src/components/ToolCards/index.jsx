@@ -79,14 +79,6 @@ const ToolCards = () => {
             />
           ) : (
             <Grid container spacing={4}>
-              {products.length > 0 && (
-                <div className="toolcard__allTools">
-                  <Typography className="toolcard__allTools__heading">
-                    All Tools
-                  </Typography>
-                </div>
-              )}
-
               {products.length == 0 ? (
                 <NoSearchFound
                   img={NoresultImg}
