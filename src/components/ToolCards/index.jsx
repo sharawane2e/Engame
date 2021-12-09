@@ -11,7 +11,7 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
-import { BASE_URL } from "../../config/ApiUrl";
+import { BASE_URL, PURCHASED_ITEM } from "../../config/ApiUrl";
 import { useHistory } from "react-router-dom";
 import Login from "../Login";
 import Registration from "../Registration";
@@ -26,6 +26,7 @@ import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/oops.gif";
 import HomePageLoader from "./ToolCardLoader";
 import { Tooltip } from "@mui/material";
+import ApiRequest from "../../util/ApiRequest";
 
 const ToolCards = () => {
   const [selectedTool, setSelectedTool] = useState(null);
@@ -41,6 +42,7 @@ const ToolCards = () => {
   const { loading, error, products } = productList;
   const [TypeClick, setTypeClick] = useState("");
   const [isInfoPopup, setIsInfoPopup] = useState(false);
+  const [purchaseList, setPurchaseList] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -54,11 +56,22 @@ const ToolCards = () => {
     setLoginIsOpen(true);
   };
 
+  const PurchaseList = async () => {
+    ApiRequest.request(PURCHASED_ITEM).then(async (res) => {
+      if (res.status) {
+        await setPurchaseList(res.data);
+      } else {
+        await setPurchaseList([]);
+      }
+    });
+  };
+
   useEffect(() => {
     // debugger;
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
+      PurchaseList();
     }
   }, [user]);
 
@@ -229,7 +242,11 @@ const ToolCards = () => {
                                     setTypeClick(ErrorMessages.loginAlert);
                                   }}
                                 >
-                                  <ShoppingCartIcon />
+                                  {purchaseList.map((purchaseItem) => {
+                                    if (productList.id === tooldata.id) {
+                                      return <ShoppingCartIcon />;
+                                    }
+                                  })}
                                 </div>
                               </Tooltip>
                             </div>

@@ -31,6 +31,10 @@ const HomePageLoader = (props) => {
       <SingleItemLoader />
       <SingleItemLoader />
       <SingleItemLoader />
+      <SingleItemLoader />
+      <SingleItemLoader />
+      <SingleItemLoader />
+      <SingleItemLoader />
     </Grid>
   );
 };

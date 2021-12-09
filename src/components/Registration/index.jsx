@@ -25,6 +25,8 @@ import UserVerification from "../userVerify";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import errorImg from "../../assets/images/error.svg";
 import { Typography } from "@material-ui/core";
+import warning_icon from "../../assets/images/warning_icon.svg";
+import { ErrorMessages } from "../../constants/Messages";
 
 class Registration extends Component {
   state = {
@@ -40,6 +42,7 @@ class Registration extends Component {
     isRegistrationWant: true,
     isRegistrationComplete: false,
     registrationMessage: "",
+    isPasswordMatch: false,
     formErrors: {
       name: "",
       email: "",
@@ -87,7 +90,7 @@ class Registration extends Component {
     });
     // const PopupVal = true;
 
-    if (validationResponse.isFormValid) {
+    if (validationResponse.isFormValid && this.state.isPasswordMatch) {
       this.props.dispatch(loadingStart());
       ApiRequest.request(REGISTRATION, "POST", user)
         .then((res) => {
@@ -137,6 +140,15 @@ class Registration extends Component {
   confirmPasswordShow = (e, key) => {
     this.confirmPasswordShow = this.confirmPasswordShow.bind(this);
     this.setState({ showPasswordConfirm: !this.state.showPasswordConfirm });
+  };
+
+  checkPasswordMatch = (e) => {
+    if (e.target.value == this.state.confirmpassword) {
+      this.setState({ isPasswordMatch: true });
+    } else {
+      this.setState({ isPasswordMatch: false });
+      this.setState({ registrationMessage: ErrorMessages.PASSWORD_MATCH });
+    }
   };
 
   handleChange = (e, key) => {
@@ -304,7 +316,10 @@ class Registration extends Component {
                   message={this.state.formErrors.confirmpassword}
                   onKeyDown={this._handleKeyDown}
                   endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment
+                      position="end"
+                      onChange={(e) => this.checkPasswordMatch(e)}
+                    >
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={this.confirmPasswordShow}
@@ -357,7 +372,7 @@ class Registration extends Component {
           </div>
         ) : (
           <div className="emptySection">
-            <img src={sucessfullImg} />
+            <img src={warning_icon} />
             <Typography component="p">
               {this.state.registrationMessage}
             </Typography>
