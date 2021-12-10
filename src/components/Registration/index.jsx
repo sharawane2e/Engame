@@ -90,7 +90,7 @@ class Registration extends Component {
     });
     // const PopupVal = true;
 
-    if (validationResponse.isFormValid && this.state.isPasswordMatch) {
+    if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
       ApiRequest.request(REGISTRATION, "POST", user)
         .then((res) => {
@@ -143,6 +143,7 @@ class Registration extends Component {
   };
 
   checkPasswordMatch = (e) => {
+    alert("check");
     if (e.target.value == this.state.confirmpassword) {
       this.setState({ isPasswordMatch: true });
     } else {
@@ -161,6 +162,15 @@ class Registration extends Component {
       [key]: value,
       formErrors: { ...this.state.formErrors, [key]: errorMessage },
     });
+
+    if (key == "confirmpassword") {
+      if (e.target.value == this.state.confirmpassword) {
+        this.setState({ isPasswordMatch: true });
+      } else {
+        this.setState({ isPasswordMatch: false });
+        this.setState({ registrationMessage: ErrorMessages.PASSWORD_MATCH });
+      }
+    }
   };
 
   backVerify = () => {

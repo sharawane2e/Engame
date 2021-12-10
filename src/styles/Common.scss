@@ -6,7 +6,9 @@
 body {
   font-family: map-get($map: $font-family, $key: font-barlowregular);
   padding: 0 !important;
+  overflow: inherit !important;
 }
+
 .App {
   position: relative;
   @include bgcolor($gray-primary);

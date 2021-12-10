@@ -6,7 +6,7 @@ const Toaster = {
     let pos = await this.toasterPosition(position);
     toast.success(message, {
       position: pos,
-      autoClose: 3000,
+      autoClose: 2000,
       closeButton: true,
       newestOnTop: true,
     });
@@ -15,7 +15,7 @@ const Toaster = {
     let pos = await this.toasterPosition(position);
     toast.error(message, {
       position: pos,
-      autoClose: 3000,
+      autoClose: 2000,
       closeButton: true,
       newestOnTop: true,
     });
@@ -24,7 +24,7 @@ const Toaster = {
     let pos = await this.toasterPosition(position);
     toast.warn(message, {
       position: pos,
-      autoClose: 3000,
+      autoClose: 2000,
       closeButton: false,
       newestOnTop: true,
     });
@@ -33,7 +33,7 @@ const Toaster = {
     let pos = await this.toasterPosition(position);
     toast.info(message, {
       position: pos,
-      autoClose: 3000,
+      autoClose: 2000,
       closeButton: false,
       newestOnTop: true,
     });

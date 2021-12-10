@@ -42,7 +42,6 @@ const ToolCards = () => {
   const { loading, error, products } = productList;
   const [TypeClick, setTypeClick] = useState("");
   const [isInfoPopup, setIsInfoPopup] = useState(false);
-  const [purchaseList, setPurchaseList] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -56,22 +55,11 @@ const ToolCards = () => {
     setLoginIsOpen(true);
   };
 
-  const PurchaseList = async () => {
-    ApiRequest.request(PURCHASED_ITEM).then(async (res) => {
-      if (res.status) {
-        await setPurchaseList(res.data);
-      } else {
-        await setPurchaseList([]);
-      }
-    });
-  };
-
   useEffect(() => {
     // debugger;
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
-      PurchaseList();
     }
   }, [user]);
 
@@ -242,11 +230,7 @@ const ToolCards = () => {
                                     setTypeClick(ErrorMessages.loginAlert);
                                   }}
                                 >
-                                  {purchaseList.map((purchaseItem) => {
-                                    if (productList.id === tooldata.id) {
-                                      return <ShoppingCartIcon />;
-                                    }
-                                  })}
+                                  <ShoppingCartIcon />
                                 </div>
                               </Tooltip>
                             </div>

@@ -107,6 +107,8 @@ const Purchased = (props) => {
 
   // Consumption report
   const downloadConsumptionStatement = async (purchased_id, widgetName) => {
+    dispatch(loadingStart());
+
     let PurchasedData = {
       user: token.user.pk,
       purchased_id: purchased_id,
@@ -116,6 +118,9 @@ const Purchased = (props) => {
       (res) => {
         if (res.hasOwnProperty("status") && !res?.state) {
           Toaster.error(res.detail.message, "topCenter");
+          setTimeout(() => {
+            dispatch(loadingStop());
+          }, 1000);
         } else {
           const convertTOJson = () => {
             const lines = res.split("\n");
@@ -139,6 +144,8 @@ const Purchased = (props) => {
           const fileName = `${widgetName}-consumption-report`;
           const exportType = exportFromJSON.types.xls;
           exportFromJSON({ data, fileName, exportType });
+
+          dispatch(loadingStop());
         }
       }
     );
