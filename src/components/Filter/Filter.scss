@@ -191,6 +191,20 @@
   padding: $padding-0 $padding-20 !important;
   padding-bottom: 15px !important;
   width: 90% !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center;
+  &__chipBox {
+    margin: 5px;
+    width: fit-content;
+    .MuiChip-root {
+      background: rgb(0 0 0 / 9%) !important;
+    }
+    .MuiChip-deleteIcon {
+      font-size: 16px !important;
+      color: $chipDeleteIconColor !important;
+    }
+  }
 
   .css-1ggoop8 {
     margin: $margin-2;
@@ -230,7 +244,66 @@
 }
 
 .filterListUl {
-  width: 100%;
+  width: 100% !important;
+  min-width: 300px;
+  margin: 2px 0 0;
+  padding: 0;
+  position: absolute;
+  list-style: none;
+  // background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
+  background: $white;
+  opacity: 1 !important;
+  overflow: auto;
+  max-height: 350px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  right: 0px;
+  top: 40px;
+  & li {
+    padding: 10px 20px;
+    display: flex;
+    text-align: left;
+    background-color: $white;
+
+    & span {
+      flex-grow: 1;
+    }
+
+    & svg {
+      color: transparent;
+    }
+  }
+
+  & li[aria-selected="true"] {
+    // background-color: ${theme.palette.mode === "dark" ? "#2b2b2b" : "#fafafa"};
+    // font-weight: 600;
+    background-color: $lightGray;
+    color: $primary;
+
+    & svg {
+      color: $primary;
+    }
+  }
+
+  & li[data-focus="true"] {
+    // background-color: ${theme.palette.mode === "dark" ? "#003b57" : "#e6f7ff"};
+    cursor: pointer;
+    background-color: #fff !important;
+
+    & svg {
+      color: currentColor;
+    }
+  }
+  &__listTopPara {
+    text-align: left;
+    font-weight: 600;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: $red;
+    color: $white;
+    font-family: map-get($map: $font-family, $key: "font-barlowregular");
+  }
 }
 .css-1k181zl li[aria-selected="true"] svg {
   color: $primary !important;

@@ -19,11 +19,11 @@ const CarouselAfterLogin = () => {
           <img src={HomeBanner1} />
           <div className="textArea">
             <p className="textArea__filter-text">
-              Creative tools cab generate
+              Creative tools can generate
               <span className="textArea__filter-text__review-text">
                 {` innovative `}
               </span>
-              ideas ignite the imagination inside you.
+              ideas, ignite the imagination inside you.
             </p>
           </div>
         </div>
@@ -31,11 +31,11 @@ const CarouselAfterLogin = () => {
           <img src={HomeBanner1} />
           <div className="textArea">
             <p className="textArea__filter-text">
-              Creative tools cab generate
+              Creative tools can generate
               <span className="textArea__filter-text__review-text">
                 innovative
               </span>
-              ideas ignite the imagination inside you.
+              ideas, ignite the imagination inside you.
             </p>
           </div>
         </div>
@@ -43,11 +43,11 @@ const CarouselAfterLogin = () => {
           <img src={HomeBanner1} />
           <div className="textArea">
             <p className="textArea__filter-text">
-              Creative tools cab generate
+              Creative tools can generate
               <span className="textArea__filter-text__review-text">
                 innovative
               </span>
-              ideas ignite the imagination inside you.
+              ideas, ignite the imagination inside you.
             </p>
           </div>
         </div>

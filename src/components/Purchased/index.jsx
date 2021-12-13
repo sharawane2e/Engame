@@ -389,7 +389,7 @@ const Purchased = (props) => {
                   } `}
                   onClick={() => setFilter("days")}
                 >
-                  Days Subs
+                  Days Subs.
                 </Typography>
                 <Typography
                   color="textPrimary"
