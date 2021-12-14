@@ -15,6 +15,7 @@ import UserVerification from "../userVerify";
 import { Typography } from "@material-ui/core";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import errorImg from "../../assets/images/error.svg";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 class ForgotPassword extends Component {
   state = {
@@ -57,7 +58,6 @@ class ForgotPassword extends Component {
               isLogin: false,
               isPasswordSent: true,
             });
-            // console.log(res, "forgot data");
           } else if (res.status && !res.data[0]?.is_verified) {
             this.setState({
               isEmailVerify: true,
@@ -65,7 +65,11 @@ class ForgotPassword extends Component {
               isLogin: false,
               isPasswordSent: false,
             });
-            localStorage.setItem("verificationEmail", email);
+            LocalStorageUtils.setLocalStorage(
+              "set",
+              "verificationEmail",
+              email
+            );
           } else {
             Toaster.error(res.detail.message, "topCenter");
             this.setState({

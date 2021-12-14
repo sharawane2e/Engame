@@ -1,5 +1,3 @@
-// import LocalStorageUtils from "../../util/LocalStorageUtils";
-// import Idle from "react-idle";
 import AppRouting from "../../AppRouting";
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -8,7 +6,6 @@ import { loginUser } from "../../redux/user/user-action";
 const PrivateScreen = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    //const data = dispatch(loginUser());
     dispatch(loginUser());
   }, []);
 

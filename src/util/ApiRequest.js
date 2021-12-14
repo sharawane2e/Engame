@@ -30,7 +30,7 @@ const ApiRequest = {
           LocalStorageUtils.removeUserFromLocalStorage();
           let location = window.location.href.split("#");
           let baseUrl = location[0];
-          localStorage.removeItem("auth");
+          // localStorage.removeItem("auth");
           window.location.href = `${baseUrl}#/`;
           window.location.reload();
         } else if (error.response.status === 400) {
@@ -42,26 +42,11 @@ const ApiRequest = {
           // Toaster.error("500");
         } else {
           // Toaster.error("Something went wrong");
-          // console.log("wrong");
         }
       }
     }
     return response;
   },
-
-  // setAuthToken: function (token) {
-  //   if (token) {
-  //     // console.log("token", token);
-  //     instance.defaults.headers.common[
-  //       "Authorization"
-  //     ] = `Bearer ${token.access_token}`;
-  //   } else {
-  //     delete instance.defaults.headers.common["Authorization"];
-  //   }
-  // },
 };
-
-// const token = LocalStorageUtils.getToken();
-// ApiRequest.setAuthToken(token);
 
 export default ApiRequest;

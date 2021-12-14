@@ -55,6 +55,7 @@ import PurchasedLoader from "./purchaseLoader";
 
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -201,7 +202,7 @@ const Purchased = (props) => {
         .then((res) => {
           if (res.status) {
             dispatch(removeFromCart());
-            localStorage.removeItem("ExtendData");
+            LocalStorageUtils.setLocalStorage("remove", "ExtendData");
           }
         })
         .finally(() => {
@@ -255,7 +256,7 @@ const Purchased = (props) => {
   };
 
   const handleExtendLocal = (widgetId) => {
-    localStorage.setItem("productShow", widgetId.plan.id);
+    LocalStorageUtils.setLocalStorage("set", "productShow", widgetId.plan.id);
   };
 
   const FilterData = widgetList?.filter((item, index) => {

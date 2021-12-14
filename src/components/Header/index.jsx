@@ -42,7 +42,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import { Pending, PersonPinCircle } from "@mui/icons-material";
+import { KeyboardArrowUp, Pending, PersonPinCircle } from "@mui/icons-material";
 import { ListItemIcon } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
@@ -50,6 +50,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import UserVerification from "../userVerify";
 import { listProducts } from "../../redux/product/product-action";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 const useStyles = makeStyles((theme) => ({
   // sectionDesktop: {
@@ -95,42 +96,22 @@ const Header = ({ props }) => {
       setLoginIsOpen(false);
       setReginIsOpen(false);
       dispatch(getItemFromCart());
-      // cartCountManagement();
-      // console.log(user, "user");
-      // dispatch(loadingStop());
     }
   }, [user]);
 
-  // const cartCountManagement = () => {
-  //   var search = props.location.search;
-  //   var params = new URLSearchParams(search);
-  //   var session_id = params.get("session_id");
-
-  //   if (!session_id && !localStorage.getItem("isPayment")) {
-  //     dispatch(getItemFromCart());
-  //   }
-  // };
-
   useEffect(() => {
-    // fetch(BASE_URL + "/widget/filters/").then(
-    //   (response) => {},
-    //   (err) => {
-    //     history.push("/error");
-    //     // alert("error");
-    //   }
-    // );
-    localStorage.removeItem("verificationEmail");
+    LocalStorageUtils.setLocalStorage("remove", "verificationEmail");
   }, []);
 
   const cartCountManagement = async () => {
     setIsPayment(localStorage.getItem("isPayment") ? true : false);
-    localStorage.removeItem("isPayment");
+    LocalStorageUtils.setLocalStorage("remove", "isPayment");
   };
 
   useEffect(() => {
     cartCountManagement();
     const timer = setTimeout(() => {
-      localStorage.removeItem("auth");
+      LocalStorageUtils.setLocalStorage("remove", "auth");
       window.location.reload();
       history.push("/");
     }, LOGOUT_TIME);
@@ -138,21 +119,14 @@ const Header = ({ props }) => {
   }, []);
 
   const handleLogout = () => {
-    // alert("logout");
     dispatch(loadingStart());
     ApiRequest.request(LOGOUT, "POST", "")
       .then((res) => {
-        localStorage.removeItem("auth");
         dispatch(logOutUser());
         history.push("/");
         Toaster.sucess(res.detail.message, "topCenter");
-        //ApiRequest.setAuthToken();
-      })
-      .catch((error) => {
-        // console.log(error);
       })
       .finally(() => {
-        // window.location.reload();
         dispatch(loadingStop());
       });
     handleMenuClose();
@@ -193,21 +167,6 @@ const Header = ({ props }) => {
           <MenuItem className="user_name">
             {user.token.user.first_name}
           </MenuItem>
-          {/* <MenuItem onClick={handleMenuClose} className="mobile__only">
-            <Link color="inherit" to="/Purchased">
-              My Widgets
-            </Link>
-          </MenuItem> */}
-          {/* <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
-            <Link color="inherit" to="/" className="">
-              <ListItemIcon>
-                <BorderColorIcon fontSize="small" />
-              </ListItemIcon>
-              <Typography variant="inherit" noWrap>
-                Edit profile
-              </Typography>
-            </Link>
-          </MenuItem> */}
           <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
             <Link color="inherit" to="/Purchased" className="">
               <ListItemIcon>
@@ -218,16 +177,6 @@ const Header = ({ props }) => {
               </Typography>
             </Link>
           </MenuItem>
-          {/* <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
-            <Link color="inherit" to="/" className="">
-              <ListItemIcon>
-                <VpnKeyOutlinedIcon fontSize="small" />
-              </ListItemIcon>
-              <Typography variant="inherit" noWrap>
-                Change Password
-              </Typography>
-            </Link>
-          </MenuItem> */}
           <MenuItem onClick={handleLogout} className="profile_menu__Link">
             <Link color="inherit" className="">
               <ListItemIcon>
@@ -242,8 +191,6 @@ const Header = ({ props }) => {
       )}
     </>
   );
-
-  // const mobileMenuId = "primary-search-account-menu-mobile";
 
   return (
     <>
@@ -275,13 +222,8 @@ const Header = ({ props }) => {
             ) : (
               <div className={classes.sectionDesktop}>
                 <div className="user-after-login">
-                  {/* <Link color="inherit" to="/Purchased" className="my-widgets">
-                    My widgets
-                  </Link> */}
                   <div className="shoping__card">
                     <Link to="cart">
-                      {/* <Badge color="secondary"> */}
-
                       <Badge
                         badgeContent={
                           isPayment ? 0 : carts.length ? carts.length : 0
@@ -311,7 +253,7 @@ const Header = ({ props }) => {
                         : ""}
                     </Avatar>
 
-                    <KeyboardArrowDown />
+                    {anchorEl ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                   </CustomButton>
                 </div>
               </div>
@@ -327,7 +269,6 @@ const Header = ({ props }) => {
         className="popup-background popup-container__iner--xl border-radius "
       >
         <Grid container spacing={1} className="popup-padding">
-          {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
           <Grid item xs={12} sm={12} lg={12}>
             <Login />
           </Grid>
@@ -339,7 +280,6 @@ const Header = ({ props }) => {
         className="popup-background popup-container__iner--xl border-radius "
       >
         <Grid container spacing={3} className="popup-padding">
-          {/* <Grid item xs={6} sm={6} className="login-background"></Grid> */}
           <Grid item xs={12} sm={12} lg={12}>
             <Registration />
           </Grid>

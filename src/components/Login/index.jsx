@@ -23,8 +23,7 @@ import { LOGIN } from "../../config/ApiUrl";
 import UserVerification from "../userVerify";
 import { getItemFromCart } from "../../redux/cart/action";
 import { listProducts } from "../../redux/product/product-action";
-
-// import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 class Login extends Component {
   state = {
@@ -81,7 +80,11 @@ class Login extends Component {
               isVerifyPopup: true,
               data: false,
             });
-            localStorage.setItem("verificationEmail", email);
+            LocalStorageUtils.setLocalStorage(
+              "set",
+              "verificationEmail",
+              email
+            );
           } else {
             Toaster.error(res.detail.message, "topCenter");
           }

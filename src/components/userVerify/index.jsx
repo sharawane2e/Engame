@@ -21,12 +21,12 @@ import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
 import { SEND_VERIFICATION_EMAIL } from "../../config/ApiUrl";
 import { Typography } from "@material-ui/core";
-// import LocalStorageUtils from "../../util/LocalStorageUtils";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import errorImg from "../../assets/images/error.svg";
 import Login from "../Login/index";
 import { useDispatch, useSelector } from "react-redux";
 import { ErrorMessages } from "../../constants/Messages";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 const UserVerification = () => {
   const [isWantVerificationEmail, setIsWantVerificationEmail] = useState(true);
@@ -56,7 +56,7 @@ const UserVerification = () => {
         dispatch(loadingStop());
       })
       .finally(() => {
-        localStorage.removeItem("verificationEmail");
+        LocalStorageUtils.setLocalStorage("remove", "verificationEmail");
       });
   };
   return (

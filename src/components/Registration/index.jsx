@@ -8,7 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { UserValidation } from "../../util/FormValidation";
+import { ResetPassword, UserValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import Link from "@material-ui/core/Link";
 import Toaster from "../../util/Toaster";
@@ -27,6 +27,7 @@ import errorImg from "../../assets/images/error.svg";
 import { Typography } from "@material-ui/core";
 import warning_icon from "../../assets/images/warning_icon.svg";
 import { ErrorMessages } from "../../constants/Messages";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 class Registration extends Component {
   state = {
@@ -95,24 +96,29 @@ class Registration extends Component {
       ApiRequest.request(REGISTRATION, "POST", user)
         .then((res) => {
           if (res.status) {
-            Toaster.sucess(res.detail.message, "topCenter");
+            // Toaster.sucess(res.detail.message, "topCenter");
             this.setState({ isRegistrationComplete: true });
             // window.location.reload();
-          } else if (!res.status && !res.data[0]?.is_verified) {
+          } else if (
+            !res.status &&
+            !res.data[0]?.is_verified &&
+            res.data[0]?.hasOwnProperty("is_verified")
+          ) {
             this.setState({
               isVerifyPopup: true,
               data: false,
             });
-            localStorage.setItem("verificationEmail", email);
+            LocalStorageUtils.setLocalStorage(
+              "set",
+              "verificationEmail",
+              email
+            );
             this.setState({ isRegistrationComplete: false });
           } else {
             // Toaster.error(res.detail.message, "topCenter");
             this.setState({ isRegistrationComplete: false });
           }
           this.setState({ registrationMessage: res.detail.message });
-        })
-        .catch((error) => {
-          // console.log(error);
         })
         .finally(() => {
           this.props.dispatch(loadingStop());
@@ -125,7 +131,7 @@ class Registration extends Component {
     }
   };
 
-  _handleKeyDown = (e) => {
+  _handleKeyDown = (e, type) => {
     if (e.key === "Enter") {
       e.preventDefault();
       this.handleRegister();
@@ -143,7 +149,6 @@ class Registration extends Component {
   };
 
   checkPasswordMatch = (e) => {
-    alert("check");
     if (e.target.value == this.state.confirmpassword) {
       this.setState({ isPasswordMatch: true });
     } else {
@@ -162,15 +167,6 @@ class Registration extends Component {
       [key]: value,
       formErrors: { ...this.state.formErrors, [key]: errorMessage },
     });
-
-    if (key == "confirmpassword") {
-      if (e.target.value == this.state.confirmpassword) {
-        this.setState({ isPasswordMatch: true });
-      } else {
-        this.setState({ isPasswordMatch: false });
-        this.setState({ registrationMessage: ErrorMessages.PASSWORD_MATCH });
-      }
-    }
   };
 
   backVerify = () => {

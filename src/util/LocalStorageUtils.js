@@ -11,6 +11,16 @@ class LocalStorageUtils {
     localStorage.removeItem("auth");
   }
 
+  static setLocalStorage(method, key, value) {
+    if (method == "set") {
+      localStorage.setItem(key, value);
+    } else if (method == "remove") {
+      localStorage.removeItem(key);
+    } else if (method == "clear") {
+      localStorage.clear();
+    }
+  }
+
   static getToken() {
     const user = this.getUserFromLocalStorage();
     //console.log("user", user);

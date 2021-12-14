@@ -7,9 +7,10 @@
   position: absolute;
   right: -32px;
   top: -7px;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-top: 50px solid #f15b5b;
+  @include border("-left", 50px, $bsolid, $transparent);
+  @include border("-right", 50px, $bsolid, $transparent);
+  @include border("-top", 50px, $bsolid, $primary);
+
   transform: rotate(225deg);
 }
 .popup-close {
@@ -27,7 +28,7 @@
 .tool-perview-data {
   .popup-close {
     > svg {
-      fill: #000 !important;
+      fill: $black !important;
     }
   }
 }
@@ -52,7 +53,8 @@
     width: 75px;
   }
   .sucess_message {
-    padding: 20px 5px;
+    @include space(padding, top-bottom, $padding-20, $padding-20);
+    @include space(padding, left-right, $padding-5, $padding-5);
   }
   #{&}__iner {
     position: absolute;
@@ -67,8 +69,6 @@
     width: 1100px;
     @include breakpoint(Ipad-pro) {
       width: 90%;
-      // height: 90vh;
-      // min-height: 500px;
       overflow-y: auto;
     }
   }
@@ -77,9 +77,6 @@
     width: 520px;
     @include breakpoint(Ipad-pro) {
       width: 90%;
-      // min-height: 90vh;
-      // min-height: 480px;
-      // overflow-x: auto;
     }
   }
 
@@ -87,7 +84,6 @@
     width: 500px;
     @include breakpoint(Ipad-pro) {
       width: 90%;
-
       min-height: 500px;
     }
   }
@@ -112,7 +108,7 @@
     @include space(padding, left-right, $padding-30, $padding-30);
     display: flex;
     font-family: map-get($map: $font-family, $key: "font-barlowregular");
-    font-weight: 600;
+    font-weight: $font-600;
   }
   #{&}__text {
     display: flex;
@@ -172,7 +168,4 @@
       flex-basis: 100% !important;
     }
   }
-  // .popup-container__footer {
-  //   display: flex;
-  // }
 }

@@ -14,6 +14,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { CHECKOUT } from "../../config/ApiUrl";
 import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 const SubscriptionRenew = ({ updateData, onClose }) => {
   // console.log("cart value", updateData);
@@ -33,8 +34,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
 
-  localStorage.setItem("valuePrice", valuePrice);
-  // console.log("valuePrice", valuePrice);
+  LocalStorageUtils.setLocalStorage("set", "valuePrice", valuePrice);
 
   const handleCalculatePrice = (e) => {
     if (e.target.value <= 0) {
@@ -97,7 +97,11 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
     ApiRequest.request(CHECKOUT, "POST", CheckoutData).then((res) => {
       if (res.status) {
         stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
-        localStorage.setItem("ExtendData", JSON.stringify(updateData));
+        LocalStorageUtils.setLocalStorage(
+          "set",
+          "ExtendData",
+          JSON.stringify(updateData)
+        );
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }

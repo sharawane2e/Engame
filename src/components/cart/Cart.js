@@ -39,6 +39,7 @@ import BlankSection from "../emptyPage/blankSection";
 import CartLoader from "./cartLoader";
 import { ErrorMessages } from "../../constants/Messages";
 import Toaster from "../../util/Toaster";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -76,7 +77,7 @@ const Cart = () => {
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       if (res.status) {
         stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
-        localStorage.setItem("isPayment", true);
+        LocalStorageUtils.setLocalStorage("set", "isPayment", true);
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }

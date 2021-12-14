@@ -1,5 +1,6 @@
 import * as actionTypes from "./user-types";
 import ApiRequest from "../../util/ApiRequest";
+import LocalStorageUtils from "../../util/LocalStorageUtils";
 const initialState = {
   isLoggedIn: false,
 };
@@ -25,14 +26,16 @@ const userReducer = (state = newAuth, action) => {
         isLoggedIn: true,
         token: action.payload,
       };
-
-      localStorage.setItem("auth", JSON.stringify(newState));
-      // ApiRequest.setAuthToken(action.payload);
+      LocalStorageUtils.setLocalStorage(
+        "set",
+        "auth",
+        JSON.stringify(newState)
+      );
 
       return newState;
 
     case actionTypes.LOGOUT:
-      //ApiRequest.setAuthToken();
+      LocalStorageUtils.setLocalStorage("clear");
       return initialState;
     default:
       return state;

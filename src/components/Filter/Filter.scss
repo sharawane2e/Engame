@@ -300,8 +300,8 @@
     font-weight: 600;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: $red;
-    color: $white;
+    background-color: $mid-gray;
+    color: $black;
     font-family: map-get($map: $font-family, $key: "font-barlowregular");
   }
 }
