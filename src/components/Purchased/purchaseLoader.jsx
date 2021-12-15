@@ -1,56 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Breadcrumbs } from "@material-ui/core";
+import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import SwitchUnstyled from "@mui/core/SwitchUnstyled";
-import Tooltip from "@material-ui/core/Tooltip";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { ReactComponent as EmbdedCodeImg } from "../../assets/images/embed-code.svg";
-import { ReactComponent as ConsumptionReportImg } from "../../assets/images/consumption-report.svg";
-import { ReactComponent as DownloadInvoiceImg } from "../../assets/images/Invoice.svg";
-import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-// import GetAppIcon from "@material-ui/icons/GetApp";
-import TimerIcon from "@material-ui/icons/Timer";
-import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
-import { useDispatch, useSelector } from "react-redux";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { withStyles } from "@material-ui/core/styles";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-// import ReceiptIcon from "@material-ui/icons/Receipt";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { ExportToCsv } from "export-to-csv";
-import Header from "../Header";
-import CustomPopup from "../CustomPopup";
-import Footer from "../Footer";
-import Toaster from "../../util/Toaster";
-import EmptyPage from "../emptyPage";
-import ApiRequest from "../../util/ApiRequest";
-import warning_icon from "../../assets/images/warning_icon.svg";
-import CustomButton from "../widgets/Button";
-import emptyWidgett from "../../assets/images/empty-widget.gif";
-import SubscriptionRenew from "../SubscriptionType/subscriptRenew";
-import { BASE_URL } from "../../config/ApiUrl";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { logOutUser } from "../../redux/user/user-action";
-import { useHistory } from "react-router-dom";
-import { ErrorMessages } from "../../constants/Messages";
-import { removeFromCart } from "../../redux/cart/action";
-import {
-  PURCHASED_ITEM,
-  PLAY_PAUSE,
-  PAYMENT_SUCESS,
-  CONSUMPTION_STATEMENT,
-} from "../../config/ApiUrl";
-import exportFromJSON from "export-from-json";
-import NoSearchFound from "../NoSearchFound";
-import NoresultImg from "../../assets/images/not-found.svg";
-import { getItemFromCart } from "../../redux/cart/action";
-import BlankSection from "../emptyPage/blankSection";
 import Skeleton from "@mui/material/Skeleton";
 
 const PurchaseSingleItem = () => {

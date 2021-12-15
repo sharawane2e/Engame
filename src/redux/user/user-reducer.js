@@ -1,6 +1,7 @@
 import * as actionTypes from "./user-types";
 import ApiRequest from "../../util/ApiRequest";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 const initialState = {
   isLoggedIn: false,
 };
@@ -9,7 +10,6 @@ const getAuthState = () => {
   const auth = localStorage.getItem("auth");
   try {
     const authObj = JSON.parse(auth);
-    //    const { access_token, refresh_token } = authObj.token;
     const { access_token, refresh_token } = authObj.token;
     return authObj;
   } catch (error) {
@@ -27,7 +27,7 @@ const userReducer = (state = newAuth, action) => {
         token: action.payload,
       };
       LocalStorageUtils.setLocalStorage(
-        "set",
+        LocalStorageType.SET,
         "auth",
         JSON.stringify(newState)
       );
@@ -35,7 +35,7 @@ const userReducer = (state = newAuth, action) => {
       return newState;
 
     case actionTypes.LOGOUT:
-      LocalStorageUtils.setLocalStorage("clear");
+      LocalStorageUtils.setLocalStorage(LocalStorageType.CLEAR);
       return initialState;
     default:
       return state;

@@ -4,7 +4,7 @@ import Overlay from "../Overlay";
 import { getClassNames } from "../../util/Utility";
 
 const CutomPopup = (props) => {
-  const { children, open, onClose, headerText = "", footerButton } = props;
+  const { children, open, onClose, headerText = "" } = props;
   return open ? (
     <>
       <Overlay position="absolute" />

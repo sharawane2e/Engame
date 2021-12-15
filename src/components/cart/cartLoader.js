@@ -2,7 +2,6 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -26,7 +25,7 @@ const CartSingleItemLoader = () => {
             <Skeleton variant="rectangular" height={120} />
           </Grid>
         </Grid>
-        <Grid item xl={10} lg={10} md={10} sm={12} xs={12} sm container>
+        <Grid item xl={10} lg={10} md={10} sm={12} xs={12} container>
           <Grid
             item
             xs

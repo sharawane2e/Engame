@@ -5,11 +5,9 @@ import "react-app-polyfill/stable";
 
 const AppRouting = (props) => {
   const { routes } = props;
-  // console.log(props)
   return (
     <Switch>
       {routes.map(function (route, index) {
-        //  console.log(route)
         return (
           <Route
             key={index}

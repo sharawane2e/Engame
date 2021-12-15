@@ -4,10 +4,10 @@ import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { addToCart, getItemFromCart } from "../../redux/cart/action";
+import { addToCart } from "../../redux/cart/action";
 import ApiRequest from "../../util/ApiRequest";
 import { CART_STANDARD_PRICE } from "../../config/ApiUrl";
-import Toaster from "../../util/Toaster";
+// import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionType = ({ toolId, onClose }) => {
@@ -47,9 +47,7 @@ const SubscriptionType = ({ toolId, onClose }) => {
       .then((res) => {
         setBase(res.data[0].base_price);
       })
-      .catch((error) => {
-        // console.log(error);
-      })
+      .catch((error) => {})
       .finally(() => {
         dispatch(loadingStop());
       });
@@ -65,7 +63,6 @@ const SubscriptionType = ({ toolId, onClose }) => {
     //   .then((response) => response.json())
     //   .then((result) => {
     //     setBase(result.base_price);
-    //     // console.log("result.base_price", result.base_price);
     //     dispatch(loadingStop());
     //   });
   };
@@ -78,7 +75,6 @@ const SubscriptionType = ({ toolId, onClose }) => {
     price: itemPrice,
     currency: "$",
   };
-  // console.log("user", productInfo);
   const handleAddCart = async () => {
     dispatch(addToCart(productInfo));
     // Toaster.sucess("You have item add successfully!", "topCenter");

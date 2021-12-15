@@ -11,9 +11,6 @@ export const addToCart = (userData) => (dispatch) => {
       dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res.data });
       dispatch(getItemFromCart());
     })
-    .catch((error) => {
-      // console.log(error);
-    })
     .finally(() => {
       dispatch(loadingStop());
     });
@@ -26,11 +23,8 @@ export const getItemFromCart =
     ApiRequest.request(GET_FROM_CART, "GET")
       .then((res) => {
         dispatch({ type: actionTypes.CART_ITEM_GET, payload: res.data });
-        // console.log(res, "Cart data list");
       })
-      .catch((error) => {
-        // console.log(error);
-      })
+      .catch((error) => {})
       .finally(() => {
         if (cbFinally && typeof cbFinally === "function") {
           cbFinally();
@@ -39,13 +33,9 @@ export const getItemFromCart =
   };
 
 export const updateCartIteam = (updatedid, plans) => (dispatch) => {
-  ApiRequest.request(CART_DETAILS`${updatedid}/`, "PUT", plans)
-    .then((res) => {
-      dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: res.data });
-    })
-    .catch((error) => {
-      // console.log(error);
-    });
+  ApiRequest.request(CART_DETAILS`${updatedid}/`, "PUT", plans).then((res) => {
+    dispatch({ type: actionTypes.CART_ITEM_UPDATE, payload: res.data });
+  });
 };
 
 export const removeFromCart = (productId) => (dispatch) => {

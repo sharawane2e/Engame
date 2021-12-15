@@ -1,22 +1,14 @@
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import HomeBanner1 from "../../assets/images/home-banner-1.png";
-import BrandTargetdnd from "../../assets/images/BrandTarget-dnd.svg";
-import ExclusiveDnd from "../../assets/images/Container_exclusive_dnd.svg";
 
 const CarouselAfterLogin = () => {
   var Carousel = require("react-responsive-carousel").Carousel;
   return (
     <div className="homeFullBanner">
-      <Carousel
-        showArrows={true}
-        // onChange={onChange}
-        // onClickItem={onClickItem}
-        // onClickThumb={onClickThumb}
-      >
+      <Carousel showArrows={true}>
         <div>
-          <img src={HomeBanner1} />
+          <img src={HomeBanner1} alt="First banner" />
           <div className="textArea">
             <p className="textArea__filter-text">
               Creative tools can generate
@@ -28,7 +20,7 @@ const CarouselAfterLogin = () => {
           </div>
         </div>
         <div>
-          <img src={HomeBanner1} />
+          <img src={HomeBanner1} alt="Second banner" />
           <div className="textArea">
             <p className="textArea__filter-text">
               Creative tools can generate
@@ -40,7 +32,7 @@ const CarouselAfterLogin = () => {
           </div>
         </div>
         <div>
-          <img src={HomeBanner1} />
+          <img src={HomeBanner1} alt="Third banner" />
           <div className="textArea">
             <p className="textArea__filter-text">
               Creative tools can generate

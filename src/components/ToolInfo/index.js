@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -18,11 +18,6 @@ const ToolInfo = (props) => {
   const handleChange = (initialOpenTabs) => (event, isExpanded) => {
     setExpanded(isExpanded ? initialOpenTabs : "");
   };
-  const [getHowToWorkData, setGetHowToWorkData] = useState([]);
-
-  useEffect(() => {
-    setGetHowToWorkData(props.howItWorkData);
-  }, []);
 
   return (
     <div className="cardInfo custom-scroll">

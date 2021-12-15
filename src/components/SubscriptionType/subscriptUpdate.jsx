@@ -3,15 +3,10 @@ import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch } from "react-redux";
-//import Toaster from "../../util/Toaster";
-import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-//import { useHistory } from "react-router-dom";
-// import { addToCart } from "../../redux/cart/action";
 import { getItemFromCart } from "../../redux/cart/action";
 import ApiRequest from "../../util/ApiRequest";
 import { CART_DETAILS } from "../../config/ApiUrl";
-import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionUpdate = ({ updateData, onClose }) => {
@@ -47,19 +42,18 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   };
 
   const handleCalculatePrice = (e) => {
-    let value = e.target.value > 0 ? e.target.value : 1;
-
+    var ItemCount = 1;
     if (e.target.value <= 0) {
-      var ItemCount = 1;
+      ItemCount = 1;
       setIsCountLimit(ErrorMessages.MINIMUM_COUNT);
     } else if (e.target.value > 999 && istype === "days") {
-      var ItemCount = 999;
+      ItemCount = 999;
       setIsCountLimit(ErrorMessages.Maxium_days_addToCart);
     } else if (e.target.value > 100000 && istype === "hits") {
-      var ItemCount = 100000;
+      ItemCount = 100000;
       setIsCountLimit(ErrorMessages.Maxium_hits_addToCart);
     } else {
-      var ItemCount = e.target.value;
+      ItemCount = e.target.value;
       setIsCountLimit("");
     }
 

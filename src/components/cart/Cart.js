@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-// import {
-//   Grid,
-//   Container,
-//   Typography,
-//   ButtonBase,
-//   Breadcrumbs,
-//   Tooltip,
-//   Paper,
-// } from "@mui/material";
 import { Breadcrumbs } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -18,11 +8,9 @@ import Container from "@material-ui/core/Container";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
-
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-
 import Header from "../Header";
 import Footer from "../Footer";
 import CustomPopup from "../CustomPopup";
@@ -34,12 +22,12 @@ import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdat
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
-import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import BlankSection from "../emptyPage/blankSection";
+import { loadingStart } from "../../redux/loader/loader-actions";
 import CartLoader from "./cartLoader";
 import { ErrorMessages } from "../../constants/Messages";
 import Toaster from "../../util/Toaster";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -77,7 +65,11 @@ const Cart = () => {
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       if (res.status) {
         stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
-        LocalStorageUtils.setLocalStorage("set", "isPayment", true);
+        LocalStorageUtils.setLocalStorage(
+          LocalStorageType.SET,
+          "isPayment",
+          true
+        );
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }

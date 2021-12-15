@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-// import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Link from "@material-ui/core/Link";
 import { ForgotValidation } from "../../util/FormValidation";
@@ -16,6 +15,7 @@ import { Typography } from "@material-ui/core";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import errorImg from "../../assets/images/error.svg";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
 class ForgotPassword extends Component {
   state = {
@@ -48,8 +48,6 @@ class ForgotPassword extends Component {
 
       ApiRequest.request(FORGOT_PASSWORD, "POST", { email: email })
         .then((res) => {
-          // console.log("this.state.props", this.state.props);
-          // window.location.reload();
           if (res.status && res.data[0]?.is_verified) {
             Toaster.sucess(res.detail.message, "topCenter");
             this.setState({
@@ -66,7 +64,7 @@ class ForgotPassword extends Component {
               isPasswordSent: false,
             });
             LocalStorageUtils.setLocalStorage(
-              "set",
+              LocalStorageType.SET,
               "verificationEmail",
               email
             );
@@ -177,12 +175,12 @@ class ForgotPassword extends Component {
           <UserVerification />
         ) : this.state.isPasswordSent ? (
           <div className="emptySection">
-            <img src={sucessfullImg} />
+            <img src={sucessfullImg} alt="successfully completed" />
             <Typography component="p">{this.state.PasswordResetRes}</Typography>
           </div>
         ) : (
           <div className="emptySection">
-            <img src={errorImg} />
+            <img src={errorImg} alt="error found" />
             <Typography component="p">{this.state.PasswordResetRes}</Typography>
           </div>
         )}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import LocalStorageUtils from "./LocalStorageUtils";
-import Toaster from "../util/Toaster";
+//import Toaster from "../util/Toaster";
+import LocalStorageType from "../config/LocalStorageType";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_Dev_BaseUrl,
@@ -27,11 +28,7 @@ const ApiRequest = {
     } catch (error) {
       if (error.response) {
         if (error.response.status === 401) {
-          LocalStorageUtils.removeUserFromLocalStorage();
-          let location = window.location.href.split("#");
-          let baseUrl = location[0];
-          // localStorage.removeItem("auth");
-          window.location.href = `${baseUrl}#/`;
+          LocalStorageUtils.setLocalStorage(LocalStorageType.CLEAR);
           window.location.reload();
         } else if (error.response.status === 400) {
           response = error.response.data;

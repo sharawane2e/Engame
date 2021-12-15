@@ -16,9 +16,9 @@ const CarouselBeforeLogin = () => {
         width={250}
         className="homeBanner"
       >
-        <img src={BrandTargetdnd} />
-        <img src={librarycards} />
-        <img src={ExclusiveDnd} />
+        <img src={BrandTargetdnd} alt="First banner" />
+        <img src={librarycards} alt="Second banner" />
+        <img src={ExclusiveDnd} alt="Third banner" />
       </Carousel>
     </>
   );

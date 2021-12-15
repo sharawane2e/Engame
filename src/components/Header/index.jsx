@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-// import AccountCircle from "@material-ui/icons/AccountCircle";
-import MoreIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import { Link, useHistory } from "react-router-dom";
@@ -19,46 +16,26 @@ import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
-// import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
 import { getItemFromCart } from "../../redux/cart/action";
 import Tooltip from "@material-ui/core/Tooltip";
 import ApiRequest from "../../util/ApiRequest";
-import { BASE_URL, LOGOUT } from "../../config/ApiUrl";
-// import axios from "axios";
-
-// import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import { KeyboardArrowUp, Pending, PersonPinCircle } from "@mui/icons-material";
+import { LOGOUT } from "../../config/ApiUrl";
+import { KeyboardArrowUp } from "@mui/icons-material";
 import { ListItemIcon } from "@mui/material";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
-import UserVerification from "../userVerify";
-import { listProducts } from "../../redux/product/product-action";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
+import { listProducts } from "../../redux/product/product-action";
 
 const useStyles = makeStyles((theme) => ({
-  // sectionDesktop: {
-  //   display: "none",
-  //   [theme.breakpoints.up("sm")]: {
-  //     display: "flex",
-  //   },
-  // },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("sm")]: {
@@ -86,7 +63,6 @@ const Header = ({ props }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
   const user = useSelector((state) => state.user);
   const [isPayment, setIsPayment] = useState();
@@ -100,18 +76,21 @@ const Header = ({ props }) => {
   }, [user]);
 
   useEffect(() => {
-    LocalStorageUtils.setLocalStorage("remove", "verificationEmail");
+    LocalStorageUtils.setLocalStorage(
+      LocalStorageType.REMOVE,
+      "verificationEmail"
+    );
   }, []);
 
   const cartCountManagement = async () => {
     setIsPayment(localStorage.getItem("isPayment") ? true : false);
-    LocalStorageUtils.setLocalStorage("remove", "isPayment");
+    LocalStorageUtils.setLocalStorage(LocalStorageType.REMOVE, "isPayment");
   };
 
   useEffect(() => {
     cartCountManagement();
     const timer = setTimeout(() => {
-      LocalStorageUtils.setLocalStorage("remove", "auth");
+      LocalStorageUtils.setLocalStorage(LocalStorageType.REMOVE, "auth");
       window.location.reload();
       history.push("/");
     }, LOGOUT_TIME);
@@ -133,19 +112,13 @@ const Header = ({ props }) => {
   };
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const menuId = "primary-search-account-menu";

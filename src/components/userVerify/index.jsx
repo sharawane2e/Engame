@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-// import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import React, { useState } from "react";
 import CustomButton from "../../components/widgets/Button";
-import Link from "@material-ui/core/Link";
-import { LoginValidation } from "../../util/FormValidation";
-// import { BASE_URL } from "../../config/ApiUrl";
-import Registration from "../../components/Registration";
-import Toaster from "../../util/Toaster";
-import ForgotPassword from "../../components/ForgotPassword";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { connect } from "react-redux";
-import { loginUser } from "../../redux/user/user-action";
-import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
 import { SEND_VERIFICATION_EMAIL } from "../../config/ApiUrl";
 import { Typography } from "@material-ui/core";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import errorImg from "../../assets/images/error.svg";
 import Login from "../Login/index";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ErrorMessages } from "../../constants/Messages";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
 const UserVerification = () => {
   const [isWantVerificationEmail, setIsWantVerificationEmail] = useState(true);
@@ -56,7 +40,10 @@ const UserVerification = () => {
         dispatch(loadingStop());
       })
       .finally(() => {
-        LocalStorageUtils.setLocalStorage("remove", "verificationEmail");
+        LocalStorageUtils.setLocalStorage(
+          LocalStorageType.REMOVE,
+          "verificationEmail"
+        );
       });
   };
   return (
@@ -79,7 +66,7 @@ const UserVerification = () => {
         </div>
       ) : isWantVerificationEmail && isEmailSent && !isWantLogin ? (
         <div className="emptySection">
-          <img src={sucessfullImg} />
+          <img src={sucessfullImg} alt="sucessfully completed" />
           <Typography component="p">
             {emailverificationMailSentMessage}
           </Typography>
@@ -96,7 +83,7 @@ const UserVerification = () => {
         <Login />
       ) : (
         <div className="emptySection">
-          <img src={errorImg} />
+          <img src={errorImg} alt="error found" />
           <Typography component="p">
             {ErrorMessages.SOMETHING_WENT_WRONG}
           </Typography>

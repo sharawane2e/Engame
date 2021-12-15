@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-// import librarycards from "../../assets/images/library-cards.svg";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,13 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useAutocomplete } from "@mui/core/AutocompleteUnstyled";
 import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
-import { styled } from "@mui/material/styles";
-import { useStore } from "react-redux";
 import { listProducts } from "../../redux/product/product-action";
 import { CATEGORIES_LIST } from "../../config/ApiUrl";
 import ApiRequest from "../../util/ApiRequest";
-import { loadingStop } from "../../redux/loader/loader-actions";
 import CarouselAfterLogin from "../Carousel/CarouselAfterLogin";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
@@ -65,9 +60,6 @@ const Filter = () => {
   });
 
   const FilterAction = async (SelectedCategoriesList, searchText) => {
-    console.log("Selected data", SelectedCategoriesList);
-    console.log("Selected val", value);
-
     let selectedCategoriesId = SelectedCategoriesList.map((item) => {
       return item.id;
     });
@@ -90,7 +82,6 @@ const Filter = () => {
   };
 
   const GetCategoriesList = () => {
-    console.log("user data", user.isLoggedIn);
     if (user.isLoggedIn && categoriesList.length > 0) {
       ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
         setCategoriesList(res?.data[0] || []);

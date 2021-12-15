@@ -1,7 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import CustomButton from "../widgets/Button";
-import { propsToClassKey } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 
 const EmptyPage = (props) => {

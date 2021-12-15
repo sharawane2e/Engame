@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { ReactComponent as PurchaseImg } from "../../assets/images/Purchase.svg";
+import { ReactComponent as RePurchaseImg } from "../../assets/images/re_purchase.svg";
 import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
 import { BASE_URL, PURCHASED_ITEM } from "../../config/ApiUrl";
-import { useHistory } from "react-router-dom";
 import Login from "../Login";
 import Registration from "../Registration";
 import warning_icon from "../../assets/images/warning_icon.svg";
@@ -42,9 +42,7 @@ const ToolCards = () => {
   const { loading, error, products } = productList;
   const [TypeClick, setTypeClick] = useState("");
   const [isInfoPopup, setIsInfoPopup] = useState(false);
-
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const [purchaseList, setPurchaseList] = useState([]);
 
   const handleToolClick = (tool) => {
     setSelectedTool(tool);
@@ -55,11 +53,22 @@ const ToolCards = () => {
     setLoginIsOpen(true);
   };
 
+  const GetPurchaseIcon = () => {
+    ApiRequest.request(PURCHASED_ITEM).then((res) => {
+      if (res) {
+        setPurchaseList(res);
+        console.log("Purchase", purchaseList);
+        console.log("res", res);
+      }
+    });
+  };
+
   useEffect(() => {
     // debugger;
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
+      GetPurchaseIcon();
     }
   }, [user]);
 
@@ -80,7 +89,7 @@ const ToolCards = () => {
             />
           ) : (
             <Grid container spacing={4}>
-              {products.length == 0 ? (
+              {products.length === 0 ? (
                 <NoSearchFound
                   img={NoresultImg}
                   heading={ErrorMessages.NoSearchResultMessage}
@@ -105,7 +114,10 @@ const ToolCards = () => {
                       >
                         <Paper className="toolcard__imageblck">
                           <div className="toolcard__image">
-                            <img src={BASE_URL + tooldata.imgUrl} />
+                            <img
+                              src={BASE_URL + tooldata.imgUrl}
+                              alt="Widget"
+                            />
                             <div className="toolcard__preview">
                               <CustomButton
                                 className="toolcard__perview-button"
@@ -151,7 +163,11 @@ const ToolCards = () => {
                                     setPopupId(tooldata.id);
                                   }}
                                 >
-                                  <ShoppingCartIcon />
+                                  {tooldata.is_purchased ? (
+                                    <RePurchaseImg />
+                                  ) : (
+                                    <PurchaseImg />
+                                  )}
                                 </div>
                               </Tooltip>
                             </div>
@@ -182,7 +198,10 @@ const ToolCards = () => {
                       >
                         <Paper className="toolcard__imageblck">
                           <div className="toolcard__image">
-                            <img src={BASE_URL + tooldata.imgUrl} />
+                            <img
+                              src={BASE_URL + tooldata.imgUrl}
+                              alt="widget"
+                            />
                             <div className="toolcard__preview">
                               <CustomButton
                                 className="toolcard__perview-button"
@@ -230,7 +249,7 @@ const ToolCards = () => {
                                     setTypeClick(ErrorMessages.loginAlert);
                                   }}
                                 >
-                                  <ShoppingCartIcon />
+                                  <PurchaseImg />
                                 </div>
                               </Tooltip>
                             </div>

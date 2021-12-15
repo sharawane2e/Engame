@@ -1,11 +1,9 @@
 import ValidationRegex from "../constants/ValidationRegex";
 import { ErrorMessages } from "../constants/Messages";
 import { PASSWORD_MIN_LENGTH } from "../constants/ConstantValues";
-import { useDispatch, useSelector } from "react-redux";
 import { EMAIL_ALLOWED } from "../config/ApiUrl";
-import { loadingStart, loadingStop } from "../redux/loader/loader-actions";
 import ApiRequest from "../util/ApiRequest";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const validateEmailPattern = (email) => ValidationRegex.EMAIL.test(email);
 const namePattern = (name) => ValidationRegex.ONLY_ALPHA.test(name);
@@ -15,16 +13,6 @@ class ValidationResponse {
   isValid = true;
   message = "";
 }
-
-const handleCMail = (value) => {
-  let EmailData = {
-    email: value,
-  };
-  ApiRequest.request(EMAIL_ALLOWED, "POST", EmailData).then((res) => {
-    return res;
-    // console.log(res);
-  });
-};
 
 export const resetPasswordValidate = (value) => {
   const validationResponse = new ValidationResponse();
@@ -95,6 +83,7 @@ export class UserValidation extends Validation {
     super(props);
     this.state = {
       legalEmail: true,
+      password: "",
     };
   }
   validateField = (field, value, context) => {
@@ -114,8 +103,6 @@ export class UserValidation extends Validation {
               email: value,
             };
             ApiRequest.request(EMAIL_ALLOWED, "POST", EmailData).then((res) => {
-              // debugger;
-              // console.log("res.status", res);
               if (res.status) {
                 this.state.legalEmail = true;
               } else {
@@ -152,6 +139,8 @@ export class UserValidation extends Validation {
         } else if (passwordPattern(value)) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_PATTERN;
+        } else if (value) {
+          this.state.password = value;
         }
         break;
       case "confirmpassword":
@@ -161,6 +150,9 @@ export class UserValidation extends Validation {
         } else if (value.length < PASSWORD_MIN_LENGTH) {
           validationResponse.isValid = false;
           validationResponse.message = ErrorMessages.PASSWORD_MIN;
+        } else if (this.state.password !== value) {
+          validationResponse.isValid = false;
+          validationResponse.message = ErrorMessages.PASSWORD_MATCH;
         }
         break;
 

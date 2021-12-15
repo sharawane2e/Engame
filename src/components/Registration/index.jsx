@@ -1,33 +1,28 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-// import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FilledInput from "@material-ui/core/FilledInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { ResetPassword, UserValidation } from "../../util/FormValidation";
+import { UserValidation } from "../../util/FormValidation";
 import Login from "../../components/Login";
 import Link from "@material-ui/core/Link";
-import Toaster from "../../util/Toaster";
+// import Toaster from "../../util/Toaster";
 import CustomButton from "../../components/widgets/Button";
 import { connect } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { BASE_URL } from "../../config/ApiUrl";
-// import { v4 as uuidv4 } from "uuid";
 import ApiRequest from "../../util/ApiRequest";
 import { REGISTRATION } from "../../config/ApiUrl";
-// import { useDispatch, useSelector } from "react-redux";
-// import { EMAIL_ALLOWED } from "../../config/ApiUrl";
 import UserVerification from "../userVerify";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
-import errorImg from "../../assets/images/error.svg";
 import { Typography } from "@material-ui/core";
 import warning_icon from "../../assets/images/warning_icon.svg";
 import { ErrorMessages } from "../../constants/Messages";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
 class Registration extends Component {
   state = {
@@ -82,7 +77,6 @@ class Registration extends Component {
       mobile: "91",
     };
 
-    // console.log("name", user);
     const validationResponse = this.UserValidation.validateForm({
       name,
       email,
@@ -109,7 +103,7 @@ class Registration extends Component {
               data: false,
             });
             LocalStorageUtils.setLocalStorage(
-              "set",
+              LocalStorageType.SET,
               "verificationEmail",
               email
             );
@@ -282,7 +276,7 @@ class Registration extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
                         edge="end"
-                        tabindex="-1"
+                        tabIndex="-1"
                       >
                         {this.state.showPassword ? (
                           <Visibility className="fill-eyecolor" />
@@ -297,13 +291,6 @@ class Registration extends Component {
                   {this.state.formErrors.setpassword}
                 </div>
               </FormControl>
-
-              {/* <InputLabel
-                htmlFor="standard-adornment-password"
-                className="input-label"
-              >
-                Confirm Password
-              </InputLabel> */}
               <FormControl
                 className="form-area__control"
                 variant="filled"
@@ -330,7 +317,7 @@ class Registration extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.confirmPasswordShow}
                         edge="end"
-                        tabindex="-1"
+                        tabIndex="-1"
                       >
                         {this.state.showPasswordConfirm ? (
                           <Visibility className="fill-eyecolor" />
@@ -363,7 +350,7 @@ class Registration extends Component {
           </div>
         ) : this.state.isRegistrationComplete ? (
           <div className="emptySection">
-            <img src={sucessfullImg} />
+            <img src={sucessfullImg} alt="successfully completed" />
             <Typography component="p">
               {this.state.registrationMessage}
             </Typography>
@@ -378,7 +365,7 @@ class Registration extends Component {
           </div>
         ) : (
           <div className="emptySection">
-            <img src={warning_icon} />
+            <img src={warning_icon} alt="warning found" />
             <Typography component="p">
               {this.state.registrationMessage}
             </Typography>

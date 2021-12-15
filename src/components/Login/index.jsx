@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-// import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,7 +9,6 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import CustomButton from "../../components/widgets/Button";
 import Link from "@material-ui/core/Link";
 import { LoginValidation } from "../../util/FormValidation";
-// import { BASE_URL } from "../../config/ApiUrl";
 import Registration from "../../components/Registration";
 import Toaster from "../../util/Toaster";
 import ForgotPassword from "../../components/ForgotPassword";
@@ -21,9 +19,8 @@ import FilledInput from "@material-ui/core/FilledInput";
 import ApiRequest from "../../util/ApiRequest";
 import { LOGIN } from "../../config/ApiUrl";
 import UserVerification from "../userVerify";
-import { getItemFromCart } from "../../redux/cart/action";
-import { listProducts } from "../../redux/product/product-action";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
 class Login extends Component {
   state = {
@@ -60,10 +57,6 @@ class Login extends Component {
       email,
       password,
     });
-    let ApiData = {
-      widget_type_id: "",
-      search_string: "",
-    };
 
     if (validationResponse.isFormValid) {
       this.props.dispatch(loadingStart());
@@ -81,7 +74,7 @@ class Login extends Component {
               data: false,
             });
             LocalStorageUtils.setLocalStorage(
-              "set",
+              LocalStorageType.SET,
               "verificationEmail",
               email
             );
@@ -184,7 +177,7 @@ class Login extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
                         edge="end"
-                        tabindex="-1"
+                        tabIndex="-1"
                       >
                         {this.state.showPassword ? (
                           <Visibility className="fill-eyecolor" />

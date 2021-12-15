@@ -3,38 +3,32 @@ import TextField from "@material-ui/core/TextField";
 import CustomButton from "../widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL, STRIPE } from "../../config/ApiUrl";
+import { STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { useHistory } from "react-router-dom";
 import { getItemFromCart } from "../../redux/cart/action";
 import { loadStripe } from "@stripe/stripe-js";
-import { logOutUser } from "../../redux/user/user-action";
-import Typography from "@material-ui/core/Typography";
 import ApiRequest from "../../util/ApiRequest";
 import { CHECKOUT } from "../../config/ApiUrl";
 import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
-const SubscriptionRenew = ({ updateData, onClose }) => {
-  // console.log("cart value", updateData);
-  const user = useSelector((state) => state.user.token);
-  //const [subscription, setSubscription] = useState("");
+const SubscriptionRenew = ({ updateData }) => {
   const [istype, setType] = useState(updateData.plan.plan_type);
   const [valuePrice, setValuePrice] = useState();
-  const [RemainvaluePrice, setRemainvaluePrice] = useState(
-    updateData.plan.plan_value
-  );
   const [isCurentPrice, setCurentPrice] = useState(updateData.plan.price);
-  const [isUpdateResult, setUpdateResult] = useState("");
   const [isCountLimit, setIsCountLimit] = useState("");
   const dispatch = useDispatch();
-  const history = useHistory();
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
 
-  LocalStorageUtils.setLocalStorage("set", "valuePrice", valuePrice);
+  LocalStorageUtils.setLocalStorage(
+    LocalStorageType.SET,
+    "valuePrice",
+    valuePrice
+  );
 
   const handleCalculatePrice = (e) => {
     if (e.target.value <= 0) {
@@ -51,7 +45,6 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
       setIsCountLimit("");
     }
 
-    // let ItemCount = e.target.value;
     setValuePrice(ItemCount);
     istype === "days"
       ? setCurentPrice(ItemCount * 5)
@@ -69,7 +62,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
   useEffect(() => {
     dispatch(loadingStop());
     dispatch(getItemFromCart());
-  }, [isUpdateResult]);
+  }, []);
 
   useEffect(() => {
     if (istype === "days") {
@@ -98,7 +91,7 @@ const SubscriptionRenew = ({ updateData, onClose }) => {
       if (res.status) {
         stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
-          "set",
+          LocalStorageType.SET,
           "ExtendData",
           JSON.stringify(updateData)
         );

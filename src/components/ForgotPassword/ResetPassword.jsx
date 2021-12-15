@@ -3,40 +3,31 @@ import Footer from "../Footer";
 import Header from "../Header";
 import CustomButton from "../widgets/Button";
 import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import { useDispatch, useSelector } from "react-redux";
 import {
   RESET_PASSWORD,
   RESET_PASSWORD_TOKEEN_VERIFY,
 } from "../../config/ApiUrl";
-import { loadingStop } from "../../redux/loader/loader-actions";
 import Toaster from "../../util/Toaster";
 import emptyImg from "../../assets/images/oops.gif";
 import sucessfullImg from "../../assets/images/sucessfull.svg";
 import { parse } from "query-string";
 import { useLocation } from "react-router";
-import { logOutUser } from "../../redux/user/user-action";
 import ApiRequest from "../../util/ApiRequest";
 import { useHistory } from "react-router-dom";
 import EmptyPage from "../emptyPage";
 import { ErrorMessages } from "../../constants/Messages";
 import BlankSection from "../emptyPage/blankSection";
-import { Message } from "@mui/icons-material";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FilledInput from "@material-ui/core/FilledInput";
 import { resetPasswordValidate } from "../../util/FormValidation";
 
 const Forgot = () => {
-  const dispatch = useDispatch();
   const [newPasswords, setNewPasswords] = useState("");
   const [conformPasswords, setConformPasswords] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const [passwordValidationMessage, setPasswordValidationMessage] =
-    useState("");
   const [isToken, setIsToken] = useState(false);
   const [isPasswordResetSucessfully, setIsPasswordResetSucessfully] =
     useState(false);
@@ -64,7 +55,6 @@ const Forgot = () => {
   };
 
   const ResetPassword = () => {
-    // console.log(passwordMatch, "Password match");
     if (passwordMatch && isPasswordPattern.isValid) {
       let resetPasswordVal = {
         new_password1: newPasswords,
@@ -95,11 +85,8 @@ const Forgot = () => {
       token: queryData.token,
     };
 
-    // console.log("Check token");
-
     ApiRequest.request(RESET_PASSWORD_TOKEEN_VERIFY, "POST", verifyTokenData)
       .then((res) => {
-        // console.log(res, "token verify");
         if (res.status) {
           setIsToken(true);
           setIsPasswordResetSucessfully(false);
@@ -146,7 +133,7 @@ const Forgot = () => {
                           aria-label="toggle password visibility"
                           // onClick={this.handleClickShowPassword}
                           edge="end"
-                          tabindex="-1"
+                          tabIndex="-1"
                         >
                           {isToken ? (
                             <Visibility className="fill-eyecolor" />

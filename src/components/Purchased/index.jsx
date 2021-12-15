@@ -13,7 +13,6 @@ import { ReactComponent as EmbdedCodeImg } from "../../assets/images/embed-code.
 import { ReactComponent as ConsumptionReportImg } from "../../assets/images/consumption-report.svg";
 import { ReactComponent as DownloadInvoiceImg } from "../../assets/images/Invoice.svg";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-// import GetAppIcon from "@material-ui/icons/GetApp";
 import TimerIcon from "@material-ui/icons/Timer";
 import { ReactComponent as CheckCircleIcon } from "../../assets/images/check-circle.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,9 +20,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-// import ReceiptIcon from "@material-ui/icons/Receipt";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { ExportToCsv } from "export-to-csv";
 import Header from "../Header";
 import CustomPopup from "../CustomPopup";
 import Footer from "../../components/Footer";
@@ -36,8 +33,6 @@ import emptyWidgett from "../../assets/images/empty-widget.gif";
 import SubscriptionRenew from "../../components/SubscriptionType/subscriptRenew";
 import { BASE_URL } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-import { logOutUser } from "../../redux/user/user-action";
-import { useHistory } from "react-router-dom";
 import { ErrorMessages } from "../../constants/Messages";
 import { removeFromCart } from "../../redux/cart/action";
 import {
@@ -46,16 +41,15 @@ import {
   PAYMENT_SUCESS,
   CONSUMPTION_STATEMENT,
 } from "../../config/ApiUrl";
-import exportFromJSON from "export-from-json";
 import NoSearchFound from "../NoSearchFound";
 import NoresultImg from "../../assets/images/not-found.svg";
 import { getItemFromCart } from "../../redux/cart/action";
-import BlankSection from "../emptyPage/blankSection";
 import PurchasedLoader from "./purchaseLoader";
 
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
+import LocalStorageType from "../../config/LocalStorageType";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -74,10 +68,8 @@ const BorderLinearProgress = withStyles((theme) => ({
 const Purchased = (props) => {
   const dispatch = useDispatch();
   const [isShow, setShow] = useState([]);
-  const [widgets, setWidgets] = useState([]);
   const [is_renew, setRenew] = useState(false);
   const [widgetList, setWidgetList] = useState([]);
-  const [isextend, setExtend] = useState("false");
   const [productShow, setProductShow] = useState([]);
   const token = useSelector((state) => state.user.token);
   const [isPausePopup, setPausePopup] = useState(false); // Popup on play and Pause
@@ -86,7 +78,6 @@ const Purchased = (props) => {
   const [isPurchaseEmpty, setIsPurchaseEmpty] = useState();
 
   const [sucess, setSucess] = useState("Copy");
-  const history = useHistory();
 
   var curentPlanID = localStorage.getItem("productShow");
   var curentUpdatePrice = localStorage.getItem("valuePrice");
@@ -202,7 +193,10 @@ const Purchased = (props) => {
         .then((res) => {
           if (res.status) {
             dispatch(removeFromCart());
-            LocalStorageUtils.setLocalStorage("remove", "ExtendData");
+            LocalStorageUtils.setLocalStorage(
+              LocalStorageType.REMOVE,
+              "ExtendData"
+            );
           }
         })
         .finally(() => {
@@ -256,7 +250,11 @@ const Purchased = (props) => {
   };
 
   const handleExtendLocal = (widgetId) => {
-    LocalStorageUtils.setLocalStorage("set", "productShow", widgetId.plan.id);
+    LocalStorageUtils.setLocalStorage(
+      LocalStorageType.SET,
+      "productShow",
+      widgetId.plan.id
+    );
   };
 
   const FilterData = widgetList?.filter((item, index) => {
@@ -280,8 +278,6 @@ const Purchased = (props) => {
       return item;
     }
   });
-
-  // console.log(FilterData, "Data after filter");
 
   return (
     <>
@@ -569,7 +565,6 @@ const Purchased = (props) => {
                                   onClick={() => {
                                     setRenew(true);
                                     setProductShow(item);
-                                    setExtend("true");
                                     handleExtendLocal(item);
                                   }}
                                 >
