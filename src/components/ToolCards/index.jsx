@@ -8,7 +8,8 @@ import ToolPerview from "../ToolPerview";
 import CustomPopup from "../CustomPopup";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import { useSelector } from "react-redux";
-import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
+// import EmbededCode from "@material-ui/icons/SystemUpdateAlt";
+import { ReactComponent as EmbededCode } from "../../assets/images/embed-code.svg";
 import Embedcode from "../EmbedCode";
 import CustomButton from "../../components/widgets/Button";
 import Subscription from "../../components/SubscriptionType";
@@ -150,7 +151,7 @@ const ToolCards = () => {
                                     setIsSelectedItemForEmbeded(tooldata.name);
                                   }}
                                 >
-                                  <SystemUpdateAltIcon />
+                                  <EmbededCode />
                                 </div>
                               </Tooltip>
                             </div>
@@ -236,7 +237,7 @@ const ToolCards = () => {
                                     setTypeClick(ErrorMessages.EmbededAlert);
                                   }}
                                 >
-                                  <SystemUpdateAltIcon />
+                                  <EmbededCode />
                                 </div>
                               </Tooltip>
                             </div>
@@ -298,28 +299,30 @@ const ToolCards = () => {
           >
             <Grid container spacing={4} align="center">
               <Grid item xs={12}>
-                <img
-                  className="message__img"
-                  src={warning_icon}
-                  alt="Registration Sucessfully"
-                />
-                <Typography component="p" className="sucess_message">
-                  {TypeClick}
-                </Typography>
-                {/* <p className="sucess_message"></p> */}
-                <CustomButton
-                  className="primary-button"
-                  style={{ marginRight: "20px" }}
-                  onClick={setLoginAlert}
-                >
-                  Login Here
-                </CustomButton>
-                <CustomButton
-                  className="secondary-button"
-                  onClick={() => setisLoginrequire(false)}
-                >
-                  Cancel
-                </CustomButton>
+                <div className="loginAlertSection">
+                  <img
+                    className="message__img"
+                    src={warning_icon}
+                    alt="Registration Sucessfully"
+                  />
+                  <Typography component="p" className="sucess_message">
+                    {TypeClick}
+                  </Typography>
+                  {/* <p className="sucess_message"></p> */}
+                  <CustomButton
+                    className="primary-button"
+                    style={{ marginRight: "20px" }}
+                    onClick={setLoginAlert}
+                  >
+                    Login Here
+                  </CustomButton>
+                  <CustomButton
+                    className="secondary-button"
+                    onClick={() => setisLoginrequire(false)}
+                  >
+                    Cancel
+                  </CustomButton>
+                </div>
               </Grid>
             </Grid>
           </CustomPopup>

@@ -103,6 +103,7 @@
   .extend-validity {
     width: 100%;
     display: flex;
+    align-items: center;
     cursor: pointer;
     text-decoration: underline;
     font-family: map-get($map: $font-family, $key: "barlowregular");
@@ -202,6 +203,7 @@
     img {
       @include breakpoint(mobileonly) {
         padding: 15px;
+        max-height: 130px;
       }
     }
   }
@@ -214,6 +216,9 @@
       @include breakpoint(mobileonly) {
         min-width: 100%;
       }
+    }
+    .switchBtn {
+      display: flex;
     }
   }
   #{&}__tool-card {
@@ -348,19 +353,19 @@
   }
   #{&}__embeded-icon {
     display: flex;
-    @include border("", $border-width, $bsolid, $black-gray);
-    @include space(padding, all, $padding-8, 0);
-    background-color: $white;
+    // @include border("", $border-width, $bsolid, $black-gray);
+    // @include space(padding, all, $padding-8, 0);
+    background-color: $transparent;
     cursor: pointer;
-    width: 45px;
-    height: 43px;
+    // width: 45px;
+    // height: 43px;
     align-items: $align-center;
     justify-content: $align-center;
     & > svg {
       fill: $accent;
     }
     &:hover {
-      @include border("", $border-width, $bsolid, $secondary);
+      // @include border("", $border-width, $bsolid, $secondary);
       svg {
         > path {
           fill: $secondary;
@@ -368,8 +373,14 @@
       }
       svg {
         > g > path {
-          fill: $secondary;
+          fill: $primary;
         }
+      }
+      path {
+        fill: $primary;
+      }
+      g {
+        stroke: $primary;
       }
     }
   }

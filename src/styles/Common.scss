@@ -101,6 +101,9 @@ body {
 .border-radius {
   border-radius: $boder-radius !important;
 }
+.loginAlertSection {
+  padding: 5px;
+}
 
 /*End*/
 /*Use thses classes for buttons*/
@@ -119,12 +122,14 @@ a {
   line-height: inherit !important;
   border-radius: $boder-radius !important;
   @include font-sizeImp($font-xl-reg);
-  @include box-shadow(
-    0px,
-    10px,
-    20px,
-    map-get($map: $boxshadow, $key: "red-smooth")
-  );
+  // @include box-shadow(
+  //   0px,
+  //   10px,
+  //   20px,
+  //   map-get($map: $boxshadow, $key: "red-smooth")
+  // );
+
+  @include box-shadow(0px, 10px, 20px, $primary-btn-shadow);
   @include breakpoint(desktop150) {
   }
   &:hover {
@@ -324,6 +329,10 @@ select:disabled {
   height: 27px;
   margin: 10px;
   cursor: pointer;
+  @include breakpoint(mobileonly) {
+    width: 35px;
+    height: 20px;
+  }
 }
 
 .MuiSwitch-track {
@@ -354,6 +363,12 @@ select:disabled {
   position: relative;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
+  @include breakpoint(mobileonly) {
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+  }
 }
 .MuiSwitch-input {
   cursor: inherit;
@@ -370,6 +385,16 @@ select:disabled {
   left: 27px;
   top: 3px;
   background-color: $white;
+  @include breakpoint(mobileonly) {
+    left: 17px;
+    top: 2px;
+  }
+}
+.Mui-focusVisible {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  fill: transparent !important;
 }
 .Mui-checked .MuiSwitch-track {
   background: $primary;

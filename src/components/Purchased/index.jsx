@@ -9,8 +9,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { ReactComponent as EmbdedCodeImg } from "../../assets/images/embed-code.svg";
+import { ReactComponent as EmbdedCodeImg } from "../../assets/images/Purchased_embed_code.svg";
 import { ReactComponent as ConsumptionReportImg } from "../../assets/images/consumption-report.svg";
+
 import { ReactComponent as DownloadInvoiceImg } from "../../assets/images/Invoice.svg";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import TimerIcon from "@material-ui/icons/Timer";
@@ -111,30 +112,30 @@ const Purchased = (props) => {
 
     await ApiRequest.request(CONSUMPTION_STATEMENT, "POST", PurchasedData).then(
       (res) => {
-        if (res.hasOwnProperty("status") && !res?.state) {
+        if (res.hasOwnProperty("status") && !res?.status) {
           Toaster.error(res.detail.message, "topCenter");
           setTimeout(() => {
             dispatch(loadingStop());
           }, 1000);
         } else {
-          const convertTOJson = () => {
-            const lines = res.split("\n");
-            const result = [];
-            const headers = lines[0].split(",");
+          // const convertTOJson = () => {
+          //   const lines = res.split("\n");
+          //   const result = [];
+          //   const headers = lines[0].split(",");
 
-            for (let i = 1; i < lines.length; i++) {
-              if (!lines[i]) continue;
-              const obj = {};
-              const currentline = lines[i].split(",");
+          //   for (let i = 1; i < lines.length; i++) {
+          //     if (!lines[i]) continue;
+          //     const obj = {};
+          //     const currentline = lines[i].split(",");
 
-              for (let j = 0; j < headers.length; j++) {
-                obj[headers[j]] = currentline[j];
-              }
-              result.push(obj);
-            }
-            return result;
-          };
-          const apiData = convertTOJson();
+          //     for (let j = 0; j < headers.length; j++) {
+          //       obj[headers[j]] = currentline[j];
+          //     }
+          //     result.push(obj);
+          //   }
+          //   return result;
+          // };
+          const apiData = res.data;
 
           const fileName = `${widgetName}-consumption-report`;
           const fileType =
@@ -546,7 +547,7 @@ const Purchased = (props) => {
                               <Tooltip title="Play / Pause" placement="top">
                                 <Typography
                                   component="div"
-                                  className=" border-radius "
+                                  className=" border-radius switchBtn"
                                 >
                                   <SwitchUnstyled
                                     checked={item.is_paused ? false : true}

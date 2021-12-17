@@ -21,6 +21,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
   let res = JSON.parse(auth);
 
   const handleChange = (e) => {
+    setIsCountLimit("");
     if (e.target.value === "days") {
       setType("days");
 
@@ -121,7 +122,17 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
             ${updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
           </div>
         </div>
-        <div className="validated-error">{isCountLimit}</div>
+        <div className="validated-error">
+          {isCountLimit}
+          {isCountLimit && valuePrice > 1 ? (
+            <span>
+              <a href="mailto:support-engame@e2eresearch.com"> email us </a> for
+              help
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <div className="popup-container__footer popup--text">
         <CustomButton

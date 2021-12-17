@@ -72,25 +72,30 @@ const ToolDemo = (props) => {
       <div className="curent-tool-name custom-scroll">{tool.name}</div>
       {/* <Scrollbars> */}
 
-      <div class="tool-perview-container">
-        {!isLoading && (
-          <div className="previewLoader">
-            <img src={LoaderImg} aboutlt="loader" />
+      {/* <div class="tool-perview-container"> */}
+      {!isLoading && (
+        <div className="previewLoader">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
-        )}
-        <iframe
-          className="tool-perview"
-          id="tool-perview"
-          width="100%"
-          // height="500"
-          // scrolling="yes"
-          // /frameborder="no"
-          // allow="autoplay"
-          onLoad={hideSpinner}
-          src={tool.toolLink}
-          frameBorder="0"
-        ></iframe>
-      </div>
+        </div>
+      )}
+      <iframe
+        className="tool-perview"
+        id="tool-perview"
+        width="100%"
+        // height="500"
+        // scrolling="yes"
+        // /frameborder="no"
+        // allow="autoplay"
+        onLoad={hideSpinner}
+        src={tool.toolLink}
+        frameBorder="0"
+      ></iframe>
+      {/* </div> */}
       {/* </Scrollbars> */}
     </>
   );

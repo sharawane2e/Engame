@@ -28,6 +28,9 @@
     .curent-tool-img {
       > img {
         max-width: 100%;
+        @include breakpoint(mobileonly) {
+          max-height: 130px;
+        }
       }
     }
   }
@@ -38,6 +41,9 @@
     @include space(padding, all, $padding-30, 0);
     @include space(margin, bottom, $margin-10, 0);
     @include breakpoint(Ipad) {
+      @include space(padding, all, $padding-20, 0);
+    }
+    @include breakpoint(mobileonly) {
       @include space(padding, all, $padding-20, 0);
     }
   }

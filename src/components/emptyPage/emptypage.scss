@@ -6,6 +6,9 @@
   width: 100%;
   background: $light-white;
   flex-direction: column;
+  @include breakpoint(Ipad) {
+    min-height: 100vh;
+  }
   @include breakpoint(mobileonly) {
     padding: 15px;
   }

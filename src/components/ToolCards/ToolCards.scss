@@ -45,12 +45,12 @@
 
   #{&}__imageblck {
     &:hover {
-      @include border("", $border-width, $bsolid, $black-secondary);
+      // @include border("", $border-width, $bsolid, $black-secondary);
       @include card-box-shadow(
-        0px,
-        0px,
+        2px,
         4px,
-        map-get($map: $boxshadow, $key: "red-smooth")
+        7px,
+        0px map-get($map: $boxshadow, $key: "red-smooth")
       );
       .toolcard__preview {
         display: block;
@@ -170,16 +170,22 @@
   }
   #{&}__sub-icons {
     display: flex;
-    @include border("", $border-width, $bsolid, $back-color);
-    @include border-radius($boder-radius);
-    @include space(padding, all, $padding-8, 0);
+    // @include border("", $border-width, $bsolid, $back-color);
+    // @include border-radius($boder-radius);
+    // @include space(padding, all, $padding-8, 0);
     & > svg {
       fill: $back-color;
     }
     &:hover {
-      @include border("", $border-width, $bsolid, $secondary);
+      // @include border("", $border-width, $bsolid, $secondary);
       svg {
-        fill: $secondary;
+        fill: $primary;
+      }
+      path {
+        fill: $primary;
+      }
+      g {
+        stroke: $primary;
       }
     }
   }

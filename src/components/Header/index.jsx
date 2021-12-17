@@ -186,7 +186,7 @@ const Header = ({ props }) => {
                 </div>
                 <span className="vertical-line">|</span>
                 <div
-                  className="menu-button"
+                  className="menu-button registerBtn"
                   onClick={() => setReginIsOpen(true)}
                 >
                   Register
@@ -212,6 +212,7 @@ const Header = ({ props }) => {
                   <CustomButton
                     onClick={handleProfileMenuOpen}
                     className="custom-avtar"
+                    focusRipple={true}
                   >
                     <Avatar sx="">
                       {user.token.user.first_name.split(/(\s+)/)[0]

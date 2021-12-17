@@ -15,8 +15,8 @@
 }
 .popup-close {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 22px;
+  top: 22px;
   cursor: pointer;
   @include breakpoint(mobileonly) {
     top: 10px;
@@ -54,7 +54,7 @@
   }
   .sucess_message {
     @include space(padding, top-bottom, $padding-20, $padding-20);
-    @include space(padding, left-right, $padding-5, $padding-5);
+    // @include space(padding, left-right, $padding-5, $padding-5);
   }
   #{&}__iner {
     position: absolute;
@@ -105,7 +105,7 @@
   /*End*/
   #{&}__header {
     @include space(padding, top-bottom, $padding-20, $padding-20);
-    @include space(padding, left-right, $padding-30, $padding-30);
+    @include space(padding, left-right, $padding-20, $padding-20);
     display: flex;
     font-family: map-get($map: $font-family, $key: "font-barlowregular");
     font-weight: $font-600;
