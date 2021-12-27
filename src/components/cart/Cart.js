@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import empty from "../../assets/images/empty.gif";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Breadcrumbs } from "@material-ui/core";
@@ -14,74 +14,28 @@ import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
-// import DoneIcon from "@material-ui/icons/Done";
+import DoneIcon from "@material-ui/icons/Done";
 // import { removeFromCart } from "../../redux/cart/action";
 import Footer from "../Footer";
 import { BASE_URL, BASE_URL_1, STRIPE } from "../../config/ApiUrl";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-import {
-  getItemFromCart,
-  removeFromCart,
-} from "../../redux/cart/action";
+import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
+import Tooltip from "@material-ui/core/Tooltip";
 
-
-const Cart = ({ prop ,cart }) => {
-  //const [carts, setCarts] = useState([]);
-  const [planValue, setPlanValue] = useState();
+const Cart = () => {
   const dispatch = useDispatch();
-  let auth = localStorage.getItem("auth");
   const user = useSelector((state) => state.user.token);
-  let res = JSON.parse(auth);
-  // const token = useSelector((state) => state.user.token.access_token);
-
-  //const carts = useSelector((state) => state.cart.cartItems);
-  const carts = useSelector((state) => state.cart.cartItems);
-  const [isProduct, setProduct] = useState("");
-  // const [cartsData, setCarts] = useState(carts);
-
-  
-
-  
-  
-  // useEffect(() => {
-  //   //const fetchCartItem = async () => {
-  //     dispatch(loadingStart());
-  //       dispatch(getItemFromCart())
-  //     dispatch(loadingStop());
-  //   //   fetch(BASE_URL + "cart/", {
-  //   //     headers: {
-  //   //       Authorization: `Bearer ${token}`,
-  //   //     },
-  //   //   })
-  //   //     .then((response) => response.json())
-  //   //     .then((result) => {
-  //   //       setCarts(result);
-  //   //       setPlanValue(result.planValue);
-  //   //     });
-  //   //   dispatch(loadingStop());
-  //   // };
-  //   //fetchCartItem();
-  // },[]);
+  const cart = useSelector((state) => state.cart.cartItems);
+  const [is_renew, setRenew] = useState("false");
 
   useEffect(() => {
-   dispatch(getItemFromCart());
-  },[])
+    dispatch(getItemFromCart());
+  }, []);
 
-  
-  // dispatch(removeFromCart(isProduct));
-
-  const handleRemove = async(isProduct) => {
-     dispatch(removeFromCart(isProduct));
-    //  dispatch(getItemFromCart());
-     console.log("remove carts",carts);
+  const handleRemove = (isProduct) => {
+    dispatch(removeFromCart(isProduct));
   };
-
-
-  // useEffect(() => {
-  //   dispatch(getItemFromCart());
-  //  },[])
 
   // handleCheckout
   const handleCheckout = async () => {
@@ -128,7 +82,7 @@ const Cart = ({ prop ,cart }) => {
           </Container>
         </div>
         <div className="shoping-cart">
-            {cart.length !== 0 ? (
+          {cart.length !== 0 ? (
             <Container
               maxWidth="lg"
               className="shoping-cart__container sticky-position margin-top-174"
@@ -143,7 +97,7 @@ const Cart = ({ prop ,cart }) => {
                   xl={8}
                   lg={8}
                   md={8}
-                  sm={12}
+                  sm={6}
                   xs={12}
                   className="shoping-cart__left-card"
                 >
@@ -154,7 +108,7 @@ const Cart = ({ prop ,cart }) => {
                   xl={4}
                   lg={4}
                   md={4}
-                  sm={12}
+                  sm={6}
                   xs={12}
                   className="shoping-cart__right-card"
                 >
@@ -172,7 +126,7 @@ const Cart = ({ prop ,cart }) => {
                   {cart.map((item, index) => {
                     return (
                       <Paper
-                        className="shoping-cart__tool-card card-box-shadow border-allside-gray border-radius"
+                        className="shoping-cart__tool-card card-box-shadow border--colordata border-radius"
                         key={index}
                       >
                         <Grid container spacing={3}>
@@ -187,7 +141,8 @@ const Cart = ({ prop ,cart }) => {
                           >
                             <ButtonBase className="curent-tool-img">
                               <img
-                                alt=""
+                                alt={item.widget.name}
+                                title={item.widget.name}
                                 src={BASE_URL_1 + item.widget.imgUrl}
                               />
                             </ButtonBase>
@@ -254,13 +209,11 @@ const Cart = ({ prop ,cart }) => {
                                   className="shoping-cart__subscription"
                                 >
                                   <span>Subscription:</span>
-                                  <select
-                                    className="border-radius"
-                                  >
+                                  <select className="border-radius">
                                     <option
                                       value="days"
                                       selected={
-                                        item.plan_type == "days"
+                                        item.plan_type === "days"
                                           ? item.plan_type
                                           : null
                                       }
@@ -270,7 +223,7 @@ const Cart = ({ prop ,cart }) => {
                                     <option
                                       value="hits"
                                       selected={
-                                        item.plan_type == "hits"
+                                        item.plan_type === "hits"
                                           ? item.plan_type
                                           : null
                                       }
@@ -292,7 +245,7 @@ const Cart = ({ prop ,cart }) => {
                                     id={"input-filed" + item.id}
                                     variant="outlined"
                                     value={item.plan_value}
-                                   // onChange={item.plan_value}
+                                    // onChange={item.plan_value}
                                   />
                                   <span className="shoping-cart__input-days">
                                     {item.plan_type}
@@ -307,15 +260,18 @@ const Cart = ({ prop ,cart }) => {
                                 className="shoping-cart__tool-icons"
                               >
                                 <Typography component="div">
-                                  {/* <DoneIcon className="shoping-cart__tool-tick" />{" "} */}
-                                  <DeleteIcon
-                                    className="shoping-cart__tool-delete"
-                                    onClick={() => {
-                                      // dispatch(removeFromCart(item.id));
-                                       handleRemove(item.id);
-                                      //setProduct(item.id);
-                                    }}
-                                  />
+                                  <DoneIcon className="shoping-cart__tool-tick" />
+                                  |
+                                  <Tooltip title="Delete" placement="top">
+                                    <DeleteIcon
+                                      className="shoping-cart__tool-delete"
+                                      onClick={() => {
+                                        // dispatch(removeFromCart(item.id));
+                                        handleRemove(item.id);
+                                        //setProduct(item.id);
+                                      }}
+                                    />
+                                  </Tooltip>
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -352,14 +308,14 @@ const Cart = ({ prop ,cart }) => {
                         .reduce((acc, value) => +acc + +value)}
                     </div>
                     <div className="shoping-cart__coupon-code">
-                      <span align="center">Promotion code</span>
+                      {/* <span align="center">Promotion code</span> */}
                       <div
                         className="shoping-cart__coupon-apply"
                         align="center"
                       >
                         <input
                           type="text"
-                          className="shoping-cart__coupon-apply-input"
+                          className="shoping-cart__coupon-apply-input" placeholder="Enter Promotion code"
                         />
                         <button>Apply</button>
                       </div>
@@ -387,11 +343,4 @@ const Cart = ({ prop ,cart }) => {
   );
 };
 
-const mapDispatchToProp = (state) => {
-  console.log("state main cred data items with cart",state.cart.cartItems)
-  return {
-    cart: state.cart.cartItems,
-  };
-};
-
-export default connect(mapDispatchToProp)(Cart);
+export default Cart;

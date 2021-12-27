@@ -19,7 +19,7 @@
 .header-box {
   z-index: 99;
   .header-padding {
-    @include space(padding, top-bottom, $padding-15, $padding-15);
+    @include space(padding, top-bottom, $padding-24, $padding-24);
     a {
       display: flex;
     }

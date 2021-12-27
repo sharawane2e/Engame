@@ -25,34 +25,33 @@ const EmbedCode = ({ data, toolId }) => {
         type: "application/octet-stream",
       })
     );
-
     link.download = "embeded.text";
     document.body.appendChild(link);
     link.click();
     setTimeout(function () {
-      Toaster.sucess("You Download successfully!", "topCenter");
-      window.URL.revokeObjectURL(link);
+      //   Toaster.sucess("You Download successfully!", "topCenter");
+      //window.URL.revokeObjectURL(link);
     }, 200);
   };
 
   return (
     <div className="embeded-conatiner">
-      <textarea
+      <TextareaAutosize
+        id="text-area"
         ref={textAreaRef}
-        className="embeded-conatiner__embeded-code-textarea border-radius border-allside"
+        className="embeded-conatiner__embeded-code-textarea border-radius border-allside custom-scroll"
         value={state
           .map((item) => {
             return item.id === toolId ? item.widget_embed_code : "";
           })
           .join("")}
       />
-
       <div className="embeded-conatiner__buttton-group">
         <CustomButton
           onClick={copyToClipboard}
           className="secondary-button margin-right-20"
         >
-          <FileCopyIcon className="margin-right-15" />{" "}
+          <FileCopyIcon className="margin-right-15" />
           {copySuccess ? copySuccess : "Copy to Clipboard"}
         </CustomButton>
         <CustomButton onClick={downloadfile} className="primary-button">

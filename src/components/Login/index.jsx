@@ -69,7 +69,7 @@ class Login extends Component {
           this.props.dispatch(loadingStop());
           if (data.access_token) {
             this.props.dispatch(loginUser(data));
-            Toaster.sucess("You login successfully!", "topCenter");
+            //Toaster.sucess("You login successfully!", "topCenter");
           } else {
             localStorage.removeItem("auth");
           }
@@ -175,6 +175,7 @@ class Login extends Component {
                         aria-label="toggle password visibility"
                         onClick={this.handleClickShowPassword}
                         edge="end"
+                        tabindex="-1"
                       >
                         {this.state.showPassword ? (
                           <Visibility />

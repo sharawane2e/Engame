@@ -10,29 +10,24 @@ import Menu from "@material-ui/core/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import { Link, useHistory } from "react-router-dom";
-import e2eLogo from "../../assets/images/E2E-logo.png";
+import Engame_logo from "../../assets/images/Engame_logo.svg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CustomPopup from "../CustomPopup";
 import Login from "../Login";
 import Registration from "../Registration";
 import Grid from "@material-ui/core/Grid";
-// import { useDispatch } from "react-redux";
-// import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
-// import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { BASE_URL } from "../../config/ApiUrl";
 import { logOutUser } from "../../redux/user/user-action";
 import CustomButton from "../../components/widgets/Button";
 import Toaster from "../../util/Toaster";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { LOGOUT_TIME } from "../../constants/ConstantValues";
-import {
-  getItemFromCart,
-  removeFromCart,
-} from "../../redux/cart/action";
+import { getItemFromCart } from "../../redux/cart/action";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -61,45 +56,25 @@ function ElevationScroll(props) {
   });
 }
 
-const Header = ({ props, cart, user, state, data, shop }) => {
+const Header = ({ props }) => {
   const [isLoginOpen, setLoginIsOpen] = useState(false);
   const [isReginOpen, setReginIsOpen] = useState(false);
-  // const [state] = useState(data);
   const classes = useStyles();
-  // const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(data);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const carts = useSelector((state) => state.cart.cartItems);
-  //const carts = useSelector((state) =>cart)
-
-
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     document.body.classList.toggle("modal-open", isLoginOpen);
     document.body.classList.toggle("modal-open", isReginOpen);
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
-      const getCartItems = () => async (dispatch) => {
-        dispatch(getItemFromCart());
-        // console.log("curent header data with add to cart click", carts);
-      }
-      getCartItems();
+      dispatch(getItemFromCart());
     }
-  }, [isLoginOpen, isReginOpen,user]);
-
-  // useEffect(() => {
-  //   let count = 0;
-  //   cart.forEach((item) => {
-  //     count += item.qty;
-  //   });
-  //   setCartCount(count);
-  //   if (user.isLoggedIn) {
-  //     setLoginIsOpen(false);
-  //   }
-  // }, [cart, cartCount, user]);
+  }, [isLoginOpen, isReginOpen, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -163,7 +138,6 @@ const Header = ({ props, cart, user, state, data, shop }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
       <MenuItem onClick={handleMenuClose}>
         <Link color="inherit" to="/Purchased">
           My Widgets
@@ -237,7 +211,7 @@ const Header = ({ props, cart, user, state, data, shop }) => {
           <Toolbar className="header-padding header-text-color">
             <Typography variant="body1" className="flexGrow">
               <Link to="/">
-                <img src={e2eLogo} />
+                <img src={Engame_logo} />
               </Link>
             </Typography>
             {!user.isLoggedIn ? (
@@ -260,16 +234,6 @@ const Header = ({ props, cart, user, state, data, shop }) => {
 
             {user.isLoggedIn ? (
               <div className={classes.sectionDesktop}>
-                {/* <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton> */}
                 <div className="user-after-login">
                   <CustomButton onClick={handleProfileMenuOpen}>
                     {user.token.user.first_name} <ArrowDropDownIcon />
@@ -282,10 +246,13 @@ const Header = ({ props, cart, user, state, data, shop }) => {
                 <Link to="cart">
                   {/* <Badge color="secondary"> */}
 
-                  <Badge badgeContent={
-                      carts.length ? carts.length : 0
-                    } color="secondary">
-                    <ShoppingCartIcon />
+                  <Badge
+                    badgeContent={carts.length ? carts.length : 0}
+                    color="secondary"
+                  >
+                    <Tooltip title="Cart Items" placement="top">
+                      <ShoppingCartIcon />
+                    </Tooltip>
                   </Badge>
                 </Link>
               </div>
@@ -336,13 +303,4 @@ const Header = ({ props, cart, user, state, data, shop }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log("state data items with header",state.cart.cartItems)
-  return {
-    cart: state.cart.cartItems,
-    user: state.user,
-    // shop: state.shop,
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

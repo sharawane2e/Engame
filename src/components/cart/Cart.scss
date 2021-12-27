@@ -1,7 +1,7 @@
 .shoping-cart {
   font-family: map-get($map: $font-family, $key: "font-barlowmedium");
-  @include bgcolor($gray-secondary);
-  margin-top: 12px;
+  // @include bgcolor($gray-secondary);
+  @include space(padding, top, $padding-30, 0);
   // min-height: 100vh;
   #{&}__container {
     //height: 80vh;
@@ -32,6 +32,9 @@
   #{&}__card-coupon {
     @include space(padding, all, $padding-30, 0);
     @include space(margin, bottom, $margin-10, 0);
+    @include breakpoint(Ipad) {
+      @include space(padding, all, $padding-20, 0);
+    }
   }
   .continue-button {
     display: flex;
@@ -40,6 +43,12 @@
   }
   .margin-right {
     @include space(margin, right, $margin-10, 0);
+    width: 25px !important;
+    height: 25px !important;
+    @include breakpoint(Ipad) {
+      width: 20px;
+      @include space(margin, right, $margin-5, 0);
+    }
   }
   #{&}__tool-title {
     @include font-size($font-xl-reg);
@@ -52,6 +61,8 @@
     text-align: $align-right;
     @include color($black-secondary);
     @include font-size($font-sm);
+    word-break: break-all;
+    line-height: 24px;
   }
   #{&}__subscription {
     display: flex;
@@ -150,6 +161,8 @@
   #{&}__coupon-amount {
     @include font-size($font-xsm);
     text-align: $align-center;
+    word-break: break-all;
+    line-height: 24px;
   }
   #{&}__coupon-code {
     text-align: $align-left;
@@ -189,7 +202,7 @@
         button {
           @include font-size($font-xmd-reg);
           width: 60%;
-          @include space(padding, top-bottom, $padding-12, 0);
+          @include space(padding, top-bottom, $padding-12, $padding-12);
           text-align: $align-center;
         }
       }
@@ -198,18 +211,25 @@
 
   .checkout-button {
     @include space(margin, bottom, $padding-50, 0);
-    width: 210px !important;
+    width: 150px !important;
+
     a {
       color: inherit;
     }
     .MuiButton-label {
       > svg {
-        @include space(margin, right, $margin-15, 0);
+        @include space(margin, right, $margin-8, 0);
+        width: 25px !important;
+        height: 25px !important;
+        @include breakpoint(Ipad) {
+          width: 20px;
+          @include space(margin, right, $margin-5, 0);
+        }
       }
     }
     @include breakpoint(Ipad) {
-      width: 106px !important;
-      padding: 10px 16px !important;
+      width: 110px !important;
+      padding: 5px !important;
       .MuiButton-label {
         @include font-size($font-xmd-reg);
       }

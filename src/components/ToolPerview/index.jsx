@@ -5,7 +5,7 @@ const ToolDemo = (props) => {
 
   return (
     <>
-      <div className="curent-tool-name">{tool.name}</div>
+      <div className="curent-tool-name custom-scroll">{tool.name}</div>
       <iframe
         className="tool-perview"
         width="100%"
