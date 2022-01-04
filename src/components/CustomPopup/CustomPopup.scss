@@ -15,11 +15,12 @@
 }
 .popup-close {
   position: absolute;
-  right: 22px;
-  top: 22px;
+  right: 10px;
+  top: 13px;
   cursor: pointer;
   @include breakpoint(mobileonly) {
     top: 10px;
+    right: 13px;
   }
   > svg {
     fill: $white;
@@ -120,7 +121,7 @@
     // height: 560px;
     @include space(padding, all, $padding-30, 0);
     @include breakpoint(mobileonly) {
-      @include space(padding, all, $padding-15, 0);
+      @include space(padding, all, $padding-20, 0);
     }
     .MuiGrid-spacing-xs-3 > .MuiGrid-item {
       @include breakpoint(mobileonly) {

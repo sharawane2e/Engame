@@ -12,6 +12,10 @@
     padding: 15px !important;
     padding-top: 30px !important;
     width: 90%;
+    @include breakpoint(mobileonly) {
+      width: 100%;
+      padding-top: 15px !important;
+    }
   }
   .filter-section {
     // width: 90%;
@@ -265,6 +269,7 @@
     display: flex;
     text-align: left;
     background-color: $white;
+    font-size: 16px;
 
     & span {
       flex-grow: 1;
@@ -311,6 +316,12 @@
 .css-1k181zl li[aria-selected="true"] {
   color: $primary !important;
   font-weight: 500 !important;
+  font-weight: 16px;
+}
+.MuiTouchRipple-root {
+  :focus-visible {
+    border: none !important;
+  }
 }
 
 .FilterInputBox {

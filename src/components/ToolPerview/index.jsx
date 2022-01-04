@@ -87,6 +87,7 @@ const ToolDemo = (props) => {
         className="tool-perview"
         id="tool-perview"
         width="100%"
+        previewLocation={window.location.hostname}
         // height="500"
         // scrolling="yes"
         // /frameborder="no"

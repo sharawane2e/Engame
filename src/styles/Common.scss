@@ -102,7 +102,9 @@ body {
   border-radius: $boder-radius !important;
 }
 .loginAlertSection {
-  padding: 5px;
+  @include breakpoint(mobileonly) {
+    padding: 10px 0px;
+  }
 }
 
 /*End*/

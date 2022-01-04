@@ -127,6 +127,8 @@
   }
 
   #{&}__purchased-date {
+    display: flex;
+    align-items: center;
     > img,
     svg {
       display: inline-flex;
@@ -146,9 +148,6 @@
       @include font-size($font-reg);
       @include space(padding, left, $padding-5, 0);
       text-decoration: none;
-      @include breakpoint(mobileonly) {
-        @include space(padding, left, 0, 0);
-      }
     }
     .bold-style {
       font-weight: bold;
@@ -156,7 +155,14 @@
     .purchased-tool__date-type-time {
       @include font-size($font-reg);
       @include space(padding, left, $padding-15, 0);
+      @include breakpoint(mobileonly) {
+        position: absolute;
+        right: 20px;
+      }
     }
+  }
+  .purchased-tool__dateNTime {
+    display: flex;
   }
   .purchased-tool__toggleclass {
     cursor: pointer;

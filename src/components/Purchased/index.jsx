@@ -442,15 +442,17 @@ const Purchased = (props) => {
                                 ""
                               )}
 
-                              <span className="purchased-tool__date-type-text purchased-curent-text">
+                              <div className="purchased-tool__date-type-text purchased-curent-text">
                                 Purchased Date:
-                              </span>
-                              <span className="purchased-tool__date-type-text">
-                                {purchase_date}
-                              </span>
-                              <span className="purchased-tool__date-type-time">
-                                {purchase_time}
-                              </span>
+                              </div>
+                              <div className="purchased-tool__dateNTime">
+                                <div className="purchased-tool__date-type-text">
+                                  {purchase_date}
+                                </div>
+                                <div className="purchased-tool__date-type-time">
+                                  {purchase_time}
+                                </div>
+                              </div>
                             </div>
                           </Grid>
 
