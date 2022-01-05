@@ -34,6 +34,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
 import LocalStorageType from "../../config/LocalStorageType";
 import { listProducts } from "../../redux/product/product-action";
+import CartView from "../cart/CartView";
 
 const useStyles = makeStyles((theme) => ({
   sectionMobile: {
@@ -208,6 +209,9 @@ const Header = ({ props }) => {
                         </Tooltip>
                       </Badge>
                     </Link>
+                    {/* <div className="shoping__card__cartHover">
+                      <CartView />
+                    </div> */}
                   </div>
                   <CustomButton
                     onClick={handleProfileMenuOpen}

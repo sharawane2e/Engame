@@ -1,0 +1,32 @@
+.faq {
+  //   min-height: 80vh;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: $lightGray;
+  &__header {
+    padding: 15px;
+    font-size: $font-xl-reg !important;
+    font-weight: 600 !important;
+  }
+  &__container {
+    min-height: max-content;
+  }
+  &__paper {
+    padding: 15px;
+  }
+  &__accordion {
+    .MuiAccordion-root {
+      background-color: $gray-secondary !important;
+      margin-bottom: 10px;
+      .css-i4bv87-MuiSvgIcon-root {
+        font-weight: 600;
+        color: $black;
+      }
+    }
+    .MuiTypography-body1 {
+      font-size: $font-reg !important;
+      //   font-weight: 600;
+      color: $black;
+    }
+  }
+}

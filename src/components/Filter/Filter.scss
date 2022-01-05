@@ -305,7 +305,7 @@
     font-weight: 600;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: $mid-gray;
+    background-color: $transparent;
     color: $black;
     font-family: map-get($map: $font-family, $key: "font-barlowregular");
   }
@@ -333,4 +333,39 @@
 
 .filter_box {
   width: 100%;
+}
+
+.filterDiv {
+  position: absolute;
+  top: 50px;
+  background: #ececec;
+  z-index: 9;
+  right: 25px;
+  padding: 0px 0px;
+  border-radius: 6px;
+  box-shadow: 1px 0px 26px -7px #c1c1c1;
+  .MuiSvgIcon-root {
+    fill: $black-secondary;
+  }
+  .MuiFormControlLabel-root {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0px;
+    margin-right: 16px;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    background: #fff;
+    width: 100%;
+    border-bottom: 2px solid #ececec;
+  }
+  .MuiSvgIcon-root {
+    font-size: 18px;
+  }
+  .MuiTypography-body1 {
+    font-size: 14px;
+  }
+  .MuiCheckbox-colorSecondary.Mui-checked {
+    color: $black-secondary;
+  }
 }

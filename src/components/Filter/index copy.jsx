@@ -20,37 +20,54 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 
-const OldCategoriesList = [
-  { widget_type: "Heatmaps and Highlighters", id: 1 },
-  { widget_type: "Rating", id: 2 },
-  { widget_type: "Single and Multi selects", id: 3 },
-  { widget_type: "Maps", id: 4 },
-  { widget_type: "Ranking", id: 5 },
-  { widget_type: "collection", id: 6 },
-  { widget_type: "Numeric", id: 7 },
-];
+const Tag = (props) => {
+  const { label, onDelete, ...other } = props;
+  return (
+    <Stack direction="row" spacing={1} className="filterInput__chipBox">
+      <Chip label={label} onDelete={onDelete} />
+    </Stack>
+  );
+};
+
+Tag.propTypes = {
+  label: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 const Filter = () => {
-  const [isFilterApply, setIsFilterApply] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
   const [searchText, setSearchText] = useState("");
-  const [isSearchNotActive, setIsSearchNotActive] = useState(true);
-
-  const [filterSelectedDataList, setFilterSelectedDataList] = useState([]);
-
-  const [categoriesList, setCategoriesList] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([""]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [isFilter, setIsFilter] = useState(false);
+  const [isSearchNotActive, setIsSearchNotActive] = useState(true);
+  const {
+    getRootProps: getfilterRootProps,
+    getInputLabelProps,
+    getInputProps,
+    getTagProps,
+    getListboxProps,
+    getOptionProps,
+    groupedOptions,
+    value,
+    focused,
+    setAnchorEl,
+  } = useAutocomplete({
+    id: "customized-hook-demo",
+    // defaultValue: [top100Films[1]],
+    multiple: true,
+    options: OldCategoriesList,
+    getOptionLabel: (option) => option.title,
+  });
 
-  const FilterAction = async (filterSelectedDataList, searchText) => {
-    // let selectedCategoriesId = SelectedCategoriesList.map((item) => {
-    //   return item.id;
-    // });
+  const FilterAction = async (SelectedCategoriesList, searchText) => {
+    let selectedCategoriesId = SelectedCategoriesList.map((item) => {
+      return item.id;
+    });
 
     let ApiData = {
       widget_type_id:
-        filterSelectedDataList.length > 0 ? filterSelectedDataList : "",
+        selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
       search_string: searchText,
       isFilter: true,
     };
@@ -59,25 +76,26 @@ const Filter = () => {
       isFilter: false,
     };
 
-    // dispatch(
-    //   listProducts(isFilterApply && user.isLoggedIn ? ApiData : getWidgetList)
-    // );
+    dispatch(
+      listProducts(isFilter && user.isLoggedIn ? ApiData : getWidgetList)
+    );
+    // alert("Categories List render");
   };
 
   const GetCategoriesList = () => {
     if (user.isLoggedIn && categoriesList.length > 0) {
       ApiRequest.request(CATEGORIES_LIST, "GET").then((res) => {
-        setCategoriesList(res?.data[0]);
+        setCategoriesList(res?.data[0] || []);
       });
     }
   };
 
   const SaerchValue = (e) => {
     setSearchText(e.target.value);
-    setIsFilterApply(true);
+    setIsFilter(true);
 
     if (e.target.value.length == 0) {
-      FilterAction(filterSelectedDataList, null);
+      FilterAction(value, null);
       setIsSearchNotActive(true);
     } else {
       setIsSearchNotActive(false);
@@ -85,60 +103,27 @@ const Filter = () => {
   };
 
   const handelSearchValueFilterClick = async (e) => {
-    setIsFilterApply(true);
+    setIsFilter(true);
 
     e.preventDefault();
-    await FilterAction(filterSelectedDataList, searchText);
+    await FilterAction(value, searchText);
     setIsSearchNotActive(true);
   };
 
   const handelFilterClick = () => {
-    setIsFilterApply(true);
-    if (!isFilterOpen) {
-      setIsFilterOpen(true);
-    } else {
-      setIsFilterOpen(false);
-    }
+    setIsFilter(true);
   };
 
-  const getMenuData = (Ldata) => {
-    if (Ldata) {
-      const result =
-        filterSelectedDataList.length > 0 &&
-        filterSelectedDataList.filter((Item) => Item == Ldata.widget_type);
-      if (result && result.length > 0) {
-        // debugger;
-        let tempv = filterSelectedDataList.indexOf(result[0]);
-        let A = filterSelectedDataList;
-        let keshav = A.splice(tempv);
-        setFilterSelectedDataList(A);
-        console.log("Data after removed", A);
-        setFilterSelectedDataList(A);
-
-        // setFilterSelectedDataList([
-        //   ...filterSelectedDataList.splice(2),
-        //   e.target.value,
-        // ]);
-      } else {
-        // setFilterSelectedDataList([...filterSelectedDataList, Ldata]);
-        console.log(Ldata);
-      }
-      console.log("Removed Data", result);
-    }
-  };
   useEffect(() => {
-    console.log("Selected Data", filterSelectedDataList);
-  }, [filterSelectedDataList]);
-
-  useEffect(() => {
-    FilterAction(filterSelectedDataList, searchText);
-  }, [filterSelectedDataList, user]);
-
-  useEffect(() => {
-    setIsFilterApply(false);
     GetCategoriesList();
-    setCategoriesList(OldCategoriesList);
-    console.log(categoriesList);
+  }, [user]);
+
+  useEffect(() => {
+    FilterAction(value, searchText);
+  }, [value, user]);
+
+  useEffect(() => {
+    setIsFilter(false);
   }, [user]);
 
   return (
@@ -182,54 +167,96 @@ const Filter = () => {
                     component="form"
                     className="flexGrow filter-inputsection__form filter-inputsection__form1"
                   >
-                    {filterSelectedDataList?.length ? (
+                    {value.length && value.length ? (
                       <p className="filter-inputsection__form__filterOn"></p>
                     ) : (
                       ""
                     )}
+
+                    {/* <input type="text" list="categoriess" />
+                    <datalist id="categoriess">
+                      <option>Test</option>
+                      <option>Test</option>
+                      <option>Test</option>
+                      <option>Test</option>
+                      <option>Test</option>
+                      <option>Test</option>
+                      <option>Test</option>
+                    </datalist> */}
+
+                    <div className="filterDiv">
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Test by madhukeshav Sharma"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Test by madhukeshav Sharma"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Test by madhukeshav Sharma"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Test by madhukeshav Sharma"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Test by madhukeshav Sharma"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Test by madhukeshav Sharma"
+                        />
+                      </FormGroup>
+                    </div>
 
                     <IconButton
                       className="iconButton filter-inputsection__icon filter-inputsection__icon1"
                       aria-label="directions"
                       onClick={() => handelFilterClick()}
                     >
+                      <input
+                        {...getInputProps()}
+                        className="filter-inputsection__filterBtn"
+                      />
                       <FilterListIcon
                         fontSize="large"
                         className="filter-inputsection__filterIcon"
                       />
-                    </IconButton>
 
-                    {isFilterOpen && (
-                      <div>
-                        <div className="filterDiv">
-                          <p className="filterListUl__listTopPara">
-                            Filter by categories
-                          </p>
-
-                          <FormGroup>
-                            {categoriesList.map((list, index) => {
-                              return (
-                                <FormControlLabel
-                                  control={<Checkbox />}
-                                  label={list.widget_type}
-                                  onClick={() => getMenuData(list)}
-                                />
-                              );
-                            })}
-                          </FormGroup>
+                      <div className="filterLisDiv">
+                        <div {...getfilterRootProps()}>
+                          {/* <Label {...getInputLabelProps()}>Customized hook</Label> */}
                         </div>
+                        {groupedOptions.length > 0 ? (
+                          <ul {...getListboxProps()} className="filterListUl">
+                            <p className="filterListUl__listTopPara">
+                              Filter by categories
+                            </p>
+                            {groupedOptions.map((option, index) => (
+                              <li {...getOptionProps({ option, index })}>
+                                <span>{option.widget_type}</span>
+                                <CheckIcon fontSize="small" />
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
                       </div>
-                    )}
+                    </IconButton>
                   </Paper>
                 </div>
               </Grid>
             </Toolbar>
-            {/* <div className={focused ? "focused filterInput" : "filterInput"}> */}
-            <div className="focused filterInput">
-              {filterSelectedDataList.length > 0 &&
-                filterSelectedDataList.map((prodd, index) => {
-                  return <p>{prodd}</p>;
-                })}
+            <div
+              ref={setAnchorEl}
+              className={focused ? "focused filterInput" : "filterInput"}
+            >
+              {value.map((option, index) => (
+                <Tag label={option.widget_type} {...getTagProps({ index })} />
+              ))}
             </div>
           </div>
         </div>
@@ -266,5 +293,15 @@ const Filter = () => {
     </>
   );
 };
+
+const OldCategoriesList = [
+  { widget_type: "Heatmaps and Highlighters", id: 1 },
+  { widget_type: "Rating", id: 2 },
+  { widget_type: "Single and Multi selects", id: 3 },
+  { widget_type: "Maps", id: 4 },
+  { widget_type: "Ranking", id: 5 },
+  { widget_type: "collection", id: 6 },
+  { widget_type: "Numeric", id: 7 },
+];
 
 export default Filter;
