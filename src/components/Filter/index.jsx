@@ -19,15 +19,16 @@ import CarouselAfterLogin from "../Carousel/CarouselAfterLogin";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import { CheckBox } from "@mui/icons-material";
 
 const OldCategoriesList = [
-  { widget_type: "Heatmaps and Highlighters", id: 1 },
+  { widget_type: "Heatmaps and Highlighters", id: 1, selected: false },
   { widget_type: "Rating", id: 2 },
-  { widget_type: "Single and Multi selects", id: 3 },
-  { widget_type: "Maps", id: 4 },
-  { widget_type: "Ranking", id: 5 },
-  { widget_type: "collection", id: 6 },
-  { widget_type: "Numeric", id: 7 },
+  { widget_type: "Single and Multi selects", id: 3, selected: false },
+  { widget_type: "Maps", id: 4, selected: false },
+  { widget_type: "Ranking", id: 5, selected: false },
+  { widget_type: "collection", id: 6, selected: false },
+  { widget_type: "Numeric", id: 7, selected: false },
 ];
 
 const Filter = () => {
@@ -40,17 +41,24 @@ const Filter = () => {
   const [filterSelectedDataList, setFilterSelectedDataList] = useState([]);
 
   const [categoriesList, setCategoriesList] = useState([]);
+  const [selectedCategoriesList, setSelectedCategoriesList] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   const FilterAction = async (filterSelectedDataList, searchText) => {
-    // let selectedCategoriesId = SelectedCategoriesList.map((item) => {
-    //   return item.id;
-    // });
+    let handelSelectedCategories = filterSelectedDataList.filter((item) => {
+      return item.selected ? true : false;
+    });
+
+    setSelectedCategoriesList(handelSelectedCategories);
+
+    let selectedCategoriesId = handelSelectedCategories.map((Item) => {
+      return Item.id;
+    });
 
     let ApiData = {
       widget_type_id:
-        filterSelectedDataList.length > 0 ? filterSelectedDataList : "",
+        selectedCategoriesId.length > 0 ? selectedCategoriesId : "",
       search_string: searchText,
       isFilter: true,
     };
@@ -59,9 +67,10 @@ const Filter = () => {
       isFilter: false,
     };
 
-    // dispatch(
-    //   listProducts(isFilterApply && user.isLoggedIn ? ApiData : getWidgetList)
-    // );
+    dispatch(
+      listProducts(isFilterApply && user.isLoggedIn ? ApiData : getWidgetList)
+      // listProducts(getWidgetList)
+    );
   };
 
   const GetCategoriesList = () => {
@@ -94,41 +103,29 @@ const Filter = () => {
 
   const handelFilterClick = () => {
     setIsFilterApply(true);
-    if (!isFilterOpen) {
-      setIsFilterOpen(true);
-    } else {
-      setIsFilterOpen(false);
-    }
   };
 
-  const getMenuData = (Ldata) => {
-    if (Ldata) {
-      const result =
-        filterSelectedDataList.length > 0 &&
-        filterSelectedDataList.filter((Item) => Item == Ldata.widget_type);
-      if (result && result.length > 0) {
-        // debugger;
-        let tempv = filterSelectedDataList.indexOf(result[0]);
-        let A = filterSelectedDataList;
-        let keshav = A.splice(tempv);
-        setFilterSelectedDataList(A);
-        console.log("Data after removed", A);
-        setFilterSelectedDataList(A);
+  const handleSelectedCategories = (clickedData) => {
+    const newArrFilter = filterSelectedDataList.map((Item) => {
+      return {
+        widget_type:
+          Item.widget_type == clickedData.widget_type
+            ? clickedData.widget_type
+            : Item.widget_type,
+        id: Item.id,
 
-        // setFilterSelectedDataList([
-        //   ...filterSelectedDataList.splice(2),
-        //   e.target.value,
-        // ]);
-      } else {
-        // setFilterSelectedDataList([...filterSelectedDataList, Ldata]);
-        console.log(Ldata);
-      }
-      console.log("Removed Data", result);
-    }
+        selected:
+          Item.selected & (Item.widget_type == clickedData.widget_type)
+            ? false
+            : Item.selected & (Item.widget_type !== clickedData.widget_type)
+            ? true
+            : !Item.selected & (Item.widget_type == clickedData.widget_type)
+            ? true
+            : false,
+      };
+    });
+    setFilterSelectedDataList(newArrFilter);
   };
-  useEffect(() => {
-    console.log("Selected Data", filterSelectedDataList);
-  }, [filterSelectedDataList]);
 
   useEffect(() => {
     FilterAction(filterSelectedDataList, searchText);
@@ -138,7 +135,7 @@ const Filter = () => {
     setIsFilterApply(false);
     GetCategoriesList();
     setCategoriesList(OldCategoriesList);
-    console.log(categoriesList);
+    setFilterSelectedDataList(OldCategoriesList);
   }, [user]);
 
   return (
@@ -182,7 +179,7 @@ const Filter = () => {
                     component="form"
                     className="flexGrow filter-inputsection__form filter-inputsection__form1"
                   >
-                    {filterSelectedDataList?.length ? (
+                    {selectedCategoriesList?.length ? (
                       <p className="filter-inputsection__form__filterOn"></p>
                     ) : (
                       ""
@@ -197,38 +194,43 @@ const Filter = () => {
                         fontSize="large"
                         className="filter-inputsection__filterIcon"
                       />
-                    </IconButton>
-
-                    {isFilterOpen && (
-                      <div>
-                        <div className="filterDiv">
-                          <p className="filterListUl__listTopPara">
-                            Filter by categories
-                          </p>
-
-                          <FormGroup>
-                            {categoriesList.map((list, index) => {
-                              return (
-                                <FormControlLabel
-                                  control={<Checkbox />}
-                                  label={list.widget_type}
-                                  onClick={() => getMenuData(list)}
-                                />
-                              );
-                            })}
-                          </FormGroup>
-                        </div>
+                      {/* {isFilterOpen && ( */}
+                      <div className="filterDiv">
+                        <p className="filterListUl__listTopPara">
+                          Filter by categories
+                        </p>
+                        {filterSelectedDataList.map((list, index) => {
+                          return (
+                            <div
+                              className="filterDiv__List"
+                              onClick={() => handleSelectedCategories(list)}
+                            >
+                              <Checkbox
+                                className="filterDiv__List__checkbox"
+                                checked={list.selected ? true : false}
+                              />
+                              <p>{list.widget_type}</p>
+                            </div>
+                          );
+                        })}
                       </div>
-                    )}
+                      {/* )} */}
+                    </IconButton>
                   </Paper>
                 </div>
               </Grid>
             </Toolbar>
             {/* <div className={focused ? "focused filterInput" : "filterInput"}> */}
             <div className="focused filterInput">
-              {filterSelectedDataList.length > 0 &&
-                filterSelectedDataList.map((prodd, index) => {
-                  return <p>{prodd}</p>;
+              {selectedCategoriesList.length > 0 &&
+                selectedCategoriesList.map((Item, index) => {
+                  return (
+                    <Chip
+                      label={Item.widget_type}
+                      onDelete={() => handleSelectedCategories(Item)}
+                      className="filterInput__chipBox"
+                    />
+                  );
                 })}
             </div>
           </div>
