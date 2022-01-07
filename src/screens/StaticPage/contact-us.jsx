@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@material-ui/core";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import Footer from "../../components/Footer";
 
 const ContactUS = () => {
   return (
@@ -60,11 +61,62 @@ const ContactUS = () => {
                   aliquam accusamus rerum quos eligendi rem consequuntur quod
                   illo voluptatem esse placeat asperiores reiciendis.
                 </Typography>
+                <Typography
+                  variant="p"
+                  gutterBottom
+                  className="StaticPage__div__container__discription"
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Eveniet, itaque totam laborum adipisci, cum aspernatur iste
+                  aliquam accusamus rerum quos eligendi rem consequuntur quod
+                  illo voluptatem esse placeat asperiores reiciendis.
+                </Typography>
+                <Typography
+                  variant="p"
+                  gutterBottom
+                  className="StaticPage__div__container__discription"
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Eveniet, itaque totam laborum adipisci, cum aspernatur iste
+                  aliquam accusamus rerum quos eligendi rem consequuntur quod
+                  illo voluptatem esse placeat asperiores reiciendis.
+                </Typography>
+                <Typography
+                  variant="p"
+                  gutterBottom
+                  className="StaticPage__div__container__discription"
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Eveniet, itaque totam laborum adipisci, cum aspernatur iste
+                  aliquam accusamus rerum quos eligendi rem consequuntur quod
+                  illo voluptatem esse placeat asperiores reiciendis.
+                </Typography>
+                <Typography
+                  variant="p"
+                  gutterBottom
+                  className="StaticPage__div__container__discription"
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Eveniet, itaque totam laborum adipisci, cum aspernatur iste
+                  aliquam accusamus rerum quos eligendi rem consequuntur quod
+                  illo voluptatem esse placeat asperiores reiciendis.
+                </Typography>
+                <Typography
+                  variant="p"
+                  gutterBottom
+                  className="StaticPage__div__container__discription"
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Eveniet, itaque totam laborum adipisci, cum aspernatur iste
+                  aliquam accusamus rerum quos eligendi rem consequuntur quod
+                  illo voluptatem esse placeat asperiores reiciendis.
+                </Typography>
               </div>
             </Paper>
           </div>
         </Container>
       </div>
+      <Footer />
     </div>
   );
 };

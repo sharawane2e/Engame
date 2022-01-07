@@ -15,3 +15,15 @@
     position: relative;
   }
 }
+.lowerFooter {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #ddd;
+  .MuiGrid-root {
+    text-align: center;
+    a {
+      font-size: 12px;
+      color: $black;
+    }
+  }
+}

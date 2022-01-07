@@ -12,6 +12,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import Footer from "../../components/Footer";
 
 const PrivacyPolicy = () => {
   return (
@@ -336,6 +337,7 @@ const PrivacyPolicy = () => {
           </div>
         </Container>
       </div>
+      <Footer />
     </div>
   );
 };
