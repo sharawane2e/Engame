@@ -1,0 +1,33 @@
+.StaticPage {
+  &__div {
+    padding: 15px 0px;
+
+    &__container {
+      padding: 15px;
+      &__mainHeading {
+        display: block;
+        font-size: 24px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: $primary;
+        border-bottom: 5px solid $primary;
+        padding: 6px 10px;
+        width: max-content;
+        margin: auto !important;
+        margin-bottom: 35px !important;
+      }
+      &__heading {
+        width: 100%;
+        display: block;
+        font-size: 20px;
+      }
+      &__discription {
+        width: 100%;
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+}

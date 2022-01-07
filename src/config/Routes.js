@@ -8,7 +8,12 @@ import Forgot from "../components/ForgotPassword/ResetPassword";
 import EmailActivation from "../components/EmailActivation";
 import Faqs from "../components/FAQ/index";
 import SomthingWentWrong from "../components/Error/somthingWentWrong";
-import ContactUS from "../screens/ContactUs";
+import ContactUS from "../screens/StaticPage/contact-us";
+import Termscondition from "../screens/StaticPage/Terms-condition";
+import Refundpolicy from "../screens/StaticPage/Refund-policy";
+import Privacypolicy from "../screens/StaticPage/Privacy-policy";
+import PrivacyPolicy from "../screens/StaticPage/Privacy-policy";
+import TermsCondition from "../screens/StaticPage/Terms-condition";
 
 const Routes = [
   {
@@ -18,6 +23,9 @@ const Routes = [
   },
   {
     path: [
+      "/refund-policy",
+      "/terms-condition",
+      "/privacy-policy",
       "/contact-us",
       "/error",
       "/faq",
@@ -50,6 +58,21 @@ const Routes = [
       {
         path: "/contact-us",
         component: ContactUS,
+        isExact: true,
+      },
+      {
+        path: "/privacy-policy",
+        component: PrivacyPolicy,
+        isExact: true,
+      },
+      {
+        path: "/terms-condition",
+        component: TermsCondition,
+        isExact: true,
+      },
+      {
+        path: "/refund-policy",
+        component: Refundpolicy,
         isExact: true,
       },
     ],
