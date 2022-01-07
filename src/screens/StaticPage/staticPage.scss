@@ -1,9 +1,8 @@
 .StaticPage {
   &__div {
     padding: 15px 0px;
-
     &__container {
-      padding: 15px;
+      padding: 25px;
       &__mainHeading {
         display: block;
         font-size: 24px;
@@ -20,7 +19,7 @@
       &__heading {
         width: 100%;
         display: block;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 700;
       }
       &__discription {
@@ -33,9 +32,29 @@
         li{
           display: block; 
           margin-bottom: 15px;
+        margin-bottom: 15px !important;
+        &__liStyling {
+          padding: 15px;
         }
         li:before { content: counters(item, ".") " "; counter-increment: item }
       }
+      &__list {
+        &__icon {
+          min-width: 25px !important;
+        }
+        margin-bottom: 10px !important;
+        .MuiListItemText-root {
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+        .MuiSvgIcon-root {
+          width: 15px;
+          height: 15px;
+          min-width: 20px;
+        }
+        
+      }
     }
   }
+}
 }
