@@ -21,12 +21,17 @@
         width: 100%;
         display: block;
         font-size: 20px;
+        font-weight: 700;
       }
       &__discription {
         width: 100%;
         display: block;
         font-size: 16px;
         font-weight: 500;
+        margin-bottom: 15px!important;
+        &__liStyling{
+          padding:15px;
+        }
       }
     }
   }
