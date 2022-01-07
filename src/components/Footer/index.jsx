@@ -6,6 +6,7 @@ const Footer = (props) => {
       <div className="footer">
         Copyright &copy; 2021 E2E Research Services Pvt. Ltd.
       </div>
+      <div className=""></div>
     </>
   );
 };
