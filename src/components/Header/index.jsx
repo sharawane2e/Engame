@@ -34,7 +34,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
 import LocalStorageType from "../../config/LocalStorageType";
 import { listProducts } from "../../redux/product/product-action";
-import CartView from "../cart/CartView";
+import CartView from "../QuickCart/CartView";
 
 const useStyles = makeStyles((theme) => ({
   sectionMobile: {
@@ -86,6 +86,7 @@ const Header = ({ props }) => {
   const cartCountManagement = async () => {
     setIsPayment(localStorage.getItem("isPayment") ? true : false);
     LocalStorageUtils.setLocalStorage(LocalStorageType.REMOVE, "isPayment");
+    setIsPayment(localStorage.getItem("isPayment") ? true : false);
   };
 
   useEffect(() => {
@@ -204,14 +205,14 @@ const Header = ({ props }) => {
                         }
                         color="secondary"
                       >
-                        <Tooltip title="Cart Items" placement="top">
-                          <ShoppingCartIcon />
-                        </Tooltip>
+                        {/* <Tooltip title="Cart Items" placement="top">
+                        </Tooltip> */}
+                        <ShoppingCartIcon />
                       </Badge>
                     </Link>
-                    {/* <div className="shoping__card__cartHover">
+                    <div className="shoping__card__cartHover">
                       <CartView />
-                    </div> */}
+                    </div>
                   </div>
                   <CustomButton
                     onClick={handleProfileMenuOpen}

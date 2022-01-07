@@ -8,7 +8,7 @@ export const addToCart = (userData) => (dispatch) => {
 
   ApiRequest.request(ADD_TO_CART, "POST", userData)
     .then((res) => {
-      dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res.data });
+      // dispatch({ type: actionTypes.CART_ADD_ITEM, payload: res.data });
       dispatch(getItemFromCart());
     })
     .finally(() => {

@@ -3,6 +3,12 @@
   padding-top: 25px;
   padding-bottom: 25px;
   background-color: $lightGray;
+  &__mainHead {
+    margin-left: -12px !important;
+    &__innerDiv {
+      padding-left: 12px !important;
+    }
+  }
   &__header {
     padding: 15px;
     font-size: $font-xl-reg !important;

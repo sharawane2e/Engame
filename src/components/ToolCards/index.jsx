@@ -35,6 +35,7 @@ const ToolCards = () => {
   const [isReginOpen, setReginIsOpen] = useState(false);
   const [isLoginrequire, setisLoginrequire] = useState(false);
   const [popupId, setPopupId] = useState();
+  const [clickedItemName, setClickedItemName] = useState();
   const [isSelectedItemForEmbeded, setIsSelectedItemForEmbeded] = useState();
   const [ispopup, setPopup] = useState(false);
   const [isSubscription, setSubscriptionPopup] = useState(false);
@@ -162,6 +163,7 @@ const ToolCards = () => {
                                   onClick={(id) => {
                                     setSubscriptionPopup(true);
                                     setPopupId(tooldata.id);
+                                    setClickedItemName(tooldata.name);
                                   }}
                                 >
                                   {tooldata.is_purchased ? (
@@ -365,6 +367,7 @@ const ToolCards = () => {
             <Subscription
               data={products}
               toolId={popupId}
+              toolName={clickedItemName}
               onClose={() => setSubscriptionPopup(false)}
             />
           </CustomPopup>

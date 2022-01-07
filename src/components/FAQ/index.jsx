@@ -23,8 +23,8 @@ const Faqs = () => {
       <Header />
       <div className="faq">
         <Container maxWidth="lg" className="faq__container">
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
+          <Grid container spacing={3} className="faq__mainHead">
+            <Grid item xs={12} className="faq__mainHead__innerDiv">
               <Paper className="purchased-tool__tool-card card-box-shadow border--colordata border-radius faq__paper">
                 <Typography component="div" className="faq__header">
                   Fequently ask question(FAQS)

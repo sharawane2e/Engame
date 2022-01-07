@@ -10,7 +10,7 @@ import { CART_STANDARD_PRICE } from "../../config/ApiUrl";
 // import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
 
-const SubscriptionType = ({ toolId, onClose }) => {
+const SubscriptionType = ({ toolId, toolName, onClose }) => {
   const [subscription, setSubscription] = useState("");
   const [type, setType] = useState("");
   const [base, setBase] = useState(0);
@@ -51,20 +51,6 @@ const SubscriptionType = ({ toolId, onClose }) => {
       .finally(() => {
         dispatch(loadingStop());
       });
-
-    // fetch(BASE_URL + "cart/standard_price/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${res.token.access_token}`,
-    //   },
-    //   body: JSON.stringify(plans),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     setBase(result.base_price);
-    //     dispatch(loadingStop());
-    //   });
   };
 
   const productInfo = {
@@ -74,10 +60,10 @@ const SubscriptionType = ({ toolId, onClose }) => {
     plan_value: itemCount,
     price: itemPrice,
     currency: "$",
+    name: toolName,
   };
   const handleAddCart = async () => {
     dispatch(addToCart(productInfo));
-    // Toaster.sucess("You have item add successfully!", "topCenter");
     onClose();
   };
 

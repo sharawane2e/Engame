@@ -115,6 +115,10 @@
     text-align: center;
     top: 12px;
     right: 50px;
+    @include breakpoint(mobileonly) {
+      right: 40px;
+      top: 10px;
+    }
   }
   #{&}__form1 {
     width: 45px;
