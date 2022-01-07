@@ -29,10 +29,16 @@
         display: block;
         font-size: 16px;
         font-weight: 500;
+        margin-bottom: 15px!important;
+        ol{counter-reset: item}
+        li{
+          display: block; 
+          margin-bottom: 15px;
         margin-bottom: 15px !important;
         &__liStyling {
           padding: 15px;
         }
+        li:before { content: counters(item, ".") " "; counter-increment: item }
       }
       &__list {
         &__icon {
@@ -48,7 +54,9 @@
           height: 15px;
           min-width: 20px;
         }
+        
       }
     }
   }
+}
 }
