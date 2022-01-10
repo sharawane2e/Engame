@@ -1,6 +1,6 @@
 .StaticPage {
   &__div {
-    @include space(padding, all, $padding-15, 0);
+    @include space(padding, all, $padding-0, 0);
     @include space(padding, bottom, 0, 0);
     &__container {
       @include space(padding, all, $padding-25, $padding-25);
