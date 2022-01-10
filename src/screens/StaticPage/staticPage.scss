@@ -1,62 +1,87 @@
 .StaticPage {
   &__div {
-    padding: 15px 0px;
+    @include space(padding, all, $padding-15, 0);
+    @include space(padding, bottom, 0, 0);
     padding-bottom: 0px;
     &__container {
-      padding: 25px;
+      @include space(padding, all, $padding-25, $padding-25);
       padding-bottom: 50px;
+      min-height: 100vh;
       &__mainHeading {
         display: block;
-        font-size: 24px;
-        text-align: center;
+        font-size: $font-xx-reg;
+        text-align: left;
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: $font-600;
         color: $primary;
-        border-bottom: 5px solid $primary;
-        padding: 6px 10px;
-        width: max-content;
+        @include border("-bottom", 2px, $bsolid, $seconday-shadow);
+        @include space(padding, all, $padding-0, $padding-10);
+        padding-bottom: 5px;
+        width: 100%;
         margin: auto !important;
         margin-bottom: 35px !important;
       }
       &__heading {
         width: 100%;
         display: block;
-        font-size: 18px;
-        font-weight: 700;
+        font-size: $font-xx-reg18;
+        font-weight: $font-600;
+        margin-top: 30px !important;
       }
       &__discription {
         width: 100%;
         display: block;
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 15px!important;
-        ol{counter-reset: item}
-        li{
-          display: block; 
-          margin-bottom: 15px;
+        font-size: $font-xl-reg;
+        font-weight: $font-500;
         margin-bottom: 15px !important;
-        &__liStyling {
-          padding: 15px;
+        ol {
+          counter-reset: item;
+          @include space(padding, left, $padding-15, 0);
+
+          margin-top: 5px;
         }
-        li:before { content: counters(item, ".") " "; counter-increment: item }
-      }
-      &__list {
-        &__icon {
-          min-width: 25px !important;
+        li {
+          display: block;
+          margin-bottom: 15px;
+          margin-bottom: 15px !important;
+          line-height: 20px;
+          &__liStyling {
+            // padding: 15px;
+            @include space(padding, all, $padding-15, $padding-15);
+          }
         }
-        margin-bottom: 10px !important;
-        .MuiListItemText-root {
-          margin-top: 0px;
-          margin-bottom: 0px;
+        li:before {
+          content: counters(item, ".") " ";
+          counter-increment: item;
+          font-weight: $font-600;
         }
-        .MuiSvgIcon-root {
-          width: 15px;
-          height: 15px;
-          min-width: 20px;
+        &__list {
+          &__icon {
+            min-width: 25px !important;
+          }
+          margin-bottom: 10px !important;
+          .MuiListItemText-root {
+            margin-top: 0px;
+            margin-bottom: 0px;
+          }
+          .MuiSvgIcon-root {
+            width: 15px;
+            height: 15px;
+            min-width: 20px;
+          }
         }
-        
       }
     }
   }
 }
+.StaticPage__div__container__discription__liStyling__alpha {
+  @include space(padding, left, $padding-15, 0!important);
+}
+.StaticPage__DataList {
+  @include space(padding, left, $padding-30, 0);
+  ul {
+    li {
+      margin-bottom: 10px;
+    }
+  }
 }

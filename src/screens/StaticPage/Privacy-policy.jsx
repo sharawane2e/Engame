@@ -54,9 +54,8 @@ const PrivacyPolicy = () => {
                   gutterBottom
                   className="StaticPage__div__container__discription"
                 >
-                  E2E Research Pvt. Ltd. operates the engame.e2eresearch.com
-                  website, which provides the SERVICEs of research tools .<br />
-                  <br />
+                  ___(Company Name)______operates the ____________ website,
+                  which provides the SERVICEs of _________
                 </Typography>
                 <Typography
                   variant="p"
@@ -162,43 +161,15 @@ const PrivacyPolicy = () => {
                   We may employ third-party companies and individuals due to the
                   following reasons:
                 </Typography>
-                <List
-                  aria-label="contacts"
-                  className="StaticPage__div__container__list"
-                >
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon className="StaticPage__div__container__list__icon">
-                        <FiberManualRecordIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="To facilitate our Service" />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon className="StaticPage__div__container__list__icon">
-                        <FiberManualRecordIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="To provide the Service on our behalf" />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon className="StaticPage__div__container__list__icon">
-                        <FiberManualRecordIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="To perform Service-related services; or" />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon className="StaticPage__div__container__list__icon">
-                        <FiberManualRecordIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="To assist us in analyzing how our Service is used." />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
+                <div className="StaticPage__DataList">
+                  <ul>
+                    <li>To facilitate our Service;</li>
+                    <li>To provide the Service on our behalf;</li>
+                    <li>To perform Service-related services; or</li>
+                    <li>To assist us in analyzing how our Service is used.</li>
+                  </ul>
+                </div>
+
                 <Typography
                   variant="p"
                   gutterBottom

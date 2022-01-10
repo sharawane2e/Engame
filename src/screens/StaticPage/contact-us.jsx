@@ -32,7 +32,7 @@ const ContactUS = () => {
             </Breadcrumbs>
           </Container>
         </div>
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <div className="StaticPage__div">
             <Paper elevation={0}>
               <div className="StaticPage__div__container">
