@@ -55,7 +55,7 @@ const TermsCondition = () => {
                   className="StaticPage__div__container__discription"
                 >
                   <ol>
-                    <li>
+                    <li className="StaticPage__div__container__discription__mainLi">
                       These terms and conditions shall govern your use of our
                       website.
                       <ol>
@@ -85,13 +85,15 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li>
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Licence to use website
                       <ol>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           You may:
                           <ol type="a">
-                            <li>Except</li>
+                            <li className="StaticPage__div__container__discription__liStyling">
+                              Except
+                            </li>
                           </ol>
                         </li>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -133,7 +135,7 @@ const TermsCondition = () => {
                             (e) redistribute material from our website.
                           </div>
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           We reserve the right to restrict access to areas of
                           our website, or indeed our whole website, at our
                           discretion; you must not circumvent or bypass, or
@@ -143,7 +145,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Acceptable use
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -204,7 +206,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Registration and accounts
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -221,7 +223,7 @@ const TermsCondition = () => {
                           You must notify us in writing immediately if you
                           become aware of any unauthorised use of your account.
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           You must not use any other person's account to access
                           the website[, unless you have that person's express
                           permission to do so].
@@ -229,7 +231,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       User login details
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -245,11 +247,11 @@ const TermsCondition = () => {
                         <li className="StaticPage__div__container__discription__liStyling">
                           You must keep your password confidential.
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           You must notify us in writing immediately if you
                           become aware of any disclosure of your password.
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           You are responsible for any activity on our website
                           arising out of any failure to keep your password
                           confidential, and may be held liable for any losses
@@ -258,7 +260,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Cancellation and suspension of accoun
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -282,7 +284,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Your content: licence
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -312,12 +314,12 @@ const TermsCondition = () => {
                           in your content have been waived to the maximum extent
                           permitted by applicable law.
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           You may edit your content to the extent permitted
                           using the editing functionality made available on our
                           website.
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           Without prejudice to our other rights under these
                           terms and conditions, if you breach any provision of
                           these terms and conditions in any way, or if we
@@ -328,7 +330,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Your content: rules
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -415,7 +417,7 @@ const TermsCondition = () => {
                       </ol>
                     </li>
 
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Limited warranties
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -453,7 +455,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Breaches of these terms and conditions
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -499,7 +501,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Variation
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -531,7 +533,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Assignment
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -547,7 +549,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Severability
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -559,7 +561,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Third party rights
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -574,7 +576,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Entire agreement
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -587,7 +589,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Law and jurisdictio
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -601,7 +603,7 @@ const TermsCondition = () => {
                         </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Statutory and regulatory disclosures
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -618,14 +620,16 @@ const TermsCondition = () => {
                           in [the United Kingdom] and are subject to [rules],
                           which can be found at [URL].
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           We subscribe to [code(s) of conduct], which can be
                           consulted electronically at [URL(s)].
                         </li>
-                        <li>Our GST number is [number].</li>
+                        <li className="StaticPage__div__container__discription__liStyling">
+                          Our GST number is [number].
+                        </li>
                       </ol>
                     </li>
-                    <li className="StaticPage__div__container__discription__liStyling">
+                    <li className="StaticPage__div__container__discription__mainLi">
                       Our details
                       <ol>
                         <li className="StaticPage__div__container__discription__liStyling">
@@ -639,7 +643,7 @@ const TermsCondition = () => {
                         <li className="StaticPage__div__container__discription__liStyling">
                           Our principal place of business is at [address]
                         </li>
-                        <li>
+                        <li className="StaticPage__div__container__discription__liStyling">
                           You can contact us:
                           <br />
                           <div className="StaticPage__div__container__discription__liStyling__alpha">

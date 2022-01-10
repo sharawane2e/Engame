@@ -77,8 +77,6 @@ const PrivacyPolicy = () => {
                   providing and improving the Service. We will not use or share
                   your information with anyone except as described in this
                   Privacy Policy.
-                  <br />
-                  <br />
                 </Typography>
                 <Typography
                   variant="h"
