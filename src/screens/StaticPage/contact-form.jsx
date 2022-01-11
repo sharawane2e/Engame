@@ -1,27 +1,16 @@
 import React from "react"
 import {
   Grid,
-  makeStyles,
   Card,
   CardContent,
   CardActions,
   Button,
-  CardHeader,
-  FormControl,
 } from "@material-ui/core"
 
 import { Formik, Form, Field } from "formik"
 import * as Yup from "yup"
 import { TextField } from "formik-material-ui"
 
-const useStyle = makeStyles((theme) => ({
-  padding: {
-    // padding: theme.spacing(3),
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}))
 
 //Data
 const initialValues = {
@@ -41,8 +30,6 @@ let validationSchema = Yup.object().shape({
 })
 
 const ContactForm = () => {
-  const classes = useStyle()
-
   const onSubmit = (values) => {
     console.log(values)
   }
@@ -50,7 +37,7 @@ const ContactForm = () => {
   return (
     <Grid container justify="center" spacing={1}>
       <Grid item md={12}>
-        <Card className={classes.padding}>
+        <Card>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -132,7 +119,7 @@ const ContactForm = () => {
                       variant="contained"
                       color="primary"
                       type="Submit"
-                      className={classes.button}>
+                      >
                       Submit
                     </Button>
                   </CardActions>

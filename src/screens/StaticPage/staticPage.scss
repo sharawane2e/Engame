@@ -93,11 +93,15 @@
     font-size: 1.50rem;
     font-weight: 500;
     padding-bottom: 0.5rem;
+   
     &__con-info-panel{
       &__con-info{
         color: #333333;
         line-height: 28px;
         font-size: 1rem;
+        @include breakpoint(mobileonly) {
+          font-size: 12px;
+        }
         a{
           color: #f15a5c;
         }
@@ -111,6 +115,9 @@
     margin-top: 0.75rem !important;
     margin-bottom: 0.75rem !important;
     font-weight: normal;
+    @include breakpoint(mobileonly) {
+      font-size: 12px;
+    }
   }
 }
 

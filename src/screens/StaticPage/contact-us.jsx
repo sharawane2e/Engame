@@ -9,7 +9,8 @@ import { Typography } from "@mui/material";
 import Footer from "../../components/Footer";
 import { Grid, Paper } from '@material-ui/core';
 import ContactForm from "./contact-form";
-import Map from "../../assets/images/mapDwarka.png";
+import GoogleMap from "../StaticPage/map/google-map-react";
+const locations = require("../StaticPage/map/locations.json");
 
 const ContactUS = () => {
   return (
@@ -49,8 +50,8 @@ const ContactUS = () => {
                   <Grid item xs={6}>
                     <div className="contact-head">
                       <div className="contact-head__text">India</div>
-                      <p>409, D-21 Corporate Park, Sector 21<br />
-                        Dwarka, New Delhi 110077</p>
+                      <p>409, D-21 Corporate Park,<br />
+                        Dwarka, ND 110077</p>
                       <div className="contact-head__text__con-info-panel">
                         <div className="contact-head__text__con-info-panel__con-info">Phone: <a href="tel:+91 11 46109435"><span>+91 11 46109435</span></a></div>
                         <div className="contact-head__text__con-info-panel__con-info">Email: <a href="mailto:info@e2eresearch.com">info@e2eresearch.com</a></div>
@@ -79,15 +80,24 @@ const ContactUS = () => {
                         <p>We’d love to hear from you!</p>
                       </div>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xl={8}
+                      lg={8}
+                      md={8}
+                      sm={8}
+                      xs={12}>
                       <div className="Form_container">
-                        <ContactForm/>
+                        <ContactForm />
                       </div>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xl={4}
+                      lg={4}
+                      md={4}
+                      sm={4}
+                      xs={12}>
                       <div>
                         <p className="Info-data__wrapper__context-text">Map</p>
-                        <img src={Map} alt="dummyMap" width={300} height={300} />
+                        <GoogleMap locations={locations} />
+                        {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.264378928!2d77.06487091549418!3d28.56182279402765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d04a34db9b4ab%3A0x8966e0b626355651!2sE2E%20Research%20Services%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1641906380680!5m2!1sen!2sin" width="100%" height="300" allowfullscreen="" loading="lazy"></iframe> */}
                       </div>
                     </Grid>
                   </Grid>
