@@ -271,9 +271,7 @@ const CartView = () => {
                   align="center"
                 >
                   <div className="quickCart__checkout__card-coupon__totalAmount">
-                    <div className="shoping-cart__coupon-hedding">
-                      Need to pay
-                    </div>
+                    <div className="shoping-cart__coupon-hedding">Total</div>
                     <div className="quickCart__checkout__card-coupon__totalAmount__amount">
                       $
                       {cart

@@ -86,7 +86,6 @@ const Header = ({ props }) => {
   const cartCountManagement = async () => {
     setIsPayment(localStorage.getItem("isPayment") ? true : false);
     LocalStorageUtils.setLocalStorage(LocalStorageType.REMOVE, "isPayment");
-    setIsPayment(localStorage.getItem("isPayment") ? true : false);
   };
 
   useEffect(() => {
