@@ -2,17 +2,41 @@
   // position: absolute;
   bottom: 0px;
   width: 100%;
-  text-align: $align-center;
+  // text-align: $align-center;
   @include font-size($font-xmd-reg);
   @include bgcolor($gray-primary);
   @include space(
     padding,
     top AND right AND bottom AND left,
-    $padding-15,
+    $padding-24,
     $padding-24
   );
   @include breakpoint(mobileonly) {
     position: relative;
+  }
+  &__gridmain{
+    &__gridInnerChild{
+      display:flex;
+      &__atag{
+        padding-left: 30px;
+        padding-right: 50px;
+       
+        font-size: 16px;
+        font-weight: 600;
+        a{
+          color: #BBBBBB;
+          &:hover {
+            color: #383838;
+          }
+        }
+       
+      }
+    }
+    &__rightChild{
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 10px;
+    }
   }
 }
 .lowerFooter {

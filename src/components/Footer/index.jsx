@@ -7,25 +7,22 @@ const Footer = (props) => {
   return (
     <>
       <div className="footer">
-        <div className="lowerFooter">
-          <Grid container>
-            <Grid item xs={2} sm={3} md={3}>
-              <Link to="/privacy-policy">Privacy Policy</Link>
-            </Grid>
-            <Grid item xs={2} sm={3} md={3}>
-              <Link to="/refund-policy">Refund Policy</Link>
-            </Grid>
-            <Grid item xs={2} sm={3} md={3}>
-              <Link to="/terms-condition">Terms & Condition</Link>
-            </Grid>
-            <Grid item xs={2} sm={3} md={3}>
-              <Link to="/contact-us">Contact US</Link>
-            </Grid>
+        <Grid container className="footer__gridmain">
+          <Grid item xs={10} className="footer__gridmain__gridInnerChild">
+            <Typography variant="div" component="div" className="footer__gridmain__gridInnerChild__atag">
+              <Link to="/privacy-policy">Privacy Policy</Link> </Typography>
+            <Typography variant="div" component="div" className="footer__gridmain__gridInnerChild__atag"> <Link to="/refund-policy">Refund Policy</Link></Typography>
+            <Typography variant="div" component="div" className="footer__gridmain__gridInnerChild__atag"><Link to="/terms-condition">Terms & Condition</Link></Typography>
+            <Typography variant="div" component="div" className="footer__gridmain__gridInnerChild__atag"> <Link to="/contact-us">Contact US</Link></Typography>
+
           </Grid>
-        </div>
-        <Typography variant="p" gutterBottom className="">
-          Copyright &copy; 2021 E2E Research Services Pvt. Ltd.
-        </Typography>
+
+          <Grid item xs={2} className="footer__gridmain__rightChild">
+            <Typography variant="p" gutterBottom >
+              Copyright &copy; 2021 E2E Research Services Pvt. Ltd.
+            </Typography>
+          </Grid>
+        </Grid>
       </div>
     </>
   );
