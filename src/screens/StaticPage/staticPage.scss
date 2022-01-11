@@ -6,7 +6,8 @@
     &__container {
       @include space(padding, all, $padding-25, $padding-25);
       padding-bottom: 50px;
-      min-height: 100vh;
+      min-height: calc(100vh - 226px);
+      
       &__mainHeading {
         display: block;
         font-size: $font-xx-reg;
@@ -82,6 +83,45 @@
   ul {
     li {
       margin-bottom: 10px;
+    }
+  }
+}
+
+.contact-head{
+  &__text{
+    color: #42424F;
+    font-size: 1.50rem;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+    &__con-info-panel{
+      &__con-info{
+        color: #333333;
+        line-height: 28px;
+        font-size: 1rem;
+        a{
+          color: #f15a5c;
+        }
+      }
+      
+    }
+  }
+  p{
+    color: #333333;
+    font-size: 1rem;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+    font-weight: normal;
+  }
+}
+
+.Info-data{
+  &__wrapper{
+    margin-top:100px;
+    &__context-text{
+      color: #42424F;
+      font-size: 1.50rem;
+      font-weight: 500;
+      padding-bottom: 0.5rem;
     }
   }
 }

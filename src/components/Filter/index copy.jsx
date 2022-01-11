@@ -10,7 +10,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import CarouselBeforeLogin from "../Carousel/CarouselBeforeLogin";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { useAutocomplete } from "@mui/core/AutocompleteUnstyled";
 import CheckIcon from "@mui/icons-material/Check";
 import { listProducts } from "../../redux/product/product-action";
 import { CATEGORIES_LIST } from "../../config/ApiUrl";

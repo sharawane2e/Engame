@@ -8,6 +8,7 @@ const CustomButton = (props) => {
       <Button
         {...props}
         className={getClassNames("custom-button", props.className)}
+        disableRipple={true}
       >
         {props.children}
       </Button>

@@ -205,8 +205,8 @@ const Header = ({ props }) => {
                         }
                         color="secondary"
                       >
-                        {/* <Tooltip title="Cart Items" placement="top">
-                        </Tooltip> */}
+                        {/* <Tooltip title="Cart Items" placement="top"> */}
+                        {/* </Tooltip> */}
                         <ShoppingCartIcon />
                       </Badge>
                     </Link>
@@ -217,7 +217,6 @@ const Header = ({ props }) => {
                   <CustomButton
                     onClick={handleProfileMenuOpen}
                     className="custom-avtar"
-                    focusRipple={true}
                   >
                     <Avatar sx="">
                       {user.token.user.first_name.split(/(\s+)/)[0]
