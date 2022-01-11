@@ -68,6 +68,10 @@ const Header = ({ props }) => {
   const user = useSelector((state) => state.user);
   const [isPayment, setIsPayment] = useState();
 
+  // const search = props.location.search;
+  // const params = new URLSearchParams(search);
+  // const session_id = params.get("session_id");
+
   useEffect(() => {
     if (user.isLoggedIn) {
       setLoginIsOpen(false);
