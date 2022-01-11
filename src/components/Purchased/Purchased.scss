@@ -59,11 +59,13 @@
     }
     .tab--button {
       border: $border-width $bsolid $tabcolor;
-      width: 130px;
+      width: max-content;
       display: flex;
       font-family: map-get($map: $font-family, $key: "font-barlowmedium");
       @include font-size($font-reg);
       @include space(padding, all, $padding-5, $padding-10);
+      @include space(padding, left, $padding-15, 0);
+      @include space(padding, right, $padding-15, 0);
       @include space(margin, right, $margin-10, 0);
       justify-content: $align-center;
       background-color: $tabcolor;
@@ -75,14 +77,19 @@
         border: $border-width $bsolid $secondary;
       }
       @include breakpoint(Ipad-pro) {
-        width: 120px;
+        width: max-content;
         line-height: 1.2rem;
-        padding: 5px;
+        // padding: 5px 10px;
+        @include space(padding, all, $padding-5, $padding-10);
+        @include space(padding, left, $padding-10, 0);
+        @include space(padding, right, $padding-10, 0);
       }
       @include breakpoint(Ipad) {
-        width: 86px;
+        width: max-content;
         line-height: 1.2rem;
-        padding: 5px;
+        @include space(padding, all, $padding-5, $padding-10);
+        @include space(padding, left, $padding-10, 0);
+        @include space(padding, right, $padding-10, 0);
       }
     }
     .tab--active {
