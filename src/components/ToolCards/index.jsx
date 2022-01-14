@@ -221,7 +221,7 @@ const ToolCards = () => {
                                   onClick={() => {
                                     setisLoginrequire(true);
                                     setTypeClick(
-                                      ErrorMessages.ToolPreviewBeforeLogin
+                                      ErrorMessages.ToolPreviewBeforeLogin,
                                     );
                                   }}
                                 />

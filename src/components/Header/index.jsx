@@ -83,7 +83,7 @@ const Header = ({ props }) => {
   useEffect(() => {
     LocalStorageUtils.setLocalStorage(
       LocalStorageType.REMOVE,
-      "verificationEmail"
+      "verificationEmail",
     );
   }, []);
 
@@ -204,7 +204,11 @@ const Header = ({ props }) => {
                     <Link to="cart">
                       <Badge
                         badgeContent={
-                          isPayment ? 0 : carts.length ? carts.length : 0
+                          user && user?.isPayment
+                            ? 0
+                            : carts?.length
+                            ? carts?.length
+                            : 0
                         }
                         color="secondary"
                       >

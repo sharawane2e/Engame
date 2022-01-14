@@ -15,6 +15,9 @@
     @include space(margin, bottom, $margin-30, 0);
     cursor: pointer;
   }
+  > .select-box > select:focus {
+    @include border("", $border-width, $bsolid, $dark-gray !important);
+  }
   &__subscriptionRenew {
     cursor: no-drop !important;
   }

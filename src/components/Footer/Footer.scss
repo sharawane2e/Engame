@@ -1,7 +1,8 @@
 .footer {
-  // position: absolute;
+  // position: fixed;
   bottom: 0px;
   width: 100%;
+  z-index: 999999;
   // text-align: $align-center;
   @include font-size($font-xmd-reg);
   @include bgcolor($gray-primary);
@@ -12,16 +13,15 @@
     $padding-24
   );
   @include breakpoint(mobileonly) {
-    position: relative;
     padding: 10px 2px 10px 2px;
   }
-  &__gridmain{
-    &__gridInnerChild{
-      display:flex;
-      &__atag{
+  &__gridmain {
+    &__gridInnerChild {
+      display: flex;
+      &__atag {
         padding-left: 30px;
         padding-right: 50px;
-       
+
         font-size: 16px;
         font-weight: 600;
         @include breakpoint(Ipad-pro) {
@@ -32,16 +32,15 @@
           padding: 10px 8px 10px 9px;
           font-size: 12px;
         }
-        a{
-          color: #BBBBBB;
+        a {
+          color: #bbbbbb;
           &:hover {
             color: #383838;
           }
         }
-       
       }
     }
-    &__rightChild{
+    &__rightChild {
       display: flex;
       justify-content: flex-end;
       padding-right: 10px;

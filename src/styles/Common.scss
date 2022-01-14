@@ -592,7 +592,7 @@ select {
       height: 100%;
       align-items: center;
       @include breakpoint(Ipad-pro) {
-        position: unset;
+        // position: unset;
         top: 10px;
         width: 100%;
         display: flex;
@@ -617,7 +617,7 @@ select {
           margin: auto;
           padding: 15px;
           padding-right: 15px;
-          margin-bottom: 15px;
+          margin-bottom: 50px;
           text-align: center;
         }
         &__review-text {

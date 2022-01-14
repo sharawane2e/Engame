@@ -51,11 +51,25 @@
     display: flex;
     justify-content: flex-end;
     @include space(margin, top-bottom, $margin-20, $margin-20);
+
+    @include breakpoint(mobileonly) {
+      margin-bottom: 80px !important;
+    }
+    @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
+      justify-content: center;
+      .MuiButton-label {
+        padding: 4px;
+      }
+    }
     > a {
       display: flex;
       width: 100%;
+      @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
+        width: 34% !important;
+      }
       .custom-button {
-        min-width: 100% !important;
+        min-width: 100%;
+
         @include space(padding, top-bottom, $padding-15, $padding-15!important);
         @include space(padding, left-right, $padding-15, $padding-15!important);
         font-size: 1.2rem !important;
@@ -203,7 +217,7 @@
     @include space(margin, right, $margin-5, 0);
     fill: $black-gray;
     width: 20px !important;
-    height: 20px !important;
+    height: 24px !important;
     &:hover {
       fill: $secondary;
     }
@@ -279,10 +293,12 @@
 
   .checkout-button {
     @include space(margin, bottom, $padding-10, 0);
-    width: 100% !important;
+    width: 100%;
     padding: 15px !important;
     font-size: 1.25rem !important;
-
+    @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
+      width: 35%;
+    }
     a {
       color: inherit;
     }

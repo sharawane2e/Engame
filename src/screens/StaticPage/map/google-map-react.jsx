@@ -7,32 +7,31 @@ const markerStyle = {
   position: "absolute",
   top: "100%",
   left: "50%",
-  transform: "translate(-50%, -100%)"
+  transform: "translate(-50%, -100%)",
 };
 
 class GoogleMap extends React.Component {
   static defaultProps = {
     center: {
-      lat: 60.192059,
-      lng: 24.945831
+      lat: 28.563743,
+      lng: 77.068891,
     },
-    zoom: 11
+    zoom: 11,
   };
-
   render() {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: "300px", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: "AIzaSyA16d9FJFh__vK04jU1P64vnEpPc3jenec"
+            key: "AIzaSyA16d9FJFh__vK04jU1P64vnEpPc3jenec",
           }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          {this.props.locations.map(item => {
+          {this.props.locations.map((item) => {
             if (item.address.length !== 0) {
-              return item.address.map(i => {
+              return item.address.map((i) => {
                 return (
                   <Link to={"/" + item.name} key={i.id} lat={i.lat} lng={i.lng}>
                     <img style={markerStyle} src={pin} alt="pin" />

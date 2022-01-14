@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Footer from "../../components/Footer";
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper } from "@material-ui/core";
 import ContactForm from "./contact-form";
 import GoogleMap from "../StaticPage/map/google-map-react";
 const locations = require("../StaticPage/map/locations.json");
@@ -47,53 +47,71 @@ const ContactUS = () => {
                   Contact US
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={6}>
+                  <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                     <div className="contact-head">
                       <div className="contact-head__text">India</div>
-                      <p>409, D-21 Corporate Park,<br />
-                        Dwarka, ND 110077</p>
+                      <p>
+                        409, D-21 Corporate Park,
+                        <br />
+                        Dwarka, ND 110077
+                      </p>
                       <div className="contact-head__text__con-info-panel">
-                        <div className="contact-head__text__con-info-panel__con-info">Phone: <a href="tel:+91 11 46109435"><span>+91 11 46109435</span></a></div>
-                        <div className="contact-head__text__con-info-panel__con-info">Email: <a href="mailto:info@e2eresearch.com">info@e2eresearch.com</a></div>
+                        <div className="contact-head__text__con-info-panel__con-info">
+                          Phone:{" "}
+                          <a href="tel:+91 11 46109435">
+                            <span>+91 11 46109435</span>
+                          </a>
+                        </div>
+                        <div className="contact-head__text__con-info-panel__con-info">
+                          Email:{" "}
+                          <a href="mailto:info@e2eresearch.com">
+                            info@e2eresearch.com
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </Grid>
-                  <Grid item xs={6}>
-
+                  <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                     <div className="contact-head">
                       <div className="contact-head__text">US</div>
-                      <p>19 W, 34th Street Suite, 1021<br />
-                        New York, NY 10001</p>
+                      <p>
+                        19 W, 34th Street Suite, 1021
+                        <br />
+                        New York, NY 10001
+                      </p>
                       <div className="contact-head__text__con-info-panel">
-                        <div className="contact-head__text__con-info-panel__con-info">Phone: <a href="tel:1-917-962-0521"><span>+1-917-962-0521</span></a></div>
-                        <div className="contact-head__text__con-info-panel__con-info">Email: <a href="mailto:info@e2eresearch.com">info@e2eresearch.com</a></div>
+                        <div className="contact-head__text__con-info-panel__con-info">
+                          Phone:{" "}
+                          <a href="tel:1-917-962-0521">
+                            <span>+1-917-962-0521</span>
+                          </a>
+                        </div>
+                        <div className="contact-head__text__con-info-panel__con-info">
+                          Email:{" "}
+                          <a href="mailto:info@e2eresearch.com">
+                            info@e2eresearch.com
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </Grid>
-
                 </Grid>
                 <div className="Info-data">
                   <Grid container spacing={3}>
                     <Grid item xs={12}>
                       <div className="Info-data__wrapper">
-                        <p className="Info-data__wrapper__context-text">Let's Work Together</p>
+                        <p className="Info-data__wrapper__context-text">
+                          Let's Work Together
+                        </p>
                         <p>We’d love to hear from you!</p>
                       </div>
                     </Grid>
-                    <Grid item xl={8}
-                      lg={8}
-                      md={8}
-                      sm={8}
-                      xs={12}>
+                    <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                       <div className="Form_container">
                         <ContactForm />
                       </div>
                     </Grid>
-                    <Grid item xl={4}
-                      lg={4}
-                      md={4}
-                      sm={4}
-                      xs={12}>
+                    <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                       <div>
                         <p className="Info-data__wrapper__context-text">Map</p>
                         <GoogleMap locations={locations} />
