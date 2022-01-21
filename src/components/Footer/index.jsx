@@ -58,7 +58,7 @@ const Footer = (props) => {
             xs={12}
             className="footer__gridmain__rightChild"
           >
-            <Typography variant="p" gutterBottom>
+            <Typography variant="p" gutterBottom className="copyright-text">
               Copyright &copy; 2021 E2E Research Services Pvt. Ltd.
             </Typography>
           </Grid>

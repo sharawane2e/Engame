@@ -33,9 +33,13 @@ const UserProfile = (props) => {
             </Breadcrumbs>
           </Container>
         </div>
-        <div className="Drawer-container">
-          <UserProfileDrawer />
-        </div>
+
+        <Container maxWidth="lg">
+          <div className="Drawer-container">
+            <UserProfileDrawer />
+          </div>
+        </Container>
+
         <Footer />
       </div>
     </>

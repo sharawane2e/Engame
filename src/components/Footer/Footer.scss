@@ -19,11 +19,17 @@
     &__gridInnerChild {
       display: flex;
       &__atag {
+        &:first-child {
+          padding-left: 0;
+          @include breakpoint(mobileonly) {
+            padding-left: 8px;
+          }
+        }
         padding-left: 30px;
         padding-right: 50px;
 
         font-size: 16px;
-        font-weight: 600;
+        // font-weight: 600;
         @include breakpoint(Ipad-pro) {
           padding: 10px 8px 10px 9px;
           font-size: 12px;
@@ -43,6 +49,7 @@
     &__rightChild {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       padding-right: 10px;
       @include breakpoint(mobileonly) {
         justify-content: center;
@@ -50,6 +57,10 @@
       }
       @include breakpoint(Ipad-pro) {
         justify-content: center;
+      }
+      .copyright-text {
+        color: #bbbbbb;
+        margin-bottom: 0 !important;
       }
     }
   }

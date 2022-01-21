@@ -90,15 +90,15 @@ function UserProfileDrawer(props) {
   };
   const drawer = (
     <div>
-      <Toolbar />
-      <List>
+      {/* <Toolbar /> */}
+      <List sx={{ py: 3 }}>
         {["User Profile", "Usage", "Activity"].map((text, index) => (
           <ListItem
             button
-            key={text}
+            key={index}
             className={index == 0 ? "ActiveBorderClass" : ""}
           >
-            <ListItemIcon>
+            <ListItemIcon sx={{ minWidth: "35px" }}>
               {index % 2 === 0 ? (
                 <PersonIcon className={index == 0 ? "ActiveIconClass" : ""} />
               ) : (
@@ -183,9 +183,6 @@ function UserProfileDrawer(props) {
       <Paper className="Paper-class">
         <Box
           component="main"
-          style={{
-            width: screenSize > 1535 ? `calc(100% - ${drawerWidth}px)` : "",
-          }}
           sx={{
             flexGrow: 1,
             p: 3,
@@ -218,48 +215,132 @@ function UserProfileDrawer(props) {
                   </label>
                 </div>
               </Grid>
-              <Grid item xs={4} md={3} sm={4}>
-                <ul className="profile-container__ul-listing-style">
-                  <li>Name</li>
-                  <li>Last Name</li>
-                  <li>Phone Number</li>
-                  <li>Email Address</li>
-                  <li>Organisation</li>
-                </ul>
-              </Grid>
-              <Grid item xs={8} md={5} sm={5}>
-                {editing ? (
-                  <div className="profile-container__input-type-style">
-                    <input
-                      type="text"
-                      name="first_name"
-                      value={inputFirstName}
-                      onChange={(e) => setInputFirstName(e.target.value)}
-                    ></input>
-                    <input
-                      type="text"
-                      name="last_name"
-                      value={inputLastName}
-                      onChange={(e) => setInputLastName(e.target.value)}
-                    ></input>
-                    <input
-                      type="text"
-                      name="pk"
-                      value={inputPhone}
-                      onChange={(e) => setInputPhone(e.target.value)}
-                    ></input>
-                    <input type="text" name="pk" value={user?.email}></input>
-                    <input type="text" name="pk" value={"E2Eservices"}></input>
-                  </div>
-                ) : (
-                  <ul className="profile-container__ul-listing-style">
-                    <li>{inputFirstName}</li>
-                    <li>{inputLastName}</li>
-                    <li>{inputPhone}</li>
-                    <li>{user?.email}</li>
-                    <li>E2Eservices</li>
-                  </ul>
-                )}
+              <Grid item xs={12} md={8} sm={12}>
+                <div className="common-display-flex">
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common"
+                  >
+                    Name
+                  </Typography>
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common-60"
+                  >
+                    {editing ? (
+                      <input
+                        type="text"
+                        name="first_name"
+                        className="input-filds"
+                        value={inputFirstName}
+                        onChange={(e) => setInputFirstName(e.target.value)}
+                      />
+                    ) : (
+                      `${inputFirstName}`
+                    )}
+                  </Typography>
+                </div>
+                <div className="common-display-flex">
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common"
+                  >
+                    Last Name
+                  </Typography>
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common-60"
+                  >
+                    {editing ? (
+                      <input
+                        type="text"
+                        name="last_name"
+                        className="input-filds"
+                        value={inputLastName}
+                        onChange={(e) => setInputLastName(e.target.value)}
+                      />
+                    ) : (
+                      `${inputLastName}`
+                    )}
+                  </Typography>
+                </div>
+                <div className="common-display-flex">
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common"
+                  >
+                    Phone Number
+                  </Typography>
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common-60"
+                  >
+                    {editing ? (
+                      <input
+                        type="text"
+                        className="input-filds"
+                        value={inputPhone}
+                        onChange={(e) => setInputPhone(e.target.value)}
+                      />
+                    ) : (
+                      `${inputPhone}`
+                    )}
+                  </Typography>
+                </div>
+                <div className="common-display-flex">
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common"
+                  >
+                    Email Address
+                  </Typography>
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common-60"
+                  >
+                    {editing ? (
+                      <input
+                        type="text"
+                        className="input-filds"
+                        value={user?.email}
+                      />
+                    ) : (
+                      `${user?.email} `
+                    )}
+                  </Typography>
+                </div>
+                <div className="common-display-flex">
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common"
+                  >
+                    Organisation
+                  </Typography>
+                  <Typography
+                    color="textPrimary"
+                    component="div"
+                    className="profile-container__pad-profile flex-common-60"
+                  >
+                    {editing ? (
+                      <input
+                        type="text"
+                        className="input-filds"
+                        value={"E2Eservices"}
+                      />
+                    ) : (
+                      "E2Eservices"
+                    )}
+                  </Typography>
+                </div>
               </Grid>
               <Grid item xs={12} md={12}>
                 {editing ? (
@@ -288,119 +369,105 @@ function UserProfileDrawer(props) {
                   className="profile-container__divider-style"
                 />
               </Grid>
+            </Grid>
+            {/*Bootm Section */}
+            <Grid container spacing={2} sx={{ mt: 3 }}>
+              <Grid item xs={12} md={6} sm={6}>
+                <Paper elevation={3} className="profile-container__paper-style">
+                  <Grid container>
+                    <Grid
+                      item
+                      xs={6}
+                      md={6}
+                      className="profile-container__password-style"
+                    >
+                      Password
+                    </Grid>
+                    <Grid
+                      item
+                      xs={8}
+                      md={6}
+                      sm={8}
+                      className="profile-container__update-style"
+                    >
+                      UPDATE
+                    </Grid>
+                    <Grid item xs={4} md={12} sm={4}>
+                      ********
+                    </Grid>
+                    <Grid item xs={9} md={12} sm={9}>
+                      Last modified on this date
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </Grid>
 
-              <Grid item xs={12} md={12}>
-                <Grid container spacing={2}>
-                  <Grid item xs={6} md={6}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={6} md={6} sm={6}>
-                        <Paper
-                          elevation={3}
-                          className="profile-container__paper-style"
-                        >
-                          <Grid container>
-                            <Grid
-                              item
-                              xs={4}
-                              md={6}
-                              className="profile-container__password-style"
-                            >
-                              Password
-                            </Grid>
-                            <Grid
-                              item
-                              xs={8}
-                              md={6}
-                              sm={8}
-                              className="profile-container__update-style"
-                            >
-                              UPDATE
-                            </Grid>
-                            <Grid item xs={4} md={12} sm={4}>
-                              ********
-                            </Grid>
-                            <Grid item xs={9} md={12} sm={9}>
-                              Last modified on this date
-                            </Grid>
-                          </Grid>
-                        </Paper>
-                      </Grid>
+              <Grid item xs={12} md={6} sm={6}>
+                <Paper
+                  elevation={3}
+                  className="profile-container__paper-style"
+                  sx={{ mb: 1 }}
+                >
+                  <Grid container className="profile-container__grid-container">
+                    <Grid
+                      item
+                      xs={2}
+                      md={2}
+                      className="profile-container__grid-icon"
+                    >
+                      <HelpIcon />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={6}
+                      className="profile-container__grid-text"
+                    >
+                      Need help or support
+                    </Grid>
+                    <Grid
+                      item
+                      xs={4}
+                      className="profile-container__Grid-greater-style"
+                    >
+                      <ArrowForwardIosIcon />
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Grid container>
-                      <Grid item xs={12}>
-                        <Paper
-                          elevation={3}
-                          className="profile-container__paper-style2"
-                        >
-                          <Grid
-                            container
-                            className="profile-container__grid-container"
-                          >
-                            <Grid
-                              item
-                              xs={2}
-                              md={2}
-                              className="profile-container__grid-icon"
-                            >
-                              <HelpIcon />
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              md={6}
-                              className="profile-container__grid-text"
-                            >
-                              Need help or support
-                            </Grid>
-                            <Grid
-                              item
-                              xs={4}
-                              className="profile-container__Grid-greater-style"
-                            >
-                              <ArrowForwardIosIcon />
-                            </Grid>
-                          </Grid>
-                        </Paper>
+                </Paper>
+                <Grid item xs={12}>
+                  <Paper
+                    elevation={3}
+                    className="profile-container__paper-style2"
+                  >
+                    <Grid
+                      container
+                      className="profile-container__grid-container"
+                    >
+                      <Grid
+                        item
+                        xs={2}
+                        md={2}
+                        className="profile-container__grid-icon"
+                      >
+                        <FeedbackIcon />
                       </Grid>
-                      <Grid item xs={12}>
-                        <Paper
-                          elevation={3}
-                          className="profile-container__paper-style2"
-                        >
-                          <Grid
-                            container
-                            className="profile-container__grid-container"
-                          >
-                            <Grid
-                              item
-                              xs={2}
-                              md={2}
-                              className="profile-container__grid-icon"
-                            >
-                              <FeedbackIcon />
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              md={6}
-                              className="profile-container__grid-text"
-                            >
-                              Share your feedback
-                            </Grid>
-                            <Grid
-                              item
-                              xs={4}
-                              className="profile-container__Grid-greater-style"
-                            >
-                              <ArrowForwardIosIcon />
-                            </Grid>
-                          </Grid>
-                        </Paper>
+                      <Grid
+                        item
+                        xs={6}
+                        md={6}
+                        className="profile-container__grid-text"
+                      >
+                        Share your feedback
+                      </Grid>
+                      <Grid
+                        item
+                        xs={4}
+                        className="profile-container__Grid-greater-style"
+                      >
+                        <ArrowForwardIosIcon />
                       </Grid>
                     </Grid>
-                  </Grid>
+                  </Paper>
                 </Grid>
               </Grid>
             </Grid>

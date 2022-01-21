@@ -1,5 +1,5 @@
 .breadcrum-main {
-  margin-left: $margin-28 !important;
+  // margin-left: $margin-28 !important;
   @include breakpoint(mobileonly) {
     margin-left: auto !important;
   }
@@ -9,7 +9,7 @@
 }
 
 .Drawer-container {
-  padding: $padding-50;
+  padding: $padding-50 $padding-0;
   @include breakpoint(mobileonly) {
     // padding: $padding-0 !important;
   }
@@ -43,14 +43,10 @@
 .ActiveIconClass {
   color: $secondary;
 }
-.ActiveBorderClass {
+.ActiveBorderClass .MuiTouchRipple-root {
   border-left: 3px solid $secondary !important;
-  @include space(
-    padding,
-    top-bottom,
-    $padding-0 !important,
-    $padding-0 !important
-  );
+  height: 20px;
+  margin-top: 15px;
 }
 .profile-container {
   width: 100%;
@@ -59,19 +55,18 @@
     margin-left: auto;
     text-align: center;
   }
+
+  &__input-padding {
+    padding-bottom: 15px;
+  }
+  .input-filds {
+    padding: 12px;
+    width: 100%;
+    border: 2px solid #cccccc30 !important;
+    border-radius: 3px;
+  }
   #{&}__input-type-style {
-    line-height: 4.5rem;
-    list-style: none;
-    @include breakpoint(mobileonly) {
-      font-size: 14px;
-      text-align: left;
-      line-height: 3.5rem;
-    }
     input {
-      padding: 12px;
-      width: 100%;
-      border: 2px solid #cccccc30 !important;
-      border-radius: 3px;
     }
   }
 
@@ -120,10 +115,10 @@
   }
   #{&}__image-noImage {
     position: relative;
-    top: 30px;
+    // top: 30px;
     filter: grayscale(100%);
     @include breakpoint(mobileonly) {
-      top: 10px;
+      // top: 10px;
       margin-bottom: 10px;
     }
   }
@@ -155,27 +150,34 @@
       transform: translate(111%, 90%);
     }
   }
-  #{&}__ul-listing-style {
-    list-style: none;
-  }
-
-  #{&}__ul-listing-style > li {
-    line-height: 4.5rem;
+  #{&}__pad-profile {
+    padding: 15px;
     @include breakpoint(mobileonly) {
-      font-size: 14px;
+      padding: 15px 0;
       text-align: left;
-      line-height: 3.5rem;
     }
   }
+  // #{&}__ul-listing-style {
+  //   list-style: none;
+  // }
+
+  // #{&}__ul-listing-style > li {
+  //   // line-height: 4.5rem;
+  //   @include breakpoint(mobileonly) {
+  //     font-size: 14px;
+  //     text-align: left;
+  //     line-height: 3.5rem;
+  //   }
+  // }
   #{&}__edit-button {
     width: auto !important;
     float: right;
-    @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
-      width: 100% !important;
-    }
-    @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
-      width: 100% !important;
-    }
+    // @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
+    //   width: 100% !important;
+    // }
+    // @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
+    //   width: 100% !important;
+    // }
   }
   #{&}__divider-style {
     background: $secondary;
@@ -187,33 +189,33 @@
   }
   #{&}__paper-style {
     padding: $padding-27;
-    width: 400px;
+    // width: 400px;
     // margin-bottom: 10px;
     line-height: 2.25rem;
 
     @include breakpoint(mobileonly) {
-      width: 330px;
+      // width: 330px;
     }
     @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
-      width: 498px;
+      // width: 498px;
     }
     @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
-      width: 360px;
+      // width: 360px;
     }
   }
   #{&}__paper-style2 {
     padding: $padding-22;
-    width: 430px;
+    // width: 430px;
     margin-bottom: 10px;
     line-height: 2.25rem;
     @include breakpoint(mobileonly) {
-      width: 330px;
+      // width: 330px;
     }
     @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
-      width: 498px;
+      // width: 498px;
     }
     @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
-      width: 360px !important;
+      // width: 360px !important;
     }
   }
   #{&}__update-style {
@@ -231,4 +233,22 @@
     display: flex;
     justify-content: flex-end;
   }
+}
+.common-display-flex {
+  display: flex;
+  align-items: center;
+  @include breakpoint(mobileonly) {
+    display: block;
+  }
+}
+.edit-mode {
+  @include breakpoint(mobileonly) {
+    display: block;
+  }
+}
+.flex-common {
+  flex: 0 0 40%;
+}
+.flex-common-60 {
+  flex: 0 0 60%;
 }
