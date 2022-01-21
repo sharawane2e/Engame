@@ -14,6 +14,7 @@ import Refundpolicy from "../screens/StaticPage/Refund-policy";
 import Privacypolicy from "../screens/StaticPage/Privacy-policy";
 import PrivacyPolicy from "../screens/StaticPage/Privacy-policy";
 import TermsCondition from "../screens/StaticPage/Terms-condition";
+import UserProfile from "../components/UserProfile";
 
 const Routes = [
   {
@@ -103,6 +104,24 @@ const Routes = [
       {
         path: "/purchased",
         component: Purchased,
+        isExact: true,
+      },
+    ],
+  },
+  {
+    path: ["/cart", "/userProfile"],
+    component: PrivateScreen,
+    exact: true,
+    isPrivate: true,
+    routes: [
+      {
+        path: "/cart",
+        component: Cart,
+        exact: true,
+      },
+      {
+        path: "/userProfile",
+        component: UserProfile,
         isExact: true,
       },
     ],

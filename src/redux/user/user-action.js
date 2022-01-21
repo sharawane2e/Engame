@@ -22,3 +22,12 @@ export const logOutUser = () => {
     }
   };
 };
+export const setUser = (user) => {
+  return (dispatch) => {
+    try {
+      dispatch({ type: actionTypes.SETUSER, payload: user });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};

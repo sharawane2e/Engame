@@ -11,6 +11,8 @@ export const LOGIN = "/user/login/";
 
 export const REGISTRATION = "/user/";
 
+export const USER_DETAILS = "/user/user/";
+
 export const LOGOUT = "/user/logout/";
 
 export const FORGOT_PASSWORD = "/user/password/reset/";

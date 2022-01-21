@@ -29,7 +29,7 @@ const userReducer = (state = newAuth, action) => {
       LocalStorageUtils.setLocalStorage(
         LocalStorageType.SET,
         "auth",
-        JSON.stringify(newState)
+        JSON.stringify(newState),
       );
 
       return newState;
@@ -37,6 +37,19 @@ const userReducer = (state = newAuth, action) => {
     case actionTypes.LOGOUT:
       LocalStorageUtils.setLocalStorage(LocalStorageType.CLEAR);
       return initialState;
+
+    case actionTypes.SETUSER:
+      const userState = {
+        isLoggedIn: true,
+        token: { ...state.token, user: action.payload },
+      };
+      LocalStorageUtils.setLocalStorage(
+        LocalStorageType.SET,
+        "auth",
+        JSON.stringify(userState),
+      );
+      return userState;
+
     default:
       return state;
   }

@@ -30,6 +30,7 @@ import { LOGOUT } from "../../config/ApiUrl";
 import { KeyboardArrowUp } from "@mui/icons-material";
 import { ListItemIcon } from "@mui/material";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
 import LocalStorageType from "../../config/LocalStorageType";
@@ -144,6 +145,16 @@ const Header = ({ props }) => {
         >
           <MenuItem className="user_name">
             {user.token.user.first_name}
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
+            <Link color="inherit" to="/userProfile" className="">
+              <ListItemIcon>
+                <EditIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit" noWrap>
+                Edit Profile
+              </Typography>
+            </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className="profile_menu__Link">
             <Link color="inherit" to="/Purchased" className="">
