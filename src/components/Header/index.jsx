@@ -215,11 +215,7 @@ const Header = ({ props }) => {
                     <Link to="cart">
                       <Badge
                         badgeContent={
-                          user && user?.isPayment
-                            ? 0
-                            : carts?.length
-                            ? carts?.length
-                            : 0
+                          isPayment ? 0 : carts.length ? carts.length : 0
                         }
                         color="secondary"
                       >

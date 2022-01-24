@@ -67,7 +67,7 @@ const Filter = () => {
     };
 
     dispatch(
-      listProducts(isFilterApply && user.isLoggedIn ? ApiData : getWidgetList)
+      listProducts(isFilterApply && user.isLoggedIn ? ApiData : getWidgetList),
       // listProducts(getWidgetList)
     );
   };

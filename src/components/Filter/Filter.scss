@@ -66,12 +66,12 @@
       height: 15vh;
     }
   }
-  // .grid-paper-style{
-  //   padding-bottom: 40px
-  // }
+  .grid-paper-style {
+    padding-bottom: 40px;
+  }
 }
 .searchNFilter {
-  // padding: 0 6vw;
+  padding: 0 1vw;
   @include breakpoint(mobile) {
     padding: 0px 5px;
   }

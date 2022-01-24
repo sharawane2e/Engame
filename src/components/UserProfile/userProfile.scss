@@ -1,5 +1,4 @@
 .breadcrum-main {
-  // margin-left: $margin-28 !important;
   @include breakpoint(mobileonly) {
     margin-left: auto !important;
   }
@@ -11,14 +10,10 @@
 .Drawer-container {
   padding: $padding-50 $padding-0;
   @include breakpoint(mobileonly) {
-    // padding: $padding-0 !important;
   }
   @include breakpoint(Ipad-pro) {
     padding: $padding-0 !important;
   }
-  // @media only screen and (min-device-width: 820px) and (max-device-height: 1180px) and (orientation: landscape) {
-  //   padding: $padding-0;
-  // }
 }
 .Toolbar-style {
   position: absolute !important;
@@ -50,7 +45,6 @@
 }
 .profile-container {
   width: 100%;
-  // margin-left: 30px;
   @include breakpoint(mobileonly) {
     margin-left: auto;
     text-align: center;
@@ -64,10 +58,6 @@
     width: 100%;
     border: 2px solid #cccccc30 !important;
     border-radius: 3px;
-  }
-  #{&}__input-type-style {
-    input {
-    }
   }
 
   input[type="file"] {
@@ -115,10 +105,8 @@
   }
   #{&}__image-noImage {
     position: relative;
-    // top: 30px;
     filter: grayscale(100%);
     @include breakpoint(mobileonly) {
-      // top: 10px;
       margin-bottom: 10px;
     }
   }
@@ -157,66 +145,26 @@
       text-align: left;
     }
   }
-  // #{&}__ul-listing-style {
-  //   list-style: none;
-  // }
 
-  // #{&}__ul-listing-style > li {
-  //   // line-height: 4.5rem;
-  //   @include breakpoint(mobileonly) {
-  //     font-size: 14px;
-  //     text-align: left;
-  //     line-height: 3.5rem;
-  //   }
-  // }
   #{&}__edit-button {
     width: auto !important;
     float: right;
-    // @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
-    //   width: 100% !important;
-    // }
-    // @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
-    //   width: 100% !important;
-    // }
   }
   #{&}__divider-style {
     background: $secondary;
     margin: 0px;
-    // width: 85%;
   }
   #{&}__main-grid-class {
     margin-top: 50px;
   }
   #{&}__paper-style {
     padding: $padding-27;
-    // width: 400px;
-    // margin-bottom: 10px;
     line-height: 2.25rem;
-
-    @include breakpoint(mobileonly) {
-      // width: 330px;
-    }
-    @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
-      // width: 498px;
-    }
-    @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
-      // width: 360px;
-    }
   }
   #{&}__paper-style2 {
     padding: $padding-22;
-    // width: 430px;
     margin-bottom: 10px;
     line-height: 2.25rem;
-    @include breakpoint(mobileonly) {
-      // width: 330px;
-    }
-    @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: portrait) {
-      // width: 498px;
-    }
-    @media only screen and (min-device-width: 820px) and (max-device-width: 1180px) and (orientation: landscape) {
-      // width: 360px !important;
-    }
   }
   #{&}__update-style {
     display: flex;

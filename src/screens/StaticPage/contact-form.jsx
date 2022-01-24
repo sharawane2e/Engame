@@ -29,7 +29,7 @@ let validationSchema = Yup.object().shape({
 
 const ContactForm = () => {
   const onSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
   };
 
   return (
