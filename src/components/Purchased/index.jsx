@@ -78,6 +78,8 @@ const Purchased = (props) => {
   const [filter, setFilter] = useState("all");
   const [isPurchaseEmpty, setIsPurchaseEmpty] = useState();
 
+
+
   const [sucess, setSucess] = useState("Copy");
 
   var curentPlanID = localStorage.getItem("productShow");
@@ -85,7 +87,9 @@ const Purchased = (props) => {
 
   useEffect(() => {
     // dispatch(loadingStart());
-    paymentSuccess();
+    // paymentSuccess();
+    PurchaseList();
+
   }, [token]);
 
   // Download embded code
@@ -844,6 +848,8 @@ const Purchased = (props) => {
             </Grid>
           </Grid>
         </CustomPopup>
+
+        
         <Footer />
       </div>
     </>

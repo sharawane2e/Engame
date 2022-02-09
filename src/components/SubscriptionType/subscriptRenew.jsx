@@ -13,6 +13,8 @@ import Toaster from "../../util/Toaster";
 import { ErrorMessages } from "../../constants/Messages";
 import LocalStorageUtils from "../../util/LocalStorageUtils";
 import LocalStorageType from "../../config/LocalStorageType";
+import CustomPopup from "../CustomPopup";
+
 
 const SubscriptionRenew = ({ updateData }) => {
   const [istype, setType] = useState(updateData.plan.plan_type);
@@ -21,7 +23,10 @@ const SubscriptionRenew = ({ updateData }) => {
   const [isCountLimit, setIsCountLimit] = useState("");
   const dispatch = useDispatch();
 
-  let auth = localStorage.getItem("auth");
+  const[isCheckoutPopup, setIsCheckoutPopup] = useState(false)
+  const[checkoutResponse, setcheckoutResponse] = useState()
+
+  let auth = localStorage.getItem("auth"); 
   let res = JSON.parse(auth);
 
   LocalStorageUtils.setLocalStorage(
@@ -85,20 +90,24 @@ const SubscriptionRenew = ({ updateData }) => {
       is_renew: "true",
       plan_new_value: valuePrice,
       plan_type: istype,
+      subscription: localStorage.getItem("productShow")
     };
 
     ApiRequest.request(CHECKOUT, "POST", CheckoutData).then((res) => {
       if (res.status) {
-        stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
+        // stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
           LocalStorageType.SET,
           "ExtendData",
           JSON.stringify(updateData)
         );
+        setIsCheckoutPopup(true)
+        console.log(res.data[0].responseData)
+        setcheckoutResponse(res.data[0].responseData)
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }
-      // dispatch(loadingStop());
+      dispatch(loadingStop());
     });
   };
 
@@ -157,9 +166,81 @@ const SubscriptionRenew = ({ updateData }) => {
           <ShoppingCartIcon className="margin-right-15" />
           Extend Now
         </CustomButton>
+
       </div>
+      {/*Checkout*/}
+      <CustomPopup
+          open={isCheckoutPopup}
+          footerButton={true}
+          className="border-radius popup-container__iner--sm"
+        >
+         {/* <iframe
+        className="too-perview"
+        id="tool-perview"
+        width="100%"
+        previewLocation={window.location.hostname}
+        // height="500"
+        // scrolling="yes"
+        // /frameborder="no"
+        // allow="autoplay"
+        // onLoad={hideSpinner}
+        srcdoc={checkoutResponse}
+        frameBorder="0"
+      >
+      </iframe> */}
+      <BasicForm />
+    
+      
+        </CustomPopup>
+        
     </>
+
+    
   );
+  
 };
+
+const BasicForm = () =>{
+  const [email, setEmail] = useState('hello@gmail.com')
+  const [password, setpassword] = useState('hello')
+
+  
+  const handleEmailChange = event => {
+    setEmail(event.target.value)
+  };
+
+  
+    const handleSubmit = event => {
+      event.preventDefault();
+  
+      const url = 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction'
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+      };
+      fetch(url, requestOptions)
+          .then(response => console.log('Submitted successfully', response))
+          .catch(error => console.log('Form submit error', error))
+    };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Email address</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter email"
+          onChange={handleEmailChange}
+          value={email}
+        />
+      </div>
+      <button type="submit">
+        Submit
+      </button>
+    </form>
+  )
+}
 
 export default SubscriptionRenew;

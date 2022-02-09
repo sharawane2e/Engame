@@ -25,7 +25,9 @@ export const CART_DETAILS = "/cart/detail/";
 
 export const CART_STANDARD_PRICE = "/cart/standard_price/";
 
-export const CHECKOUT = "/payments/checkout-session/";
+// export const CHECKOUT = "/payments/checkout-session/";
+
+export const CHECKOUT = "/payments/ccavanue-checkout-session/"
 
 export const WIDGET_LIST = "/widget/";
 
