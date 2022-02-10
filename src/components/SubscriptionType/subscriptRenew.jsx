@@ -21,11 +21,8 @@ const SubscriptionRenew = ({ updateData }) => {
   const [valuePrice, setValuePrice] = useState();
   const [isCurentPrice, setCurentPrice] = useState(updateData.plan.price);
   const [isCountLimit, setIsCountLimit] = useState("");
-  const dispatch = useDispatch();
-
-  const[isCheckoutPopup, setIsCheckoutPopup] = useState(false)
   const[checkoutResponse, setcheckoutResponse] = useState()
-
+  const dispatch = useDispatch();
   let auth = localStorage.getItem("auth"); 
   let res = JSON.parse(auth);
 
@@ -83,7 +80,7 @@ const SubscriptionRenew = ({ updateData }) => {
 
   const ItemRenew = async () => {
     dispatch(loadingStart());
-    const stripe = await loadStripe(STRIPE);
+    // const stripe = await loadStripe(STRIPE);
 
     let CheckoutData = {
       user: res.token.user.pk,
@@ -94,28 +91,26 @@ const SubscriptionRenew = ({ updateData }) => {
     };
 
     ApiRequest.request(CHECKOUT, "POST", CheckoutData).then((res) => {
-      // debugger
       if (res.status) {
+        setcheckoutResponse(res?.data[0]?.responseData)
+        windowLocationHtml(res?.data[0]?.responseData);
         // stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
           LocalStorageType.SET,
           "ExtendData",
           JSON.stringify(updateData)
         );
-      //  setIsCheckoutPopup(true)
-        // console.log("checkout data ",res.data.responseData)
-       setcheckoutResponse(res.data[0].responseData)
+      
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }
      dispatch(loadingStop());
-    });
+    })
   };
-const windowLocationHtml = ()=>{
-  let myWindow = window.open("", "checkoutResponse")
-  myWindow.document.write(checkoutResponse)
-}
-console.log(checkoutResponse);
+  const windowLocationHtml = (data)=>{
+      let myWindow = window.open("","response")
+      myWindow.document.write(data)
+  }
   return (
     <>
       <div className="subscription-type">
@@ -193,7 +188,7 @@ console.log(checkoutResponse);
       >
       </iframe> */}
     
-      {windowLocationHtml()}
+      
         {/* </CustomPopup> */}
         
     </>

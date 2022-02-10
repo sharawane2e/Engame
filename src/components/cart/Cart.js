@@ -22,7 +22,7 @@ import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdat
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
-import { loadingStart } from "../../redux/loader/loader-actions";
+import { loadingStart, loadingStop} from "../../redux/loader/loader-actions";
 import CartLoader from "./cartLoader";
 import { ErrorMessages } from "../../constants/Messages";
 import Toaster from "../../util/Toaster";
@@ -36,6 +36,7 @@ const Cart = () => {
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
   const [isPageRendring, setIsPageRendring] = useState(true);
+  const[checkoutResponse, setcheckoutResponse] = useState()
 
   useEffect(async () => {
     // debugger;
@@ -64,6 +65,8 @@ const Cart = () => {
    dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       if (res.status) {
+        setcheckoutResponse(res?.data[0]?.responseData)
+        windowLocationHtml(res?.data[0]?.responseData);
         console.log("checkout data ",res.data[0].responseData)
         //debugger
         //stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
@@ -75,9 +78,14 @@ const Cart = () => {
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }
+      dispatch(loadingStop());
     });
   };
 
+  const windowLocationHtml = (data)=>{
+    let myWindow = window.open("","response")
+    myWindow.document.write(data)
+}
   return (
     <>
       <Header />

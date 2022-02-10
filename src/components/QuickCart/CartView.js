@@ -22,7 +22,7 @@ import SubscriptionUpdate from "../SubscriptionType/subscriptUpdate";
 import EmptyPage from "../emptyPage";
 import emptyImg from "../../assets/images/empty.gif";
 import ApiRequest from "../../util/ApiRequest";
-import { loadingStart } from "../../redux/loader/loader-actions";
+import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import CartLoader from "../cart/cartLoader";
 import { ErrorMessages } from "../../constants/Messages";
 import Toaster from "../../util/Toaster";
@@ -40,6 +40,7 @@ const CartView = () => {
   const [is_renew, setRenew] = useState(false);
   const [productShow, setProductShow] = useState([]);
   const [isPageRendring, setIsPageRendring] = useState(true);
+  const[checkoutResponse, setcheckoutResponse] = useState();
 
   useEffect(async () => {
     dispatch(
@@ -69,6 +70,8 @@ const CartView = () => {
    dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       if (res.status) {
+        setcheckoutResponse(res?.data[0]?.responseData)
+        windowLocationHtml(res?.data[0]?.responseData);
       //  stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
           LocalStorageType.SET,
@@ -79,9 +82,13 @@ const CartView = () => {
       else {
         Toaster.error(res?.detail?.message, "topCenter");
       }
+      dispatch(loadingStop());
     });
   };
-
+  const windowLocationHtml = (data)=>{
+    let myWindow = window.open("","response")
+    myWindow.document.write(data)
+}
   return (
     <>
       <div className="quickCart">
