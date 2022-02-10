@@ -94,6 +94,7 @@ const SubscriptionRenew = ({ updateData }) => {
     };
 
     ApiRequest.request(CHECKOUT, "POST", CheckoutData).then((res) => {
+      // debugger
       if (res.status) {
         // stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
@@ -101,16 +102,20 @@ const SubscriptionRenew = ({ updateData }) => {
           "ExtendData",
           JSON.stringify(updateData)
         );
-        setIsCheckoutPopup(true)
-        console.log(res.data[0].responseData)
-        setcheckoutResponse(res.data[0].responseData)
+      //  setIsCheckoutPopup(true)
+        // console.log("checkout data ",res.data.responseData)
+       setcheckoutResponse(res.data[0].responseData)
       } else {
         Toaster.error(res?.detail?.message, "topCenter");
       }
-      dispatch(loadingStop());
+     dispatch(loadingStop());
     });
   };
-
+const windowLocationHtml = ()=>{
+  let myWindow = window.open("", "checkoutResponse")
+  myWindow.document.write(checkoutResponse)
+}
+console.log(checkoutResponse);
   return (
     <>
       <div className="subscription-type">
@@ -168,12 +173,11 @@ const SubscriptionRenew = ({ updateData }) => {
         </CustomButton>
 
       </div>
-      {/*Checkout*/}
-      <CustomPopup
+      {/* <CustomPopup
           open={isCheckoutPopup}
           footerButton={true}
           className="border-radius popup-container__iner--sm"
-        >
+        > */}
          {/* <iframe
         className="too-perview"
         id="tool-perview"
@@ -188,10 +192,9 @@ const SubscriptionRenew = ({ updateData }) => {
         frameBorder="0"
       >
       </iframe> */}
-      <BasicForm />
     
-      
-        </CustomPopup>
+      {windowLocationHtml()}
+        {/* </CustomPopup> */}
         
     </>
 
@@ -200,47 +203,6 @@ const SubscriptionRenew = ({ updateData }) => {
   
 };
 
-const BasicForm = () =>{
-  const [email, setEmail] = useState('hello@gmail.com')
-  const [password, setpassword] = useState('hello')
 
-  
-  const handleEmailChange = event => {
-    setEmail(event.target.value)
-  };
-
-  
-    const handleSubmit = event => {
-      event.preventDefault();
-  
-      const url = 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction'
-      const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-      };
-      fetch(url, requestOptions)
-          .then(response => console.log('Submitted successfully', response))
-          .catch(error => console.log('Form submit error', error))
-    };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Email address</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter email"
-          onChange={handleEmailChange}
-          value={email}
-        />
-      </div>
-      <button type="submit">
-        Submit
-      </button>
-    </form>
-  )
-}
 
 export default SubscriptionRenew;

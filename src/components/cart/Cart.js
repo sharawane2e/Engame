@@ -16,7 +16,7 @@ import Footer from "../Footer";
 import CustomPopup from "../CustomPopup";
 import CustomButton from "../../components/widgets/Button";
 import { BASE_URL, CHECKOUT, STRIPE } from "../../config/ApiUrl";
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import { getItemFromCart, removeFromCart } from "../../redux/cart/action";
 import SubscriptionUpdate from "../../components/SubscriptionType/subscriptUpdate";
 import EmptyPage from "../emptyPage";
@@ -59,12 +59,14 @@ const Cart = () => {
       user: user.user.pk,
       is_renew: "false",
     };
-    const stripe = await loadStripe(STRIPE);
+    //const stripe = await loadStripe(STRIPE);
 
-    dispatch(loadingStart());
+   dispatch(loadingStart());
     ApiRequest.request(CHECKOUT, "POST", CheckOutValue).then((res) => {
       if (res.status) {
-        stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
+        console.log("checkout data ",res.data[0].responseData)
+        //debugger
+        //stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
           LocalStorageType.SET,
           "isPayment",
