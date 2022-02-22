@@ -135,7 +135,7 @@ const SubscriptionType = ({ toolId, toolName, onClose }) => {
             <div className="subscription-type__text">{type}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-          {cart[0]?.currency}{itemPrice.toFixed(2)}
+          {cart[0]?.currency}{itemPrice.toFixed(2)}{''}
           </div>
         </div>
         <div className="validated-error">

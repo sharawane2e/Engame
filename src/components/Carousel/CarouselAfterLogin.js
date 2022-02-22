@@ -9,8 +9,12 @@ const CarouselAfterLogin = () => {
       <Carousel showArrows={true}>
         <div>
           <img src={HomeBanner1} alt="First banner" />
+          
+
           <div className="textArea">
             <p className="textArea__filter-text">
+          
+
               Creative tools can generate
               <span className="textArea__filter-text__review-text">
                 {` innovative `}
@@ -18,6 +22,8 @@ const CarouselAfterLogin = () => {
               ideas, ignite the imagination inside you.
             </p>
           </div>
+          <img src={HomeBanner1} alt="First banner" />
+
         </div>
         <div>
           <img src={HomeBanner1} alt="Second banner" />

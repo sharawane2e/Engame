@@ -201,7 +201,7 @@ const CartView = () => {
                           </Grid>
 
                           <Grid item xs={12} sm={12} container>
-                            <Grid item md={11} sm={11} xs={11}>
+                            <Grid item md={9} sm={9} xs={9}>
                               <Typography
                                 component="div"
                                 className="shoping-cart__validity-input"
@@ -225,9 +225,9 @@ const CartView = () => {
                             </Grid>
                             <Grid
                               item
-                              md={1}
-                              sm={1}
-                              xs={1}
+                              md={3}
+                              sm={3}
+                              xs={3}
                               className="shoping-cart__tool-icons"
                             >
                               <Typography component="div">

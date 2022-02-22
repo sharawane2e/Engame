@@ -201,7 +201,7 @@ const Cart = () => {
                                 component="div"
                                 className="shoping-cart__total-amount"
                               >
-                                {item.currency}
+                                {item.currency}{' '}
                                 {Number(item.price).toFixed(2)}
                               </Typography>
                             </Grid>
@@ -293,8 +293,7 @@ const Cart = () => {
                       Need to pay
                     </div>
                     <div className="shoping-cart__coupon-amount">
-                   {cart[0]?.currency}
-                   {console.log(cart,"cart")}
+                   {cart[0]?.currency} {""}
                       {cart
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}

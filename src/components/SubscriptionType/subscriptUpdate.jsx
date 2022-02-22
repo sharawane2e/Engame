@@ -120,7 +120,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
             <div className="subscription-type__text">{istype}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-          {cart[0]?.currency}{updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
+          {cart[0]?.currency}{' '}{updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
           </div>
         </div>
         <div className="validated-error">

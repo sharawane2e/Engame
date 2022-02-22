@@ -142,11 +142,11 @@ a {
   //   map-get($map: $boxshadow, $key: "red-smooth")
   // );
 
-  @include box-shadow(0px, 10px, 20px, $primary-btn-shadow);
+  @include box-shadow(0px, 1px, 10px, $primary-btn-shadow);
   @include breakpoint(desktop150) {
   }
   &:hover {
-    @include box-shadow(0px, 10px, 20px, $primary-btn-shadow);
+    @include box-shadow(0px, 5px, 15px, $primary-btn-shadow);
   }
 }
 .secondary-button {

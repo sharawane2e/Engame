@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Divider from '@mui/material/Divider';
+
+
+
 const Footer = (props) => {
+  useEffect(() =>{
+    window.scrollTo(0, 0);
+  },[])
   return (
     <>
       <div className="footer">
