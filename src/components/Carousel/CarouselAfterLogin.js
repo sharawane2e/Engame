@@ -25,7 +25,7 @@ const CarouselAfterLogin = () => {
             <p className="textArea__filter-text">
               Creative tools can generate
               <span className="textArea__filter-text__review-text">
-                innovative
+               {` innovative `}
               </span>
               ideas, ignite the imagination inside you.
             </p>
@@ -37,7 +37,7 @@ const CarouselAfterLogin = () => {
             <p className="textArea__filter-text">
               Creative tools can generate
               <span className="textArea__filter-text__review-text">
-                innovative
+               {` innovative `}
               </span>
               ideas, ignite the imagination inside you.
             </p>

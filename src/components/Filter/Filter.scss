@@ -119,11 +119,12 @@
     position: absolute;
     border-radius: 50%;
     text-align: center;
-    top: 12px;
-    right: 50px;
+    top: 15px;
+    right: 25px;
+    z-index: 1;
     @include breakpoint(mobileonly) {
-      right: 40px;
-      top: 10px;
+      right: 24px;
+      top: 11px;
     }
   }
   #{&}__form1 {
@@ -215,6 +216,7 @@
   &__chipBox {
     margin: 5px !important;
     width: fit-content;
+    background: rgb(0 0 0 / 9%) !important;
     .MuiChip-root {
       background: rgb(0 0 0 / 9%) !important;
     }

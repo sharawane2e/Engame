@@ -39,7 +39,6 @@ const Cart = () => {
   const[checkoutResponse, setcheckoutResponse] = useState()
 
   useEffect(async () => {
-    // debugger;
     // dispatch(loadingStart());
     dispatch(
       getItemFromCart(() => {
@@ -67,8 +66,6 @@ const Cart = () => {
       if (res.status) {
         setcheckoutResponse(res?.data[0]?.responseData)
         windowLocationHtml(res?.data[0]?.responseData);
-        console.log("checkout data ",res.data[0].responseData)
-        //debugger
         //stripe.redirectToCheckout({ sessionId: res.data[0].sessionId });
         LocalStorageUtils.setLocalStorage(
           LocalStorageType.SET,
@@ -83,7 +80,7 @@ const Cart = () => {
   };
 
   const windowLocationHtml = (data)=>{
-    let myWindow = window.open("","response")
+    let myWindow = window.open("","_self")
     myWindow.document.write(data)
 }
   return (
@@ -296,7 +293,8 @@ const Cart = () => {
                       Need to pay
                     </div>
                     <div className="shoping-cart__coupon-amount">
-                      $
+                   {cart[0]?.currency}
+                   {console.log(cart,"cart")}
                       {cart
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}

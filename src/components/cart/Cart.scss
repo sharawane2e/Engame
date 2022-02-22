@@ -64,9 +64,9 @@
     > a {
       display: flex;
       width: 100%;
-      @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
-        width: 34% !important;
-      }
+      // @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
+      //   width: 34% !important;
+      // }
       .custom-button {
         min-width: 100%;
 
@@ -119,7 +119,7 @@
   #{&}__total-amount {
     text-align: $align-right;
     @include color($black-secondary);
-    @include font-size($font-sm);
+    @include font-size($font-xx-reg);
     word-break: break-all;
     line-height: 24px;
     @include breakpoint(mobileonly) {
@@ -296,9 +296,9 @@
     width: 100%;
     padding: 15px !important;
     font-size: 1.25rem !important;
-    @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
-      width: 35%;
-    }
+    // @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) {
+    //   width: 35%;
+    // }
     a {
       color: inherit;
     }
@@ -322,4 +322,30 @@
       }
     }
   }
+ 
+}
+
+
+
+
+// Cart loader
+.cartLoader{
+  padding: 10px;
+  margin-bottom: 10px;
+   &__paper-last-container{
+     margin-top: 12px;
+     margin-bottom: 12px;
+   }
+}
+.skeleton-button{
+  display:flex;
+  justify-content: center;
+  width:100%;
+  margin:auto !important;
+}
+.paper-first-container{
+  margin-top:10px;
+}
+.cartLoaderContainer{
+ min-height: 10vh; 
 }

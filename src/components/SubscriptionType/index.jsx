@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { addToCart } from "../../redux/cart/action";
 import ApiRequest from "../../util/ApiRequest";
@@ -18,6 +18,7 @@ const SubscriptionType = ({ toolId, toolName, onClose }) => {
   const [itemPrice, setItemPrice] = useState(0);
   const dispatch = useDispatch();
   const [isCountLimit, setIsCountLimit] = useState("");
+  const cart = useSelector((state) => state.cart.cartItems);
 
   let auth = localStorage.getItem("auth");
   let res = JSON.parse(auth);
@@ -134,7 +135,7 @@ const SubscriptionType = ({ toolId, toolName, onClose }) => {
             <div className="subscription-type__text">{type}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-            ${itemPrice.toFixed(2)}
+          {cart[0]?.currency}{itemPrice.toFixed(2)}
           </div>
         </div>
         <div className="validated-error">

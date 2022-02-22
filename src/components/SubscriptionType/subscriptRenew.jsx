@@ -25,7 +25,7 @@ const SubscriptionRenew = ({ updateData }) => {
   const dispatch = useDispatch();
   let auth = localStorage.getItem("auth"); 
   let res = JSON.parse(auth);
-
+  const cart = useSelector((state) => state.cart.cartItems);
   LocalStorageUtils.setLocalStorage(
     LocalStorageType.SET,
     "valuePrice",
@@ -108,9 +108,9 @@ const SubscriptionRenew = ({ updateData }) => {
     })
   };
   const windowLocationHtml = (data)=>{
-      let myWindow = window.open("","response")
-      myWindow.document.write(data)
-  }
+    let myWindow = window.open("","_self")
+    myWindow.document.write(data)
+}
   return (
     <>
       <div className="subscription-type">
@@ -142,7 +142,7 @@ const SubscriptionRenew = ({ updateData }) => {
             <div className="subscription-type__text">{istype}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-            ${updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
+            {cart[0]?.currency}{updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
           </div>
         </div>
         <div className="validated-error">

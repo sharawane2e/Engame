@@ -9,9 +9,12 @@
       color: $black;
     }
   }
+
   .MuiAccordionSummary-root {
     width: 100% !important;
-    padding: 0px 15px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    min-height: fit-content !important;
     .MuiTypography-body1 {
       font-weight: 600 !important;
       width: 100% !important;

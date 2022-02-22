@@ -30,6 +30,7 @@ import LocalStorageUtils from "../../util/LocalStorageUtils";
 import LocalStorageType from "../../config/LocalStorageType";
 import CancelIcon from "@mui/icons-material/Cancel";
 import NoSearchFound from "../NoSearchFound";
+import CartViewLoader from "../cart/cartViewLoader";
 
 const CartView = () => {
   const history = useHistory();
@@ -43,21 +44,25 @@ const CartView = () => {
   const[checkoutResponse, setcheckoutResponse] = useState();
 
   useEffect(async () => {
+    getCartItem()
+  }, []);
+
+
+
+  const handelRedirectCart = () => {
+    history.push("./cart");
+  };
+  const getCartItem = ()=>{
     dispatch(
       getItemFromCart(() => {
         setIsPageRendring(false);
       })
     );
-  }, []);
-
-  const handelRedirectCart = () => {
-    history.push("./cart");
-  };
-
+  }
   const handleRemove = async (isProduct) => {
     setIsPageRendring(true);
     await dispatch(removeFromCart(isProduct));
-    setIsPageRendring(false);
+    await getCartItem();
   };
 
   const handleCheckout = async () => {
@@ -86,14 +91,14 @@ const CartView = () => {
     });
   };
   const windowLocationHtml = (data)=>{
-    let myWindow = window.open("","response")
+    let myWindow = window.open("","_self")
     myWindow.document.write(data)
 }
   return (
     <>
       <div className="quickCart">
         {isPageRendring ? (
-          <CartLoader />
+          <CartViewLoader />
         ) : !isPageRendring && cart && cart.length ? (
           <div className="shoping-cart shopping-cart-data quickCart__cartDetails">
             <div className="quickCart__cartDetails__topBanner">
@@ -102,7 +107,7 @@ const CartView = () => {
                   component="p"
                   className="quickCart__cartDetails__topBanner__leftPart__shopingCart"
                 >
-                  Shoping cart
+                  Shopping cart
                 </Typography>
               </div>
               <div className="quickCart__cartDetails__topBanner__rightPart">
@@ -281,7 +286,7 @@ const CartView = () => {
                   <div className="quickCart__checkout__card-coupon__totalAmount">
                     <div className="shoping-cart__coupon-hedding">Total</div>
                     <div className="quickCart__checkout__card-coupon__totalAmount__amount">
-                      $
+                    {cart[0]?.currency}
                       {cart
                         .map((item) => item.price)
                         .reduce((acc, value) => +acc + +value)}
@@ -307,6 +312,8 @@ const CartView = () => {
               buttonName="Continue Shoping"
             />
           </div>
+          // <CartViewLoader />
+
         )}
       </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-
+import Divider from '@mui/material/Divider';
 const Footer = (props) => {
   return (
     <>
@@ -10,10 +10,10 @@ const Footer = (props) => {
         <Grid container className="footer__gridmain">
           <Grid
             item
-            xl={8}
-            lg={8}
-            md={8}
-            sm={8}
+            xl={12}
+            lg={12}
+            md={12}
+            sm={12}
             xs={12}
             className="footer__gridmain__gridInnerChild"
           >
@@ -48,13 +48,13 @@ const Footer = (props) => {
               <Link to="/contact-us">Contact US</Link>
             </Typography>
           </Grid>
-
+          <Divider  className="footer__divider"/>
           <Grid
             item
-            xl={4}
-            lg={4}
-            md={4}
-            sm={4}
+            xl={12}
+            lg={12}
+            md={12}
+            sm={12}
             xs={12}
             className="footer__gridmain__rightChild"
           >

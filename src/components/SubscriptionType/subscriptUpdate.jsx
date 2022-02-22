@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import CustomButton from "../../components/widgets/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { loadingStart, loadingStop } from "../../redux/loader/loader-actions";
 import { getItemFromCart } from "../../redux/cart/action";
 import ApiRequest from "../../util/ApiRequest";
@@ -10,6 +10,7 @@ import { CART_DETAILS } from "../../config/ApiUrl";
 import { ErrorMessages } from "../../constants/Messages";
 
 const SubscriptionUpdate = ({ updateData, onClose }) => {
+  const cart = useSelector((state) => state.cart.cartItems);
   const [istype, setType] = useState(updateData.plan_type);
   const [valuePrice, setValuePrice] = useState(updateData.plan_value);
   const [isCurentPrice, setCurentPrice] = useState(updateData.price);
@@ -119,7 +120,7 @@ const SubscriptionUpdate = ({ updateData, onClose }) => {
             <div className="subscription-type__text">{istype}</div>
           </div>
           <div className="subscription-type__amount  subscription-type__amount-text ">
-            ${updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
+          {cart[0]?.currency}{updateData.plan_type === "days" ? isCurentPrice : isCurentPrice}
           </div>
         </div>
         <div className="validated-error">

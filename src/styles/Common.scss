@@ -28,6 +28,9 @@ body {
   //   font-size: 12px;
   // }
 }
+.MuiLinearProgress-barColorPrimary {
+  background-color: transparent !important;
+}
 .progress-yellow .MuiLinearProgress-barColorPrimary {
   background-color: $yelow !important;
 }
@@ -37,7 +40,7 @@ body {
 .progress-embeded .MuiLinearProgress-barColorPrimary {
   background-color: $red-yellow !important;
 }
-.progress-red .MuiLinearProgress-barColorPrimary {
+.progress-red {
   background-color: $red !important;
 }
 .cursor--pointer {
@@ -304,7 +307,11 @@ body::-webkit-scrollbar-thumb,
   background-color: $scroll-color;
   outline: 1px solid $scroll-border-color;
 }
+
 /*end Custom Scroll*/
+.custom-scroll .MuiAccordionSummary-content{
+  margin:0px 0px !important;
+}
 
 .pdl-2 {
   @include space(padding, left, $margin-15, 0);

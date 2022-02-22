@@ -59,14 +59,11 @@ const ToolCards = () => {
     ApiRequest.request(PURCHASED_ITEM).then((res) => {
       if (res) {
         setPurchaseList(res);
-        console.log("Purchase", purchaseList);
-        console.log("res", res);
       }
     });
   };
 
   useEffect(() => {
-    // debugger;
     if (user) {
       setLoginIsOpen(false);
       setReginIsOpen(false);
@@ -130,7 +127,7 @@ const ToolCards = () => {
                               </CustomButton>
                             </div>
                             <div className="toolcard__tooltip">
-                              <Tooltip title="Embeded Code" placement="top">
+                              <Tooltip title="How it works?" placement="top">
                                 <HelpCenterRoundedIcon
                                   className="toolcard__tooltip__icon"
                                   onClick={() =>
@@ -215,7 +212,7 @@ const ToolCards = () => {
                               </CustomButton>
                             </div>
                             <div className="toolcard__tooltip">
-                              <Tooltip title="How tool work" placement="top">
+                              <Tooltip title="How it works?" placement="top">
                                 <HelpCenterRoundedIcon
                                   className="toolcard__tooltip__icon"
                                   onClick={() => {
