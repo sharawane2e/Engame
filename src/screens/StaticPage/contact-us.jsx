@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -10,9 +10,13 @@ import Footer from "../../components/Footer";
 import { Grid, Paper } from "@material-ui/core";
 import ContactForm from "./contact-form";
 import GoogleMap from "../StaticPage/map/google-map-react";
+import CustomPopup from "../../components/CustomPopup";
+
 const locations = require("../StaticPage/map/locations.json");
 
 const ContactUS = () => {
+  const [contactListDetails, setContactListDetails] = useState("");
+  const [isContactOpen, setContactOpen] = useState(false);
   return (
     <div className="StaticPage">
       <Header />
@@ -108,7 +112,11 @@ const ContactUS = () => {
                     </Grid>
                     <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                       <div className="Form_container">
-                        <ContactForm />
+                        <ContactForm
+                          contactListDetails={contactListDetails}
+                          setContactListDetails={setContactListDetails}
+                          setContactOpen={setContactOpen}
+                        />
                       </div>
                     </Grid>
                     <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -120,6 +128,29 @@ const ContactUS = () => {
                     </Grid>
                   </Grid>
                 </div>
+                {contactListDetails ? (
+                <CustomPopup
+                  open={isContactOpen}
+                  onClose={() => setContactOpen(false)}
+                  className="popup-background popup-container__iner--xl border-radius "
+                >
+                  <Grid container spacing={1} className="popup-padding">
+                  <Grid item xs={12} sm={12} lg={12}>
+                     <h3>
+                     Thank you for contacting us!
+                     </h3>
+                     </Grid>
+                    <Grid item xs={12} sm={12} lg={12}>
+                    <h1 className="StaticPage__div__container__headingStyle">
+                    We Will Contact you soon!
+                  </h1>
+                    </Grid>
+                  </Grid>
+                </CustomPopup>)
+                : (
+                ""
+                )}
+                
               </div>
             </Paper>
           </div>

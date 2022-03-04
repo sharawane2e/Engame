@@ -83,10 +83,10 @@ const UserVerification = () => {
         <Login />
       ) : (
         <div className="emptySection">
-          <img src={errorImg} alt="error found" />
+          {/* <img src={errorImg} alt="error found" />
           <Typography component="p">
             {ErrorMessages.SOMETHING_WENT_WRONG}
-          </Typography>
+          </Typography> */}
           <div className="form-button-grop">
             <CustomButton
               className="login__button primary-button"

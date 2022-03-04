@@ -53,3 +53,5 @@ export const CATEGORIES_LIST = "/widget_type/";
 export const SEND_VERIFICATION_EMAIL = "/user/re-sendemail/";
 
 export const VERIFICATION_EMAIL_TOKEN = "/user/verify-email/";
+
+export const CONTACT_DETAILS = "/contactus/";

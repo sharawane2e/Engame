@@ -13,18 +13,18 @@ const markerStyle = {
 class GoogleMap extends React.Component {
   static defaultProps = {
     center: {
-      lat: 28.563743,
-      lng: 77.068891,
+      lat: 28.62474,
+      lng: 77.08351,
     },
     zoom: 11,
   };
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: "300px", width: "100%" }}>
+      <div style={{ height: "380px", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: "AIzaSyA16d9FJFh__vK04jU1P64vnEpPc3jenec",
+            key: "AIzaSyBMTZWXHM2difV8CW_WD_m3dzdq7brseRo",
           }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
